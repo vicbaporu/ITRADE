@@ -54,7 +54,21 @@ return array(
                                 'lang'          => 'es',
                             ),
                             'constraints' => array(
-                            'lang' => 'es|en',
+                                'lang' => 'es|en',
+                            ),
+                        ),
+                    ),
+                    'contacto' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '[/:lang]/contacto',
+                            'defaults' => array(
+                                'controller'    => 'Website\Controller\Contacto',
+                                'action'        => 'index',
+                                'lang'          => 'es',
+                            ),
+                            'constraints' => array(
+                                'lang' => 'es|en',
                             ),
                         ),
                     ),
@@ -87,6 +101,7 @@ return array(
              * Website
              */
             'Website\Controller\Index' => 'Website\Controller\IndexController',
+            'Website\Controller\Contacto' => 'Website\Controller\ContactoController',
             /*
              * ADMIN
              */
