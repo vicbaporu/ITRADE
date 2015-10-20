@@ -15,6 +15,28 @@ return array(
             /*
              * ADMIN
              */
+            'client' => array(
+                'type' => 'Hostname',
+                'options' => array(
+                    'route' => 'clientes.itrade',
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'home' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/',
+                            'defaults' => array(
+                                'controller'    => 'Client\Controller\Index',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            /*
+             * ADMIN
+             */
             'admin' => array(
                 'type' => 'Hostname',
                 'options' => array(
@@ -104,7 +126,7 @@ return array(
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'en_MX',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',

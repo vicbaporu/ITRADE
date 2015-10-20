@@ -32,77 +32,46 @@ class TemplateMapListener implements ListenerAggregateInterface
 
     	$controller_params = $e->getRouteMatch()->getParams();
         $controller_of_route = $controller_params['controller'];  
-    	
 
-        $section = new classReflection($controller_of_route);
-        
-        $section = $section ->getFileName();      
-        $section = explode("/src/",  $section);      
+        $section = new classReflection($controller_of_route.'Controller');
+        $section = $section ->getFileName();   
+        $section = explode("/src/",  $section);
         $section = explode("/",$section[1]);
-        
+       
         $template_map=$e->getApplication()->getServiceManager()->get('viewtemplatemapresolver');
-
+       
         switch ($section[0]){
-    		case 'Apps':{
-    			
-    			$template_map->merge(
-    					array(
-                                                        'layout/layout'      => __DIR__.'/../../../view/apps/theme/layout/launched/launched.phtml',
-    							'error/404'          => __DIR__.'/../../../view/apps/theme/layout/launched/errors/404.phtml',
-    							'error/index'        => __DIR__.'/../../../view/apps/theme/layout/launched/errors/index.phtml',
-                               
-                                // analizar si la ubicacion para esto lo correcto es aqui.
-                                'dashboard_user_area'           => __DIR__ . '/../../../view/apps/theme/layout/launched/dashboard-viewhelper/user-area.phtml',
-                                'dashboard_search_area'         => __DIR__ . '/../../../view/apps/theme/layout/launched/dashboard-viewhelper/search-area.phtml',
-                                'dashboard_top_menu'            => __DIR__ . '/../../../view/apps/theme/layout/launched/dashboard-viewhelper/top-menu.phtml',
-                                'dashboard_app_menu'            => __DIR__ . '/../../../view/apps/theme/layout/launched/dashboard-viewhelper/app-menu.phtml',
-                                'dashboard_notification_area'   => __DIR__ . '/../../../view/apps/theme/layout/launched/dashboard-viewhelper/notification-area.phtml',
-                                'dashboard_footer'              => __DIR__ . '/../../../view/apps/theme/layout/launched/dashboard-viewhelper/footer.phtml',                                                                                 
-                        ));
-    			break;
-    		}
-    		case 'Auth':{
-    			$template_map->merge(
-    					array(
-                                'layout/layout'      => __DIR__.'/../../../view/auth/theme/layout/launched/launched.phtml',
-                                'error/404'          => __DIR__.'/../../../view/auth/theme/layout/launched/errors/404.phtml',
-                                'error/index'        => __DIR__.'/../../../view/auth/theme/layout/launched/errors/index.phtml',
-                            ));
-                       
-    			break;
-    		}
-           
-
-    		case 'Templete':{
-                $template_map->merge(
-                        array(
-                                'layout/layout'      => __DIR__.'/../../../view/templete/theme/layout/launched/launched.phtml',
-                                'error/404'          => __DIR__.'/../../../view/templete/theme/layout/launched/errors/404.phtml',
-                                'error/index'        => __DIR__.'/../../../view/templete/theme/layout/launched/errors/index.phtml',
-
-                                // analizar si la ubicaci�n para esto lo correcto es aqu�.
-                                'dashboard_user_area'           => __DIR__ . '/../../../view/templete/theme/layout/launched/dashboard-viewhelper/user-area.phtml',
-                                'dashboard_search_area'         => __DIR__ . '/../../../view/templete/theme/layout/launched/dashboard-viewhelper/search-area.phtml',
-                                'dashboard_top_menu'            => __DIR__ . '/../../../view/templete/theme/layout/launched/dashboard-viewhelper/top-menu.phtml',
-                                'dashboard_app_menu'            => __DIR__ . '/../../../view/templete/theme/layout/launched/dashboard-viewhelper/app-menu.phtml',
-                                'dashboard_notification_area'   => __DIR__ . '/../../../view/templete/theme/layout/launched/dashboard-viewhelper/notification-area.phtml',
-                                'dashboard_footer'              => __DIR__ . '/../../../view/templete/theme/layout/launched/dashboard-viewhelper/footer.phtml',
-                            ));
-                break;
-            }
             case 'Website':{
                 $template_map->merge(
-                        array(
-                                'layout/layout'      => __DIR__.'/../../../view/website/theme/layout/launched/launched.phtml',
-                                'error/404'          => __DIR__.'/../../../view/website/theme/layout/launched/errors/404.phtml',
-                                'error/index'        => __DIR__.'/../../../view/website/theme/layout/launched/errors/index.phtml',
-
-                                'website_header'   => __DIR__ . '/../../../view/website/theme/layout/launched/viewhelpers/header.phtml',
-                                'website_header_menu'   => __DIR__ . '/../../../view/website/theme/layout/launched/viewhelpers/header_menu.phtml',
-                                'website_footer'   => __DIR__ . '/../../../view/website/theme/layout/launched/viewhelpers/footer.phtml',
-                            ));
+                    array(
+                        'layout/layout'      => __DIR__.'/../../../view/website/layout/layout.phtml',
+                        'error/404'          => __DIR__.'/../../../view/website/theme/layout/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/website/theme/layout/error/index.phtml',
+                                                                              
+                ));
                 break;
             }
+            case 'Admin':{
+                $template_map->merge(
+                    array(
+                        'layout/layout'      => __DIR__.'/../../../view/admin/layout/layout.phtml',
+                        'error/404'          => __DIR__.'/../../../view/admin/theme/layout/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/admin/theme/layout/error/index.phtml',
+                                                                              
+                ));
+                break;
+            }
+            case 'Client':{
+                $template_map->merge(
+                    array(
+                        'layout/layout'      => __DIR__.'/../../../view/client/layout/layout.phtml',
+                        'error/404'          => __DIR__.'/../../../view/client/theme/layout/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/client/theme/layout/error/index.phtml',
+                                                                              
+                ));
+                break;
+            }
+
     	}    	
          
     }
