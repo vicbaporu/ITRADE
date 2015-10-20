@@ -58,6 +58,24 @@ return array(
                             ),
                         ),
                     ),
+                    
+                    //Ruta servicios
+                    'servicios' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '[/:lang]/servicios',
+                            'defaults' => array(
+                                'controller'    => 'Website\Controller\Servicios',
+                                'action'        => 'index',
+                                'lang'          => 'es',
+                            ),
+                            'constraints' => array(
+                                'lang' => 'es|en',
+                            ),
+                        ),
+                    ),
+
+                    //Ruta de contacto
                     'contacto' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -101,6 +119,9 @@ return array(
              * Website
              */
             'Website\Controller\Index' => 'Website\Controller\IndexController',
+            
+            'Website\Controller\Servicios' => 'Website\Controller\ServiciosController',
+
             'Website\Controller\Contacto' => 'Website\Controller\ContactoController',
             /*
              * ADMIN
