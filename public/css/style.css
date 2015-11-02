@@ -10,15 +10,44 @@ li
 
 lead{color: black;}
 
-.top{ padding-top: 20px;}
-.bigTop{ padding-top: 50px;}
-.miniTop{ padding-top: 10px;}
 
-.bop{ margin-bottom: 20px;}
-.bigBop{ margin-bottom: 50px;}
-.miniBop{ margin-bottom: 10px;}
 
-.bRight { border-right: 1px solid black }
+@media (max-width: 767px) {
+  .top{ padding-top: 8px;}
+  .bigTop{ padding-top: 20px;}
+  .miniTop{ padding-top: 10px;}
+  .specialAlign{text-align: center}
+  .topXS {padding-top: 5px;} 
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .top{ padding-top: 10px;}
+  .bigTop{ padding-top: 20px;}
+  .miniTop{ padding-top: 10px;}
+  .specialAlign{text-align: center}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .top{ padding-top: 20px;}
+  .bigTop{ padding-top: 30px;}
+  .miniTop{ padding-top: 10px;}
+  .bRight { border-right: 1px solid black }
+  .specialAlign{text-align: left}
+}
+
+/*Estilos para resolución grande*/
+@media (min-width: 1200px) {
+  .top{ padding-top: 20px;}
+  .bigTop{ padding-top: 50px;}
+  .miniTop{ padding-top: 10px;}
+  .bRight { border-right: 1px solid black }
+  .specialAlign{text-align: left}
+}
+
+
+.justifyText{ text-align : justify; }
+
 .blue { background-color: rgb(46,49,146) }
 .black { background-color: rgb(0,0,0) }
 .textWhite { color: white}

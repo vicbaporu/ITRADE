@@ -32,15 +32,15 @@
                         col-lg-3 col-lg-offset-0
                         col-md-3 col-sm-offset-0 
                         col-sm-5 col-sm-offset-0 
-                        col-xs-10 col-xs-offset-1
+                        hidden-xs
                         " 
             src="img/u38.jpg">
             <a class="
                         bold text-right top
                         col-lg-9 col-lg-offset-0
-                        col-md-3 col-sm-offset-0 
+                        col-md-9 col-sm-offset-0 
                         col-sm-5 col-sm-offset-0 
-                        col-xs-10 col-xs-offset-1
+                        hidden-xs
                     ">
                 <?php echo  $this->translate('Iniciar seción')?>
                 
@@ -52,6 +52,7 @@
           <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+            <img src="img/u38.jpg" class="img-responsive hidden-lg hidden-md hidden-sm col-xs-8">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -64,10 +65,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">              
                 <ul class="nav navbar-nav col-lg-6 navbar-right">
-                    <li class="col-lg-3"><a class="bRight" href="#"><strong><?php echo  $this->translate('Página 1') ?> </strong></a></li>
-                    <li class="col-lg-3"><a class="bRight" href="#"><strong><?php echo  $this->translate('Página 2') ?> </strong></a></li>
-                    <li class="col-lg-3"><a class="bRight" href="#"><strong><?php echo  $this->translate('Página 3') ?> </strong></a></li>
-                    <li class="col-lg-3"><a class="bRight" href="#"><strong><?php echo  $this->translate('Página 4') ?> </strong></a></li>
+                    <li class="col-lg-3"><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Página 1') ?> </strong></a></li>
+                    <li class="col-lg-3"><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Página 2') ?> </strong></a></li>
+                    <li class="col-lg-3"><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Página 3') ?> </strong></a></li>
+                    <li class="col-lg-3"><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Página 4') ?> </strong></a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -75,15 +76,15 @@
         </nav>
         <div class="container">
             <?php echo $this->content; ?>
-            <hr>
-            <footer class="col-lg-6 navbar-right bigTop">        
+            
+            <footer class="col-lg-6 col-lg-offset-6  bigTop">        
                 
-                <li class="col-lg-2 pull-right text-right"><a href="#"><lead><?php echo  $this->translate('Correo') ?> </lead></a></li>
-                <li class="col-lg-2 pull-right text-center bRight"><a href="#"><lead><?php echo  $this->translate('Teléfono') ?> </lead></a></li>
-                <li class="col-lg-2 pull-right text-center bRight"><a href="#"><lead><?php echo  $this->translate('Ubicación') ?> </lead></a></li>
-                <li class="col-lg-2 pull-right text-center bRight"><a href="#"><lead><?php echo  $this->translate('Contacto') ?> </lead></a></li>
+                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center "><a href="#"><lead><?php echo  $this->translate('Correo') ?> </lead></a></li>
+                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center bRight"><a href="#"><lead><?php echo  $this->translate('Teléfono') ?> </lead></a></li>
+                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center bRight topXS"><a href="#"><lead><?php echo  $this->translate('Ubicación') ?> </lead></a></li>
+                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center bRight topXS"><a href="#"><lead><?php echo  $this->translate('Contacto') ?> </lead></a></li>
                 
-                <li class="col-lg-12 text-right miniTop"><a href="#"><lead><?php echo  $this->translate('© 2015 ITRADE MEXICO S.A. de C.V.') ?> </lead></a></li>
+                <li class="col-lg-12 col-xs-12 text-right top"><a href="#"><lead><?php echo  $this->translate('© 2015 ITRADE MEXICO S.A. de C.V.') ?> </lead></a></li>
                 
             </footer>
         </div> <!-- /container -->
