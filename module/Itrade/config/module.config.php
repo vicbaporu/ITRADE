@@ -112,6 +112,22 @@ return array(
                             ),
                         ),
                     ),
+
+                    //Ruta de login
+                    'login' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '[/:lang]/login',
+                            'defaults' => array(
+                                'controller'    => 'Website\Controller\Login',
+                                'action'        => 'index',
+                                'lang'          => 'es',
+                            ),
+                            'constraints' => array(
+                                'lang' => 'es|en',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
@@ -145,6 +161,8 @@ return array(
             'Website\Controller\Servicios' => 'Website\Controller\ServiciosController',
 
             'Website\Controller\Contacto' => 'Website\Controller\ContactoController',
+
+            'Website\Controller\Login' => 'Website\Controller\LoginController',
             /*
              * ADMIN
              */
@@ -163,6 +181,7 @@ return array(
         'exception_template'       => 'error/index',
         'template_map' => array(
             'layout/layout'           => __DIR__ . '\..\view\layout\layout.phtml',
+            'layout/login'            => __DIR__ . '\..\view\client\layout\layout.phtml',
             'application/index/index' => __DIR__ . '\..\view\application\index\index.phtml',
             'error/404'               => __DIR__ . '\..\view\error\404.phtml',
             'error/index'             => __DIR__ . '\..\view\error\index.phtml',
