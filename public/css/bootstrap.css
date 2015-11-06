@@ -1600,7 +1600,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1000px;
   }
 }
 .container-fluid {
@@ -2551,15 +2551,15 @@ output {
 .form-control {
   display: block;
   width: 100%;
-  height: 34px;
+  height: 2em;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
@@ -2580,7 +2580,7 @@ output {
   color: #999;
 }
 .form-control::-webkit-input-placeholder {
-  color: #999;
+  color: rgb(220,220,220);
 }
 .form-control[disabled],
 .form-control[readonly],
@@ -3574,12 +3574,12 @@ tbody.collapse.in {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 100;
   z-index: 1000;
   display: none;
   float: left;
   min-width: 160px;
-  padding: 5px 0;
+  padding: 5px 0 ;
   margin: 2px 0 0;
   font-size: 14px;
   text-align: left;
@@ -3589,7 +3589,7 @@ tbody.collapse.in {
           background-clip: padding-box;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, .15);
-  border-radius: 4px;
+  
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
           box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
@@ -3949,11 +3949,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
-  color: #555;
+  color: rgb(220,220,220);
   text-align: center;
-  background-color: #eee;
+  background-color: white;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0 0 10px 0;
 }
 .input-group-addon.input-sm {
   padding: 5px 10px;
@@ -4379,7 +4379,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
-    position: static;
+    position: absolute;
     float: none;
     width: auto;
     margin-top: 0;
@@ -6459,14 +6459,12 @@ button.close {
 }
 .carousel-caption {
   position: absolute;
-  right: 15%;
-  bottom: 20px;
-  left: 15%;
+  bottom: 55%;
+  
   z-index: 10;
-  padding-top: 20px;
-  padding-bottom: 20px;
+
   color: #fff;
-  text-align: center;
+  
   text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
 }
 .carousel-caption .btn {
@@ -6491,9 +6489,9 @@ button.close {
     margin-right: -15px;
   }
   .carousel-caption {
-    right: 20%;
-    left: 20%;
-    padding-bottom: 30px;
+    right: 58%;
+    left: 5%;
+    padding-bottom: 20px;
   }
   .carousel-indicators {
     bottom: 20px;
