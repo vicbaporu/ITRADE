@@ -139,11 +139,9 @@
 }
 .navmenu,
 .navbar-offcanvas {
-  width: 300px;
+  width: 250px;
   height: auto;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 4px;
+  
 }
 .navmenu-fixed-left,
 .navmenu-fixed-right,
@@ -241,8 +239,8 @@
 .navbar-default .navbar-offcanvas .navmenu-nav > .dropdown > a:hover .caret,
 .navmenu-default .navmenu-nav > .dropdown > a:focus .caret,
 .navbar-default .navbar-offcanvas .navmenu-nav > .dropdown > a:focus .caret {
-  border-top-color: #333;
-  border-bottom-color: #333;
+  border-top-color: ;
+  border-bottom-color: ;
 }
 .navmenu-default .navmenu-nav > .open > a,
 .navbar-default .navbar-offcanvas .navmenu-nav > .open > a,
@@ -269,7 +267,8 @@
 }
 .navmenu-default .navmenu-nav.dropdown-menu,
 .navbar-default .navbar-offcanvas .navmenu-nav.dropdown-menu {
-  background-color: #e7e7e7;
+  background-color: transparent;
+  border-bottom: 1px solid rgb(119,119,119);
 }
 .navmenu-default .navmenu-nav.dropdown-menu > .divider,
 .navbar-default .navbar-offcanvas .navmenu-nav.dropdown-menu > .divider {
@@ -300,7 +299,7 @@
 .navbar-default .navbar-offcanvas .navmenu-nav > .active > a:hover,
 .navmenu-default .navmenu-nav > .active > a:focus,
 .navbar-default .navbar-offcanvas .navmenu-nav > .active > a:focus {
-  color: #555;
+  color: #333;
   background-color: #e7e7e7;
 }
 .navmenu-default .navmenu-nav > .disabled > a,
