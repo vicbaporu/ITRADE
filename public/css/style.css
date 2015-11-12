@@ -6,6 +6,8 @@
 
 
 li { list-style:none; }
+a {color: black;}
+a:hover {color: rgba(0,0,0,.8);}
 
 lead{color: black;}
 
@@ -47,19 +49,17 @@ lead{color: black;}
 
 .login
 {
+  padding-top: .8em;
+  padding-bottom: .8em;
   background-color: rgb(46,49,146);
   color: white;
   font-weight: bold;
-  padding-bottom: 15px;
+  background-image: url('../img/login.jpg');
 
-  padding-top: 10px;
-  margin-top: -20px;
 }
-.login:hover{
-  color: white;
-  cursor: pointer;
-  text-decoration: none;
-}
+
+ 
+
 
 .justifyText{ text-align : justify; }
 
@@ -69,20 +69,17 @@ lead{color: black;}
 
 .imgLang
 {
+  margin-top: .8em;
+  
   width: 32px;
   height: 24px;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0; // remove the gap so it doesn't close
- }
 
- .login {background-image: url('../img/login.jpg');}
 
  .panel-login
  {
-  margin-top: 15%;
+  margin-top: 10em;
  }
 .username
 {
@@ -102,7 +99,7 @@ lead{color: black;}
   font-size: 20px;
   font-weight: lighter;
   height: 2.3em;
-  width: 340px;
+  
 }
 
 .white
@@ -113,10 +110,7 @@ lead{color: black;}
   font-size: 15px;
   text-decoration: none;
 }
-a:link
-{
-  text-decoration: none;
-}
+a:link{ text-decoration: none; }
 
 .img-Back
 {
@@ -125,4 +119,23 @@ a:link
   top: 2em;
   left: 2em;
 }
+.img-Back:hover{ cursor: pointer; }
+
+
+.icon-right-arrow
+{
+  color: rgb(220,220,220); 
+  font-size: 35px;
+  margin-top: 0.1em;
+  margin-right: .3em;
+
+}
+input[type="text"] > input:active { cursor: pointer; }
+
+.iconButton 
+{
+  color: black;
+  cursor: pointer;
+} 
+
 

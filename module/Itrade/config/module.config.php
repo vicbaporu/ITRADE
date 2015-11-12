@@ -85,7 +85,7 @@ return array(
                     'servicios' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '[/:lang]/servicios',
+                            'route'    => '/servicios[/:lang]',
                             'defaults' => array(
                                 'controller'    => 'Website\Controller\Servicios',
                                 'action'        => 'index',
