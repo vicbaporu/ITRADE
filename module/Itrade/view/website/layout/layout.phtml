@@ -85,7 +85,7 @@ else
 
 
         <nav class="container navbar navbar-default">
-          <div class="container">
+          <div class="container col-lg-12">
 
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header  col-xs-3">
@@ -98,56 +98,54 @@ else
               </button>
               <a class="navbar-brand" href="#"></a>
             </div>
-            <img src="/img/u38.jpg" class="img-responsive hidden-lg hidden-md hidden-sm col-xs-8 ">
+            <a href="http://itrade"><img src="/img/u38.jpg" class="img-responsive hidden-lg hidden-md hidden-sm col-xs-8 "></a>
             
             <!-- Links del menu movil -->
             <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas " role="navigation">
                 <ul class="nav  navmenu">
                     <li><a class="text-center" href="#"><strong><?php echo  $this->translate('Acerca de') ?> </strong></a></li>
-                    <li class="dropdown text-center">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong><?php echo  $this->translate('Servicios') ?> </strong> <b class="caret"></b></a>
-                        <ul class="dropdown-menu navmenu-nav " role="menu">
-                            <li class="text-center"><a href="servicios">Todos</a></li>
-                            <li class="text-center"><a href="servicios">Marítimo</a></li>
-                            <li class="text-center"><a href="#">Aereo</a></li>
-                            <li class="text-center"><a href="#">Terrestre</a></li>
-                            <li class="text-center"><a href="#">Aduana</a></li>
-                            <li class="text-center"><a href="#">Seguro</a></li>
-                            <li class="text-center"><a href="#">Logística</a></li>
+
+                    <li><a class="text-center" href="/servicios"><strong><?php echo  $this->translate('Servicios') ?> </strong></a></li>
+                    <li class=" dropdown text-center">
+                        <a href="#" class="dropdown-toggle bRight" data-toggle="dropdown" data-hover="dropdown" data-delay="" data-close-others="false">
+                            <strong><?php echo  $this->translate('Recursos') ?></strong> <b class="caret"></b>
+                        </a>
+                        
+
+                        <ul class="dropdown-menu blue navmenu-nav " >
+                            <li><a class="text-center"href="#">PDF</a></li>
+                            <li class="divider"></li>
+                            <li><a class="text-center"href="#">PDF</a></li>
                         </ul>
                     </li>
-                    <li><a class="text-center" href="#"><strong><?php echo  $this->translate('Recursos') ?> </strong></a></li>
-                    <li><a class="text-center" href="#"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
+                    <li><a class="text-center" href="/contacto"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
 
                 </ul>
             </nav>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">              
-                <ul class="nav navbar-nav col-lg-7 navbar-right">
-                    <li class="col-lg-3"><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Acerca de') ?> </strong></a></li>
-                    <li class="col-lg-3 dropdown">
-                        <a href="/servicios" class="dropdown-toggle  bRight specialAlign" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <strong><?php echo  $this->translate('Servicios') ?></strong> <span class="caret"></span>
+            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1 ">              
+                <ul class="nav navbar-nav  navbar-right ">
+                    <li class=""><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Acerca de') ?> </strong></a></li>
+                    <li class=""><a class="bRight specialAlign" href="/servicios"><strong><?php echo  $this->translate('Servicios') ?> </strong></a></li>
+
+                    <li class=" dropdown">
+                        <a href="#" class="dropdown-toggle bRight" data-toggle="dropdown" data-hover="dropdown" data-delay="" data-close-others="false">
+                            <strong><?php echo  $this->translate('Recursos') ?></strong> <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu right" >
-                            <li><a href="servicios">Todos</a></li>
-                            <li><a href="#">Marítimo</a></li>
-                            <li><a href="#">Aereo</a></li>
-                            <li><a href="#">Terrestre</a></li>
-                            <li><a href="#">Aduana</a></li>
-                            <li><a href="#">Seguro</a></li>
-                            <li><a href="#">Logística</a></li>
+                        
+
+                        <ul class="dropdown-menu blue " >
+                            <li><a class="textWhite"href="#">PDF</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">PDF</a></li>
                         </ul>
                     </li>
 
-
                     
-                    <li class="col-lg-3"><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Recursos') ?> </strong></a></li>
-                    <li class="col-lg-3"><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
+                    <li class=""><a class=" specialAlign" href="/contacto"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
+            </div>
+          </div>
 
         </nav>
         <div class="container">
