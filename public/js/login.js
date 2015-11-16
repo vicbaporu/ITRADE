@@ -5,11 +5,13 @@ $( document ).ready(function()
     
     if($("#txtPass").val() != "" && $("#txtUser").val())
     {
-      $("#plhPass").addClass("iconButton"); 
+      $("#plhPass").addClass("iconButton");
+      $("#plhPass").attr("src", "/img/passH.png");
     }
     else
     {
       $("#plhPass").removeClass("iconButton");
+      $("#plhPass").attr("src", "/img/pass.png");
     }
   });
 
@@ -18,11 +20,13 @@ $( document ).ready(function()
     
     if($("#txtPass").val() != "" && $("#txtUser").val())
     {
-      $("#plhPass").addClass("iconButton"); 
+      $("#plhPass").addClass("iconButton");
+      $("#plhPass").attr("src", "/img/passH.png");
     }
     else
     {
       $("#plhPass").removeClass("iconButton");
+      $("#plhPass").attr("src", "/img/pass.png");
     }
   });
 

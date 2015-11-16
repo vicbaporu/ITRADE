@@ -3609,7 +3609,7 @@ tbody.collapse.in {
   clear: both;
   font-weight: normal;
   line-height: 1.42857143;
-  color: #333;
+  color: white;
   white-space: nowrap;
 }
 .dropdown-menu > li > a:hover,
@@ -3688,7 +3688,7 @@ tbody.collapse.in {
 }
 @media (min-width: 768px) {
   .navbar-right .dropdown-menu {
-    right: 0;
+    /*right: 0;*/
     left: auto;
   }
   .navbar-right .dropdown-menu-left {
