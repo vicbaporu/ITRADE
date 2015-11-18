@@ -3623,7 +3623,7 @@ tbody.collapse.in {
 .dropdown-menu > .active > a:focus {
   color: #fff;
   text-decoration: none;
-  background-color: #337ab7;
+  background-color: red;
   outline: 0;
 }
 .dropdown-menu > .disabled > a,
@@ -5114,6 +5114,11 @@ a.thumbnail.active {
   color: #2b542c;
 }
 .alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.alert-primary {
   color: #31708f;
   background-color: #d9edf7;
   border-color: #bce8f1;
