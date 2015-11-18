@@ -15,6 +15,8 @@ lead{color: black;}
 .container {font-family: Calibri;}
 .container-fluid {font-family: Calibri;}
 
+
+
 @media (max-width: 767px) {
   .top{ padding-top: 8px;}
   .bigTop{ padding-top: 20px;}
@@ -183,3 +185,36 @@ input[type="text"] > input:active { cursor: pointer; }
   border-color: rgba(253,89,0,.3);
   border-radius: 0px;
 }
+
+.detalle-content
+{
+  
+  margin-left: 3em;
+}
+/*
+#detalle
+{
+  position: relative;
+  background-color: rgba(0,0,0,.8);
+  color: white;
+  opacity: 1;
+
+  top: -24em;
+  height: 24em;
+  margin-left: 24em;
+}
+*/
+
+.icon-close 
+{ 
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-right: 10px;
+  color: white;
+}
+.icon-close:hover
+{
+  color: rgba(255,255,255,.7);
+}
+

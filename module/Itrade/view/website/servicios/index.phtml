@@ -1,4 +1,17 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
 <script src="js/servicios.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+
+  </script>
+
+
+	  
+
+	
+	 
 
 <div class="page-header row"></div>
 
@@ -19,18 +32,24 @@
 
 	
 	<div class="hidden-xs">
-		<img class="img-responsive" id="imgTransportes" src="/img/Servicios/Servicios-transporte.jpg"  usemap="#mapTransportes" alt="" />
+
+		<div class="rdetalleAduana">
+			<img class="img-responsive" id="imgTransportes" src="/img/Servicios/Servicios-transporte.jpg"  usemap="#mapTransportes" alt="" />
+			
+	  	</div>
+	  	
 
 		<map name="mapTransportes">
 
-			<area  id="detalleMaritimo" alt="" title="" href="#" shape="rect" coords="0,253,335,335"  target="_self"    />
-			<area  id="detalleAereo" alt="" title="" href="#" shape="rect" coords="335,254,667,336" 	style="outline:none;" target="_self"    />
-			<area  id="detalleTerrestre" alt="" title=""  shape="rect" coords="666,253,1000,336" 	style="outline:none;" target="_self"    />
+			<area  id="detalleAduanaMaritimo" alt="" title="" href="#" shape="rect" coords="0,253,335,335"  target="_self"    />
+			<area  id="detalleAduanaAereo" alt="" title="" href="#" shape="rect" coords="335,254,667,336" 	style="outline:none;" target="_self"    />
+			<area  id="detalleAduanaTerrestre" alt="" title=""  shape="rect" coords="666,253,1000,336" 	style="outline:none;" target="_self"    />
 			
 		</map>
 
-		<div id="collapsibleUno" class=" collapse in"  >
+		<div id="collapsibleUno" class=" collapse"  >
 			<div id="collapsiblePanel" class="alert alert-maritimo" role="alert">
+				
 				<strong>TRANSPORTE MARÍTIMO</strong>
 	 			<br>
 				Servicios adecuados a las necesidades de cada tipo de carga, cliente y/o negociación de compra-venta.
@@ -50,6 +69,7 @@
 				Proyectos Especiales.
 				<br>
 				Fletamento de Buques.
+
 			</div>
 		</div>
 
@@ -76,7 +96,7 @@
 
 </div>
 
-<div class="row top">
+<div class="row top ">
 	
 	<div class="col-lg-12">
 		<h2>Heading 2</h2>
@@ -90,9 +110,37 @@
 	<div class="hidden-xs">
 		<img class="img-responsive" id="imgLogistica" src="/img/Servicios/Servicios-logisticos.jpg" usemap="#mapLogistica" alt="" >	
 		
+		<div id="detalleAduana">
+			<div class="detalle-content">
+				
+					
+				<span id="aduanaClose"class="glyphicon glyphicon-remove pull-right icon-close" aria-hidden="true"></span>
+				<br>
+		    	<h4><strong>TRANSPORTE MARÍTIMO</strong></h4>
+				<br>
+				Servicios adecuados a las necesidades de cada tipo de carga, cliente y/o negociación de compra-venta.
+				<br>
+				Atención personalizada 24/7.
+				<br>
+				Oficinas propias en las principales ciudades de China.
+				<br>
+				Servicios de Despacho Aduanal en Origen y/o Destino.
+				<br>
+				Servicio Web Tracking.
+				<br>
+				Cotizaciones en menos de 24 horas (Puerto-Puerto).
+				<br>
+				Servicio FCL, LCL, Break Bulk, RoRo, Chartering y Refrigerados.
+				<br>
+				Proyectos Especiales.
+				<br>
+				Fletamento de Buques.
+			</div>
+	  	</div>
+
 		<map name="mapLogistica">
 
-			<area  alt="" title="" href="#" shape="rect" coords="0,253,335,335"  target="_self"    />
+			<area id="btnAduana" class="ui-state-default ui-corner-all" alt="" title=""  shape="rect" coords="0,253,335,335"  target="_self"    />
 			<area  alt="" title="" href="#" shape="rect" coords="335,254,667,336" 	style="outline:none;" target="_self"    />
 			<area  alt="" title="" href="#" shape="rect" coords="666,253,1000,336" 	style="outline:none;" target="_self"    />
 			
