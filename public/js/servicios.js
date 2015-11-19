@@ -1,113 +1,97 @@
 $( document ).ready(function() 
 {
 
-  //Codigo para transicion propuesta en detalle
-  //$('#collapsibleUno').collapse();
-  $('#detalleAduanaMaritimo').on("click",function()
-  {
-    if(!$('#collapsiblePanel').hasClass('alert-maritimo') )
-    {
-        $('#collapsiblePanel').removeClass();
-        $('#collapsiblePanel').addClass(
-          " alert alert-maritimo"
-          );
-        if(!$("#collapsibleUno").hasClass('in'))
-          $('#collapsibleUno').collapse('toggle');
-
-          var src = $("#imgTransportes").attr('src');
-
-          if(src == "/img/Servicios/maritimoFocus.jpg")
-            $("#imgTransportes").attr("src","/img/Servicios/Servicios-transporte.jpg");
-          else
-            $("#imgTransportes").attr("src","/img/Servicios/maritimoFocus.jpg");
-        
-    }
-    else
-    {
-        $('#collapsibleUno').collapse('toggle');
-
-        var src = $("#imgTransportes").attr('src');
-          if(src == "/img/Servicios/maritimoFocus.jpg")
-            $("#imgTransportes").attr("src","/img/Servicios/Servicios-transporte.jpg");
-          else
-            $("#imgTransportes").attr("src","/img/Servicios/maritimoFocus.jpg");
-    }
-
-  });
-
-  $('#detalleAduanaAereo').on('click',function()
-  {
-    if(!$('#collapsiblePanel').hasClass('alert-aereo') )
-    {
-        $("#imgTransportes").attr("src","/img/Servicios/aereoFocus.jpg");
-        $('#collapsiblePanel').removeClass();
-        $('#collapsiblePanel').addClass(
-          " alert alert-aereo"
-          );
-        if(!$("#collapsibleUno").hasClass('in'))
-        {
-          $('#collapsibleUno').collapse('toggle');
-
-          var src = $("#imgTransportes").attr('src');
-          if(src != "/img/Servicios/aereoFocus.jpg")
-            $("#imgTransportes").attr("src","/img/Servicios/Servicios-transporte.jpg");
-          else
-            $("#imgTransportes").attr("src","/img/Servicios/aereoFocus.jpg");
-            
-        }
-    }
-    else
-    {
-      
-      $('#collapsibleUno').collapse('toggle');
-
-      var src = $("#imgTransportes").attr('src');
-      if(src == "/img/Servicios/aereoFocus.jpg")
-        $("#imgTransportes").attr("src","/img/Servicios/Servicios-transporte.jpg");
-      else
-        $("#imgTransportes").attr("src","/img/Servicios/aereoFocus.jpg");
-
-        
-    }
-
-  });
-
-
-
-
   //Codigo para mandar la entrada de la transición de detalle
   $(function() 
   {
     // run the currently selected effect
-    function runEffect() 
+    function runEffect(component, dir) 
     {
       // get effect type from
       var selectedEffect = "drop";
- 
+  
       // most effect types need no options passed by default
-      var options = {};
-      // some effects have required parameters
-      if ( selectedEffect === "scale" ) {
-        options = { percent: 0 };
-      } else if ( selectedEffect === "size" ) {
-        options = { to: { width: 200, height: 60 } };
-      }
+      
+      options = { direction: dir };
  
       // run the effect
-      $( "#detalleAduana" ).toggle( selectedEffect, options, 500 );
+      $( "#"+ component).toggle( selectedEffect, options, 400 );
     };
  
-    // set effect from select menu value
+    //Efecto maritimo
+    $( "#btnMaritimo" ).click(function() {
+      runEffect("detalleMaritimo","left");
+    });
+    $( "#maritimoClose" ).click(function() {
+      $( "#btnMaritimo" ).click();
+    });
+
+    //Efecto Aereo
+    $( "#btnAereo" ).click(function() {
+      runEffect("detalleAereo","up");
+    });
+    $( "#aereoClose" ).click(function() {
+      $( "#btnAereo" ).click();
+    });
+
+    $( "#btnTerrestre" ).click(function() {
+      runEffect("detalleTerrestre","right");
+    });
+    $( "#terrestreClose" ).click(function() {
+      $( "#btnTerrestre" ).click();
+    });
+
     $( "#btnAduana" ).click(function() {
-      runEffect();
+      runEffect("detalleAduana","left");
     });
     $( "#aduanaClose" ).click(function() {
       $( "#btnAduana" ).click();
     });
+
+
+    $( "#btnLogistica" ).click(function() {
+      runEffect("detalleLogistica","right");
+    });
+    $( "#logisticaClose" ).click(function() {
+      $( "#btnLogistica" ).click();
+    });
+
+
+
   });
+
+
   //Codigo para setear la posición de cuadro de detalle
   var width = $("#imgTransportes").width();
   var height = $("#imgTransportes").height();
+
+  $("#detalleMaritimo").css("display","none"); 
+  $("#detalleMaritimo").css("position","relative");
+  $("#detalleMaritimo").css("background-color","rgba(0,0,0,.8)");
+  $("#detalleMaritimo").css("color","white");
+  $("#detalleMaritimo").css("opacity","1");
+
+  $("#detalleMaritimo").css("bottom",height);
+  $("#detalleMaritimo").css("margin-bottom",-height);
+  $("#detalleMaritimo").css("left",width/3);
+
+  $("#detalleMaritimo").css("height",height);
+  $("#detalleMaritimo").css("width", (width/3)*2  );
+
+
+  $("#detalleTerrestre").css("display","none"); 
+  $("#detalleTerrestre").css("position","relative");
+  $("#detalleTerrestre").css("background-color","rgba(0,0,0,.8)");
+  $("#detalleTerrestre").css("color","white");
+  $("#detalleTerrestre").css("opacity","1");
+
+  $("#detalleTerrestre").css("bottom",height);
+  $("#detalleTerrestre").css("margin-bottom",-height);
+  $("#detalleTerrestre").css("right",0);
+
+  $("#detalleTerrestre").css("height",height);
+  $("#detalleTerrestre").css("width", (width/3)*2  );
+
 
   $("#detalleAduana").css("display","none"); 
   $("#detalleAduana").css("position","relative");
@@ -121,6 +105,30 @@ $( document ).ready(function()
 
   $("#detalleAduana").css("height",height);
   $("#detalleAduana").css("width", (width/3)*2  );
-  $("#detalleAduana").css("marginleft"," 24em");
+
+
+  $("#detalleLogistica").css("display","none"); 
+  $("#detalleLogistica").css("position","relative");
+  $("#detalleLogistica").css("background-color","rgba(0,0,0,.8)");
+  $("#detalleLogistica").css("color","white");
+  $("#detalleLogistica").css("opacity","1");
+
+  $("#detalleLogistica").css("bottom",height);
+  $("#detalleLogistica").css("margin-bottom",-height);
+
+  $("#detalleLogistica").css("height",height);
+  $("#detalleLogistica").css("width", (width/3)*2  );
+
+  $("#detalleAereo").css("display","none"); 
+  $("#detalleAereo").css("position","relative");
+  $("#detalleAereo").css("background-color","rgba(0,0,0,.9)");
+  $("#detalleAereo").css("color","white");
+  $("#detalleAereo").css("opacity","1");
+
+  //$("#detalleAereo").css("bottom",height);
+  //$("#detalleAereo").css("margin-bottom",-height);
+
+  $("#detalleAereo").css("height",height);
+  $("#detalleAereo").css("width", width );
 
 });
