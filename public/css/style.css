@@ -8,11 +8,14 @@
 li { list-style:none; }
 a {color: black;}
 a:hover {color: rgba(0,0,0,.8);}
+a:link{ text-decoration: none; }
 
 lead{color: black;}
 
 .container {font-family: Calibri;}
 .container-fluid {font-family: Calibri;}
+
+
 
 @media (max-width: 767px) {
   .top{ padding-top: 8px;}
@@ -53,11 +56,24 @@ lead{color: black;}
 {
   padding-top: .8em;
   padding-bottom: .8em;
-  background-color: rgb(46,49,146);
   color: white;
   font-weight: bold;
-  background-image: url('../img/login.jpg');
+  background-color: rgb(46,49,146);
 
+
+
+}
+.loginArea
+{
+  padding-top: .8em;
+  padding-bottom: .8em;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(46,49,146);
+  background-image: url('../img/login.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
  
@@ -119,7 +135,7 @@ lead{color: black;}
   font-size: 15px;
   text-decoration: none;
 }
-a:link{ text-decoration: none; }
+
 
 .img-Back
 {
@@ -147,4 +163,58 @@ input[type="text"] > input:active { cursor: pointer; }
   cursor: pointer;
 } 
 
+
+.alert-maritimo 
+{
+  color: #31708f;
+  background-color: rgba(1,168,184,.3);
+  border-color: #bce8f1;
+  border-radius: 0px;
+}
+.alert-aereo 
+{
+  color: rgba(255,185,3,1);
+  background-color: rgba(255,185,3,.2);
+  border-color: rgba(255,185,3,.1);
+  border-radius: 0px;
+}
+.alert-terrestre 
+{
+  color: rgba(253,89,0,1);
+  background-color: rgba(253,89,0,.3);
+  border-color: rgba(253,89,0,.3);
+  border-radius: 0px;
+}
+
+.detalle-content
+{
+  
+  margin-left: 3em;
+}
+/*
+#detalle
+{
+  position: relative;
+  background-color: rgba(0,0,0,.8);
+  color: white;
+  opacity: 1;
+
+  top: -24em;
+  height: 24em;
+  margin-left: 24em;
+}
+*/
+
+.icon-close 
+{ 
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-right: 10px;
+  color: white;
+}
+.icon-close:hover
+{
+  color: rgba(255,255,255,.7);
+}
 
