@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    $vendorDir . '/phpunit/php-text-template',
-    $vendorDir . '/phpunit/php-timer',
+    $vendorDir . '/phing/phing/classes',
+    $vendorDir . '/propel/propel1/runtime/lib',
+    $vendorDir . '/propel/propel1/generator/lib',
 );
