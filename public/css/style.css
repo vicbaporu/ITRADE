@@ -22,6 +22,7 @@ lead{color: black;}
   .bigTop{ padding-top: 20px;}
   .miniTop{ padding-top: 10px;}
   .specialAlign{text-align: center}
+  .formAlign{text-align: center}
   .topXS {padding-top: 5px;} 
 
 }
@@ -31,6 +32,7 @@ lead{color: black;}
   .bigTop{ padding-top: 20px;}
   .miniTop{ padding-top: 10px;}
   .specialAlign{text-align: center}
+  .formAlign{text-align: right;}
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -39,6 +41,7 @@ lead{color: black;}
   .miniTop{ padding-top: 10px;}
   .bRight { border-right: 1px solid black }
   .specialAlign{text-align: left}
+  .formAlign{text-align: right}
 }
 
 /*Estilos para resolución grande*/
@@ -48,9 +51,8 @@ lead{color: black;}
   .miniTop{ padding-top: 10px;}
   .bRight { border-right: 1px solid black }
   .specialAlign{text-align: left}
+  .formAlign{text-align: right}
 }
-
-
 
 .login
 {
@@ -188,7 +190,6 @@ input[type="text"] > input:active { cursor: pointer; }
 
 .detalle-content
 {
-  
   margin-left: 3em;
 }
 /*
@@ -209,12 +210,15 @@ input[type="text"] > input:active { cursor: pointer; }
 { 
   font-size: 20px;
   cursor: pointer;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-right: 10px;
   color: white;
 }
+
+
 .icon-close:hover
 {
   color: rgba(255,255,255,.7);
 }
+
 
