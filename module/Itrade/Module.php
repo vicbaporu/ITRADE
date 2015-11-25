@@ -19,7 +19,20 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
+        
+        //Recepción de los Eventos
+        $eventManager   = $e->getApplication()->getEventManager();
 
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+
+        //Llamada al Listener de Templetes
+        $themeListener   = new \Shared\CustomListener\TemplateMapListener();
+        $themeListener->attach($eventManager);
+        
+        //Llamada al Listener de Idioma
+        $langListener   = new \Shared\CustomListener\LangListener();
+        $langListener->attach($eventManager);
                 
     }
     

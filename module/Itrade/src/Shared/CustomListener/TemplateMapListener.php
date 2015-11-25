@@ -53,8 +53,8 @@ class TemplateMapListener implements ListenerAggregateInterface
                 $template_map->merge(
                     array(
                         'layout/layout'      => __DIR__.'/../../../view/website/layout/layout.phtml',
-                        'error/404'          => __DIR__.'/../../../view/website/theme/layout/error/404.phtml',
-                        'error/index'        => __DIR__.'/../../../view/website/theme/layout/error/index.phtml',
+                        'error/404'          => __DIR__.'/../../../view/website/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/website/error/index.phtml',
                                                                               
                 ));
                 break;
@@ -63,8 +63,8 @@ class TemplateMapListener implements ListenerAggregateInterface
                 $template_map->merge(
                     array(
                         'layout/layout'      => __DIR__.'/../../../view/admin/layout/layout.phtml',
-                        'error/404'          => __DIR__.'/../../../view/admin/theme/layout/error/404.phtml',
-                        'error/index'        => __DIR__.'/../../../view/admin/theme/layout/error/index.phtml',
+                        'error/404'          => __DIR__.'/../../../view/admin/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/admin/error/index.phtml',
                                                                               
                 ));
                 break;

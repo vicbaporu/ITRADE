@@ -62,7 +62,7 @@ return array(
                         'options' => array(
                             'route'    => '/catalogo',
                             'defaults' => array(
-                                'controller'    => 'Admin\Catalogo\Controller\EmpleadoController',
+                                'controller'    => 'Catalogo\Controller\EmpleadoController',
                                 'action'        => 'index',
                             ),
                         ),
@@ -73,7 +73,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/test',
                                     'defaults' => array(
-                                        'controller'    => 'Admin\Catalogo\Controller\EmpleadoController',
+                                        'controller'    => 'Catalogo\Controller\Empleado',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -192,7 +192,7 @@ return array(
             /*
              * START ADMIN
              */
-            'Admin\Catalogo\Controller\EmpleadoController' => 'Admin\Catalogo\Controller\EmpleadoController',
+            'Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
 
              //CATALOGO
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
@@ -209,19 +209,22 @@ return array(
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/admin/layout/layout.phtml',
-            'layout/login'            => __DIR__ . '/../view/client/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404'               => __DIR__ . '/../view/admin/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/admin/error/index.phtml',
+        //'layout/layout'         => __DIR__ . '/../view/apps/theme/layout/launched.phtml',
+        //'website/index/index'   => __DIR__ . '/../view/website/index/index.phtml',
+        'error/404'             => __DIR__ . '/../view/website/theme/layout/launched/errors/404.phtml',
+        'error/index'           => __DIR__ . '/../view/website/theme/layout/launched/errors/index.phtml',
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            'Website' =>  __DIR__ . '/../view/',
+            'Admin' =>  __DIR__ . '/../view/admin/',
+           // 'Admin' => __DIR__ . '/../view/admin',
+         //   'Website' => __DIR__ . '/../view',
+
         ),
     ),
 );
