@@ -185,18 +185,30 @@
                     </div>
                     <!-- END MINI-PROFILE -->
                     <!-- BEGIN SIDEBAR MENU -->	
-                    <p class="menu-title">BROWSE<span class="pull-right"><a href="javascript:;"><i class="fa fa-refresh"></i></a></span></p>
+                    
                     <ul>	
                         <!-- BEGIN SELECTED LINK -->
-                        <li class="start active">
+                        <li navbar="dashboard" class="start active">
                             <a href="#">
                                 <i class="icon-custom-home"></i>
-                                <span class="title">Link 1</span>
+                                <span class="title">Escritorio</span>
                                 <span class="selected"></span>
-                                <span class="badge badge-important pull-right">5</span>
+                                <!--<span class="badge badge-important pull-right">5</span>-->
                             </a>
                         </li>
                         <!-- END SELECTED LINK -->
+                        <!-- BEGIN TWO LEVEL MENU -->
+                        <li class="">
+                            <a href="javascript:;">
+                                <i class="fa fa-folder-open"></i>
+                                <span class="title">Catálogo</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="javascript:;">Empleados</a></li>
+                            </ul>
+                        </li>
+                        <!-- END TWO LEVEL MENU -->
                         <!-- BEGIN BADGE LINK -->
                         <li class="">
                             <a href="#">
@@ -226,24 +238,7 @@
                             </ul>
                         </li>
                         <!-- END ONE LEVEL MENU -->
-                        <!-- BEGIN TWO LEVEL MENU -->
-                        <li class="">
-                            <a href="javascript:;">
-                                <i class="fa fa-folder-open"></i>
-                                <span class="title">Link 5</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li><a href="javascript:;">Sub Link 1</a></li>
-                                <li>
-                                    <a href="javascript:;"><span class="title">Sub Link 2</span><span class="arrow "></span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="javascript:;">Sub Link 1</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- END TWO LEVEL MENU -->			
+                        			
                     </ul>
                     <!-- END SIDEBAR MENU -->
                     <!-- BEGIN SIDEBAR WIDGETS -->
@@ -263,9 +258,7 @@
             <div class="page-content"> 
                 <div class="content">  
                     <!-- BEGIN PAGE TITLE -->
-                    <div class="page-title">	
-                        <h3>Master Page</h3>		
-                    </div>
+                    <?php echo $this->content?>
                     <!-- END PAGE TITLE -->
                     <!-- BEGIN PlACE PAGE CONTENT HERE -->
 

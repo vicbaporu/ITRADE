@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,23 +6,30 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Itrade;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-
-use Shared\CustomListener\TemplateMapListener;
-use Shared\CustomListener\AuthListener;
 
 class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
 
-                
+        //Recepción de los Eventos
+        $eventManager   = $e->getApplication()->getEventManager();
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+
+        //Llamada al Listener de Templetes
+        $themeListener   = new \Shared\CustomListener\TemplateMapListener();
+        $themeListener->attach($eventManager);
+        
+        //Llamada al Listener de Idioma
+        $langListener   = new \Shared\CustomListener\LangListener();
+        $langListener->attach($eventManager);
     }
-    
 
     public function getConfig()
     {
