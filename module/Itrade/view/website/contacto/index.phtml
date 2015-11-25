@@ -1,3 +1,51 @@
+<?php if ($_POST): ?>
+	
+	<?php
+
+	$nombre 	= $_POST['nombre'];
+	$empresa 	= $_POST['empresa'];
+	$email 		= $_POST['email'];
+	$telefono 	= $_POST['telefono'];
+	$mensaje 	= $_POST['mensaje'];
+
+	$bodyMessage = 'Nombre: '.$nombre.'<br>Empresa: '.$empresa.'<br>Email: '.$email.'<br>Telefono: '.$telefono.'<br>Mensaje: '.$mensaje.'<br><br> Ponte en contacto con el';
+
+	require 'PHPMailer/PHPMailerAutoload.php';
+
+	$mail = new PHPMailer;
+
+
+	$mail->isSMTP();                                      // Set mailer to use SMTP
+	$mail->Host = 'smtp.gmail.com server';  // Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                               // Enable SMTP authentication
+	$mail->Password = '********';                           // SMTP password
+	$mail->Username = 'mail@server.com';                 // SMTP username
+	$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+	$mail->Port = 465;                                    // TCP port to connect to
+
+	$mail->setFrom($email, 'ITRADE Contacto');
+	$mail->addAddress('mailtorecipe@server.com', $nombre);     // Add a recipient
+
+	$mail->isHTML(true);                                  // Set email format to HTML
+
+	$mail->Subject = 'Ponte en contacto WEB';
+	$mail->Body    = $bodyMessage;
+	//	$mail->AltBody = '';
+
+	if(!$mail->send()) 
+	{?>
+	    <div class="alert alert-danger" role="alert">Lo siento '.$nombre.' no pudimos enviar el correo </div>
+    <?php 
+	} else 
+	{?>
+		<div class="alert alert-success" role="alert">Muchas gracias <?php echo $nombre ?> por enviar tus datos, nos pondremos en contacto a la brevedad .... </div>
+   	<?php 
+	}
+
+	?>
+
+<?php endif ?>
+
 <div class="row specialAlign">
 	
 	<div class="page-header"></div>
@@ -35,29 +83,70 @@
 </div>
 <div class="top"></div>
 <div class=" row  top blue">
-	<div class="col-lg-6 col-xs-12 col-sm-12 col-md-6">
+	<div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
 		<h2 class="textWhite specialAlign">Lorem ipsum dolor sit amet, consectetur </h2>
 		<h4 class="textWhite specialAlign top"> adipisicing elit </h4>
 	</div>
-	<div class="col-lg-5 col-xs-12 col-sm-12 col-md-6 bot">
-		<form class="textWhite ">
-			<div class="row">
+	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot">
 
-				<div class="col-lg-2  col-xs-2  col-sm-2 col-md-2 text-right"><label for="exampleInputEmail1">Texto</label></div>
-				<div class="col-lg-10 col-xs-10"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="placeHolder"></div>
-			
-				<div class="col-lg-2  col-xs-2  col-sm-2 col-md-2 text-right miniTop"><label for="exampleInputEmail1">Texto</label></div>
-				<div class="col-lg-10 col-xs-10 miniTop"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="placeHolder"></div>
-			
-				<div class="col-lg-2  col-xs-2  col-sm-2 col-md-2 text-right miniTop"><label for="exampleInputEmail1">Texto</label></div>
-				<div class="col-lg-10 col-xs-10 miniTop"><input type="text" class="form-control" id="exampleInputEmail1" placeholder="placeHolder"></div>
-			
-				<div class="col-lg-12 col-xs-12 miniTop">
-					<button class="btn btn-danger col-lg-3 col-lg-offset-9 col-xs-6 col-xs-offset-3 col-md-6 col-md-offset-6">Acción</button>
+		<form class="textWhite" action="/contacto" method="post">
+
+			<div class="form-group row miniTop">
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
+					<label for="nombre">Nombre: *</label>
 				</div>
+				<div class="col-lg-8 col-md-8  col-sm-8 col-xs-12">
+					<input type="text" class="form-control" id="nombre" name="nombre" required>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
+					<label for="empresa">Empresa:</label>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<input type="text" class="form-control" id="empresa" name="empresa" >
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
+					<label for="email">Dirección de e-mail: *</label>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<input type="text" class="form-control" id="email" name="email" required>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
+					<label for="telefono">Teléfono/Fax: *</label>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<input type="text" class="form-control" id="telefono" name="telefono" required>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
+					<label for="mensaje">Mensaje: *</label>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<textarea name="mensaje" id="mensaje" class="form-control" rows="3" required></textarea>
+				</div>
+			</div>
+
+
+			<div class="form-group  row">
+				<div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-xs-6 col-xs-offset-3">
+					<button class="btn btn-danger form-control  ">Acción</button>
+				</div>
+			</div>
+
+
+
 				 
 			
-			</div>
 		  
 		</form>
 	</div>
