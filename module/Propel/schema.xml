@@ -60,6 +60,7 @@
     <column name="empleado_apellidopaterno" phpName="EmpleadoApellidopaterno" type="VARCHAR" size="45" required="true"/>
     <column name="empleado_apallidomaterno" phpName="EmpleadoApallidomaterno" type="VARCHAR" size="45" required="true"/>
     <column name="empleado_email" phpName="EmpleadoEmail" type="VARCHAR" size="45" required="true"/>
+    <column name="empleado_password" phpName="EmpleadoPassword" type="VARCHAR" size="45" required="true"/>
     <column name="empleado_celular" phpName="EmpleadoCelular" type="VARCHAR" size="45" required="true"/>
     <column name="empleado_telefono" phpName="EmpleadoTelefono" type="VARCHAR" size="45" required="false"/>
     <column name="empleado_calle" phpName="EmpleadoCalle" type="VARCHAR" size="45" required="false"/>

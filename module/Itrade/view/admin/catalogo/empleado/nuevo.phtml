@@ -1,0 +1,56 @@
+<div class="page-title">
+   
+    <h3>REGISTRO <span class="semi-bold">EMPLEADO</span></h3>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4><span class="semi-bold">Información general</span>
+                </h4>
+            </div>
+            <div class="grid-body no-border">
+                <br>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_nombre')) ?>  
+                            <span class="help req">*</span>
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_nombre')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_apellidopaterno')) ?>  
+                            <span class="help req">*</span>
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_apellidopaterno')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_apallidomaterno')) ?>  
+                            <span class="help req">*</span>
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_apallidomaterno')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_celular')) ?>  
+                            <span class="help req">*</span>
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_celular')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

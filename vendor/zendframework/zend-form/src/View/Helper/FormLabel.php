@@ -42,6 +42,7 @@ class FormLabel extends AbstractHelper
      */
     public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)
     {
+        
         if (!$element) {
             return $this;
         }
@@ -99,11 +100,14 @@ class FormLabel extends AbstractHelper
      */
     public function openTag($attributesOrElement = null)
     {
+      
         if (null === $attributesOrElement) {
+          
             return '<label>';
         }
 
         if (is_array($attributesOrElement)) {
+          
             $attributes = $this->createAttributesString($attributesOrElement);
             return sprintf('<label %s>', $attributes);
         }
@@ -136,7 +140,7 @@ class FormLabel extends AbstractHelper
         }
 
         $attributes = $this->createAttributesString($attributes);
-        return sprintf('<label %s>', $attributes);
+        return sprintf('<label %s class="form-label">', $attributes);
     }
 
     /**

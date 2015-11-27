@@ -8117,3 +8117,9 @@ body.rtl .footer-widget {
   right: 0;
   left: auto;
 }
+
+.req,
+.required {
+  font-weight: normal;
+  color: #de2c3b !important;
+}

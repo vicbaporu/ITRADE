@@ -60,6 +60,12 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
     protected $empleado_email;
 
     /**
+     * The value for the empleado_password field.
+     * @var        string
+     */
+    protected $empleado_password;
+
+    /**
      * The value for the empleado_celular field.
      * @var        string
      */
@@ -258,6 +264,17 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
     {
 
         return $this->empleado_email;
+    }
+
+    /**
+     * Get the [empleado_password] column value.
+     *
+     * @return string
+     */
+    public function getEmpleadoPassword()
+    {
+
+        return $this->empleado_password;
     }
 
     /**
@@ -558,6 +575,27 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
 
         return $this;
     } // setEmpleadoEmail()
+
+    /**
+     * Set the value of [empleado_password] column.
+     *
+     * @param  string $v new value
+     * @return Empleado The current object (for fluent API support)
+     */
+    public function setEmpleadoPassword($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->empleado_password !== $v) {
+            $this->empleado_password = $v;
+            $this->modifiedColumns[] = EmpleadoPeer::EMPLEADO_PASSWORD;
+        }
+
+
+        return $this;
+    } // setEmpleadoPassword()
 
     /**
      * Set the value of [empleado_celular] column.
@@ -913,21 +951,22 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             $this->empleado_apellidopaterno = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->empleado_apallidomaterno = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->empleado_email = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->empleado_celular = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->empleado_telefono = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-            $this->empleado_calle = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
-            $this->empleado_numero = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
-            $this->empleado_interior = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
-            $this->empleado_colonia = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
-            $this->empleado_ciudad = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
-            $this->empleado_estado = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
-            $this->empleado_nss = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
-            $this->empleado_rfc = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
-            $this->empleado_iniciocontrato = ($row[$startcol + 15] !== null) ? (string) $row[$startcol + 15] : null;
-            $this->empleado_nombrecontacto = ($row[$startcol + 16] !== null) ? (string) $row[$startcol + 16] : null;
-            $this->empleado_telefonocontacto = ($row[$startcol + 17] !== null) ? (string) $row[$startcol + 17] : null;
-            $this->empleado_estatus = ($row[$startcol + 18] !== null) ? (string) $row[$startcol + 18] : null;
-            $this->empleado_rol = ($row[$startcol + 19] !== null) ? (string) $row[$startcol + 19] : null;
+            $this->empleado_password = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->empleado_celular = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->empleado_telefono = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->empleado_calle = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+            $this->empleado_numero = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+            $this->empleado_interior = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
+            $this->empleado_colonia = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
+            $this->empleado_ciudad = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
+            $this->empleado_estado = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
+            $this->empleado_nss = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
+            $this->empleado_rfc = ($row[$startcol + 15] !== null) ? (string) $row[$startcol + 15] : null;
+            $this->empleado_iniciocontrato = ($row[$startcol + 16] !== null) ? (string) $row[$startcol + 16] : null;
+            $this->empleado_nombrecontacto = ($row[$startcol + 17] !== null) ? (string) $row[$startcol + 17] : null;
+            $this->empleado_telefonocontacto = ($row[$startcol + 18] !== null) ? (string) $row[$startcol + 18] : null;
+            $this->empleado_estatus = ($row[$startcol + 19] !== null) ? (string) $row[$startcol + 19] : null;
+            $this->empleado_rol = ($row[$startcol + 20] !== null) ? (string) $row[$startcol + 20] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -937,7 +976,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 20; // 20 = EmpleadoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 21; // 21 = EmpleadoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Empleado object", $e);
@@ -1222,6 +1261,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_EMAIL)) {
             $modifiedColumns[':p' . $index++]  = '`empleado_email`';
         }
+        if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_PASSWORD)) {
+            $modifiedColumns[':p' . $index++]  = '`empleado_password`';
+        }
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_CELULAR)) {
             $modifiedColumns[':p' . $index++]  = '`empleado_celular`';
         }
@@ -1292,6 +1334,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                         break;
                     case '`empleado_email`':
                         $stmt->bindValue($identifier, $this->empleado_email, PDO::PARAM_STR);
+                        break;
+                    case '`empleado_password`':
+                        $stmt->bindValue($identifier, $this->empleado_password, PDO::PARAM_STR);
                         break;
                     case '`empleado_celular`':
                         $stmt->bindValue($identifier, $this->empleado_celular, PDO::PARAM_STR);
@@ -1512,48 +1557,51 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                 return $this->getEmpleadoEmail();
                 break;
             case 5:
-                return $this->getEmpleadoCelular();
+                return $this->getEmpleadoPassword();
                 break;
             case 6:
-                return $this->getEmpleadoTelefono();
+                return $this->getEmpleadoCelular();
                 break;
             case 7:
-                return $this->getEmpleadoCalle();
+                return $this->getEmpleadoTelefono();
                 break;
             case 8:
-                return $this->getEmpleadoNumero();
+                return $this->getEmpleadoCalle();
                 break;
             case 9:
-                return $this->getEmpleadoInterior();
+                return $this->getEmpleadoNumero();
                 break;
             case 10:
-                return $this->getEmpleadoColonia();
+                return $this->getEmpleadoInterior();
                 break;
             case 11:
-                return $this->getEmpleadoCiudad();
+                return $this->getEmpleadoColonia();
                 break;
             case 12:
-                return $this->getEmpleadoEstado();
+                return $this->getEmpleadoCiudad();
                 break;
             case 13:
-                return $this->getEmpleadoNss();
+                return $this->getEmpleadoEstado();
                 break;
             case 14:
-                return $this->getEmpleadoRfc();
+                return $this->getEmpleadoNss();
                 break;
             case 15:
-                return $this->getEmpleadoIniciocontrato();
+                return $this->getEmpleadoRfc();
                 break;
             case 16:
-                return $this->getEmpleadoNombrecontacto();
+                return $this->getEmpleadoIniciocontrato();
                 break;
             case 17:
-                return $this->getEmpleadoTelefonocontacto();
+                return $this->getEmpleadoNombrecontacto();
                 break;
             case 18:
-                return $this->getEmpleadoEstatus();
+                return $this->getEmpleadoTelefonocontacto();
                 break;
             case 19:
+                return $this->getEmpleadoEstatus();
+                break;
+            case 20:
                 return $this->getEmpleadoRol();
                 break;
             default:
@@ -1590,21 +1638,22 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             $keys[2] => $this->getEmpleadoApellidopaterno(),
             $keys[3] => $this->getEmpleadoApallidomaterno(),
             $keys[4] => $this->getEmpleadoEmail(),
-            $keys[5] => $this->getEmpleadoCelular(),
-            $keys[6] => $this->getEmpleadoTelefono(),
-            $keys[7] => $this->getEmpleadoCalle(),
-            $keys[8] => $this->getEmpleadoNumero(),
-            $keys[9] => $this->getEmpleadoInterior(),
-            $keys[10] => $this->getEmpleadoColonia(),
-            $keys[11] => $this->getEmpleadoCiudad(),
-            $keys[12] => $this->getEmpleadoEstado(),
-            $keys[13] => $this->getEmpleadoNss(),
-            $keys[14] => $this->getEmpleadoRfc(),
-            $keys[15] => $this->getEmpleadoIniciocontrato(),
-            $keys[16] => $this->getEmpleadoNombrecontacto(),
-            $keys[17] => $this->getEmpleadoTelefonocontacto(),
-            $keys[18] => $this->getEmpleadoEstatus(),
-            $keys[19] => $this->getEmpleadoRol(),
+            $keys[5] => $this->getEmpleadoPassword(),
+            $keys[6] => $this->getEmpleadoCelular(),
+            $keys[7] => $this->getEmpleadoTelefono(),
+            $keys[8] => $this->getEmpleadoCalle(),
+            $keys[9] => $this->getEmpleadoNumero(),
+            $keys[10] => $this->getEmpleadoInterior(),
+            $keys[11] => $this->getEmpleadoColonia(),
+            $keys[12] => $this->getEmpleadoCiudad(),
+            $keys[13] => $this->getEmpleadoEstado(),
+            $keys[14] => $this->getEmpleadoNss(),
+            $keys[15] => $this->getEmpleadoRfc(),
+            $keys[16] => $this->getEmpleadoIniciocontrato(),
+            $keys[17] => $this->getEmpleadoNombrecontacto(),
+            $keys[18] => $this->getEmpleadoTelefonocontacto(),
+            $keys[19] => $this->getEmpleadoEstatus(),
+            $keys[20] => $this->getEmpleadoRol(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1671,48 +1720,51 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                 $this->setEmpleadoEmail($value);
                 break;
             case 5:
-                $this->setEmpleadoCelular($value);
+                $this->setEmpleadoPassword($value);
                 break;
             case 6:
-                $this->setEmpleadoTelefono($value);
+                $this->setEmpleadoCelular($value);
                 break;
             case 7:
-                $this->setEmpleadoCalle($value);
+                $this->setEmpleadoTelefono($value);
                 break;
             case 8:
-                $this->setEmpleadoNumero($value);
+                $this->setEmpleadoCalle($value);
                 break;
             case 9:
-                $this->setEmpleadoInterior($value);
+                $this->setEmpleadoNumero($value);
                 break;
             case 10:
-                $this->setEmpleadoColonia($value);
+                $this->setEmpleadoInterior($value);
                 break;
             case 11:
-                $this->setEmpleadoCiudad($value);
+                $this->setEmpleadoColonia($value);
                 break;
             case 12:
-                $this->setEmpleadoEstado($value);
+                $this->setEmpleadoCiudad($value);
                 break;
             case 13:
-                $this->setEmpleadoNss($value);
+                $this->setEmpleadoEstado($value);
                 break;
             case 14:
-                $this->setEmpleadoRfc($value);
+                $this->setEmpleadoNss($value);
                 break;
             case 15:
-                $this->setEmpleadoIniciocontrato($value);
+                $this->setEmpleadoRfc($value);
                 break;
             case 16:
-                $this->setEmpleadoNombrecontacto($value);
+                $this->setEmpleadoIniciocontrato($value);
                 break;
             case 17:
-                $this->setEmpleadoTelefonocontacto($value);
+                $this->setEmpleadoNombrecontacto($value);
                 break;
             case 18:
-                $this->setEmpleadoEstatus($value);
+                $this->setEmpleadoTelefonocontacto($value);
                 break;
             case 19:
+                $this->setEmpleadoEstatus($value);
+                break;
+            case 20:
                 $this->setEmpleadoRol($value);
                 break;
         } // switch()
@@ -1744,21 +1796,22 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         if (array_key_exists($keys[2], $arr)) $this->setEmpleadoApellidopaterno($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setEmpleadoApallidomaterno($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setEmpleadoEmail($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setEmpleadoCelular($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setEmpleadoTelefono($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setEmpleadoCalle($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setEmpleadoNumero($arr[$keys[8]]);
-        if (array_key_exists($keys[9], $arr)) $this->setEmpleadoInterior($arr[$keys[9]]);
-        if (array_key_exists($keys[10], $arr)) $this->setEmpleadoColonia($arr[$keys[10]]);
-        if (array_key_exists($keys[11], $arr)) $this->setEmpleadoCiudad($arr[$keys[11]]);
-        if (array_key_exists($keys[12], $arr)) $this->setEmpleadoEstado($arr[$keys[12]]);
-        if (array_key_exists($keys[13], $arr)) $this->setEmpleadoNss($arr[$keys[13]]);
-        if (array_key_exists($keys[14], $arr)) $this->setEmpleadoRfc($arr[$keys[14]]);
-        if (array_key_exists($keys[15], $arr)) $this->setEmpleadoIniciocontrato($arr[$keys[15]]);
-        if (array_key_exists($keys[16], $arr)) $this->setEmpleadoNombrecontacto($arr[$keys[16]]);
-        if (array_key_exists($keys[17], $arr)) $this->setEmpleadoTelefonocontacto($arr[$keys[17]]);
-        if (array_key_exists($keys[18], $arr)) $this->setEmpleadoEstatus($arr[$keys[18]]);
-        if (array_key_exists($keys[19], $arr)) $this->setEmpleadoRol($arr[$keys[19]]);
+        if (array_key_exists($keys[5], $arr)) $this->setEmpleadoPassword($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setEmpleadoCelular($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setEmpleadoTelefono($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setEmpleadoCalle($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setEmpleadoNumero($arr[$keys[9]]);
+        if (array_key_exists($keys[10], $arr)) $this->setEmpleadoInterior($arr[$keys[10]]);
+        if (array_key_exists($keys[11], $arr)) $this->setEmpleadoColonia($arr[$keys[11]]);
+        if (array_key_exists($keys[12], $arr)) $this->setEmpleadoCiudad($arr[$keys[12]]);
+        if (array_key_exists($keys[13], $arr)) $this->setEmpleadoEstado($arr[$keys[13]]);
+        if (array_key_exists($keys[14], $arr)) $this->setEmpleadoNss($arr[$keys[14]]);
+        if (array_key_exists($keys[15], $arr)) $this->setEmpleadoRfc($arr[$keys[15]]);
+        if (array_key_exists($keys[16], $arr)) $this->setEmpleadoIniciocontrato($arr[$keys[16]]);
+        if (array_key_exists($keys[17], $arr)) $this->setEmpleadoNombrecontacto($arr[$keys[17]]);
+        if (array_key_exists($keys[18], $arr)) $this->setEmpleadoTelefonocontacto($arr[$keys[18]]);
+        if (array_key_exists($keys[19], $arr)) $this->setEmpleadoEstatus($arr[$keys[19]]);
+        if (array_key_exists($keys[20], $arr)) $this->setEmpleadoRol($arr[$keys[20]]);
     }
 
     /**
@@ -1775,6 +1828,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_APELLIDOPATERNO)) $criteria->add(EmpleadoPeer::EMPLEADO_APELLIDOPATERNO, $this->empleado_apellidopaterno);
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_APALLIDOMATERNO)) $criteria->add(EmpleadoPeer::EMPLEADO_APALLIDOMATERNO, $this->empleado_apallidomaterno);
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_EMAIL)) $criteria->add(EmpleadoPeer::EMPLEADO_EMAIL, $this->empleado_email);
+        if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_PASSWORD)) $criteria->add(EmpleadoPeer::EMPLEADO_PASSWORD, $this->empleado_password);
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_CELULAR)) $criteria->add(EmpleadoPeer::EMPLEADO_CELULAR, $this->empleado_celular);
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_TELEFONO)) $criteria->add(EmpleadoPeer::EMPLEADO_TELEFONO, $this->empleado_telefono);
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_CALLE)) $criteria->add(EmpleadoPeer::EMPLEADO_CALLE, $this->empleado_calle);
@@ -1857,6 +1911,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         $copyObj->setEmpleadoApellidopaterno($this->getEmpleadoApellidopaterno());
         $copyObj->setEmpleadoApallidomaterno($this->getEmpleadoApallidomaterno());
         $copyObj->setEmpleadoEmail($this->getEmpleadoEmail());
+        $copyObj->setEmpleadoPassword($this->getEmpleadoPassword());
         $copyObj->setEmpleadoCelular($this->getEmpleadoCelular());
         $copyObj->setEmpleadoTelefono($this->getEmpleadoTelefono());
         $copyObj->setEmpleadoCalle($this->getEmpleadoCalle());
@@ -2680,6 +2735,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         $this->empleado_apellidopaterno = null;
         $this->empleado_apallidomaterno = null;
         $this->empleado_email = null;
+        $this->empleado_password = null;
         $this->empleado_celular = null;
         $this->empleado_telefono = null;
         $this->empleado_calle = null;

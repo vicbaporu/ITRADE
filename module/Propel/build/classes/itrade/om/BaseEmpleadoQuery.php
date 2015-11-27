@@ -11,6 +11,7 @@
  * @method EmpleadoQuery orderByEmpleadoApellidopaterno($order = Criteria::ASC) Order by the empleado_apellidopaterno column
  * @method EmpleadoQuery orderByEmpleadoApallidomaterno($order = Criteria::ASC) Order by the empleado_apallidomaterno column
  * @method EmpleadoQuery orderByEmpleadoEmail($order = Criteria::ASC) Order by the empleado_email column
+ * @method EmpleadoQuery orderByEmpleadoPassword($order = Criteria::ASC) Order by the empleado_password column
  * @method EmpleadoQuery orderByEmpleadoCelular($order = Criteria::ASC) Order by the empleado_celular column
  * @method EmpleadoQuery orderByEmpleadoTelefono($order = Criteria::ASC) Order by the empleado_telefono column
  * @method EmpleadoQuery orderByEmpleadoCalle($order = Criteria::ASC) Order by the empleado_calle column
@@ -32,6 +33,7 @@
  * @method EmpleadoQuery groupByEmpleadoApellidopaterno() Group by the empleado_apellidopaterno column
  * @method EmpleadoQuery groupByEmpleadoApallidomaterno() Group by the empleado_apallidomaterno column
  * @method EmpleadoQuery groupByEmpleadoEmail() Group by the empleado_email column
+ * @method EmpleadoQuery groupByEmpleadoPassword() Group by the empleado_password column
  * @method EmpleadoQuery groupByEmpleadoCelular() Group by the empleado_celular column
  * @method EmpleadoQuery groupByEmpleadoTelefono() Group by the empleado_telefono column
  * @method EmpleadoQuery groupByEmpleadoCalle() Group by the empleado_calle column
@@ -71,6 +73,7 @@
  * @method Empleado findOneByEmpleadoApellidopaterno(string $empleado_apellidopaterno) Return the first Empleado filtered by the empleado_apellidopaterno column
  * @method Empleado findOneByEmpleadoApallidomaterno(string $empleado_apallidomaterno) Return the first Empleado filtered by the empleado_apallidomaterno column
  * @method Empleado findOneByEmpleadoEmail(string $empleado_email) Return the first Empleado filtered by the empleado_email column
+ * @method Empleado findOneByEmpleadoPassword(string $empleado_password) Return the first Empleado filtered by the empleado_password column
  * @method Empleado findOneByEmpleadoCelular(string $empleado_celular) Return the first Empleado filtered by the empleado_celular column
  * @method Empleado findOneByEmpleadoTelefono(string $empleado_telefono) Return the first Empleado filtered by the empleado_telefono column
  * @method Empleado findOneByEmpleadoCalle(string $empleado_calle) Return the first Empleado filtered by the empleado_calle column
@@ -92,6 +95,7 @@
  * @method array findByEmpleadoApellidopaterno(string $empleado_apellidopaterno) Return Empleado objects filtered by the empleado_apellidopaterno column
  * @method array findByEmpleadoApallidomaterno(string $empleado_apallidomaterno) Return Empleado objects filtered by the empleado_apallidomaterno column
  * @method array findByEmpleadoEmail(string $empleado_email) Return Empleado objects filtered by the empleado_email column
+ * @method array findByEmpleadoPassword(string $empleado_password) Return Empleado objects filtered by the empleado_password column
  * @method array findByEmpleadoCelular(string $empleado_celular) Return Empleado objects filtered by the empleado_celular column
  * @method array findByEmpleadoTelefono(string $empleado_telefono) Return Empleado objects filtered by the empleado_telefono column
  * @method array findByEmpleadoCalle(string $empleado_calle) Return Empleado objects filtered by the empleado_calle column
@@ -214,7 +218,7 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idempleado`, `empleado_nombre`, `empleado_apellidopaterno`, `empleado_apallidomaterno`, `empleado_email`, `empleado_celular`, `empleado_telefono`, `empleado_calle`, `empleado_numero`, `empleado_interior`, `empleado_colonia`, `empleado_ciudad`, `empleado_estado`, `empleado_nss`, `empleado_rfc`, `empleado_iniciocontrato`, `empleado_nombrecontacto`, `empleado_telefonocontacto`, `empleado_estatus`, `empleado_rol` FROM `empleado` WHERE `idempleado` = :p0';
+        $sql = 'SELECT `idempleado`, `empleado_nombre`, `empleado_apellidopaterno`, `empleado_apallidomaterno`, `empleado_email`, `empleado_password`, `empleado_celular`, `empleado_telefono`, `empleado_calle`, `empleado_numero`, `empleado_interior`, `empleado_colonia`, `empleado_ciudad`, `empleado_estado`, `empleado_nss`, `empleado_rfc`, `empleado_iniciocontrato`, `empleado_nombrecontacto`, `empleado_telefonocontacto`, `empleado_estatus`, `empleado_rol` FROM `empleado` WHERE `idempleado` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -459,6 +463,35 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(EmpleadoPeer::EMPLEADO_EMAIL, $empleadoEmail, $comparison);
+    }
+
+    /**
+     * Filter the query on the empleado_password column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByEmpleadoPassword('fooValue');   // WHERE empleado_password = 'fooValue'
+     * $query->filterByEmpleadoPassword('%fooValue%'); // WHERE empleado_password LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $empleadoPassword The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return EmpleadoQuery The current query, for fluid interface
+     */
+    public function filterByEmpleadoPassword($empleadoPassword = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($empleadoPassword)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $empleadoPassword)) {
+                $empleadoPassword = str_replace('*', '%', $empleadoPassword);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(EmpleadoPeer::EMPLEADO_PASSWORD, $empleadoPassword, $comparison);
     }
 
     /**

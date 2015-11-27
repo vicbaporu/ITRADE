@@ -71,7 +71,7 @@ return array(
                             'empleado' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/test',
+                                    'route'    => '/empleados[/:action]',
                                     'defaults' => array(
                                         'controller'    => 'Catalogo\Controller\Empleado',
                                         'action'        => 'index',

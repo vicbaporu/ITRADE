@@ -43,6 +43,7 @@ class EmpleadoTableMap extends TableMap
         $this->addColumn('empleado_apellidopaterno', 'EmpleadoApellidopaterno', 'VARCHAR', true, 45, null);
         $this->addColumn('empleado_apallidomaterno', 'EmpleadoApallidomaterno', 'VARCHAR', true, 45, null);
         $this->addColumn('empleado_email', 'EmpleadoEmail', 'VARCHAR', true, 45, null);
+        $this->addColumn('empleado_password', 'EmpleadoPassword', 'VARCHAR', true, 45, null);
         $this->addColumn('empleado_celular', 'EmpleadoCelular', 'VARCHAR', true, 45, null);
         $this->addColumn('empleado_telefono', 'EmpleadoTelefono', 'VARCHAR', false, 45, null);
         $this->addColumn('empleado_calle', 'EmpleadoCalle', 'VARCHAR', false, 45, null);

@@ -18,4 +18,16 @@ class EmpleadoController extends AbstractActionController
     {
         return new ViewModel();
     }
+    
+    public function nuevoAction()
+    {
+        
+        //INSTANCIAMOS NUESTRO FORMULARIO
+        $form = new \Catalogo\Form\EmpleadoForm();
+
+        //RETORNAMOS A NUESTRA VISTA
+        return new ViewModel(array(
+            'form' => $form
+        ));
+    }
 }

@@ -75,6 +75,7 @@ CREATE TABLE `empleado`
     `empleado_apellidopaterno` VARCHAR(45) NOT NULL,
     `empleado_apallidomaterno` VARCHAR(45) NOT NULL,
     `empleado_email` VARCHAR(45) NOT NULL,
+    `empleado_password` VARCHAR(45) NOT NULL,
     `empleado_celular` VARCHAR(45) NOT NULL,
     `empleado_telefono` VARCHAR(45),
     `empleado_calle` VARCHAR(45),
