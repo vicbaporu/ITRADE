@@ -68,17 +68,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4><span class="semi-bold">Dirección</span>
-                </h4>
-            </div>
-            <div class="grid-body no-border">
-                <br>
-                <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="form-group">
                                 <?php echo $this->formLabel($form->get('empleado_calle')) ?>  
@@ -138,8 +127,137 @@
                 </div>
             </div>
         </div>
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4><span class="semi-bold">Información laboral</span></h4>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;"></a>
+                </div>
+            </div>
+            <div class="grid-body no-border">
+                <br>
+                <div class="row">
+                     
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_rfc')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_rfc')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_nss')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_nss')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_iniciocontrato')) ?>  
+                            <div class="controls">
+                                <div class="input-append success date width-93">
+                                    <input class="span12 " type="text">
+                                    <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4><span class="semi-bold">Información de contacto</span></h4>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;"></a>
+                </div>
+            </div>
+            <div class="grid-body no-border">
+                <br>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_nombrecontacto')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_nombrecontacto')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_telefonocontacto')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_telefonocontacto')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4><span class="semi-bold">Datos de acceso</span></h4>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;"></a>
+                </div>
+            </div>
+            <div class="grid-body no-border">
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('empleado_rol')) ?>  
+                                <div class="controls">
+                                    <?php echo $this->formSelect($form->get('empleado_rol')) ?>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('empleado_email')) ?>  
+                                <div class="controls">
+                                    <?php echo $this->formText($form->get('empleado_email')) ?>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('empleado_password')) ?>  
+                                <div class="controls">
+                                    <?php echo $this->formPassword($form->get('empleado_password')) ?>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 </div>
-<script>
-    $('select').select2();
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $("select").select2({
+            placeholder: "Select a state",
+            allowClear: true,
+            language: "es"
+        });
+
+        //Date Pickers
+	$('.input-append.date').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format:'dd/mm/yyyy'
+        });
+        
+        
+    });
 </script>

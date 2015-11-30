@@ -88,6 +88,8 @@ class EmpleadoForm extends Form
             ),
         ));
         
+        
+        
         /*
          * DIRECCION
          */
@@ -119,7 +121,7 @@ class EmpleadoForm extends Form
             'name' => 'empleado_numero',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Numero exterior',
+                'label' => 'Número exterior',
             ),
             'attributes' => array(
                 'class' => 'form-control',
@@ -130,7 +132,7 @@ class EmpleadoForm extends Form
             'name' => 'empleado_interior',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Numero interior',
+                'label' => 'Número interior',
             ),
             'attributes' => array(
                 'class' => 'form-control',
@@ -169,7 +171,7 @@ class EmpleadoForm extends Form
                 
             ),
             'attributes' => array(
-                'class' => 'form-control',
+                'class' => 'width-100',
             ),
         ));
         
@@ -183,9 +185,121 @@ class EmpleadoForm extends Form
                 'class' => 'form-control',
             ),
         ));
+        
+        /*
+         * INFORMACION LABORAL
+         */
+        
+        $this->add(array(
+            'name' => 'empleado_iniciocontrato',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Inicio de contrato',
+            ),
+            'attributes' => array(
+                'class' => 'form-control',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'empleado_rfc',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'R.F.C',
+            ),
+            'attributes' => array(
 
+                'class' => 'form-control',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'empleado_nss',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Número del seguro social',
+            ),
+            'attributes' => array(
+
+                'class' => 'form-control',
+            ),
+        ));
+        
+        /*
+         * INFORMACION DE CONTACTO
+         */
+        
+        $this->add(array(
+            'name' => 'empleado_nombrecontacto',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Nombre de contacto',
+            ),
+            'attributes' => array(
+
+                'class' => 'form-control',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'empleado_telefonocontacto',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Número de contacto',
+            ),
+            'attributes' => array(
+
+                'class' => 'form-control',
+            ),
+        ));
+        
+        /*
+         * DATOS DE ACCESO
+         */
+        
+        $this->add(array(
+            'name' => 'empleado_rol',
+            'type' => 'Select',
+            'options' => array(
+                'label' => 'Rol',
+                'empty_option' => 'Seleccione un rol',
+                'value_options' =>array(
+                    'operaciones' => 'Operaciónes',
+                    'ventas' => 'Ventas',
+                    'administrador' => 'Administrador' 
+                ),
+                
+            ),
+            'attributes' => array(
+                'class' => 'width-100',
+            ),
+        ));
+        
+         $this->add(array(
+            'name' => 'empleado_email',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Correo electrónico',
+            ),
+            'attributes' => array(
+                'required' => true,
+                'class' => 'form-control',
+            ),
+        ));
+         
+         $this->add(array(
+            'name' => 'empleado_password',
+            'type' => 'Password',
+            'options' => array(
+                'label' => 'Contraseña',
+            ),
+            'attributes' => array(
+                'required' => true,
+                'class' => 'form-control',
+            ),
+        ));
+
+        
  
     }
 }
-
-
