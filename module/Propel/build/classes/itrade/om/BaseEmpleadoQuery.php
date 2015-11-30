@@ -18,6 +18,7 @@
  * @method EmpleadoQuery orderByEmpleadoNumero($order = Criteria::ASC) Order by the empleado_numero column
  * @method EmpleadoQuery orderByEmpleadoInterior($order = Criteria::ASC) Order by the empleado_interior column
  * @method EmpleadoQuery orderByEmpleadoColonia($order = Criteria::ASC) Order by the empleado_colonia column
+ * @method EmpleadoQuery orderByEmpleadoCodigopostal($order = Criteria::ASC) Order by the empleado_codigopostal column
  * @method EmpleadoQuery orderByEmpleadoCiudad($order = Criteria::ASC) Order by the empleado_ciudad column
  * @method EmpleadoQuery orderByEmpleadoEstado($order = Criteria::ASC) Order by the empleado_estado column
  * @method EmpleadoQuery orderByEmpleadoNss($order = Criteria::ASC) Order by the empleado_nss column
@@ -40,6 +41,7 @@
  * @method EmpleadoQuery groupByEmpleadoNumero() Group by the empleado_numero column
  * @method EmpleadoQuery groupByEmpleadoInterior() Group by the empleado_interior column
  * @method EmpleadoQuery groupByEmpleadoColonia() Group by the empleado_colonia column
+ * @method EmpleadoQuery groupByEmpleadoCodigopostal() Group by the empleado_codigopostal column
  * @method EmpleadoQuery groupByEmpleadoCiudad() Group by the empleado_ciudad column
  * @method EmpleadoQuery groupByEmpleadoEstado() Group by the empleado_estado column
  * @method EmpleadoQuery groupByEmpleadoNss() Group by the empleado_nss column
@@ -80,6 +82,7 @@
  * @method Empleado findOneByEmpleadoNumero(string $empleado_numero) Return the first Empleado filtered by the empleado_numero column
  * @method Empleado findOneByEmpleadoInterior(string $empleado_interior) Return the first Empleado filtered by the empleado_interior column
  * @method Empleado findOneByEmpleadoColonia(string $empleado_colonia) Return the first Empleado filtered by the empleado_colonia column
+ * @method Empleado findOneByEmpleadoCodigopostal(string $empleado_codigopostal) Return the first Empleado filtered by the empleado_codigopostal column
  * @method Empleado findOneByEmpleadoCiudad(string $empleado_ciudad) Return the first Empleado filtered by the empleado_ciudad column
  * @method Empleado findOneByEmpleadoEstado(string $empleado_estado) Return the first Empleado filtered by the empleado_estado column
  * @method Empleado findOneByEmpleadoNss(string $empleado_nss) Return the first Empleado filtered by the empleado_nss column
@@ -102,6 +105,7 @@
  * @method array findByEmpleadoNumero(string $empleado_numero) Return Empleado objects filtered by the empleado_numero column
  * @method array findByEmpleadoInterior(string $empleado_interior) Return Empleado objects filtered by the empleado_interior column
  * @method array findByEmpleadoColonia(string $empleado_colonia) Return Empleado objects filtered by the empleado_colonia column
+ * @method array findByEmpleadoCodigopostal(string $empleado_codigopostal) Return Empleado objects filtered by the empleado_codigopostal column
  * @method array findByEmpleadoCiudad(string $empleado_ciudad) Return Empleado objects filtered by the empleado_ciudad column
  * @method array findByEmpleadoEstado(string $empleado_estado) Return Empleado objects filtered by the empleado_estado column
  * @method array findByEmpleadoNss(string $empleado_nss) Return Empleado objects filtered by the empleado_nss column
@@ -218,7 +222,7 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idempleado`, `empleado_nombre`, `empleado_apellidopaterno`, `empleado_apallidomaterno`, `empleado_email`, `empleado_password`, `empleado_celular`, `empleado_telefono`, `empleado_calle`, `empleado_numero`, `empleado_interior`, `empleado_colonia`, `empleado_ciudad`, `empleado_estado`, `empleado_nss`, `empleado_rfc`, `empleado_iniciocontrato`, `empleado_nombrecontacto`, `empleado_telefonocontacto`, `empleado_estatus`, `empleado_rol` FROM `empleado` WHERE `idempleado` = :p0';
+        $sql = 'SELECT `idempleado`, `empleado_nombre`, `empleado_apellidopaterno`, `empleado_apallidomaterno`, `empleado_email`, `empleado_password`, `empleado_celular`, `empleado_telefono`, `empleado_calle`, `empleado_numero`, `empleado_interior`, `empleado_colonia`, `empleado_codigopostal`, `empleado_ciudad`, `empleado_estado`, `empleado_nss`, `empleado_rfc`, `empleado_iniciocontrato`, `empleado_nombrecontacto`, `empleado_telefonocontacto`, `empleado_estatus`, `empleado_rol` FROM `empleado` WHERE `idempleado` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -666,6 +670,35 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(EmpleadoPeer::EMPLEADO_COLONIA, $empleadoColonia, $comparison);
+    }
+
+    /**
+     * Filter the query on the empleado_codigopostal column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByEmpleadoCodigopostal('fooValue');   // WHERE empleado_codigopostal = 'fooValue'
+     * $query->filterByEmpleadoCodigopostal('%fooValue%'); // WHERE empleado_codigopostal LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $empleadoCodigopostal The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return EmpleadoQuery The current query, for fluid interface
+     */
+    public function filterByEmpleadoCodigopostal($empleadoCodigopostal = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($empleadoCodigopostal)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $empleadoCodigopostal)) {
+                $empleadoCodigopostal = str_replace('*', '%', $empleadoCodigopostal);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(EmpleadoPeer::EMPLEADO_CODIGOPOSTAL, $empleadoCodigopostal, $comparison);
     }
 
     /**

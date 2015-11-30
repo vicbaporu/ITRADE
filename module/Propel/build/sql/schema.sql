@@ -82,6 +82,7 @@ CREATE TABLE `empleado`
     `empleado_numero` VARCHAR(45),
     `empleado_interior` VARCHAR(45),
     `empleado_colonia` VARCHAR(45),
+    `empleado_codigopostal` VARCHAR(45),
     `empleado_ciudad` VARCHAR(45),
     `empleado_estado` VARCHAR(45),
     `empleado_nss` VARCHAR(45),

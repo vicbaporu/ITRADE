@@ -8,6 +8,7 @@ return array(
     'Client\Controller\IndexController'         => __DIR__ . '/src/Client/Controller/IndexController.php',
     'Shared\CustomListener\LangListener'        => __DIR__ . '/src/Shared/CustomListener/LangListener.php',
     'Shared\CustomListener\TemplateMapListener' => __DIR__ . '/src/Shared/CustomListener/TemplateMapListener.php',
+    'Shared\GeneralFunction\Geolocation'        => __DIR__ . '/src/Shared/GeneralFunction/Geolocation.php',
     'Website\Controller\ContactoController'     => __DIR__ . '/src/Website/Controller/ContactoController.php',
     'Website\Controller\IndexController'        => __DIR__ . '/src/Website/Controller/IndexController.php',
     'Website\Controller\LoginController'        => __DIR__ . '/src/Website/Controller/LoginController.php',

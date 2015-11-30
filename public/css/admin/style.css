@@ -1007,7 +1007,7 @@ body.modal-open .chat-window-wrapper {
   line-height: 16px;
 }
 .scrollup {
-  background: url('../img/pullup.png') no-repeat;
+  background: url('../../img/admin/pullup.png') no-repeat;
   background-position: 0px 0px;
   width: 27px;
   height: 27px;
@@ -4937,7 +4937,7 @@ form legend,
 .grid.simple .grid-title .tools a,
 .grid.solid .grid-title .tools a {
   position: relative;
-  background: url('../img/icon/portlet-tray.png') no-repeat;
+  background: url('../../img/admin/icon/portlet-tray.png') no-repeat;
   transition: all 0.1s linear 0s;
 }
 .grid.simple .grid-title .tools > a.remove,

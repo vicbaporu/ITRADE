@@ -1,14 +1,25 @@
+<ul class="breadcrumb">
+    <li>
+        <p>Catalogo</p>
+    </li>
+    <li>
+        <a href="/catalogo/empleados">Empleados</a>
+    </li>
+    <li>
+        <a class="active" href="/catalogo/empleados/nuevo">Registro</a>
+    </li>
+</ul>
 <div class="page-title">
-   
     <h3>REGISTRO <span class="semi-bold">EMPLEADO</span></h3>
 </div>
 <div class="row">
     <div class="col-md-12">
-        
         <div class="grid simple">
             <div class="grid-title no-border">
-                <h4><span class="semi-bold">Información general</span>
-                </h4>
+                <h4><span class="semi-bold">Información general</span></h4>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;"></a>
+                </div>
             </div>
             <div class="grid-body no-border">
                 <br>
@@ -49,8 +60,86 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_telefono')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_telefono')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4><span class="semi-bold">Dirección</span>
+                </h4>
+            </div>
+            <div class="grid-body no-border">
+                <br>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_calle')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_calle')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_numero')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_numero')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_interior')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_interior')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_colonia')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_colonia')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_codigopostal')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_codigopostal')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_ciudad')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formText($form->get('empleado_ciudad')) ?>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group">
+                                <?php echo $this->formLabel($form->get('empleado_estado')) ?>  
+                            <div class="controls">
+                                <?php echo $this->formSelect($form->get('empleado_estado')) ?>   
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $('select').select2();
+</script>

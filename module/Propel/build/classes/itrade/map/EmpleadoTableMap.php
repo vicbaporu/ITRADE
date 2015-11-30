@@ -50,6 +50,7 @@ class EmpleadoTableMap extends TableMap
         $this->addColumn('empleado_numero', 'EmpleadoNumero', 'VARCHAR', false, 45, null);
         $this->addColumn('empleado_interior', 'EmpleadoInterior', 'VARCHAR', false, 45, null);
         $this->addColumn('empleado_colonia', 'EmpleadoColonia', 'VARCHAR', false, 45, null);
+        $this->addColumn('empleado_codigopostal', 'EmpleadoCodigopostal', 'VARCHAR', false, 45, null);
         $this->addColumn('empleado_ciudad', 'EmpleadoCiudad', 'VARCHAR', false, 45, null);
         $this->addColumn('empleado_estado', 'EmpleadoEstado', 'VARCHAR', false, 45, null);
         $this->addColumn('empleado_nss', 'EmpleadoNss', 'VARCHAR', false, 45, null);

@@ -67,6 +67,7 @@
     <column name="empleado_numero" phpName="EmpleadoNumero" type="VARCHAR" size="45" required="false"/>
     <column name="empleado_interior" phpName="EmpleadoInterior" type="VARCHAR" size="45" required="false"/>
     <column name="empleado_colonia" phpName="EmpleadoColonia" type="VARCHAR" size="45" required="false"/>
+    <column name="empleado_codigopostal" phpName="EmpleadoCodigopostal" type="VARCHAR" size="45" required="false"/>
     <column name="empleado_ciudad" phpName="EmpleadoCiudad" type="VARCHAR" size="45" required="false"/>
     <column name="empleado_estado" phpName="EmpleadoEstado" type="VARCHAR" size="45" required="false"/>
     <column name="empleado_nss" phpName="EmpleadoNss" type="VARCHAR" size="45" required="false"/>

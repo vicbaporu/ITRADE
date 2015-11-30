@@ -22,9 +22,11 @@ class EmpleadoController extends AbstractActionController
     public function nuevoAction()
     {
         
+        
         //INSTANCIAMOS NUESTRO FORMULARIO
-        $form = new \Catalogo\Form\EmpleadoForm();
-
+        $mexico_states = \Shared\GeneralFunction\Geolocation::getMexicoStates();
+        $form = new \Catalogo\Form\EmpleadoForm($mexico_states);
+        
         //RETORNAMOS A NUESTRA VISTA
         return new ViewModel(array(
             'form' => $form
