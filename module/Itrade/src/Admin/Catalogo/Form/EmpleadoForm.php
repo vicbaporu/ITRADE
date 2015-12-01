@@ -197,7 +197,7 @@ class EmpleadoForm extends Form
                 'label' => 'Inicio de contrato',
             ),
             'attributes' => array(
-                'class' => 'form-control',
+                'class' => 'form-control input-append.date',
             ),
         ));
         
