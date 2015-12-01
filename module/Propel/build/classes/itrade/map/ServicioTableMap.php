@@ -39,7 +39,18 @@ class ServicioTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idservicio', 'Idservicio', 'INTEGER', true, null, null);
-        $this->addColumn('servicio_nombre', 'ServicioNombre', 'VARCHAR', false, 45, null);
+        $this->addColumn('servicio_tipo', 'ServicioTipo', 'CHAR', true, null, null);
+        $this->getColumn('servicio_tipo', false)->setValueSet(array (
+  0 => 'importacion',
+  1 => 'exportacion',
+));
+        $this->addColumn('servicio_medio', 'ServicioMedio', 'CHAR', true, null, null);
+        $this->getColumn('servicio_medio', false)->setValueSet(array (
+  0 => 'terrestre',
+  1 => 'aereo',
+  2 => 'maritimo',
+));
+        $this->addColumn('servicio_nombre', 'ServicioNombre', 'VARCHAR', true, 45, null);
         $this->addColumn('servicio_descripcion', 'ServicioDescripcion', 'VARCHAR', false, 45, null);
         // validators
     } // initialize()

@@ -42,12 +42,14 @@ class ExpedientegastoTableMap extends TableMap
         $this->addForeignKey('idexpediente', 'Idexpediente', 'INTEGER', 'expediente', 'idexpediente', true, null, null);
         $this->addForeignKey('idgastofacturacion', 'Idgastofacturacion', 'INTEGER', 'gastofacturacion', 'idgastofacturacion', true, null, null);
         $this->addForeignKey('idproveedoritrade', 'Idproveedoritrade', 'INTEGER', 'proveedoritrade', 'idproveedoritrade', true, null, null);
+        $this->addForeignKey('idempleado', 'Idempleado', 'INTEGER', 'empleado', 'idempleado', true, null, null);
         $this->addColumn('expedientegasto_fecha', 'ExpedientegastoFecha', 'TIMESTAMP', true, null, null);
         $this->addColumn('expedientegasto_monto', 'ExpedientegastoMonto', 'DECIMAL', true, 10, null);
         $this->addColumn('expedientegasto_tipo', 'ExpedientegastoTipo', 'CHAR', true, null, null);
         $this->getColumn('expedientegasto_tipo', false)->setValueSet(array (
-  0 => 'gasto',
-  1 => 'cobro',
+  0 => 'gastorecibir',
+  1 => 'gastoconocido',
+  2 => 'cobro',
 ));
         $this->addColumn('expedientegasto_comprobante', 'ExpedientegastoComprobante', 'LONGVARCHAR', false, null, null);
         // validators
@@ -58,6 +60,7 @@ class ExpedientegastoTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Empleado', 'Empleado', RelationMap::MANY_TO_ONE, array('idempleado' => 'idempleado', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Expediente', 'Expediente', RelationMap::MANY_TO_ONE, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Gastofacturacion', 'Gastofacturacion', RelationMap::MANY_TO_ONE, array('idgastofacturacion' => 'idgastofacturacion', ), null, null);
         $this->addRelation('Proveedoritrade', 'Proveedoritrade', RelationMap::MANY_TO_ONE, array('idproveedoritrade' => 'idproveedoritrade', ), null, null);

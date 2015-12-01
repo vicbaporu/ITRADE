@@ -24,22 +24,33 @@ abstract class BaseGastofacturacionPeer
     const TM_CLASS = 'GastofacturacionTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 3;
+    const NUM_COLUMNS = 5;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 3;
+    const NUM_HYDRATE_COLUMNS = 5;
 
     /** the column name for the idgastofacturacion field */
     const IDGASTOFACTURACION = 'gastofacturacion.idgastofacturacion';
+
+    /** the column name for the idcategoriagasto field */
+    const IDCATEGORIAGASTO = 'gastofacturacion.idcategoriagasto';
 
     /** the column name for the gastofacturacion_nombre field */
     const GASTOFACTURACION_NOMBRE = 'gastofacturacion.gastofacturacion_nombre';
 
     /** the column name for the gastofacturacion_descripcion field */
     const GASTOFACTURACION_DESCRIPCION = 'gastofacturacion.gastofacturacion_descripcion';
+
+    /** the column name for the gastofacturacion_iva field */
+    const GASTOFACTURACION_IVA = 'gastofacturacion.gastofacturacion_iva';
+
+    /** The enumerated values for the gastofacturacion_iva field */
+    const GASTOFACTURACION_IVA_0 = '0';
+    const GASTOFACTURACION_IVA_16 = '16';
+    const GASTOFACTURACION_IVA_4 = '4';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -60,12 +71,12 @@ abstract class BaseGastofacturacionPeer
      * e.g. GastofacturacionPeer::$fieldNames[GastofacturacionPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idgastofacturacion', 'GastofacturacionNombre', 'GastofacturacionDescripcion', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idgastofacturacion', 'gastofacturacionNombre', 'gastofacturacionDescripcion', ),
-        BasePeer::TYPE_COLNAME => array (GastofacturacionPeer::IDGASTOFACTURACION, GastofacturacionPeer::GASTOFACTURACION_NOMBRE, GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDGASTOFACTURACION', 'GASTOFACTURACION_NOMBRE', 'GASTOFACTURACION_DESCRIPCION', ),
-        BasePeer::TYPE_FIELDNAME => array ('idgastofacturacion', 'gastofacturacion_nombre', 'gastofacturacion_descripcion', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, )
+        BasePeer::TYPE_PHPNAME => array ('Idgastofacturacion', 'Idcategoriagasto', 'GastofacturacionNombre', 'GastofacturacionDescripcion', 'GastofacturacionIva', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idgastofacturacion', 'idcategoriagasto', 'gastofacturacionNombre', 'gastofacturacionDescripcion', 'gastofacturacionIva', ),
+        BasePeer::TYPE_COLNAME => array (GastofacturacionPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDCATEGORIAGASTO, GastofacturacionPeer::GASTOFACTURACION_NOMBRE, GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION, GastofacturacionPeer::GASTOFACTURACION_IVA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDGASTOFACTURACION', 'IDCATEGORIAGASTO', 'GASTOFACTURACION_NOMBRE', 'GASTOFACTURACION_DESCRIPCION', 'GASTOFACTURACION_IVA', ),
+        BasePeer::TYPE_FIELDNAME => array ('idgastofacturacion', 'idcategoriagasto', 'gastofacturacion_nombre', 'gastofacturacion_descripcion', 'gastofacturacion_iva', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
     /**
@@ -75,12 +86,21 @@ abstract class BaseGastofacturacionPeer
      * e.g. GastofacturacionPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idgastofacturacion' => 0, 'GastofacturacionNombre' => 1, 'GastofacturacionDescripcion' => 2, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idgastofacturacion' => 0, 'gastofacturacionNombre' => 1, 'gastofacturacionDescripcion' => 2, ),
-        BasePeer::TYPE_COLNAME => array (GastofacturacionPeer::IDGASTOFACTURACION => 0, GastofacturacionPeer::GASTOFACTURACION_NOMBRE => 1, GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION => 2, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDGASTOFACTURACION' => 0, 'GASTOFACTURACION_NOMBRE' => 1, 'GASTOFACTURACION_DESCRIPCION' => 2, ),
-        BasePeer::TYPE_FIELDNAME => array ('idgastofacturacion' => 0, 'gastofacturacion_nombre' => 1, 'gastofacturacion_descripcion' => 2, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, )
+        BasePeer::TYPE_PHPNAME => array ('Idgastofacturacion' => 0, 'Idcategoriagasto' => 1, 'GastofacturacionNombre' => 2, 'GastofacturacionDescripcion' => 3, 'GastofacturacionIva' => 4, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idgastofacturacion' => 0, 'idcategoriagasto' => 1, 'gastofacturacionNombre' => 2, 'gastofacturacionDescripcion' => 3, 'gastofacturacionIva' => 4, ),
+        BasePeer::TYPE_COLNAME => array (GastofacturacionPeer::IDGASTOFACTURACION => 0, GastofacturacionPeer::IDCATEGORIAGASTO => 1, GastofacturacionPeer::GASTOFACTURACION_NOMBRE => 2, GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION => 3, GastofacturacionPeer::GASTOFACTURACION_IVA => 4, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDGASTOFACTURACION' => 0, 'IDCATEGORIAGASTO' => 1, 'GASTOFACTURACION_NOMBRE' => 2, 'GASTOFACTURACION_DESCRIPCION' => 3, 'GASTOFACTURACION_IVA' => 4, ),
+        BasePeer::TYPE_FIELDNAME => array ('idgastofacturacion' => 0, 'idcategoriagasto' => 1, 'gastofacturacion_nombre' => 2, 'gastofacturacion_descripcion' => 3, 'gastofacturacion_iva' => 4, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+    );
+
+    /** The enumerated values for this table */
+    protected static $enumValueSets = array(
+        GastofacturacionPeer::GASTOFACTURACION_IVA => array(
+            GastofacturacionPeer::GASTOFACTURACION_IVA_0,
+            GastofacturacionPeer::GASTOFACTURACION_IVA_16,
+            GastofacturacionPeer::GASTOFACTURACION_IVA_4,
+        ),
     );
 
     /**
@@ -123,6 +143,51 @@ abstract class BaseGastofacturacionPeer
     }
 
     /**
+     * Gets the list of values for all ENUM columns
+     * @return array
+     */
+    public static function getValueSets()
+    {
+      return GastofacturacionPeer::$enumValueSets;
+    }
+
+    /**
+     * Gets the list of values for an ENUM column
+     *
+     * @param string $colname The ENUM column name.
+     *
+     * @return array list of possible values for the column
+     */
+    public static function getValueSet($colname)
+    {
+        $valueSets = GastofacturacionPeer::getValueSets();
+
+        if (!isset($valueSets[$colname])) {
+            throw new PropelException(sprintf('Column "%s" has no ValueSet.', $colname));
+        }
+
+        return $valueSets[$colname];
+    }
+
+    /**
+     * Gets the SQL value for the ENUM column value
+     *
+     * @param string $colname ENUM column name.
+     * @param string $enumVal ENUM value.
+     *
+     * @return int SQL value
+     */
+    public static function getSqlValueForEnum($colname, $enumVal)
+    {
+        $values = GastofacturacionPeer::getValueSet($colname);
+        if (!in_array($enumVal, $values)) {
+            throw new PropelException(sprintf('Value "%s" is not accepted in this enumerated column', $colname));
+        }
+
+        return array_search($enumVal, $values);
+    }
+
+    /**
      * Convenience method which changes table.column to alias.column.
      *
      * Using this method you can maintain SQL abstraction while using column aliases.
@@ -155,12 +220,16 @@ abstract class BaseGastofacturacionPeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(GastofacturacionPeer::IDGASTOFACTURACION);
+            $criteria->addSelectColumn(GastofacturacionPeer::IDCATEGORIAGASTO);
             $criteria->addSelectColumn(GastofacturacionPeer::GASTOFACTURACION_NOMBRE);
             $criteria->addSelectColumn(GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION);
+            $criteria->addSelectColumn(GastofacturacionPeer::GASTOFACTURACION_IVA);
         } else {
             $criteria->addSelectColumn($alias . '.idgastofacturacion');
+            $criteria->addSelectColumn($alias . '.idcategoriagasto');
             $criteria->addSelectColumn($alias . '.gastofacturacion_nombre');
             $criteria->addSelectColumn($alias . '.gastofacturacion_descripcion');
+            $criteria->addSelectColumn($alias . '.gastofacturacion_iva');
         }
     }
 
@@ -459,6 +528,244 @@ abstract class BaseGastofacturacionPeer
         }
 
         return array($obj, $col);
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Categoriagasto table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinCategoriagasto(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(GastofacturacionPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            GastofacturacionPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(GastofacturacionPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(GastofacturacionPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(GastofacturacionPeer::IDCATEGORIAGASTO, CategoriagastoPeer::IDCATEGORIAGASTO, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of Gastofacturacion objects pre-filled with their Categoriagasto objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Gastofacturacion objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinCategoriagasto(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(GastofacturacionPeer::DATABASE_NAME);
+        }
+
+        GastofacturacionPeer::addSelectColumns($criteria);
+        $startcol = GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
+        CategoriagastoPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(GastofacturacionPeer::IDCATEGORIAGASTO, CategoriagastoPeer::IDCATEGORIAGASTO, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = GastofacturacionPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = GastofacturacionPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = GastofacturacionPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                GastofacturacionPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = CategoriagastoPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = CategoriagastoPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = CategoriagastoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    CategoriagastoPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Gastofacturacion) to $obj2 (Categoriagasto)
+                $obj2->addGastofacturacion($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining all related tables
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(GastofacturacionPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            GastofacturacionPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(GastofacturacionPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(GastofacturacionPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(GastofacturacionPeer::IDCATEGORIAGASTO, CategoriagastoPeer::IDCATEGORIAGASTO, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+    /**
+     * Selects a collection of Gastofacturacion objects pre-filled with all related objects.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Gastofacturacion objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(GastofacturacionPeer::DATABASE_NAME);
+        }
+
+        GastofacturacionPeer::addSelectColumns($criteria);
+        $startcol2 = GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
+
+        CategoriagastoPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + CategoriagastoPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(GastofacturacionPeer::IDCATEGORIAGASTO, CategoriagastoPeer::IDCATEGORIAGASTO, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = GastofacturacionPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = GastofacturacionPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = GastofacturacionPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                GastofacturacionPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+            // Add objects for joined Categoriagasto rows
+
+            $key2 = CategoriagastoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = CategoriagastoPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = CategoriagastoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    CategoriagastoPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (Gastofacturacion) to the collection in $obj2 (Categoriagasto)
+                $obj2->addGastofacturacion($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
     }
 
     /**

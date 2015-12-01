@@ -54,6 +54,12 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
     protected $idproveedoritrade;
 
     /**
+     * The value for the idempleado field.
+     * @var        int
+     */
+    protected $idempleado;
+
+    /**
      * The value for the expedientegasto_fecha field.
      * @var        string
      */
@@ -76,6 +82,11 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
      * @var        string
      */
     protected $expedientegasto_comprobante;
+
+    /**
+     * @var        Empleado
+     */
+    protected $aEmpleado;
 
     /**
      * @var        Expediente
@@ -154,6 +165,17 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
     {
 
         return $this->idproveedoritrade;
+    }
+
+    /**
+     * Get the [idempleado] column value.
+     *
+     * @return int
+     */
+    public function getIdempleado()
+    {
+
+        return $this->idempleado;
     }
 
     /**
@@ -326,6 +348,31 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
     } // setIdproveedoritrade()
 
     /**
+     * Set the value of [idempleado] column.
+     *
+     * @param  int $v new value
+     * @return Expedientegasto The current object (for fluent API support)
+     */
+    public function setIdempleado($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->idempleado !== $v) {
+            $this->idempleado = $v;
+            $this->modifiedColumns[] = ExpedientegastoPeer::IDEMPLEADO;
+        }
+
+        if ($this->aEmpleado !== null && $this->aEmpleado->getIdempleado() !== $v) {
+            $this->aEmpleado = null;
+        }
+
+
+        return $this;
+    } // setIdempleado()
+
+    /**
      * Sets the value of [expedientegasto_fecha] column to a normalized version of the date/time value specified.
      *
      * @param mixed $v string, integer (timestamp), or DateTime value.
@@ -447,10 +494,11 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             $this->idexpediente = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->idgastofacturacion = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
             $this->idproveedoritrade = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
-            $this->expedientegasto_fecha = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->expedientegasto_monto = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->expedientegasto_tipo = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-            $this->expedientegasto_comprobante = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->idempleado = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+            $this->expedientegasto_fecha = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->expedientegasto_monto = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->expedientegasto_tipo = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->expedientegasto_comprobante = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -460,7 +508,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 8; // 8 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 9; // 9 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Expedientegasto object", $e);
@@ -491,6 +539,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         }
         if ($this->aProveedoritrade !== null && $this->idproveedoritrade !== $this->aProveedoritrade->getIdproveedoritrade()) {
             $this->aProveedoritrade = null;
+        }
+        if ($this->aEmpleado !== null && $this->idempleado !== $this->aEmpleado->getIdempleado()) {
+            $this->aEmpleado = null;
         }
     } // ensureConsistency
 
@@ -531,6 +582,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->aEmpleado = null;
             $this->aExpediente = null;
             $this->aGastofacturacion = null;
             $this->aProveedoritrade = null;
@@ -652,6 +704,13 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
+            if ($this->aEmpleado !== null) {
+                if ($this->aEmpleado->isModified() || $this->aEmpleado->isNew()) {
+                    $affectedRows += $this->aEmpleado->save($con);
+                }
+                $this->setEmpleado($this->aEmpleado);
+            }
+
             if ($this->aExpediente !== null) {
                 if ($this->aExpediente->isModified() || $this->aExpediente->isNew()) {
                     $affectedRows += $this->aExpediente->save($con);
@@ -722,6 +781,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientegastoPeer::IDPROVEEDORITRADE)) {
             $modifiedColumns[':p' . $index++]  = '`idproveedoritrade`';
         }
+        if ($this->isColumnModified(ExpedientegastoPeer::IDEMPLEADO)) {
+            $modifiedColumns[':p' . $index++]  = '`idempleado`';
+        }
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA)) {
             $modifiedColumns[':p' . $index++]  = '`expedientegasto_fecha`';
         }
@@ -756,6 +818,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
                         break;
                     case '`idproveedoritrade`':
                         $stmt->bindValue($identifier, $this->idproveedoritrade, PDO::PARAM_INT);
+                        break;
+                    case '`idempleado`':
+                        $stmt->bindValue($identifier, $this->idempleado, PDO::PARAM_INT);
                         break;
                     case '`expedientegasto_fecha`':
                         $stmt->bindValue($identifier, $this->expedientegasto_fecha, PDO::PARAM_STR);
@@ -868,6 +933,12 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
+            if ($this->aEmpleado !== null) {
+                if (!$this->aEmpleado->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aEmpleado->getValidationFailures());
+                }
+            }
+
             if ($this->aExpediente !== null) {
                 if (!$this->aExpediente->validate($columns)) {
                     $failureMap = array_merge($failureMap, $this->aExpediente->getValidationFailures());
@@ -940,15 +1011,18 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
                 return $this->getIdproveedoritrade();
                 break;
             case 4:
-                return $this->getExpedientegastoFecha();
+                return $this->getIdempleado();
                 break;
             case 5:
-                return $this->getExpedientegastoMonto();
+                return $this->getExpedientegastoFecha();
                 break;
             case 6:
-                return $this->getExpedientegastoTipo();
+                return $this->getExpedientegastoMonto();
                 break;
             case 7:
+                return $this->getExpedientegastoTipo();
+                break;
+            case 8:
                 return $this->getExpedientegastoComprobante();
                 break;
             default:
@@ -984,10 +1058,11 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             $keys[1] => $this->getIdexpediente(),
             $keys[2] => $this->getIdgastofacturacion(),
             $keys[3] => $this->getIdproveedoritrade(),
-            $keys[4] => $this->getExpedientegastoFecha(),
-            $keys[5] => $this->getExpedientegastoMonto(),
-            $keys[6] => $this->getExpedientegastoTipo(),
-            $keys[7] => $this->getExpedientegastoComprobante(),
+            $keys[4] => $this->getIdempleado(),
+            $keys[5] => $this->getExpedientegastoFecha(),
+            $keys[6] => $this->getExpedientegastoMonto(),
+            $keys[7] => $this->getExpedientegastoTipo(),
+            $keys[8] => $this->getExpedientegastoComprobante(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -995,6 +1070,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
+            if (null !== $this->aEmpleado) {
+                $result['Empleado'] = $this->aEmpleado->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
             if (null !== $this->aExpediente) {
                 $result['Expediente'] = $this->aExpediente->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
@@ -1051,15 +1129,18 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
                 $this->setIdproveedoritrade($value);
                 break;
             case 4:
-                $this->setExpedientegastoFecha($value);
+                $this->setIdempleado($value);
                 break;
             case 5:
-                $this->setExpedientegastoMonto($value);
+                $this->setExpedientegastoFecha($value);
                 break;
             case 6:
-                $this->setExpedientegastoTipo($value);
+                $this->setExpedientegastoMonto($value);
                 break;
             case 7:
+                $this->setExpedientegastoTipo($value);
+                break;
+            case 8:
                 $this->setExpedientegastoComprobante($value);
                 break;
         } // switch()
@@ -1090,10 +1171,11 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         if (array_key_exists($keys[1], $arr)) $this->setIdexpediente($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setIdgastofacturacion($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setIdproveedoritrade($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setExpedientegastoFecha($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setExpedientegastoMonto($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setExpedientegastoTipo($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setExpedientegastoComprobante($arr[$keys[7]]);
+        if (array_key_exists($keys[4], $arr)) $this->setIdempleado($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setExpedientegastoFecha($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setExpedientegastoMonto($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setExpedientegastoTipo($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setExpedientegastoComprobante($arr[$keys[8]]);
     }
 
     /**
@@ -1109,6 +1191,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientegastoPeer::IDEXPEDIENTE)) $criteria->add(ExpedientegastoPeer::IDEXPEDIENTE, $this->idexpediente);
         if ($this->isColumnModified(ExpedientegastoPeer::IDGASTOFACTURACION)) $criteria->add(ExpedientegastoPeer::IDGASTOFACTURACION, $this->idgastofacturacion);
         if ($this->isColumnModified(ExpedientegastoPeer::IDPROVEEDORITRADE)) $criteria->add(ExpedientegastoPeer::IDPROVEEDORITRADE, $this->idproveedoritrade);
+        if ($this->isColumnModified(ExpedientegastoPeer::IDEMPLEADO)) $criteria->add(ExpedientegastoPeer::IDEMPLEADO, $this->idempleado);
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA)) $criteria->add(ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA, $this->expedientegasto_fecha);
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO)) $criteria->add(ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO, $this->expedientegasto_monto);
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO)) $criteria->add(ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO, $this->expedientegasto_tipo);
@@ -1179,6 +1262,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         $copyObj->setIdexpediente($this->getIdexpediente());
         $copyObj->setIdgastofacturacion($this->getIdgastofacturacion());
         $copyObj->setIdproveedoritrade($this->getIdproveedoritrade());
+        $copyObj->setIdempleado($this->getIdempleado());
         $copyObj->setExpedientegastoFecha($this->getExpedientegastoFecha());
         $copyObj->setExpedientegastoMonto($this->getExpedientegastoMonto());
         $copyObj->setExpedientegastoTipo($this->getExpedientegastoTipo());
@@ -1239,6 +1323,58 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         }
 
         return self::$peer;
+    }
+
+    /**
+     * Declares an association between this object and a Empleado object.
+     *
+     * @param                  Empleado $v
+     * @return Expedientegasto The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setEmpleado(Empleado $v = null)
+    {
+        if ($v === null) {
+            $this->setIdempleado(NULL);
+        } else {
+            $this->setIdempleado($v->getIdempleado());
+        }
+
+        $this->aEmpleado = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Empleado object, it will not be re-added.
+        if ($v !== null) {
+            $v->addExpedientegasto($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated Empleado object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return Empleado The associated Empleado object.
+     * @throws PropelException
+     */
+    public function getEmpleado(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aEmpleado === null && ($this->idempleado !== null) && $doQuery) {
+            $this->aEmpleado = EmpleadoQuery::create()->findPk($this->idempleado, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aEmpleado->addExpedientegastos($this);
+             */
+        }
+
+        return $this->aEmpleado;
     }
 
     /**
@@ -1406,6 +1542,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         $this->idexpediente = null;
         $this->idgastofacturacion = null;
         $this->idproveedoritrade = null;
+        $this->idempleado = null;
         $this->expedientegasto_fecha = null;
         $this->expedientegasto_monto = null;
         $this->expedientegasto_tipo = null;
@@ -1432,6 +1569,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->aEmpleado instanceof Persistent) {
+              $this->aEmpleado->clearAllReferences($deep);
+            }
             if ($this->aExpediente instanceof Persistent) {
               $this->aExpediente->clearAllReferences($deep);
             }
@@ -1445,6 +1585,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        $this->aEmpleado = null;
         $this->aExpediente = null;
         $this->aGastofacturacion = null;
         $this->aProveedoritrade = null;

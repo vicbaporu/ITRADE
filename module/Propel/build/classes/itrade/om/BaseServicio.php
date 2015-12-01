@@ -36,6 +36,18 @@ abstract class BaseServicio extends BaseObject implements Persistent
     protected $idservicio;
 
     /**
+     * The value for the servicio_tipo field.
+     * @var        string
+     */
+    protected $servicio_tipo;
+
+    /**
+     * The value for the servicio_medio field.
+     * @var        string
+     */
+    protected $servicio_medio;
+
+    /**
      * The value for the servicio_nombre field.
      * @var        string
      */
@@ -115,6 +127,28 @@ abstract class BaseServicio extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [servicio_tipo] column value.
+     *
+     * @return string
+     */
+    public function getServicioTipo()
+    {
+
+        return $this->servicio_tipo;
+    }
+
+    /**
+     * Get the [servicio_medio] column value.
+     *
+     * @return string
+     */
+    public function getServicioMedio()
+    {
+
+        return $this->servicio_medio;
+    }
+
+    /**
      * Get the [servicio_nombre] column value.
      *
      * @return string
@@ -156,6 +190,48 @@ abstract class BaseServicio extends BaseObject implements Persistent
 
         return $this;
     } // setIdservicio()
+
+    /**
+     * Set the value of [servicio_tipo] column.
+     *
+     * @param  string $v new value
+     * @return Servicio The current object (for fluent API support)
+     */
+    public function setServicioTipo($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->servicio_tipo !== $v) {
+            $this->servicio_tipo = $v;
+            $this->modifiedColumns[] = ServicioPeer::SERVICIO_TIPO;
+        }
+
+
+        return $this;
+    } // setServicioTipo()
+
+    /**
+     * Set the value of [servicio_medio] column.
+     *
+     * @param  string $v new value
+     * @return Servicio The current object (for fluent API support)
+     */
+    public function setServicioMedio($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->servicio_medio !== $v) {
+            $this->servicio_medio = $v;
+            $this->modifiedColumns[] = ServicioPeer::SERVICIO_MEDIO;
+        }
+
+
+        return $this;
+    } // setServicioMedio()
 
     /**
      * Set the value of [servicio_nombre] column.
@@ -232,8 +308,10 @@ abstract class BaseServicio extends BaseObject implements Persistent
         try {
 
             $this->idservicio = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->servicio_nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->servicio_descripcion = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->servicio_tipo = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->servicio_medio = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->servicio_nombre = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->servicio_descripcion = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -243,7 +321,7 @@ abstract class BaseServicio extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 3; // 3 = ServicioPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 5; // 5 = ServicioPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Servicio object", $e);
@@ -515,6 +593,12 @@ abstract class BaseServicio extends BaseObject implements Persistent
         if ($this->isColumnModified(ServicioPeer::IDSERVICIO)) {
             $modifiedColumns[':p' . $index++]  = '`idservicio`';
         }
+        if ($this->isColumnModified(ServicioPeer::SERVICIO_TIPO)) {
+            $modifiedColumns[':p' . $index++]  = '`servicio_tipo`';
+        }
+        if ($this->isColumnModified(ServicioPeer::SERVICIO_MEDIO)) {
+            $modifiedColumns[':p' . $index++]  = '`servicio_medio`';
+        }
         if ($this->isColumnModified(ServicioPeer::SERVICIO_NOMBRE)) {
             $modifiedColumns[':p' . $index++]  = '`servicio_nombre`';
         }
@@ -534,6 +618,12 @@ abstract class BaseServicio extends BaseObject implements Persistent
                 switch ($columnName) {
                     case '`idservicio`':
                         $stmt->bindValue($identifier, $this->idservicio, PDO::PARAM_INT);
+                        break;
+                    case '`servicio_tipo`':
+                        $stmt->bindValue($identifier, $this->servicio_tipo, PDO::PARAM_STR);
+                        break;
+                    case '`servicio_medio`':
+                        $stmt->bindValue($identifier, $this->servicio_medio, PDO::PARAM_STR);
                         break;
                     case '`servicio_nombre`':
                         $stmt->bindValue($identifier, $this->servicio_nombre, PDO::PARAM_STR);
@@ -703,9 +793,15 @@ abstract class BaseServicio extends BaseObject implements Persistent
                 return $this->getIdservicio();
                 break;
             case 1:
-                return $this->getServicioNombre();
+                return $this->getServicioTipo();
                 break;
             case 2:
+                return $this->getServicioMedio();
+                break;
+            case 3:
+                return $this->getServicioNombre();
+                break;
+            case 4:
                 return $this->getServicioDescripcion();
                 break;
             default:
@@ -738,8 +834,10 @@ abstract class BaseServicio extends BaseObject implements Persistent
         $keys = ServicioPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getIdservicio(),
-            $keys[1] => $this->getServicioNombre(),
-            $keys[2] => $this->getServicioDescripcion(),
+            $keys[1] => $this->getServicioTipo(),
+            $keys[2] => $this->getServicioMedio(),
+            $keys[3] => $this->getServicioNombre(),
+            $keys[4] => $this->getServicioDescripcion(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -794,9 +892,15 @@ abstract class BaseServicio extends BaseObject implements Persistent
                 $this->setIdservicio($value);
                 break;
             case 1:
-                $this->setServicioNombre($value);
+                $this->setServicioTipo($value);
                 break;
             case 2:
+                $this->setServicioMedio($value);
+                break;
+            case 3:
+                $this->setServicioNombre($value);
+                break;
+            case 4:
                 $this->setServicioDescripcion($value);
                 break;
         } // switch()
@@ -824,8 +928,10 @@ abstract class BaseServicio extends BaseObject implements Persistent
         $keys = ServicioPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setIdservicio($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setServicioNombre($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setServicioDescripcion($arr[$keys[2]]);
+        if (array_key_exists($keys[1], $arr)) $this->setServicioTipo($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setServicioMedio($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setServicioNombre($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setServicioDescripcion($arr[$keys[4]]);
     }
 
     /**
@@ -838,6 +944,8 @@ abstract class BaseServicio extends BaseObject implements Persistent
         $criteria = new Criteria(ServicioPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(ServicioPeer::IDSERVICIO)) $criteria->add(ServicioPeer::IDSERVICIO, $this->idservicio);
+        if ($this->isColumnModified(ServicioPeer::SERVICIO_TIPO)) $criteria->add(ServicioPeer::SERVICIO_TIPO, $this->servicio_tipo);
+        if ($this->isColumnModified(ServicioPeer::SERVICIO_MEDIO)) $criteria->add(ServicioPeer::SERVICIO_MEDIO, $this->servicio_medio);
         if ($this->isColumnModified(ServicioPeer::SERVICIO_NOMBRE)) $criteria->add(ServicioPeer::SERVICIO_NOMBRE, $this->servicio_nombre);
         if ($this->isColumnModified(ServicioPeer::SERVICIO_DESCRIPCION)) $criteria->add(ServicioPeer::SERVICIO_DESCRIPCION, $this->servicio_descripcion);
 
@@ -903,6 +1011,8 @@ abstract class BaseServicio extends BaseObject implements Persistent
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
+        $copyObj->setServicioTipo($this->getServicioTipo());
+        $copyObj->setServicioMedio($this->getServicioMedio());
         $copyObj->setServicioNombre($this->getServicioNombre());
         $copyObj->setServicioDescripcion($this->getServicioDescripcion());
 
@@ -1734,6 +1844,8 @@ abstract class BaseServicio extends BaseObject implements Persistent
     public function clear()
     {
         $this->idservicio = null;
+        $this->servicio_tipo = null;
+        $this->servicio_medio = null;
         $this->servicio_nombre = null;
         $this->servicio_descripcion = null;
         $this->alreadyInSave = false;

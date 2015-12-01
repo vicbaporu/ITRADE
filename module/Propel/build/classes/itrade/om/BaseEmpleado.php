@@ -162,6 +162,12 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
     protected $empleado_rol;
 
     /**
+     * The value for the empleado_foto field.
+     * @var        string
+     */
+    protected $empleado_foto;
+
+    /**
      * @var        PropelObjectCollection|Cliente[] Collection to store aggregation of Cliente objects.
      */
     protected $collClientesRelatedByIdempleadocomercial;
@@ -178,6 +184,12 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
      */
     protected $collExpedientearchivos;
     protected $collExpedientearchivosPartial;
+
+    /**
+     * @var        PropelObjectCollection|Expedientegasto[] Collection to store aggregation of Expedientegasto objects.
+     */
+    protected $collExpedientegastos;
+    protected $collExpedientegastosPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -216,6 +228,12 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
      * @var		PropelObjectCollection
      */
     protected $expedientearchivosScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $expedientegastosScheduledForDeletion = null;
 
     /**
      * Get the [idempleado] column value.
@@ -486,6 +504,17 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
     {
 
         return $this->empleado_rol;
+    }
+
+    /**
+     * Get the [empleado_foto] column value.
+     *
+     * @return string
+     */
+    public function getEmpleadoFoto()
+    {
+
+        return $this->empleado_foto;
     }
 
     /**
@@ -953,6 +982,27 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
     } // setEmpleadoRol()
 
     /**
+     * Set the value of [empleado_foto] column.
+     *
+     * @param  string $v new value
+     * @return Empleado The current object (for fluent API support)
+     */
+    public function setEmpleadoFoto($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->empleado_foto !== $v) {
+            $this->empleado_foto = $v;
+            $this->modifiedColumns[] = EmpleadoPeer::EMPLEADO_FOTO;
+        }
+
+
+        return $this;
+    } // setEmpleadoFoto()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -1006,6 +1056,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             $this->empleado_telefonocontacto = ($row[$startcol + 19] !== null) ? (string) $row[$startcol + 19] : null;
             $this->empleado_estatus = ($row[$startcol + 20] !== null) ? (string) $row[$startcol + 20] : null;
             $this->empleado_rol = ($row[$startcol + 21] !== null) ? (string) $row[$startcol + 21] : null;
+            $this->empleado_foto = ($row[$startcol + 22] !== null) ? (string) $row[$startcol + 22] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -1015,7 +1066,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 22; // 22 = EmpleadoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 23; // 23 = EmpleadoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Empleado object", $e);
@@ -1082,6 +1133,8 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             $this->collClientesRelatedByIdempleadooperaciones = null;
 
             $this->collExpedientearchivos = null;
+
+            $this->collExpedientegastos = null;
 
         } // if (deep)
     }
@@ -1259,6 +1312,23 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                 }
             }
 
+            if ($this->expedientegastosScheduledForDeletion !== null) {
+                if (!$this->expedientegastosScheduledForDeletion->isEmpty()) {
+                    ExpedientegastoQuery::create()
+                        ->filterByPrimaryKeys($this->expedientegastosScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->expedientegastosScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collExpedientegastos !== null) {
+                foreach ($this->collExpedientegastos as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -1351,6 +1421,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_ROL)) {
             $modifiedColumns[':p' . $index++]  = '`empleado_rol`';
         }
+        if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_FOTO)) {
+            $modifiedColumns[':p' . $index++]  = '`empleado_foto`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `empleado` (%s) VALUES (%s)',
@@ -1427,6 +1500,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                         break;
                     case '`empleado_rol`':
                         $stmt->bindValue($identifier, $this->empleado_rol, PDO::PARAM_STR);
+                        break;
+                    case '`empleado_foto`':
+                        $stmt->bindValue($identifier, $this->empleado_foto, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1551,6 +1627,14 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                     }
                 }
 
+                if ($this->collExpedientegastos !== null) {
+                    foreach ($this->collExpedientegastos as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -1652,6 +1736,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             case 21:
                 return $this->getEmpleadoRol();
                 break;
+            case 22:
+                return $this->getEmpleadoFoto();
+                break;
             default:
                 return null;
                 break;
@@ -1703,6 +1790,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             $keys[19] => $this->getEmpleadoTelefonocontacto(),
             $keys[20] => $this->getEmpleadoEstatus(),
             $keys[21] => $this->getEmpleadoRol(),
+            $keys[22] => $this->getEmpleadoFoto(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1718,6 +1806,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             }
             if (null !== $this->collExpedientearchivos) {
                 $result['Expedientearchivos'] = $this->collExpedientearchivos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collExpedientegastos) {
+                $result['Expedientegastos'] = $this->collExpedientegastos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1819,6 +1910,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             case 21:
                 $this->setEmpleadoRol($value);
                 break;
+            case 22:
+                $this->setEmpleadoFoto($value);
+                break;
         } // switch()
     }
 
@@ -1865,6 +1959,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         if (array_key_exists($keys[19], $arr)) $this->setEmpleadoTelefonocontacto($arr[$keys[19]]);
         if (array_key_exists($keys[20], $arr)) $this->setEmpleadoEstatus($arr[$keys[20]]);
         if (array_key_exists($keys[21], $arr)) $this->setEmpleadoRol($arr[$keys[21]]);
+        if (array_key_exists($keys[22], $arr)) $this->setEmpleadoFoto($arr[$keys[22]]);
     }
 
     /**
@@ -1898,6 +1993,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_TELEFONOCONTACTO)) $criteria->add(EmpleadoPeer::EMPLEADO_TELEFONOCONTACTO, $this->empleado_telefonocontacto);
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_ESTATUS)) $criteria->add(EmpleadoPeer::EMPLEADO_ESTATUS, $this->empleado_estatus);
         if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_ROL)) $criteria->add(EmpleadoPeer::EMPLEADO_ROL, $this->empleado_rol);
+        if ($this->isColumnModified(EmpleadoPeer::EMPLEADO_FOTO)) $criteria->add(EmpleadoPeer::EMPLEADO_FOTO, $this->empleado_foto);
 
         return $criteria;
     }
@@ -1982,6 +2078,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         $copyObj->setEmpleadoTelefonocontacto($this->getEmpleadoTelefonocontacto());
         $copyObj->setEmpleadoEstatus($this->getEmpleadoEstatus());
         $copyObj->setEmpleadoRol($this->getEmpleadoRol());
+        $copyObj->setEmpleadoFoto($this->getEmpleadoFoto());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -2005,6 +2102,12 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             foreach ($this->getExpedientearchivos() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addExpedientearchivo($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getExpedientegastos() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addExpedientegasto($relObj->copy($deepCopy));
                 }
             }
 
@@ -2077,6 +2180,9 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         }
         if ('Expedientearchivo' == $relationName) {
             $this->initExpedientearchivos();
+        }
+        if ('Expedientegasto' == $relationName) {
+            $this->initExpedientegastos();
         }
     }
 
@@ -2748,7 +2854,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                 $this->expedientearchivosScheduledForDeletion = clone $this->collExpedientearchivos;
                 $this->expedientearchivosScheduledForDeletion->clear();
             }
-            $this->expedientearchivosScheduledForDeletion[]= $expedientearchivo;
+            $this->expedientearchivosScheduledForDeletion[]= clone $expedientearchivo;
             $expedientearchivo->setEmpleado(null);
         }
 
@@ -2781,6 +2887,306 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
     }
 
     /**
+     * Clears out the collExpedientegastos collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return Empleado The current object (for fluent API support)
+     * @see        addExpedientegastos()
+     */
+    public function clearExpedientegastos()
+    {
+        $this->collExpedientegastos = null; // important to set this to null since that means it is uninitialized
+        $this->collExpedientegastosPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collExpedientegastos collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialExpedientegastos($v = true)
+    {
+        $this->collExpedientegastosPartial = $v;
+    }
+
+    /**
+     * Initializes the collExpedientegastos collection.
+     *
+     * By default this just sets the collExpedientegastos collection to an empty array (like clearcollExpedientegastos());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initExpedientegastos($overrideExisting = true)
+    {
+        if (null !== $this->collExpedientegastos && !$overrideExisting) {
+            return;
+        }
+        $this->collExpedientegastos = new PropelObjectCollection();
+        $this->collExpedientegastos->setModel('Expedientegasto');
+    }
+
+    /**
+     * Gets an array of Expedientegasto objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Empleado is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
+     * @throws PropelException
+     */
+    public function getExpedientegastos($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collExpedientegastosPartial && !$this->isNew();
+        if (null === $this->collExpedientegastos || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collExpedientegastos) {
+                // return empty collection
+                $this->initExpedientegastos();
+            } else {
+                $collExpedientegastos = ExpedientegastoQuery::create(null, $criteria)
+                    ->filterByEmpleado($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collExpedientegastosPartial && count($collExpedientegastos)) {
+                      $this->initExpedientegastos(false);
+
+                      foreach ($collExpedientegastos as $obj) {
+                        if (false == $this->collExpedientegastos->contains($obj)) {
+                          $this->collExpedientegastos->append($obj);
+                        }
+                      }
+
+                      $this->collExpedientegastosPartial = true;
+                    }
+
+                    $collExpedientegastos->getInternalIterator()->rewind();
+
+                    return $collExpedientegastos;
+                }
+
+                if ($partial && $this->collExpedientegastos) {
+                    foreach ($this->collExpedientegastos as $obj) {
+                        if ($obj->isNew()) {
+                            $collExpedientegastos[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collExpedientegastos = $collExpedientegastos;
+                $this->collExpedientegastosPartial = false;
+            }
+        }
+
+        return $this->collExpedientegastos;
+    }
+
+    /**
+     * Sets a collection of Expedientegasto objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $expedientegastos A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return Empleado The current object (for fluent API support)
+     */
+    public function setExpedientegastos(PropelCollection $expedientegastos, PropelPDO $con = null)
+    {
+        $expedientegastosToDelete = $this->getExpedientegastos(new Criteria(), $con)->diff($expedientegastos);
+
+
+        $this->expedientegastosScheduledForDeletion = $expedientegastosToDelete;
+
+        foreach ($expedientegastosToDelete as $expedientegastoRemoved) {
+            $expedientegastoRemoved->setEmpleado(null);
+        }
+
+        $this->collExpedientegastos = null;
+        foreach ($expedientegastos as $expedientegasto) {
+            $this->addExpedientegasto($expedientegasto);
+        }
+
+        $this->collExpedientegastos = $expedientegastos;
+        $this->collExpedientegastosPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Expedientegasto objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related Expedientegasto objects.
+     * @throws PropelException
+     */
+    public function countExpedientegastos(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collExpedientegastosPartial && !$this->isNew();
+        if (null === $this->collExpedientegastos || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collExpedientegastos) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getExpedientegastos());
+            }
+            $query = ExpedientegastoQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByEmpleado($this)
+                ->count($con);
+        }
+
+        return count($this->collExpedientegastos);
+    }
+
+    /**
+     * Method called to associate a Expedientegasto object to this object
+     * through the Expedientegasto foreign key attribute.
+     *
+     * @param    Expedientegasto $l Expedientegasto
+     * @return Empleado The current object (for fluent API support)
+     */
+    public function addExpedientegasto(Expedientegasto $l)
+    {
+        if ($this->collExpedientegastos === null) {
+            $this->initExpedientegastos();
+            $this->collExpedientegastosPartial = true;
+        }
+
+        if (!in_array($l, $this->collExpedientegastos->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddExpedientegasto($l);
+
+            if ($this->expedientegastosScheduledForDeletion and $this->expedientegastosScheduledForDeletion->contains($l)) {
+                $this->expedientegastosScheduledForDeletion->remove($this->expedientegastosScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Expedientegasto $expedientegasto The expedientegasto object to add.
+     */
+    protected function doAddExpedientegasto($expedientegasto)
+    {
+        $this->collExpedientegastos[]= $expedientegasto;
+        $expedientegasto->setEmpleado($this);
+    }
+
+    /**
+     * @param	Expedientegasto $expedientegasto The expedientegasto object to remove.
+     * @return Empleado The current object (for fluent API support)
+     */
+    public function removeExpedientegasto($expedientegasto)
+    {
+        if ($this->getExpedientegastos()->contains($expedientegasto)) {
+            $this->collExpedientegastos->remove($this->collExpedientegastos->search($expedientegasto));
+            if (null === $this->expedientegastosScheduledForDeletion) {
+                $this->expedientegastosScheduledForDeletion = clone $this->collExpedientegastos;
+                $this->expedientegastosScheduledForDeletion->clear();
+            }
+            $this->expedientegastosScheduledForDeletion[]= clone $expedientegasto;
+            $expedientegasto->setEmpleado(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Empleado is new, it will return
+     * an empty collection; or if this Empleado has previously
+     * been saved, it will retrieve related Expedientegastos from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Empleado.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
+     */
+    public function getExpedientegastosJoinExpediente($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ExpedientegastoQuery::create(null, $criteria);
+        $query->joinWith('Expediente', $join_behavior);
+
+        return $this->getExpedientegastos($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Empleado is new, it will return
+     * an empty collection; or if this Empleado has previously
+     * been saved, it will retrieve related Expedientegastos from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Empleado.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
+     */
+    public function getExpedientegastosJoinGastofacturacion($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ExpedientegastoQuery::create(null, $criteria);
+        $query->joinWith('Gastofacturacion', $join_behavior);
+
+        return $this->getExpedientegastos($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Empleado is new, it will return
+     * an empty collection; or if this Empleado has previously
+     * been saved, it will retrieve related Expedientegastos from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Empleado.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
+     */
+    public function getExpedientegastosJoinProveedoritrade($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ExpedientegastoQuery::create(null, $criteria);
+        $query->joinWith('Proveedoritrade', $join_behavior);
+
+        return $this->getExpedientegastos($query, $con);
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -2807,6 +3213,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
         $this->empleado_telefonocontacto = null;
         $this->empleado_estatus = null;
         $this->empleado_rol = null;
+        $this->empleado_foto = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -2844,6 +3251,11 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collExpedientegastos) {
+                foreach ($this->collExpedientegastos as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
@@ -2860,6 +3272,10 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
             $this->collExpedientearchivos->clearIterator();
         }
         $this->collExpedientearchivos = null;
+        if ($this->collExpedientegastos instanceof PropelCollection) {
+            $this->collExpedientegastos->clearIterator();
+        }
+        $this->collExpedientegastos = null;
     }
 
     /**

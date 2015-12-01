@@ -39,8 +39,15 @@ class GastofacturacionTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idgastofacturacion', 'Idgastofacturacion', 'INTEGER', true, null, null);
+        $this->addForeignKey('idcategoriagasto', 'Idcategoriagasto', 'INTEGER', 'categoriagasto', 'idcategoriagasto', true, null, null);
         $this->addColumn('gastofacturacion_nombre', 'GastofacturacionNombre', 'VARCHAR', false, 255, null);
         $this->addColumn('gastofacturacion_descripcion', 'GastofacturacionDescripcion', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('gastofacturacion_iva', 'GastofacturacionIva', 'CHAR', false, null, null);
+        $this->getColumn('gastofacturacion_iva', false)->setValueSet(array (
+  0 => '0',
+  1 => '16',
+  2 => '4',
+));
         // validators
     } // initialize()
 
@@ -49,6 +56,7 @@ class GastofacturacionTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Categoriagasto', 'Categoriagasto', RelationMap::MANY_TO_ONE, array('idcategoriagasto' => 'idcategoriagasto', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idgastofacturacion' => 'idgastofacturacion', ), null, null, 'Expedientegastos');
     } // buildRelations()
 

@@ -2,68 +2,53 @@
 
 
 /**
- * Base static class for performing query and update operations on the 'servicio' table.
+ * Base static class for performing query and update operations on the 'categoriagasto' table.
  *
  *
  *
  * @package propel.generator.itrade.om
  */
-abstract class BaseServicioPeer
+abstract class BaseCategoriagastoPeer
 {
 
     /** the default database name for this class */
     const DATABASE_NAME = 'itrade';
 
     /** the table name for this class */
-    const TABLE_NAME = 'servicio';
+    const TABLE_NAME = 'categoriagasto';
 
     /** the related Propel class for this table */
-    const OM_CLASS = 'Servicio';
+    const OM_CLASS = 'Categoriagasto';
 
     /** the related TableMap class for this table */
-    const TM_CLASS = 'ServicioTableMap';
+    const TM_CLASS = 'CategoriagastoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 5;
+    const NUM_COLUMNS = 3;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 5;
+    const NUM_HYDRATE_COLUMNS = 3;
 
-    /** the column name for the idservicio field */
-    const IDSERVICIO = 'servicio.idservicio';
+    /** the column name for the idcategoriagasto field */
+    const IDCATEGORIAGASTO = 'categoriagasto.idcategoriagasto';
 
-    /** the column name for the servicio_tipo field */
-    const SERVICIO_TIPO = 'servicio.servicio_tipo';
+    /** the column name for the categoriagasto_nombre field */
+    const CATEGORIAGASTO_NOMBRE = 'categoriagasto.categoriagasto_nombre';
 
-    /** the column name for the servicio_medio field */
-    const SERVICIO_MEDIO = 'servicio.servicio_medio';
-
-    /** the column name for the servicio_nombre field */
-    const SERVICIO_NOMBRE = 'servicio.servicio_nombre';
-
-    /** the column name for the servicio_descripcion field */
-    const SERVICIO_DESCRIPCION = 'servicio.servicio_descripcion';
-
-    /** The enumerated values for the servicio_tipo field */
-    const SERVICIO_TIPO_IMPORTACION = 'importacion';
-    const SERVICIO_TIPO_EXPORTACION = 'exportacion';
-
-    /** The enumerated values for the servicio_medio field */
-    const SERVICIO_MEDIO_TERRESTRE = 'terrestre';
-    const SERVICIO_MEDIO_AEREO = 'aereo';
-    const SERVICIO_MEDIO_MARITIMO = 'maritimo';
+    /** the column name for the categoriagasto_descripcion field */
+    const CATEGORIAGASTO_DESCRIPCION = 'categoriagasto.categoriagasto_descripcion';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
     /**
-     * An identity map to hold any loaded instances of Servicio objects.
+     * An identity map to hold any loaded instances of Categoriagasto objects.
      * This must be public so that other peer classes can access this when hydrating from JOIN
      * queries.
-     * @var        array Servicio[]
+     * @var        array Categoriagasto[]
      */
     public static $instances = array();
 
@@ -72,43 +57,30 @@ abstract class BaseServicioPeer
      * holds an array of fieldnames
      *
      * first dimension keys are the type constants
-     * e.g. ServicioPeer::$fieldNames[ServicioPeer::TYPE_PHPNAME][0] = 'Id'
+     * e.g. CategoriagastoPeer::$fieldNames[CategoriagastoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idservicio', 'ServicioTipo', 'ServicioMedio', 'ServicioNombre', 'ServicioDescripcion', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idservicio', 'servicioTipo', 'servicioMedio', 'servicioNombre', 'servicioDescripcion', ),
-        BasePeer::TYPE_COLNAME => array (ServicioPeer::IDSERVICIO, ServicioPeer::SERVICIO_TIPO, ServicioPeer::SERVICIO_MEDIO, ServicioPeer::SERVICIO_NOMBRE, ServicioPeer::SERVICIO_DESCRIPCION, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDSERVICIO', 'SERVICIO_TIPO', 'SERVICIO_MEDIO', 'SERVICIO_NOMBRE', 'SERVICIO_DESCRIPCION', ),
-        BasePeer::TYPE_FIELDNAME => array ('idservicio', 'servicio_tipo', 'servicio_medio', 'servicio_nombre', 'servicio_descripcion', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('Idcategoriagasto', 'CategoriagastoNombre', 'CategoriagastoDescripcion', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idcategoriagasto', 'categoriagastoNombre', 'categoriagastoDescripcion', ),
+        BasePeer::TYPE_COLNAME => array (CategoriagastoPeer::IDCATEGORIAGASTO, CategoriagastoPeer::CATEGORIAGASTO_NOMBRE, CategoriagastoPeer::CATEGORIAGASTO_DESCRIPCION, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDCATEGORIAGASTO', 'CATEGORIAGASTO_NOMBRE', 'CATEGORIAGASTO_DESCRIPCION', ),
+        BasePeer::TYPE_FIELDNAME => array ('idcategoriagasto', 'categoriagasto_nombre', 'categoriagasto_descripcion', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
     /**
      * holds an array of keys for quick access to the fieldnames array
      *
      * first dimension keys are the type constants
-     * e.g. ServicioPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
+     * e.g. CategoriagastoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idservicio' => 0, 'ServicioTipo' => 1, 'ServicioMedio' => 2, 'ServicioNombre' => 3, 'ServicioDescripcion' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idservicio' => 0, 'servicioTipo' => 1, 'servicioMedio' => 2, 'servicioNombre' => 3, 'servicioDescripcion' => 4, ),
-        BasePeer::TYPE_COLNAME => array (ServicioPeer::IDSERVICIO => 0, ServicioPeer::SERVICIO_TIPO => 1, ServicioPeer::SERVICIO_MEDIO => 2, ServicioPeer::SERVICIO_NOMBRE => 3, ServicioPeer::SERVICIO_DESCRIPCION => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDSERVICIO' => 0, 'SERVICIO_TIPO' => 1, 'SERVICIO_MEDIO' => 2, 'SERVICIO_NOMBRE' => 3, 'SERVICIO_DESCRIPCION' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('idservicio' => 0, 'servicio_tipo' => 1, 'servicio_medio' => 2, 'servicio_nombre' => 3, 'servicio_descripcion' => 4, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
-    );
-
-    /** The enumerated values for this table */
-    protected static $enumValueSets = array(
-        ServicioPeer::SERVICIO_TIPO => array(
-            ServicioPeer::SERVICIO_TIPO_IMPORTACION,
-            ServicioPeer::SERVICIO_TIPO_EXPORTACION,
-        ),
-        ServicioPeer::SERVICIO_MEDIO => array(
-            ServicioPeer::SERVICIO_MEDIO_TERRESTRE,
-            ServicioPeer::SERVICIO_MEDIO_AEREO,
-            ServicioPeer::SERVICIO_MEDIO_MARITIMO,
-        ),
+        BasePeer::TYPE_PHPNAME => array ('Idcategoriagasto' => 0, 'CategoriagastoNombre' => 1, 'CategoriagastoDescripcion' => 2, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idcategoriagasto' => 0, 'categoriagastoNombre' => 1, 'categoriagastoDescripcion' => 2, ),
+        BasePeer::TYPE_COLNAME => array (CategoriagastoPeer::IDCATEGORIAGASTO => 0, CategoriagastoPeer::CATEGORIAGASTO_NOMBRE => 1, CategoriagastoPeer::CATEGORIAGASTO_DESCRIPCION => 2, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDCATEGORIAGASTO' => 0, 'CATEGORIAGASTO_NOMBRE' => 1, 'CATEGORIAGASTO_DESCRIPCION' => 2, ),
+        BasePeer::TYPE_FIELDNAME => array ('idcategoriagasto' => 0, 'categoriagasto_nombre' => 1, 'categoriagasto_descripcion' => 2, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, )
     );
 
     /**
@@ -123,10 +95,10 @@ abstract class BaseServicioPeer
      */
     public static function translateFieldName($name, $fromType, $toType)
     {
-        $toNames = ServicioPeer::getFieldNames($toType);
-        $key = isset(ServicioPeer::$fieldKeys[$fromType][$name]) ? ServicioPeer::$fieldKeys[$fromType][$name] : null;
+        $toNames = CategoriagastoPeer::getFieldNames($toType);
+        $key = isset(CategoriagastoPeer::$fieldKeys[$fromType][$name]) ? CategoriagastoPeer::$fieldKeys[$fromType][$name] : null;
         if ($key === null) {
-            throw new PropelException("'$name' could not be found in the field names of type '$fromType'. These are: " . print_r(ServicioPeer::$fieldKeys[$fromType], true));
+            throw new PropelException("'$name' could not be found in the field names of type '$fromType'. These are: " . print_r(CategoriagastoPeer::$fieldKeys[$fromType], true));
         }
 
         return $toNames[$key];
@@ -143,56 +115,11 @@ abstract class BaseServicioPeer
      */
     public static function getFieldNames($type = BasePeer::TYPE_PHPNAME)
     {
-        if (!array_key_exists($type, ServicioPeer::$fieldNames)) {
+        if (!array_key_exists($type, CategoriagastoPeer::$fieldNames)) {
             throw new PropelException('Method getFieldNames() expects the parameter $type to be one of the class constants BasePeer::TYPE_PHPNAME, BasePeer::TYPE_STUDLYPHPNAME, BasePeer::TYPE_COLNAME, BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_NUM. ' . $type . ' was given.');
         }
 
-        return ServicioPeer::$fieldNames[$type];
-    }
-
-    /**
-     * Gets the list of values for all ENUM columns
-     * @return array
-     */
-    public static function getValueSets()
-    {
-      return ServicioPeer::$enumValueSets;
-    }
-
-    /**
-     * Gets the list of values for an ENUM column
-     *
-     * @param string $colname The ENUM column name.
-     *
-     * @return array list of possible values for the column
-     */
-    public static function getValueSet($colname)
-    {
-        $valueSets = ServicioPeer::getValueSets();
-
-        if (!isset($valueSets[$colname])) {
-            throw new PropelException(sprintf('Column "%s" has no ValueSet.', $colname));
-        }
-
-        return $valueSets[$colname];
-    }
-
-    /**
-     * Gets the SQL value for the ENUM column value
-     *
-     * @param string $colname ENUM column name.
-     * @param string $enumVal ENUM value.
-     *
-     * @return int SQL value
-     */
-    public static function getSqlValueForEnum($colname, $enumVal)
-    {
-        $values = ServicioPeer::getValueSet($colname);
-        if (!in_array($enumVal, $values)) {
-            throw new PropelException(sprintf('Value "%s" is not accepted in this enumerated column', $colname));
-        }
-
-        return array_search($enumVal, $values);
+        return CategoriagastoPeer::$fieldNames[$type];
     }
 
     /**
@@ -204,12 +131,12 @@ abstract class BaseServicioPeer
      *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
      * </code>
      * @param      string $alias The alias for the current table.
-     * @param      string $column The column name for current table. (i.e. ServicioPeer::COLUMN_NAME).
+     * @param      string $column The column name for current table. (i.e. CategoriagastoPeer::COLUMN_NAME).
      * @return string
      */
     public static function alias($alias, $column)
     {
-        return str_replace(ServicioPeer::TABLE_NAME.'.', $alias.'.', $column);
+        return str_replace(CategoriagastoPeer::TABLE_NAME.'.', $alias.'.', $column);
     }
 
     /**
@@ -227,17 +154,13 @@ abstract class BaseServicioPeer
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(ServicioPeer::IDSERVICIO);
-            $criteria->addSelectColumn(ServicioPeer::SERVICIO_TIPO);
-            $criteria->addSelectColumn(ServicioPeer::SERVICIO_MEDIO);
-            $criteria->addSelectColumn(ServicioPeer::SERVICIO_NOMBRE);
-            $criteria->addSelectColumn(ServicioPeer::SERVICIO_DESCRIPCION);
+            $criteria->addSelectColumn(CategoriagastoPeer::IDCATEGORIAGASTO);
+            $criteria->addSelectColumn(CategoriagastoPeer::CATEGORIAGASTO_NOMBRE);
+            $criteria->addSelectColumn(CategoriagastoPeer::CATEGORIAGASTO_DESCRIPCION);
         } else {
-            $criteria->addSelectColumn($alias . '.idservicio');
-            $criteria->addSelectColumn($alias . '.servicio_tipo');
-            $criteria->addSelectColumn($alias . '.servicio_medio');
-            $criteria->addSelectColumn($alias . '.servicio_nombre');
-            $criteria->addSelectColumn($alias . '.servicio_descripcion');
+            $criteria->addSelectColumn($alias . '.idcategoriagasto');
+            $criteria->addSelectColumn($alias . '.categoriagasto_nombre');
+            $criteria->addSelectColumn($alias . '.categoriagasto_descripcion');
         }
     }
 
@@ -257,21 +180,21 @@ abstract class BaseServicioPeer
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(ServicioPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(CategoriagastoPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            ServicioPeer::addSelectColumns($criteria);
+            CategoriagastoPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-        $criteria->setDbName(ServicioPeer::DATABASE_NAME); // Set the correct dbName
+        $criteria->setDbName(CategoriagastoPeer::DATABASE_NAME); // Set the correct dbName
 
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
         // BasePeer returns a PDOStatement
         $stmt = BasePeer::doCount($criteria, $con);
@@ -290,7 +213,7 @@ abstract class BaseServicioPeer
      *
      * @param      Criteria $criteria object used to create the SELECT statement.
      * @param      PropelPDO $con
-     * @return Servicio
+     * @return Categoriagasto
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -298,7 +221,7 @@ abstract class BaseServicioPeer
     {
         $critcopy = clone $criteria;
         $critcopy->setLimit(1);
-        $objects = ServicioPeer::doSelect($critcopy, $con);
+        $objects = CategoriagastoPeer::doSelect($critcopy, $con);
         if ($objects) {
             return $objects[0];
         }
@@ -316,7 +239,7 @@ abstract class BaseServicioPeer
      */
     public static function doSelect(Criteria $criteria, PropelPDO $con = null)
     {
-        return ServicioPeer::populateObjects(ServicioPeer::doSelectStmt($criteria, $con));
+        return CategoriagastoPeer::populateObjects(CategoriagastoPeer::doSelectStmt($criteria, $con));
     }
     /**
      * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -334,16 +257,16 @@ abstract class BaseServicioPeer
     public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         if (!$criteria->hasSelectClause()) {
             $criteria = clone $criteria;
-            ServicioPeer::addSelectColumns($criteria);
+            CategoriagastoPeer::addSelectColumns($criteria);
         }
 
         // Set the correct dbName
-        $criteria->setDbName(ServicioPeer::DATABASE_NAME);
+        $criteria->setDbName(CategoriagastoPeer::DATABASE_NAME);
 
         // BasePeer returns a PDOStatement
         return BasePeer::doSelect($criteria, $con);
@@ -357,16 +280,16 @@ abstract class BaseServicioPeer
      * to the cache in order to ensure that the same objects are always returned by doSelect*()
      * and retrieveByPK*() calls.
      *
-     * @param Servicio $obj A Servicio object.
+     * @param Categoriagasto $obj A Categoriagasto object.
      * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getIdservicio();
+                $key = (string) $obj->getIdcategoriagasto();
             } // if key === null
-            ServicioPeer::$instances[$key] = $obj;
+            CategoriagastoPeer::$instances[$key] = $obj;
         }
     }
 
@@ -378,7 +301,7 @@ abstract class BaseServicioPeer
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param      mixed $value A Servicio object or a primary key value.
+     * @param      mixed $value A Categoriagasto object or a primary key value.
      *
      * @return void
      * @throws PropelException - if the value is invalid.
@@ -386,17 +309,17 @@ abstract class BaseServicioPeer
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
-            if (is_object($value) && $value instanceof Servicio) {
-                $key = (string) $value->getIdservicio();
+            if (is_object($value) && $value instanceof Categoriagasto) {
+                $key = (string) $value->getIdcategoriagasto();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Servicio object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Categoriagasto object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
             }
 
-            unset(ServicioPeer::$instances[$key]);
+            unset(CategoriagastoPeer::$instances[$key]);
         }
     } // removeInstanceFromPool()
 
@@ -407,14 +330,14 @@ abstract class BaseServicioPeer
      * a multi-column primary key, a serialize()d version of the primary key will be returned.
      *
      * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-     * @return Servicio Found object or null if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+     * @return Categoriagasto Found object or null if 1) no instance exists for specified key or 2) instance pooling has been disabled.
      * @see        getPrimaryKeyHash()
      */
     public static function getInstanceFromPool($key)
     {
         if (Propel::isInstancePoolingEnabled()) {
-            if (isset(ServicioPeer::$instances[$key])) {
-                return ServicioPeer::$instances[$key];
+            if (isset(CategoriagastoPeer::$instances[$key])) {
+                return CategoriagastoPeer::$instances[$key];
             }
         }
 
@@ -429,28 +352,22 @@ abstract class BaseServicioPeer
     public static function clearInstancePool($and_clear_all_references = false)
     {
       if ($and_clear_all_references) {
-        foreach (ServicioPeer::$instances as $instance) {
+        foreach (CategoriagastoPeer::$instances as $instance) {
           $instance->clearAllReferences(true);
         }
       }
-        ServicioPeer::$instances = array();
+        CategoriagastoPeer::$instances = array();
     }
 
     /**
-     * Method to invalidate the instance pool of all tables related to servicio
+     * Method to invalidate the instance pool of all tables related to categoriagasto
      * by a foreign key with ON DELETE CASCADE
      */
     public static function clearRelatedInstancePool()
     {
-        // Invalidate objects in ExpedienteservicioPeer instance pool,
+        // Invalidate objects in GastofacturacionPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
-        ExpedienteservicioPeer::clearInstancePool();
-        // Invalidate objects in ProveedoritradeservicioPeer instance pool,
-        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
-        ProveedoritradeservicioPeer::clearInstancePool();
-        // Invalidate objects in ServicioestadoPeer instance pool,
-        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
-        ServicioestadoPeer::clearInstancePool();
+        GastofacturacionPeer::clearInstancePool();
     }
 
     /**
@@ -500,11 +417,11 @@ abstract class BaseServicioPeer
         $results = array();
 
         // set the class once to avoid overhead in the loop
-        $cls = ServicioPeer::getOMClass();
+        $cls = CategoriagastoPeer::getOMClass();
         // populate the object(s)
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key = ServicioPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj = ServicioPeer::getInstanceFromPool($key))) {
+            $key = CategoriagastoPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj = CategoriagastoPeer::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -513,7 +430,7 @@ abstract class BaseServicioPeer
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                ServicioPeer::addInstanceToPool($obj, $key);
+                CategoriagastoPeer::addInstanceToPool($obj, $key);
             } // if key exists
         }
         $stmt->closeCursor();
@@ -527,21 +444,21 @@ abstract class BaseServicioPeer
      * @param      int $startcol The 0-based offset for reading from the resultset row.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
-     * @return array (Servicio object, last column rank)
+     * @return array (Categoriagasto object, last column rank)
      */
     public static function populateObject($row, $startcol = 0)
     {
-        $key = ServicioPeer::getPrimaryKeyHashFromRow($row, $startcol);
-        if (null !== ($obj = ServicioPeer::getInstanceFromPool($key))) {
+        $key = CategoriagastoPeer::getPrimaryKeyHashFromRow($row, $startcol);
+        if (null !== ($obj = CategoriagastoPeer::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $startcol, true); // rehydrate
-            $col = $startcol + ServicioPeer::NUM_HYDRATE_COLUMNS;
+            $col = $startcol + CategoriagastoPeer::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = ServicioPeer::OM_CLASS;
+            $cls = CategoriagastoPeer::OM_CLASS;
             $obj = new $cls();
             $col = $obj->hydrate($row, $startcol);
-            ServicioPeer::addInstanceToPool($obj, $key);
+            CategoriagastoPeer::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -556,7 +473,7 @@ abstract class BaseServicioPeer
      */
     public static function getTableMap()
     {
-        return Propel::getDatabaseMap(ServicioPeer::DATABASE_NAME)->getTable(ServicioPeer::TABLE_NAME);
+        return Propel::getDatabaseMap(CategoriagastoPeer::DATABASE_NAME)->getTable(CategoriagastoPeer::TABLE_NAME);
     }
 
     /**
@@ -564,9 +481,9 @@ abstract class BaseServicioPeer
      */
     public static function buildTableMap()
     {
-      $dbMap = Propel::getDatabaseMap(BaseServicioPeer::DATABASE_NAME);
-      if (!$dbMap->hasTable(BaseServicioPeer::TABLE_NAME)) {
-        $dbMap->addTableObject(new \ServicioTableMap());
+      $dbMap = Propel::getDatabaseMap(BaseCategoriagastoPeer::DATABASE_NAME);
+      if (!$dbMap->hasTable(BaseCategoriagastoPeer::TABLE_NAME)) {
+        $dbMap->addTableObject(new \CategoriagastoTableMap());
       }
     }
 
@@ -578,13 +495,13 @@ abstract class BaseServicioPeer
      */
     public static function getOMClass($row = 0, $colnum = 0)
     {
-        return ServicioPeer::OM_CLASS;
+        return CategoriagastoPeer::OM_CLASS;
     }
 
     /**
-     * Performs an INSERT on the database, given a Servicio or Criteria object.
+     * Performs an INSERT on the database, given a Categoriagasto or Criteria object.
      *
-     * @param      mixed $values Criteria or Servicio object containing data that is used to create the INSERT statement.
+     * @param      mixed $values Criteria or Categoriagasto object containing data that is used to create the INSERT statement.
      * @param      PropelPDO $con the PropelPDO connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -593,22 +510,22 @@ abstract class BaseServicioPeer
     public static function doInsert($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
         } else {
-            $criteria = $values->buildCriteria(); // build Criteria from Servicio object
+            $criteria = $values->buildCriteria(); // build Criteria from Categoriagasto object
         }
 
-        if ($criteria->containsKey(ServicioPeer::IDSERVICIO) && $criteria->keyContainsValue(ServicioPeer::IDSERVICIO) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.ServicioPeer::IDSERVICIO.')');
+        if ($criteria->containsKey(CategoriagastoPeer::IDCATEGORIAGASTO) && $criteria->keyContainsValue(CategoriagastoPeer::IDCATEGORIAGASTO) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.CategoriagastoPeer::IDCATEGORIAGASTO.')');
         }
 
 
         // Set the correct dbName
-        $criteria->setDbName(ServicioPeer::DATABASE_NAME);
+        $criteria->setDbName(CategoriagastoPeer::DATABASE_NAME);
 
         try {
             // use transaction because $criteria could contain info
@@ -625,9 +542,9 @@ abstract class BaseServicioPeer
     }
 
     /**
-     * Performs an UPDATE on the database, given a Servicio or Criteria object.
+     * Performs an UPDATE on the database, given a Categoriagasto or Criteria object.
      *
-     * @param      mixed $values Criteria or Servicio object containing data that is used to create the UPDATE statement.
+     * @param      mixed $values Criteria or Categoriagasto object containing data that is used to create the UPDATE statement.
      * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException Any exceptions caught during processing will be
@@ -636,35 +553,35 @@ abstract class BaseServicioPeer
     public static function doUpdate($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
-        $selectCriteria = new Criteria(ServicioPeer::DATABASE_NAME);
+        $selectCriteria = new Criteria(CategoriagastoPeer::DATABASE_NAME);
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(ServicioPeer::IDSERVICIO);
-            $value = $criteria->remove(ServicioPeer::IDSERVICIO);
+            $comparison = $criteria->getComparison(CategoriagastoPeer::IDCATEGORIAGASTO);
+            $value = $criteria->remove(CategoriagastoPeer::IDCATEGORIAGASTO);
             if ($value) {
-                $selectCriteria->add(ServicioPeer::IDSERVICIO, $value, $comparison);
+                $selectCriteria->add(CategoriagastoPeer::IDCATEGORIAGASTO, $value, $comparison);
             } else {
-                $selectCriteria->setPrimaryTableName(ServicioPeer::TABLE_NAME);
+                $selectCriteria->setPrimaryTableName(CategoriagastoPeer::TABLE_NAME);
             }
 
-        } else { // $values is Servicio object
+        } else { // $values is Categoriagasto object
             $criteria = $values->buildCriteria(); // gets full criteria
             $selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
         }
 
         // set the correct dbName
-        $criteria->setDbName(ServicioPeer::DATABASE_NAME);
+        $criteria->setDbName(CategoriagastoPeer::DATABASE_NAME);
 
         return BasePeer::doUpdate($selectCriteria, $criteria, $con);
     }
 
     /**
-     * Deletes all rows from the servicio table.
+     * Deletes all rows from the categoriagasto table.
      *
      * @param      PropelPDO $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).
@@ -673,20 +590,20 @@ abstract class BaseServicioPeer
     public static function doDeleteAll(PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
         try {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += ServicioPeer::doOnDeleteCascade(new Criteria(ServicioPeer::DATABASE_NAME), $con);
-            $affectedRows += BasePeer::doDeleteAll(ServicioPeer::TABLE_NAME, $con, ServicioPeer::DATABASE_NAME);
+            $affectedRows += CategoriagastoPeer::doOnDeleteCascade(new Criteria(CategoriagastoPeer::DATABASE_NAME), $con);
+            $affectedRows += BasePeer::doDeleteAll(CategoriagastoPeer::TABLE_NAME, $con, CategoriagastoPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            ServicioPeer::clearInstancePool();
-            ServicioPeer::clearRelatedInstancePool();
+            CategoriagastoPeer::clearInstancePool();
+            CategoriagastoPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -697,9 +614,9 @@ abstract class BaseServicioPeer
     }
 
     /**
-     * Performs a DELETE on the database, given a Servicio or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a Categoriagasto or Criteria object OR a primary key value.
      *
-     * @param      mixed $values Criteria or Servicio object or primary key or array of primary keys
+     * @param      mixed $values Criteria or Categoriagasto object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param      PropelPDO $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -710,22 +627,22 @@ abstract class BaseServicioPeer
      public static function doDelete($values, PropelPDO $con = null)
      {
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             // rename for clarity
             $criteria = clone $values;
-        } elseif ($values instanceof Servicio) { // it's a model object
+        } elseif ($values instanceof Categoriagasto) { // it's a model object
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
-            $criteria = new Criteria(ServicioPeer::DATABASE_NAME);
-            $criteria->add(ServicioPeer::IDSERVICIO, (array) $values, Criteria::IN);
+            $criteria = new Criteria(CategoriagastoPeer::DATABASE_NAME);
+            $criteria->add(CategoriagastoPeer::IDCATEGORIAGASTO, (array) $values, Criteria::IN);
         }
 
         // Set the correct dbName
-        $criteria->setDbName(ServicioPeer::DATABASE_NAME);
+        $criteria->setDbName(CategoriagastoPeer::DATABASE_NAME);
 
         $affectedRows = 0; // initialize var to track total num of affected rows
 
@@ -736,23 +653,23 @@ abstract class BaseServicioPeer
 
             // cloning the Criteria in case it's modified by doSelect() or doSelectStmt()
             $c = clone $criteria;
-            $affectedRows += ServicioPeer::doOnDeleteCascade($c, $con);
+            $affectedRows += CategoriagastoPeer::doOnDeleteCascade($c, $con);
 
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
             if ($values instanceof Criteria) {
-                ServicioPeer::clearInstancePool();
-            } elseif ($values instanceof Servicio) { // it's a model object
-                ServicioPeer::removeInstanceFromPool($values);
+                CategoriagastoPeer::clearInstancePool();
+            } elseif ($values instanceof Categoriagasto) { // it's a model object
+                CategoriagastoPeer::removeInstanceFromPool($values);
             } else { // it's a primary key, or an array of pks
                 foreach ((array) $values as $singleval) {
-                    ServicioPeer::removeInstanceFromPool($singleval);
+                    CategoriagastoPeer::removeInstanceFromPool($singleval);
                 }
             }
 
             $affectedRows += BasePeer::doDelete($criteria, $con);
-            ServicioPeer::clearRelatedInstancePool();
+            CategoriagastoPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -781,40 +698,28 @@ abstract class BaseServicioPeer
         $affectedRows = 0;
 
         // first find the objects that are implicated by the $criteria
-        $objects = ServicioPeer::doSelect($criteria, $con);
+        $objects = CategoriagastoPeer::doSelect($criteria, $con);
         foreach ($objects as $obj) {
 
 
-            // delete related Expedienteservicio objects
-            $criteria = new Criteria(ExpedienteservicioPeer::DATABASE_NAME);
+            // delete related Gastofacturacion objects
+            $criteria = new Criteria(GastofacturacionPeer::DATABASE_NAME);
 
-            $criteria->add(ExpedienteservicioPeer::IDSERVICIO, $obj->getIdservicio());
-            $affectedRows += ExpedienteservicioPeer::doDelete($criteria, $con);
-
-            // delete related Proveedoritradeservicio objects
-            $criteria = new Criteria(ProveedoritradeservicioPeer::DATABASE_NAME);
-
-            $criteria->add(ProveedoritradeservicioPeer::IDSERVICIO, $obj->getIdservicio());
-            $affectedRows += ProveedoritradeservicioPeer::doDelete($criteria, $con);
-
-            // delete related Servicioestado objects
-            $criteria = new Criteria(ServicioestadoPeer::DATABASE_NAME);
-
-            $criteria->add(ServicioestadoPeer::IDSERVICIO, $obj->getIdservicio());
-            $affectedRows += ServicioestadoPeer::doDelete($criteria, $con);
+            $criteria->add(GastofacturacionPeer::IDCATEGORIAGASTO, $obj->getIdcategoriagasto());
+            $affectedRows += GastofacturacionPeer::doDelete($criteria, $con);
         }
 
         return $affectedRows;
     }
 
     /**
-     * Validates all modified columns of given Servicio object.
+     * Validates all modified columns of given Categoriagasto object.
      * If parameter $columns is either a single column name or an array of column names
      * than only those columns are validated.
      *
      * NOTICE: This does not apply to primary or foreign keys for now.
      *
-     * @param Servicio $obj The object to validate.
+     * @param Categoriagasto $obj The object to validate.
      * @param      mixed $cols Column name or array of column names.
      *
      * @return mixed TRUE if all columns are valid or the error message of the first invalid column.
@@ -824,8 +729,8 @@ abstract class BaseServicioPeer
         $columns = array();
 
         if ($cols) {
-            $dbMap = Propel::getDatabaseMap(ServicioPeer::DATABASE_NAME);
-            $tableMap = $dbMap->getTable(ServicioPeer::TABLE_NAME);
+            $dbMap = Propel::getDatabaseMap(CategoriagastoPeer::DATABASE_NAME);
+            $tableMap = $dbMap->getTable(CategoriagastoPeer::TABLE_NAME);
 
             if (! is_array($cols)) {
                 $cols = array($cols);
@@ -841,7 +746,7 @@ abstract class BaseServicioPeer
 
         }
 
-        return BasePeer::doValidate(ServicioPeer::DATABASE_NAME, ServicioPeer::TABLE_NAME, $columns);
+        return BasePeer::doValidate(CategoriagastoPeer::DATABASE_NAME, CategoriagastoPeer::TABLE_NAME, $columns);
     }
 
     /**
@@ -849,23 +754,23 @@ abstract class BaseServicioPeer
      *
      * @param int $pk the primary key.
      * @param      PropelPDO $con the connection to use
-     * @return Servicio
+     * @return Categoriagasto
      */
     public static function retrieveByPK($pk, PropelPDO $con = null)
     {
 
-        if (null !== ($obj = ServicioPeer::getInstanceFromPool((string) $pk))) {
+        if (null !== ($obj = CategoriagastoPeer::getInstanceFromPool((string) $pk))) {
             return $obj;
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria = new Criteria(ServicioPeer::DATABASE_NAME);
-        $criteria->add(ServicioPeer::IDSERVICIO, $pk);
+        $criteria = new Criteria(CategoriagastoPeer::DATABASE_NAME);
+        $criteria->add(CategoriagastoPeer::IDCATEGORIAGASTO, $pk);
 
-        $v = ServicioPeer::doSelect($criteria, $con);
+        $v = CategoriagastoPeer::doSelect($criteria, $con);
 
         return !empty($v) > 0 ? $v[0] : null;
     }
@@ -875,31 +780,31 @@ abstract class BaseServicioPeer
      *
      * @param      array $pks List of primary keys
      * @param      PropelPDO $con the connection to use
-     * @return Servicio[]
+     * @return Categoriagasto[]
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
     public static function retrieveByPKs($pks, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(ServicioPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         $objs = null;
         if (empty($pks)) {
             $objs = array();
         } else {
-            $criteria = new Criteria(ServicioPeer::DATABASE_NAME);
-            $criteria->add(ServicioPeer::IDSERVICIO, $pks, Criteria::IN);
-            $objs = ServicioPeer::doSelect($criteria, $con);
+            $criteria = new Criteria(CategoriagastoPeer::DATABASE_NAME);
+            $criteria->add(CategoriagastoPeer::IDCATEGORIAGASTO, $pks, Criteria::IN);
+            $objs = CategoriagastoPeer::doSelect($criteria, $con);
         }
 
         return $objs;
     }
 
-} // BaseServicioPeer
+} // BaseCategoriagastoPeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-BaseServicioPeer::buildTableMap();
+BaseCategoriagastoPeer::buildTableMap();
 

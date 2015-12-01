@@ -24,13 +24,13 @@ abstract class BaseEmpleadoPeer
     const TM_CLASS = 'EmpleadoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 22;
+    const NUM_COLUMNS = 23;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 22;
+    const NUM_HYDRATE_COLUMNS = 23;
 
     /** the column name for the idempleado field */
     const IDEMPLEADO = 'empleado.idempleado';
@@ -98,6 +98,9 @@ abstract class BaseEmpleadoPeer
     /** the column name for the empleado_rol field */
     const EMPLEADO_ROL = 'empleado.empleado_rol';
 
+    /** the column name for the empleado_foto field */
+    const EMPLEADO_FOTO = 'empleado.empleado_foto';
+
     /** The enumerated values for the empleado_estatus field */
     const EMPLEADO_ESTATUS_ACTIVO = 'activo';
     const EMPLEADO_ESTATUS_SUSPENDIDO = 'suspendido';
@@ -127,12 +130,12 @@ abstract class BaseEmpleadoPeer
      * e.g. EmpleadoPeer::$fieldNames[EmpleadoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idempleado', 'EmpleadoNombre', 'EmpleadoApellidopaterno', 'EmpleadoApallidomaterno', 'EmpleadoEmail', 'EmpleadoPassword', 'EmpleadoCelular', 'EmpleadoTelefono', 'EmpleadoCalle', 'EmpleadoNumero', 'EmpleadoInterior', 'EmpleadoColonia', 'EmpleadoCodigopostal', 'EmpleadoCiudad', 'EmpleadoEstado', 'EmpleadoNss', 'EmpleadoRfc', 'EmpleadoIniciocontrato', 'EmpleadoNombrecontacto', 'EmpleadoTelefonocontacto', 'EmpleadoEstatus', 'EmpleadoRol', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idempleado', 'empleadoNombre', 'empleadoApellidopaterno', 'empleadoApallidomaterno', 'empleadoEmail', 'empleadoPassword', 'empleadoCelular', 'empleadoTelefono', 'empleadoCalle', 'empleadoNumero', 'empleadoInterior', 'empleadoColonia', 'empleadoCodigopostal', 'empleadoCiudad', 'empleadoEstado', 'empleadoNss', 'empleadoRfc', 'empleadoIniciocontrato', 'empleadoNombrecontacto', 'empleadoTelefonocontacto', 'empleadoEstatus', 'empleadoRol', ),
-        BasePeer::TYPE_COLNAME => array (EmpleadoPeer::IDEMPLEADO, EmpleadoPeer::EMPLEADO_NOMBRE, EmpleadoPeer::EMPLEADO_APELLIDOPATERNO, EmpleadoPeer::EMPLEADO_APALLIDOMATERNO, EmpleadoPeer::EMPLEADO_EMAIL, EmpleadoPeer::EMPLEADO_PASSWORD, EmpleadoPeer::EMPLEADO_CELULAR, EmpleadoPeer::EMPLEADO_TELEFONO, EmpleadoPeer::EMPLEADO_CALLE, EmpleadoPeer::EMPLEADO_NUMERO, EmpleadoPeer::EMPLEADO_INTERIOR, EmpleadoPeer::EMPLEADO_COLONIA, EmpleadoPeer::EMPLEADO_CODIGOPOSTAL, EmpleadoPeer::EMPLEADO_CIUDAD, EmpleadoPeer::EMPLEADO_ESTADO, EmpleadoPeer::EMPLEADO_NSS, EmpleadoPeer::EMPLEADO_RFC, EmpleadoPeer::EMPLEADO_INICIOCONTRATO, EmpleadoPeer::EMPLEADO_NOMBRECONTACTO, EmpleadoPeer::EMPLEADO_TELEFONOCONTACTO, EmpleadoPeer::EMPLEADO_ESTATUS, EmpleadoPeer::EMPLEADO_ROL, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEMPLEADO', 'EMPLEADO_NOMBRE', 'EMPLEADO_APELLIDOPATERNO', 'EMPLEADO_APALLIDOMATERNO', 'EMPLEADO_EMAIL', 'EMPLEADO_PASSWORD', 'EMPLEADO_CELULAR', 'EMPLEADO_TELEFONO', 'EMPLEADO_CALLE', 'EMPLEADO_NUMERO', 'EMPLEADO_INTERIOR', 'EMPLEADO_COLONIA', 'EMPLEADO_CODIGOPOSTAL', 'EMPLEADO_CIUDAD', 'EMPLEADO_ESTADO', 'EMPLEADO_NSS', 'EMPLEADO_RFC', 'EMPLEADO_INICIOCONTRATO', 'EMPLEADO_NOMBRECONTACTO', 'EMPLEADO_TELEFONOCONTACTO', 'EMPLEADO_ESTATUS', 'EMPLEADO_ROL', ),
-        BasePeer::TYPE_FIELDNAME => array ('idempleado', 'empleado_nombre', 'empleado_apellidopaterno', 'empleado_apallidomaterno', 'empleado_email', 'empleado_password', 'empleado_celular', 'empleado_telefono', 'empleado_calle', 'empleado_numero', 'empleado_interior', 'empleado_colonia', 'empleado_codigopostal', 'empleado_ciudad', 'empleado_estado', 'empleado_nss', 'empleado_rfc', 'empleado_iniciocontrato', 'empleado_nombrecontacto', 'empleado_telefonocontacto', 'empleado_estatus', 'empleado_rol', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+        BasePeer::TYPE_PHPNAME => array ('Idempleado', 'EmpleadoNombre', 'EmpleadoApellidopaterno', 'EmpleadoApallidomaterno', 'EmpleadoEmail', 'EmpleadoPassword', 'EmpleadoCelular', 'EmpleadoTelefono', 'EmpleadoCalle', 'EmpleadoNumero', 'EmpleadoInterior', 'EmpleadoColonia', 'EmpleadoCodigopostal', 'EmpleadoCiudad', 'EmpleadoEstado', 'EmpleadoNss', 'EmpleadoRfc', 'EmpleadoIniciocontrato', 'EmpleadoNombrecontacto', 'EmpleadoTelefonocontacto', 'EmpleadoEstatus', 'EmpleadoRol', 'EmpleadoFoto', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idempleado', 'empleadoNombre', 'empleadoApellidopaterno', 'empleadoApallidomaterno', 'empleadoEmail', 'empleadoPassword', 'empleadoCelular', 'empleadoTelefono', 'empleadoCalle', 'empleadoNumero', 'empleadoInterior', 'empleadoColonia', 'empleadoCodigopostal', 'empleadoCiudad', 'empleadoEstado', 'empleadoNss', 'empleadoRfc', 'empleadoIniciocontrato', 'empleadoNombrecontacto', 'empleadoTelefonocontacto', 'empleadoEstatus', 'empleadoRol', 'empleadoFoto', ),
+        BasePeer::TYPE_COLNAME => array (EmpleadoPeer::IDEMPLEADO, EmpleadoPeer::EMPLEADO_NOMBRE, EmpleadoPeer::EMPLEADO_APELLIDOPATERNO, EmpleadoPeer::EMPLEADO_APALLIDOMATERNO, EmpleadoPeer::EMPLEADO_EMAIL, EmpleadoPeer::EMPLEADO_PASSWORD, EmpleadoPeer::EMPLEADO_CELULAR, EmpleadoPeer::EMPLEADO_TELEFONO, EmpleadoPeer::EMPLEADO_CALLE, EmpleadoPeer::EMPLEADO_NUMERO, EmpleadoPeer::EMPLEADO_INTERIOR, EmpleadoPeer::EMPLEADO_COLONIA, EmpleadoPeer::EMPLEADO_CODIGOPOSTAL, EmpleadoPeer::EMPLEADO_CIUDAD, EmpleadoPeer::EMPLEADO_ESTADO, EmpleadoPeer::EMPLEADO_NSS, EmpleadoPeer::EMPLEADO_RFC, EmpleadoPeer::EMPLEADO_INICIOCONTRATO, EmpleadoPeer::EMPLEADO_NOMBRECONTACTO, EmpleadoPeer::EMPLEADO_TELEFONOCONTACTO, EmpleadoPeer::EMPLEADO_ESTATUS, EmpleadoPeer::EMPLEADO_ROL, EmpleadoPeer::EMPLEADO_FOTO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEMPLEADO', 'EMPLEADO_NOMBRE', 'EMPLEADO_APELLIDOPATERNO', 'EMPLEADO_APALLIDOMATERNO', 'EMPLEADO_EMAIL', 'EMPLEADO_PASSWORD', 'EMPLEADO_CELULAR', 'EMPLEADO_TELEFONO', 'EMPLEADO_CALLE', 'EMPLEADO_NUMERO', 'EMPLEADO_INTERIOR', 'EMPLEADO_COLONIA', 'EMPLEADO_CODIGOPOSTAL', 'EMPLEADO_CIUDAD', 'EMPLEADO_ESTADO', 'EMPLEADO_NSS', 'EMPLEADO_RFC', 'EMPLEADO_INICIOCONTRATO', 'EMPLEADO_NOMBRECONTACTO', 'EMPLEADO_TELEFONOCONTACTO', 'EMPLEADO_ESTATUS', 'EMPLEADO_ROL', 'EMPLEADO_FOTO', ),
+        BasePeer::TYPE_FIELDNAME => array ('idempleado', 'empleado_nombre', 'empleado_apellidopaterno', 'empleado_apallidomaterno', 'empleado_email', 'empleado_password', 'empleado_celular', 'empleado_telefono', 'empleado_calle', 'empleado_numero', 'empleado_interior', 'empleado_colonia', 'empleado_codigopostal', 'empleado_ciudad', 'empleado_estado', 'empleado_nss', 'empleado_rfc', 'empleado_iniciocontrato', 'empleado_nombrecontacto', 'empleado_telefonocontacto', 'empleado_estatus', 'empleado_rol', 'empleado_foto', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
     );
 
     /**
@@ -142,12 +145,12 @@ abstract class BaseEmpleadoPeer
      * e.g. EmpleadoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idempleado' => 0, 'EmpleadoNombre' => 1, 'EmpleadoApellidopaterno' => 2, 'EmpleadoApallidomaterno' => 3, 'EmpleadoEmail' => 4, 'EmpleadoPassword' => 5, 'EmpleadoCelular' => 6, 'EmpleadoTelefono' => 7, 'EmpleadoCalle' => 8, 'EmpleadoNumero' => 9, 'EmpleadoInterior' => 10, 'EmpleadoColonia' => 11, 'EmpleadoCodigopostal' => 12, 'EmpleadoCiudad' => 13, 'EmpleadoEstado' => 14, 'EmpleadoNss' => 15, 'EmpleadoRfc' => 16, 'EmpleadoIniciocontrato' => 17, 'EmpleadoNombrecontacto' => 18, 'EmpleadoTelefonocontacto' => 19, 'EmpleadoEstatus' => 20, 'EmpleadoRol' => 21, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idempleado' => 0, 'empleadoNombre' => 1, 'empleadoApellidopaterno' => 2, 'empleadoApallidomaterno' => 3, 'empleadoEmail' => 4, 'empleadoPassword' => 5, 'empleadoCelular' => 6, 'empleadoTelefono' => 7, 'empleadoCalle' => 8, 'empleadoNumero' => 9, 'empleadoInterior' => 10, 'empleadoColonia' => 11, 'empleadoCodigopostal' => 12, 'empleadoCiudad' => 13, 'empleadoEstado' => 14, 'empleadoNss' => 15, 'empleadoRfc' => 16, 'empleadoIniciocontrato' => 17, 'empleadoNombrecontacto' => 18, 'empleadoTelefonocontacto' => 19, 'empleadoEstatus' => 20, 'empleadoRol' => 21, ),
-        BasePeer::TYPE_COLNAME => array (EmpleadoPeer::IDEMPLEADO => 0, EmpleadoPeer::EMPLEADO_NOMBRE => 1, EmpleadoPeer::EMPLEADO_APELLIDOPATERNO => 2, EmpleadoPeer::EMPLEADO_APALLIDOMATERNO => 3, EmpleadoPeer::EMPLEADO_EMAIL => 4, EmpleadoPeer::EMPLEADO_PASSWORD => 5, EmpleadoPeer::EMPLEADO_CELULAR => 6, EmpleadoPeer::EMPLEADO_TELEFONO => 7, EmpleadoPeer::EMPLEADO_CALLE => 8, EmpleadoPeer::EMPLEADO_NUMERO => 9, EmpleadoPeer::EMPLEADO_INTERIOR => 10, EmpleadoPeer::EMPLEADO_COLONIA => 11, EmpleadoPeer::EMPLEADO_CODIGOPOSTAL => 12, EmpleadoPeer::EMPLEADO_CIUDAD => 13, EmpleadoPeer::EMPLEADO_ESTADO => 14, EmpleadoPeer::EMPLEADO_NSS => 15, EmpleadoPeer::EMPLEADO_RFC => 16, EmpleadoPeer::EMPLEADO_INICIOCONTRATO => 17, EmpleadoPeer::EMPLEADO_NOMBRECONTACTO => 18, EmpleadoPeer::EMPLEADO_TELEFONOCONTACTO => 19, EmpleadoPeer::EMPLEADO_ESTATUS => 20, EmpleadoPeer::EMPLEADO_ROL => 21, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEMPLEADO' => 0, 'EMPLEADO_NOMBRE' => 1, 'EMPLEADO_APELLIDOPATERNO' => 2, 'EMPLEADO_APALLIDOMATERNO' => 3, 'EMPLEADO_EMAIL' => 4, 'EMPLEADO_PASSWORD' => 5, 'EMPLEADO_CELULAR' => 6, 'EMPLEADO_TELEFONO' => 7, 'EMPLEADO_CALLE' => 8, 'EMPLEADO_NUMERO' => 9, 'EMPLEADO_INTERIOR' => 10, 'EMPLEADO_COLONIA' => 11, 'EMPLEADO_CODIGOPOSTAL' => 12, 'EMPLEADO_CIUDAD' => 13, 'EMPLEADO_ESTADO' => 14, 'EMPLEADO_NSS' => 15, 'EMPLEADO_RFC' => 16, 'EMPLEADO_INICIOCONTRATO' => 17, 'EMPLEADO_NOMBRECONTACTO' => 18, 'EMPLEADO_TELEFONOCONTACTO' => 19, 'EMPLEADO_ESTATUS' => 20, 'EMPLEADO_ROL' => 21, ),
-        BasePeer::TYPE_FIELDNAME => array ('idempleado' => 0, 'empleado_nombre' => 1, 'empleado_apellidopaterno' => 2, 'empleado_apallidomaterno' => 3, 'empleado_email' => 4, 'empleado_password' => 5, 'empleado_celular' => 6, 'empleado_telefono' => 7, 'empleado_calle' => 8, 'empleado_numero' => 9, 'empleado_interior' => 10, 'empleado_colonia' => 11, 'empleado_codigopostal' => 12, 'empleado_ciudad' => 13, 'empleado_estado' => 14, 'empleado_nss' => 15, 'empleado_rfc' => 16, 'empleado_iniciocontrato' => 17, 'empleado_nombrecontacto' => 18, 'empleado_telefonocontacto' => 19, 'empleado_estatus' => 20, 'empleado_rol' => 21, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+        BasePeer::TYPE_PHPNAME => array ('Idempleado' => 0, 'EmpleadoNombre' => 1, 'EmpleadoApellidopaterno' => 2, 'EmpleadoApallidomaterno' => 3, 'EmpleadoEmail' => 4, 'EmpleadoPassword' => 5, 'EmpleadoCelular' => 6, 'EmpleadoTelefono' => 7, 'EmpleadoCalle' => 8, 'EmpleadoNumero' => 9, 'EmpleadoInterior' => 10, 'EmpleadoColonia' => 11, 'EmpleadoCodigopostal' => 12, 'EmpleadoCiudad' => 13, 'EmpleadoEstado' => 14, 'EmpleadoNss' => 15, 'EmpleadoRfc' => 16, 'EmpleadoIniciocontrato' => 17, 'EmpleadoNombrecontacto' => 18, 'EmpleadoTelefonocontacto' => 19, 'EmpleadoEstatus' => 20, 'EmpleadoRol' => 21, 'EmpleadoFoto' => 22, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idempleado' => 0, 'empleadoNombre' => 1, 'empleadoApellidopaterno' => 2, 'empleadoApallidomaterno' => 3, 'empleadoEmail' => 4, 'empleadoPassword' => 5, 'empleadoCelular' => 6, 'empleadoTelefono' => 7, 'empleadoCalle' => 8, 'empleadoNumero' => 9, 'empleadoInterior' => 10, 'empleadoColonia' => 11, 'empleadoCodigopostal' => 12, 'empleadoCiudad' => 13, 'empleadoEstado' => 14, 'empleadoNss' => 15, 'empleadoRfc' => 16, 'empleadoIniciocontrato' => 17, 'empleadoNombrecontacto' => 18, 'empleadoTelefonocontacto' => 19, 'empleadoEstatus' => 20, 'empleadoRol' => 21, 'empleadoFoto' => 22, ),
+        BasePeer::TYPE_COLNAME => array (EmpleadoPeer::IDEMPLEADO => 0, EmpleadoPeer::EMPLEADO_NOMBRE => 1, EmpleadoPeer::EMPLEADO_APELLIDOPATERNO => 2, EmpleadoPeer::EMPLEADO_APALLIDOMATERNO => 3, EmpleadoPeer::EMPLEADO_EMAIL => 4, EmpleadoPeer::EMPLEADO_PASSWORD => 5, EmpleadoPeer::EMPLEADO_CELULAR => 6, EmpleadoPeer::EMPLEADO_TELEFONO => 7, EmpleadoPeer::EMPLEADO_CALLE => 8, EmpleadoPeer::EMPLEADO_NUMERO => 9, EmpleadoPeer::EMPLEADO_INTERIOR => 10, EmpleadoPeer::EMPLEADO_COLONIA => 11, EmpleadoPeer::EMPLEADO_CODIGOPOSTAL => 12, EmpleadoPeer::EMPLEADO_CIUDAD => 13, EmpleadoPeer::EMPLEADO_ESTADO => 14, EmpleadoPeer::EMPLEADO_NSS => 15, EmpleadoPeer::EMPLEADO_RFC => 16, EmpleadoPeer::EMPLEADO_INICIOCONTRATO => 17, EmpleadoPeer::EMPLEADO_NOMBRECONTACTO => 18, EmpleadoPeer::EMPLEADO_TELEFONOCONTACTO => 19, EmpleadoPeer::EMPLEADO_ESTATUS => 20, EmpleadoPeer::EMPLEADO_ROL => 21, EmpleadoPeer::EMPLEADO_FOTO => 22, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEMPLEADO' => 0, 'EMPLEADO_NOMBRE' => 1, 'EMPLEADO_APELLIDOPATERNO' => 2, 'EMPLEADO_APALLIDOMATERNO' => 3, 'EMPLEADO_EMAIL' => 4, 'EMPLEADO_PASSWORD' => 5, 'EMPLEADO_CELULAR' => 6, 'EMPLEADO_TELEFONO' => 7, 'EMPLEADO_CALLE' => 8, 'EMPLEADO_NUMERO' => 9, 'EMPLEADO_INTERIOR' => 10, 'EMPLEADO_COLONIA' => 11, 'EMPLEADO_CODIGOPOSTAL' => 12, 'EMPLEADO_CIUDAD' => 13, 'EMPLEADO_ESTADO' => 14, 'EMPLEADO_NSS' => 15, 'EMPLEADO_RFC' => 16, 'EMPLEADO_INICIOCONTRATO' => 17, 'EMPLEADO_NOMBRECONTACTO' => 18, 'EMPLEADO_TELEFONOCONTACTO' => 19, 'EMPLEADO_ESTATUS' => 20, 'EMPLEADO_ROL' => 21, 'EMPLEADO_FOTO' => 22, ),
+        BasePeer::TYPE_FIELDNAME => array ('idempleado' => 0, 'empleado_nombre' => 1, 'empleado_apellidopaterno' => 2, 'empleado_apallidomaterno' => 3, 'empleado_email' => 4, 'empleado_password' => 5, 'empleado_celular' => 6, 'empleado_telefono' => 7, 'empleado_calle' => 8, 'empleado_numero' => 9, 'empleado_interior' => 10, 'empleado_colonia' => 11, 'empleado_codigopostal' => 12, 'empleado_ciudad' => 13, 'empleado_estado' => 14, 'empleado_nss' => 15, 'empleado_rfc' => 16, 'empleado_iniciocontrato' => 17, 'empleado_nombrecontacto' => 18, 'empleado_telefonocontacto' => 19, 'empleado_estatus' => 20, 'empleado_rol' => 21, 'empleado_foto' => 22, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
     );
 
     /** The enumerated values for this table */
@@ -302,6 +305,7 @@ abstract class BaseEmpleadoPeer
             $criteria->addSelectColumn(EmpleadoPeer::EMPLEADO_TELEFONOCONTACTO);
             $criteria->addSelectColumn(EmpleadoPeer::EMPLEADO_ESTATUS);
             $criteria->addSelectColumn(EmpleadoPeer::EMPLEADO_ROL);
+            $criteria->addSelectColumn(EmpleadoPeer::EMPLEADO_FOTO);
         } else {
             $criteria->addSelectColumn($alias . '.idempleado');
             $criteria->addSelectColumn($alias . '.empleado_nombre');
@@ -325,6 +329,7 @@ abstract class BaseEmpleadoPeer
             $criteria->addSelectColumn($alias . '.empleado_telefonocontacto');
             $criteria->addSelectColumn($alias . '.empleado_estatus');
             $criteria->addSelectColumn($alias . '.empleado_rol');
+            $criteria->addSelectColumn($alias . '.empleado_foto');
         }
     }
 
@@ -538,6 +543,9 @@ abstract class BaseEmpleadoPeer
         // Invalidate objects in ExpedientearchivoPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ExpedientearchivoPeer::clearInstancePool();
+        // Invalidate objects in ExpedientegastoPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        ExpedientegastoPeer::clearInstancePool();
     }
 
     /**
@@ -888,6 +896,12 @@ abstract class BaseEmpleadoPeer
 
             $criteria->add(ExpedientearchivoPeer::IDEMPLEADO, $obj->getIdempleado());
             $affectedRows += ExpedientearchivoPeer::doDelete($criteria, $con);
+
+            // delete related Expedientegasto objects
+            $criteria = new Criteria(ExpedientegastoPeer::DATABASE_NAME);
+
+            $criteria->add(ExpedientegastoPeer::IDEMPLEADO, $obj->getIdempleado());
+            $affectedRows += ExpedientegastoPeer::doDelete($criteria, $con);
         }
 
         return $affectedRows;

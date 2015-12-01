@@ -298,6 +298,15 @@ class EmpleadoForm extends Form
                 'class' => 'form-control',
             ),
         ));
+         
+         $this->add(array(
+            'name' => 'empleado_foto',
+            'type' => 'File',
+             'attributes' => array(
+                'class' => 'hidden',
+            ),
+             
+        ));
 
         
  

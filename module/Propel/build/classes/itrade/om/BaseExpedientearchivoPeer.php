@@ -24,13 +24,13 @@ abstract class BaseExpedientearchivoPeer
     const TM_CLASS = 'ExpedientearchivoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 5;
+    const NUM_COLUMNS = 7;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 5;
+    const NUM_HYDRATE_COLUMNS = 7;
 
     /** the column name for the idexpedientearchivo field */
     const IDEXPEDIENTEARCHIVO = 'expedientearchivo.idexpedientearchivo';
@@ -38,14 +38,34 @@ abstract class BaseExpedientearchivoPeer
     /** the column name for the idexpediente field */
     const IDEXPEDIENTE = 'expedientearchivo.idexpediente';
 
+    /** the column name for the idempleado field */
+    const IDEMPLEADO = 'expedientearchivo.idempleado';
+
     /** the column name for the expedientearchivo_fecha field */
     const EXPEDIENTEARCHIVO_FECHA = 'expedientearchivo.expedientearchivo_fecha';
+
+    /** the column name for the expedientearchivo_tipo field */
+    const EXPEDIENTEARCHIVO_TIPO = 'expedientearchivo.expedientearchivo_tipo';
+
+    /** the column name for the expedientearchivo_archivo field */
+    const EXPEDIENTEARCHIVO_ARCHIVO = 'expedientearchivo.expedientearchivo_archivo';
 
     /** the column name for the expedientearchivo_nota field */
     const EXPEDIENTEARCHIVO_NOTA = 'expedientearchivo.expedientearchivo_nota';
 
-    /** the column name for the idempleado field */
-    const IDEMPLEADO = 'expedientearchivo.idempleado';
+    /** The enumerated values for the expedientearchivo_tipo field */
+    const EXPEDIENTEARCHIVO_TIPO_BLAWB = 'blawb';
+    const EXPEDIENTEARCHIVO_TIPO_CERTIFICADOORIGEN = 'certificadoorigen';
+    const EXPEDIENTEARCHIVO_TIPO_POLIZASEGURO = 'polizaseguro';
+    const EXPEDIENTEARCHIVO_TIPO_FACTURAMERCANCIA = 'facturamercancia';
+    const EXPEDIENTEARCHIVO_TIPO_FACTURASHIPPER = 'facturashipper';
+    const EXPEDIENTEARCHIVO_TIPO_PEDIMENTO = 'pedimento';
+    const EXPEDIENTEARCHIVO_TIPO_PACKINGLIST = 'packinglist';
+    const EXPEDIENTEARCHIVO_TIPO_MSDS = 'msds';
+    const EXPEDIENTEARCHIVO_TIPO_EIR = 'eir';
+    const EXPEDIENTEARCHIVO_TIPO_ESTIMACIONGASTOS = 'estimaciongastos';
+    const EXPEDIENTEARCHIVO_TIPO_DOCUMENTOSADUANALES = 'documentosaduanales';
+    const EXPEDIENTEARCHIVO_TIPO_OTRO = 'otro';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -66,12 +86,12 @@ abstract class BaseExpedientearchivoPeer
      * e.g. ExpedientearchivoPeer::$fieldNames[ExpedientearchivoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientearchivo', 'Idexpediente', 'ExpedientearchivoFecha', 'ExpedientearchivoNota', 'Idempleado', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientearchivo', 'idexpediente', 'expedientearchivoFecha', 'expedientearchivoNota', 'idempleado', ),
-        BasePeer::TYPE_COLNAME => array (ExpedientearchivoPeer::IDEXPEDIENTEARCHIVO, ExpedientearchivoPeer::IDEXPEDIENTE, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA, ExpedientearchivoPeer::IDEMPLEADO, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEARCHIVO', 'IDEXPEDIENTE', 'EXPEDIENTEARCHIVO_FECHA', 'EXPEDIENTEARCHIVO_NOTA', 'IDEMPLEADO', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientearchivo', 'idexpediente', 'expedientearchivo_fecha', 'expedientearchivo_nota', 'idempleado', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientearchivo', 'Idexpediente', 'Idempleado', 'ExpedientearchivoFecha', 'ExpedientearchivoTipo', 'ExpedientearchivoArchivo', 'ExpedientearchivoNota', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientearchivo', 'idexpediente', 'idempleado', 'expedientearchivoFecha', 'expedientearchivoTipo', 'expedientearchivoArchivo', 'expedientearchivoNota', ),
+        BasePeer::TYPE_COLNAME => array (ExpedientearchivoPeer::IDEXPEDIENTEARCHIVO, ExpedientearchivoPeer::IDEXPEDIENTE, ExpedientearchivoPeer::IDEMPLEADO, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEARCHIVO', 'IDEXPEDIENTE', 'IDEMPLEADO', 'EXPEDIENTEARCHIVO_FECHA', 'EXPEDIENTEARCHIVO_TIPO', 'EXPEDIENTEARCHIVO_ARCHIVO', 'EXPEDIENTEARCHIVO_NOTA', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientearchivo', 'idexpediente', 'idempleado', 'expedientearchivo_fecha', 'expedientearchivo_tipo', 'expedientearchivo_archivo', 'expedientearchivo_nota', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -81,12 +101,30 @@ abstract class BaseExpedientearchivoPeer
      * e.g. ExpedientearchivoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientearchivo' => 0, 'Idexpediente' => 1, 'ExpedientearchivoFecha' => 2, 'ExpedientearchivoNota' => 3, 'Idempleado' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientearchivo' => 0, 'idexpediente' => 1, 'expedientearchivoFecha' => 2, 'expedientearchivoNota' => 3, 'idempleado' => 4, ),
-        BasePeer::TYPE_COLNAME => array (ExpedientearchivoPeer::IDEXPEDIENTEARCHIVO => 0, ExpedientearchivoPeer::IDEXPEDIENTE => 1, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA => 2, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA => 3, ExpedientearchivoPeer::IDEMPLEADO => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEARCHIVO' => 0, 'IDEXPEDIENTE' => 1, 'EXPEDIENTEARCHIVO_FECHA' => 2, 'EXPEDIENTEARCHIVO_NOTA' => 3, 'IDEMPLEADO' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientearchivo' => 0, 'idexpediente' => 1, 'expedientearchivo_fecha' => 2, 'expedientearchivo_nota' => 3, 'idempleado' => 4, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientearchivo' => 0, 'Idexpediente' => 1, 'Idempleado' => 2, 'ExpedientearchivoFecha' => 3, 'ExpedientearchivoTipo' => 4, 'ExpedientearchivoArchivo' => 5, 'ExpedientearchivoNota' => 6, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientearchivo' => 0, 'idexpediente' => 1, 'idempleado' => 2, 'expedientearchivoFecha' => 3, 'expedientearchivoTipo' => 4, 'expedientearchivoArchivo' => 5, 'expedientearchivoNota' => 6, ),
+        BasePeer::TYPE_COLNAME => array (ExpedientearchivoPeer::IDEXPEDIENTEARCHIVO => 0, ExpedientearchivoPeer::IDEXPEDIENTE => 1, ExpedientearchivoPeer::IDEMPLEADO => 2, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA => 3, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO => 4, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO => 5, ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA => 6, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEARCHIVO' => 0, 'IDEXPEDIENTE' => 1, 'IDEMPLEADO' => 2, 'EXPEDIENTEARCHIVO_FECHA' => 3, 'EXPEDIENTEARCHIVO_TIPO' => 4, 'EXPEDIENTEARCHIVO_ARCHIVO' => 5, 'EXPEDIENTEARCHIVO_NOTA' => 6, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientearchivo' => 0, 'idexpediente' => 1, 'idempleado' => 2, 'expedientearchivo_fecha' => 3, 'expedientearchivo_tipo' => 4, 'expedientearchivo_archivo' => 5, 'expedientearchivo_nota' => 6, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+    );
+
+    /** The enumerated values for this table */
+    protected static $enumValueSets = array(
+        ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO => array(
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_BLAWB,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_CERTIFICADOORIGEN,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_POLIZASEGURO,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_FACTURAMERCANCIA,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_FACTURASHIPPER,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_PEDIMENTO,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_PACKINGLIST,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_MSDS,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_EIR,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_ESTIMACIONGASTOS,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_DOCUMENTOSADUANALES,
+            ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO_OTRO,
+        ),
     );
 
     /**
@@ -129,6 +167,51 @@ abstract class BaseExpedientearchivoPeer
     }
 
     /**
+     * Gets the list of values for all ENUM columns
+     * @return array
+     */
+    public static function getValueSets()
+    {
+      return ExpedientearchivoPeer::$enumValueSets;
+    }
+
+    /**
+     * Gets the list of values for an ENUM column
+     *
+     * @param string $colname The ENUM column name.
+     *
+     * @return array list of possible values for the column
+     */
+    public static function getValueSet($colname)
+    {
+        $valueSets = ExpedientearchivoPeer::getValueSets();
+
+        if (!isset($valueSets[$colname])) {
+            throw new PropelException(sprintf('Column "%s" has no ValueSet.', $colname));
+        }
+
+        return $valueSets[$colname];
+    }
+
+    /**
+     * Gets the SQL value for the ENUM column value
+     *
+     * @param string $colname ENUM column name.
+     * @param string $enumVal ENUM value.
+     *
+     * @return int SQL value
+     */
+    public static function getSqlValueForEnum($colname, $enumVal)
+    {
+        $values = ExpedientearchivoPeer::getValueSet($colname);
+        if (!in_array($enumVal, $values)) {
+            throw new PropelException(sprintf('Value "%s" is not accepted in this enumerated column', $colname));
+        }
+
+        return array_search($enumVal, $values);
+    }
+
+    /**
      * Convenience method which changes table.column to alias.column.
      *
      * Using this method you can maintain SQL abstraction while using column aliases.
@@ -162,15 +245,19 @@ abstract class BaseExpedientearchivoPeer
         if (null === $alias) {
             $criteria->addSelectColumn(ExpedientearchivoPeer::IDEXPEDIENTEARCHIVO);
             $criteria->addSelectColumn(ExpedientearchivoPeer::IDEXPEDIENTE);
-            $criteria->addSelectColumn(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA);
-            $criteria->addSelectColumn(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA);
             $criteria->addSelectColumn(ExpedientearchivoPeer::IDEMPLEADO);
+            $criteria->addSelectColumn(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA);
+            $criteria->addSelectColumn(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO);
+            $criteria->addSelectColumn(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO);
+            $criteria->addSelectColumn(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA);
         } else {
             $criteria->addSelectColumn($alias . '.idexpedientearchivo');
             $criteria->addSelectColumn($alias . '.idexpediente');
-            $criteria->addSelectColumn($alias . '.expedientearchivo_fecha');
-            $criteria->addSelectColumn($alias . '.expedientearchivo_nota');
             $criteria->addSelectColumn($alias . '.idempleado');
+            $criteria->addSelectColumn($alias . '.expedientearchivo_fecha');
+            $criteria->addSelectColumn($alias . '.expedientearchivo_tipo');
+            $criteria->addSelectColumn($alias . '.expedientearchivo_archivo');
+            $criteria->addSelectColumn($alias . '.expedientearchivo_nota');
         }
     }
 

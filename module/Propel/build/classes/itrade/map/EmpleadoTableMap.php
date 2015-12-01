@@ -70,6 +70,7 @@ class EmpleadoTableMap extends TableMap
   1 => 'ventas',
   2 => 'administrador',
 ));
+        $this->addColumn('empleado_foto', 'EmpleadoFoto', 'VARCHAR', false, 45, null);
         // validators
     } // initialize()
 
@@ -81,6 +82,7 @@ class EmpleadoTableMap extends TableMap
         $this->addRelation('ClienteRelatedByIdempleadocomercial', 'Cliente', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleadocomercial', ), 'SET NULL', 'SET NULL', 'ClientesRelatedByIdempleadocomercial');
         $this->addRelation('ClienteRelatedByIdempleadooperaciones', 'Cliente', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleadooperaciones', ), 'CASCADE', 'CASCADE', 'ClientesRelatedByIdempleadooperaciones');
         $this->addRelation('Expedientearchivo', 'Expedientearchivo', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleado', ), 'CASCADE', 'CASCADE', 'Expedientearchivos');
+        $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleado', ), 'CASCADE', 'CASCADE', 'Expedientegastos');
     } // buildRelations()
 
 } // EmpleadoTableMap

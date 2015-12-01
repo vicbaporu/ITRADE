@@ -7,10 +7,14 @@
  *
  *
  * @method ServicioQuery orderByIdservicio($order = Criteria::ASC) Order by the idservicio column
+ * @method ServicioQuery orderByServicioTipo($order = Criteria::ASC) Order by the servicio_tipo column
+ * @method ServicioQuery orderByServicioMedio($order = Criteria::ASC) Order by the servicio_medio column
  * @method ServicioQuery orderByServicioNombre($order = Criteria::ASC) Order by the servicio_nombre column
  * @method ServicioQuery orderByServicioDescripcion($order = Criteria::ASC) Order by the servicio_descripcion column
  *
  * @method ServicioQuery groupByIdservicio() Group by the idservicio column
+ * @method ServicioQuery groupByServicioTipo() Group by the servicio_tipo column
+ * @method ServicioQuery groupByServicioMedio() Group by the servicio_medio column
  * @method ServicioQuery groupByServicioNombre() Group by the servicio_nombre column
  * @method ServicioQuery groupByServicioDescripcion() Group by the servicio_descripcion column
  *
@@ -33,10 +37,14 @@
  * @method Servicio findOne(PropelPDO $con = null) Return the first Servicio matching the query
  * @method Servicio findOneOrCreate(PropelPDO $con = null) Return the first Servicio matching the query, or a new Servicio object populated from the query conditions when no match is found
  *
+ * @method Servicio findOneByServicioTipo(string $servicio_tipo) Return the first Servicio filtered by the servicio_tipo column
+ * @method Servicio findOneByServicioMedio(string $servicio_medio) Return the first Servicio filtered by the servicio_medio column
  * @method Servicio findOneByServicioNombre(string $servicio_nombre) Return the first Servicio filtered by the servicio_nombre column
  * @method Servicio findOneByServicioDescripcion(string $servicio_descripcion) Return the first Servicio filtered by the servicio_descripcion column
  *
  * @method array findByIdservicio(int $idservicio) Return Servicio objects filtered by the idservicio column
+ * @method array findByServicioTipo(string $servicio_tipo) Return Servicio objects filtered by the servicio_tipo column
+ * @method array findByServicioMedio(string $servicio_medio) Return Servicio objects filtered by the servicio_medio column
  * @method array findByServicioNombre(string $servicio_nombre) Return Servicio objects filtered by the servicio_nombre column
  * @method array findByServicioDescripcion(string $servicio_descripcion) Return Servicio objects filtered by the servicio_descripcion column
  *
@@ -146,7 +154,7 @@ abstract class BaseServicioQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idservicio`, `servicio_nombre`, `servicio_descripcion` FROM `servicio` WHERE `idservicio` = :p0';
+        $sql = 'SELECT `idservicio`, `servicio_tipo`, `servicio_medio`, `servicio_nombre`, `servicio_descripcion` FROM `servicio` WHERE `idservicio` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -275,6 +283,64 @@ abstract class BaseServicioQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ServicioPeer::IDSERVICIO, $idservicio, $comparison);
+    }
+
+    /**
+     * Filter the query on the servicio_tipo column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByServicioTipo('fooValue');   // WHERE servicio_tipo = 'fooValue'
+     * $query->filterByServicioTipo('%fooValue%'); // WHERE servicio_tipo LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $servicioTipo The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ServicioQuery The current query, for fluid interface
+     */
+    public function filterByServicioTipo($servicioTipo = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($servicioTipo)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $servicioTipo)) {
+                $servicioTipo = str_replace('*', '%', $servicioTipo);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ServicioPeer::SERVICIO_TIPO, $servicioTipo, $comparison);
+    }
+
+    /**
+     * Filter the query on the servicio_medio column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByServicioMedio('fooValue');   // WHERE servicio_medio = 'fooValue'
+     * $query->filterByServicioMedio('%fooValue%'); // WHERE servicio_medio LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $servicioMedio The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ServicioQuery The current query, for fluid interface
+     */
+    public function filterByServicioMedio($servicioMedio = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($servicioMedio)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $servicioMedio)) {
+                $servicioMedio = str_replace('*', '%', $servicioMedio);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ServicioPeer::SERVICIO_MEDIO, $servicioMedio, $comparison);
     }
 
     /**

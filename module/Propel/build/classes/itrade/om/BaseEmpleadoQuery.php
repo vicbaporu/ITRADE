@@ -28,6 +28,7 @@
  * @method EmpleadoQuery orderByEmpleadoTelefonocontacto($order = Criteria::ASC) Order by the empleado_telefonocontacto column
  * @method EmpleadoQuery orderByEmpleadoEstatus($order = Criteria::ASC) Order by the empleado_estatus column
  * @method EmpleadoQuery orderByEmpleadoRol($order = Criteria::ASC) Order by the empleado_rol column
+ * @method EmpleadoQuery orderByEmpleadoFoto($order = Criteria::ASC) Order by the empleado_foto column
  *
  * @method EmpleadoQuery groupByIdempleado() Group by the idempleado column
  * @method EmpleadoQuery groupByEmpleadoNombre() Group by the empleado_nombre column
@@ -51,6 +52,7 @@
  * @method EmpleadoQuery groupByEmpleadoTelefonocontacto() Group by the empleado_telefonocontacto column
  * @method EmpleadoQuery groupByEmpleadoEstatus() Group by the empleado_estatus column
  * @method EmpleadoQuery groupByEmpleadoRol() Group by the empleado_rol column
+ * @method EmpleadoQuery groupByEmpleadoFoto() Group by the empleado_foto column
  *
  * @method EmpleadoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method EmpleadoQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -67,6 +69,10 @@
  * @method EmpleadoQuery leftJoinExpedientearchivo($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expedientearchivo relation
  * @method EmpleadoQuery rightJoinExpedientearchivo($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedientearchivo relation
  * @method EmpleadoQuery innerJoinExpedientearchivo($relationAlias = null) Adds a INNER JOIN clause to the query using the Expedientearchivo relation
+ *
+ * @method EmpleadoQuery leftJoinExpedientegasto($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expedientegasto relation
+ * @method EmpleadoQuery rightJoinExpedientegasto($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedientegasto relation
+ * @method EmpleadoQuery innerJoinExpedientegasto($relationAlias = null) Adds a INNER JOIN clause to the query using the Expedientegasto relation
  *
  * @method Empleado findOne(PropelPDO $con = null) Return the first Empleado matching the query
  * @method Empleado findOneOrCreate(PropelPDO $con = null) Return the first Empleado matching the query, or a new Empleado object populated from the query conditions when no match is found
@@ -92,6 +98,7 @@
  * @method Empleado findOneByEmpleadoTelefonocontacto(string $empleado_telefonocontacto) Return the first Empleado filtered by the empleado_telefonocontacto column
  * @method Empleado findOneByEmpleadoEstatus(string $empleado_estatus) Return the first Empleado filtered by the empleado_estatus column
  * @method Empleado findOneByEmpleadoRol(string $empleado_rol) Return the first Empleado filtered by the empleado_rol column
+ * @method Empleado findOneByEmpleadoFoto(string $empleado_foto) Return the first Empleado filtered by the empleado_foto column
  *
  * @method array findByIdempleado(int $idempleado) Return Empleado objects filtered by the idempleado column
  * @method array findByEmpleadoNombre(string $empleado_nombre) Return Empleado objects filtered by the empleado_nombre column
@@ -115,6 +122,7 @@
  * @method array findByEmpleadoTelefonocontacto(string $empleado_telefonocontacto) Return Empleado objects filtered by the empleado_telefonocontacto column
  * @method array findByEmpleadoEstatus(string $empleado_estatus) Return Empleado objects filtered by the empleado_estatus column
  * @method array findByEmpleadoRol(string $empleado_rol) Return Empleado objects filtered by the empleado_rol column
+ * @method array findByEmpleadoFoto(string $empleado_foto) Return Empleado objects filtered by the empleado_foto column
  *
  * @package    propel.generator.itrade.om
  */
@@ -222,7 +230,7 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idempleado`, `empleado_nombre`, `empleado_apellidopaterno`, `empleado_apallidomaterno`, `empleado_email`, `empleado_password`, `empleado_celular`, `empleado_telefono`, `empleado_calle`, `empleado_numero`, `empleado_interior`, `empleado_colonia`, `empleado_codigopostal`, `empleado_ciudad`, `empleado_estado`, `empleado_nss`, `empleado_rfc`, `empleado_iniciocontrato`, `empleado_nombrecontacto`, `empleado_telefonocontacto`, `empleado_estatus`, `empleado_rol` FROM `empleado` WHERE `idempleado` = :p0';
+        $sql = 'SELECT `idempleado`, `empleado_nombre`, `empleado_apellidopaterno`, `empleado_apallidomaterno`, `empleado_email`, `empleado_password`, `empleado_celular`, `empleado_telefono`, `empleado_calle`, `empleado_numero`, `empleado_interior`, `empleado_colonia`, `empleado_codigopostal`, `empleado_ciudad`, `empleado_estado`, `empleado_nss`, `empleado_rfc`, `empleado_iniciocontrato`, `empleado_nombrecontacto`, `empleado_telefonocontacto`, `empleado_estatus`, `empleado_rol`, `empleado_foto` FROM `empleado` WHERE `idempleado` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -977,6 +985,35 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the empleado_foto column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByEmpleadoFoto('fooValue');   // WHERE empleado_foto = 'fooValue'
+     * $query->filterByEmpleadoFoto('%fooValue%'); // WHERE empleado_foto LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $empleadoFoto The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return EmpleadoQuery The current query, for fluid interface
+     */
+    public function filterByEmpleadoFoto($empleadoFoto = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($empleadoFoto)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $empleadoFoto)) {
+                $empleadoFoto = str_replace('*', '%', $empleadoFoto);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(EmpleadoPeer::EMPLEADO_FOTO, $empleadoFoto, $comparison);
+    }
+
+    /**
      * Filter the query by a related Cliente object
      *
      * @param   Cliente|PropelObjectCollection $cliente  the related object to use as filter
@@ -1156,7 +1193,7 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
      *
      * @return EmpleadoQuery The current query, for fluid interface
      */
-    public function joinExpedientearchivo($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinExpedientearchivo($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Expedientearchivo');
@@ -1191,11 +1228,85 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
      *
      * @return   ExpedientearchivoQuery A secondary query class using the current class as primary query
      */
-    public function useExpedientearchivoQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useExpedientearchivoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinExpedientearchivo($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Expedientearchivo', 'ExpedientearchivoQuery');
+    }
+
+    /**
+     * Filter the query by a related Expedientegasto object
+     *
+     * @param   Expedientegasto|PropelObjectCollection $expedientegasto  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 EmpleadoQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByExpedientegasto($expedientegasto, $comparison = null)
+    {
+        if ($expedientegasto instanceof Expedientegasto) {
+            return $this
+                ->addUsingAlias(EmpleadoPeer::IDEMPLEADO, $expedientegasto->getIdempleado(), $comparison);
+        } elseif ($expedientegasto instanceof PropelObjectCollection) {
+            return $this
+                ->useExpedientegastoQuery()
+                ->filterByPrimaryKeys($expedientegasto->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByExpedientegasto() only accepts arguments of type Expedientegasto or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Expedientegasto relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return EmpleadoQuery The current query, for fluid interface
+     */
+    public function joinExpedientegasto($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Expedientegasto');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Expedientegasto');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Expedientegasto relation Expedientegasto object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   ExpedientegastoQuery A secondary query class using the current class as primary query
+     */
+    public function useExpedientegastoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinExpedientegasto($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Expedientegasto', 'ExpedientegastoQuery');
     }
 
     /**

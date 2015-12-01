@@ -5,3 +5,7 @@
 .width-93{
     width: 93%;
 }
+
+.empleado_foto{
+    cursor: pointer;
+}

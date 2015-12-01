@@ -2,24 +2,24 @@
 
 
 /**
- * Base class that represents a row from the 'gastofacturacion' table.
+ * Base class that represents a row from the 'categoriagasto' table.
  *
  *
  *
  * @package    propel.generator.itrade.om
  */
-abstract class BaseGastofacturacion extends BaseObject implements Persistent
+abstract class BaseCategoriagasto extends BaseObject implements Persistent
 {
     /**
      * Peer class name
      */
-    const PEER = 'GastofacturacionPeer';
+    const PEER = 'CategoriagastoPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        GastofacturacionPeer
+     * @var        CategoriagastoPeer
      */
     protected static $peer;
 
@@ -30,45 +30,28 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     protected $startCopy = false;
 
     /**
-     * The value for the idgastofacturacion field.
-     * @var        int
-     */
-    protected $idgastofacturacion;
-
-    /**
      * The value for the idcategoriagasto field.
      * @var        int
      */
     protected $idcategoriagasto;
 
     /**
-     * The value for the gastofacturacion_nombre field.
+     * The value for the categoriagasto_nombre field.
      * @var        string
      */
-    protected $gastofacturacion_nombre;
+    protected $categoriagasto_nombre;
 
     /**
-     * The value for the gastofacturacion_descripcion field.
+     * The value for the categoriagasto_descripcion field.
      * @var        string
      */
-    protected $gastofacturacion_descripcion;
+    protected $categoriagasto_descripcion;
 
     /**
-     * The value for the gastofacturacion_iva field.
-     * @var        string
+     * @var        PropelObjectCollection|Gastofacturacion[] Collection to store aggregation of Gastofacturacion objects.
      */
-    protected $gastofacturacion_iva;
-
-    /**
-     * @var        Categoriagasto
-     */
-    protected $aCategoriagasto;
-
-    /**
-     * @var        PropelObjectCollection|Expedientegasto[] Collection to store aggregation of Expedientegasto objects.
-     */
-    protected $collExpedientegastos;
-    protected $collExpedientegastosPartial;
+    protected $collGastofacturacions;
+    protected $collGastofacturacionsPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -94,18 +77,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
-    protected $expedientegastosScheduledForDeletion = null;
-
-    /**
-     * Get the [idgastofacturacion] column value.
-     *
-     * @return int
-     */
-    public function getIdgastofacturacion()
-    {
-
-        return $this->idgastofacturacion;
-    }
+    protected $gastofacturacionsScheduledForDeletion = null;
 
     /**
      * Get the [idcategoriagasto] column value.
@@ -119,64 +91,32 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [gastofacturacion_nombre] column value.
+     * Get the [categoriagasto_nombre] column value.
      *
      * @return string
      */
-    public function getGastofacturacionNombre()
+    public function getCategoriagastoNombre()
     {
 
-        return $this->gastofacturacion_nombre;
+        return $this->categoriagasto_nombre;
     }
 
     /**
-     * Get the [gastofacturacion_descripcion] column value.
+     * Get the [categoriagasto_descripcion] column value.
      *
      * @return string
      */
-    public function getGastofacturacionDescripcion()
+    public function getCategoriagastoDescripcion()
     {
 
-        return $this->gastofacturacion_descripcion;
+        return $this->categoriagasto_descripcion;
     }
-
-    /**
-     * Get the [gastofacturacion_iva] column value.
-     *
-     * @return string
-     */
-    public function getGastofacturacionIva()
-    {
-
-        return $this->gastofacturacion_iva;
-    }
-
-    /**
-     * Set the value of [idgastofacturacion] column.
-     *
-     * @param  int $v new value
-     * @return Gastofacturacion The current object (for fluent API support)
-     */
-    public function setIdgastofacturacion($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->idgastofacturacion !== $v) {
-            $this->idgastofacturacion = $v;
-            $this->modifiedColumns[] = GastofacturacionPeer::IDGASTOFACTURACION;
-        }
-
-
-        return $this;
-    } // setIdgastofacturacion()
 
     /**
      * Set the value of [idcategoriagasto] column.
      *
      * @param  int $v new value
-     * @return Gastofacturacion The current object (for fluent API support)
+     * @return Categoriagasto The current object (for fluent API support)
      */
     public function setIdcategoriagasto($v)
     {
@@ -186,11 +126,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
 
         if ($this->idcategoriagasto !== $v) {
             $this->idcategoriagasto = $v;
-            $this->modifiedColumns[] = GastofacturacionPeer::IDCATEGORIAGASTO;
-        }
-
-        if ($this->aCategoriagasto !== null && $this->aCategoriagasto->getIdcategoriagasto() !== $v) {
-            $this->aCategoriagasto = null;
+            $this->modifiedColumns[] = CategoriagastoPeer::IDCATEGORIAGASTO;
         }
 
 
@@ -198,67 +134,46 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     } // setIdcategoriagasto()
 
     /**
-     * Set the value of [gastofacturacion_nombre] column.
+     * Set the value of [categoriagasto_nombre] column.
      *
      * @param  string $v new value
-     * @return Gastofacturacion The current object (for fluent API support)
+     * @return Categoriagasto The current object (for fluent API support)
      */
-    public function setGastofacturacionNombre($v)
+    public function setCategoriagastoNombre($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->gastofacturacion_nombre !== $v) {
-            $this->gastofacturacion_nombre = $v;
-            $this->modifiedColumns[] = GastofacturacionPeer::GASTOFACTURACION_NOMBRE;
+        if ($this->categoriagasto_nombre !== $v) {
+            $this->categoriagasto_nombre = $v;
+            $this->modifiedColumns[] = CategoriagastoPeer::CATEGORIAGASTO_NOMBRE;
         }
 
 
         return $this;
-    } // setGastofacturacionNombre()
+    } // setCategoriagastoNombre()
 
     /**
-     * Set the value of [gastofacturacion_descripcion] column.
+     * Set the value of [categoriagasto_descripcion] column.
      *
      * @param  string $v new value
-     * @return Gastofacturacion The current object (for fluent API support)
+     * @return Categoriagasto The current object (for fluent API support)
      */
-    public function setGastofacturacionDescripcion($v)
+    public function setCategoriagastoDescripcion($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->gastofacturacion_descripcion !== $v) {
-            $this->gastofacturacion_descripcion = $v;
-            $this->modifiedColumns[] = GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION;
+        if ($this->categoriagasto_descripcion !== $v) {
+            $this->categoriagasto_descripcion = $v;
+            $this->modifiedColumns[] = CategoriagastoPeer::CATEGORIAGASTO_DESCRIPCION;
         }
 
 
         return $this;
-    } // setGastofacturacionDescripcion()
-
-    /**
-     * Set the value of [gastofacturacion_iva] column.
-     *
-     * @param  string $v new value
-     * @return Gastofacturacion The current object (for fluent API support)
-     */
-    public function setGastofacturacionIva($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->gastofacturacion_iva !== $v) {
-            $this->gastofacturacion_iva = $v;
-            $this->modifiedColumns[] = GastofacturacionPeer::GASTOFACTURACION_IVA;
-        }
-
-
-        return $this;
-    } // setGastofacturacionIva()
+    } // setCategoriagastoDescripcion()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -292,11 +207,9 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     {
         try {
 
-            $this->idgastofacturacion = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->idcategoriagasto = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
-            $this->gastofacturacion_nombre = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->gastofacturacion_descripcion = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->gastofacturacion_iva = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->idcategoriagasto = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->categoriagasto_nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->categoriagasto_descripcion = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -306,10 +219,10 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 5; // 5 = GastofacturacionPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 3; // 3 = CategoriagastoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating Gastofacturacion object", $e);
+            throw new PropelException("Error populating Categoriagasto object", $e);
         }
     }
 
@@ -329,9 +242,6 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
-        if ($this->aCategoriagasto !== null && $this->idcategoriagasto !== $this->aCategoriagasto->getIdcategoriagasto()) {
-            $this->aCategoriagasto = null;
-        }
     } // ensureConsistency
 
     /**
@@ -355,13 +265,13 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(GastofacturacionPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = GastofacturacionPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = CategoriagastoPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -371,8 +281,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aCategoriagasto = null;
-            $this->collExpedientegastos = null;
+            $this->collGastofacturacions = null;
 
         } // if (deep)
     }
@@ -394,12 +303,12 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(GastofacturacionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = GastofacturacionQuery::create()
+            $deleteQuery = CategoriagastoQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -437,7 +346,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(GastofacturacionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(CategoriagastoPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -457,7 +366,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                GastofacturacionPeer::addInstanceToPool($this);
+                CategoriagastoPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -487,18 +396,6 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
 
-            // We call the save method on the following object(s) if they
-            // were passed to this object by their corresponding set
-            // method.  This object relates to these object(s) by a
-            // foreign key reference.
-
-            if ($this->aCategoriagasto !== null) {
-                if ($this->aCategoriagasto->isModified() || $this->aCategoriagasto->isNew()) {
-                    $affectedRows += $this->aCategoriagasto->save($con);
-                }
-                $this->setCategoriagasto($this->aCategoriagasto);
-            }
-
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -510,17 +407,17 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
                 $this->resetModified();
             }
 
-            if ($this->expedientegastosScheduledForDeletion !== null) {
-                if (!$this->expedientegastosScheduledForDeletion->isEmpty()) {
-                    ExpedientegastoQuery::create()
-                        ->filterByPrimaryKeys($this->expedientegastosScheduledForDeletion->getPrimaryKeys(false))
+            if ($this->gastofacturacionsScheduledForDeletion !== null) {
+                if (!$this->gastofacturacionsScheduledForDeletion->isEmpty()) {
+                    GastofacturacionQuery::create()
+                        ->filterByPrimaryKeys($this->gastofacturacionsScheduledForDeletion->getPrimaryKeys(false))
                         ->delete($con);
-                    $this->expedientegastosScheduledForDeletion = null;
+                    $this->gastofacturacionsScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collExpedientegastos !== null) {
-                foreach ($this->collExpedientegastos as $referrerFK) {
+            if ($this->collGastofacturacions !== null) {
+                foreach ($this->collGastofacturacions as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -547,30 +444,24 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = GastofacturacionPeer::IDGASTOFACTURACION;
-        if (null !== $this->idgastofacturacion) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . GastofacturacionPeer::IDGASTOFACTURACION . ')');
+        $this->modifiedColumns[] = CategoriagastoPeer::IDCATEGORIAGASTO;
+        if (null !== $this->idcategoriagasto) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . CategoriagastoPeer::IDCATEGORIAGASTO . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(GastofacturacionPeer::IDGASTOFACTURACION)) {
-            $modifiedColumns[':p' . $index++]  = '`idgastofacturacion`';
-        }
-        if ($this->isColumnModified(GastofacturacionPeer::IDCATEGORIAGASTO)) {
+        if ($this->isColumnModified(CategoriagastoPeer::IDCATEGORIAGASTO)) {
             $modifiedColumns[':p' . $index++]  = '`idcategoriagasto`';
         }
-        if ($this->isColumnModified(GastofacturacionPeer::GASTOFACTURACION_NOMBRE)) {
-            $modifiedColumns[':p' . $index++]  = '`gastofacturacion_nombre`';
+        if ($this->isColumnModified(CategoriagastoPeer::CATEGORIAGASTO_NOMBRE)) {
+            $modifiedColumns[':p' . $index++]  = '`categoriagasto_nombre`';
         }
-        if ($this->isColumnModified(GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION)) {
-            $modifiedColumns[':p' . $index++]  = '`gastofacturacion_descripcion`';
-        }
-        if ($this->isColumnModified(GastofacturacionPeer::GASTOFACTURACION_IVA)) {
-            $modifiedColumns[':p' . $index++]  = '`gastofacturacion_iva`';
+        if ($this->isColumnModified(CategoriagastoPeer::CATEGORIAGASTO_DESCRIPCION)) {
+            $modifiedColumns[':p' . $index++]  = '`categoriagasto_descripcion`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `gastofacturacion` (%s) VALUES (%s)',
+            'INSERT INTO `categoriagasto` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -579,20 +470,14 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`idgastofacturacion`':
-                        $stmt->bindValue($identifier, $this->idgastofacturacion, PDO::PARAM_INT);
-                        break;
                     case '`idcategoriagasto`':
                         $stmt->bindValue($identifier, $this->idcategoriagasto, PDO::PARAM_INT);
                         break;
-                    case '`gastofacturacion_nombre`':
-                        $stmt->bindValue($identifier, $this->gastofacturacion_nombre, PDO::PARAM_STR);
+                    case '`categoriagasto_nombre`':
+                        $stmt->bindValue($identifier, $this->categoriagasto_nombre, PDO::PARAM_STR);
                         break;
-                    case '`gastofacturacion_descripcion`':
-                        $stmt->bindValue($identifier, $this->gastofacturacion_descripcion, PDO::PARAM_STR);
-                        break;
-                    case '`gastofacturacion_iva`':
-                        $stmt->bindValue($identifier, $this->gastofacturacion_iva, PDO::PARAM_STR);
+                    case '`categoriagasto_descripcion`':
+                        $stmt->bindValue($identifier, $this->categoriagasto_descripcion, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -607,7 +492,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdgastofacturacion($pk);
+        $this->setIdcategoriagasto($pk);
 
         $this->setNew(false);
     }
@@ -688,25 +573,13 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
             $failureMap = array();
 
 
-            // We call the validate method on the following object(s) if they
-            // were passed to this object by their corresponding set
-            // method.  This object relates to these object(s) by a
-            // foreign key reference.
-
-            if ($this->aCategoriagasto !== null) {
-                if (!$this->aCategoriagasto->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aCategoriagasto->getValidationFailures());
-                }
-            }
-
-
-            if (($retval = GastofacturacionPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = CategoriagastoPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
 
-                if ($this->collExpedientegastos !== null) {
-                    foreach ($this->collExpedientegastos as $referrerFK) {
+                if ($this->collGastofacturacions !== null) {
+                    foreach ($this->collGastofacturacions as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -732,7 +605,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = GastofacturacionPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = CategoriagastoPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -749,19 +622,13 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                return $this->getIdgastofacturacion();
-                break;
-            case 1:
                 return $this->getIdcategoriagasto();
                 break;
+            case 1:
+                return $this->getCategoriagastoNombre();
+                break;
             case 2:
-                return $this->getGastofacturacionNombre();
-                break;
-            case 3:
-                return $this->getGastofacturacionDescripcion();
-                break;
-            case 4:
-                return $this->getGastofacturacionIva();
+                return $this->getCategoriagastoDescripcion();
                 break;
             default:
                 return null;
@@ -786,17 +653,15 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Gastofacturacion'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['Categoriagasto'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Gastofacturacion'][$this->getPrimaryKey()] = true;
-        $keys = GastofacturacionPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['Categoriagasto'][$this->getPrimaryKey()] = true;
+        $keys = CategoriagastoPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdgastofacturacion(),
-            $keys[1] => $this->getIdcategoriagasto(),
-            $keys[2] => $this->getGastofacturacionNombre(),
-            $keys[3] => $this->getGastofacturacionDescripcion(),
-            $keys[4] => $this->getGastofacturacionIva(),
+            $keys[0] => $this->getIdcategoriagasto(),
+            $keys[1] => $this->getCategoriagastoNombre(),
+            $keys[2] => $this->getCategoriagastoDescripcion(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -804,11 +669,8 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
-            if (null !== $this->aCategoriagasto) {
-                $result['Categoriagasto'] = $this->aCategoriagasto->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
-            }
-            if (null !== $this->collExpedientegastos) {
-                $result['Expedientegastos'] = $this->collExpedientegastos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            if (null !== $this->collGastofacturacions) {
+                $result['Gastofacturacions'] = $this->collGastofacturacions->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -828,7 +690,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = GastofacturacionPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = CategoriagastoPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -845,19 +707,13 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                $this->setIdgastofacturacion($value);
-                break;
-            case 1:
                 $this->setIdcategoriagasto($value);
                 break;
+            case 1:
+                $this->setCategoriagastoNombre($value);
+                break;
             case 2:
-                $this->setGastofacturacionNombre($value);
-                break;
-            case 3:
-                $this->setGastofacturacionDescripcion($value);
-                break;
-            case 4:
-                $this->setGastofacturacionIva($value);
+                $this->setCategoriagastoDescripcion($value);
                 break;
         } // switch()
     }
@@ -881,13 +737,11 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = GastofacturacionPeer::getFieldNames($keyType);
+        $keys = CategoriagastoPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdgastofacturacion($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setIdcategoriagasto($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setGastofacturacionNombre($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setGastofacturacionDescripcion($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setGastofacturacionIva($arr[$keys[4]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdcategoriagasto($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setCategoriagastoNombre($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setCategoriagastoDescripcion($arr[$keys[2]]);
     }
 
     /**
@@ -897,13 +751,11 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(GastofacturacionPeer::DATABASE_NAME);
+        $criteria = new Criteria(CategoriagastoPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(GastofacturacionPeer::IDGASTOFACTURACION)) $criteria->add(GastofacturacionPeer::IDGASTOFACTURACION, $this->idgastofacturacion);
-        if ($this->isColumnModified(GastofacturacionPeer::IDCATEGORIAGASTO)) $criteria->add(GastofacturacionPeer::IDCATEGORIAGASTO, $this->idcategoriagasto);
-        if ($this->isColumnModified(GastofacturacionPeer::GASTOFACTURACION_NOMBRE)) $criteria->add(GastofacturacionPeer::GASTOFACTURACION_NOMBRE, $this->gastofacturacion_nombre);
-        if ($this->isColumnModified(GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION)) $criteria->add(GastofacturacionPeer::GASTOFACTURACION_DESCRIPCION, $this->gastofacturacion_descripcion);
-        if ($this->isColumnModified(GastofacturacionPeer::GASTOFACTURACION_IVA)) $criteria->add(GastofacturacionPeer::GASTOFACTURACION_IVA, $this->gastofacturacion_iva);
+        if ($this->isColumnModified(CategoriagastoPeer::IDCATEGORIAGASTO)) $criteria->add(CategoriagastoPeer::IDCATEGORIAGASTO, $this->idcategoriagasto);
+        if ($this->isColumnModified(CategoriagastoPeer::CATEGORIAGASTO_NOMBRE)) $criteria->add(CategoriagastoPeer::CATEGORIAGASTO_NOMBRE, $this->categoriagasto_nombre);
+        if ($this->isColumnModified(CategoriagastoPeer::CATEGORIAGASTO_DESCRIPCION)) $criteria->add(CategoriagastoPeer::CATEGORIAGASTO_DESCRIPCION, $this->categoriagasto_descripcion);
 
         return $criteria;
     }
@@ -918,8 +770,8 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(GastofacturacionPeer::DATABASE_NAME);
-        $criteria->add(GastofacturacionPeer::IDGASTOFACTURACION, $this->idgastofacturacion);
+        $criteria = new Criteria(CategoriagastoPeer::DATABASE_NAME);
+        $criteria->add(CategoriagastoPeer::IDCATEGORIAGASTO, $this->idcategoriagasto);
 
         return $criteria;
     }
@@ -930,18 +782,18 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function getPrimaryKey()
     {
-        return $this->getIdgastofacturacion();
+        return $this->getIdcategoriagasto();
     }
 
     /**
-     * Generic method to set the primary key (idgastofacturacion column).
+     * Generic method to set the primary key (idcategoriagasto column).
      *
      * @param  int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdgastofacturacion($key);
+        $this->setIdcategoriagasto($key);
     }
 
     /**
@@ -951,7 +803,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdgastofacturacion();
+        return null === $this->getIdcategoriagasto();
     }
 
     /**
@@ -960,17 +812,15 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param object $copyObj An object of Gastofacturacion (or compatible) type.
+     * @param object $copyObj An object of Categoriagasto (or compatible) type.
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setIdcategoriagasto($this->getIdcategoriagasto());
-        $copyObj->setGastofacturacionNombre($this->getGastofacturacionNombre());
-        $copyObj->setGastofacturacionDescripcion($this->getGastofacturacionDescripcion());
-        $copyObj->setGastofacturacionIva($this->getGastofacturacionIva());
+        $copyObj->setCategoriagastoNombre($this->getCategoriagastoNombre());
+        $copyObj->setCategoriagastoDescripcion($this->getCategoriagastoDescripcion());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -979,9 +829,9 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
             // store object hash to prevent cycle
             $this->startCopy = true;
 
-            foreach ($this->getExpedientegastos() as $relObj) {
+            foreach ($this->getGastofacturacions() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addExpedientegasto($relObj->copy($deepCopy));
+                    $copyObj->addGastofacturacion($relObj->copy($deepCopy));
                 }
             }
 
@@ -991,7 +841,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
 
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdgastofacturacion(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdcategoriagasto(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -1004,7 +854,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      * objects.
      *
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return Gastofacturacion Clone of current object.
+     * @return Categoriagasto Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1024,67 +874,15 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return GastofacturacionPeer
+     * @return CategoriagastoPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new GastofacturacionPeer();
+            self::$peer = new CategoriagastoPeer();
         }
 
         return self::$peer;
-    }
-
-    /**
-     * Declares an association between this object and a Categoriagasto object.
-     *
-     * @param                  Categoriagasto $v
-     * @return Gastofacturacion The current object (for fluent API support)
-     * @throws PropelException
-     */
-    public function setCategoriagasto(Categoriagasto $v = null)
-    {
-        if ($v === null) {
-            $this->setIdcategoriagasto(NULL);
-        } else {
-            $this->setIdcategoriagasto($v->getIdcategoriagasto());
-        }
-
-        $this->aCategoriagasto = $v;
-
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Categoriagasto object, it will not be re-added.
-        if ($v !== null) {
-            $v->addGastofacturacion($this);
-        }
-
-
-        return $this;
-    }
-
-
-    /**
-     * Get the associated Categoriagasto object
-     *
-     * @param PropelPDO $con Optional Connection object.
-     * @param $doQuery Executes a query to get the object if required
-     * @return Categoriagasto The associated Categoriagasto object.
-     * @throws PropelException
-     */
-    public function getCategoriagasto(PropelPDO $con = null, $doQuery = true)
-    {
-        if ($this->aCategoriagasto === null && ($this->idcategoriagasto !== null) && $doQuery) {
-            $this->aCategoriagasto = CategoriagastoQuery::create()->findPk($this->idcategoriagasto, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aCategoriagasto->addGastofacturacions($this);
-             */
-        }
-
-        return $this->aCategoriagasto;
     }
 
 
@@ -1098,42 +896,42 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function initRelation($relationName)
     {
-        if ('Expedientegasto' == $relationName) {
-            $this->initExpedientegastos();
+        if ('Gastofacturacion' == $relationName) {
+            $this->initGastofacturacions();
         }
     }
 
     /**
-     * Clears out the collExpedientegastos collection
+     * Clears out the collGastofacturacions collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
-     * @return Gastofacturacion The current object (for fluent API support)
-     * @see        addExpedientegastos()
+     * @return Categoriagasto The current object (for fluent API support)
+     * @see        addGastofacturacions()
      */
-    public function clearExpedientegastos()
+    public function clearGastofacturacions()
     {
-        $this->collExpedientegastos = null; // important to set this to null since that means it is uninitialized
-        $this->collExpedientegastosPartial = null;
+        $this->collGastofacturacions = null; // important to set this to null since that means it is uninitialized
+        $this->collGastofacturacionsPartial = null;
 
         return $this;
     }
 
     /**
-     * reset is the collExpedientegastos collection loaded partially
+     * reset is the collGastofacturacions collection loaded partially
      *
      * @return void
      */
-    public function resetPartialExpedientegastos($v = true)
+    public function resetPartialGastofacturacions($v = true)
     {
-        $this->collExpedientegastosPartial = $v;
+        $this->collGastofacturacionsPartial = $v;
     }
 
     /**
-     * Initializes the collExpedientegastos collection.
+     * Initializes the collGastofacturacions collection.
      *
-     * By default this just sets the collExpedientegastos collection to an empty array (like clearcollExpedientegastos());
+     * By default this just sets the collGastofacturacions collection to an empty array (like clearcollGastofacturacions());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1142,158 +940,158 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      *
      * @return void
      */
-    public function initExpedientegastos($overrideExisting = true)
+    public function initGastofacturacions($overrideExisting = true)
     {
-        if (null !== $this->collExpedientegastos && !$overrideExisting) {
+        if (null !== $this->collGastofacturacions && !$overrideExisting) {
             return;
         }
-        $this->collExpedientegastos = new PropelObjectCollection();
-        $this->collExpedientegastos->setModel('Expedientegasto');
+        $this->collGastofacturacions = new PropelObjectCollection();
+        $this->collGastofacturacions->setModel('Gastofacturacion');
     }
 
     /**
-     * Gets an array of Expedientegasto objects which contain a foreign key that references this object.
+     * Gets an array of Gastofacturacion objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this Gastofacturacion is new, it will return
+     * If this Categoriagasto is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param Criteria $criteria optional Criteria object to narrow the query
      * @param PropelPDO $con optional connection object
-     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
+     * @return PropelObjectCollection|Gastofacturacion[] List of Gastofacturacion objects
      * @throws PropelException
      */
-    public function getExpedientegastos($criteria = null, PropelPDO $con = null)
+    public function getGastofacturacions($criteria = null, PropelPDO $con = null)
     {
-        $partial = $this->collExpedientegastosPartial && !$this->isNew();
-        if (null === $this->collExpedientegastos || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collExpedientegastos) {
+        $partial = $this->collGastofacturacionsPartial && !$this->isNew();
+        if (null === $this->collGastofacturacions || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collGastofacturacions) {
                 // return empty collection
-                $this->initExpedientegastos();
+                $this->initGastofacturacions();
             } else {
-                $collExpedientegastos = ExpedientegastoQuery::create(null, $criteria)
-                    ->filterByGastofacturacion($this)
+                $collGastofacturacions = GastofacturacionQuery::create(null, $criteria)
+                    ->filterByCategoriagasto($this)
                     ->find($con);
                 if (null !== $criteria) {
-                    if (false !== $this->collExpedientegastosPartial && count($collExpedientegastos)) {
-                      $this->initExpedientegastos(false);
+                    if (false !== $this->collGastofacturacionsPartial && count($collGastofacturacions)) {
+                      $this->initGastofacturacions(false);
 
-                      foreach ($collExpedientegastos as $obj) {
-                        if (false == $this->collExpedientegastos->contains($obj)) {
-                          $this->collExpedientegastos->append($obj);
+                      foreach ($collGastofacturacions as $obj) {
+                        if (false == $this->collGastofacturacions->contains($obj)) {
+                          $this->collGastofacturacions->append($obj);
                         }
                       }
 
-                      $this->collExpedientegastosPartial = true;
+                      $this->collGastofacturacionsPartial = true;
                     }
 
-                    $collExpedientegastos->getInternalIterator()->rewind();
+                    $collGastofacturacions->getInternalIterator()->rewind();
 
-                    return $collExpedientegastos;
+                    return $collGastofacturacions;
                 }
 
-                if ($partial && $this->collExpedientegastos) {
-                    foreach ($this->collExpedientegastos as $obj) {
+                if ($partial && $this->collGastofacturacions) {
+                    foreach ($this->collGastofacturacions as $obj) {
                         if ($obj->isNew()) {
-                            $collExpedientegastos[] = $obj;
+                            $collGastofacturacions[] = $obj;
                         }
                     }
                 }
 
-                $this->collExpedientegastos = $collExpedientegastos;
-                $this->collExpedientegastosPartial = false;
+                $this->collGastofacturacions = $collGastofacturacions;
+                $this->collGastofacturacionsPartial = false;
             }
         }
 
-        return $this->collExpedientegastos;
+        return $this->collGastofacturacions;
     }
 
     /**
-     * Sets a collection of Expedientegasto objects related by a one-to-many relationship
+     * Sets a collection of Gastofacturacion objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param PropelCollection $expedientegastos A Propel collection.
+     * @param PropelCollection $gastofacturacions A Propel collection.
      * @param PropelPDO $con Optional connection object
-     * @return Gastofacturacion The current object (for fluent API support)
+     * @return Categoriagasto The current object (for fluent API support)
      */
-    public function setExpedientegastos(PropelCollection $expedientegastos, PropelPDO $con = null)
+    public function setGastofacturacions(PropelCollection $gastofacturacions, PropelPDO $con = null)
     {
-        $expedientegastosToDelete = $this->getExpedientegastos(new Criteria(), $con)->diff($expedientegastos);
+        $gastofacturacionsToDelete = $this->getGastofacturacions(new Criteria(), $con)->diff($gastofacturacions);
 
 
-        $this->expedientegastosScheduledForDeletion = $expedientegastosToDelete;
+        $this->gastofacturacionsScheduledForDeletion = $gastofacturacionsToDelete;
 
-        foreach ($expedientegastosToDelete as $expedientegastoRemoved) {
-            $expedientegastoRemoved->setGastofacturacion(null);
+        foreach ($gastofacturacionsToDelete as $gastofacturacionRemoved) {
+            $gastofacturacionRemoved->setCategoriagasto(null);
         }
 
-        $this->collExpedientegastos = null;
-        foreach ($expedientegastos as $expedientegasto) {
-            $this->addExpedientegasto($expedientegasto);
+        $this->collGastofacturacions = null;
+        foreach ($gastofacturacions as $gastofacturacion) {
+            $this->addGastofacturacion($gastofacturacion);
         }
 
-        $this->collExpedientegastos = $expedientegastos;
-        $this->collExpedientegastosPartial = false;
+        $this->collGastofacturacions = $gastofacturacions;
+        $this->collGastofacturacionsPartial = false;
 
         return $this;
     }
 
     /**
-     * Returns the number of related Expedientegasto objects.
+     * Returns the number of related Gastofacturacion objects.
      *
      * @param Criteria $criteria
      * @param boolean $distinct
      * @param PropelPDO $con
-     * @return int             Count of related Expedientegasto objects.
+     * @return int             Count of related Gastofacturacion objects.
      * @throws PropelException
      */
-    public function countExpedientegastos(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    public function countGastofacturacions(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
     {
-        $partial = $this->collExpedientegastosPartial && !$this->isNew();
-        if (null === $this->collExpedientegastos || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collExpedientegastos) {
+        $partial = $this->collGastofacturacionsPartial && !$this->isNew();
+        if (null === $this->collGastofacturacions || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collGastofacturacions) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getExpedientegastos());
+                return count($this->getGastofacturacions());
             }
-            $query = ExpedientegastoQuery::create(null, $criteria);
+            $query = GastofacturacionQuery::create(null, $criteria);
             if ($distinct) {
                 $query->distinct();
             }
 
             return $query
-                ->filterByGastofacturacion($this)
+                ->filterByCategoriagasto($this)
                 ->count($con);
         }
 
-        return count($this->collExpedientegastos);
+        return count($this->collGastofacturacions);
     }
 
     /**
-     * Method called to associate a Expedientegasto object to this object
-     * through the Expedientegasto foreign key attribute.
+     * Method called to associate a Gastofacturacion object to this object
+     * through the Gastofacturacion foreign key attribute.
      *
-     * @param    Expedientegasto $l Expedientegasto
-     * @return Gastofacturacion The current object (for fluent API support)
+     * @param    Gastofacturacion $l Gastofacturacion
+     * @return Categoriagasto The current object (for fluent API support)
      */
-    public function addExpedientegasto(Expedientegasto $l)
+    public function addGastofacturacion(Gastofacturacion $l)
     {
-        if ($this->collExpedientegastos === null) {
-            $this->initExpedientegastos();
-            $this->collExpedientegastosPartial = true;
+        if ($this->collGastofacturacions === null) {
+            $this->initGastofacturacions();
+            $this->collGastofacturacionsPartial = true;
         }
 
-        if (!in_array($l, $this->collExpedientegastos->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
-            $this->doAddExpedientegasto($l);
+        if (!in_array($l, $this->collGastofacturacions->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddGastofacturacion($l);
 
-            if ($this->expedientegastosScheduledForDeletion and $this->expedientegastosScheduledForDeletion->contains($l)) {
-                $this->expedientegastosScheduledForDeletion->remove($this->expedientegastosScheduledForDeletion->search($l));
+            if ($this->gastofacturacionsScheduledForDeletion and $this->gastofacturacionsScheduledForDeletion->contains($l)) {
+                $this->gastofacturacionsScheduledForDeletion->remove($this->gastofacturacionsScheduledForDeletion->search($l));
             }
         }
 
@@ -1301,106 +1099,31 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     }
 
     /**
-     * @param	Expedientegasto $expedientegasto The expedientegasto object to add.
+     * @param	Gastofacturacion $gastofacturacion The gastofacturacion object to add.
      */
-    protected function doAddExpedientegasto($expedientegasto)
+    protected function doAddGastofacturacion($gastofacturacion)
     {
-        $this->collExpedientegastos[]= $expedientegasto;
-        $expedientegasto->setGastofacturacion($this);
+        $this->collGastofacturacions[]= $gastofacturacion;
+        $gastofacturacion->setCategoriagasto($this);
     }
 
     /**
-     * @param	Expedientegasto $expedientegasto The expedientegasto object to remove.
-     * @return Gastofacturacion The current object (for fluent API support)
+     * @param	Gastofacturacion $gastofacturacion The gastofacturacion object to remove.
+     * @return Categoriagasto The current object (for fluent API support)
      */
-    public function removeExpedientegasto($expedientegasto)
+    public function removeGastofacturacion($gastofacturacion)
     {
-        if ($this->getExpedientegastos()->contains($expedientegasto)) {
-            $this->collExpedientegastos->remove($this->collExpedientegastos->search($expedientegasto));
-            if (null === $this->expedientegastosScheduledForDeletion) {
-                $this->expedientegastosScheduledForDeletion = clone $this->collExpedientegastos;
-                $this->expedientegastosScheduledForDeletion->clear();
+        if ($this->getGastofacturacions()->contains($gastofacturacion)) {
+            $this->collGastofacturacions->remove($this->collGastofacturacions->search($gastofacturacion));
+            if (null === $this->gastofacturacionsScheduledForDeletion) {
+                $this->gastofacturacionsScheduledForDeletion = clone $this->collGastofacturacions;
+                $this->gastofacturacionsScheduledForDeletion->clear();
             }
-            $this->expedientegastosScheduledForDeletion[]= clone $expedientegasto;
-            $expedientegasto->setGastofacturacion(null);
+            $this->gastofacturacionsScheduledForDeletion[]= clone $gastofacturacion;
+            $gastofacturacion->setCategoriagasto(null);
         }
 
         return $this;
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Gastofacturacion is new, it will return
-     * an empty collection; or if this Gastofacturacion has previously
-     * been saved, it will retrieve related Expedientegastos from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Gastofacturacion.
-     *
-     * @param Criteria $criteria optional Criteria object to narrow the query
-     * @param PropelPDO $con optional connection object
-     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
-     */
-    public function getExpedientegastosJoinEmpleado($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = ExpedientegastoQuery::create(null, $criteria);
-        $query->joinWith('Empleado', $join_behavior);
-
-        return $this->getExpedientegastos($query, $con);
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Gastofacturacion is new, it will return
-     * an empty collection; or if this Gastofacturacion has previously
-     * been saved, it will retrieve related Expedientegastos from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Gastofacturacion.
-     *
-     * @param Criteria $criteria optional Criteria object to narrow the query
-     * @param PropelPDO $con optional connection object
-     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
-     */
-    public function getExpedientegastosJoinExpediente($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = ExpedientegastoQuery::create(null, $criteria);
-        $query->joinWith('Expediente', $join_behavior);
-
-        return $this->getExpedientegastos($query, $con);
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this Gastofacturacion is new, it will return
-     * an empty collection; or if this Gastofacturacion has previously
-     * been saved, it will retrieve related Expedientegastos from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in Gastofacturacion.
-     *
-     * @param Criteria $criteria optional Criteria object to narrow the query
-     * @param PropelPDO $con optional connection object
-     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Expedientegasto[] List of Expedientegasto objects
-     */
-    public function getExpedientegastosJoinProveedoritrade($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = ExpedientegastoQuery::create(null, $criteria);
-        $query->joinWith('Proveedoritrade', $join_behavior);
-
-        return $this->getExpedientegastos($query, $con);
     }
 
     /**
@@ -1408,11 +1131,9 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function clear()
     {
-        $this->idgastofacturacion = null;
         $this->idcategoriagasto = null;
-        $this->gastofacturacion_nombre = null;
-        $this->gastofacturacion_descripcion = null;
-        $this->gastofacturacion_iva = null;
+        $this->categoriagasto_nombre = null;
+        $this->categoriagasto_descripcion = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -1435,23 +1156,19 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->collExpedientegastos) {
-                foreach ($this->collExpedientegastos as $o) {
+            if ($this->collGastofacturacions) {
+                foreach ($this->collGastofacturacions as $o) {
                     $o->clearAllReferences($deep);
                 }
-            }
-            if ($this->aCategoriagasto instanceof Persistent) {
-              $this->aCategoriagasto->clearAllReferences($deep);
             }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        if ($this->collExpedientegastos instanceof PropelCollection) {
-            $this->collExpedientegastos->clearIterator();
+        if ($this->collGastofacturacions instanceof PropelCollection) {
+            $this->collGastofacturacions->clearIterator();
         }
-        $this->collExpedientegastos = null;
-        $this->aCategoriagasto = null;
+        $this->collGastofacturacions = null;
     }
 
     /**
@@ -1461,7 +1178,7 @@ abstract class BaseGastofacturacion extends BaseObject implements Persistent
      */
     public function __toString()
     {
-        return (string) $this->exportTo(GastofacturacionPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(CategoriagastoPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**

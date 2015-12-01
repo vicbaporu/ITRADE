@@ -42,22 +42,34 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     protected $idexpediente;
 
     /**
+     * The value for the idempleado field.
+     * @var        int
+     */
+    protected $idempleado;
+
+    /**
      * The value for the expedientearchivo_fecha field.
      * @var        string
      */
     protected $expedientearchivo_fecha;
 
     /**
+     * The value for the expedientearchivo_tipo field.
+     * @var        string
+     */
+    protected $expedientearchivo_tipo;
+
+    /**
+     * The value for the expedientearchivo_archivo field.
+     * @var        string
+     */
+    protected $expedientearchivo_archivo;
+
+    /**
      * The value for the expedientearchivo_nota field.
      * @var        string
      */
     protected $expedientearchivo_nota;
-
-    /**
-     * The value for the idempleado field.
-     * @var        int
-     */
-    protected $idempleado;
 
     /**
      * @var        Empleado
@@ -112,6 +124,17 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [idempleado] column value.
+     *
+     * @return int
+     */
+    public function getIdempleado()
+    {
+
+        return $this->idempleado;
+    }
+
+    /**
      * Get the [optionally formatted] temporal [expedientearchivo_fecha] column value.
      *
      *
@@ -152,6 +175,28 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [expedientearchivo_tipo] column value.
+     *
+     * @return string
+     */
+    public function getExpedientearchivoTipo()
+    {
+
+        return $this->expedientearchivo_tipo;
+    }
+
+    /**
+     * Get the [expedientearchivo_archivo] column value.
+     *
+     * @return string
+     */
+    public function getExpedientearchivoArchivo()
+    {
+
+        return $this->expedientearchivo_archivo;
+    }
+
+    /**
      * Get the [expedientearchivo_nota] column value.
      *
      * @return string
@@ -160,17 +205,6 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     {
 
         return $this->expedientearchivo_nota;
-    }
-
-    /**
-     * Get the [idempleado] column value.
-     *
-     * @return int
-     */
-    public function getIdempleado()
-    {
-
-        return $this->idempleado;
     }
 
     /**
@@ -220,50 +254,6 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     } // setIdexpediente()
 
     /**
-     * Sets the value of [expedientearchivo_fecha] column to a normalized version of the date/time value specified.
-     *
-     * @param mixed $v string, integer (timestamp), or DateTime value.
-     *               Empty strings are treated as null.
-     * @return Expedientearchivo The current object (for fluent API support)
-     */
-    public function setExpedientearchivoFecha($v)
-    {
-        $dt = PropelDateTime::newInstance($v, null, 'DateTime');
-        if ($this->expedientearchivo_fecha !== null || $dt !== null) {
-            $currentDateAsString = ($this->expedientearchivo_fecha !== null && $tmpDt = new DateTime($this->expedientearchivo_fecha)) ? $tmpDt->format('Y-m-d H:i:s') : null;
-            $newDateAsString = $dt ? $dt->format('Y-m-d H:i:s') : null;
-            if ($currentDateAsString !== $newDateAsString) {
-                $this->expedientearchivo_fecha = $newDateAsString;
-                $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA;
-            }
-        } // if either are not null
-
-
-        return $this;
-    } // setExpedientearchivoFecha()
-
-    /**
-     * Set the value of [expedientearchivo_nota] column.
-     *
-     * @param  string $v new value
-     * @return Expedientearchivo The current object (for fluent API support)
-     */
-    public function setExpedientearchivoNota($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->expedientearchivo_nota !== $v) {
-            $this->expedientearchivo_nota = $v;
-            $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA;
-        }
-
-
-        return $this;
-    } // setExpedientearchivoNota()
-
-    /**
      * Set the value of [idempleado] column.
      *
      * @param  int $v new value
@@ -287,6 +277,92 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
 
         return $this;
     } // setIdempleado()
+
+    /**
+     * Sets the value of [expedientearchivo_fecha] column to a normalized version of the date/time value specified.
+     *
+     * @param mixed $v string, integer (timestamp), or DateTime value.
+     *               Empty strings are treated as null.
+     * @return Expedientearchivo The current object (for fluent API support)
+     */
+    public function setExpedientearchivoFecha($v)
+    {
+        $dt = PropelDateTime::newInstance($v, null, 'DateTime');
+        if ($this->expedientearchivo_fecha !== null || $dt !== null) {
+            $currentDateAsString = ($this->expedientearchivo_fecha !== null && $tmpDt = new DateTime($this->expedientearchivo_fecha)) ? $tmpDt->format('Y-m-d H:i:s') : null;
+            $newDateAsString = $dt ? $dt->format('Y-m-d H:i:s') : null;
+            if ($currentDateAsString !== $newDateAsString) {
+                $this->expedientearchivo_fecha = $newDateAsString;
+                $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA;
+            }
+        } // if either are not null
+
+
+        return $this;
+    } // setExpedientearchivoFecha()
+
+    /**
+     * Set the value of [expedientearchivo_tipo] column.
+     *
+     * @param  string $v new value
+     * @return Expedientearchivo The current object (for fluent API support)
+     */
+    public function setExpedientearchivoTipo($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expedientearchivo_tipo !== $v) {
+            $this->expedientearchivo_tipo = $v;
+            $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO;
+        }
+
+
+        return $this;
+    } // setExpedientearchivoTipo()
+
+    /**
+     * Set the value of [expedientearchivo_archivo] column.
+     *
+     * @param  string $v new value
+     * @return Expedientearchivo The current object (for fluent API support)
+     */
+    public function setExpedientearchivoArchivo($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expedientearchivo_archivo !== $v) {
+            $this->expedientearchivo_archivo = $v;
+            $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO;
+        }
+
+
+        return $this;
+    } // setExpedientearchivoArchivo()
+
+    /**
+     * Set the value of [expedientearchivo_nota] column.
+     *
+     * @param  string $v new value
+     * @return Expedientearchivo The current object (for fluent API support)
+     */
+    public function setExpedientearchivoNota($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expedientearchivo_nota !== $v) {
+            $this->expedientearchivo_nota = $v;
+            $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA;
+        }
+
+
+        return $this;
+    } // setExpedientearchivoNota()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -322,9 +398,11 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
 
             $this->idexpedientearchivo = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->idexpediente = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
-            $this->expedientearchivo_fecha = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->expedientearchivo_nota = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->idempleado = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+            $this->idempleado = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+            $this->expedientearchivo_fecha = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->expedientearchivo_tipo = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->expedientearchivo_archivo = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->expedientearchivo_nota = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -334,7 +412,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 5; // 5 = ExpedientearchivoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = ExpedientearchivoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Expedientearchivo object", $e);
@@ -579,14 +657,20 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientearchivoPeer::IDEXPEDIENTE)) {
             $modifiedColumns[':p' . $index++]  = '`idexpediente`';
         }
+        if ($this->isColumnModified(ExpedientearchivoPeer::IDEMPLEADO)) {
+            $modifiedColumns[':p' . $index++]  = '`idempleado`';
+        }
         if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA)) {
             $modifiedColumns[':p' . $index++]  = '`expedientearchivo_fecha`';
         }
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO)) {
+            $modifiedColumns[':p' . $index++]  = '`expedientearchivo_tipo`';
+        }
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO)) {
+            $modifiedColumns[':p' . $index++]  = '`expedientearchivo_archivo`';
+        }
         if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA)) {
             $modifiedColumns[':p' . $index++]  = '`expedientearchivo_nota`';
-        }
-        if ($this->isColumnModified(ExpedientearchivoPeer::IDEMPLEADO)) {
-            $modifiedColumns[':p' . $index++]  = '`idempleado`';
         }
 
         $sql = sprintf(
@@ -605,14 +689,20 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
                     case '`idexpediente`':
                         $stmt->bindValue($identifier, $this->idexpediente, PDO::PARAM_INT);
                         break;
+                    case '`idempleado`':
+                        $stmt->bindValue($identifier, $this->idempleado, PDO::PARAM_INT);
+                        break;
                     case '`expedientearchivo_fecha`':
                         $stmt->bindValue($identifier, $this->expedientearchivo_fecha, PDO::PARAM_STR);
                         break;
+                    case '`expedientearchivo_tipo`':
+                        $stmt->bindValue($identifier, $this->expedientearchivo_tipo, PDO::PARAM_STR);
+                        break;
+                    case '`expedientearchivo_archivo`':
+                        $stmt->bindValue($identifier, $this->expedientearchivo_archivo, PDO::PARAM_STR);
+                        break;
                     case '`expedientearchivo_nota`':
                         $stmt->bindValue($identifier, $this->expedientearchivo_nota, PDO::PARAM_STR);
-                        break;
-                    case '`idempleado`':
-                        $stmt->bindValue($identifier, $this->idempleado, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -773,13 +863,19 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
                 return $this->getIdexpediente();
                 break;
             case 2:
-                return $this->getExpedientearchivoFecha();
+                return $this->getIdempleado();
                 break;
             case 3:
-                return $this->getExpedientearchivoNota();
+                return $this->getExpedientearchivoFecha();
                 break;
             case 4:
-                return $this->getIdempleado();
+                return $this->getExpedientearchivoTipo();
+                break;
+            case 5:
+                return $this->getExpedientearchivoArchivo();
+                break;
+            case 6:
+                return $this->getExpedientearchivoNota();
                 break;
             default:
                 return null;
@@ -812,9 +908,11 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
         $result = array(
             $keys[0] => $this->getIdexpedientearchivo(),
             $keys[1] => $this->getIdexpediente(),
-            $keys[2] => $this->getExpedientearchivoFecha(),
-            $keys[3] => $this->getExpedientearchivoNota(),
-            $keys[4] => $this->getIdempleado(),
+            $keys[2] => $this->getIdempleado(),
+            $keys[3] => $this->getExpedientearchivoFecha(),
+            $keys[4] => $this->getExpedientearchivoTipo(),
+            $keys[5] => $this->getExpedientearchivoArchivo(),
+            $keys[6] => $this->getExpedientearchivoNota(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -869,13 +967,19 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
                 $this->setIdexpediente($value);
                 break;
             case 2:
-                $this->setExpedientearchivoFecha($value);
+                $this->setIdempleado($value);
                 break;
             case 3:
-                $this->setExpedientearchivoNota($value);
+                $this->setExpedientearchivoFecha($value);
                 break;
             case 4:
-                $this->setIdempleado($value);
+                $this->setExpedientearchivoTipo($value);
+                break;
+            case 5:
+                $this->setExpedientearchivoArchivo($value);
+                break;
+            case 6:
+                $this->setExpedientearchivoNota($value);
                 break;
         } // switch()
     }
@@ -903,9 +1007,11 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
 
         if (array_key_exists($keys[0], $arr)) $this->setIdexpedientearchivo($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setIdexpediente($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setExpedientearchivoFecha($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setExpedientearchivoNota($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setIdempleado($arr[$keys[4]]);
+        if (array_key_exists($keys[2], $arr)) $this->setIdempleado($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setExpedientearchivoFecha($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setExpedientearchivoTipo($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setExpedientearchivoArchivo($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setExpedientearchivoNota($arr[$keys[6]]);
     }
 
     /**
@@ -919,9 +1025,11 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
 
         if ($this->isColumnModified(ExpedientearchivoPeer::IDEXPEDIENTEARCHIVO)) $criteria->add(ExpedientearchivoPeer::IDEXPEDIENTEARCHIVO, $this->idexpedientearchivo);
         if ($this->isColumnModified(ExpedientearchivoPeer::IDEXPEDIENTE)) $criteria->add(ExpedientearchivoPeer::IDEXPEDIENTE, $this->idexpediente);
-        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $this->expedientearchivo_fecha);
-        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA, $this->expedientearchivo_nota);
         if ($this->isColumnModified(ExpedientearchivoPeer::IDEMPLEADO)) $criteria->add(ExpedientearchivoPeer::IDEMPLEADO, $this->idempleado);
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $this->expedientearchivo_fecha);
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO, $this->expedientearchivo_tipo);
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO, $this->expedientearchivo_archivo);
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA, $this->expedientearchivo_nota);
 
         return $criteria;
     }
@@ -986,9 +1094,11 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setIdexpediente($this->getIdexpediente());
-        $copyObj->setExpedientearchivoFecha($this->getExpedientearchivoFecha());
-        $copyObj->setExpedientearchivoNota($this->getExpedientearchivoNota());
         $copyObj->setIdempleado($this->getIdempleado());
+        $copyObj->setExpedientearchivoFecha($this->getExpedientearchivoFecha());
+        $copyObj->setExpedientearchivoTipo($this->getExpedientearchivoTipo());
+        $copyObj->setExpedientearchivoArchivo($this->getExpedientearchivoArchivo());
+        $copyObj->setExpedientearchivoNota($this->getExpedientearchivoNota());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1158,9 +1268,11 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     {
         $this->idexpedientearchivo = null;
         $this->idexpediente = null;
-        $this->expedientearchivo_fecha = null;
-        $this->expedientearchivo_nota = null;
         $this->idempleado = null;
+        $this->expedientearchivo_fecha = null;
+        $this->expedientearchivo_tipo = null;
+        $this->expedientearchivo_archivo = null;
+        $this->expedientearchivo_nota = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

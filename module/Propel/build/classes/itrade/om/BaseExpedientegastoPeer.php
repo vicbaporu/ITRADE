@@ -24,13 +24,13 @@ abstract class BaseExpedientegastoPeer
     const TM_CLASS = 'ExpedientegastoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 8;
+    const NUM_COLUMNS = 9;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 8;
+    const NUM_HYDRATE_COLUMNS = 9;
 
     /** the column name for the idexpedientegasto field */
     const IDEXPEDIENTEGASTO = 'expedientegasto.idexpedientegasto';
@@ -43,6 +43,9 @@ abstract class BaseExpedientegastoPeer
 
     /** the column name for the idproveedoritrade field */
     const IDPROVEEDORITRADE = 'expedientegasto.idproveedoritrade';
+
+    /** the column name for the idempleado field */
+    const IDEMPLEADO = 'expedientegasto.idempleado';
 
     /** the column name for the expedientegasto_fecha field */
     const EXPEDIENTEGASTO_FECHA = 'expedientegasto.expedientegasto_fecha';
@@ -57,7 +60,8 @@ abstract class BaseExpedientegastoPeer
     const EXPEDIENTEGASTO_COMPROBANTE = 'expedientegasto.expedientegasto_comprobante';
 
     /** The enumerated values for the expedientegasto_tipo field */
-    const EXPEDIENTEGASTO_TIPO_GASTO = 'gasto';
+    const EXPEDIENTEGASTO_TIPO_GASTORECIBIR = 'gastorecibir';
+    const EXPEDIENTEGASTO_TIPO_GASTOCONOCIDO = 'gastoconocido';
     const EXPEDIENTEGASTO_TIPO_COBRO = 'cobro';
 
     /** The default string format for model objects of the related table **/
@@ -79,12 +83,12 @@ abstract class BaseExpedientegastoPeer
      * e.g. ExpedientegastoPeer::$fieldNames[ExpedientegastoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto', 'Idexpediente', 'Idgastofacturacion', 'Idproveedoritrade', 'ExpedientegastoFecha', 'ExpedientegastoMonto', 'ExpedientegastoTipo', 'ExpedientegastoComprobante', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'expedientegastoFecha', 'expedientegastoMonto', 'expedientegastoTipo', 'expedientegastoComprobante', ),
-        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO, ExpedientegastoPeer::IDEXPEDIENTE, ExpedientegastoPeer::IDGASTOFACTURACION, ExpedientegastoPeer::IDPROVEEDORITRADE, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO', 'IDEXPEDIENTE', 'IDGASTOFACTURACION', 'IDPROVEEDORITRADE', 'EXPEDIENTEGASTO_FECHA', 'EXPEDIENTEGASTO_MONTO', 'EXPEDIENTEGASTO_TIPO', 'EXPEDIENTEGASTO_COMPROBANTE', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'expedientegasto_fecha', 'expedientegasto_monto', 'expedientegasto_tipo', 'expedientegasto_comprobante', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto', 'Idexpediente', 'Idgastofacturacion', 'Idproveedoritrade', 'Idempleado', 'ExpedientegastoFecha', 'ExpedientegastoMonto', 'ExpedientegastoTipo', 'ExpedientegastoComprobante', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'idempleado', 'expedientegastoFecha', 'expedientegastoMonto', 'expedientegastoTipo', 'expedientegastoComprobante', ),
+        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO, ExpedientegastoPeer::IDEXPEDIENTE, ExpedientegastoPeer::IDGASTOFACTURACION, ExpedientegastoPeer::IDPROVEEDORITRADE, ExpedientegastoPeer::IDEMPLEADO, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO', 'IDEXPEDIENTE', 'IDGASTOFACTURACION', 'IDPROVEEDORITRADE', 'IDEMPLEADO', 'EXPEDIENTEGASTO_FECHA', 'EXPEDIENTEGASTO_MONTO', 'EXPEDIENTEGASTO_TIPO', 'EXPEDIENTEGASTO_COMPROBANTE', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'idempleado', 'expedientegasto_fecha', 'expedientegasto_monto', 'expedientegasto_tipo', 'expedientegasto_comprobante', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
     /**
@@ -94,18 +98,19 @@ abstract class BaseExpedientegastoPeer
      * e.g. ExpedientegastoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto' => 0, 'Idexpediente' => 1, 'Idgastofacturacion' => 2, 'Idproveedoritrade' => 3, 'ExpedientegastoFecha' => 4, 'ExpedientegastoMonto' => 5, 'ExpedientegastoTipo' => 6, 'ExpedientegastoComprobante' => 7, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'expedientegastoFecha' => 4, 'expedientegastoMonto' => 5, 'expedientegastoTipo' => 6, 'expedientegastoComprobante' => 7, ),
-        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO => 0, ExpedientegastoPeer::IDEXPEDIENTE => 1, ExpedientegastoPeer::IDGASTOFACTURACION => 2, ExpedientegastoPeer::IDPROVEEDORITRADE => 3, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA => 4, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO => 5, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO => 6, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE => 7, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO' => 0, 'IDEXPEDIENTE' => 1, 'IDGASTOFACTURACION' => 2, 'IDPROVEEDORITRADE' => 3, 'EXPEDIENTEGASTO_FECHA' => 4, 'EXPEDIENTEGASTO_MONTO' => 5, 'EXPEDIENTEGASTO_TIPO' => 6, 'EXPEDIENTEGASTO_COMPROBANTE' => 7, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'expedientegasto_fecha' => 4, 'expedientegasto_monto' => 5, 'expedientegasto_tipo' => 6, 'expedientegasto_comprobante' => 7, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto' => 0, 'Idexpediente' => 1, 'Idgastofacturacion' => 2, 'Idproveedoritrade' => 3, 'Idempleado' => 4, 'ExpedientegastoFecha' => 5, 'ExpedientegastoMonto' => 6, 'ExpedientegastoTipo' => 7, 'ExpedientegastoComprobante' => 8, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'idempleado' => 4, 'expedientegastoFecha' => 5, 'expedientegastoMonto' => 6, 'expedientegastoTipo' => 7, 'expedientegastoComprobante' => 8, ),
+        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO => 0, ExpedientegastoPeer::IDEXPEDIENTE => 1, ExpedientegastoPeer::IDGASTOFACTURACION => 2, ExpedientegastoPeer::IDPROVEEDORITRADE => 3, ExpedientegastoPeer::IDEMPLEADO => 4, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA => 5, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO => 6, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO => 7, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE => 8, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO' => 0, 'IDEXPEDIENTE' => 1, 'IDGASTOFACTURACION' => 2, 'IDPROVEEDORITRADE' => 3, 'IDEMPLEADO' => 4, 'EXPEDIENTEGASTO_FECHA' => 5, 'EXPEDIENTEGASTO_MONTO' => 6, 'EXPEDIENTEGASTO_TIPO' => 7, 'EXPEDIENTEGASTO_COMPROBANTE' => 8, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'idempleado' => 4, 'expedientegasto_fecha' => 5, 'expedientegasto_monto' => 6, 'expedientegasto_tipo' => 7, 'expedientegasto_comprobante' => 8, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
     /** The enumerated values for this table */
     protected static $enumValueSets = array(
         ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO => array(
-            ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_GASTO,
+            ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_GASTORECIBIR,
+            ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_GASTOCONOCIDO,
             ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_COBRO,
         ),
     );
@@ -230,6 +235,7 @@ abstract class BaseExpedientegastoPeer
             $criteria->addSelectColumn(ExpedientegastoPeer::IDEXPEDIENTE);
             $criteria->addSelectColumn(ExpedientegastoPeer::IDGASTOFACTURACION);
             $criteria->addSelectColumn(ExpedientegastoPeer::IDPROVEEDORITRADE);
+            $criteria->addSelectColumn(ExpedientegastoPeer::IDEMPLEADO);
             $criteria->addSelectColumn(ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA);
             $criteria->addSelectColumn(ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO);
             $criteria->addSelectColumn(ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO);
@@ -239,6 +245,7 @@ abstract class BaseExpedientegastoPeer
             $criteria->addSelectColumn($alias . '.idexpediente');
             $criteria->addSelectColumn($alias . '.idgastofacturacion');
             $criteria->addSelectColumn($alias . '.idproveedoritrade');
+            $criteria->addSelectColumn($alias . '.idempleado');
             $criteria->addSelectColumn($alias . '.expedientegasto_fecha');
             $criteria->addSelectColumn($alias . '.expedientegasto_monto');
             $criteria->addSelectColumn($alias . '.expedientegasto_tipo');
@@ -545,6 +552,57 @@ abstract class BaseExpedientegastoPeer
 
 
     /**
+     * Returns the number of rows matching criteria, joining the related Empleado table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinEmpleado(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(ExpedientegastoPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            ExpedientegastoPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(ExpedientegastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
      * Returns the number of rows matching criteria, joining the related Expediente table
      *
      * @param      Criteria $criteria
@@ -694,6 +752,73 @@ abstract class BaseExpedientegastoPeer
         $stmt->closeCursor();
 
         return $count;
+    }
+
+
+    /**
+     * Selects a collection of Expedientegasto objects pre-filled with their Empleado objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Expedientegasto objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinEmpleado(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
+        }
+
+        ExpedientegastoPeer::addSelectColumns($criteria);
+        $startcol = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS;
+        EmpleadoPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ExpedientegastoPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ExpedientegastoPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = ExpedientegastoPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ExpedientegastoPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = EmpleadoPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = EmpleadoPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = EmpleadoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    EmpleadoPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Expedientegasto) to $obj2 (Empleado)
+                $obj2->addExpedientegasto($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
     }
 
 
@@ -934,6 +1059,8 @@ abstract class BaseExpedientegastoPeer
             $con = Propel::getConnection(ExpedientegastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
         $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
 
         $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
@@ -974,14 +1101,19 @@ abstract class BaseExpedientegastoPeer
         ExpedientegastoPeer::addSelectColumns($criteria);
         $startcol2 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS;
 
+        EmpleadoPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + EmpleadoPeer::NUM_HYDRATE_COLUMNS;
+
         ExpedientePeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + ExpedientePeer::NUM_HYDRATE_COLUMNS;
+        $startcol4 = $startcol3 + ExpedientePeer::NUM_HYDRATE_COLUMNS;
 
         GastofacturacionPeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
+        $startcol5 = $startcol4 + GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
 
         ProveedoritradePeer::addSelectColumns($criteria);
-        $startcol5 = $startcol4 + ProveedoritradePeer::NUM_HYDRATE_COLUMNS;
+        $startcol6 = $startcol5 + ProveedoritradePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
 
         $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
 
@@ -1006,58 +1138,76 @@ abstract class BaseExpedientegastoPeer
                 ExpedientegastoPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-            // Add objects for joined Expediente rows
+            // Add objects for joined Empleado rows
 
-            $key2 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            $key2 = EmpleadoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
             if ($key2 !== null) {
-                $obj2 = ExpedientePeer::getInstanceFromPool($key2);
+                $obj2 = EmpleadoPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = ExpedientePeer::getOMClass();
+                    $cls = EmpleadoPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    ExpedientePeer::addInstanceToPool($obj2, $key2);
+                    EmpleadoPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 loaded
 
-                // Add the $obj1 (Expedientegasto) to the collection in $obj2 (Expediente)
+                // Add the $obj1 (Expedientegasto) to the collection in $obj2 (Empleado)
                 $obj2->addExpedientegasto($obj1);
+            } // if joined row not null
+
+            // Add objects for joined Expediente rows
+
+            $key3 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            if ($key3 !== null) {
+                $obj3 = ExpedientePeer::getInstanceFromPool($key3);
+                if (!$obj3) {
+
+                    $cls = ExpedientePeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    ExpedientePeer::addInstanceToPool($obj3, $key3);
+                } // if obj3 loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Expediente)
+                $obj3->addExpedientegasto($obj1);
             } // if joined row not null
 
             // Add objects for joined Gastofacturacion rows
 
-            $key3 = GastofacturacionPeer::getPrimaryKeyHashFromRow($row, $startcol3);
-            if ($key3 !== null) {
-                $obj3 = GastofacturacionPeer::getInstanceFromPool($key3);
-                if (!$obj3) {
+            $key4 = GastofacturacionPeer::getPrimaryKeyHashFromRow($row, $startcol4);
+            if ($key4 !== null) {
+                $obj4 = GastofacturacionPeer::getInstanceFromPool($key4);
+                if (!$obj4) {
 
                     $cls = GastofacturacionPeer::getOMClass();
 
-                    $obj3 = new $cls();
-                    $obj3->hydrate($row, $startcol3);
-                    GastofacturacionPeer::addInstanceToPool($obj3, $key3);
-                } // if obj3 loaded
+                    $obj4 = new $cls();
+                    $obj4->hydrate($row, $startcol4);
+                    GastofacturacionPeer::addInstanceToPool($obj4, $key4);
+                } // if obj4 loaded
 
-                // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Gastofacturacion)
-                $obj3->addExpedientegasto($obj1);
+                // Add the $obj1 (Expedientegasto) to the collection in $obj4 (Gastofacturacion)
+                $obj4->addExpedientegasto($obj1);
             } // if joined row not null
 
             // Add objects for joined Proveedoritrade rows
 
-            $key4 = ProveedoritradePeer::getPrimaryKeyHashFromRow($row, $startcol4);
-            if ($key4 !== null) {
-                $obj4 = ProveedoritradePeer::getInstanceFromPool($key4);
-                if (!$obj4) {
+            $key5 = ProveedoritradePeer::getPrimaryKeyHashFromRow($row, $startcol5);
+            if ($key5 !== null) {
+                $obj5 = ProveedoritradePeer::getInstanceFromPool($key5);
+                if (!$obj5) {
 
                     $cls = ProveedoritradePeer::getOMClass();
 
-                    $obj4 = new $cls();
-                    $obj4->hydrate($row, $startcol4);
-                    ProveedoritradePeer::addInstanceToPool($obj4, $key4);
-                } // if obj4 loaded
+                    $obj5 = new $cls();
+                    $obj5->hydrate($row, $startcol5);
+                    ProveedoritradePeer::addInstanceToPool($obj5, $key5);
+                } // if obj5 loaded
 
-                // Add the $obj1 (Expedientegasto) to the collection in $obj4 (Proveedoritrade)
-                $obj4->addExpedientegasto($obj1);
+                // Add the $obj1 (Expedientegasto) to the collection in $obj5 (Proveedoritrade)
+                $obj5->addExpedientegasto($obj1);
             } // if joined row not null
 
             $results[] = $obj1;
@@ -1065,6 +1215,61 @@ abstract class BaseExpedientegastoPeer
         $stmt->closeCursor();
 
         return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Empleado table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptEmpleado(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(ExpedientegastoPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            ExpedientegastoPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(ExpedientegastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDPROVEEDORITRADE, ProveedoritradePeer::IDPROVEEDORITRADE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
     }
 
 
@@ -1103,6 +1308,8 @@ abstract class BaseExpedientegastoPeer
         if ($con === null) {
             $con = Propel::getConnection(ExpedientegastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
 
         $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
 
@@ -1157,6 +1364,8 @@ abstract class BaseExpedientegastoPeer
             $con = Propel::getConnection(ExpedientegastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
         $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
 
         $criteria->addJoin(ExpedientegastoPeer::IDPROVEEDORITRADE, ProveedoritradePeer::IDPROVEEDORITRADE, $join_behavior);
@@ -1210,6 +1419,8 @@ abstract class BaseExpedientegastoPeer
             $con = Propel::getConnection(ExpedientegastoPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
         $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
 
         $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
@@ -1228,7 +1439,7 @@ abstract class BaseExpedientegastoPeer
 
 
     /**
-     * Selects a collection of Expedientegasto objects pre-filled with all related objects except Expediente.
+     * Selects a collection of Expedientegasto objects pre-filled with all related objects except Empleado.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -1237,203 +1448,7 @@ abstract class BaseExpedientegastoPeer
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptExpediente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $criteria = clone $criteria;
-
-        // Set the correct dbName if it has not been overridden
-        // $criteria->getDbName() will return the same object if not set to another value
-        // so == check is okay and faster
-        if ($criteria->getDbName() == Propel::getDefaultDB()) {
-            $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
-        }
-
-        ExpedientegastoPeer::addSelectColumns($criteria);
-        $startcol2 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS;
-
-        GastofacturacionPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
-
-        ProveedoritradePeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + ProveedoritradePeer::NUM_HYDRATE_COLUMNS;
-
-        $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
-
-        $criteria->addJoin(ExpedientegastoPeer::IDPROVEEDORITRADE, ProveedoritradePeer::IDPROVEEDORITRADE, $join_behavior);
-
-
-        $stmt = BasePeer::doSelect($criteria, $con);
-        $results = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = ExpedientegastoPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = ExpedientegastoPeer::getInstanceFromPool($key1))) {
-                // We no longer rehydrate the object, since this can cause data loss.
-                // See http://www.propelorm.org/ticket/509
-                // $obj1->hydrate($row, 0, true); // rehydrate
-            } else {
-                $cls = ExpedientegastoPeer::getOMClass();
-
-                $obj1 = new $cls();
-                $obj1->hydrate($row);
-                ExpedientegastoPeer::addInstanceToPool($obj1, $key1);
-            } // if obj1 already loaded
-
-                // Add objects for joined Gastofacturacion rows
-
-                $key2 = GastofacturacionPeer::getPrimaryKeyHashFromRow($row, $startcol2);
-                if ($key2 !== null) {
-                    $obj2 = GastofacturacionPeer::getInstanceFromPool($key2);
-                    if (!$obj2) {
-
-                        $cls = GastofacturacionPeer::getOMClass();
-
-                    $obj2 = new $cls();
-                    $obj2->hydrate($row, $startcol2);
-                    GastofacturacionPeer::addInstanceToPool($obj2, $key2);
-                } // if $obj2 already loaded
-
-                // Add the $obj1 (Expedientegasto) to the collection in $obj2 (Gastofacturacion)
-                $obj2->addExpedientegasto($obj1);
-
-            } // if joined row is not null
-
-                // Add objects for joined Proveedoritrade rows
-
-                $key3 = ProveedoritradePeer::getPrimaryKeyHashFromRow($row, $startcol3);
-                if ($key3 !== null) {
-                    $obj3 = ProveedoritradePeer::getInstanceFromPool($key3);
-                    if (!$obj3) {
-
-                        $cls = ProveedoritradePeer::getOMClass();
-
-                    $obj3 = new $cls();
-                    $obj3->hydrate($row, $startcol3);
-                    ProveedoritradePeer::addInstanceToPool($obj3, $key3);
-                } // if $obj3 already loaded
-
-                // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Proveedoritrade)
-                $obj3->addExpedientegasto($obj1);
-
-            } // if joined row is not null
-
-            $results[] = $obj1;
-        }
-        $stmt->closeCursor();
-
-        return $results;
-    }
-
-
-    /**
-     * Selects a collection of Expedientegasto objects pre-filled with all related objects except Gastofacturacion.
-     *
-     * @param      Criteria  $criteria
-     * @param      PropelPDO $con
-     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Expedientegasto objects.
-     * @throws PropelException Any exceptions caught during processing will be
-     *		 rethrown wrapped into a PropelException.
-     */
-    public static function doSelectJoinAllExceptGastofacturacion(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $criteria = clone $criteria;
-
-        // Set the correct dbName if it has not been overridden
-        // $criteria->getDbName() will return the same object if not set to another value
-        // so == check is okay and faster
-        if ($criteria->getDbName() == Propel::getDefaultDB()) {
-            $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
-        }
-
-        ExpedientegastoPeer::addSelectColumns($criteria);
-        $startcol2 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS;
-
-        ExpedientePeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + ExpedientePeer::NUM_HYDRATE_COLUMNS;
-
-        ProveedoritradePeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + ProveedoritradePeer::NUM_HYDRATE_COLUMNS;
-
-        $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
-
-        $criteria->addJoin(ExpedientegastoPeer::IDPROVEEDORITRADE, ProveedoritradePeer::IDPROVEEDORITRADE, $join_behavior);
-
-
-        $stmt = BasePeer::doSelect($criteria, $con);
-        $results = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = ExpedientegastoPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = ExpedientegastoPeer::getInstanceFromPool($key1))) {
-                // We no longer rehydrate the object, since this can cause data loss.
-                // See http://www.propelorm.org/ticket/509
-                // $obj1->hydrate($row, 0, true); // rehydrate
-            } else {
-                $cls = ExpedientegastoPeer::getOMClass();
-
-                $obj1 = new $cls();
-                $obj1->hydrate($row);
-                ExpedientegastoPeer::addInstanceToPool($obj1, $key1);
-            } // if obj1 already loaded
-
-                // Add objects for joined Expediente rows
-
-                $key2 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol2);
-                if ($key2 !== null) {
-                    $obj2 = ExpedientePeer::getInstanceFromPool($key2);
-                    if (!$obj2) {
-
-                        $cls = ExpedientePeer::getOMClass();
-
-                    $obj2 = new $cls();
-                    $obj2->hydrate($row, $startcol2);
-                    ExpedientePeer::addInstanceToPool($obj2, $key2);
-                } // if $obj2 already loaded
-
-                // Add the $obj1 (Expedientegasto) to the collection in $obj2 (Expediente)
-                $obj2->addExpedientegasto($obj1);
-
-            } // if joined row is not null
-
-                // Add objects for joined Proveedoritrade rows
-
-                $key3 = ProveedoritradePeer::getPrimaryKeyHashFromRow($row, $startcol3);
-                if ($key3 !== null) {
-                    $obj3 = ProveedoritradePeer::getInstanceFromPool($key3);
-                    if (!$obj3) {
-
-                        $cls = ProveedoritradePeer::getOMClass();
-
-                    $obj3 = new $cls();
-                    $obj3->hydrate($row, $startcol3);
-                    ProveedoritradePeer::addInstanceToPool($obj3, $key3);
-                } // if $obj3 already loaded
-
-                // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Proveedoritrade)
-                $obj3->addExpedientegasto($obj1);
-
-            } // if joined row is not null
-
-            $results[] = $obj1;
-        }
-        $stmt->closeCursor();
-
-        return $results;
-    }
-
-
-    /**
-     * Selects a collection of Expedientegasto objects pre-filled with all related objects except Proveedoritrade.
-     *
-     * @param      Criteria  $criteria
-     * @param      PropelPDO $con
-     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Expedientegasto objects.
-     * @throws PropelException Any exceptions caught during processing will be
-     *		 rethrown wrapped into a PropelException.
-     */
-    public static function doSelectJoinAllExceptProveedoritrade(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptEmpleado(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -1453,9 +1468,14 @@ abstract class BaseExpedientegastoPeer
         GastofacturacionPeer::addSelectColumns($criteria);
         $startcol4 = $startcol3 + GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
 
+        ProveedoritradePeer::addSelectColumns($criteria);
+        $startcol5 = $startcol4 + ProveedoritradePeer::NUM_HYDRATE_COLUMNS;
+
         $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
 
         $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDPROVEEDORITRADE, ProveedoritradePeer::IDPROVEEDORITRADE, $join_behavior);
 
 
         $stmt = BasePeer::doSelect($criteria, $con);
@@ -1510,6 +1530,391 @@ abstract class BaseExpedientegastoPeer
 
                 // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Gastofacturacion)
                 $obj3->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Proveedoritrade rows
+
+                $key4 = ProveedoritradePeer::getPrimaryKeyHashFromRow($row, $startcol4);
+                if ($key4 !== null) {
+                    $obj4 = ProveedoritradePeer::getInstanceFromPool($key4);
+                    if (!$obj4) {
+
+                        $cls = ProveedoritradePeer::getOMClass();
+
+                    $obj4 = new $cls();
+                    $obj4->hydrate($row, $startcol4);
+                    ProveedoritradePeer::addInstanceToPool($obj4, $key4);
+                } // if $obj4 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj4 (Proveedoritrade)
+                $obj4->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Expedientegasto objects pre-filled with all related objects except Expediente.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Expedientegasto objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptExpediente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
+        }
+
+        ExpedientegastoPeer::addSelectColumns($criteria);
+        $startcol2 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS;
+
+        EmpleadoPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + EmpleadoPeer::NUM_HYDRATE_COLUMNS;
+
+        GastofacturacionPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
+
+        ProveedoritradePeer::addSelectColumns($criteria);
+        $startcol5 = $startcol4 + ProveedoritradePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDPROVEEDORITRADE, ProveedoritradePeer::IDPROVEEDORITRADE, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ExpedientegastoPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ExpedientegastoPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = ExpedientegastoPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ExpedientegastoPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined Empleado rows
+
+                $key2 = EmpleadoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = EmpleadoPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+
+                        $cls = EmpleadoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    EmpleadoPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj2 (Empleado)
+                $obj2->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Gastofacturacion rows
+
+                $key3 = GastofacturacionPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = GastofacturacionPeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+
+                        $cls = GastofacturacionPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    GastofacturacionPeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Gastofacturacion)
+                $obj3->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Proveedoritrade rows
+
+                $key4 = ProveedoritradePeer::getPrimaryKeyHashFromRow($row, $startcol4);
+                if ($key4 !== null) {
+                    $obj4 = ProveedoritradePeer::getInstanceFromPool($key4);
+                    if (!$obj4) {
+
+                        $cls = ProveedoritradePeer::getOMClass();
+
+                    $obj4 = new $cls();
+                    $obj4->hydrate($row, $startcol4);
+                    ProveedoritradePeer::addInstanceToPool($obj4, $key4);
+                } // if $obj4 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj4 (Proveedoritrade)
+                $obj4->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Expedientegasto objects pre-filled with all related objects except Gastofacturacion.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Expedientegasto objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptGastofacturacion(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
+        }
+
+        ExpedientegastoPeer::addSelectColumns($criteria);
+        $startcol2 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS;
+
+        EmpleadoPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + EmpleadoPeer::NUM_HYDRATE_COLUMNS;
+
+        ExpedientePeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + ExpedientePeer::NUM_HYDRATE_COLUMNS;
+
+        ProveedoritradePeer::addSelectColumns($criteria);
+        $startcol5 = $startcol4 + ProveedoritradePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDPROVEEDORITRADE, ProveedoritradePeer::IDPROVEEDORITRADE, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ExpedientegastoPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ExpedientegastoPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = ExpedientegastoPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ExpedientegastoPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined Empleado rows
+
+                $key2 = EmpleadoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = EmpleadoPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+
+                        $cls = EmpleadoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    EmpleadoPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj2 (Empleado)
+                $obj2->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Expediente rows
+
+                $key3 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = ExpedientePeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+
+                        $cls = ExpedientePeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    ExpedientePeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Expediente)
+                $obj3->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Proveedoritrade rows
+
+                $key4 = ProveedoritradePeer::getPrimaryKeyHashFromRow($row, $startcol4);
+                if ($key4 !== null) {
+                    $obj4 = ProveedoritradePeer::getInstanceFromPool($key4);
+                    if (!$obj4) {
+
+                        $cls = ProveedoritradePeer::getOMClass();
+
+                    $obj4 = new $cls();
+                    $obj4->hydrate($row, $startcol4);
+                    ProveedoritradePeer::addInstanceToPool($obj4, $key4);
+                } // if $obj4 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj4 (Proveedoritrade)
+                $obj4->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Expedientegasto objects pre-filled with all related objects except Proveedoritrade.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Expedientegasto objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptProveedoritrade(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ExpedientegastoPeer::DATABASE_NAME);
+        }
+
+        ExpedientegastoPeer::addSelectColumns($criteria);
+        $startcol2 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS;
+
+        EmpleadoPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + EmpleadoPeer::NUM_HYDRATE_COLUMNS;
+
+        ExpedientePeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + ExpedientePeer::NUM_HYDRATE_COLUMNS;
+
+        GastofacturacionPeer::addSelectColumns($criteria);
+        $startcol5 = $startcol4 + GastofacturacionPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEMPLEADO, EmpleadoPeer::IDEMPLEADO, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+
+        $criteria->addJoin(ExpedientegastoPeer::IDGASTOFACTURACION, GastofacturacionPeer::IDGASTOFACTURACION, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ExpedientegastoPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ExpedientegastoPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = ExpedientegastoPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ExpedientegastoPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined Empleado rows
+
+                $key2 = EmpleadoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = EmpleadoPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+
+                        $cls = EmpleadoPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    EmpleadoPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj2 (Empleado)
+                $obj2->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Expediente rows
+
+                $key3 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = ExpedientePeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+
+                        $cls = ExpedientePeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    ExpedientePeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj3 (Expediente)
+                $obj3->addExpedientegasto($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Gastofacturacion rows
+
+                $key4 = GastofacturacionPeer::getPrimaryKeyHashFromRow($row, $startcol4);
+                if ($key4 !== null) {
+                    $obj4 = GastofacturacionPeer::getInstanceFromPool($key4);
+                    if (!$obj4) {
+
+                        $cls = GastofacturacionPeer::getOMClass();
+
+                    $obj4 = new $cls();
+                    $obj4->hydrate($row, $startcol4);
+                    GastofacturacionPeer::addInstanceToPool($obj4, $key4);
+                } // if $obj4 already loaded
+
+                // Add the $obj1 (Expedientegasto) to the collection in $obj4 (Gastofacturacion)
+                $obj4->addExpedientegasto($obj1);
 
             } // if joined row is not null
 

@@ -8,15 +8,19 @@
  *
  * @method ExpedientearchivoQuery orderByIdexpedientearchivo($order = Criteria::ASC) Order by the idexpedientearchivo column
  * @method ExpedientearchivoQuery orderByIdexpediente($order = Criteria::ASC) Order by the idexpediente column
- * @method ExpedientearchivoQuery orderByExpedientearchivoFecha($order = Criteria::ASC) Order by the expedientearchivo_fecha column
- * @method ExpedientearchivoQuery orderByExpedientearchivoNota($order = Criteria::ASC) Order by the expedientearchivo_nota column
  * @method ExpedientearchivoQuery orderByIdempleado($order = Criteria::ASC) Order by the idempleado column
+ * @method ExpedientearchivoQuery orderByExpedientearchivoFecha($order = Criteria::ASC) Order by the expedientearchivo_fecha column
+ * @method ExpedientearchivoQuery orderByExpedientearchivoTipo($order = Criteria::ASC) Order by the expedientearchivo_tipo column
+ * @method ExpedientearchivoQuery orderByExpedientearchivoArchivo($order = Criteria::ASC) Order by the expedientearchivo_archivo column
+ * @method ExpedientearchivoQuery orderByExpedientearchivoNota($order = Criteria::ASC) Order by the expedientearchivo_nota column
  *
  * @method ExpedientearchivoQuery groupByIdexpedientearchivo() Group by the idexpedientearchivo column
  * @method ExpedientearchivoQuery groupByIdexpediente() Group by the idexpediente column
- * @method ExpedientearchivoQuery groupByExpedientearchivoFecha() Group by the expedientearchivo_fecha column
- * @method ExpedientearchivoQuery groupByExpedientearchivoNota() Group by the expedientearchivo_nota column
  * @method ExpedientearchivoQuery groupByIdempleado() Group by the idempleado column
+ * @method ExpedientearchivoQuery groupByExpedientearchivoFecha() Group by the expedientearchivo_fecha column
+ * @method ExpedientearchivoQuery groupByExpedientearchivoTipo() Group by the expedientearchivo_tipo column
+ * @method ExpedientearchivoQuery groupByExpedientearchivoArchivo() Group by the expedientearchivo_archivo column
+ * @method ExpedientearchivoQuery groupByExpedientearchivoNota() Group by the expedientearchivo_nota column
  *
  * @method ExpedientearchivoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ExpedientearchivoQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -34,15 +38,19 @@
  * @method Expedientearchivo findOneOrCreate(PropelPDO $con = null) Return the first Expedientearchivo matching the query, or a new Expedientearchivo object populated from the query conditions when no match is found
  *
  * @method Expedientearchivo findOneByIdexpediente(int $idexpediente) Return the first Expedientearchivo filtered by the idexpediente column
- * @method Expedientearchivo findOneByExpedientearchivoFecha(string $expedientearchivo_fecha) Return the first Expedientearchivo filtered by the expedientearchivo_fecha column
- * @method Expedientearchivo findOneByExpedientearchivoNota(string $expedientearchivo_nota) Return the first Expedientearchivo filtered by the expedientearchivo_nota column
  * @method Expedientearchivo findOneByIdempleado(int $idempleado) Return the first Expedientearchivo filtered by the idempleado column
+ * @method Expedientearchivo findOneByExpedientearchivoFecha(string $expedientearchivo_fecha) Return the first Expedientearchivo filtered by the expedientearchivo_fecha column
+ * @method Expedientearchivo findOneByExpedientearchivoTipo(string $expedientearchivo_tipo) Return the first Expedientearchivo filtered by the expedientearchivo_tipo column
+ * @method Expedientearchivo findOneByExpedientearchivoArchivo(string $expedientearchivo_archivo) Return the first Expedientearchivo filtered by the expedientearchivo_archivo column
+ * @method Expedientearchivo findOneByExpedientearchivoNota(string $expedientearchivo_nota) Return the first Expedientearchivo filtered by the expedientearchivo_nota column
  *
  * @method array findByIdexpedientearchivo(int $idexpedientearchivo) Return Expedientearchivo objects filtered by the idexpedientearchivo column
  * @method array findByIdexpediente(int $idexpediente) Return Expedientearchivo objects filtered by the idexpediente column
- * @method array findByExpedientearchivoFecha(string $expedientearchivo_fecha) Return Expedientearchivo objects filtered by the expedientearchivo_fecha column
- * @method array findByExpedientearchivoNota(string $expedientearchivo_nota) Return Expedientearchivo objects filtered by the expedientearchivo_nota column
  * @method array findByIdempleado(int $idempleado) Return Expedientearchivo objects filtered by the idempleado column
+ * @method array findByExpedientearchivoFecha(string $expedientearchivo_fecha) Return Expedientearchivo objects filtered by the expedientearchivo_fecha column
+ * @method array findByExpedientearchivoTipo(string $expedientearchivo_tipo) Return Expedientearchivo objects filtered by the expedientearchivo_tipo column
+ * @method array findByExpedientearchivoArchivo(string $expedientearchivo_archivo) Return Expedientearchivo objects filtered by the expedientearchivo_archivo column
+ * @method array findByExpedientearchivoNota(string $expedientearchivo_nota) Return Expedientearchivo objects filtered by the expedientearchivo_nota column
  *
  * @package    propel.generator.itrade.om
  */
@@ -150,7 +158,7 @@ abstract class BaseExpedientearchivoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpedientearchivo`, `idexpediente`, `expedientearchivo_fecha`, `expedientearchivo_nota`, `idempleado` FROM `expedientearchivo` WHERE `idexpedientearchivo` = :p0';
+        $sql = 'SELECT `idexpedientearchivo`, `idexpediente`, `idempleado`, `expedientearchivo_fecha`, `expedientearchivo_tipo`, `expedientearchivo_archivo`, `expedientearchivo_nota` FROM `expedientearchivo` WHERE `idexpedientearchivo` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -326,78 +334,6 @@ abstract class BaseExpedientearchivoQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the expedientearchivo_fecha column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByExpedientearchivoFecha('2011-03-14'); // WHERE expedientearchivo_fecha = '2011-03-14'
-     * $query->filterByExpedientearchivoFecha('now'); // WHERE expedientearchivo_fecha = '2011-03-14'
-     * $query->filterByExpedientearchivoFecha(array('max' => 'yesterday')); // WHERE expedientearchivo_fecha < '2011-03-13'
-     * </code>
-     *
-     * @param     mixed $expedientearchivoFecha The value to use as filter.
-     *              Values can be integers (unix timestamps), DateTime objects, or strings.
-     *              Empty strings are treated as NULL.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ExpedientearchivoQuery The current query, for fluid interface
-     */
-    public function filterByExpedientearchivoFecha($expedientearchivoFecha = null, $comparison = null)
-    {
-        if (is_array($expedientearchivoFecha)) {
-            $useMinMax = false;
-            if (isset($expedientearchivoFecha['min'])) {
-                $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $expedientearchivoFecha['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($expedientearchivoFecha['max'])) {
-                $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $expedientearchivoFecha['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $expedientearchivoFecha, $comparison);
-    }
-
-    /**
-     * Filter the query on the expedientearchivo_nota column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByExpedientearchivoNota('fooValue');   // WHERE expedientearchivo_nota = 'fooValue'
-     * $query->filterByExpedientearchivoNota('%fooValue%'); // WHERE expedientearchivo_nota LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $expedientearchivoNota The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ExpedientearchivoQuery The current query, for fluid interface
-     */
-    public function filterByExpedientearchivoNota($expedientearchivoNota = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($expedientearchivoNota)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $expedientearchivoNota)) {
-                $expedientearchivoNota = str_replace('*', '%', $expedientearchivoNota);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA, $expedientearchivoNota, $comparison);
-    }
-
-    /**
      * Filter the query on the idempleado column
      *
      * Example usage:
@@ -442,6 +378,136 @@ abstract class BaseExpedientearchivoQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the expedientearchivo_fecha column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedientearchivoFecha('2011-03-14'); // WHERE expedientearchivo_fecha = '2011-03-14'
+     * $query->filterByExpedientearchivoFecha('now'); // WHERE expedientearchivo_fecha = '2011-03-14'
+     * $query->filterByExpedientearchivoFecha(array('max' => 'yesterday')); // WHERE expedientearchivo_fecha < '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $expedientearchivoFecha The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedientearchivoQuery The current query, for fluid interface
+     */
+    public function filterByExpedientearchivoFecha($expedientearchivoFecha = null, $comparison = null)
+    {
+        if (is_array($expedientearchivoFecha)) {
+            $useMinMax = false;
+            if (isset($expedientearchivoFecha['min'])) {
+                $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $expedientearchivoFecha['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($expedientearchivoFecha['max'])) {
+                $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $expedientearchivoFecha['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $expedientearchivoFecha, $comparison);
+    }
+
+    /**
+     * Filter the query on the expedientearchivo_tipo column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedientearchivoTipo('fooValue');   // WHERE expedientearchivo_tipo = 'fooValue'
+     * $query->filterByExpedientearchivoTipo('%fooValue%'); // WHERE expedientearchivo_tipo LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $expedientearchivoTipo The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedientearchivoQuery The current query, for fluid interface
+     */
+    public function filterByExpedientearchivoTipo($expedientearchivoTipo = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($expedientearchivoTipo)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $expedientearchivoTipo)) {
+                $expedientearchivoTipo = str_replace('*', '%', $expedientearchivoTipo);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO, $expedientearchivoTipo, $comparison);
+    }
+
+    /**
+     * Filter the query on the expedientearchivo_archivo column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedientearchivoArchivo('fooValue');   // WHERE expedientearchivo_archivo = 'fooValue'
+     * $query->filterByExpedientearchivoArchivo('%fooValue%'); // WHERE expedientearchivo_archivo LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $expedientearchivoArchivo The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedientearchivoQuery The current query, for fluid interface
+     */
+    public function filterByExpedientearchivoArchivo($expedientearchivoArchivo = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($expedientearchivoArchivo)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $expedientearchivoArchivo)) {
+                $expedientearchivoArchivo = str_replace('*', '%', $expedientearchivoArchivo);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO, $expedientearchivoArchivo, $comparison);
+    }
+
+    /**
+     * Filter the query on the expedientearchivo_nota column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedientearchivoNota('fooValue');   // WHERE expedientearchivo_nota = 'fooValue'
+     * $query->filterByExpedientearchivoNota('%fooValue%'); // WHERE expedientearchivo_nota LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $expedientearchivoNota The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedientearchivoQuery The current query, for fluid interface
+     */
+    public function filterByExpedientearchivoNota($expedientearchivoNota = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($expedientearchivoNota)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $expedientearchivoNota)) {
+                $expedientearchivoNota = str_replace('*', '%', $expedientearchivoNota);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA, $expedientearchivoNota, $comparison);
+    }
+
+    /**
      * Filter the query by a related Empleado object
      *
      * @param   Empleado|PropelObjectCollection $empleado The related object(s) to use as filter
@@ -475,7 +541,7 @@ abstract class BaseExpedientearchivoQuery extends ModelCriteria
      *
      * @return ExpedientearchivoQuery The current query, for fluid interface
      */
-    public function joinEmpleado($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinEmpleado($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Empleado');
@@ -510,7 +576,7 @@ abstract class BaseExpedientearchivoQuery extends ModelCriteria
      *
      * @return   EmpleadoQuery A secondary query class using the current class as primary query
      */
-    public function useEmpleadoQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useEmpleadoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinEmpleado($relationAlias, $joinType)

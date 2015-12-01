@@ -10,6 +10,7 @@
  * @method ExpedientegastoQuery orderByIdexpediente($order = Criteria::ASC) Order by the idexpediente column
  * @method ExpedientegastoQuery orderByIdgastofacturacion($order = Criteria::ASC) Order by the idgastofacturacion column
  * @method ExpedientegastoQuery orderByIdproveedoritrade($order = Criteria::ASC) Order by the idproveedoritrade column
+ * @method ExpedientegastoQuery orderByIdempleado($order = Criteria::ASC) Order by the idempleado column
  * @method ExpedientegastoQuery orderByExpedientegastoFecha($order = Criteria::ASC) Order by the expedientegasto_fecha column
  * @method ExpedientegastoQuery orderByExpedientegastoMonto($order = Criteria::ASC) Order by the expedientegasto_monto column
  * @method ExpedientegastoQuery orderByExpedientegastoTipo($order = Criteria::ASC) Order by the expedientegasto_tipo column
@@ -19,6 +20,7 @@
  * @method ExpedientegastoQuery groupByIdexpediente() Group by the idexpediente column
  * @method ExpedientegastoQuery groupByIdgastofacturacion() Group by the idgastofacturacion column
  * @method ExpedientegastoQuery groupByIdproveedoritrade() Group by the idproveedoritrade column
+ * @method ExpedientegastoQuery groupByIdempleado() Group by the idempleado column
  * @method ExpedientegastoQuery groupByExpedientegastoFecha() Group by the expedientegasto_fecha column
  * @method ExpedientegastoQuery groupByExpedientegastoMonto() Group by the expedientegasto_monto column
  * @method ExpedientegastoQuery groupByExpedientegastoTipo() Group by the expedientegasto_tipo column
@@ -27,6 +29,10 @@
  * @method ExpedientegastoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ExpedientegastoQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method ExpedientegastoQuery innerJoin($relation) Adds a INNER JOIN clause to the query
+ *
+ * @method ExpedientegastoQuery leftJoinEmpleado($relationAlias = null) Adds a LEFT JOIN clause to the query using the Empleado relation
+ * @method ExpedientegastoQuery rightJoinEmpleado($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Empleado relation
+ * @method ExpedientegastoQuery innerJoinEmpleado($relationAlias = null) Adds a INNER JOIN clause to the query using the Empleado relation
  *
  * @method ExpedientegastoQuery leftJoinExpediente($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expediente relation
  * @method ExpedientegastoQuery rightJoinExpediente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expediente relation
@@ -46,6 +52,7 @@
  * @method Expedientegasto findOneByIdexpediente(int $idexpediente) Return the first Expedientegasto filtered by the idexpediente column
  * @method Expedientegasto findOneByIdgastofacturacion(int $idgastofacturacion) Return the first Expedientegasto filtered by the idgastofacturacion column
  * @method Expedientegasto findOneByIdproveedoritrade(int $idproveedoritrade) Return the first Expedientegasto filtered by the idproveedoritrade column
+ * @method Expedientegasto findOneByIdempleado(int $idempleado) Return the first Expedientegasto filtered by the idempleado column
  * @method Expedientegasto findOneByExpedientegastoFecha(string $expedientegasto_fecha) Return the first Expedientegasto filtered by the expedientegasto_fecha column
  * @method Expedientegasto findOneByExpedientegastoMonto(string $expedientegasto_monto) Return the first Expedientegasto filtered by the expedientegasto_monto column
  * @method Expedientegasto findOneByExpedientegastoTipo(string $expedientegasto_tipo) Return the first Expedientegasto filtered by the expedientegasto_tipo column
@@ -55,6 +62,7 @@
  * @method array findByIdexpediente(int $idexpediente) Return Expedientegasto objects filtered by the idexpediente column
  * @method array findByIdgastofacturacion(int $idgastofacturacion) Return Expedientegasto objects filtered by the idgastofacturacion column
  * @method array findByIdproveedoritrade(int $idproveedoritrade) Return Expedientegasto objects filtered by the idproveedoritrade column
+ * @method array findByIdempleado(int $idempleado) Return Expedientegasto objects filtered by the idempleado column
  * @method array findByExpedientegastoFecha(string $expedientegasto_fecha) Return Expedientegasto objects filtered by the expedientegasto_fecha column
  * @method array findByExpedientegastoMonto(string $expedientegasto_monto) Return Expedientegasto objects filtered by the expedientegasto_monto column
  * @method array findByExpedientegastoTipo(string $expedientegasto_tipo) Return Expedientegasto objects filtered by the expedientegasto_tipo column
@@ -166,7 +174,7 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpedientegasto`, `idexpediente`, `idgastofacturacion`, `idproveedoritrade`, `expedientegasto_fecha`, `expedientegasto_monto`, `expedientegasto_tipo`, `expedientegasto_comprobante` FROM `expedientegasto` WHERE `idexpedientegasto` = :p0';
+        $sql = 'SELECT `idexpedientegasto`, `idexpediente`, `idgastofacturacion`, `idproveedoritrade`, `idempleado`, `expedientegasto_fecha`, `expedientegasto_monto`, `expedientegasto_tipo`, `expedientegasto_comprobante` FROM `expedientegasto` WHERE `idexpedientegasto` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -430,6 +438,50 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the idempleado column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByIdempleado(1234); // WHERE idempleado = 1234
+     * $query->filterByIdempleado(array(12, 34)); // WHERE idempleado IN (12, 34)
+     * $query->filterByIdempleado(array('min' => 12)); // WHERE idempleado >= 12
+     * $query->filterByIdempleado(array('max' => 12)); // WHERE idempleado <= 12
+     * </code>
+     *
+     * @see       filterByEmpleado()
+     *
+     * @param     mixed $idempleado The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedientegastoQuery The current query, for fluid interface
+     */
+    public function filterByIdempleado($idempleado = null, $comparison = null)
+    {
+        if (is_array($idempleado)) {
+            $useMinMax = false;
+            if (isset($idempleado['min'])) {
+                $this->addUsingAlias(ExpedientegastoPeer::IDEMPLEADO, $idempleado['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($idempleado['max'])) {
+                $this->addUsingAlias(ExpedientegastoPeer::IDEMPLEADO, $idempleado['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientegastoPeer::IDEMPLEADO, $idempleado, $comparison);
+    }
+
+    /**
      * Filter the query on the expedientegasto_fecha column
      *
      * Example usage:
@@ -570,6 +622,82 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE, $expedientegastoComprobante, $comparison);
+    }
+
+    /**
+     * Filter the query by a related Empleado object
+     *
+     * @param   Empleado|PropelObjectCollection $empleado The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 ExpedientegastoQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByEmpleado($empleado, $comparison = null)
+    {
+        if ($empleado instanceof Empleado) {
+            return $this
+                ->addUsingAlias(ExpedientegastoPeer::IDEMPLEADO, $empleado->getIdempleado(), $comparison);
+        } elseif ($empleado instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(ExpedientegastoPeer::IDEMPLEADO, $empleado->toKeyValue('PrimaryKey', 'Idempleado'), $comparison);
+        } else {
+            throw new PropelException('filterByEmpleado() only accepts arguments of type Empleado or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Empleado relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ExpedientegastoQuery The current query, for fluid interface
+     */
+    public function joinEmpleado($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Empleado');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Empleado');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Empleado relation Empleado object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   EmpleadoQuery A secondary query class using the current class as primary query
+     */
+    public function useEmpleadoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinEmpleado($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Empleado', 'EmpleadoQuery');
     }
 
     /**

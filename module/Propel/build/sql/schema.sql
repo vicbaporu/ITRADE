@@ -4,6 +4,20 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ---------------------------------------------------------------------
+-- categoriagasto
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `categoriagasto`;
+
+CREATE TABLE `categoriagasto`
+(
+    `idcategoriagasto` INTEGER NOT NULL AUTO_INCREMENT,
+    `categoriagasto_nombre` VARCHAR(255) NOT NULL,
+    `categoriagasto_descripcion` TEXT,
+    PRIMARY KEY (`idcategoriagasto`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- cliente
 -- ---------------------------------------------------------------------
 
@@ -92,6 +106,7 @@ CREATE TABLE `empleado`
     `empleado_telefonocontacto` VARCHAR(45),
     `empleado_estatus` enum('activo','suspendido','inactivo') NOT NULL,
     `empleado_rol` enum('operaciones','ventas','administrador') NOT NULL,
+    `empleado_foto` VARCHAR(45),
     PRIMARY KEY (`idempleado`)
 ) ENGINE=InnoDB;
 
@@ -152,9 +167,11 @@ CREATE TABLE `expedientearchivo`
 (
     `idexpedientearchivo` INTEGER NOT NULL AUTO_INCREMENT,
     `idexpediente` INTEGER NOT NULL,
+    `idempleado` INTEGER NOT NULL,
     `expedientearchivo_fecha` DATETIME NOT NULL,
+    `expedientearchivo_tipo` enum('blawb','certificadoorigen','polizaseguro','facturamercancia','facturashipper','pedimento','packinglist','msds','eir','estimaciongastos','documentosaduanales','otro') NOT NULL,
+    `expedientearchivo_archivo` TEXT NOT NULL,
     `expedientearchivo_nota` TEXT,
-    `idempleado` INTEGER,
     PRIMARY KEY (`idexpedientearchivo`),
     INDEX `idmpleado` (`idempleado`),
     INDEX `idexpediente` (`idexpediente`),
@@ -182,14 +199,21 @@ CREATE TABLE `expedientegasto`
     `idexpediente` INTEGER NOT NULL,
     `idgastofacturacion` INTEGER NOT NULL,
     `idproveedoritrade` INTEGER NOT NULL,
+    `idempleado` INTEGER NOT NULL,
     `expedientegasto_fecha` DATETIME NOT NULL,
     `expedientegasto_monto` DECIMAL(10,2) NOT NULL,
-    `expedientegasto_tipo` enum('gasto','cobro') NOT NULL,
+    `expedientegasto_tipo` enum('gastorecibir','gastoconocido','cobro') NOT NULL,
     `expedientegasto_comprobante` TEXT,
     PRIMARY KEY (`idexpedientegasto`),
     INDEX `idgastofacturacion` (`idgastofacturacion`),
     INDEX `idproveedoritrade` (`idproveedoritrade`),
     INDEX `idexpediente` (`idexpediente`),
+    INDEX `idempleado` (`idempleado`),
+    CONSTRAINT `idempleado_expedientegasto`
+        FOREIGN KEY (`idempleado`)
+        REFERENCES `empleado` (`idempleado`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT `idexpediente_expedientegasto`
         FOREIGN KEY (`idexpediente`)
         REFERENCES `expediente` (`idexpediente`)
@@ -268,9 +292,17 @@ DROP TABLE IF EXISTS `gastofacturacion`;
 CREATE TABLE `gastofacturacion`
 (
     `idgastofacturacion` INTEGER NOT NULL AUTO_INCREMENT,
+    `idcategoriagasto` INTEGER NOT NULL,
     `gastofacturacion_nombre` VARCHAR(255),
     `gastofacturacion_descripcion` TEXT,
-    PRIMARY KEY (`idgastofacturacion`)
+    `gastofacturacion_iva` enum('0','16','4'),
+    PRIMARY KEY (`idgastofacturacion`),
+    INDEX `idcategoriagasto` (`idcategoriagasto`),
+    CONSTRAINT `idcategoriagasto_gastofacturacion`
+        FOREIGN KEY (`idcategoriagasto`)
+        REFERENCES `categoriagasto` (`idcategoriagasto`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -357,7 +389,9 @@ DROP TABLE IF EXISTS `servicio`;
 CREATE TABLE `servicio`
 (
     `idservicio` INTEGER NOT NULL AUTO_INCREMENT,
-    `servicio_nombre` VARCHAR(45),
+    `servicio_tipo` enum('importacion','exportacion') NOT NULL,
+    `servicio_medio` enum('terrestre','aereo','maritimo') NOT NULL,
+    `servicio_nombre` VARCHAR(45) NOT NULL,
     `servicio_descripcion` VARCHAR(45),
     PRIMARY KEY (`idservicio`)
 ) ENGINE=InnoDB;
