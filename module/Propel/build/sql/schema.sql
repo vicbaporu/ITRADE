@@ -106,7 +106,7 @@ CREATE TABLE `empleado`
     `empleado_telefonocontacto` VARCHAR(45),
     `empleado_estatus` enum('activo','suspendido','inactivo') NOT NULL,
     `empleado_rol` enum('operaciones','ventas','administrador') NOT NULL,
-    `empleado_foto` VARCHAR(45),
+    `empleado_foto` TEXT,
     PRIMARY KEY (`idempleado`)
 ) ENGINE=InnoDB;
 

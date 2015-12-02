@@ -50,27 +50,28 @@ $(document).ready(function(){
 
                    var field = $(this).attr('name');
                    var value = $(this).val();
+                   var input = $(this);
 
                    $.ajax({
 
                        url:url+'/validateajax',
                        type:'POST',
-                          async: false,
+                       async: false,
+                       dataType: 'json',
                        data:{field:field,value:value},
                        success:function(data){
+                           console.log(data.exist);
                           if(data.exist){
                               error = true;
-                              $(this).closest('div').addClass('error-control');
-                              $(this).siblings('i').addClass('fa fa-exclamation');
-                              $(this).closest('div').siblings('span.error').text(data.msj);
+                              input.closest('div').addClass('error-control');
+                              input.siblings('i').addClass('fa fa-exclamation');
+                              input.closest('div').siblings('span.error').text(data.msj);
                           }
                        }
                    });
 
                });
             
-            console.log(empty);
-            console.log(error);
             if(empty || error){
                 e.preventDefault();
             }else{

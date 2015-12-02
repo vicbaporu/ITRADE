@@ -68,10 +68,10 @@ return array(
                         ),
                         'may_terminate' => false,
                         'child_routes' => array(
-                            'empleado' => array(
+                            'empleados' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/empleados[/:action]',
+                                    'route'    => '/empleados[/:action][/:id][/]',
                                     'defaults' => array(
                                         'controller'    => 'Catalogo\Controller\Empleado',
                                         'action'        => 'index',

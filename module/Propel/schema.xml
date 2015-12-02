@@ -85,7 +85,7 @@
     <column name="empleado_telefonocontacto" phpName="EmpleadoTelefonocontacto" type="VARCHAR" size="45" required="false"/>
     <column name="empleado_estatus" phpName="EmpleadoEstatus" type="CHAR" sqlType="enum('activo','suspendido','inactivo')" required="true"/>
     <column name="empleado_rol" phpName="EmpleadoRol" type="CHAR" sqlType="enum('operaciones','ventas','administrador')" required="true"/>
-    <column name="empleado_foto" phpName="EmpleadoFoto" type="VARCHAR" size="45" required="false"/>
+    <column name="empleado_foto" phpName="EmpleadoFoto" type="LONGVARCHAR" required="false"/>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
     </vendor>

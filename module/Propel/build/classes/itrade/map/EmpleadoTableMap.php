@@ -70,7 +70,7 @@ class EmpleadoTableMap extends TableMap
   1 => 'ventas',
   2 => 'administrador',
 ));
-        $this->addColumn('empleado_foto', 'EmpleadoFoto', 'VARCHAR', false, 45, null);
+        $this->addColumn('empleado_foto', 'EmpleadoFoto', 'LONGVARCHAR', false, null, null);
         // validators
     } // initialize()
 

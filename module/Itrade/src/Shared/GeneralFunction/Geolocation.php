@@ -48,7 +48,8 @@ class Geolocation
         
         $mexico_states = array();
         foreach ($states as $state){
-            array_push($mexico_states, $state['label']);
+            $key = strtolower($state['label']);
+            $mexico_states[$key] = $state['label'];
         }
         
         return $mexico_states;

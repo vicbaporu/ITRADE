@@ -8,11 +8,11 @@
             <a href="/catalogo/empleados">Empleados</a>
         </li>
         <li>
-            <a class="active" href="/catalogo/empleados/nuevo">Registro</a>
+            <a class="active" href="/catalogo/empleados/editar/<?php echo $form->get('idempleado')->getValue()?>"><?php echo $form->get('empleado_nombre')->getValue().' '.$form->get('empleado_apellidopaterno')->getValue().' '.$form->get('empleado_apallidomaterno')->getValue()?></a>
         </li>
     </ul>
     <div class="page-title">
-        <h3>REGISTRO <span class="semi-bold">EMPLEADO</span></h3>
+        <h3><span class="semi-bold"><?php echo strtoupper($form->get('empleado_nombre')->getValue().' '.$form->get('empleado_apellidopaterno')->getValue().' '.$form->get('empleado_apallidomaterno')->getValue())?></span></h3>
     </div>
     <?php 
         $form->setAttribute('action', '/catalogo/empleados/nuevo');
