@@ -15,8 +15,10 @@
         <h3>REGISTRO <span class="semi-bold">EMPLEADO</span></h3>
     </div>
     <?php 
-        $form->setAttribute('action', '/catalogo/empleado/nuevo');
+        $form->setAttribute('action', '/catalogo/empleados/nuevo');
         $form->setAttribute('novalidate', true);
+        $form->setAttribute('enctype', 'multipart/form-data');
+
         echo $this->form()->openTag($form); 
     ?>
     <div class="row">
@@ -289,9 +291,9 @@
                                     <div class="form-group">
                                         <?php echo $this->formLabel($form->get('empleado_rol')) ?>  
                                         <span class="help req">*</span>
-                                        <div class="input-with-icon  right">
+                                        <div class="input-with-icon right ">
                                             <i class=""></i>
-                                            <?php echo $this->formText($form->get('empleado_rol')) ?>  
+                                            <?php echo $this->formSelect($form->get('empleado_rol')) ?>  
                                         </div>
                                         <span class="error"></span>
                                     </div>
@@ -317,7 +319,7 @@
                                         <span class="help req">*</span>
                                         <div class="input-with-icon  right">
                                             <i class=""></i>
-                                            <?php echo $this->formText($form->get('empleado_password')) ?>  
+                                            <?php echo $this->formPassword($form->get('empleado_password')) ?>  
                                         </div>
                                         <span class="error"></span>
                                     </div>
@@ -348,12 +350,15 @@
             <div class="form-actions">
                 <div class="row">
                     <div class="pull-right">
-                    <button btn_action="submit" class="btn btn-primary btn-cons" type="button">Guardar</button>
+                        <button btn_action="submit" class="btn btn-primary btn-cons" type="button">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <?php 
+        echo $this->form()->closeTag(); 
+    ?>
 </div>
 <!--IMPORTAMOS SCRIPTS DE CROPPER-->
 <link rel="stylesheet" href="/plugins/admin/cropper/cropper.css">

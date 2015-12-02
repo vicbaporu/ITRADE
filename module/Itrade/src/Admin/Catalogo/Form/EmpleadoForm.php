@@ -271,6 +271,7 @@ class EmpleadoForm extends Form
                 
             ),
             'attributes' => array(
+                'required' => true,
                 'class' => 'width-100',
             ),
         ));
@@ -283,7 +284,8 @@ class EmpleadoForm extends Form
             ),
             'attributes' => array(
                 'required' => true,
-                'class' => 'form-control',
+                'class' => 'form-control validate-ajax',
+                'dirname' => '/catalogo/empleados'
             ),
         ));
          

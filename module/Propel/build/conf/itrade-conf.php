@@ -4,7 +4,7 @@
 $conf = array (
   'datasources' => 
   array (
-    'itrade' => 
+    'itrade_system' => 
     array (
       'adapter' => 'mysql',
       'connection' => 
@@ -14,7 +14,7 @@ $conf = array (
         'password' => 'CEy9vCaFm6BuuzDM',
       ),
     ),
-    'default' => 'itrade',
+    'default' => 'itrade_system',
   ),
   'generator_version' => '1.7.1',
 );

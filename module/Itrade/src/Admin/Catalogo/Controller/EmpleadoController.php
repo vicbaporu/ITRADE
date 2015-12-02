@@ -22,7 +22,14 @@ class EmpleadoController extends AbstractActionController
     public function nuevoAction()
     {
         
+        $request = $this->getRequest();
         
+        if($request->isPost()){
+            $post_data = $request->getPost();
+            $post_files = $request->getFiles();
+            echo '<pre>';var_dump($post_data);echo '</pre>';
+            echo '<pre>';var_dump($post_files);echo '</pre>';exit();
+        }
         //INSTANCIAMOS NUESTRO FORMULARIO
         $mexico_states = \Shared\GeneralFunction\Geolocation::getMexicoStates();
         $form = new \Catalogo\Form\EmpleadoForm($mexico_states);
@@ -31,5 +38,31 @@ class EmpleadoController extends AbstractActionController
         return new ViewModel(array(
             'form' => $form
         ));
+    }
+    
+    public function validateajaxAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            $query = new \EmpleadoQuery();
+       
+            $query->filterBy(\BasePeer::translateFieldname('empleado', $post_data['field'], \BasePeer::TYPE_FIELDNAME, \BasePeer::TYPE_PHPNAME), $post_data['value'], \Criteria::EQUAL);
+            
+            $exist = $query->exists();
+            
+            if($post_data['field'] == 'empleado_email'){
+                $msj = 'correo electrónico en uso';
+            }
+            
+            return $this->getResponse()->setContent(json_encode(array('exist' => $exist,'msj' => $msj)));
+            
+            
+        }
+        
+       
     }
 }

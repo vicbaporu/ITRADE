@@ -6,9 +6,91 @@ $(document).ready(function(){
     $('form').delegate('button[btn_action=submit]','click',function(e){
         
         var $form = $(this).closest('form');
+        var empty = false;
+        var error = false;
+        
+        $form.find('.error-control').removeClass('error-control');
+        $form.find('span.error').html('');
+        $form.find('i.fa-exclamation').removeClass('fa fa-exclamation');
+        
+        /*
+         * VALIDACIONES DE CAMPOS VACIOS
+         */
+        
+        //Validacion de campos vacios input
+        $form.find('input[required]').each(function(){
+            if($(this).val() == ""){
+                empty = true;
+                
+                $(this).closest('div').addClass('error-control');
+                $(this).siblings('i').addClass('fa fa-exclamation');
+                $(this).closest('div').siblings('span.error').text('Este campo no puede ir vacío');
+            }
+        });
+        
+        //Validacion de campos vacios select
+        $form.find('select[required]').each(function(){
+            if($(this).val() == ""){
+                empty = true;
+                
+                $(this).closest('div').addClass('error-control');
+                //$(this).siblings('i').addClass('fa fa-exclamation');
+                $(this).closest('div').siblings('span.error').text('Debe de seleccionar una opción');
+            }
+        });
+        
+        
+        if(!empty){
+            
+            
+                //LAS VALIDACIONES AJAX
+               $form.find('input.validate-ajax').each(function(){
 
-//        var empty = false;
-//        var error = false;
+                   var url = $(this).attr('dirname');
+
+                   var field = $(this).attr('name');
+                   var value = $(this).val();
+
+                   $.ajax({
+
+                       url:url+'/validateajax',
+                       type:'POST',
+                          async: false,
+                       data:{field:field,value:value},
+                       success:function(data){
+                          if(data.exist){
+                              error = true;
+                              $(this).closest('div').addClass('error-control');
+                              $(this).siblings('i').addClass('fa fa-exclamation');
+                              $(this).closest('div').siblings('span.error').text(data.msj);
+                          }
+                       }
+                   });
+
+               });
+            
+            console.log(empty);
+            console.log(error);
+            if(empty || error){
+                e.preventDefault();
+            }else{
+                $form.submit();
+            }
+            
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+    });
+            
 //        console.log($form);return;
 //        $form.find('span.error').remove();
 //        $form.find('[required]').removeClass('input-error');
@@ -45,52 +127,9 @@ $(document).ready(function(){
 //        }
 
 
-   $form.validate({
-           errorElement: 'span', 
-           errorClass: 'error', 
-           focusInvalid: false, 
-           ignore: "",
-           rules: {
-               form1Email: {
-                   required: true,
-                   email: true
-               },
-           },
 
-           invalidHandler: function (event, validator) {
-//display error alert on form submit    
-           },
-
-           errorPlacement: function (error, element) { // render error placement for each input type
-               var icon = $(element).parent('.input-with-icon').children('i');
-               var parent = $(element).parent('.input-with-icon');
-               icon.removeClass('icon-ok').addClass('icon-exclamation');  
-               parent.removeClass('success-control').addClass('error-control');  
-           },
-
-           highlight: function (element) { // hightlight error inputs
-
-           },
-
-           unhighlight: function (element) { // revert the change done by hightlight
-               
-           },
-
-           success: function (label, element) {
-               var icon = $(element).parent('.input-with-icon').children('i');
-var parent = $(element).parent('.input-with-icon');
-               icon.removeClass("icon-exclamation").addClass('icon-ok');
-parent.removeClass('error-control').addClass('success-control'); 
-           },
-
-           submitHandler: function (form) {
-           
-           }
-       });
-
-        
-    });
 
     
 });
+
 
