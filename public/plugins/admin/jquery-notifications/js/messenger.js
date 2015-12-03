@@ -1207,7 +1207,7 @@ window.Messenger.Events = (function() {
   window.Messenger._call = function(opts) {
     var $el, $parent, choosen_loc, chosen_loc, classes, defaultOpts, inst, loc, locations, _i, _len;
     defaultOpts = {
-      extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+      extraClasses: 'messenger-fixed messenger-on-top messenger-on-right',
       theme: 'future',
       maxMessages: 9,
       parentLocations: ['body']

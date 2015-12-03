@@ -37,7 +37,7 @@
         */ 
        
        var defaults = {
-           
+           successMessages:new Array(),
        };
        
        /* 
@@ -60,11 +60,21 @@
             
             settings = plugin.settings = $.extend({}, defaults, options);
             
+            $.each(settings.successMessages,function(){
+                Messenger().post({
+                    message: this,
+                    type: 'success',
+                    showCloseButton: true,
+                });	
+            });
             
             
         }
         
-        plugin.formBind = function(){
+        plugin.formBind = function(edit,entity){
+            
+            var edit = typeof edit != 'undefined' ? true : false;
+  
             //INICIALIZAMOS NUESTROS SELECT
             $container.find("select").select2({
                 placeholder: "Select a state",
@@ -115,13 +125,35 @@
                 $container.find('input[name=empleado_foto_submit]').val('delete');
                 $container.find('p.eliminar_imagen').hide();
             });
+            
+            if(edit){
+            
+                //SETIAMOS LA CONTRASEÑA
+                if(entity.empleado_foto != null){
+                    $container.find('img.empleado_foto').attr('src',entity.empleado_foto);
+                    $container.find('p#eliminar_imagen').show();
+                }
+                
+                //QUITAMOS EL CAMPO CONTRASEÑA COMO REQUERIDO
+                $container.find('input[name=empleado_password]').prop('required',false); 
+                $container.find('input[name=empleado_email]').removeClass('validate-ajax');
+                
+                //SETIAMOS LA FECHA 
+                if(typeof entity.empleado_iniciocontrato != 'undefined' && entity.empleado_iniciocontrato != ''){
+                     var empleado_iniciocontrato = moment(entity.empleado_iniciocontrato,'MM/DD/YY');
+                     empleado_iniciocontrato = empleado_iniciocontrato.toDate();
+                     $( ".input-append.date" ).datepicker( "setDate",empleado_iniciocontrato);
+                }
+               
+                
+            }
         }
 
         /*
         * Plugin initializing
         */
         
-        //plugin.init();
+        plugin.init();
        
     }
     

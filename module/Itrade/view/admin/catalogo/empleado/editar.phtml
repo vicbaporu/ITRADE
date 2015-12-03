@@ -15,7 +15,7 @@
         <h3><span class="semi-bold"><?php echo strtoupper($form->get('empleado_nombre')->getValue().' '.$form->get('empleado_apellidopaterno')->getValue().' '.$form->get('empleado_apallidomaterno')->getValue())?></span></h3>
     </div>
     <?php 
-        $form->setAttribute('action', '/catalogo/empleados/nuevo');
+        $form->setAttribute('action', '/catalogo/empleados/editar/'.$form->get('idempleado')->getValue());
         $form->setAttribute('novalidate', true);
         $form->setAttribute('enctype', 'multipart/form-data');
 
@@ -340,8 +340,8 @@
                     <br>
                     <div class="row">
                         <div style="text-align: center" class="col-md-4 col-sm-4 col-xs-4 col-xs-push-4 col-md-push-4 col-sm-push-4">
-                             <?php echo $this->formFile($form->get('empleado_foto')) ?>  
-                            <img class="empleado_foto" style="width: 233px; height: 232px;"id="image" src="/img/admin/profiles/avatar_default.jpg">
+                             <?php echo $this->formFile($form->get('empleado_foto')) ?>
+                             <img class="empleado_foto" style="width: 233px; height: 232px;"id="image" src="/img/admin/profiles/avatar_default.jpg">
                             <p id="eliminar_imagen" style="text-align: center; display: none"><a style="text-decoration: none" href="javascript:void(0)">Eliminar Imagen</a></p>
                         </div>
                     </div>
@@ -369,10 +369,9 @@
 <script type="text/javascript">
     
     $(document).ready(function() {
-        
         //FORM BIND
-        var $form = $('.empleado_form_container').empleados();
-        $form.formBind();
+        var $form = $('.empleado_form_container').empleados({successMessages:<?php echo $successMessages?>});
+        $form.formBind(true,<?php echo $entity?>);
 
     });
 </script>
