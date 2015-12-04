@@ -16,7 +16,10 @@ class EmpleadoController extends AbstractActionController
 {
     public function indexAction()
     {
-
+        $collection = \EmpleadoQuery::create()->filterByIdempleado(1,  \Criteria::NOT_EQUAL)->find();
+        return new ViewModel(array(
+            'collection' => $collection,
+        ));
     }
     
     public function nuevoAction()
@@ -279,11 +282,7 @@ class EmpleadoController extends AbstractActionController
             return $this->redirect()->toRoute('admin/catalogo/empleados', array('action' => 'index'));
         }
        
-        
-        
-        
-        
-        
+
     }
     
     public function validateajaxAction(){

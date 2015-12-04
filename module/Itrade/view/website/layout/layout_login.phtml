@@ -1,0 +1,75 @@
+<?php $url="http://".$_SERVER['HTTP_HOST'].":".$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI']; ?>
+<?php echo $this->doctype(); ?>
+
+
+<?php
+$urlEng = "";
+$urlEsp = "";
+
+if (preg_match('/en/',$url))
+    $urlEng = $url;
+elseif(preg_match('/es/i',$url))
+    $urlEng = str_replace("/es","/en",$url); 
+else
+{
+    if(substr($url, -1) != '/')
+        $urlEng = $url."/en";
+    else
+        $urlEng = $url."en";
+}
+
+if (preg_match('/es/',$url))
+    $urlEsp = $url;
+elseif(preg_match('/en/i',$url))
+    $urlEsp = str_replace("/en","/es",$url); 
+else
+{
+    if(substr($url, -1) != '/')
+        $urlEsp = $url."/es";
+    else
+        $urlEsp = $url."es";
+}
+
+
+ ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($this->translate('ITRADE'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/.ico'))
+                        ->prependStylesheet($this->basePath('css/animations.css')) 
+                        ->prependStylesheet($this->basePath('css/style.css')) 
+                        ->prependStylesheet($this->basePath('css/bootstrap.css'))
+                        ->prependStylesheet($this->basePath('css/jasny-bootstrap.css')) 
+                        ?>
+
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+        
+            ->prependFile($this->basePath('js/comun.js'))
+            ->prependFile($this->basePath('js/bootstrap.js'))
+            ->prependFile($this->basePath('js/jasny-bootstrap.js'))
+            ->prependFile($this->basePath('js/responsiveMap.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+    <body>
+
+            <?php echo $this->content; ?>
+            
+
+        <script src="js/layout/layout.js"></script>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

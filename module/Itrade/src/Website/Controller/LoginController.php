@@ -9,7 +9,7 @@ class LoginController extends AbstractActionController
     public function indexAction()
     {
     	$layout = $this->layout();
-	    $layout->setTemplate('layout/login');
+	    $layout->setTemplate('client/layout/layout');
 	    $viewModel = new ViewModel();
 	    return $viewModel;
 

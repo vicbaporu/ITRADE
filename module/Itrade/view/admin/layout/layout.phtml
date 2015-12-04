@@ -13,6 +13,8 @@
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
             
+            ->appendStylesheet($this->basePath('plugins/admin/jquery-datatable/css/jquery.dataTables.min.css'))
+            ->appendStylesheet($this->basePath('plugins/admin/datatables-responsive/css/datatables.responsive.min.css'))
             ->appendStylesheet($this->basePath('plugins/admin/bootstrap-datepicker/css/datepicker.css'))
             ->appendStylesheet($this->basePath('plugins/admin/bootstrap-timepicker/css/bootstrap-timepicker.css'))
             ->appendStylesheet($this->basePath('plugins/admin/bootstrap-select2/select2.css'))
@@ -26,12 +28,10 @@
             ->appendStylesheet($this->basePath('css/admin/style_itrade.css'))
             ->appendStylesheet($this->basePath('css/admin/responsive.css'))
             ->appendStylesheet($this->basePath('css/admin/custom-icon-set.css')) 
-            ->appendStylesheet($this->basePath('css/admin/custom-icon-set.css')) 
-            ->appendStylesheet($this->basePath('plugins/admin/jquery-datatable/css/jquery.dataTables.css'))
-            ->appendStylesheet($this->basePath('plugins/admin/datatables-responsive/css/datatables.responsive.css'))
+            ->appendStylesheet($this->basePath('css/admin/custom-icon-set.css'))  
             ->appendStylesheet($this->basePath('plugins/admin/jquery-notifications/css/messenger.min.css')) 
             ->appendStylesheet($this->basePath('plugins/admin/jquery-notifications/css/messenger-theme-future.min.css'))
-
+//            ->appendStylesheet($this->basePath('plugins/admin/data-tables/DT_bootstrap.min.css'))
         ?>
         
         <!-- BEGIN CORE JS FRAMEWORK--> 
@@ -62,17 +62,16 @@
         <script src="/js/admin/demo.js" type="text/javascript"></script> 
         <!-- END CORE TEMPLATE JS --> 
         <!-- BEGIN DATATABLE JS --> 
-        <script src="/plugins/admin/jquery-datatable/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="/plugins/admin/jquery-datatable/js/jquery.dataTables.js" type="text/javascript"></script>
 	<script src="/plugins/admin/jquery-datatable/extra/js/dataTables.tableTools.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/plugins/admin/datatables-responsive/js/datatables.responsive.js"></script>
 	<script type="text/javascript" src="/plugins/admin/datatables-responsive/js/lodash.min.js"></script>
+        <script type="text/javascript" src="/plugins/admin/jquery-datatable/extra/js/dataTablesInitilization.js"></script>
+
         <!-- END DATATABLE JS --> 
         <script src="/js/admin/form/form.js" type="text/javascript"></script>
         <script src="/plugins/admin/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
         
-        
-
-	 
 
 	
         

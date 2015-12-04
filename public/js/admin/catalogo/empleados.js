@@ -46,6 +46,8 @@
         var $container = $(container);  
         
         var settings;
+        var $table;
+        
         
         /*
         * Private methods
@@ -57,7 +59,87 @@
         */
        
         plugin.list = function(){
-            console.log('entro');
+            
+            //
+            var responsiveHelper = undefined;
+    var breakpointDefinition = {
+        tablet: 1024,
+        phone : 480
+    };   
+            var tableElement = $('#example');
+
+//    tableElement.dataTable( {
+//		"sDom": "<'row'<'col-md-6'l T><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
+//			"oTableTools": {
+//			"aButtons": [
+//				{
+//					"sExtends":    "collection",
+//					"sButtonText": "<i class='fa fa-cloud-download'></i>",
+//					"aButtons":    [ "csv", "xls", "pdf", "copy"]
+//				}
+//			]
+//		},
+//		"sPaginationType": "bootstrap",
+//		 "aoColumnDefs": [
+//          { 'bSortable': false, 'aTargets': [ 0 ] }
+//		],
+//		"aaSorting": [[ 1, "asc" ]],
+//		"oLanguage": {
+//			"sLengthMenu": "_MENU_ ",
+//			"sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+//		},
+//		 bAutoWidth     : false,
+//        fnPreDrawCallback: function () {
+//            // Initialize the responsive datatables helper once.
+//            if (!responsiveHelper) {
+//                responsiveHelper = new ResponsiveDatatablesHelper(tableElement, breakpointDefinition);
+//            }
+//        },
+//        fnRowCallback  : function (nRow) {
+//            responsiveHelper.createExpandIcon(nRow);
+//        },
+//        fnDrawCallback : function (oSettings) {
+//            responsiveHelper.respond();
+//        }
+//	});
+
+            //INICILIZAMOS NUNESTRA TABLA
+            $.ajax({
+                 url: '/json/datatable/lang_es.json',
+              
+                 async:false,
+                 success: function (data) {
+                    $table = $container.find('table').DataTable({
+                         //bServerSide: true,
+                         processing: true,
+                         oLanguage: data,
+                         iDisplayLength:25,
+                         bSort: false,
+                         columns: [
+                            { data: "empleado_nombre" },
+                            { data: "empleado_email" },
+                            { data: "empleado_celular" },
+                            { data: "empleado_rol" },
+                            { data: "empleado_options" },
+                        ],
+//                        fnServerData: function (sSource, aoData, fnCallback, oSettings) {
+//                            oSettings.jqXHR = $.ajax( {
+//                                dataType: 'json',
+//                                type: 'POST',
+//                                url: '/catalogo/empleados/serverside',
+//                            });     
+//                        },
+                    });
+                    //INICIALIZAMOS NUESTROS SELECT
+                    $container.find("select").select2({
+                        minimumResultsForSearch: -1
+                    });
+                    
+                 }
+            });
+            
+            
+            
         }
         
         plugin.init = function(){

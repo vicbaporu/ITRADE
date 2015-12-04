@@ -20,7 +20,7 @@
                     <br>
                 </div>
                 <div class="grid-body no-border">
-                    <table class="table no-more-tables">
+                    <table id="example" class="table">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -31,7 +31,28 @@
                             </tr>
                     </thead>
                     <tbody>
-
+                        <?php $entity = new Empleado()?>
+                        <?php foreach ($collection as $entity) :?>
+                        <tr>
+                            <td>
+                                <?php echo $entity->getEmpleadoNombre().' '.$entity->getEmpleadoApellidopaterno().' '.$entity->getEmpleadoApallidomaterno()?>
+                            </td>
+                            <td>
+                                 <?php echo $entity->getEmpleadoEmail()?>
+                            </td>
+                            <td>
+                                 <?php echo $entity->getEmpleadoCelular()?>
+                            </td>
+                            <td>
+                                 <?php echo ucfirst($entity->getEmpleadoRol())?>
+                            </td>
+                            <td>
+                                <a href="editar">Editar</a>&nbsp&nbsp<a href="editar">Eliminar</a>
+                            </td>
+                        </tr>
+                        <?php endforeach;?>
+                        
+                        
                     </tbody>
                     </table>
                 </div>
