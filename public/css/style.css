@@ -288,3 +288,9 @@ input[type="text"] > input:active { cursor: pointer; }
 }
 
 .italic {font-style: italic;}
+
+.social-ico 
+{
+  width: 24px;
+  height: 24px;
+}
