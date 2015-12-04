@@ -1,87 +1,50 @@
-<ul class="breadcrumb">
-    <li>
-        <p>Catalogo</p>
-    </li>
-    <li>
-        <a class="active" href="/catalogo/empleados">Empleados</a>
-    </li>
-</ul>
-<div class="page-title">
-    <h3><span class="semi-bold">EMPLEADOS</span></h3>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <div>
-                    <a style="float: right" href="/catalogo/empleados/nuevo"><i class="fa fa-plus"></i> Registro empleado</a>
+<div class="list_container">
+    <ul class="breadcrumb">
+        <li>
+            <p>Catalogo</p>
+        </li>
+        <li>
+            <a class="active" href="/catalogo/empleados">Empleados</a>
+        </li>
+    </ul>
+    <div class="page-title">
+        <h3><span class="semi-bold">EMPLEADOS</span></h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <div>
+                        <a style="float: right" href="/catalogo/empleados/nuevo"><i class="fa fa-plus"></i> Registro empleado</a>
+                    </div>
+                    <br>
                 </div>
-                <br>
-            </div>
-            <div class="grid-body no-border">
-                <table class="table no-more-tables">
-                    <thead>
-                        <tr>
-                            <th style="width:9%">Project Name</th>
-                            <th style="width:22%">Description</th>
-                            <th style="width:6%">Price</th>
-                            <th style="width:10%">Progress</th>
-                        </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="v-align-middle">Early Bird</td>
-                        <td class="v-align-middle"><span class="muted">Redesign project template</span>
-                        </td>
-                        <td><span class="muted">$4,500</span>
-                        </td>
-                        <td class="v-align-middle">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success animate-progress-bar" data-percentage="79%" style="width: 79%;"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="inline">Angry Birds</div> <span class="label label-important">ALERT!</span>
-                        </td>
-                        <td><span class="muted">Something goes here</span>
-                        </td>
-                        <td><span class="muted">$9,000</span>
-                        </td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-danger animate-progress-bar" data-percentage="10%" style="width: 10%;"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>PHP Login page</td>
-                        <td class="v-align-middle"><span class="muted">A project in business and science is typically defined</span>
-                        </td>
-                        <td><span class="muted">$5,400</span>
-                        </td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info animate-progress-bar" data-percentage="65%" style="width: 65%;"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Zombies</td>
-                        <td class="v-align-middle"><span class="muted">frequently involving research or design</span>
-                        </td>
-                        <td><span class="muted">$6,000</span>
-                        </td>
-                        <td>
-                            <div class="progress ">
-                                <div class="progress-bar progress-bar-warning animate-progress-bar" data-percentage="42%" style="width: 42%;"></div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                </table>
+                <div class="grid-body no-border">
+                    <table class="table no-more-tables">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo electrónico</th>
+                                <th>Celular</th>
+                                <th>Rol</th>
+                                <th>Opciones</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!--CUSTOM SCRIPT-->
+<script src="/js/admin/catalogo/empleados.js"></script>
+<script>
+    $(document).ready(function() {
+        var empleados = $('.list_container').empleados();
+        empleados.list();
+    }); 
+</script>
 

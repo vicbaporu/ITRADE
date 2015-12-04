@@ -16,7 +16,7 @@ class EmpleadoController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+
     }
     
     public function nuevoAction()
@@ -170,7 +170,9 @@ class EmpleadoController extends AbstractActionController
                 $entity->setEmpleadoPassword(md5($post_data['empleado_password']));
             }
             
-           
+            //ELIMINAMOS LA FOTOGRAFIA DEL EMPLEADO
+            $entity->setEmpleadoFoto(NULL);
+            unlink($_SERVER['DOCUMENT_ROOT'] . "/img/admin/profiles/empleado_avatar_" . $entity->getIdempleado() . ".jpg");
             
            $entity->save();
            

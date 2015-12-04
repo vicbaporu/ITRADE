@@ -55,6 +55,10 @@
        /*
         * Public methods
         */
+       
+        plugin.list = function(){
+            console.log('entro');
+        }
         
         plugin.init = function(){
             
@@ -67,6 +71,8 @@
                     showCloseButton: true,
                 });	
             });
+            
+            
             
             
         }
