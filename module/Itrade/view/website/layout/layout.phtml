@@ -104,7 +104,7 @@ else
             <!-- Links del menu movil -->
             <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas " role="navigation">
                 <ul class="nav  navmenu">
-                    <li><a class="text-center" href="#"><strong><?php echo  $this->translate('Acerca de') ?> </strong></a></li>
+                    <li><a class="text-center" href="#"><strong><?php echo  $this->translate('Inicio') ?> </strong></a></li>
 
                     <li><a class="text-center" href="/servicios"><strong><?php echo  $this->translate('Servicios') ?> </strong></a></li>
                     <li class=" dropdown text-center">
@@ -126,10 +126,10 @@ else
 
             <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1 ">              
                 <ul class="nav navbar-nav  navbar-right ">
-                    <li class=""><a class="bRight specialAlign" href="#"><strong><?php echo  $this->translate('Acerca de') ?> </strong></a></li>
-                    <li class=""><a class="bRight specialAlign" href="/servicios"><strong><?php echo  $this->translate('Servicios') ?> </strong></a></li>
+                    <li id="navInicio"class=""><a class="bRight specialAlign" href="/"><strong><?php echo  $this->translate('Inicio') ?> </strong></a></li>
+                    <li id="navServicios"class=""><a class="bRight specialAlign" href="/servicios"><strong><?php echo  $this->translate('Servicios') ?> </strong></a></li>
 
-                    <li class=" dropdown">
+                    <li id="navRecursos" class=" dropdown">
                         <a href="#" class="dropdown-toggle bRight" data-toggle="dropdown" data-hover="dropdown" data-delay="" data-close-others="false">
                             <strong><?php echo  $this->translate('Recursos') ?></strong> <b class="caret"></b>
                         </a>
@@ -143,7 +143,7 @@ else
                     </li>
 
                     
-                    <li class=""><a class=" specialAlign" href="/contacto"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
+                    <li id="navContacto" class=""><a class=" specialAlign" href="/contacto"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
                 </ul>
             </div>
           </div>
@@ -152,17 +152,26 @@ else
         <div class="container">
             <?php echo $this->content; ?>
             
-            <footer class="col-lg-6 col-lg-offset-6  bigTop">        
+            <footer class="col-lg-6 col-lg-offset-6  top">        
                 
-                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center "><a href="#"><lead><?php echo  $this->translate('Correo') ?> </lead></a></li>
-                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center bRight"><a href="#"><lead><?php echo  $this->translate('Teléfono') ?> </lead></a></li>
-                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center bRight topXS"><a href="#"><lead><?php echo  $this->translate('Ubicación') ?> </lead></a></li>
-                <li class="col-lg-2 col-xs-6 col-sm-6 col-md-2 pull-right text-center bRight topXS"><a href="#"><lead><?php echo  $this->translate('Contacto') ?> </lead></a></li>
                 
-                <li class="col-lg-12 col-xs-12 text-right top"><a href="#"><lead><?php echo  $this->translate('© 2015 ITRADE MEXICO S.A. de C.V.') ?> </lead></a></li>
+                
+                <li class="col-lg-12 col-xs-12 text-right">
+                    <a href="#"><lead><?php echo  $this->translate('© 2015 ITRADE MEXICO S.A. de C.V.') ?> </lead></a>
+                </li>
+                <li class="col-lg-12 col-xs-12 text-right">
+                    <a target="_blank"href="https://goo.gl/maps/Ypx3yduiYVK2"><lead class="textBlue"><?php echo  $this->translate('San Antonio de Padua #740-A. Camino Real, Zapopan, Jalisco C.P. 45040') ?> </lead></a>
+                </li>
+                <li class="col-lg-12 col-xs-12 text-right">
+                    <a href="mailto:luis.contreras@itrade.com.mx" ><lead class="textBlue"><?php echo  $this->translate('luis.contreras@itrade.com.mx') ?> </lead></a>
+                    <lead> Oficina: +52(33)20010565</lead>
+                </li>
+                <span class="glyphicon glyphicon-facebook"></span>
                 
             </footer>
+
         </div> <!-- /container -->
+        <script src="js/layout/layout.js"></script>
         <?php echo $this->inlineScript() ?>
     </body>
 </html>

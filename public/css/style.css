@@ -65,17 +65,82 @@ lead{color: black;}
 
 
 }
-.loginArea
-{
-  padding-top: .8em;
-  padding-bottom: .8em;
-  color: white;
-  font-weight: bold;
-  background-color: rgb(46,49,146);
-  background-image: url('../img/login.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+
+@media (min-width: 1920px) {
+  .loginArea
+  {
+    padding-top: .8em;
+    padding-bottom: .8em;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(46,49,146);
+    background-image: url('../img/login/fullHD.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1919px) {
+  .loginArea
+  {
+    padding-top: .8em;
+    padding-bottom: .8em;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(46,49,146);
+    background-image: url('../img/login/grande.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .loginArea
+  {
+    padding-top: .8em;
+    padding-bottom: .8em;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(46,49,146);
+    background-image: url('../img/login/mediana.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .loginArea
+  {
+    padding-top: .8em;
+    padding-bottom: .8em;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(46,49,146);
+    background-image: url('../img/login/chica.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media (max-width: 767px) {
+  .loginArea
+  {
+    padding-top: .8em;
+    padding-bottom: .8em;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(46,49,146);
+    background-image: url('../img/login/movil.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
 }
 
  
@@ -87,6 +152,7 @@ lead{color: black;}
 .blue { background-color: rgb(46,49,146); }
 .black { background-color: rgb(0,0,0) }
 .textWhite { color: white}
+.textBlue {color: blue}
 
 .imgLang
 {
@@ -221,4 +287,4 @@ input[type="text"] > input:active { cursor: pointer; }
   color: rgba(255,255,255,.7);
 }
 
-
+.italic {font-style: italic;}
