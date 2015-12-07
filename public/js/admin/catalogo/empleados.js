@@ -68,41 +68,6 @@
             };   
             var tableElement = $('#example');
 
-//    tableElement.dataTable( {
-//		"sDom": "<'row'<'col-md-6'l T><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
-//			"oTableTools": {
-//			"aButtons": [
-//				{
-//					"sExtends":    "collection",
-//					"sButtonText": "<i class='fa fa-cloud-download'></i>",
-//					"aButtons":    [ "csv", "xls", "pdf", "copy"]
-//				}
-//			]
-//		},
-//		"sPaginationType": "bootstrap",
-//		 "aoColumnDefs": [
-//          { 'bSortable': false, 'aTargets': [ 0 ] }
-//		],
-//		"aaSorting": [[ 1, "asc" ]],
-//		"oLanguage": {
-//			"sLengthMenu": "_MENU_ ",
-//			"sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-//		},
-//		 bAutoWidth     : false,
-//        fnPreDrawCallback: function () {
-//            // Initialize the responsive datatables helper once.
-//            if (!responsiveHelper) {
-//                responsiveHelper = new ResponsiveDatatablesHelper(tableElement, breakpointDefinition);
-//            }
-//        },
-//        fnRowCallback  : function (nRow) {
-//            responsiveHelper.createExpandIcon(nRow);
-//        },
-//        fnDrawCallback : function (oSettings) {
-//            responsiveHelper.respond();
-//        }
-//	});
-
             //INICILIZAMOS NUNESTRA TABLA
             $.ajax({
                  url: '/json/datatable/lang_es.json',
@@ -125,13 +90,55 @@
                         ajax: {
                             url: '/catalogo/empleados/serverside',
                             type: 'POST',
+                            
                         },
                         fnDrawCallback : function (oSettings) {
-                 
-                            //responsiveHelper.respond();
+                            //MODIFICAMOS LA URL
+                            var url_params = $.query.SET('limit',oSettings._iDisplayLength);
+                            
+                            if(typeof oSettings.aaSorting[0] != 'undefined'){
+                                url_params = $.query.SET('order',oSettings.aaSorting[0][0]);
+                                url_params = $.query.SET('dir',oSettings.aaSorting[0][1]);
+                            }
+                            
+                            var page = Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1;
+                            url_params = $.query.SET('page',page);
+                            
+                            history.replaceState( {} , 'itrade', url_params );
+       
                         },
                         fnRowCallback  : function (nRow) {
                             
+                            //DELETE MODAL
+                            $(nRow).find('td.options a.delete').on('click',function(){
+                                var id = $(this).closest('tr').attr('id');
+                                $.ajax({
+                                    url:'/catalogo/empleados/eliminar',
+                                    data:{id:id},
+                                    success:function(source){
+                                        source = $('<div>'+source+'</div>');
+                                        source.find('button[btn-action=eliminar]').on('click',function(){
+                                            $.ajax({
+                                                url:'/catalogo/empleados/eliminar',
+                                                type:'POST',
+                                                dataType:'json',
+                                                data:{id:id},
+                                                success:function(data){
+                                                    if(data){
+                                                        
+                                                    }
+                                                }
+                                            });
+                                        });
+                                        
+                                        $container.append(source);
+                                        
+                                        source.find('.modal').modal();
+                                  
+                                    }
+                                });
+                                
+                            });
                             //responsiveHelper.createExpandIcon(nRow);
                         },
                         

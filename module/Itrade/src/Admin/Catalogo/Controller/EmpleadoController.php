@@ -16,7 +16,11 @@ class EmpleadoController extends AbstractActionController
 {
     public function indexAction()
     {
-
+        
+        return new ViewModel(array(
+            'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
+        ));
+        
     }
     
     public function nuevoAction()
@@ -308,6 +312,55 @@ class EmpleadoController extends AbstractActionController
        
     }
     
+    public function eliminarAction(){
+        
+        $request = $this->getRequest();
+        
+      
+
+        if($request->isPost()){
+            
+            $id = $request->getPost('id');
+            
+            $entity = \EmpleadoQuery::create()->findPk($id);
+            
+            $entity->delete();
+            
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro eliminado exitosamente!');
+            
+            if($entity->isDeleted()){
+                return $this->getResponse()->setContent(json_encode(true));
+            }
+            
+            
+        }
+        
+        $id = $this->params()->fromQuery('id');
+        
+        /*
+         * VALIDACIONES
+         */
+        
+        //VALIDAMOS QUE EL EMPLEADO QUE SE QUIERE ELIMINAR NO TENGA ASIGNADO UN CLIENTE/EXPEDIENTE ASIGNADO
+        $valid = true;
+        
+        if(\ClienteQuery::create()->filterByIdempleadocomercial($id)->exists()){
+            $valid = false;
+        }elseif (\ClienteQuery::create()->filterByIdempleadooperaciones($id)->exists()) {
+            $valid = false;
+        }
+            
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        
+        if(!$valid){
+            $viewModel->setTemplate('catalogo/empleado/eliminar_error');
+        }
+
+        return $viewModel;
+    }
+    
     public function serversideAction(){
         
         $request = $this->getRequest();
@@ -323,6 +376,9 @@ class EmpleadoController extends AbstractActionController
             );
             
             $post_data = $request->getPost();
+            
+            
+            
            
             //NUESTRA QUERY
             $query = new \EmpleadoQuery();
@@ -336,8 +392,8 @@ class EmpleadoController extends AbstractActionController
             }else{
                 $query->orderByIdempleado(\Criteria::DESC);
             }
-             
-          
+            
+ 
             if(!empty($post_data['search']['value'])){
                 
                 $search = $post_data['search']['value'];
@@ -355,10 +411,22 @@ class EmpleadoController extends AbstractActionController
                 $query->addAnd($c1);
                
             }
-            
 
             //EL TOTAL DE LA BUSQUEDA
             $recordsFiltered = $query->count();
+            
+            //SUSTITUIMOS VARIABLES SI NOS LAS ENVIAN POR LA URL
+            if($this->params()->fromQuery('limit') && $this->params()->fromQuery('page')){
+                $post_data['length'] = $this->params()->fromQuery('limit');
+                $post_data['start'] = 0;
+                if($this->params()->fromQuery('page') > 1){
+                    $post_data['start'] = ($recordsFiltered * $this->params()->fromQuery('page'));
+                }
+            }
+            
+            //LIMIT
+            $query->setOffset((int)$post_data['start']);
+            $query->setLimit((int)$post_data['length']);
             
              //DAMOS EL FORMATO CORRECTO
             $data = array();
@@ -370,7 +438,7 @@ class EmpleadoController extends AbstractActionController
                 $tmp['empleado_email'] =  $value->getEmpleadoEmail();
                 $tmp['empleado_celular'] = $value->getEmpleadoCelular();
                 $tmp['empleado_rol'] = ucfirst($value->getEmpleadoRol());
-                $tmp['empleado_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/catalogo/empleados/editar/'.$value->getIdempleado().'"><i class="fa fa-pencil"></i></a><a data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void()"><i class="fa fa-trash-o"></a>';
+                $tmp['empleado_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/catalogo/empleados/editar/'.$value->getIdempleado().'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
 
                 $data[] = $tmp;
  

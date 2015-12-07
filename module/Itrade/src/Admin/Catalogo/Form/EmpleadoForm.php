@@ -301,6 +301,24 @@ class EmpleadoForm extends Form
             ),
         ));
          
+        $this->add(array(
+            'name' => 'empleado_estatus',
+            'type' => 'Select',
+            'options' => array(
+                'label' => 'Rol',
+                //'empty_option' => 'Seleccione un estatus',
+                'value_options' =>array(
+                    'activo' => 'Activo',
+                    'inactivo' => 'Inactivo',
+                ),
+                
+            ),
+            'attributes' => array(
+                'required' => true,
+                'class' => 'width-100',
+            ),
+        ));
+         
          $this->add(array(
             'name' => 'empleado_foto',
             'type' => 'File',
