@@ -31,27 +31,6 @@
                             </tr>
                     </thead>
                     <tbody>
-                        <?php $entity = new Empleado()?>
-                        <?php foreach ($collection as $entity) :?>
-                        <tr>
-                            <td>
-                                <?php echo $entity->getEmpleadoNombre().' '.$entity->getEmpleadoApellidopaterno().' '.$entity->getEmpleadoApallidomaterno()?>
-                            </td>
-                            <td>
-                                 <?php echo $entity->getEmpleadoEmail()?>
-                            </td>
-                            <td>
-                                 <?php echo $entity->getEmpleadoCelular()?>
-                            </td>
-                            <td>
-                                 <?php echo ucfirst($entity->getEmpleadoRol())?>
-                            </td>
-                            <td>
-                                <a href="editar">Editar</a>&nbsp&nbsp<a href="editar">Eliminar</a>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                        
                         
                     </tbody>
                     </table>

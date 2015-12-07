@@ -9,3 +9,11 @@
 .empleado_foto{
     cursor: pointer;
 }
+
+table tbody td.options i.fa-trash-o{
+    color:red;
+}
+
+table tbody td.options a:not(:first-child){
+    margin-left: 10px;
+}

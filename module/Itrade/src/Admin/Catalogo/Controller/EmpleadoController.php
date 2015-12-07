@@ -16,10 +16,7 @@ class EmpleadoController extends AbstractActionController
 {
     public function indexAction()
     {
-        $collection = \EmpleadoQuery::create()->filterByIdempleado(1,  \Criteria::NOT_EQUAL)->find();
-        return new ViewModel(array(
-            'collection' => $collection,
-        ));
+
     }
     
     public function nuevoAction()
@@ -309,5 +306,86 @@ class EmpleadoController extends AbstractActionController
         }
         
        
+    }
+    
+    public function serversideAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            //EL MAPEO DE NUESTRA TABALA
+            $table_map = array(
+                0 => 'empleado_nombre',
+                1 => 'empleado_email',
+                2 => 'empleado_celular',
+                3 => 'empleado_rol',
+            );
+            
+            $post_data = $request->getPost();
+           
+            //NUESTRA QUERY
+            $query = new \EmpleadoQuery();
+            $query->filterByIdempleado(1,  \Criteria::NOT_EQUAL);
+            
+            //ORDER 
+            if(isset($post_data['order'])){
+                $order = $table_map[$post_data['order'][0]['column']];
+                $dir = $post_data['order'][0]['dir'];
+                $query->orderBy($order, $dir);
+            }else{
+                $query->orderByIdempleado(\Criteria::DESC);
+            }
+             
+          
+            if(!empty($post_data['search']['value'])){
+                
+                $search = $post_data['search']['value'];
+
+                $c = new \Criteria();
+                
+                $c1= $c->getNewCriterion('empleado.empleado_nombre', '%'.$search.'%', \Criteria::LIKE);
+                $c2= $c->getNewCriterion('empleado.empleado_apallidomaterno', '%'.$search.'%', \Criteria::LIKE);
+                $c3= $c->getNewCriterion('empleado.empleado_apellidopaterno', '%'.$search.'%', \Criteria::LIKE);
+                $c4= $c->getNewCriterion('empleado.empleado_celular', '%'.$search.'%', \Criteria::LIKE);
+                $c5= $c->getNewCriterion('empleado.empleado_rol', '%'.$search.'%', \Criteria::LIKE);
+
+                $c1->addOr($c2)->addOr($c3)->addOr($c4)->addOr($c5);
+
+                $query->addAnd($c1);
+               
+            }
+            
+
+            //EL TOTAL DE LA BUSQUEDA
+            $recordsFiltered = $query->count();
+            
+             //DAMOS EL FORMATO CORRECTO
+            $data = array();
+            $value = new \Empleado();
+            foreach ($query->find() as $value){
+
+                $tmp['DT_RowId'] = $value->getIdempleado();
+                $tmp['empleado_nombre'] = $value->getEmpleadoNombre().' '.$value->getEmpleadoApellidopaterno().' '.$value->getEmpleadoApallidomaterno();
+                $tmp['empleado_email'] =  $value->getEmpleadoEmail();
+                $tmp['empleado_celular'] = $value->getEmpleadoCelular();
+                $tmp['empleado_rol'] = ucfirst($value->getEmpleadoRol());
+                $tmp['empleado_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/catalogo/empleados/editar/'.$value->getIdempleado().'"><i class="fa fa-pencil"></i></a><a data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void()"><i class="fa fa-trash-o"></a>';
+
+                $data[] = $tmp;
+ 
+            }  
+            
+            //El arreglo que regresamos
+            $json_data = array(
+                "draw"            => (int)$post_data['draw'],
+                "recordsFiltered" => $recordsFiltered,
+                "data"            => $data
+            );
+
+            
+            return $this->getResponse()->setContent(json_encode($json_data));
+
+        }
     }
 }

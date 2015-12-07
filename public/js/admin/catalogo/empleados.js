@@ -60,12 +60,12 @@
        
         plugin.list = function(){
             
-            //
+            //RESPONSIVIDAD
             var responsiveHelper = undefined;
-    var breakpointDefinition = {
-        tablet: 1024,
-        phone : 480
-    };   
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone : 480
+            };   
             var tableElement = $('#example');
 
 //    tableElement.dataTable( {
@@ -106,29 +106,35 @@
             //INICILIZAMOS NUNESTRA TABLA
             $.ajax({
                  url: '/json/datatable/lang_es.json',
-              
                  async:false,
                  success: function (data) {
                     $table = $container.find('table').DataTable({
-                         //bServerSide: true,
+                         autoWidth: false,
+                         serverSide: true,
                          processing: true,
-                         oLanguage: data,
+                         language:data,
                          iDisplayLength:25,
-                         bSort: false,
+                         order:[],
                          columns: [
                             { data: "empleado_nombre" },
                             { data: "empleado_email" },
                             { data: "empleado_celular" },
                             { data: "empleado_rol" },
-                            { data: "empleado_options" },
+                            { data: "empleado_options",bSearchable: false, bSortable: false, className:'options'},
                         ],
-//                        fnServerData: function (sSource, aoData, fnCallback, oSettings) {
-//                            oSettings.jqXHR = $.ajax( {
-//                                dataType: 'json',
-//                                type: 'POST',
-//                                url: '/catalogo/empleados/serverside',
-//                            });     
-//                        },
+                        ajax: {
+                            url: '/catalogo/empleados/serverside',
+                            type: 'POST',
+                        },
+                        fnDrawCallback : function (oSettings) {
+                 
+                            //responsiveHelper.respond();
+                        },
+                        fnRowCallback  : function (nRow) {
+                            
+                            //responsiveHelper.createExpandIcon(nRow);
+                        },
+                        
                     });
                     //INICIALIZAMOS NUESTROS SELECT
                     $container.find("select").select2({
