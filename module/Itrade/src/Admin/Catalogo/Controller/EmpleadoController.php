@@ -376,7 +376,7 @@ class EmpleadoController extends AbstractActionController
             );
             
             $post_data = $request->getPost();
-            
+           
             
             
            
@@ -416,14 +416,14 @@ class EmpleadoController extends AbstractActionController
             $recordsFiltered = $query->count();
             
             //SUSTITUIMOS VARIABLES SI NOS LAS ENVIAN POR LA URL
-            if($this->params()->fromQuery('limit') && $this->params()->fromQuery('page')){
-                $post_data['length'] = $this->params()->fromQuery('limit');
-                $post_data['start'] = 0;
-                if($this->params()->fromQuery('page') > 1){
-                    $post_data['start'] = ($recordsFiltered * $this->params()->fromQuery('page'));
-                }
+                if(isset($post_data['url_params']['limit']) && isset($post_data['url_params']['page'])){
+                    $post_data['length'] = (int)$post_data['url_params']['limit'];
+                    $post_data['start'] = 0;
+                    if((int)$post_data['url_params']['page'] > 1){               
+                        $post_data['start'] = ($post_data['url_params']['limit'] * ((int)$post_data['url_params']['page']-1));
+                    }
             }
-            
+
             //LIMIT
             $query->setOffset((int)$post_data['start']);
             $query->setLimit((int)$post_data['length']);
@@ -448,7 +448,8 @@ class EmpleadoController extends AbstractActionController
             $json_data = array(
                 "draw"            => (int)$post_data['draw'],
                 "recordsFiltered" => $recordsFiltered,
-                "data"            => $data
+                "data"            => $data,
+                "page"            => $post_data['url_params']['page']
             );
 
             

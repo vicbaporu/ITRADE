@@ -14,9 +14,13 @@
         <div class="col-md-12">
             <div class="grid simple">
                 <div class="grid-title no-border">
-                    <div>
-                        <a style="float: right" href="/catalogo/empleados/nuevo"><i class="fa fa-plus"></i> Registro empleado</a>
+                    <div class="tools">
+                        <a class="config" href="#grid-config"></a> 
                     </div>
+<!--                    <div>
+                            
+                        <a style="float: right" href="/catalogo/empleados/nuevo"><i class="fa fa-plus"></i> Registro empleado</a>
+                    </div>-->
                     <br>
                 </div>
                 <div class="grid-body no-border">
@@ -43,7 +47,7 @@
 <script src="/js/admin/catalogo/empleados.js"></script>
 <script>
     $(document).ready(function() {
-        var empleados = $('.list_container').empleados();
+        var empleados = $('.list_container').empleados({successMessages:<?php echo $successMessages?>});
         empleados.list();
     }); 
 </script>

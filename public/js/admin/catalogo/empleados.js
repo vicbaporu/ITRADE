@@ -66,6 +66,7 @@
                 tablet: 1024,
                 phone : 480
             };   
+            
             var tableElement = $('#example');
 
             //INICILIZAMOS NUNESTRA TABLA
@@ -90,22 +91,12 @@
                         ajax: {
                             url: '/catalogo/empleados/serverside',
                             type: 'POST',
-                            
+                            async:false,
                         },
                         fnDrawCallback : function (oSettings) {
-                            //MODIFICAMOS LA URL
-                            var url_params = $.query.SET('limit',oSettings._iDisplayLength);
+
                             
-                            if(typeof oSettings.aaSorting[0] != 'undefined'){
-                                url_params = $.query.SET('order',oSettings.aaSorting[0][0]);
-                                url_params = $.query.SET('dir',oSettings.aaSorting[0][1]);
-                            }
-                            
-                            var page = Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1;
-                            url_params = $.query.SET('page',page);
-                            
-                            history.replaceState( {} , 'itrade', url_params );
-       
+                                                    
                         },
                         fnRowCallback  : function (nRow) {
                             
@@ -125,7 +116,7 @@
                                                 data:{id:id},
                                                 success:function(data){
                                                     if(data){
-                                                        
+                                                        window.location.replace('/catalogo/empleados');
                                                     }
                                                 }
                                             });
@@ -143,6 +134,7 @@
                         },
                         
                     });
+
                     //INICIALIZAMOS NUESTROS SELECT
                     $container.find("select").select2({
                         minimumResultsForSearch: -1
@@ -150,9 +142,7 @@
                     
                  }
             });
-            
-            
-            
+
         }
         
         plugin.init = function(){
@@ -166,10 +156,7 @@
                     showCloseButton: true,
                 });	
             });
-            
-            
-            
-            
+
         }
         
         plugin.formBind = function(edit,entity){
