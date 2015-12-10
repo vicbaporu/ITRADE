@@ -232,6 +232,20 @@
                      empleado_iniciocontrato = empleado_iniciocontrato.toDate();
                      $( ".input-append.date" ).datepicker( "setDate",empleado_iniciocontrato);
                 }
+                
+                //EL EVENTO CAMBIAR CONTRASEÑA
+                $container.find('a#change_password').on('click',function(){
+                    var id = $container.find('input[name=idempleado]').val();
+                    $.ajax({
+                        url:'/catalogo/empleados/changepassword',
+                        data:{id:id},
+                        success:function(source){
+                             source = $('<div>'+source+'</div>');
+                             $container.append(source);
+                             source.find('.modal').modal();
+                        }
+                    });
+                });
                
                 
             }

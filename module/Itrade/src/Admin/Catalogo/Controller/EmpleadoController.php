@@ -23,6 +23,40 @@ class EmpleadoController extends AbstractActionController
         
     }
     
+    public function changepasswordAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            $post_data = $request->getPost();
+            
+            $id = $post_data['idempleado'];
+            $entity = \EmpleadoQuery::create()->findPk($id);
+            
+            $entity->setEmpleadoPassword(md5($post_data['empleado_password']));
+            $entity->save();
+            
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+                  
+           //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+           return $this->redirect()->toRoute('admin/catalogo/empleados', array('action' => 'editar','id' => $entity->getIdempleado()));
+
+        }
+        
+        
+        
+         $id = $this->params()->fromQuery('id');
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->setVariable('id', $id);
+        return $viewModel;
+        
+      
+        
+    }
+
+
     public function nuevoAction()
     {
         

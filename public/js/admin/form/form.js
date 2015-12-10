@@ -4,7 +4,8 @@ $(document).ready(function(){
     
     
     $('form').delegate('button[btn_action=submit]','click',function(e){
-        
+      
+      
         var $form = $(this).closest('form');
         var empty = false;
         var error = false;
