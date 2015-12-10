@@ -8,6 +8,8 @@
  *
  * @method ProveedoritradeQuery orderByIdproveedoritrade($order = Criteria::ASC) Order by the idproveedoritrade column
  * @method ProveedoritradeQuery orderByProveedoritradeNombre($order = Criteria::ASC) Order by the proveedoritrade_nombre column
+ * @method ProveedoritradeQuery orderByProveedoritradeNombrecontacto($order = Criteria::ASC) Order by the proveedoritrade_nombrecontacto column
+ * @method ProveedoritradeQuery orderByProveedoritradeTelefono($order = Criteria::ASC) Order by the proveedoritrade_telefono column
  * @method ProveedoritradeQuery orderByProveedoritradeCalle($order = Criteria::ASC) Order by the proveedoritrade_calle column
  * @method ProveedoritradeQuery orderByProveedoritradeNumero($order = Criteria::ASC) Order by the proveedoritrade_numero column
  * @method ProveedoritradeQuery orderByProveedoritradeInterior($order = Criteria::ASC) Order by the proveedoritrade_interior column
@@ -15,7 +17,6 @@
  * @method ProveedoritradeQuery orderByProveedoritradeCiudad($order = Criteria::ASC) Order by the proveedoritrade_ciudad column
  * @method ProveedoritradeQuery orderByProveedoritradeEstado($order = Criteria::ASC) Order by the proveedoritrade_estado column
  * @method ProveedoritradeQuery orderByProveedoritradePais($order = Criteria::ASC) Order by the proveedoritrade_pais column
- * @method ProveedoritradeQuery orderByProveedoritradeTelefono($order = Criteria::ASC) Order by the proveedoritrade_telefono column
  * @method ProveedoritradeQuery orderByProveedoritradeEmail($order = Criteria::ASC) Order by the proveedoritrade_email column
  * @method ProveedoritradeQuery orderByProveedoritradeRfc($order = Criteria::ASC) Order by the proveedoritrade_rfc column
  * @method ProveedoritradeQuery orderByProveedoritradeComprobantedomicilio($order = Criteria::ASC) Order by the proveedoritrade_comprobantedomicilio column
@@ -24,6 +25,8 @@
  *
  * @method ProveedoritradeQuery groupByIdproveedoritrade() Group by the idproveedoritrade column
  * @method ProveedoritradeQuery groupByProveedoritradeNombre() Group by the proveedoritrade_nombre column
+ * @method ProveedoritradeQuery groupByProveedoritradeNombrecontacto() Group by the proveedoritrade_nombrecontacto column
+ * @method ProveedoritradeQuery groupByProveedoritradeTelefono() Group by the proveedoritrade_telefono column
  * @method ProveedoritradeQuery groupByProveedoritradeCalle() Group by the proveedoritrade_calle column
  * @method ProveedoritradeQuery groupByProveedoritradeNumero() Group by the proveedoritrade_numero column
  * @method ProveedoritradeQuery groupByProveedoritradeInterior() Group by the proveedoritrade_interior column
@@ -31,7 +34,6 @@
  * @method ProveedoritradeQuery groupByProveedoritradeCiudad() Group by the proveedoritrade_ciudad column
  * @method ProveedoritradeQuery groupByProveedoritradeEstado() Group by the proveedoritrade_estado column
  * @method ProveedoritradeQuery groupByProveedoritradePais() Group by the proveedoritrade_pais column
- * @method ProveedoritradeQuery groupByProveedoritradeTelefono() Group by the proveedoritrade_telefono column
  * @method ProveedoritradeQuery groupByProveedoritradeEmail() Group by the proveedoritrade_email column
  * @method ProveedoritradeQuery groupByProveedoritradeRfc() Group by the proveedoritrade_rfc column
  * @method ProveedoritradeQuery groupByProveedoritradeComprobantedomicilio() Group by the proveedoritrade_comprobantedomicilio column
@@ -54,6 +56,8 @@
  * @method Proveedoritrade findOneOrCreate(PropelPDO $con = null) Return the first Proveedoritrade matching the query, or a new Proveedoritrade object populated from the query conditions when no match is found
  *
  * @method Proveedoritrade findOneByProveedoritradeNombre(string $proveedoritrade_nombre) Return the first Proveedoritrade filtered by the proveedoritrade_nombre column
+ * @method Proveedoritrade findOneByProveedoritradeNombrecontacto(string $proveedoritrade_nombrecontacto) Return the first Proveedoritrade filtered by the proveedoritrade_nombrecontacto column
+ * @method Proveedoritrade findOneByProveedoritradeTelefono(string $proveedoritrade_telefono) Return the first Proveedoritrade filtered by the proveedoritrade_telefono column
  * @method Proveedoritrade findOneByProveedoritradeCalle(string $proveedoritrade_calle) Return the first Proveedoritrade filtered by the proveedoritrade_calle column
  * @method Proveedoritrade findOneByProveedoritradeNumero(string $proveedoritrade_numero) Return the first Proveedoritrade filtered by the proveedoritrade_numero column
  * @method Proveedoritrade findOneByProveedoritradeInterior(string $proveedoritrade_interior) Return the first Proveedoritrade filtered by the proveedoritrade_interior column
@@ -61,7 +65,6 @@
  * @method Proveedoritrade findOneByProveedoritradeCiudad(string $proveedoritrade_ciudad) Return the first Proveedoritrade filtered by the proveedoritrade_ciudad column
  * @method Proveedoritrade findOneByProveedoritradeEstado(string $proveedoritrade_estado) Return the first Proveedoritrade filtered by the proveedoritrade_estado column
  * @method Proveedoritrade findOneByProveedoritradePais(string $proveedoritrade_pais) Return the first Proveedoritrade filtered by the proveedoritrade_pais column
- * @method Proveedoritrade findOneByProveedoritradeTelefono(string $proveedoritrade_telefono) Return the first Proveedoritrade filtered by the proveedoritrade_telefono column
  * @method Proveedoritrade findOneByProveedoritradeEmail(string $proveedoritrade_email) Return the first Proveedoritrade filtered by the proveedoritrade_email column
  * @method Proveedoritrade findOneByProveedoritradeRfc(string $proveedoritrade_rfc) Return the first Proveedoritrade filtered by the proveedoritrade_rfc column
  * @method Proveedoritrade findOneByProveedoritradeComprobantedomicilio(string $proveedoritrade_comprobantedomicilio) Return the first Proveedoritrade filtered by the proveedoritrade_comprobantedomicilio column
@@ -70,6 +73,8 @@
  *
  * @method array findByIdproveedoritrade(int $idproveedoritrade) Return Proveedoritrade objects filtered by the idproveedoritrade column
  * @method array findByProveedoritradeNombre(string $proveedoritrade_nombre) Return Proveedoritrade objects filtered by the proveedoritrade_nombre column
+ * @method array findByProveedoritradeNombrecontacto(string $proveedoritrade_nombrecontacto) Return Proveedoritrade objects filtered by the proveedoritrade_nombrecontacto column
+ * @method array findByProveedoritradeTelefono(string $proveedoritrade_telefono) Return Proveedoritrade objects filtered by the proveedoritrade_telefono column
  * @method array findByProveedoritradeCalle(string $proveedoritrade_calle) Return Proveedoritrade objects filtered by the proveedoritrade_calle column
  * @method array findByProveedoritradeNumero(string $proveedoritrade_numero) Return Proveedoritrade objects filtered by the proveedoritrade_numero column
  * @method array findByProveedoritradeInterior(string $proveedoritrade_interior) Return Proveedoritrade objects filtered by the proveedoritrade_interior column
@@ -77,7 +82,6 @@
  * @method array findByProveedoritradeCiudad(string $proveedoritrade_ciudad) Return Proveedoritrade objects filtered by the proveedoritrade_ciudad column
  * @method array findByProveedoritradeEstado(string $proveedoritrade_estado) Return Proveedoritrade objects filtered by the proveedoritrade_estado column
  * @method array findByProveedoritradePais(string $proveedoritrade_pais) Return Proveedoritrade objects filtered by the proveedoritrade_pais column
- * @method array findByProveedoritradeTelefono(string $proveedoritrade_telefono) Return Proveedoritrade objects filtered by the proveedoritrade_telefono column
  * @method array findByProveedoritradeEmail(string $proveedoritrade_email) Return Proveedoritrade objects filtered by the proveedoritrade_email column
  * @method array findByProveedoritradeRfc(string $proveedoritrade_rfc) Return Proveedoritrade objects filtered by the proveedoritrade_rfc column
  * @method array findByProveedoritradeComprobantedomicilio(string $proveedoritrade_comprobantedomicilio) Return Proveedoritrade objects filtered by the proveedoritrade_comprobantedomicilio column
@@ -190,7 +194,7 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idproveedoritrade`, `proveedoritrade_nombre`, `proveedoritrade_calle`, `proveedoritrade_numero`, `proveedoritrade_interior`, `proveedoritrade_colonia`, `proveedoritrade_ciudad`, `proveedoritrade_estado`, `proveedoritrade_pais`, `proveedoritrade_telefono`, `proveedoritrade_email`, `proveedoritrade_rfc`, `proveedoritrade_comprobantedomicilio`, `proveedoritrade_clabe`, `proveedoritrade_comprobantedatosbancarios` FROM `proveedoritrade` WHERE `idproveedoritrade` = :p0';
+        $sql = 'SELECT `idproveedoritrade`, `proveedoritrade_nombre`, `proveedoritrade_nombrecontacto`, `proveedoritrade_telefono`, `proveedoritrade_calle`, `proveedoritrade_numero`, `proveedoritrade_interior`, `proveedoritrade_colonia`, `proveedoritrade_ciudad`, `proveedoritrade_estado`, `proveedoritrade_pais`, `proveedoritrade_email`, `proveedoritrade_rfc`, `proveedoritrade_comprobantedomicilio`, `proveedoritrade_clabe`, `proveedoritrade_comprobantedatosbancarios` FROM `proveedoritrade` WHERE `idproveedoritrade` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -348,6 +352,64 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_NOMBRE, $proveedoritradeNombre, $comparison);
+    }
+
+    /**
+     * Filter the query on the proveedoritrade_nombrecontacto column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByProveedoritradeNombrecontacto('fooValue');   // WHERE proveedoritrade_nombrecontacto = 'fooValue'
+     * $query->filterByProveedoritradeNombrecontacto('%fooValue%'); // WHERE proveedoritrade_nombrecontacto LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $proveedoritradeNombrecontacto The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedoritradeQuery The current query, for fluid interface
+     */
+    public function filterByProveedoritradeNombrecontacto($proveedoritradeNombrecontacto = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($proveedoritradeNombrecontacto)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $proveedoritradeNombrecontacto)) {
+                $proveedoritradeNombrecontacto = str_replace('*', '%', $proveedoritradeNombrecontacto);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO, $proveedoritradeNombrecontacto, $comparison);
+    }
+
+    /**
+     * Filter the query on the proveedoritrade_telefono column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByProveedoritradeTelefono('fooValue');   // WHERE proveedoritrade_telefono = 'fooValue'
+     * $query->filterByProveedoritradeTelefono('%fooValue%'); // WHERE proveedoritrade_telefono LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $proveedoritradeTelefono The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedoritradeQuery The current query, for fluid interface
+     */
+    public function filterByProveedoritradeTelefono($proveedoritradeTelefono = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($proveedoritradeTelefono)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $proveedoritradeTelefono)) {
+                $proveedoritradeTelefono = str_replace('*', '%', $proveedoritradeTelefono);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO, $proveedoritradeTelefono, $comparison);
     }
 
     /**
@@ -551,35 +613,6 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_PAIS, $proveedoritradePais, $comparison);
-    }
-
-    /**
-     * Filter the query on the proveedoritrade_telefono column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByProveedoritradeTelefono('fooValue');   // WHERE proveedoritrade_telefono = 'fooValue'
-     * $query->filterByProveedoritradeTelefono('%fooValue%'); // WHERE proveedoritrade_telefono LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $proveedoritradeTelefono The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ProveedoritradeQuery The current query, for fluid interface
-     */
-    public function filterByProveedoritradeTelefono($proveedoritradeTelefono = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($proveedoritradeTelefono)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $proveedoritradeTelefono)) {
-                $proveedoritradeTelefono = str_replace('*', '%', $proveedoritradeTelefono);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO, $proveedoritradeTelefono, $comparison);
     }
 
     /**

@@ -159,8 +159,8 @@ class EmpleadoController extends AbstractActionController
             //Agregamos un mensaje
             $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
                   
-             //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
-            return $this->redirect()->toRoute('admin/catalogo/empleados', array('action' => 'editar','id' => $entity->getIdempleado()));
+                    //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+                   return $this->redirect()->toRoute('admin/catalogo/empleados', array('action' => 'editar','id' => $entity->getIdempleado()));
                 
         }
         

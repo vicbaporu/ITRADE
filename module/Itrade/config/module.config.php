@@ -78,6 +78,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'proveedores' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/proveedores[/:action][/:id][/]',
+                                    'defaults' => array(
+                                        'controller'    => 'Catalogo\Controller\Proveedor',
+                                        'action'        => 'index',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -193,9 +203,11 @@ return array(
              * START ADMIN
              */
             'Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
-
+            'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
+            
              //CATALOGO
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            
             /*
              * END ADMIN
              */

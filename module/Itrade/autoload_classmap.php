@@ -3,7 +3,9 @@
 return array(
     'Itrade\Module'                             => __DIR__ . '/Module.php',
     'Catalogo\Controller\EmpleadoController'    => __DIR__ . '/src/Admin/Catalogo/Controller/EmpleadoController.php',
+    'Catalogo\Controller\ProveedorController'   => __DIR__ . '/src/Admin/Catalogo/Controller/ProveedorController.php',
     'Catalogo\Form\EmpleadoForm'                => __DIR__ . '/src/Admin/Catalogo/Form/EmpleadoForm.php',
+    'Catalogo\Form\ProveedorForm'               => __DIR__ . '/src/Admin/Catalogo/Form/ProveedorForm.php',
     'Admin\Controller\IndexController'          => __DIR__ . '/src/Admin/Controller/IndexController.php',
     'Client\Controller\IndexController'         => __DIR__ . '/src/Client/Controller/IndexController.php',
     'Shared\CustomListener\LangListener'        => __DIR__ . '/src/Shared/CustomListener/LangListener.php',

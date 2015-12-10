@@ -39,7 +39,9 @@ class ProveedoritradeTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idproveedoritrade', 'Idproveedoritrade', 'INTEGER', true, null, null);
-        $this->addColumn('proveedoritrade_nombre', 'ProveedoritradeNombre', 'VARCHAR', false, 45, null);
+        $this->addColumn('proveedoritrade_nombre', 'ProveedoritradeNombre', 'VARCHAR', true, 45, null);
+        $this->addColumn('proveedoritrade_nombrecontacto', 'ProveedoritradeNombrecontacto', 'VARCHAR', true, 45, null);
+        $this->addColumn('proveedoritrade_telefono', 'ProveedoritradeTelefono', 'VARCHAR', true, 45, null);
         $this->addColumn('proveedoritrade_calle', 'ProveedoritradeCalle', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_numero', 'ProveedoritradeNumero', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_interior', 'ProveedoritradeInterior', 'VARCHAR', false, 45, null);
@@ -47,7 +49,6 @@ class ProveedoritradeTableMap extends TableMap
         $this->addColumn('proveedoritrade_ciudad', 'ProveedoritradeCiudad', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_estado', 'ProveedoritradeEstado', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_pais', 'ProveedoritradePais', 'VARCHAR', false, 45, null);
-        $this->addColumn('proveedoritrade_telefono', 'ProveedoritradeTelefono', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_email', 'ProveedoritradeEmail', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_rfc', 'ProveedoritradeRfc', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_comprobantedomicilio', 'ProveedoritradeComprobantedomicilio', 'LONGVARCHAR', false, null, null);

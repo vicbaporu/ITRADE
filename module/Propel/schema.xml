@@ -266,7 +266,9 @@
   </table>
   <table name="proveedoritrade" phpName="Proveedoritrade" idMethod="native">
     <column name="idproveedoritrade" phpName="Idproveedoritrade" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
-    <column name="proveedoritrade_nombre" phpName="ProveedoritradeNombre" type="VARCHAR" size="45" required="false"/>
+    <column name="proveedoritrade_nombre" phpName="ProveedoritradeNombre" type="VARCHAR" size="45" required="true"/>
+    <column name="proveedoritrade_nombrecontacto" phpName="ProveedoritradeNombrecontacto" type="VARCHAR" size="45" required="true"/>
+    <column name="proveedoritrade_telefono" phpName="ProveedoritradeTelefono" type="VARCHAR" size="45" required="true"/>
     <column name="proveedoritrade_calle" phpName="ProveedoritradeCalle" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_numero" phpName="ProveedoritradeNumero" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_interior" phpName="ProveedoritradeInterior" type="VARCHAR" size="45" required="false"/>
@@ -274,7 +276,6 @@
     <column name="proveedoritrade_ciudad" phpName="ProveedoritradeCiudad" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_estado" phpName="ProveedoritradeEstado" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_pais" phpName="ProveedoritradePais" type="VARCHAR" size="45" required="false"/>
-    <column name="proveedoritrade_telefono" phpName="ProveedoritradeTelefono" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_email" phpName="ProveedoritradeEmail" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_rfc" phpName="ProveedoritradeRfc" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_comprobantedomicilio" phpName="ProveedoritradeComprobantedomicilio" type="LONGVARCHAR" required="false"/>

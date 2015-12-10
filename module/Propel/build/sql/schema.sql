@@ -337,7 +337,9 @@ DROP TABLE IF EXISTS `proveedoritrade`;
 CREATE TABLE `proveedoritrade`
 (
     `idproveedoritrade` INTEGER NOT NULL AUTO_INCREMENT,
-    `proveedoritrade_nombre` VARCHAR(45),
+    `proveedoritrade_nombre` VARCHAR(45) NOT NULL,
+    `proveedoritrade_nombrecontacto` VARCHAR(45) NOT NULL,
+    `proveedoritrade_telefono` VARCHAR(45) NOT NULL,
     `proveedoritrade_calle` VARCHAR(45),
     `proveedoritrade_numero` VARCHAR(45),
     `proveedoritrade_interior` VARCHAR(45),
@@ -345,7 +347,6 @@ CREATE TABLE `proveedoritrade`
     `proveedoritrade_ciudad` VARCHAR(45),
     `proveedoritrade_estado` VARCHAR(45),
     `proveedoritrade_pais` VARCHAR(45),
-    `proveedoritrade_telefono` VARCHAR(45),
     `proveedoritrade_email` VARCHAR(45),
     `proveedoritrade_rfc` VARCHAR(45),
     `proveedoritrade_comprobantedomicilio` TEXT,

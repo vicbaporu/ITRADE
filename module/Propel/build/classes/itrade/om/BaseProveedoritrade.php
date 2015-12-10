@@ -42,6 +42,18 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     protected $proveedoritrade_nombre;
 
     /**
+     * The value for the proveedoritrade_nombrecontacto field.
+     * @var        string
+     */
+    protected $proveedoritrade_nombrecontacto;
+
+    /**
+     * The value for the proveedoritrade_telefono field.
+     * @var        string
+     */
+    protected $proveedoritrade_telefono;
+
+    /**
      * The value for the proveedoritrade_calle field.
      * @var        string
      */
@@ -82,12 +94,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
      * @var        string
      */
     protected $proveedoritrade_pais;
-
-    /**
-     * The value for the proveedoritrade_telefono field.
-     * @var        string
-     */
-    protected $proveedoritrade_telefono;
 
     /**
      * The value for the proveedoritrade_email field.
@@ -186,6 +192,28 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [proveedoritrade_nombrecontacto] column value.
+     *
+     * @return string
+     */
+    public function getProveedoritradeNombrecontacto()
+    {
+
+        return $this->proveedoritrade_nombrecontacto;
+    }
+
+    /**
+     * Get the [proveedoritrade_telefono] column value.
+     *
+     * @return string
+     */
+    public function getProveedoritradeTelefono()
+    {
+
+        return $this->proveedoritrade_telefono;
+    }
+
+    /**
      * Get the [proveedoritrade_calle] column value.
      *
      * @return string
@@ -260,17 +288,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     {
 
         return $this->proveedoritrade_pais;
-    }
-
-    /**
-     * Get the [proveedoritrade_telefono] column value.
-     *
-     * @return string
-     */
-    public function getProveedoritradeTelefono()
-    {
-
-        return $this->proveedoritrade_telefono;
     }
 
     /**
@@ -369,6 +386,48 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
 
         return $this;
     } // setProveedoritradeNombre()
+
+    /**
+     * Set the value of [proveedoritrade_nombrecontacto] column.
+     *
+     * @param  string $v new value
+     * @return Proveedoritrade The current object (for fluent API support)
+     */
+    public function setProveedoritradeNombrecontacto($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->proveedoritrade_nombrecontacto !== $v) {
+            $this->proveedoritrade_nombrecontacto = $v;
+            $this->modifiedColumns[] = ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO;
+        }
+
+
+        return $this;
+    } // setProveedoritradeNombrecontacto()
+
+    /**
+     * Set the value of [proveedoritrade_telefono] column.
+     *
+     * @param  string $v new value
+     * @return Proveedoritrade The current object (for fluent API support)
+     */
+    public function setProveedoritradeTelefono($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->proveedoritrade_telefono !== $v) {
+            $this->proveedoritrade_telefono = $v;
+            $this->modifiedColumns[] = ProveedoritradePeer::PROVEEDORITRADE_TELEFONO;
+        }
+
+
+        return $this;
+    } // setProveedoritradeTelefono()
 
     /**
      * Set the value of [proveedoritrade_calle] column.
@@ -518,27 +577,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     } // setProveedoritradePais()
 
     /**
-     * Set the value of [proveedoritrade_telefono] column.
-     *
-     * @param  string $v new value
-     * @return Proveedoritrade The current object (for fluent API support)
-     */
-    public function setProveedoritradeTelefono($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->proveedoritrade_telefono !== $v) {
-            $this->proveedoritrade_telefono = $v;
-            $this->modifiedColumns[] = ProveedoritradePeer::PROVEEDORITRADE_TELEFONO;
-        }
-
-
-        return $this;
-    } // setProveedoritradeTelefono()
-
-    /**
      * Set the value of [proveedoritrade_email] column.
      *
      * @param  string $v new value
@@ -677,19 +715,20 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
 
             $this->idproveedoritrade = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->proveedoritrade_nombre = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->proveedoritrade_calle = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->proveedoritrade_numero = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->proveedoritrade_interior = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->proveedoritrade_colonia = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->proveedoritrade_ciudad = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-            $this->proveedoritrade_estado = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
-            $this->proveedoritrade_pais = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
-            $this->proveedoritrade_telefono = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
-            $this->proveedoritrade_email = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
-            $this->proveedoritrade_rfc = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
-            $this->proveedoritrade_comprobantedomicilio = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
-            $this->proveedoritrade_clabe = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
-            $this->proveedoritrade_comprobantedatosbancarios = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
+            $this->proveedoritrade_nombrecontacto = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->proveedoritrade_telefono = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->proveedoritrade_calle = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->proveedoritrade_numero = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->proveedoritrade_interior = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->proveedoritrade_colonia = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->proveedoritrade_ciudad = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+            $this->proveedoritrade_estado = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+            $this->proveedoritrade_pais = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
+            $this->proveedoritrade_email = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
+            $this->proveedoritrade_rfc = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
+            $this->proveedoritrade_comprobantedomicilio = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
+            $this->proveedoritrade_clabe = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
+            $this->proveedoritrade_comprobantedatosbancarios = ($row[$startcol + 15] !== null) ? (string) $row[$startcol + 15] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -699,7 +738,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 15; // 15 = ProveedoritradePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 16; // 16 = ProveedoritradePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Proveedoritrade object", $e);
@@ -955,6 +994,12 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_NOMBRE)) {
             $modifiedColumns[':p' . $index++]  = '`proveedoritrade_nombre`';
         }
+        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO)) {
+            $modifiedColumns[':p' . $index++]  = '`proveedoritrade_nombrecontacto`';
+        }
+        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO)) {
+            $modifiedColumns[':p' . $index++]  = '`proveedoritrade_telefono`';
+        }
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_CALLE)) {
             $modifiedColumns[':p' . $index++]  = '`proveedoritrade_calle`';
         }
@@ -975,9 +1020,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         }
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_PAIS)) {
             $modifiedColumns[':p' . $index++]  = '`proveedoritrade_pais`';
-        }
-        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO)) {
-            $modifiedColumns[':p' . $index++]  = '`proveedoritrade_telefono`';
         }
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_EMAIL)) {
             $modifiedColumns[':p' . $index++]  = '`proveedoritrade_email`';
@@ -1011,6 +1053,12 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                     case '`proveedoritrade_nombre`':
                         $stmt->bindValue($identifier, $this->proveedoritrade_nombre, PDO::PARAM_STR);
                         break;
+                    case '`proveedoritrade_nombrecontacto`':
+                        $stmt->bindValue($identifier, $this->proveedoritrade_nombrecontacto, PDO::PARAM_STR);
+                        break;
+                    case '`proveedoritrade_telefono`':
+                        $stmt->bindValue($identifier, $this->proveedoritrade_telefono, PDO::PARAM_STR);
+                        break;
                     case '`proveedoritrade_calle`':
                         $stmt->bindValue($identifier, $this->proveedoritrade_calle, PDO::PARAM_STR);
                         break;
@@ -1031,9 +1079,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                         break;
                     case '`proveedoritrade_pais`':
                         $stmt->bindValue($identifier, $this->proveedoritrade_pais, PDO::PARAM_STR);
-                        break;
-                    case '`proveedoritrade_telefono`':
-                        $stmt->bindValue($identifier, $this->proveedoritrade_telefono, PDO::PARAM_STR);
                         break;
                     case '`proveedoritrade_email`':
                         $stmt->bindValue($identifier, $this->proveedoritrade_email, PDO::PARAM_STR);
@@ -1207,42 +1252,45 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                 return $this->getProveedoritradeNombre();
                 break;
             case 2:
-                return $this->getProveedoritradeCalle();
+                return $this->getProveedoritradeNombrecontacto();
                 break;
             case 3:
-                return $this->getProveedoritradeNumero();
-                break;
-            case 4:
-                return $this->getProveedoritradeInterior();
-                break;
-            case 5:
-                return $this->getProveedoritradeColonia();
-                break;
-            case 6:
-                return $this->getProveedoritradeCiudad();
-                break;
-            case 7:
-                return $this->getProveedoritradeEstado();
-                break;
-            case 8:
-                return $this->getProveedoritradePais();
-                break;
-            case 9:
                 return $this->getProveedoritradeTelefono();
                 break;
+            case 4:
+                return $this->getProveedoritradeCalle();
+                break;
+            case 5:
+                return $this->getProveedoritradeNumero();
+                break;
+            case 6:
+                return $this->getProveedoritradeInterior();
+                break;
+            case 7:
+                return $this->getProveedoritradeColonia();
+                break;
+            case 8:
+                return $this->getProveedoritradeCiudad();
+                break;
+            case 9:
+                return $this->getProveedoritradeEstado();
+                break;
             case 10:
-                return $this->getProveedoritradeEmail();
+                return $this->getProveedoritradePais();
                 break;
             case 11:
-                return $this->getProveedoritradeRfc();
+                return $this->getProveedoritradeEmail();
                 break;
             case 12:
-                return $this->getProveedoritradeComprobantedomicilio();
+                return $this->getProveedoritradeRfc();
                 break;
             case 13:
-                return $this->getProveedoritradeClabe();
+                return $this->getProveedoritradeComprobantedomicilio();
                 break;
             case 14:
+                return $this->getProveedoritradeClabe();
+                break;
+            case 15:
                 return $this->getProveedoritradeComprobantedatosbancarios();
                 break;
             default:
@@ -1276,19 +1324,20 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         $result = array(
             $keys[0] => $this->getIdproveedoritrade(),
             $keys[1] => $this->getProveedoritradeNombre(),
-            $keys[2] => $this->getProveedoritradeCalle(),
-            $keys[3] => $this->getProveedoritradeNumero(),
-            $keys[4] => $this->getProveedoritradeInterior(),
-            $keys[5] => $this->getProveedoritradeColonia(),
-            $keys[6] => $this->getProveedoritradeCiudad(),
-            $keys[7] => $this->getProveedoritradeEstado(),
-            $keys[8] => $this->getProveedoritradePais(),
-            $keys[9] => $this->getProveedoritradeTelefono(),
-            $keys[10] => $this->getProveedoritradeEmail(),
-            $keys[11] => $this->getProveedoritradeRfc(),
-            $keys[12] => $this->getProveedoritradeComprobantedomicilio(),
-            $keys[13] => $this->getProveedoritradeClabe(),
-            $keys[14] => $this->getProveedoritradeComprobantedatosbancarios(),
+            $keys[2] => $this->getProveedoritradeNombrecontacto(),
+            $keys[3] => $this->getProveedoritradeTelefono(),
+            $keys[4] => $this->getProveedoritradeCalle(),
+            $keys[5] => $this->getProveedoritradeNumero(),
+            $keys[6] => $this->getProveedoritradeInterior(),
+            $keys[7] => $this->getProveedoritradeColonia(),
+            $keys[8] => $this->getProveedoritradeCiudad(),
+            $keys[9] => $this->getProveedoritradeEstado(),
+            $keys[10] => $this->getProveedoritradePais(),
+            $keys[11] => $this->getProveedoritradeEmail(),
+            $keys[12] => $this->getProveedoritradeRfc(),
+            $keys[13] => $this->getProveedoritradeComprobantedomicilio(),
+            $keys[14] => $this->getProveedoritradeClabe(),
+            $keys[15] => $this->getProveedoritradeComprobantedatosbancarios(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1343,42 +1392,45 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                 $this->setProveedoritradeNombre($value);
                 break;
             case 2:
-                $this->setProveedoritradeCalle($value);
+                $this->setProveedoritradeNombrecontacto($value);
                 break;
             case 3:
-                $this->setProveedoritradeNumero($value);
-                break;
-            case 4:
-                $this->setProveedoritradeInterior($value);
-                break;
-            case 5:
-                $this->setProveedoritradeColonia($value);
-                break;
-            case 6:
-                $this->setProveedoritradeCiudad($value);
-                break;
-            case 7:
-                $this->setProveedoritradeEstado($value);
-                break;
-            case 8:
-                $this->setProveedoritradePais($value);
-                break;
-            case 9:
                 $this->setProveedoritradeTelefono($value);
                 break;
+            case 4:
+                $this->setProveedoritradeCalle($value);
+                break;
+            case 5:
+                $this->setProveedoritradeNumero($value);
+                break;
+            case 6:
+                $this->setProveedoritradeInterior($value);
+                break;
+            case 7:
+                $this->setProveedoritradeColonia($value);
+                break;
+            case 8:
+                $this->setProveedoritradeCiudad($value);
+                break;
+            case 9:
+                $this->setProveedoritradeEstado($value);
+                break;
             case 10:
-                $this->setProveedoritradeEmail($value);
+                $this->setProveedoritradePais($value);
                 break;
             case 11:
-                $this->setProveedoritradeRfc($value);
+                $this->setProveedoritradeEmail($value);
                 break;
             case 12:
-                $this->setProveedoritradeComprobantedomicilio($value);
+                $this->setProveedoritradeRfc($value);
                 break;
             case 13:
-                $this->setProveedoritradeClabe($value);
+                $this->setProveedoritradeComprobantedomicilio($value);
                 break;
             case 14:
+                $this->setProveedoritradeClabe($value);
+                break;
+            case 15:
                 $this->setProveedoritradeComprobantedatosbancarios($value);
                 break;
         } // switch()
@@ -1407,19 +1459,20 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
 
         if (array_key_exists($keys[0], $arr)) $this->setIdproveedoritrade($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setProveedoritradeNombre($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setProveedoritradeCalle($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setProveedoritradeNumero($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setProveedoritradeInterior($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setProveedoritradeColonia($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setProveedoritradeCiudad($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setProveedoritradeEstado($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setProveedoritradePais($arr[$keys[8]]);
-        if (array_key_exists($keys[9], $arr)) $this->setProveedoritradeTelefono($arr[$keys[9]]);
-        if (array_key_exists($keys[10], $arr)) $this->setProveedoritradeEmail($arr[$keys[10]]);
-        if (array_key_exists($keys[11], $arr)) $this->setProveedoritradeRfc($arr[$keys[11]]);
-        if (array_key_exists($keys[12], $arr)) $this->setProveedoritradeComprobantedomicilio($arr[$keys[12]]);
-        if (array_key_exists($keys[13], $arr)) $this->setProveedoritradeClabe($arr[$keys[13]]);
-        if (array_key_exists($keys[14], $arr)) $this->setProveedoritradeComprobantedatosbancarios($arr[$keys[14]]);
+        if (array_key_exists($keys[2], $arr)) $this->setProveedoritradeNombrecontacto($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setProveedoritradeTelefono($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setProveedoritradeCalle($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setProveedoritradeNumero($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setProveedoritradeInterior($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setProveedoritradeColonia($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setProveedoritradeCiudad($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setProveedoritradeEstado($arr[$keys[9]]);
+        if (array_key_exists($keys[10], $arr)) $this->setProveedoritradePais($arr[$keys[10]]);
+        if (array_key_exists($keys[11], $arr)) $this->setProveedoritradeEmail($arr[$keys[11]]);
+        if (array_key_exists($keys[12], $arr)) $this->setProveedoritradeRfc($arr[$keys[12]]);
+        if (array_key_exists($keys[13], $arr)) $this->setProveedoritradeComprobantedomicilio($arr[$keys[13]]);
+        if (array_key_exists($keys[14], $arr)) $this->setProveedoritradeClabe($arr[$keys[14]]);
+        if (array_key_exists($keys[15], $arr)) $this->setProveedoritradeComprobantedatosbancarios($arr[$keys[15]]);
     }
 
     /**
@@ -1433,6 +1486,8 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
 
         if ($this->isColumnModified(ProveedoritradePeer::IDPROVEEDORITRADE)) $criteria->add(ProveedoritradePeer::IDPROVEEDORITRADE, $this->idproveedoritrade);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_NOMBRE)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_NOMBRE, $this->proveedoritrade_nombre);
+        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO, $this->proveedoritrade_nombrecontacto);
+        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO, $this->proveedoritrade_telefono);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_CALLE)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_CALLE, $this->proveedoritrade_calle);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_NUMERO)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_NUMERO, $this->proveedoritrade_numero);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_INTERIOR)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_INTERIOR, $this->proveedoritrade_interior);
@@ -1440,7 +1495,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_CIUDAD)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_CIUDAD, $this->proveedoritrade_ciudad);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_ESTADO)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_ESTADO, $this->proveedoritrade_estado);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_PAIS)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_PAIS, $this->proveedoritrade_pais);
-        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_TELEFONO, $this->proveedoritrade_telefono);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_EMAIL)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_EMAIL, $this->proveedoritrade_email);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_RFC)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_RFC, $this->proveedoritrade_rfc);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO, $this->proveedoritrade_comprobantedomicilio);
@@ -1510,6 +1564,8 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setProveedoritradeNombre($this->getProveedoritradeNombre());
+        $copyObj->setProveedoritradeNombrecontacto($this->getProveedoritradeNombrecontacto());
+        $copyObj->setProveedoritradeTelefono($this->getProveedoritradeTelefono());
         $copyObj->setProveedoritradeCalle($this->getProveedoritradeCalle());
         $copyObj->setProveedoritradeNumero($this->getProveedoritradeNumero());
         $copyObj->setProveedoritradeInterior($this->getProveedoritradeInterior());
@@ -1517,7 +1573,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         $copyObj->setProveedoritradeCiudad($this->getProveedoritradeCiudad());
         $copyObj->setProveedoritradeEstado($this->getProveedoritradeEstado());
         $copyObj->setProveedoritradePais($this->getProveedoritradePais());
-        $copyObj->setProveedoritradeTelefono($this->getProveedoritradeTelefono());
         $copyObj->setProveedoritradeEmail($this->getProveedoritradeEmail());
         $copyObj->setProveedoritradeRfc($this->getProveedoritradeRfc());
         $copyObj->setProveedoritradeComprobantedomicilio($this->getProveedoritradeComprobantedomicilio());
@@ -2169,6 +2224,8 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     {
         $this->idproveedoritrade = null;
         $this->proveedoritrade_nombre = null;
+        $this->proveedoritrade_nombrecontacto = null;
+        $this->proveedoritrade_telefono = null;
         $this->proveedoritrade_calle = null;
         $this->proveedoritrade_numero = null;
         $this->proveedoritrade_interior = null;
@@ -2176,7 +2233,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         $this->proveedoritrade_ciudad = null;
         $this->proveedoritrade_estado = null;
         $this->proveedoritrade_pais = null;
-        $this->proveedoritrade_telefono = null;
         $this->proveedoritrade_email = null;
         $this->proveedoritrade_rfc = null;
         $this->proveedoritrade_comprobantedomicilio = null;
