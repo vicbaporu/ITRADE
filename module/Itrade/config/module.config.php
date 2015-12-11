@@ -122,6 +122,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             'route'    => '/servicios[/:lang]',
+                            'route'    => '/servicios[/:lang]',
                             'defaults' => array(
                                 'controller'    => 'Website\Controller\Servicios',
                                 'action'        => 'index',
@@ -137,7 +138,7 @@ return array(
                     'contacto' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '[/:lang]/contacto',
+                            'route'    => '[/:lang]/contacto[/:servicio]',
                             'defaults' => array(
                                 'controller'    => 'Website\Controller\Contacto',
                                 'action'        => 'index',

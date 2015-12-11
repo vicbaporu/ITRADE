@@ -16,6 +16,8 @@ class ContactoController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        $servicio=$this->params()->fromRoute("servicio",null);
+
+        return new ViewModel(array("servicio"=>$servicio));
     }
 }
