@@ -7,26 +7,29 @@
 	$email 		= $_POST['email'];
 	$telefono 	= $_POST['telefono'];
 	$mensaje 	= $_POST['mensaje'];
+	$servicio   = $_POST['servicio'];
 
-	$bodyMessage = 'Nombre: '.$nombre.'<br>Empresa: '.$empresa.'<br>Email: '.$email.'<br>Telefono: '.$telefono.'<br>Mensaje: '.$mensaje.'<br><br> Ponte en contacto con el';
+	$bodyMessage = 'Nombre: '.$nombre.'<br>Empresa: '.$empresa.'<br>Email: '.$email.'<br>Telefono: '.$telefono.'<br>Mensaje: '.$mensaje.'<br><br> Ponte en contacto con el<br>Tipo de servicio: '.$servicio;
 
 	require 'PHPMailer/PHPMailerAutoload.php';
 
 	$mail = new PHPMailer;
 
 
-	$mail->isSMTP();                                      // Set mailer to use SMTP
-	$mail->Host = 'smtp.gmail.com server';  // Specify main and backup SMTP servers
-	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Password = '********';                         // SMTP password
-	$mail->Username = 'dcastanedob@gmail.com';            // SMTP username
-	$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-	$mail->Port = 465;                                    // TCP port to connect to
+
+	$mail->isSMTP();                                      	// Set mailer to use SMTP
+	$mail->Host = 'smtp.gmail.com server';  				// Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                               	// Enable SMTP authentication
+	$mail->Password = '********';                           // SMTP password
+	$mail->Username = 'mail@server.com';                 	// SMTP username
+	$mail->SMTPSecure = 'ssl';                            	// Enable TLS encryption, `ssl` also accepted
+	$mail->Port = 465;                                    	// TCP port to connect to
+
 
 	$mail->setFrom($email, 'ITRADE Contacto');
-	$mail->addAddress('mailtorecipe@server.com', $nombre);     // Add a recipient
+	$mail->addAddress('mailtorecipe@server.com', $nombre);  // Add a recipient
 
-	$mail->isHTML(true);                                  // Set email format to HTML
+	$mail->isHTML(true);                                  	// Set email format to HTML
 
 	$mail->Subject = 'Ponte en contacto WEB';
 	$mail->Body    = $bodyMessage;
@@ -174,10 +177,26 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 				</div>
 			</div>
 
+			<div class="form-group row">
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
+					<label for="mensaje">Tipo de servicio: *</label>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					
+					<select name="cbServicio" id="cbServicio" class="form-control">
+						<option value="maritimo">Marítimo</option>
+						<option value="aereo">Aereo</option>
+						<option value="terrestre">Terrestre</option>
+						<option value="aduana">Aduana</option>
+						<option value="seguro">Seguro</option>
+					</select>
+				</div>
+			</div>
+
 
 			<div class="form-group  row">
-				<div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-xs-6 col-xs-offset-3">
-					<button class="btn btn-danger  col-lg-12 col-md-10 col-sm-12 col-xs-12 ">Acción</button>
+				<div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-5 col-xs-6 col-xs-offset-3">
+					<button class="btn btn-danger  col-lg-12 col-md-10 col-sm-12 col-xs-12 ">Enviar</button>
 				</div>
 			</div>
 
