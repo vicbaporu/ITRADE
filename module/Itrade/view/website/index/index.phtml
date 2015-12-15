@@ -62,20 +62,20 @@
 			<div class="item active">
 			  <img src="img/u2.jpg" alt="...">
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm">
-				<h2 id="textCar1">BRINDAMOS SOLUCIONES LOGÍSTICAS Y ADUANALES PARA TU NEGOCIO</h2>
+				<h2 id="textCar1"><?php echo  $this->translate('BRINDAMOS SOLUCIONES LOGÍSTICAS Y ADUANALES PARA TU NEGOCIO')?></h2>
 			  </div>
 			</div>
 			<div class="item">
-			  <img src="img/u19.png" alt="...">
+			  <a href="/servicios"><img src="img/u19.png" alt="..."></a>
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm top"><br><br>
-				<h2 id="textCar2">TRANSPORTAMOS CON RAPIDEZ, EFICIENCIA Y SEGURIDAD</h2>
-				<h4>Lee mas acerca de nuestros servicios</h4>
+				<h2 id="textCar2"><?php echo  $this->translate('TRANSPORTAMOS CON RAPIDEZ, EFICIENCIA Y SEGURIDAD')?></h2>
+				<h4><?php echo  $this->translate('Lee mas acerca de nuestros servicios')?></h4>
 			  </div>
 			</div>
 			<div class="item">
 			  <img src="img/u35.jpg" alt="...">
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm">
-				<h2 id="textCar3">COMIENZA A EXPORTAR TU PRODUCTO HOY MISMO</h2>
+				<h2 id="textCar3"><?php echo  $this->translate('COMIENZA A EXPORTAR TU PRODUCTO HOY MISMO')?></h2>
 			  </div>
 			</div>
 		</div>
@@ -98,11 +98,11 @@
 	<div class="col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-0 top">
 
 		<small class="specialAlign col-xs-12 col-sm-12 ">
-		<h3 class="bold specialAlign">Bienvenido a ITRADE México</h3>
-		ITRADE es una compañía joven especializada en intercambios y gestión de negocios y contactos comerciales en todos los campos del transporte y la logística
-		de mercancías.﻿
+		<h3 class="bold specialAlign"><?php echo  $this->translate('Bienvenido a ITRADE México')?></h3>
+		<?php echo  $this->translate('ITRADE es una compañía joven especializada en intercambios y gestión de negocios y contactos comerciales en todos los campos del transporte y la logística
+		de mercancías.﻿')?>
  		<br><br>
-		Rapidez, eficiencia y seguridad son determinantes en el ramo transportista, ITRADE además de cubrir estos aspectos le ofrece un excelente servicio a un inmejorable precio. Nuestros servicios de logística y transporte están creados para safisfacer sus requerimientos con gran calidad. Conozca más sobre los sevicios que le ofrecemos.
+		<?php echo  $this->translate('Rapidez, eficiencia y seguridad son determinantes en el ramo transportista, ITRADE además de cubrir estos aspectos le ofrece un excelente servicio a un inmejorable precio. Nuestros servicios de logística y transporte están creados para safisfacer sus requerimientos con gran calidad. Conozca más sobre los sevicios que le ofrecemos.')?>
 		</small>
 	</div>
 
@@ -113,10 +113,10 @@
 		<img src="img/u75.png" class="img-responsive col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0">
 	</div>
 	<div class="col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-0 ">
-		<h3 class="bold specialAlign">Especialistas en el manejo de
-carga y transporte. </h3>
-		<small class="specialAlign col-xs-12">Elaboramos la planeación estratégica aduanal y logística de tu empresa para reducir tiempos, riesgos y costos en las importaciones y exportaciones.
-Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
+		<h3 class="bold specialAlign"><?php echo  $this->translate('Especialistas en el manejo de
+carga y transporte.')?> </h3>
+		<small class="specialAlign col-xs-12"><?php echo  $this->translate('Elaboramos la planeación estratégica aduanal y logística de tu empresa para reducir tiempos, riesgos y costos en las importaciones y exportaciones.
+Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.')?>
 		</small>
 	</div>
 </div>
@@ -126,15 +126,15 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 <div id="contacto" class="  row top blue">
 	<div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
-		<h1 class="textWhite specialAlign">Comienza a exportar tu producto hoy. </h1>
-		<h3 class="textWhite specialAlign">Será un gusto servirte. </h3>
+		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Comienza a exportar tu producto hoy.')?></h1>
+		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Será un gusto servirte.')?> </h3>
 	</div>
 	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot ">
 		<form class="textWhite" action="http://itrade" method="post">
 
 			<div class="form-group  row">
 				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="nombre">Nombre: *</label>
+					<label for="nombre"><?php echo  $this->translate('Nombre')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8  col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -143,7 +143,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="empresa">Empresa:</label>
+					<label for="empresa"><?php echo  $this->translate('Empresa')?>:</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="empresa" name="empresa" >
@@ -152,14 +152,14 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 			
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="email">Dirección de e-mail: *</label>
+					<label for="email"><?php echo  $this->translate('Dirección de e-mail')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="email" name="email" required>
 				</div>
 				<div class=" form-group hidden-lg hidden-md"></div>
 				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign ">
-					<label for="telefono">Teléfono: *</label>
+					<label for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="telefono" name="telefono" required>
@@ -169,7 +169,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="mensaje">Mensaje: *</label>
+					<label for="mensaje"><?php echo  $this->translate('Mensaje')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<textarea name="mensaje" id="mensaje" class="form-control" rows="3" required></textarea>
@@ -178,16 +178,16 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="mensaje">Tipo de servicio: *</label>
+					<label for="mensaje"><?php echo  $this->translate('Tipo de servicio')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					
 					<select name="cbServicio" id="cbServicio" class="form-control">
-						<option value="maritimo">Marítimo</option>
-						<option value="aereo">Aereo</option>
-						<option value="terrestre">Terrestre</option>
-						<option value="aduana">Aduana</option>
-						<option value="seguro">Seguro</option>
+						<option value="maritimo"><?php echo  $this->translate('Marítimo')?></option>
+						<option value="aereo"><?php echo  $this->translate('Aereo')?></option>
+						<option value="terrestre"><?php echo  $this->translate('Terrestre')?></option>
+						<option value="aduana"><?php echo  $this->translate('Aduana')?></option>
+						<option value="seguro"><?php echo  $this->translate('Seguro')?></option>
 					</select>
 				</div>
 			</div>
@@ -195,7 +195,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-5 col-xs-6 col-xs-offset-3 top">
-					<button class="btn btn-danger  col-lg-12 col-md-10 col-sm-12 col-xs-12 ">Enviar</button>
+					<button class="btn btn-danger  col-lg-12 col-md-10 col-sm-12 col-xs-12 "><?php echo  $this->translate('Enviar')?></button>
 				</div>
 			</div>
 			<div class="row"></div> 
