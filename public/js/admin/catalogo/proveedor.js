@@ -160,7 +160,7 @@
         
         plugin.formBind = function(){
             
-          $container.find('#proveedoritrade_comprobantedatosbancarios').dropzone({ url: "/file/post" });
+          $container.find('#mydropzone').dropzone({ url: "/catalogo/proveedores/dropzone" });
         }
 
         /*

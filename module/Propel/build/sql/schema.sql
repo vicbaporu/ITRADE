@@ -349,10 +349,28 @@ CREATE TABLE `proveedoritrade`
     `proveedoritrade_pais` VARCHAR(45),
     `proveedoritrade_email` VARCHAR(45),
     `proveedoritrade_rfc` VARCHAR(45),
-    `proveedoritrade_comprobantedomicilio` TEXT,
     `proveedoritrade_clabe` VARCHAR(45),
-    `proveedoritrade_comprobantedatosbancarios` TEXT,
     PRIMARY KEY (`idproveedoritrade`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- proveedoritradearchivo
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `proveedoritradearchivo`;
+
+CREATE TABLE `proveedoritradearchivo`
+(
+    `idproveedoritradearchivo` INTEGER NOT NULL,
+    `idproveedoritrade` INTEGER NOT NULL,
+    `proveedoritradearchivo_archivo` TEXT NOT NULL,
+    PRIMARY KEY (`idproveedoritradearchivo`),
+    INDEX `idproveedoritrade` (`idproveedoritrade`),
+    CONSTRAINT `idproveedoritrade_proveedoritradearchivo`
+        FOREIGN KEY (`idproveedoritrade`)
+        REFERENCES `proveedoritrade` (`idproveedoritrade`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
