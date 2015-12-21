@@ -13,10 +13,10 @@
 			<div class="col-lg-4">
 				
 				<img src="img/login/logo.png" alt="" class="img-responsive"><br>
-				<input id="txtUser" type="text" class="form-control username" placeholder="Nombre de usuario">
+				<input id="txtUser" type="text" class="form-control username" placeholder="<?php echo  $this->translate('Nombre de usuario')?>">
 				
 				<div class="form-group has-feedback ">
-					<input name="txtPass" id="txtPass"type="text" class="form-control password" placeholder="Contraseña" /> 	 	
+					<input name="txtPass" id="txtPass"type="text" class="form-control password" placeholder="<?php echo  $this->translate('Contraseña')?>" /> 	 	
 					<!--<span  id="plhPass"class="icon-right-arrow form-control-feedback"></span>-->
 					<img  id="plhPass" class="form-control-feedback" src="/img/pass.png" alt="">
 				</div>
@@ -29,7 +29,7 @@
 			<div class="page-header col-lg-4  ">
 				<div class="checkbox top ">
 					<label class="white">
-						<input type="checkbox"> No cerrar sesión
+						<input type="checkbox"> <?php echo  $this->translate('No cerrar sesión')?>
 					</label>
 				</div>
 				
@@ -39,7 +39,7 @@
 		<div class="row">
 			
 			<a class="col-lg-4 col-lg-offset- "href="">
-				<div class="white">Olvidaste tu nombre de usuario o contraseña?
+				<div class="white"><?php echo  $this->translate('Olvidaste tu nombre de usuario o contraseña?')?>
 				</div>
 			</a>
 			
