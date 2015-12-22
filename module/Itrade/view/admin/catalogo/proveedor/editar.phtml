@@ -221,34 +221,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="grid simple">
                 <div class="grid-title no-border">
-                    <h4><span class="semi-bold">Comprobante de domicilio</span></h4>
-                    <div class="tools">
-                        <a class="collapse" href="javascript:;"></a>
-                    </div>
-                </div>
-                <div class="grid-body no-border">
-                    
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="grid simple">
-                <div class="grid-title no-border">
-                    <h4><span class="semi-bold">Comprobante de información bancaria</span></h4>
+                    <h4><span class="semi-bold">Archivos</span></h4>
                     <div class="tools">
                         <a class="collapse" href="javascript:;"></a>
                     </div>
                 </div>
                 <div class="grid-body no-border">
                     <div class="row-fluid">
-                        <form action="/file-upload" class="dropzone no-margin">
-                            <div id="proveedoritrade_comprobantedatosbancarios" class="fallback">
-                                <input name="file" type="file" multiple />
-                            </div>
-                        </form>
+                        <div class="dropzone" id="mydropzone"></div>
                     </div>
                 </div>
             </div>
@@ -269,7 +252,8 @@
 <!--CUSTOM SCRIPT-->
 <script src="/js/admin/catalogo/proveedor.js"></script>
 <!--DROPZONE-->
-
+<script src="/plugins/admin/dropzone/dropzone.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/admin/dropzone/css/dropzone.css">
 <script type="text/javascript">
     
     $(document).ready(function() {

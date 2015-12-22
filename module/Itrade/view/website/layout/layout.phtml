@@ -35,7 +35,8 @@ else
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle($this->translate('ITRADE'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle($this->translate('ITRADE ADMIN'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -43,7 +44,7 @@ else
         ?>
 
         <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/.ico'))
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                         ->prependStylesheet($this->basePath('css/animations.css')) 
                         ->prependStylesheet($this->basePath('css/style.css')) 
                         ->prependStylesheet($this->basePath('css/bootstrap.css'))
@@ -65,24 +66,31 @@ else
 
     </head>
     <body>
-        <div class="container">
+        <div class="container" id="tope">
             <a href="http://itrade"><img class="img-responsive col-lg-3 col-lg-offset-0 col-md-3 col-sm-offset-0 col-sm-5 col-sm-offset-0 hidden-xs" src="/img/u38.jpg"></a>
 
             <div class="bold text-center  col-lg-4 col-lg-offset-5 col-md-4 col-md-offset-5 col-sm-6 col-sm-offset-1 hidden-xs">
-                <a href="login"class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-2 col-sm-5 col-sm-offset-2">
+
+                
+                <a href="/login"class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-2 col-sm-5 col-sm-offset-2">
+
                     <div class="login"><?php echo  $this->translate('Iniciar sesión')?></div>
                 </a>
+                
                 <div class="col-lg-4 col-md-5 col-sm-5 pull-right">
                     
                     
-                    <a href="<?php echo $urlEsp ?>"><img id="imgEsp" src="/img/español.png" class=" imgLang " alt=""></a>
-                    <a href="<?php echo $urlEng ?>"><img id="imgEng" src="/img/inglesH.png" class=" imgLang " alt=""></a>
+                    <a href="<?php echo $urlEsp ?>"><img id="" src="/img/español.png" class="imgEsp imgLang " alt=""></a>
+                    <a href="<?php echo $urlEng ?>"><img id="" src="/img/inglesH.png" class="imgEng imgLang " alt=""></a>
                 
                     
                 </div>
 
             </div>
         </div>
+
+        <a href="<?php echo $urlEsp ?>"><img id="" src="/img/español.png" class="imgEsp imgEsp-xs hidden visible-xs" alt=""></a>
+        <a href="<?php echo $urlEng ?>"><img id="" src="/img/inglesH.png" class="imgEng imgEng-xs hidden visible-xs" alt=""></a>
 
 
         <nav class="container navbar navbar-default">
@@ -114,14 +122,14 @@ else
                         
 
                         <ul class="dropdown-menu blue navmenu-nav " >
-                            <li><a class="text-center"href="#">PDF</a></li>
+                            <li><a class="text-center"href="#"><?php echo  $this->translate('PDF')?></a></li>
                             <li class="divider"></li>
-                            <li><a class="text-center"href="#">PDF</a></li>
+                            <li><a class="text-center"href="#"><?php echo  $this->translate('PDF')?></a></li>
                         </ul>
                     </li>
                     <li><a class="text-center" href="/contacto"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
                     <li><a href="login"class="text-center">
-                    <strong><?php echo  $this->translate('Iniciar seción')?></strong>
+                    
                 </a></li>
                 </ul>
             </nav>
@@ -138,7 +146,7 @@ else
                         
 
                         <ul class="dropdown-menu blue " >
-                            <li><a class="textWhite"href="#">PDF</a></li>
+                            <li><a class="textWhite"href="#"><?php echo  $this->translate('PDF')?></a></li>
                             <li class="divider"></li>
                             <li><a href="#">PDF</a></li>
                         </ul>
@@ -152,6 +160,12 @@ else
 
         </nav>
         <div class="container">
+            <a href="/contacto/maritimo"class="btn-cotizar btn hidden-xs"><img src="/img/cotizar.png" class="img-responsive img-rounded"></a>
+            <a href="/contacto/maritimo"class="btn-cotizar-xs hiddev visible-xs"><span class="glyphicon glyphicon-usd"></span> <?php echo  $this->translate('COTIZAR')?></a>
+
+            <a href="/login"class="btn-user-xs hiddev visible-xs"><span class="glyphicon glyphicon-user"></span> </a>
+
+            <a class="btn-up-xs hiddev visible-xs"><span class="glyphicon glyphicon-menu-up"></span> </a>
             <?php echo $this->content; ?>
             
             <footer class="col-lg-6 col-lg-offset-6  top">        
@@ -166,7 +180,7 @@ else
                 </li>
                 <li class="col-lg-12 col-xs-12 text-right">
                     <a href="mailto:luis.contreras@itrade.com.mx" ><lead class="textBlue"><?php echo  $this->translate('luis.contreras@itrade.com.mx') ?> </lead></a>
-                    <lead> Oficina: +52(33)20010565</lead>
+                    <lead><?php echo  $this->translate(' Oficina: +52(33)20010565')?></lead>
                 </li>
                 
                 <a href="https://www.instagram.com/itrademexico/" target="_blank"><img src="/img/footer/linked.png" class="pull-right social-ico" alt=""></a>
@@ -174,9 +188,16 @@ else
                 <a href="https://www.facebook.com/Itrade-Mexico-632336230208434/?fref=ts" target="_blank"><img src="/img/footer/facebook.png" class="pull-right social-ico" alt=""></a>
                 <br> <br> 
             </footer>
-
         </div> <!-- /container -->
         <script src="/js/layout/layout.js"></script>
+        <script>
+        $( ".btn-up-xs" ).click(function() {
+            $('html,body').animate({
+                scrollTop: $("#tope").offset().top
+            }, 1000);
+        });
+        </script>
+
         <?php echo $this->inlineScript() ?>
     </body>
 </html>

@@ -24,13 +24,13 @@ abstract class BaseProveedoritradePeer
     const TM_CLASS = 'ProveedoritradeTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 16;
+    const NUM_COLUMNS = 14;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 16;
+    const NUM_HYDRATE_COLUMNS = 14;
 
     /** the column name for the idproveedoritrade field */
     const IDPROVEEDORITRADE = 'proveedoritrade.idproveedoritrade';
@@ -71,14 +71,8 @@ abstract class BaseProveedoritradePeer
     /** the column name for the proveedoritrade_rfc field */
     const PROVEEDORITRADE_RFC = 'proveedoritrade.proveedoritrade_rfc';
 
-    /** the column name for the proveedoritrade_comprobantedomicilio field */
-    const PROVEEDORITRADE_COMPROBANTEDOMICILIO = 'proveedoritrade.proveedoritrade_comprobantedomicilio';
-
     /** the column name for the proveedoritrade_clabe field */
     const PROVEEDORITRADE_CLABE = 'proveedoritrade.proveedoritrade_clabe';
-
-    /** the column name for the proveedoritrade_comprobantedatosbancarios field */
-    const PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS = 'proveedoritrade.proveedoritrade_comprobantedatosbancarios';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -99,12 +93,12 @@ abstract class BaseProveedoritradePeer
      * e.g. ProveedoritradePeer::$fieldNames[ProveedoritradePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedoritrade', 'ProveedoritradeNombre', 'ProveedoritradeNombrecontacto', 'ProveedoritradeTelefono', 'ProveedoritradeCalle', 'ProveedoritradeNumero', 'ProveedoritradeInterior', 'ProveedoritradeColonia', 'ProveedoritradeCiudad', 'ProveedoritradeEstado', 'ProveedoritradePais', 'ProveedoritradeEmail', 'ProveedoritradeRfc', 'ProveedoritradeComprobantedomicilio', 'ProveedoritradeClabe', 'ProveedoritradeComprobantedatosbancarios', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritrade', 'proveedoritradeNombre', 'proveedoritradeNombrecontacto', 'proveedoritradeTelefono', 'proveedoritradeCalle', 'proveedoritradeNumero', 'proveedoritradeInterior', 'proveedoritradeColonia', 'proveedoritradeCiudad', 'proveedoritradeEstado', 'proveedoritradePais', 'proveedoritradeEmail', 'proveedoritradeRfc', 'proveedoritradeComprobantedomicilio', 'proveedoritradeClabe', 'proveedoritradeComprobantedatosbancarios', ),
-        BasePeer::TYPE_COLNAME => array (ProveedoritradePeer::IDPROVEEDORITRADE, ProveedoritradePeer::PROVEEDORITRADE_NOMBRE, ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO, ProveedoritradePeer::PROVEEDORITRADE_TELEFONO, ProveedoritradePeer::PROVEEDORITRADE_CALLE, ProveedoritradePeer::PROVEEDORITRADE_NUMERO, ProveedoritradePeer::PROVEEDORITRADE_INTERIOR, ProveedoritradePeer::PROVEEDORITRADE_COLONIA, ProveedoritradePeer::PROVEEDORITRADE_CIUDAD, ProveedoritradePeer::PROVEEDORITRADE_ESTADO, ProveedoritradePeer::PROVEEDORITRADE_PAIS, ProveedoritradePeer::PROVEEDORITRADE_EMAIL, ProveedoritradePeer::PROVEEDORITRADE_RFC, ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO, ProveedoritradePeer::PROVEEDORITRADE_CLABE, ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADE', 'PROVEEDORITRADE_NOMBRE', 'PROVEEDORITRADE_NOMBRECONTACTO', 'PROVEEDORITRADE_TELEFONO', 'PROVEEDORITRADE_CALLE', 'PROVEEDORITRADE_NUMERO', 'PROVEEDORITRADE_INTERIOR', 'PROVEEDORITRADE_COLONIA', 'PROVEEDORITRADE_CIUDAD', 'PROVEEDORITRADE_ESTADO', 'PROVEEDORITRADE_PAIS', 'PROVEEDORITRADE_EMAIL', 'PROVEEDORITRADE_RFC', 'PROVEEDORITRADE_COMPROBANTEDOMICILIO', 'PROVEEDORITRADE_CLABE', 'PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS', ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedoritrade', 'proveedoritrade_nombre', 'proveedoritrade_nombrecontacto', 'proveedoritrade_telefono', 'proveedoritrade_calle', 'proveedoritrade_numero', 'proveedoritrade_interior', 'proveedoritrade_colonia', 'proveedoritrade_ciudad', 'proveedoritrade_estado', 'proveedoritrade_pais', 'proveedoritrade_email', 'proveedoritrade_rfc', 'proveedoritrade_comprobantedomicilio', 'proveedoritrade_clabe', 'proveedoritrade_comprobantedatosbancarios', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedoritrade', 'ProveedoritradeNombre', 'ProveedoritradeNombrecontacto', 'ProveedoritradeTelefono', 'ProveedoritradeCalle', 'ProveedoritradeNumero', 'ProveedoritradeInterior', 'ProveedoritradeColonia', 'ProveedoritradeCiudad', 'ProveedoritradeEstado', 'ProveedoritradePais', 'ProveedoritradeEmail', 'ProveedoritradeRfc', 'ProveedoritradeClabe', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritrade', 'proveedoritradeNombre', 'proveedoritradeNombrecontacto', 'proveedoritradeTelefono', 'proveedoritradeCalle', 'proveedoritradeNumero', 'proveedoritradeInterior', 'proveedoritradeColonia', 'proveedoritradeCiudad', 'proveedoritradeEstado', 'proveedoritradePais', 'proveedoritradeEmail', 'proveedoritradeRfc', 'proveedoritradeClabe', ),
+        BasePeer::TYPE_COLNAME => array (ProveedoritradePeer::IDPROVEEDORITRADE, ProveedoritradePeer::PROVEEDORITRADE_NOMBRE, ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO, ProveedoritradePeer::PROVEEDORITRADE_TELEFONO, ProveedoritradePeer::PROVEEDORITRADE_CALLE, ProveedoritradePeer::PROVEEDORITRADE_NUMERO, ProveedoritradePeer::PROVEEDORITRADE_INTERIOR, ProveedoritradePeer::PROVEEDORITRADE_COLONIA, ProveedoritradePeer::PROVEEDORITRADE_CIUDAD, ProveedoritradePeer::PROVEEDORITRADE_ESTADO, ProveedoritradePeer::PROVEEDORITRADE_PAIS, ProveedoritradePeer::PROVEEDORITRADE_EMAIL, ProveedoritradePeer::PROVEEDORITRADE_RFC, ProveedoritradePeer::PROVEEDORITRADE_CLABE, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADE', 'PROVEEDORITRADE_NOMBRE', 'PROVEEDORITRADE_NOMBRECONTACTO', 'PROVEEDORITRADE_TELEFONO', 'PROVEEDORITRADE_CALLE', 'PROVEEDORITRADE_NUMERO', 'PROVEEDORITRADE_INTERIOR', 'PROVEEDORITRADE_COLONIA', 'PROVEEDORITRADE_CIUDAD', 'PROVEEDORITRADE_ESTADO', 'PROVEEDORITRADE_PAIS', 'PROVEEDORITRADE_EMAIL', 'PROVEEDORITRADE_RFC', 'PROVEEDORITRADE_CLABE', ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedoritrade', 'proveedoritrade_nombre', 'proveedoritrade_nombrecontacto', 'proveedoritrade_telefono', 'proveedoritrade_calle', 'proveedoritrade_numero', 'proveedoritrade_interior', 'proveedoritrade_colonia', 'proveedoritrade_ciudad', 'proveedoritrade_estado', 'proveedoritrade_pais', 'proveedoritrade_email', 'proveedoritrade_rfc', 'proveedoritrade_clabe', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
     );
 
     /**
@@ -114,12 +108,12 @@ abstract class BaseProveedoritradePeer
      * e.g. ProveedoritradePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedoritrade' => 0, 'ProveedoritradeNombre' => 1, 'ProveedoritradeNombrecontacto' => 2, 'ProveedoritradeTelefono' => 3, 'ProveedoritradeCalle' => 4, 'ProveedoritradeNumero' => 5, 'ProveedoritradeInterior' => 6, 'ProveedoritradeColonia' => 7, 'ProveedoritradeCiudad' => 8, 'ProveedoritradeEstado' => 9, 'ProveedoritradePais' => 10, 'ProveedoritradeEmail' => 11, 'ProveedoritradeRfc' => 12, 'ProveedoritradeComprobantedomicilio' => 13, 'ProveedoritradeClabe' => 14, 'ProveedoritradeComprobantedatosbancarios' => 15, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritrade' => 0, 'proveedoritradeNombre' => 1, 'proveedoritradeNombrecontacto' => 2, 'proveedoritradeTelefono' => 3, 'proveedoritradeCalle' => 4, 'proveedoritradeNumero' => 5, 'proveedoritradeInterior' => 6, 'proveedoritradeColonia' => 7, 'proveedoritradeCiudad' => 8, 'proveedoritradeEstado' => 9, 'proveedoritradePais' => 10, 'proveedoritradeEmail' => 11, 'proveedoritradeRfc' => 12, 'proveedoritradeComprobantedomicilio' => 13, 'proveedoritradeClabe' => 14, 'proveedoritradeComprobantedatosbancarios' => 15, ),
-        BasePeer::TYPE_COLNAME => array (ProveedoritradePeer::IDPROVEEDORITRADE => 0, ProveedoritradePeer::PROVEEDORITRADE_NOMBRE => 1, ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO => 2, ProveedoritradePeer::PROVEEDORITRADE_TELEFONO => 3, ProveedoritradePeer::PROVEEDORITRADE_CALLE => 4, ProveedoritradePeer::PROVEEDORITRADE_NUMERO => 5, ProveedoritradePeer::PROVEEDORITRADE_INTERIOR => 6, ProveedoritradePeer::PROVEEDORITRADE_COLONIA => 7, ProveedoritradePeer::PROVEEDORITRADE_CIUDAD => 8, ProveedoritradePeer::PROVEEDORITRADE_ESTADO => 9, ProveedoritradePeer::PROVEEDORITRADE_PAIS => 10, ProveedoritradePeer::PROVEEDORITRADE_EMAIL => 11, ProveedoritradePeer::PROVEEDORITRADE_RFC => 12, ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO => 13, ProveedoritradePeer::PROVEEDORITRADE_CLABE => 14, ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS => 15, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADE' => 0, 'PROVEEDORITRADE_NOMBRE' => 1, 'PROVEEDORITRADE_NOMBRECONTACTO' => 2, 'PROVEEDORITRADE_TELEFONO' => 3, 'PROVEEDORITRADE_CALLE' => 4, 'PROVEEDORITRADE_NUMERO' => 5, 'PROVEEDORITRADE_INTERIOR' => 6, 'PROVEEDORITRADE_COLONIA' => 7, 'PROVEEDORITRADE_CIUDAD' => 8, 'PROVEEDORITRADE_ESTADO' => 9, 'PROVEEDORITRADE_PAIS' => 10, 'PROVEEDORITRADE_EMAIL' => 11, 'PROVEEDORITRADE_RFC' => 12, 'PROVEEDORITRADE_COMPROBANTEDOMICILIO' => 13, 'PROVEEDORITRADE_CLABE' => 14, 'PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS' => 15, ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedoritrade' => 0, 'proveedoritrade_nombre' => 1, 'proveedoritrade_nombrecontacto' => 2, 'proveedoritrade_telefono' => 3, 'proveedoritrade_calle' => 4, 'proveedoritrade_numero' => 5, 'proveedoritrade_interior' => 6, 'proveedoritrade_colonia' => 7, 'proveedoritrade_ciudad' => 8, 'proveedoritrade_estado' => 9, 'proveedoritrade_pais' => 10, 'proveedoritrade_email' => 11, 'proveedoritrade_rfc' => 12, 'proveedoritrade_comprobantedomicilio' => 13, 'proveedoritrade_clabe' => 14, 'proveedoritrade_comprobantedatosbancarios' => 15, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedoritrade' => 0, 'ProveedoritradeNombre' => 1, 'ProveedoritradeNombrecontacto' => 2, 'ProveedoritradeTelefono' => 3, 'ProveedoritradeCalle' => 4, 'ProveedoritradeNumero' => 5, 'ProveedoritradeInterior' => 6, 'ProveedoritradeColonia' => 7, 'ProveedoritradeCiudad' => 8, 'ProveedoritradeEstado' => 9, 'ProveedoritradePais' => 10, 'ProveedoritradeEmail' => 11, 'ProveedoritradeRfc' => 12, 'ProveedoritradeClabe' => 13, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritrade' => 0, 'proveedoritradeNombre' => 1, 'proveedoritradeNombrecontacto' => 2, 'proveedoritradeTelefono' => 3, 'proveedoritradeCalle' => 4, 'proveedoritradeNumero' => 5, 'proveedoritradeInterior' => 6, 'proveedoritradeColonia' => 7, 'proveedoritradeCiudad' => 8, 'proveedoritradeEstado' => 9, 'proveedoritradePais' => 10, 'proveedoritradeEmail' => 11, 'proveedoritradeRfc' => 12, 'proveedoritradeClabe' => 13, ),
+        BasePeer::TYPE_COLNAME => array (ProveedoritradePeer::IDPROVEEDORITRADE => 0, ProveedoritradePeer::PROVEEDORITRADE_NOMBRE => 1, ProveedoritradePeer::PROVEEDORITRADE_NOMBRECONTACTO => 2, ProveedoritradePeer::PROVEEDORITRADE_TELEFONO => 3, ProveedoritradePeer::PROVEEDORITRADE_CALLE => 4, ProveedoritradePeer::PROVEEDORITRADE_NUMERO => 5, ProveedoritradePeer::PROVEEDORITRADE_INTERIOR => 6, ProveedoritradePeer::PROVEEDORITRADE_COLONIA => 7, ProveedoritradePeer::PROVEEDORITRADE_CIUDAD => 8, ProveedoritradePeer::PROVEEDORITRADE_ESTADO => 9, ProveedoritradePeer::PROVEEDORITRADE_PAIS => 10, ProveedoritradePeer::PROVEEDORITRADE_EMAIL => 11, ProveedoritradePeer::PROVEEDORITRADE_RFC => 12, ProveedoritradePeer::PROVEEDORITRADE_CLABE => 13, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADE' => 0, 'PROVEEDORITRADE_NOMBRE' => 1, 'PROVEEDORITRADE_NOMBRECONTACTO' => 2, 'PROVEEDORITRADE_TELEFONO' => 3, 'PROVEEDORITRADE_CALLE' => 4, 'PROVEEDORITRADE_NUMERO' => 5, 'PROVEEDORITRADE_INTERIOR' => 6, 'PROVEEDORITRADE_COLONIA' => 7, 'PROVEEDORITRADE_CIUDAD' => 8, 'PROVEEDORITRADE_ESTADO' => 9, 'PROVEEDORITRADE_PAIS' => 10, 'PROVEEDORITRADE_EMAIL' => 11, 'PROVEEDORITRADE_RFC' => 12, 'PROVEEDORITRADE_CLABE' => 13, ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedoritrade' => 0, 'proveedoritrade_nombre' => 1, 'proveedoritrade_nombrecontacto' => 2, 'proveedoritrade_telefono' => 3, 'proveedoritrade_calle' => 4, 'proveedoritrade_numero' => 5, 'proveedoritrade_interior' => 6, 'proveedoritrade_colonia' => 7, 'proveedoritrade_ciudad' => 8, 'proveedoritrade_estado' => 9, 'proveedoritrade_pais' => 10, 'proveedoritrade_email' => 11, 'proveedoritrade_rfc' => 12, 'proveedoritrade_clabe' => 13, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
     );
 
     /**
@@ -206,9 +200,7 @@ abstract class BaseProveedoritradePeer
             $criteria->addSelectColumn(ProveedoritradePeer::PROVEEDORITRADE_PAIS);
             $criteria->addSelectColumn(ProveedoritradePeer::PROVEEDORITRADE_EMAIL);
             $criteria->addSelectColumn(ProveedoritradePeer::PROVEEDORITRADE_RFC);
-            $criteria->addSelectColumn(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO);
             $criteria->addSelectColumn(ProveedoritradePeer::PROVEEDORITRADE_CLABE);
-            $criteria->addSelectColumn(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS);
         } else {
             $criteria->addSelectColumn($alias . '.idproveedoritrade');
             $criteria->addSelectColumn($alias . '.proveedoritrade_nombre');
@@ -223,9 +215,7 @@ abstract class BaseProveedoritradePeer
             $criteria->addSelectColumn($alias . '.proveedoritrade_pais');
             $criteria->addSelectColumn($alias . '.proveedoritrade_email');
             $criteria->addSelectColumn($alias . '.proveedoritrade_rfc');
-            $criteria->addSelectColumn($alias . '.proveedoritrade_comprobantedomicilio');
             $criteria->addSelectColumn($alias . '.proveedoritrade_clabe');
-            $criteria->addSelectColumn($alias . '.proveedoritrade_comprobantedatosbancarios');
         }
     }
 
@@ -430,6 +420,9 @@ abstract class BaseProveedoritradePeer
      */
     public static function clearRelatedInstancePool()
     {
+        // Invalidate objects in ProveedoritradearchivoPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        ProveedoritradearchivoPeer::clearInstancePool();
         // Invalidate objects in ProveedoritradeservicioPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ProveedoritradeservicioPeer::clearInstancePool();
@@ -766,6 +759,12 @@ abstract class BaseProveedoritradePeer
         $objects = ProveedoritradePeer::doSelect($criteria, $con);
         foreach ($objects as $obj) {
 
+
+            // delete related Proveedoritradearchivo objects
+            $criteria = new Criteria(ProveedoritradearchivoPeer::DATABASE_NAME);
+
+            $criteria->add(ProveedoritradearchivoPeer::IDPROVEEDORITRADE, $obj->getIdproveedoritrade());
+            $affectedRows += ProveedoritradearchivoPeer::doDelete($criteria, $con);
 
             // delete related Proveedoritradeservicio objects
             $criteria = new Criteria(ProveedoritradeservicioPeer::DATABASE_NAME);

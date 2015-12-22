@@ -49,16 +49,16 @@
 
 <?php endif ?>
 
-
-
 <?php if ($servicio != null): ?>
+	
 	<script>
-	$( document ).ready(function() {
+		$( document ).ready(function() {
 	    $('html,body').animate({
 	        scrollTop: $("#contacto").offset().top
 	    }, 2000);
 	});
 	</script>
+
 <?php endif ?>
 
 
@@ -66,36 +66,38 @@
 <div class="row specialAlign">
 	
 	<div class="page-header"></div>
-	<h3 class="bold">Contacto</h3>
+	<h3 class="bold"><?php echo  $this->translate('Contacto')?></h3>
 	
-	<div class="bold top">Tienes dudas acerca de algún trámite con nosotros?</div>
+	<div class="bold top"><?php echo  $this->translate('Tienes dudas acerca de algún trámite con nosotros?')?></div>
  
-	<div class="bold miniTop">Necesitas informes de algún servicio que ofrecemos?</div>
+	<div class="bold miniTop"><?php echo  $this->translate('Necesitas informes de algún servicio que ofrecemos?')?></div>
  
-	<div class="bold miniTop">Estamos aquí para ayudar y puedes contactarnos de varias maneras! </div>
+	<div class="bold miniTop"><?php echo  $this->translate('Estamos aquí para ayudar y puedes contactarnos de varias maneras!')?> </div>
 	
-	<div class="top">Estamos disponibles en los siguientes horarios:</div>
+	<div class="top"><?php echo  $this->translate('Estamos disponibles en los siguientes horarios:')?></div>
  	
  	<div class="top">
+ 		<?php echo  $this->translate('
 		Lun - Vier: 9:00am - 6:00pm <br>
 		Sábados: 9:00am - 2:00pm
+		')?>
 	</div>
 
 	<div class="page-header"></div>
 
-	<div class="bold top">Contacta a nuestro equipo de soporte via email:</div>
+	<div class="bold top"><?php echo  $this->translate('Contacta a nuestro equipo de soporte via email')?>:</div>
 
-	<div class="top">Para ventas: ventas@itrademexico.com.mx</div>
- 
-	Para soporte: soporte@itrademexico.com.mx
+	<div class="top"><?php echo  $this->translate('Para ventas: ventas@itrademexico.com.mx')?></div>
+ 	
+	<?php echo  $this->translate('Para soporte: soporte@itrademexico.com.mx')?>
 	<div class="page-header"></div>
 
-	<div class="top bold">Llámanos!</div>
+	<div class="top bold"><?php echo  $this->translate('Llámanos!')?></div>
  	<div class="top">
-		<strong>Servicio al Cliente:</strong> <lead>+52(33)20010565</lead>
+		<strong><?php echo  $this->translate('Servicio al Cliente:')?></strong> <lead>+52(33)20010565</lead>
  	</div>
 
-	<div class="miniTop"><strong>Soporte Logístico:</strong> +52(33)20010566</div>
+	<div class="miniTop"><strong><?php echo  $this->translate('Soporte Logístico:')?></strong> +52(33)20010566</div>
 
 </div>
 <div class="top"></div>
@@ -108,17 +110,17 @@
 </div>
 
 
-<div class=" row  top blue" id="contacto">
+<div id="contacto" class="  row top blue">
 	<div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
-		<h1 class="textWhite specialAlign">Comienza a exportar tu producto hoy. </h1>
-		<h3 class="textWhite specialAlign">Será un gusto servirte. </h3>
+		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Comienza a exportar tu producto hoy.')?></h1>
+		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Será un gusto servirte.')?> </h3>
 	</div>
-	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot">
+	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot ">
 		<form class="textWhite" action="http://itrade" method="post">
 
-			<div class="form-group row ">
-				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
-					<label for="nombre">Nombre: *</label>
+			<div class="form-group  row">
+				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
+					<label for="nombre"><?php echo  $this->translate('Nombre')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8  col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -126,8 +128,8 @@
 			</div>
 
 			<div class="form-group row">
-				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
-					<label for="empresa">Empresa:</label>
+				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
+					<label for="empresa"><?php echo  $this->translate('Empresa')?>:</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="empresa" name="empresa" >
@@ -135,15 +137,15 @@
 			</div>
 			
 			<div class="form-group row">
-				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
-					<label for="email">Dirección de e-mail: *</label>
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
+					<label for="email"><?php echo  $this->translate('Dirección de e-mail')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="email" name="email" required>
 				</div>
-				<div class="row form-group hidden-lg hidden-md"></div>
-				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign">
-					<label for="telefono">Teléfono: *</label>
+				<div class=" form-group hidden-lg hidden-md"></div>
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign ">
+					<label for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="telefono" name="telefono" required>
@@ -152,8 +154,8 @@
 
 
 			<div class="form-group row">
-				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
-					<label for="mensaje">Mensaje: *</label>
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
+					<label for="mensaje"><?php echo  $this->translate('Mensaje')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<textarea name="mensaje" id="mensaje" class="form-control" rows="3" required></textarea>
@@ -161,60 +163,51 @@
 			</div>
 
 			<div class="form-group row">
-				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign">
-					<label for="mensaje">Tipo de servicio: *</label>
+				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
+					<label for="mensaje"><?php echo  $this->translate('Tipo de servicio')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					
 					<select name="cbServicio" id="cbServicio" class="form-control">
 						<?php if ($servicio == 'maritimo'): ?>
-							<option value="maritimo" selected>Marítimo</option>
+							<option selected value="maritimo"><?php echo  $this->translate('Marítimo')?></option>
 						<?php else: ?>
-							<option value="maritimo">Marítimo</option>
+							<option value="maritimo"><?php echo  $this->translate('Marítimo')?></option>
 						<?php endif ?>
-
 						<?php if ($servicio == 'aereo'): ?>
-							<option value="aereo" selected>Aereo</option>
+							<option value="aereo" selected><?php echo  $this->translate('Aereo')?></option>
 						<?php else: ?>
-							<option value="aereo">Aereo</option>
+							<option value="aereo"><?php echo  $this->translate('Aereo')?></option>
 						<?php endif ?>
-
 						<?php if ($servicio == 'terrestre'): ?>
-							<option value="terrestre" selected>Terrestre</option>
+							<option selected value="terrestre"><?php echo  $this->translate('Terrestre')?></option>
 						<?php else: ?>
-							<option value="terrestre">Terrestre</option>
+							<option value="terrestre"><?php echo  $this->translate('Terrestre')?></option>
 						<?php endif ?>
-
 						<?php if ($servicio == 'aduana'): ?>
-							<option value="aduana" selected>Aduana</option>
+							<option selected value="aduana"><?php echo  $this->translate('Aduana')?></option>
 						<?php else: ?>
-							<option value="aduana">Aduana</option>
+							<option value="aduana"><?php echo  $this->translate('Aduana')?></option>
 						<?php endif ?>
-
 						<?php if ($servicio == 'seguro'): ?>
-							<option value="seguro" selected>Seguro</option>
+							<option selected value="seguro"><?php echo  $this->translate('Seguro')?></option>
 						<?php else: ?>
-							<option value="seguro">Seguro</option>
+							<option value="seguro"><?php echo  $this->translate('Seguro')?></option>
 						<?php endif ?>
 					</select>
 				</div>
 			</div>
 
 
-			<div class="form-group  row">
-				<div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-5 col-xs-6 col-xs-offset-3">
-					<button class="btn btn-danger  col-lg-12 col-md-10 col-sm-12 col-xs-12 ">Enviar</button>
+			<div class="form-group row">
+				<div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-5 col-xs-6 col-xs-offset-3 top">
+					<button class="btn btn-danger  col-lg-12 col-md-10 col-sm-12 col-xs-12 "><?php echo  $this->translate('Enviar')?></button>
 				</div>
 			</div>
+			<div class="row"></div> 
 
-
-
-				 
-			
-		  
 		</form>
 	</div>
 		
 </div>
-
 

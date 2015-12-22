@@ -108,28 +108,22 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     protected $proveedoritrade_rfc;
 
     /**
-     * The value for the proveedoritrade_comprobantedomicilio field.
-     * @var        string
-     */
-    protected $proveedoritrade_comprobantedomicilio;
-
-    /**
      * The value for the proveedoritrade_clabe field.
      * @var        string
      */
     protected $proveedoritrade_clabe;
 
     /**
-     * The value for the proveedoritrade_comprobantedatosbancarios field.
-     * @var        string
-     */
-    protected $proveedoritrade_comprobantedatosbancarios;
-
-    /**
      * @var        PropelObjectCollection|Expedientegasto[] Collection to store aggregation of Expedientegasto objects.
      */
     protected $collExpedientegastos;
     protected $collExpedientegastosPartial;
+
+    /**
+     * @var        PropelObjectCollection|Proveedoritradearchivo[] Collection to store aggregation of Proveedoritradearchivo objects.
+     */
+    protected $collProveedoritradearchivos;
+    protected $collProveedoritradearchivosPartial;
 
     /**
      * @var        PropelObjectCollection|Proveedoritradeservicio[] Collection to store aggregation of Proveedoritradeservicio objects.
@@ -162,6 +156,12 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
      * @var		PropelObjectCollection
      */
     protected $expedientegastosScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $proveedoritradearchivosScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
@@ -313,17 +313,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [proveedoritrade_comprobantedomicilio] column value.
-     *
-     * @return string
-     */
-    public function getProveedoritradeComprobantedomicilio()
-    {
-
-        return $this->proveedoritrade_comprobantedomicilio;
-    }
-
-    /**
      * Get the [proveedoritrade_clabe] column value.
      *
      * @return string
@@ -332,17 +321,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     {
 
         return $this->proveedoritrade_clabe;
-    }
-
-    /**
-     * Get the [proveedoritrade_comprobantedatosbancarios] column value.
-     *
-     * @return string
-     */
-    public function getProveedoritradeComprobantedatosbancarios()
-    {
-
-        return $this->proveedoritrade_comprobantedatosbancarios;
     }
 
     /**
@@ -619,27 +597,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     } // setProveedoritradeRfc()
 
     /**
-     * Set the value of [proveedoritrade_comprobantedomicilio] column.
-     *
-     * @param  string $v new value
-     * @return Proveedoritrade The current object (for fluent API support)
-     */
-    public function setProveedoritradeComprobantedomicilio($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->proveedoritrade_comprobantedomicilio !== $v) {
-            $this->proveedoritrade_comprobantedomicilio = $v;
-            $this->modifiedColumns[] = ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO;
-        }
-
-
-        return $this;
-    } // setProveedoritradeComprobantedomicilio()
-
-    /**
      * Set the value of [proveedoritrade_clabe] column.
      *
      * @param  string $v new value
@@ -659,27 +616,6 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
 
         return $this;
     } // setProveedoritradeClabe()
-
-    /**
-     * Set the value of [proveedoritrade_comprobantedatosbancarios] column.
-     *
-     * @param  string $v new value
-     * @return Proveedoritrade The current object (for fluent API support)
-     */
-    public function setProveedoritradeComprobantedatosbancarios($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->proveedoritrade_comprobantedatosbancarios !== $v) {
-            $this->proveedoritrade_comprobantedatosbancarios = $v;
-            $this->modifiedColumns[] = ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS;
-        }
-
-
-        return $this;
-    } // setProveedoritradeComprobantedatosbancarios()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -726,9 +662,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
             $this->proveedoritrade_pais = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
             $this->proveedoritrade_email = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
             $this->proveedoritrade_rfc = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
-            $this->proveedoritrade_comprobantedomicilio = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
-            $this->proveedoritrade_clabe = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
-            $this->proveedoritrade_comprobantedatosbancarios = ($row[$startcol + 15] !== null) ? (string) $row[$startcol + 15] : null;
+            $this->proveedoritrade_clabe = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -738,7 +672,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 16; // 16 = ProveedoritradePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 14; // 14 = ProveedoritradePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Proveedoritrade object", $e);
@@ -801,6 +735,8 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         if ($deep) {  // also de-associate any related objects?
 
             $this->collExpedientegastos = null;
+
+            $this->collProveedoritradearchivos = null;
 
             $this->collProveedoritradeservicios = null;
 
@@ -945,6 +881,23 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                 }
             }
 
+            if ($this->proveedoritradearchivosScheduledForDeletion !== null) {
+                if (!$this->proveedoritradearchivosScheduledForDeletion->isEmpty()) {
+                    ProveedoritradearchivoQuery::create()
+                        ->filterByPrimaryKeys($this->proveedoritradearchivosScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->proveedoritradearchivosScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collProveedoritradearchivos !== null) {
+                foreach ($this->collProveedoritradearchivos as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             if ($this->proveedoritradeserviciosScheduledForDeletion !== null) {
                 if (!$this->proveedoritradeserviciosScheduledForDeletion->isEmpty()) {
                     ProveedoritradeservicioQuery::create()
@@ -1027,14 +980,8 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_RFC)) {
             $modifiedColumns[':p' . $index++]  = '`proveedoritrade_rfc`';
         }
-        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO)) {
-            $modifiedColumns[':p' . $index++]  = '`proveedoritrade_comprobantedomicilio`';
-        }
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_CLABE)) {
             $modifiedColumns[':p' . $index++]  = '`proveedoritrade_clabe`';
-        }
-        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS)) {
-            $modifiedColumns[':p' . $index++]  = '`proveedoritrade_comprobantedatosbancarios`';
         }
 
         $sql = sprintf(
@@ -1086,14 +1033,8 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                     case '`proveedoritrade_rfc`':
                         $stmt->bindValue($identifier, $this->proveedoritrade_rfc, PDO::PARAM_STR);
                         break;
-                    case '`proveedoritrade_comprobantedomicilio`':
-                        $stmt->bindValue($identifier, $this->proveedoritrade_comprobantedomicilio, PDO::PARAM_STR);
-                        break;
                     case '`proveedoritrade_clabe`':
                         $stmt->bindValue($identifier, $this->proveedoritrade_clabe, PDO::PARAM_STR);
-                        break;
-                    case '`proveedoritrade_comprobantedatosbancarios`':
-                        $stmt->bindValue($identifier, $this->proveedoritrade_comprobantedatosbancarios, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1202,6 +1143,14 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                     }
                 }
 
+                if ($this->collProveedoritradearchivos !== null) {
+                    foreach ($this->collProveedoritradearchivos as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
                 if ($this->collProveedoritradeservicios !== null) {
                     foreach ($this->collProveedoritradeservicios as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
@@ -1285,13 +1234,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                 return $this->getProveedoritradeRfc();
                 break;
             case 13:
-                return $this->getProveedoritradeComprobantedomicilio();
-                break;
-            case 14:
                 return $this->getProveedoritradeClabe();
-                break;
-            case 15:
-                return $this->getProveedoritradeComprobantedatosbancarios();
                 break;
             default:
                 return null;
@@ -1335,9 +1278,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
             $keys[10] => $this->getProveedoritradePais(),
             $keys[11] => $this->getProveedoritradeEmail(),
             $keys[12] => $this->getProveedoritradeRfc(),
-            $keys[13] => $this->getProveedoritradeComprobantedomicilio(),
-            $keys[14] => $this->getProveedoritradeClabe(),
-            $keys[15] => $this->getProveedoritradeComprobantedatosbancarios(),
+            $keys[13] => $this->getProveedoritradeClabe(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1347,6 +1288,9 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         if ($includeForeignObjects) {
             if (null !== $this->collExpedientegastos) {
                 $result['Expedientegastos'] = $this->collExpedientegastos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collProveedoritradearchivos) {
+                $result['Proveedoritradearchivos'] = $this->collProveedoritradearchivos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collProveedoritradeservicios) {
                 $result['Proveedoritradeservicios'] = $this->collProveedoritradeservicios->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -1425,13 +1369,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                 $this->setProveedoritradeRfc($value);
                 break;
             case 13:
-                $this->setProveedoritradeComprobantedomicilio($value);
-                break;
-            case 14:
                 $this->setProveedoritradeClabe($value);
-                break;
-            case 15:
-                $this->setProveedoritradeComprobantedatosbancarios($value);
                 break;
         } // switch()
     }
@@ -1470,9 +1408,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         if (array_key_exists($keys[10], $arr)) $this->setProveedoritradePais($arr[$keys[10]]);
         if (array_key_exists($keys[11], $arr)) $this->setProveedoritradeEmail($arr[$keys[11]]);
         if (array_key_exists($keys[12], $arr)) $this->setProveedoritradeRfc($arr[$keys[12]]);
-        if (array_key_exists($keys[13], $arr)) $this->setProveedoritradeComprobantedomicilio($arr[$keys[13]]);
-        if (array_key_exists($keys[14], $arr)) $this->setProveedoritradeClabe($arr[$keys[14]]);
-        if (array_key_exists($keys[15], $arr)) $this->setProveedoritradeComprobantedatosbancarios($arr[$keys[15]]);
+        if (array_key_exists($keys[13], $arr)) $this->setProveedoritradeClabe($arr[$keys[13]]);
     }
 
     /**
@@ -1497,9 +1433,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_PAIS)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_PAIS, $this->proveedoritrade_pais);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_EMAIL)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_EMAIL, $this->proveedoritrade_email);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_RFC)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_RFC, $this->proveedoritrade_rfc);
-        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO, $this->proveedoritrade_comprobantedomicilio);
         if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_CLABE)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_CLABE, $this->proveedoritrade_clabe);
-        if ($this->isColumnModified(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS)) $criteria->add(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS, $this->proveedoritrade_comprobantedatosbancarios);
 
         return $criteria;
     }
@@ -1575,9 +1509,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         $copyObj->setProveedoritradePais($this->getProveedoritradePais());
         $copyObj->setProveedoritradeEmail($this->getProveedoritradeEmail());
         $copyObj->setProveedoritradeRfc($this->getProveedoritradeRfc());
-        $copyObj->setProveedoritradeComprobantedomicilio($this->getProveedoritradeComprobantedomicilio());
         $copyObj->setProveedoritradeClabe($this->getProveedoritradeClabe());
-        $copyObj->setProveedoritradeComprobantedatosbancarios($this->getProveedoritradeComprobantedatosbancarios());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1589,6 +1521,12 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
             foreach ($this->getExpedientegastos() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addExpedientegasto($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getProveedoritradearchivos() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addProveedoritradearchivo($relObj->copy($deepCopy));
                 }
             }
 
@@ -1661,6 +1599,9 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     {
         if ('Expedientegasto' == $relationName) {
             $this->initExpedientegastos();
+        }
+        if ('Proveedoritradearchivo' == $relationName) {
+            $this->initProveedoritradearchivos();
         }
         if ('Proveedoritradeservicio' == $relationName) {
             $this->initProveedoritradeservicios();
@@ -1968,6 +1909,231 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
     }
 
     /**
+     * Clears out the collProveedoritradearchivos collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return Proveedoritrade The current object (for fluent API support)
+     * @see        addProveedoritradearchivos()
+     */
+    public function clearProveedoritradearchivos()
+    {
+        $this->collProveedoritradearchivos = null; // important to set this to null since that means it is uninitialized
+        $this->collProveedoritradearchivosPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collProveedoritradearchivos collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialProveedoritradearchivos($v = true)
+    {
+        $this->collProveedoritradearchivosPartial = $v;
+    }
+
+    /**
+     * Initializes the collProveedoritradearchivos collection.
+     *
+     * By default this just sets the collProveedoritradearchivos collection to an empty array (like clearcollProveedoritradearchivos());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initProveedoritradearchivos($overrideExisting = true)
+    {
+        if (null !== $this->collProveedoritradearchivos && !$overrideExisting) {
+            return;
+        }
+        $this->collProveedoritradearchivos = new PropelObjectCollection();
+        $this->collProveedoritradearchivos->setModel('Proveedoritradearchivo');
+    }
+
+    /**
+     * Gets an array of Proveedoritradearchivo objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Proveedoritrade is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Proveedoritradearchivo[] List of Proveedoritradearchivo objects
+     * @throws PropelException
+     */
+    public function getProveedoritradearchivos($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collProveedoritradearchivosPartial && !$this->isNew();
+        if (null === $this->collProveedoritradearchivos || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collProveedoritradearchivos) {
+                // return empty collection
+                $this->initProveedoritradearchivos();
+            } else {
+                $collProveedoritradearchivos = ProveedoritradearchivoQuery::create(null, $criteria)
+                    ->filterByProveedoritrade($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collProveedoritradearchivosPartial && count($collProveedoritradearchivos)) {
+                      $this->initProveedoritradearchivos(false);
+
+                      foreach ($collProveedoritradearchivos as $obj) {
+                        if (false == $this->collProveedoritradearchivos->contains($obj)) {
+                          $this->collProveedoritradearchivos->append($obj);
+                        }
+                      }
+
+                      $this->collProveedoritradearchivosPartial = true;
+                    }
+
+                    $collProveedoritradearchivos->getInternalIterator()->rewind();
+
+                    return $collProveedoritradearchivos;
+                }
+
+                if ($partial && $this->collProveedoritradearchivos) {
+                    foreach ($this->collProveedoritradearchivos as $obj) {
+                        if ($obj->isNew()) {
+                            $collProveedoritradearchivos[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collProveedoritradearchivos = $collProveedoritradearchivos;
+                $this->collProveedoritradearchivosPartial = false;
+            }
+        }
+
+        return $this->collProveedoritradearchivos;
+    }
+
+    /**
+     * Sets a collection of Proveedoritradearchivo objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $proveedoritradearchivos A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return Proveedoritrade The current object (for fluent API support)
+     */
+    public function setProveedoritradearchivos(PropelCollection $proveedoritradearchivos, PropelPDO $con = null)
+    {
+        $proveedoritradearchivosToDelete = $this->getProveedoritradearchivos(new Criteria(), $con)->diff($proveedoritradearchivos);
+
+
+        $this->proveedoritradearchivosScheduledForDeletion = $proveedoritradearchivosToDelete;
+
+        foreach ($proveedoritradearchivosToDelete as $proveedoritradearchivoRemoved) {
+            $proveedoritradearchivoRemoved->setProveedoritrade(null);
+        }
+
+        $this->collProveedoritradearchivos = null;
+        foreach ($proveedoritradearchivos as $proveedoritradearchivo) {
+            $this->addProveedoritradearchivo($proveedoritradearchivo);
+        }
+
+        $this->collProveedoritradearchivos = $proveedoritradearchivos;
+        $this->collProveedoritradearchivosPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Proveedoritradearchivo objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related Proveedoritradearchivo objects.
+     * @throws PropelException
+     */
+    public function countProveedoritradearchivos(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collProveedoritradearchivosPartial && !$this->isNew();
+        if (null === $this->collProveedoritradearchivos || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collProveedoritradearchivos) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getProveedoritradearchivos());
+            }
+            $query = ProveedoritradearchivoQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByProveedoritrade($this)
+                ->count($con);
+        }
+
+        return count($this->collProveedoritradearchivos);
+    }
+
+    /**
+     * Method called to associate a Proveedoritradearchivo object to this object
+     * through the Proveedoritradearchivo foreign key attribute.
+     *
+     * @param    Proveedoritradearchivo $l Proveedoritradearchivo
+     * @return Proveedoritrade The current object (for fluent API support)
+     */
+    public function addProveedoritradearchivo(Proveedoritradearchivo $l)
+    {
+        if ($this->collProveedoritradearchivos === null) {
+            $this->initProveedoritradearchivos();
+            $this->collProveedoritradearchivosPartial = true;
+        }
+
+        if (!in_array($l, $this->collProveedoritradearchivos->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddProveedoritradearchivo($l);
+
+            if ($this->proveedoritradearchivosScheduledForDeletion and $this->proveedoritradearchivosScheduledForDeletion->contains($l)) {
+                $this->proveedoritradearchivosScheduledForDeletion->remove($this->proveedoritradearchivosScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Proveedoritradearchivo $proveedoritradearchivo The proveedoritradearchivo object to add.
+     */
+    protected function doAddProveedoritradearchivo($proveedoritradearchivo)
+    {
+        $this->collProveedoritradearchivos[]= $proveedoritradearchivo;
+        $proveedoritradearchivo->setProveedoritrade($this);
+    }
+
+    /**
+     * @param	Proveedoritradearchivo $proveedoritradearchivo The proveedoritradearchivo object to remove.
+     * @return Proveedoritrade The current object (for fluent API support)
+     */
+    public function removeProveedoritradearchivo($proveedoritradearchivo)
+    {
+        if ($this->getProveedoritradearchivos()->contains($proveedoritradearchivo)) {
+            $this->collProveedoritradearchivos->remove($this->collProveedoritradearchivos->search($proveedoritradearchivo));
+            if (null === $this->proveedoritradearchivosScheduledForDeletion) {
+                $this->proveedoritradearchivosScheduledForDeletion = clone $this->collProveedoritradearchivos;
+                $this->proveedoritradearchivosScheduledForDeletion->clear();
+            }
+            $this->proveedoritradearchivosScheduledForDeletion[]= clone $proveedoritradearchivo;
+            $proveedoritradearchivo->setProveedoritrade(null);
+        }
+
+        return $this;
+    }
+
+    /**
      * Clears out the collProveedoritradeservicios collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
@@ -2235,9 +2401,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
         $this->proveedoritrade_pais = null;
         $this->proveedoritrade_email = null;
         $this->proveedoritrade_rfc = null;
-        $this->proveedoritrade_comprobantedomicilio = null;
         $this->proveedoritrade_clabe = null;
-        $this->proveedoritrade_comprobantedatosbancarios = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -2265,6 +2429,11 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collProveedoritradearchivos) {
+                foreach ($this->collProveedoritradearchivos as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collProveedoritradeservicios) {
                 foreach ($this->collProveedoritradeservicios as $o) {
                     $o->clearAllReferences($deep);
@@ -2278,6 +2447,10 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
             $this->collExpedientegastos->clearIterator();
         }
         $this->collExpedientegastos = null;
+        if ($this->collProveedoritradearchivos instanceof PropelCollection) {
+            $this->collProveedoritradearchivos->clearIterator();
+        }
+        $this->collProveedoritradearchivos = null;
         if ($this->collProveedoritradeservicios instanceof PropelCollection) {
             $this->collProveedoritradeservicios->clearIterator();
         }

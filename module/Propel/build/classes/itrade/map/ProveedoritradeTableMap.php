@@ -51,9 +51,7 @@ class ProveedoritradeTableMap extends TableMap
         $this->addColumn('proveedoritrade_pais', 'ProveedoritradePais', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_email', 'ProveedoritradeEmail', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedoritrade_rfc', 'ProveedoritradeRfc', 'VARCHAR', false, 45, null);
-        $this->addColumn('proveedoritrade_comprobantedomicilio', 'ProveedoritradeComprobantedomicilio', 'LONGVARCHAR', false, null, null);
         $this->addColumn('proveedoritrade_clabe', 'ProveedoritradeClabe', 'VARCHAR', false, 45, null);
-        $this->addColumn('proveedoritrade_comprobantedatosbancarios', 'ProveedoritradeComprobantedatosbancarios', 'LONGVARCHAR', false, null, null);
         // validators
     } // initialize()
 
@@ -63,6 +61,7 @@ class ProveedoritradeTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idproveedoritrade' => 'idproveedoritrade', ), null, null, 'Expedientegastos');
+        $this->addRelation('Proveedoritradearchivo', 'Proveedoritradearchivo', RelationMap::ONE_TO_MANY, array('idproveedoritrade' => 'idproveedoritrade', ), 'CASCADE', 'CASCADE', 'Proveedoritradearchivos');
         $this->addRelation('Proveedoritradeservicio', 'Proveedoritradeservicio', RelationMap::ONE_TO_MANY, array('idproveedoritrade' => 'idproveedoritrade', ), 'CASCADE', 'CASCADE', 'Proveedoritradeservicios');
     } // buildRelations()
 

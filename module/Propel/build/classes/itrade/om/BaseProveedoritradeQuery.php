@@ -19,9 +19,7 @@
  * @method ProveedoritradeQuery orderByProveedoritradePais($order = Criteria::ASC) Order by the proveedoritrade_pais column
  * @method ProveedoritradeQuery orderByProveedoritradeEmail($order = Criteria::ASC) Order by the proveedoritrade_email column
  * @method ProveedoritradeQuery orderByProveedoritradeRfc($order = Criteria::ASC) Order by the proveedoritrade_rfc column
- * @method ProveedoritradeQuery orderByProveedoritradeComprobantedomicilio($order = Criteria::ASC) Order by the proveedoritrade_comprobantedomicilio column
  * @method ProveedoritradeQuery orderByProveedoritradeClabe($order = Criteria::ASC) Order by the proveedoritrade_clabe column
- * @method ProveedoritradeQuery orderByProveedoritradeComprobantedatosbancarios($order = Criteria::ASC) Order by the proveedoritrade_comprobantedatosbancarios column
  *
  * @method ProveedoritradeQuery groupByIdproveedoritrade() Group by the idproveedoritrade column
  * @method ProveedoritradeQuery groupByProveedoritradeNombre() Group by the proveedoritrade_nombre column
@@ -36,9 +34,7 @@
  * @method ProveedoritradeQuery groupByProveedoritradePais() Group by the proveedoritrade_pais column
  * @method ProveedoritradeQuery groupByProveedoritradeEmail() Group by the proveedoritrade_email column
  * @method ProveedoritradeQuery groupByProveedoritradeRfc() Group by the proveedoritrade_rfc column
- * @method ProveedoritradeQuery groupByProveedoritradeComprobantedomicilio() Group by the proveedoritrade_comprobantedomicilio column
  * @method ProveedoritradeQuery groupByProveedoritradeClabe() Group by the proveedoritrade_clabe column
- * @method ProveedoritradeQuery groupByProveedoritradeComprobantedatosbancarios() Group by the proveedoritrade_comprobantedatosbancarios column
  *
  * @method ProveedoritradeQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ProveedoritradeQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -47,6 +43,10 @@
  * @method ProveedoritradeQuery leftJoinExpedientegasto($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expedientegasto relation
  * @method ProveedoritradeQuery rightJoinExpedientegasto($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedientegasto relation
  * @method ProveedoritradeQuery innerJoinExpedientegasto($relationAlias = null) Adds a INNER JOIN clause to the query using the Expedientegasto relation
+ *
+ * @method ProveedoritradeQuery leftJoinProveedoritradearchivo($relationAlias = null) Adds a LEFT JOIN clause to the query using the Proveedoritradearchivo relation
+ * @method ProveedoritradeQuery rightJoinProveedoritradearchivo($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Proveedoritradearchivo relation
+ * @method ProveedoritradeQuery innerJoinProveedoritradearchivo($relationAlias = null) Adds a INNER JOIN clause to the query using the Proveedoritradearchivo relation
  *
  * @method ProveedoritradeQuery leftJoinProveedoritradeservicio($relationAlias = null) Adds a LEFT JOIN clause to the query using the Proveedoritradeservicio relation
  * @method ProveedoritradeQuery rightJoinProveedoritradeservicio($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Proveedoritradeservicio relation
@@ -67,9 +67,7 @@
  * @method Proveedoritrade findOneByProveedoritradePais(string $proveedoritrade_pais) Return the first Proveedoritrade filtered by the proveedoritrade_pais column
  * @method Proveedoritrade findOneByProveedoritradeEmail(string $proveedoritrade_email) Return the first Proveedoritrade filtered by the proveedoritrade_email column
  * @method Proveedoritrade findOneByProveedoritradeRfc(string $proveedoritrade_rfc) Return the first Proveedoritrade filtered by the proveedoritrade_rfc column
- * @method Proveedoritrade findOneByProveedoritradeComprobantedomicilio(string $proveedoritrade_comprobantedomicilio) Return the first Proveedoritrade filtered by the proveedoritrade_comprobantedomicilio column
  * @method Proveedoritrade findOneByProveedoritradeClabe(string $proveedoritrade_clabe) Return the first Proveedoritrade filtered by the proveedoritrade_clabe column
- * @method Proveedoritrade findOneByProveedoritradeComprobantedatosbancarios(string $proveedoritrade_comprobantedatosbancarios) Return the first Proveedoritrade filtered by the proveedoritrade_comprobantedatosbancarios column
  *
  * @method array findByIdproveedoritrade(int $idproveedoritrade) Return Proveedoritrade objects filtered by the idproveedoritrade column
  * @method array findByProveedoritradeNombre(string $proveedoritrade_nombre) Return Proveedoritrade objects filtered by the proveedoritrade_nombre column
@@ -84,9 +82,7 @@
  * @method array findByProveedoritradePais(string $proveedoritrade_pais) Return Proveedoritrade objects filtered by the proveedoritrade_pais column
  * @method array findByProveedoritradeEmail(string $proveedoritrade_email) Return Proveedoritrade objects filtered by the proveedoritrade_email column
  * @method array findByProveedoritradeRfc(string $proveedoritrade_rfc) Return Proveedoritrade objects filtered by the proveedoritrade_rfc column
- * @method array findByProveedoritradeComprobantedomicilio(string $proveedoritrade_comprobantedomicilio) Return Proveedoritrade objects filtered by the proveedoritrade_comprobantedomicilio column
  * @method array findByProveedoritradeClabe(string $proveedoritrade_clabe) Return Proveedoritrade objects filtered by the proveedoritrade_clabe column
- * @method array findByProveedoritradeComprobantedatosbancarios(string $proveedoritrade_comprobantedatosbancarios) Return Proveedoritrade objects filtered by the proveedoritrade_comprobantedatosbancarios column
  *
  * @package    propel.generator.itrade.om
  */
@@ -194,7 +190,7 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idproveedoritrade`, `proveedoritrade_nombre`, `proveedoritrade_nombrecontacto`, `proveedoritrade_telefono`, `proveedoritrade_calle`, `proveedoritrade_numero`, `proveedoritrade_interior`, `proveedoritrade_colonia`, `proveedoritrade_ciudad`, `proveedoritrade_estado`, `proveedoritrade_pais`, `proveedoritrade_email`, `proveedoritrade_rfc`, `proveedoritrade_comprobantedomicilio`, `proveedoritrade_clabe`, `proveedoritrade_comprobantedatosbancarios` FROM `proveedoritrade` WHERE `idproveedoritrade` = :p0';
+        $sql = 'SELECT `idproveedoritrade`, `proveedoritrade_nombre`, `proveedoritrade_nombrecontacto`, `proveedoritrade_telefono`, `proveedoritrade_calle`, `proveedoritrade_numero`, `proveedoritrade_interior`, `proveedoritrade_colonia`, `proveedoritrade_ciudad`, `proveedoritrade_estado`, `proveedoritrade_pais`, `proveedoritrade_email`, `proveedoritrade_rfc`, `proveedoritrade_clabe` FROM `proveedoritrade` WHERE `idproveedoritrade` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -674,35 +670,6 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the proveedoritrade_comprobantedomicilio column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByProveedoritradeComprobantedomicilio('fooValue');   // WHERE proveedoritrade_comprobantedomicilio = 'fooValue'
-     * $query->filterByProveedoritradeComprobantedomicilio('%fooValue%'); // WHERE proveedoritrade_comprobantedomicilio LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $proveedoritradeComprobantedomicilio The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ProveedoritradeQuery The current query, for fluid interface
-     */
-    public function filterByProveedoritradeComprobantedomicilio($proveedoritradeComprobantedomicilio = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($proveedoritradeComprobantedomicilio)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $proveedoritradeComprobantedomicilio)) {
-                $proveedoritradeComprobantedomicilio = str_replace('*', '%', $proveedoritradeComprobantedomicilio);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDOMICILIO, $proveedoritradeComprobantedomicilio, $comparison);
-    }
-
-    /**
      * Filter the query on the proveedoritrade_clabe column
      *
      * Example usage:
@@ -729,35 +696,6 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_CLABE, $proveedoritradeClabe, $comparison);
-    }
-
-    /**
-     * Filter the query on the proveedoritrade_comprobantedatosbancarios column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByProveedoritradeComprobantedatosbancarios('fooValue');   // WHERE proveedoritrade_comprobantedatosbancarios = 'fooValue'
-     * $query->filterByProveedoritradeComprobantedatosbancarios('%fooValue%'); // WHERE proveedoritrade_comprobantedatosbancarios LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $proveedoritradeComprobantedatosbancarios The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ProveedoritradeQuery The current query, for fluid interface
-     */
-    public function filterByProveedoritradeComprobantedatosbancarios($proveedoritradeComprobantedatosbancarios = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($proveedoritradeComprobantedatosbancarios)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $proveedoritradeComprobantedatosbancarios)) {
-                $proveedoritradeComprobantedatosbancarios = str_replace('*', '%', $proveedoritradeComprobantedatosbancarios);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ProveedoritradePeer::PROVEEDORITRADE_COMPROBANTEDATOSBANCARIOS, $proveedoritradeComprobantedatosbancarios, $comparison);
     }
 
     /**
@@ -832,6 +770,80 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
         return $this
             ->joinExpedientegasto($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Expedientegasto', 'ExpedientegastoQuery');
+    }
+
+    /**
+     * Filter the query by a related Proveedoritradearchivo object
+     *
+     * @param   Proveedoritradearchivo|PropelObjectCollection $proveedoritradearchivo  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 ProveedoritradeQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByProveedoritradearchivo($proveedoritradearchivo, $comparison = null)
+    {
+        if ($proveedoritradearchivo instanceof Proveedoritradearchivo) {
+            return $this
+                ->addUsingAlias(ProveedoritradePeer::IDPROVEEDORITRADE, $proveedoritradearchivo->getIdproveedoritrade(), $comparison);
+        } elseif ($proveedoritradearchivo instanceof PropelObjectCollection) {
+            return $this
+                ->useProveedoritradearchivoQuery()
+                ->filterByPrimaryKeys($proveedoritradearchivo->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByProveedoritradearchivo() only accepts arguments of type Proveedoritradearchivo or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Proveedoritradearchivo relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ProveedoritradeQuery The current query, for fluid interface
+     */
+    public function joinProveedoritradearchivo($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Proveedoritradearchivo');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Proveedoritradearchivo');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Proveedoritradearchivo relation Proveedoritradearchivo object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   ProveedoritradearchivoQuery A secondary query class using the current class as primary query
+     */
+    public function useProveedoritradearchivoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinProveedoritradearchivo($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Proveedoritradearchivo', 'ProveedoritradearchivoQuery');
     }
 
     /**

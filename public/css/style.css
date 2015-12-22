@@ -161,7 +161,30 @@ lead{color: black;}
   width: 32px;
   height: 24px;
 }
-
+.imgEsp-xs
+{
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #eee;
+  background-color: white;
+  position: fixed;
+  right: 0;
+  top: 20px;
+  width: 42px;
+  height: 31.5px;
+  z-index: 10;
+}
+.imgEng-xs
+{
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #eee;
+  background-color: white;
+  position: fixed;
+  right: 0;
+  top: 62px;
+  width: 42px;
+  height: 31.5px;
+  z-index: 10;
+}
 
 
  .panel-login
@@ -313,3 +336,70 @@ input[type="text"] > input:active { cursor: pointer; }
   bottom: 10px;
   right: 10px;
 }
+
+.btn-cotizar
+{
+  position: fixed;
+  right: 0;
+  width: 90px;
+  height: auto;
+  background-color: transparent;
+  z-index: 10;
+  color: rgba(46,49,146);
+  font-family: bold;
+}
+.btn-cotizar-xs
+{
+  border: 1px solid rgba(255,255,255,.5);
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 30%;
+  height: 30px;
+  background-color: rgb(46,49,146);
+  text-align: center;
+  color: white;
+  padding-top: 4px;
+  font-size: 18px;
+  border-radius: 4px 4px 0 0;
+}
+.btn-cotizar-xs:hover {color: rgba(255,255,255,.5);} 
+.btn-user-xs
+{
+
+  border: 1px solid rgba(255,255,255,.5);
+  position: fixed;
+  bottom: 0;
+  left: 34%;
+  z-index: 10;
+  width: 30%;
+  height: 30px;
+  background-color: rgb(46,49,146);
+  text-align: center;
+  color: white;
+  padding-top: 4px;
+  font-size: 18px;
+  border-radius: 4px 4px 0 0;
+}
+.btn-user-xs:hover{color: rgba(255,255,255,.5);}
+
+.btn-up-xs
+{
+  border: 1px solid rgba(255,255,255,.5);
+  position: fixed;
+  bottom: 0;
+  left: 65%;
+  z-index: 10;
+  width: 10%;
+  height: 30px;
+  background-color: rgb(46,49,146);
+  text-align: center;
+  color: white;
+  padding-top: 4px;
+  font-size: 18px;
+  border-radius: 4px 4px 0 0;
+}
+.btn-up-xs:hover{color: rgba(255,255,255,.5);}
+
+
+.img-responsive{ z-index: 1;}

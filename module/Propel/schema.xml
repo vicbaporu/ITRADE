@@ -278,9 +278,21 @@
     <column name="proveedoritrade_pais" phpName="ProveedoritradePais" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_email" phpName="ProveedoritradeEmail" type="VARCHAR" size="45" required="false"/>
     <column name="proveedoritrade_rfc" phpName="ProveedoritradeRfc" type="VARCHAR" size="45" required="false"/>
-    <column name="proveedoritrade_comprobantedomicilio" phpName="ProveedoritradeComprobantedomicilio" type="LONGVARCHAR" required="false"/>
     <column name="proveedoritrade_clabe" phpName="ProveedoritradeClabe" type="VARCHAR" size="45" required="false"/>
-    <column name="proveedoritrade_comprobantedatosbancarios" phpName="ProveedoritradeComprobantedatosbancarios" type="LONGVARCHAR" required="false"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="proveedoritradearchivo" phpName="Proveedoritradearchivo" idMethod="native">
+    <column name="idproveedoritradearchivo" phpName="Idproveedoritradearchivo" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="idproveedoritrade" phpName="Idproveedoritrade" type="INTEGER" required="true"/>
+    <column name="proveedoritradearchivo_archivo" phpName="ProveedoritradearchivoArchivo" type="LONGVARCHAR" required="true"/>
+    <foreign-key foreignTable="proveedoritrade" name="idproveedoritrade_proveedoritradearchivo" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="idproveedoritrade" foreign="idproveedoritrade"/>
+    </foreign-key>
+    <index name="idproveedoritrade">
+      <index-column name="idproveedoritrade"/>
+    </index>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
     </vendor>

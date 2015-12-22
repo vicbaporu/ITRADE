@@ -203,4 +203,22 @@ class ProveedorController extends AbstractActionController
 
         }
     }
+    
+    public function dropzoneAction(){
+        
+        $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/proveedores';
+        echo '<pre>';var_dump($storeFolder); echo '</pre>';exit();
+        
+         $request = $this->getRequest();
+         
+         if($request->isPost()){
+             
+             $files = $request->getFiles();
+             
+             $tempFile = $files['file']['tmp_name']; 
+             echo '<pre>';var_dump($tempFile); echo '</pre>';exit();
+             
+         }
+         
+    }
 }
