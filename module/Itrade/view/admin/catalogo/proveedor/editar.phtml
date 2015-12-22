@@ -39,6 +39,7 @@
                                     <span class="help req">*</span>
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
+                                        <?php echo $this->formHidden($form->get('idproveedoritrade')) ?>
                                         <?php echo $this->formText($form->get('proveedoritrade_nombre')) ?>
                                     </div>
                                     <span class="error"></span>
@@ -259,8 +260,8 @@
     $(document).ready(function() {
         
         //FORM BIND
-        var $form = $('.form_container').proveedor();
-        $form.formBind();
+        var $form = $('.form_container').proveedor({successMessages:<?php echo $successMessages?>});
+        $form.formBind(<?php echo $files?>);
 
     });
 </script>

@@ -48,6 +48,12 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
     protected $proveedoritradearchivo_archivo;
 
     /**
+     * The value for the proveedoritradearchivo_size field.
+     * @var        string
+     */
+    protected $proveedoritradearchivo_size;
+
+    /**
      * @var        Proveedoritrade
      */
     protected $aProveedoritrade;
@@ -103,6 +109,17 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
     {
 
         return $this->proveedoritradearchivo_archivo;
+    }
+
+    /**
+     * Get the [proveedoritradearchivo_size] column value.
+     *
+     * @return string
+     */
+    public function getProveedoritradearchivoSize()
+    {
+
+        return $this->proveedoritradearchivo_size;
     }
 
     /**
@@ -173,6 +190,27 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
     } // setProveedoritradearchivoArchivo()
 
     /**
+     * Set the value of [proveedoritradearchivo_size] column.
+     *
+     * @param  string $v new value
+     * @return Proveedoritradearchivo The current object (for fluent API support)
+     */
+    public function setProveedoritradearchivoSize($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->proveedoritradearchivo_size !== $v) {
+            $this->proveedoritradearchivo_size = $v;
+            $this->modifiedColumns[] = ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE;
+        }
+
+
+        return $this;
+    } // setProveedoritradearchivoSize()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -207,6 +245,7 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
             $this->idproveedoritradearchivo = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->idproveedoritrade = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->proveedoritradearchivo_archivo = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->proveedoritradearchivo_size = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -216,7 +255,7 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 3; // 3 = ProveedoritradearchivoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 4; // 4 = ProveedoritradearchivoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Proveedoritradearchivo object", $e);
@@ -438,6 +477,10 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
         $modifiedColumns = array();
         $index = 0;
 
+        $this->modifiedColumns[] = ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO;
+        if (null !== $this->idproveedoritradearchivo) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO . ')');
+        }
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO)) {
@@ -448,6 +491,9 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
         }
         if ($this->isColumnModified(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO)) {
             $modifiedColumns[':p' . $index++]  = '`proveedoritradearchivo_archivo`';
+        }
+        if ($this->isColumnModified(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE)) {
+            $modifiedColumns[':p' . $index++]  = '`proveedoritradearchivo_size`';
         }
 
         $sql = sprintf(
@@ -469,6 +515,9 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
                     case '`proveedoritradearchivo_archivo`':
                         $stmt->bindValue($identifier, $this->proveedoritradearchivo_archivo, PDO::PARAM_STR);
                         break;
+                    case '`proveedoritradearchivo_size`':
+                        $stmt->bindValue($identifier, $this->proveedoritradearchivo_size, PDO::PARAM_STR);
+                        break;
                 }
             }
             $stmt->execute();
@@ -476,6 +525,13 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
+
+        try {
+            $pk = $con->lastInsertId();
+        } catch (Exception $e) {
+            throw new PropelException('Unable to get autoincrement id.', $e);
+        }
+        $this->setIdproveedoritradearchivo($pk);
 
         $this->setNew(false);
     }
@@ -617,6 +673,9 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
             case 2:
                 return $this->getProveedoritradearchivoArchivo();
                 break;
+            case 3:
+                return $this->getProveedoritradearchivoSize();
+                break;
             default:
                 return null;
                 break;
@@ -649,6 +708,7 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
             $keys[0] => $this->getIdproveedoritradearchivo(),
             $keys[1] => $this->getIdproveedoritrade(),
             $keys[2] => $this->getProveedoritradearchivoArchivo(),
+            $keys[3] => $this->getProveedoritradearchivoSize(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -702,6 +762,9 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
             case 2:
                 $this->setProveedoritradearchivoArchivo($value);
                 break;
+            case 3:
+                $this->setProveedoritradearchivoSize($value);
+                break;
         } // switch()
     }
 
@@ -729,6 +792,7 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
         if (array_key_exists($keys[0], $arr)) $this->setIdproveedoritradearchivo($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setIdproveedoritrade($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setProveedoritradearchivoArchivo($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setProveedoritradearchivoSize($arr[$keys[3]]);
     }
 
     /**
@@ -743,6 +807,7 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
         if ($this->isColumnModified(ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO)) $criteria->add(ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO, $this->idproveedoritradearchivo);
         if ($this->isColumnModified(ProveedoritradearchivoPeer::IDPROVEEDORITRADE)) $criteria->add(ProveedoritradearchivoPeer::IDPROVEEDORITRADE, $this->idproveedoritrade);
         if ($this->isColumnModified(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO)) $criteria->add(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO, $this->proveedoritradearchivo_archivo);
+        if ($this->isColumnModified(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE)) $criteria->add(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE, $this->proveedoritradearchivo_size);
 
         return $criteria;
     }
@@ -808,6 +873,7 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
     {
         $copyObj->setIdproveedoritrade($this->getIdproveedoritrade());
         $copyObj->setProveedoritradearchivoArchivo($this->getProveedoritradearchivoArchivo());
+        $copyObj->setProveedoritradearchivoSize($this->getProveedoritradearchivoSize());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -926,6 +992,7 @@ abstract class BaseProveedoritradearchivo extends BaseObject implements Persiste
         $this->idproveedoritradearchivo = null;
         $this->idproveedoritrade = null;
         $this->proveedoritradearchivo_archivo = null;
+        $this->proveedoritradearchivo_size = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

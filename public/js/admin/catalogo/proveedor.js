@@ -158,9 +158,31 @@
 
         }
         
-        plugin.formBind = function(){
+        plugin.formBind = function(files){
+
+         //EL ID DEL PROVEEDOR
+         var id = $container.find('input[name=idproveedoritrade]').val();
+
+         Dropzone.autoDiscover = false;  
+         
+         var myDropzone = new Dropzone("#mydropzone", { url: "/catalogo/proveedores/dropzone"});
+         myDropzone.on('sending', function(file, xhr, formData){
+            formData.append('id', id);
+        });
+        
+        $.each(files,function(key,value){
+            var mockFile = { name: value.name, size: value.size, url:'/Applications/AMPPS/www/itrade' }; 
             
-          $container.find('#mydropzone').dropzone({ url: "/catalogo/proveedores/dropzone" });
+            myDropzone.options.addedfile.call(myDropzone, mockFile); 
+            myDropzone.emit("thumbnail", mockFile, '/files/proveedores/3/images.jpg');
+        });
+        
+        
+//       
+//       $container.find('#mydropzone').dropzone({ url: "/catalogo/proveedores/dropzone" }).on('sending', function(file, xhr, formData){
+//            console.log(formData);
+//        });
+       
         }
 
         /*

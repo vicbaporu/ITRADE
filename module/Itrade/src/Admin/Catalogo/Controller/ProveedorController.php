@@ -65,7 +65,12 @@ class ProveedorController extends AbstractActionController
         
         $request = $this->getRequest();
         
-         $exist = \ProveedoritradeQuery::create()->filterByIdproveedoritrade($id)->exists();
+        if($request->isPost()){
+            
+        }
+        
+        
+        $exist = \ProveedoritradeQuery::create()->filterByIdproveedoritrade($id)->exists();
          
          if($exist){
             
@@ -74,11 +79,24 @@ class ProveedorController extends AbstractActionController
             //INSTANCIAMOS NUESTRO FORMULARIO
             $form = new \Catalogo\Form\ProveedorForm();
             $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+            
+            //LOS ARCHIVOS
+            $files = \ProveedoritradearchivoQuery::create()->filterByIdproveedoritrade($entity->getIdproveedoritrade())->find();
+            
+            $files_array = array();
+            $file = new \Proveedoritradearchivo();
+            foreach ($files as $file){
+                $tmp['name'] = $file->getProveedoritradearchivoArchivo();
+                $tmp['size'] = $file->getProveedoritradearchivoSize();
+                $files_array[] = $tmp;
+            }
+            
        
             //RETORNAMOS A NUESTRA VISTA
             return new ViewModel(array(
                 'entity' => json_encode($entity->toArray(\BasePeer::TYPE_FIELDNAME)),
                 'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
+                'files' => json_encode($files_array),
                 'form' => $form
             ));
         
@@ -206,17 +224,38 @@ class ProveedorController extends AbstractActionController
     
     public function dropzoneAction(){
         
-        $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/proveedores';
-        echo '<pre>';var_dump($storeFolder); echo '</pre>';exit();
-        
+         $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/proveedores';
+      
          $request = $this->getRequest();
          
          if($request->isPost()){
              
+             
+             $post_data = $request->getPost();
              $files = $request->getFiles();
              
+             //OBTENEMOS EL ID DEL PROVEEDOR
+             $id = $post_data['id'];
+            
+             
              $tempFile = $files['file']['tmp_name']; 
-             echo '<pre>';var_dump($tempFile); echo '</pre>';exit();
+             $targetFile =  $storeFolder. '/'. $id.'/'.$_FILES['file']['name']; 
+             
+             if (!file_exists($storeFolder. '/'. $id)) {
+                mkdir($storeFolder. '/'. $id, 0777, true);
+            }
+
+             move_uploaded_file($tempFile,$targetFile);
+             
+             //Guardamos en nuestra base de datos
+             $proveedor_archivo = new \Proveedoritradearchivo();
+             $proveedor_archivo->setIdproveedoritrade($id);
+             $proveedor_archivo->setProveedoritradearchivoArchivo('/files/proveedores'. '/'. $id.'/'.$_FILES['file']['name']);
+             $proveedor_archivo->setProveedoritradearchivoSize($_FILES['file']['size']);
+             
+             $proveedor_archivo->save();
+             
+             return $this->getResponse()->setContent(json_encode(true));
              
          }
          
