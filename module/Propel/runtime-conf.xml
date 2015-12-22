@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <propel>
+        <datasources default="itrade">
+            <datasource id="itrade">
+                <adapter>mysql</adapter> <!-- sqlite, mysql, myssql, oracle, or pgsql -->
+                <connection>
+                    <dsn>mysql:host=127.0.0.1;dbname=itrade_system</dsn>
+                    <user>itrade_admin</user>
+                    <password>CEy9vCaFm6BuuzDM</password>
+                </connection>
+            </datasource>
+        </datasources>
+    </propel>
+</config>

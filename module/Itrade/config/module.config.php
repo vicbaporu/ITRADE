@@ -54,6 +54,42 @@ return array(
                             ),
                         ),
                     ),
+                    /*
+                     * CATALOGOS
+                     */
+                    'catalogo' => array(
+                        'type'    => 'literal',
+                        'options' => array(
+                            'route'    => '/catalogo',
+                            'defaults' => array(
+                                'controller'    => 'Catalogo\Controller\EmpleadoController',
+                                'action'        => 'index',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'empleados' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/empleados[/:action][/:id][/]',
+                                    'defaults' => array(
+                                        'controller'    => 'Catalogo\Controller\Empleado',
+                                        'action'        => 'index',
+                                    ),
+                                ),
+                            ),
+                            'proveedores' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/proveedores[/:action][/:id][/]',
+                                    'defaults' => array(
+                                        'controller'    => 'Catalogo\Controller\Proveedor',
+                                        'action'        => 'index',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
                 ),
             ),
             /*
@@ -165,9 +201,19 @@ return array(
 
             'Website\Controller\Login' => 'Website\Controller\LoginController',
             /*
-             * ADMIN
+             * START ADMIN
              */
+            'Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
+            'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
+            
+             //CATALOGO
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            
+            /*
+             * END ADMIN
+             */
+            
+            
             /*
              * CLIENT
              */
@@ -176,19 +222,22 @@ return array(
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '\..\view\layout\layout.phtml',
-            'layout/login'            => __DIR__ . '\..\view\client\layout\layout.phtml',
-            'application/index/index' => __DIR__ . '\..\view\application\index\index.phtml',
-            'error/404'               => __DIR__ . '\..\view\error\404.phtml',
-            'error/index'             => __DIR__ . '\..\view\error\index.phtml',
+        //'layout/layout'         => __DIR__ . '/../view/apps/theme/layout/launched.phtml',
+        //'website/index/index'   => __DIR__ . '/../view/website/index/index.phtml',
+        'error/404'             => __DIR__ . '/../view/website/theme/layout/launched/errors/404.phtml',
+        'error/index'           => __DIR__ . '/../view/website/theme/layout/launched/errors/index.phtml',
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            'Website' =>  __DIR__ . '/../view/',
+            'Admin' =>  __DIR__ . '/../view/admin/',
+           // 'Admin' => __DIR__ . '/../view/admin',
+         //   'Website' => __DIR__ . '/../view',
+
         ),
     ),
 );

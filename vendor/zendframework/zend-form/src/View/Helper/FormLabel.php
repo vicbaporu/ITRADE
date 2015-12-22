@@ -23,10 +23,10 @@ class FormLabel extends AbstractHelper
      *
      * @var array
      */
-    protected $validTagAttributes = array(
+    protected $validTagAttributes = [
         'for'  => true,
         'form' => true,
-    );
+    ];
 
     /**
      * Generate a form label, optionally with content
@@ -42,6 +42,7 @@ class FormLabel extends AbstractHelper
      */
     public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)
     {
+        
         if (!$element) {
             return $this;
         }
@@ -99,11 +100,14 @@ class FormLabel extends AbstractHelper
      */
     public function openTag($attributesOrElement = null)
     {
+      
         if (null === $attributesOrElement) {
+          
             return '<label>';
         }
 
         if (is_array($attributesOrElement)) {
+          
             $attributes = $this->createAttributesString($attributesOrElement);
             return sprintf('<label %s>', $attributes);
         }
@@ -124,19 +128,19 @@ class FormLabel extends AbstractHelper
             ));
         }
 
-        $labelAttributes = array();
+        $labelAttributes = [];
         if ($attributesOrElement instanceof LabelAwareInterface) {
             $labelAttributes = $attributesOrElement->getLabelAttributes();
         }
 
-        $attributes = array('for' => $id);
+        $attributes = ['for' => $id];
 
         if (!empty($labelAttributes)) {
             $attributes = array_merge($labelAttributes, $attributes);
         }
 
         $attributes = $this->createAttributesString($attributes);
-        return sprintf('<label %s>', $attributes);
+        return sprintf('<label %s class="form-label">', $attributes);
     }
 
     /**

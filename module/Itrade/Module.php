@@ -12,11 +12,14 @@ namespace Itrade;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
+use Shared\CustomListener\TemplateMapListener;
+use Shared\CustomListener\AuthListener;
+
 class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-
+        
         //Recepción de los Eventos
         $eventManager   = $e->getApplication()->getEventManager();
 
@@ -30,7 +33,9 @@ class Module
         //Llamada al Listener de Idioma
         $langListener   = new \Shared\CustomListener\LangListener();
         $langListener->attach($eventManager);
+                
     }
+    
 
     public function getConfig()
     {
@@ -39,14 +44,10 @@ class Module
 
     public function getAutoloaderConfig()
     {
+
         return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    'Website' => __DIR__ . '/src/' . 'Website',
-                    'Admin' => __DIR__ . '/src/' . 'Admin',
-                    'Client' => __DIR__ . '/src/' . 'Client',
-                    'Shared' => __DIR__ . '/src/' . 'Shared',
-                ),
+            'Zend\Loader\ClassMapAutoloader' => array(
+                __DIR__ . '/autoload_classmap.php',
             ),
         );
     }

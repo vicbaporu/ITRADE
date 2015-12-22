@@ -29,16 +29,21 @@ class LangListener implements ListenerAggregateInterface
     
     public function onDispatch(MvcEvent $e)
     {
-
+        
     	$controller_params = $e->getRouteMatch()->getParams();
-        $lang = $controller_params['lang'];
-        define('lang', $lang);
+
+        if(isset($controller_params['lang'])){
+            
+            $lang = $controller_params['lang'];
+            define('lang', $lang);
+            $translator = $e->getApplication()->getServiceManager()->get('translator');
         
-        $translator = $e->getApplication()->getServiceManager()->get('translator');
-        
-        if($lang == 'en'){
-            $translator->setLocale($lang.'_US');
+            if($lang == 'en'){
+                $translator->setLocale($lang.'_US');
+            }
         }
+        
+        
 
     }
       

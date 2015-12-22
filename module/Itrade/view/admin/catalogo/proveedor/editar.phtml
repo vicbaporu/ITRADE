@@ -1,0 +1,266 @@
+<div class="form_container">
+    <ul class="breadcrumb">
+        <li>
+            <p>Catalogo</p>
+        </li>
+        <li>
+            <a href="/catalogo/proveedores">Proveedores</a>
+        </li>
+        <li>
+            <a class="active" href="/catalogo/proveedores/editar/<?php echo $form->get('idproveedoritrade')->getValue()?>"><?php echo $form->get('proveedoritrade_nombre')->getValue();?></a>
+        </li>
+    </ul>
+    <div class="page-title">
+        <h3><span class="semi-bold"><?php echo strtoupper($form->get('proveedoritrade_nombre')->getValue())?></span></h3>
+    </div>
+    <?php 
+        $form->setAttribute('action', '/catalogo/empleados/editar/'.$form->get('idproveedoritrade')->getValue());
+        $form->setAttribute('novalidate', true);
+        $form->setAttribute('enctype', 'multipart/form-data');
+
+        echo $this->form()->openTag($form); 
+    ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Información general</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_nombre')) ?>  
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_nombre')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_nombrecontacto')) ?>  
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_nombrecontacto')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_telefono')) ?>  
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_telefono')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_email')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_email')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Dirección</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_calle')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_calle')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_numero')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_numero')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_interior')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_interior')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_colonia')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_colonia')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_ciudad')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_ciudad')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_estado')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_estado')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_pais')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_pais')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Información de pago</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_rfc')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_rfc')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedoritrade_clabe')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedoritrade_clabe')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Archivos</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <div class="row-fluid">
+                        <div class="dropzone" id="mydropzone"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-actions">
+                <div class="row">
+                    <div class="pull-right">
+                        <button btn_action="submit" class="btn btn-primary btn-cons" type="button">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php 
+        echo $this->form()->closeTag(); 
+    ?>
+    </div></div>
+<!--CUSTOM SCRIPT-->
+<script src="/js/admin/catalogo/proveedor.js"></script>
+<!--DROPZONE-->
+<script src="/plugins/admin/dropzone/dropzone.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/admin/dropzone/css/dropzone.css">
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+        
+        //FORM BIND
+        var $form = $('.form_container').proveedor();
+        $form.formBind();
+
+    });
+</script>
