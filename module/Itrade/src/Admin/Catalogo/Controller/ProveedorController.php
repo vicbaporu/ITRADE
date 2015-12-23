@@ -67,6 +67,26 @@ class ProveedorController extends AbstractActionController
         
         if($request->isPost()){
             
+            $post_data = $request->getPost();
+            
+            //INSTANCIAMOS NUESTRA ENTIDAD
+            $entity = \ProveedoritradeQuery::create()->findPk($id);
+            
+            //SETIAMOS NUESTROS DATOS CON EXCEPCIONES
+            foreach($post_data as $key => $value){
+                if(\ProveedoritradePeer::getTableMap()->hasColumn($key)){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            $entity->save();
+            
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+             //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toRoute('admin/catalogo/proveedores', array('action' => 'editar','id' => $entity->getIdproveedoritrade()));
+
         }
         
         
@@ -86,8 +106,12 @@ class ProveedorController extends AbstractActionController
             $files_array = array();
             $file = new \Proveedoritradearchivo();
             foreach ($files as $file){
-                $tmp['name'] = $file->getProveedoritradearchivoArchivo();
+                $file_path = $file->getProveedoritradearchivoArchivo();
+                $file_name = explode('files/proveedores/'.$entity->getIdproveedoritrade().'/', $file->getProveedoritradearchivoArchivo());
+                $tmp['id'] = $file->getIdproveedoritradearchivo();
+                $tmp['name'] = $file_name[1];
                 $tmp['size'] = $file->getProveedoritradearchivoSize();
+                $tmp['type']= mime_content_type($_SERVER['DOCUMENT_ROOT'].'/'.$file->getProveedoritradearchivoArchivo());
                 $files_array[] = $tmp;
             }
             
@@ -255,9 +279,61 @@ class ProveedorController extends AbstractActionController
              
              $proveedor_archivo->save();
              
-             return $this->getResponse()->setContent(json_encode(true));
+             return $this->getResponse()->setContent(json_encode(array('response' => true, 'id' => $proveedor_archivo->getIdproveedoritradearchivo())));
              
          }
          
+    }
+    
+    public function dropzonedeleteAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $entity = \ProveedoritradearchivoQuery::create()->findPk($id);
+            
+            //Eliminamos del sistema de archivos
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getProveedoritradearchivoArchivo();
+            unlink($taget_file);
+            
+            //Eliminamos de la base de datos
+            $entity->delete();
+            
+            return $this->getResponse()->setContent(json_encode(true));
+                       
+        }
+    }
+    
+    public function dropzonedownloadAction(){
+        
+         $request = $this->getRequest();
+         
+         if($request->isPost()){
+             
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $entity = \ProveedoritradearchivoQuery::create()->findPk($id);
+            
+            $file_path = $entity->getProveedoritradearchivoArchivo();
+            $file_name = explode('/files/proveedores/'.$entity->getIdproveedoritrade().'/', $entity->getProveedoritradearchivoArchivo());
+            $file_name = $file_name[1];
+
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getProveedoritradearchivoArchivo();
+            
+            $file_base64 = base64_encode(file_get_contents($taget_file));
+            $file_type = mime_content_type($taget_file);
+            
+            return $this->getResponse()->setContent(json_encode(array('base64' => $file_base64, 'type' => $file_type,'name' => $file_name)));
+            
+             
+         }
+        
     }
 }

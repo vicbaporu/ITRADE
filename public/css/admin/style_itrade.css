@@ -17,3 +17,15 @@ table tbody td.options i.fa-trash-o{
 table tbody td.options a:not(:first-child){
     margin-left: 10px;
 }
+
+.dz-download{
+    background-image: -moz-linear-gradient(center top , #fafafa 0px, #eee 100%);
+    border: 1px solid #eee;
+    border-radius: 2px;
+    color: #aaa;
+    display: block;
+    margin-top: 5px;
+    padding: 4px 5px;
+    text-align: center;
+    text-decoration: none;
+}
