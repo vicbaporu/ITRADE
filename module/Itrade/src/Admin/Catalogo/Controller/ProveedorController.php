@@ -324,7 +324,7 @@ class ProveedorController extends AbstractActionController
             $file_path = $entity->getProveedoritradearchivoArchivo();
             $file_name = explode('/files/proveedores/'.$entity->getIdproveedoritrade().'/', $entity->getProveedoritradearchivoArchivo());
             $file_name = $file_name[1];
-
+            
             $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getProveedoritradearchivoArchivo();
             
             $file_base64 = base64_encode(file_get_contents($taget_file));
