@@ -186,7 +186,7 @@ $( document ).ready(function()
     //$("#detalleAereo").css("bottom",height);
     //$("#detalleAereo").css("margin-bottom",-height);
 
-    $("#detalleAereo").css("height",height);
+    $("#detalleAereo").css("height",height/1.5);
     $("#detalleAereo").css("width", width );
 
     //Imagen seguro
@@ -199,7 +199,7 @@ $( document ).ready(function()
     //$("#detalleAereo").css("bottom",height);
     //$("#detalleAereo").css("margin-bottom",-height);
 
-    $("#detalleSeguro").css("height",height);
+    $("#detalleSeguro").css("height",height/1.5);
     $("#detalleSeguro").css("width", width );
 
     //Seccion movil
@@ -225,7 +225,8 @@ $( document ).ready(function()
     $("#detalleAereoM").css("opacity","1");
     //$("#detalleAereoM").css("bottom",heightM);
     //$("#detalleAereoM").css("margin-bottom",-heightM);
-    //$("#detalleAereoM").css("height",heightM);
+    //$("#detalleAereoM").css("height",heightM/1.5);
+
     $("#detalleAereoM").css("font-size", "16px"  );
 
     heightM = $("#imgTerrestreM").height();
@@ -258,7 +259,7 @@ $( document ).ready(function()
     $("#detalleSeguroM").css("opacity","1");
     //$("#detalleSeguroM").css("bottom",heightM);
     //$("#detalleSeguroM").css("margin-bottom",-heightM);
-    //$("#detalleSeguroM").css("height",heightM);
+    //$("#detalleSeguroM").css("height",heightM/1.2);
     $("#detalleSeguroM").css("font-size", "16px"  );
 
     heightM = $("#imgLogisticaM").height();

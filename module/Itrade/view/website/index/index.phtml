@@ -1,3 +1,4 @@
+<script src="js/index/index.js"></script>
 <?php if ($_POST): ?>
 	
 	<?php
@@ -62,22 +63,29 @@
 			<div class="item active">
 			  <img src="img/u2.jpg" alt="...">
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm">
-				<h2 id="textCar1"><?php echo  $this->translate('BRINDAMOS SOLUCIONES LOGÍSTICAS Y ADUANALES PARA TU NEGOCIO')?></h2>
+				<h2 id="textCar1"><?php echo  $this->translate('SOLUCIONES LOGISTICAS Y ADUANALES')?></h2>
 			  </div>
 			</div>
 			<div class="item">
 			  <a href="/servicios"><img src="img/u19.png" alt="..."></a>
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm top"><br><br>
-				<h2 id="textCar2"><?php echo  $this->translate('TRANSPORTAMOS CON RAPIDEZ, EFICIENCIA Y SEGURIDAD')?></h2>
+				<h2 id="textCar2"><?php echo  $this->translate('RAPIDEZ, EFICENCIA  Y SEGURIDAD')?></h2>
 				<h4><?php echo  $this->translate('Lee mas acerca de nuestros servicios')?></h4>
 			  </div>
 			</div>
 			<div class="item">
 			  <img src="img/u35.jpg" alt="...">
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm">
-				<h2 id="textCar3"><?php echo  $this->translate('COMIENZA A EXPORTAR TU PRODUCTO HOY MISMO')?></h2>
+				<h2 id="textCar3"><?php echo  $this->translate('COMIENZA A EXPORTAR HOY MISMO')?></h2>
 			  </div>
 			</div>
+			<div class="item">
+			  <img src="img/u35.jpg" alt="...">
+			  <div class="carousel-caption text-left row hidden-xs hidden-sm">
+				<h2 id="textCar4"><?php echo  $this->translate('ASESORIA EN LOGISTICA Y COMERCIO EXTERIOR')?></h2>
+			  </div>
+			</div>
+
 		</div>
 
 		<!-- Controls -->
@@ -99,19 +107,18 @@
 
 		<small class="specialAlign col-xs-12 col-sm-12 ">
 		<h3 class="bold specialAlign"><?php echo  $this->translate('Bienvenido a ITRADE México')?></h3>
-		<?php echo  $this->translate('ITRADE es una compañía joven especializada en intercambios y gestión de negocios y contactos comerciales en todos los campos del transporte y la logística
-		de mercancías.﻿')?>
+		<?php echo  $this->translate('Itrade es una empresa de capital mexicano dedicada a brindar soluciones logísticas y aduaneras, nuestro servicio es personalizado y atendido por personas responsables, honestas y con experiencia en comercio internacional. Nuestro compromiso es con usted y su negocio, nos distinguimos por nuestra eficacia y resultados alcanzados. Elaboramos una planeación estratégica aduanal y logística para reducir tiempos, riesgos y costos en las importaciones y exportaciones.')?>
  		<br><br>
-		<?php echo  $this->translate('Rapidez, eficiencia y seguridad son determinantes en el ramo transportista, ITRADE además de cubrir estos aspectos le ofrece un excelente servicio a un inmejorable precio. Nuestros servicios de logística y transporte están creados para safisfacer sus requerimientos con gran calidad. Conozca más sobre los sevicios que le ofrecemos.')?>
+		<?php echo  $this->translate('Nuestra Visión es convertirnos en un departamento externo de logística para las empresas, capaz de poder ofrecer un servicio de calidad y soluciones a la demanda de nuestros clientes.')?>
 		</small>
 	</div>
 
 	<div class="page-header col-lg-12 col-xs-12 col-sm-12 col-md-12"></div>
 
-	<div class="col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-12  col-md-6 col-md-offset-0 top">
-		<img src="img/u73.jpg" class="img-responsive col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0">
-		<img src="img/u75.png" class="img-responsive col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0">
+	<div class="col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-0 top">
+		<img src="img/shipping.jpg" class="img-responsive">
 	</div>
+
 	<div class="col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-0 ">
 		<h3 class="bold specialAlign"><?php echo  $this->translate('Especialistas en el manejo de
 carga y transporte.')?> </h3>
@@ -126,8 +133,8 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 <div id="contacto" class="  row top blue">
 	<div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
-		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Comienza a exportar tu producto hoy.')?></h1>
-		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Será un gusto servirte.')?> </h3>
+		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Contactanos')?></h1>
+		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Nosotros podemos ayudarte.')?> </h3>
 	</div>
 	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot ">
 		<form class="textWhite" action="http://itrade" method="post">
@@ -150,18 +157,17 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 				</div>
 			</div>
 			
-			<div class="form-group row">
+			<div class="form-group row ">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
 					<label for="email"><?php echo  $this->translate('Dirección de e-mail')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="email" name="email" required>
 				</div>
-				<div class=" form-group hidden-lg hidden-md"></div>
-				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign ">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign top-sm ">
 					<label for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
+				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12 top-sm">
 					<input type="text" class="form-control" id="telefono" name="telefono" required>
 				</div>
 			</div>
@@ -204,18 +210,3 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 	</div>
 		
 </div>
-
-
-
-
-<script>
-$( document ).ready(function() 
-{
-	//Animacion de carousel
-	$('#textCar1').addClass('magictime spaceInLeft');
-	$('#textCar2').addClass('magictime spaceInLeft');
-	$('#textCar3').addClass('magictime spaceInLeft');
-});
-
-	
-</script>

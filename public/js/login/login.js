@@ -1,5 +1,12 @@
 $( document ).ready(function() 
 {
+  if($("#txtPass").val() != "" && $("#txtUser").val() != "")
+  {
+    alert('hi');
+    $("#plhPass").addClass("iconButton");
+    $("#plhPass").attr("src", "/img/passH.png");
+  }
+
   $("#txtPass").keyup(function()
   {
     
@@ -35,7 +42,7 @@ $( document ).ready(function()
     
     if($("#txtPass").val() != "" && $("#txtUser").val())
     {
-      alert('Mando log in');
+      $("#btnLogin").click();
     }
   });
 

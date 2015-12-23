@@ -44,9 +44,7 @@ class EmpleadoController extends AbstractActionController
 
         }
         
-        
-        
-         $id = $this->params()->fromQuery('id');
+        $id = $this->params()->fromQuery('id');
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setVariable('id', $id);
