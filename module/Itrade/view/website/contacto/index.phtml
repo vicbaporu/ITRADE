@@ -68,8 +68,8 @@
 	<div class="page-header"></div>
 	<h3 class="bold"><?php echo  $this->translate('Contacto')?></h3>
 	
-	<div class="bold top"><?php echo  $this->translate('Tienes dudas acerca de algún trámite con nosotros?')?></div>
- 
+	<div class="bold top"><?php echo  $this->translate('Acércate a nosotros, será un gusto apoyarte!')?></div>
+ <!--
 	<div class="bold miniTop"><?php echo  $this->translate('Necesitas informes de algún servicio que ofrecemos?')?></div>
  
 	<div class="bold miniTop"><?php echo  $this->translate('Estamos aquí para ayudar y puedes contactarnos de varias maneras!')?> </div>
@@ -82,23 +82,25 @@
 		Sábados: 9:00am - 2:00pm
 		')?>
 	</div>
-
+-->
 	<div class="page-header"></div>
 
 	<div class="bold top"><?php echo  $this->translate('Contacta a nuestro equipo de soporte via email')?>:</div>
 
-	<div class="top"><?php echo  $this->translate('Para ventas: ventas@itrademexico.com.mx')?></div>
+	<div class="top">
+		<?php echo  $this->translate('General Manager<br>Luis Contreras<br>')?>
+		<a href="mailto:luis.cotreras@itrademexico.com.mx" class="textBlue">luis.cotreras@itrademexico.com.mx</a>
+	</div>
+	
  	
-	<?php echo  $this->translate('Para soporte: soporte@itrademexico.com.mx')?>
-	<div class="page-header"></div>
+	<?php echo  $this->translate('<br>Sales Manager<br>Ninfa Ortiz<br>')?>
+	<a href="mailto:ninfa.ortiz@itrademexico.com.mx" class="textBlue">ninfa.ortiz@itrademexico.com.mx</a>
+	<?php echo  $this->translate('<br><br>Operations Manager<br>Erick Martinez<br>')?>
+	<a href="mailto:erick.martinez@itrademexico.com.mx" class="textBlue">erick.martinez@itrademexico.com.mx</a>
 
-	<div class="top bold"><?php echo  $this->translate('Llámanos!')?></div>
- 	<div class="top">
-		<strong><?php echo  $this->translate('Servicio al Cliente:')?></strong> <lead>+52(33)20010565</lead>
- 	</div>
+	
 
-	<div class="miniTop"><strong><?php echo  $this->translate('Soporte Logístico:')?></strong> +52(33)20010566</div>
-
+	
 </div>
 <div class="top"></div>
 
@@ -109,11 +111,20 @@
 	<div class="italic">San Antonio de Padua #740-A. Camino Real, Zapopan, Jalisco C.P. 45040</div><br>
 </div>
 
+<div class="page-header"></div>
+
+	<div class="top bold"><?php echo  $this->translate('Llámanos!')?></div>
+ 	<div class="top">
+		<strong><?php echo  $this->translate('Servicio al Cliente:')?></strong> <lead>+52(33)20010565</lead>
+ 	</div>
+
+<div class="miniTop"><strong><?php echo  $this->translate('Soporte Logístico:')?></strong> +52(33)20010566</div>
+<br>
 
 <div id="contacto" class="  row top blue">
 	<div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
-		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Comienza a exportar tu producto hoy.')?></h1>
-		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Será un gusto servirte.')?> </h3>
+		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Contactanos')?></h1>
+		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Nosotros podemos ayudarte.')?> </h3>
 	</div>
 	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot ">
 		<form class="textWhite" action="http://itrade" method="post">
@@ -136,18 +147,17 @@
 				</div>
 			</div>
 			
-			<div class="form-group row">
+			<div class="form-group row ">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
 					<label for="email"><?php echo  $this->translate('Dirección de e-mail')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="email" name="email" required>
 				</div>
-				<div class=" form-group hidden-lg hidden-md"></div>
-				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign ">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign top-sm ">
 					<label for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
+				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12 top-sm">
 					<input type="text" class="form-control" id="telefono" name="telefono" required>
 				</div>
 			</div>

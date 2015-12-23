@@ -12,10 +12,16 @@ namespace Client\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+use Zend\Session\Container;
+
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+    	$userSession = new Container('user');
+    	$name = $userSession->username;
+    	
+    	$viewModel = new ViewModel(array("mensaje"=>$name));
+	    return $viewModel;
     }
 }

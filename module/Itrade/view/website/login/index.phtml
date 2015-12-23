@@ -1,6 +1,7 @@
 <script src="js/login/login.js"></script>
 
-<a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">
+<!--<a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">-->
+<a href="http://itrade/">
 	<img class="img-Back"src="img/back.png" alt="">
 </a>
 
@@ -10,23 +11,32 @@
 
 	<div class="col-lg-7 col-lg-offset-5 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center panel-login">
 		<div class="row">
-			<div class="col-lg-4">
+			<form action="/login" method="post">
 				
-				<img src="img/login/logo.png" alt="" class="img-responsive"><br>
-				<input id="txtUser" type="text" class="form-control username" placeholder="<?php echo  $this->translate('Nombre de usuario')?>">
-				
-				<div class="form-group has-feedback ">
-					<input name="txtPass" id="txtPass"type="text" class="form-control password" placeholder="<?php echo  $this->translate('Contraseña')?>" /> 	 	
-					<!--<span  id="plhPass"class="icon-right-arrow form-control-feedback"></span>-->
-					<img  id="plhPass" class="form-control-feedback" src="/img/pass.png" alt="">
-				</div>
-	        </div>
+				<input id="btnLogin" type="submit" class="hidden">
+				<div class="col-lg-4">
+					
+					<img src="img/login/logo.png" alt="" class="img-responsive"><br>
+					<input id="txtUser" name="txtUser" type="email" required class="form-control username" placeholder="<?php echo  $this->translate('Email')?>">
+					
+					<div class="form-group has-feedback ">
+						<input name="txtPass" id="txtPass"type="password" required class="form-control password" placeholder="<?php echo  $this->translate('Contraseña')?>" /> 	 	
+						<!--<span  id="plhPass"class="icon-right-arrow form-control-feedback"></span>-->
+						<img  id="plhPass" class="form-control-feedback" src="/img/pass.png" alt="">
+					</div>
+		        </div>
+
+			</form>
 
 		</div>
 		
 		
 		<div class="row">
 			<div class="page-header col-lg-4  ">
+
+				<?php if ($mensaje != ""): ?>
+					<div class="alert alert-danger" role="alert"><?php echo $mensaje ?></div>
+				<?php endif ?>
 				<div class="checkbox top ">
 					<label class="white">
 						<input type="checkbox"> <?php echo  $this->translate('No cerrar sesión')?>

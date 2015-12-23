@@ -33,6 +33,7 @@ lead{color: black;}
   .miniTop{ padding-top: 10px;}
   .specialAlign{text-align: center}
   .formAlign{text-align: right;}
+  .top-sm{ margin-top: .5em; }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -61,9 +62,6 @@ lead{color: black;}
   color: white;
   font-weight: bold;
   background-color: rgb(46,49,146);
-
-
-
 }
 
 @media (min-width: 1920px) {
@@ -336,6 +334,19 @@ input[type="text"] > input:active { cursor: pointer; }
   bottom: 10px;
   right: 10px;
 }
+.cotizar-xs
+{
+  color: white;
+  font-size: 25px;
+  text-align: right;
+}
+.cotizar-xs:hover
+{
+  color: rgba(255,255,255,.7);
+  font-size: 25px;
+  text-align: right;
+}
+
 
 .btn-cotizar
 {
