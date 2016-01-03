@@ -35,7 +35,7 @@ class LoginController extends AbstractActionController
 				  	$userSession = new Container('user');
         			$userSession->username = 'vic';	
         			echo $userSession->username;
-				  	//return $this->redirect()->toUrl('http://clientes.itrade/');
+				  	return $this->redirect()->toUrl('http://clientes.itrade/');
 				  }
 				}
 			}
@@ -44,7 +44,7 @@ class LoginController extends AbstractActionController
 		
 
     	$layout = $this->layout();
-	    $layout->setTemplate('client/layout/layout');
+	    $layout->setTemplate('website/layout/layout_login');
 
 	    $viewModel = new ViewModel(array("mensaje"=>$message));
 	    return $viewModel;

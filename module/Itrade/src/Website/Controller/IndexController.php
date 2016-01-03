@@ -16,6 +16,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+    	$form = new \Catalogo\Form\ClienteForm();
         return new ViewModel();
     }
 }

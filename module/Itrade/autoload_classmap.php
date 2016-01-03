@@ -6,6 +6,7 @@ return array(
     'Catalogo\Controller\ProveedorController'   => __DIR__ . '/src/Admin/Catalogo/Controller/ProveedorController.php',
     'Catalogo\Form\EmpleadoForm'                => __DIR__ . '/src/Admin/Catalogo/Form/EmpleadoForm.php',
     'Catalogo\Form\ProveedorForm'               => __DIR__ . '/src/Admin/Catalogo/Form/ProveedorForm.php',
+    'Client\Form\ClienteForm'                   => __DIR__ . '/src/Client/Form/ClienteForm.php',
     'Admin\Controller\IndexController'          => __DIR__ . '/src/Admin/Controller/IndexController.php',
     'Client\Controller\IndexController'         => __DIR__ . '/src/Client/Controller/IndexController.php',
     'Shared\CustomListener\LangListener'        => __DIR__ . '/src/Shared/CustomListener/LangListener.php',

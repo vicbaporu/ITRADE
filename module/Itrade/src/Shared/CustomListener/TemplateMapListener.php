@@ -19,7 +19,7 @@ class TemplateMapListener implements ListenerAggregateInterface
     public function detach(EventManagerInterface $events)
     {
        foreach ($this->listeners as $index => $listener) {
-    	
+        
            if ($events->detach($listener)) {
                 unset($this->listeners[$index]);
             }
@@ -30,31 +30,30 @@ class TemplateMapListener implements ListenerAggregateInterface
     public function onDispatch(MvcEvent $e)
     {
 
-    	$controller_params = $e->getRouteMatch()->getParams();
+        $controller_params = $e->getRouteMatch()->getParams();
         $controller_of_route = $controller_params['controller'];  
 
         $section = new classReflection($controller_of_route.'Controller');
     
 
         $section = $section ->getFileName();   
-
-        $section = explode('/src/',  $section);
-        $section = explode("/",$section[1]);
-
+        $section = explode(addslashes('src'),  $section);
+        $section = explode("\\",$section[1]);
+       
         $template_map=$e->getApplication()->getServiceManager()->get('viewtemplatemapresolver');
        
         
         //$section[0] = 'Website';
-        switch ($section[0])
+        switch ($section[1])
         {
             case 'Website':
             
             {
                 $template_map->merge(
                     array(
-                        'layout/layout'      => __DIR__.'/../../../view/website/layout/layout.phtml',
-                        'error/404'          => __DIR__.'/../../../view/website/error/404.phtml',
-                        'error/index'        => __DIR__.'/../../../view/website/error/index.phtml',
+                        'layout/layout'      => __DIR__.'\..\..\..\view\website\layout\layout.phtml',
+                        'error/404'          => __DIR__.'\..\..\..\view\website\theme\layout\error\404.phtml',
+                        'error/index'        => __DIR__.'\..\..\..\view\website\theme\layout\error\index.phtml',
                                                                               
                 ));
                 break;
@@ -62,9 +61,9 @@ class TemplateMapListener implements ListenerAggregateInterface
             case 'Admin':{
                 $template_map->merge(
                     array(
-                        'layout/layout'      => __DIR__.'/../../../view/admin/layout/layout.phtml',
-                        'error/404'          => __DIR__.'/../../../view/admin/error/404.phtml',
-                        'error/index'        => __DIR__.'/../../../view/admin/error/index.phtml',
+                        'layout/layout'      => __DIR__.'\..\..\..\view\admin\layout\layout.phtml',
+                        'error/404'          => __DIR__.'\..\..\..\view\admin\theme\layout\error\404.phtml',
+                        'error/index'        => __DIR__.'\..\..\..\view\admin\theme\layout\error\index.phtml',
                                                                               
                 ));
                 break;
@@ -72,15 +71,15 @@ class TemplateMapListener implements ListenerAggregateInterface
             case 'Client':{
                 $template_map->merge(
                     array(
-                        'layout/layout'      => __DIR__.'/../../../view/client/layout/layout.phtml',
-                        'error/404'          => __DIR__.'/../../../view/client/theme/layout/error/404.phtml',
-                        'error/index'        => __DIR__.'/../../../view/client/theme/layout/error/index.phtml',
+                        'layout/layout'      => __DIR__.'\..\..\..\view\client\layout\layout.phtml',
+                        'error/404'          => __DIR__.'\..\..\..\view\client\theme\layout\error\404.phtml',
+                        'error/index'        => __DIR__.'\..\..\..\view\client\theme\layout\error\index.phtml',
                                                                               
                 ));
                 break;
             }
 
-    	}    	
+        }       
          
     }
       

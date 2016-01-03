@@ -1,3 +1,615 @@
-<h1><?php echo $this->translate('Welcome to client area')?></h1>
+<div class="empleado_form_container">
+    
+    <ul class="breadcrumb">
+        <li>
+            <p>Catalogo</p>
+        </li>
+        <li>
+            <a href="/catalogo/empleados">Empleados</a>
+        </li>
+        <li>
+            <a class="active" href="/catalogo/empleados/nuevo">Registro</a>
+        </li>
+    </ul>
+    <div class="page-title">
+        <h3>REGISTRO <span class="semi-bold">EMPLEADO</span></h3>
+    </div>
+    <?php 
 
-<?php echo 'test'.$mensaje ?>
+
+        $form->setAttribute('action', '/catalogo/empleados/nuevo');
+        $form->setAttribute('novalidate', true);
+        $form->setAttribute('enctype', 'multipart/form-data');
+
+        echo $this->form()->openTag($form); 
+    ?>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Datos generales</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_razon_social')) ?> 
+                                    <span class="help req">*</span> 
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_razon_social')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_rfc')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_rfc')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_calle')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_calle')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_numero_exterior')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_numero_exterior')) ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_numero_interior')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_numero_interior')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_colonia')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_colonia')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_ciudad')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_ciudad')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_cp')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_cp')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_estado')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formSelect($form->get('cliente_estado')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_pais')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formSelect($form->get('cliente_pais')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_email')) ?>  
+                                        <span class="help req">*</span>
+                                        <div class="input-with-icon  right">
+                                            <i class=""></i>
+                                            <?php echo $this->formText($form->get('cliente_email')) ?>  
+                                        </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_telefono')) ?>  
+                                        <span class="help req">*</span>
+                                        <div class="input-with-icon  right">
+                                            <i class=""></i>
+                                            <?php echo $this->formText($form->get('cliente_telefono')) ?>  
+                                        </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_nombre')) ?>  
+                                        <span class="help req">*</span>
+                                        <div class="input-with-icon  right">
+                                            <i class=""></i>
+                                            <?php echo $this->formText($form->get('cliente_nombre')) ?>  
+                                        </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    
+                                    <?php echo $this->formLabel($form->get('cliente_cumpleaños')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <div class="input-append success date width-93">
+                                            <i class=""></i>
+                                            <?php echo $this->formText($form->get('cliente_cumpleaños')) ?>  
+                                            <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span> 
+                                        </div>
+                                    </div>
+                                      
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Fiscales</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                <div class="row">
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_razon_social')) ?> 
+                                    <span class="help req">*</span> 
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_razon_social')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_rfc')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_rfc')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_calle')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_calle')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_numero_exterior')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_numero_exterior')) ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_numero_interior')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_numero_interior')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_colonia')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_colonia')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_ciudad')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_ciudad')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_cp')) ?>
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('cliente_f_cp')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_estado')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formSelect($form->get('cliente_f_estado')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_f_pais')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formSelect($form->get('cliente_f_pais')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Legal</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_padron')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_padron')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_encargo')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_encargo')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_R1')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_R2')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_R2')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_R2')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_identificacion')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_identificacion')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_rfc_empresa')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_rfc_empresa')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_rfc_representante')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_rfc_representante')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_acta')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_acta')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_poder')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_poder')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_carta')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_carta')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_comprobante_domicilio')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_comprobante_domicilio')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_clabe')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_clabe')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_carpeta')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_carpeta')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('cliente_foto_domicilio')) ?>  
+
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formFile($form->get('cliente_foto_domicilio')) ?>  
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+   
+        </div>
+    </div>
+    <?php 
+        echo $this->form()->closeTag(); 
+    ?>
+</div>
+<!--IMPORTAMOS SCRIPTS DE CROPPER-->
+<link rel="stylesheet" href="/plugins/admin/cropper/cropper.css">
+<script src="/plugins/admin/cropper/cropper.js"></script>
+<!--CUSTOM SCRIPT-->
+<script src="/js/admin/catalogo/empleados.js"></script>
+
+<script type="text/javascript">
+    
+
+</script>
