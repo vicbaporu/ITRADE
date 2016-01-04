@@ -33,6 +33,9 @@ class Module
         //Llamada al Listener de Idioma
         $langListener   = new \Shared\CustomListener\LangListener();
         $langListener->attach($eventManager);
+        
+        $authListener = new AuthListener();
+        $authListener->attach($eventManager);
                 
     }
     

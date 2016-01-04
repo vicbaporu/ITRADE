@@ -29,3 +29,12 @@ table tbody td.options a:not(:first-child){
     text-align: center;
     text-decoration: none;
 }
+
+#admin_login{
+    background-image: url(/img/admin/login/6793522-free-office-wallpaper.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+}

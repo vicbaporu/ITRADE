@@ -55,6 +55,19 @@ return array(
                         ),
                     ),
                     /*
+                     * LOGIN
+                     */
+                    'login' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/login[/:action]',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Login\Controller\Login',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    /*
                      * CATALOGOS
                      */
                     'catalogo' => array(
@@ -62,7 +75,7 @@ return array(
                         'options' => array(
                             'route'    => '/catalogo',
                             'defaults' => array(
-                                'controller'    => 'Catalogo\Controller\EmpleadoController',
+                                'controller'    => 'Admin\Catalogo\Controller\EmpleadoController',
                                 'action'        => 'index',
                             ),
                         ),
@@ -73,7 +86,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/empleados[/:action][/:id][/]',
                                     'defaults' => array(
-                                        'controller'    => 'Catalogo\Controller\Empleado',
+                                        'controller'    => 'Admin\Catalogo\Controller\Empleado',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -83,7 +96,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/proveedores[/:action][/:id][/]',
                                     'defaults' => array(
-                                        'controller'    => 'Catalogo\Controller\Proveedor',
+                                        'controller'    => 'Admin\Catalogo\Controller\Proveedor',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -203,10 +216,14 @@ return array(
             /*
              * START ADMIN
              */
-            'Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
-            'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
             
-             //CATALOGO
+            //CATALOGO
+            'Admin\Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
+            'Admin\'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
+            //LOGIN
+            'Admin\Login\Controller\Login' => 'Login\Controller\LoginController',
+            
+             
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             
             /*
