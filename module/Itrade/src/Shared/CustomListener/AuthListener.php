@@ -50,7 +50,7 @@ class AuthListener implements ListenerAggregateInterface {
         
         $module = explode('\\', $controller); $module = $module[0];
         $action = $matches->getParam('action');
-         echo '<pre>';var_dump($module);echo '</pre>';exit();
+         
         define("redirect", $matches->getMatchedRouteName());
         
         switch ($module){
@@ -66,8 +66,8 @@ class AuthListener implements ListenerAggregateInterface {
                 if (in_array( $controller , $excludeControllers, true ) || $AouthSession->isActive() ) {  
                     return;
                 }else{
-                   
-                    $matches->setParam('controller', 'Login\Controller\Login');
+                    
+                    $matches->setParam('controller', 'Admin\Login\Controller\Login');
                     $matches->setParam('action', 'index');
                 }
                 
