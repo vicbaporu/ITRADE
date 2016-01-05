@@ -50,7 +50,7 @@ class AuthListener implements ListenerAggregateInterface {
         
         $module = explode('\\', $controller); $module = $module[0];
         $action = $matches->getParam('action');
-         echo '<pre>';var_dump($module);echo '</pre>';exit();
+
         define("redirect", $matches->getMatchedRouteName());
         
         switch ($module){
