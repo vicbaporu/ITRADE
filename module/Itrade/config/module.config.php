@@ -86,7 +86,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/empleados[/:action][/:id][/]',
                                     'defaults' => array(
-                                        'controller'    => 'Admin\Catalogo\Controller\Empleado',
+                                        'controller'    => 'Admin\Catalogo\Empleado',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -218,10 +218,10 @@ return array(
              */
             
             //CATALOGO
-            'Admin\Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
-            'Admin\'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
+            'Admin\Catalogo\Empleado' => 'Admin\Catalogo\EmpleadoController',
+            'Admin\'Catalogo\Controller\Proveedor' => 'Admin\Catalogo\Controller\ProveedorController',
             //LOGIN
-            'Admin\Login\Controller\Login' => 'Login\Controller\LoginController',
+            //'Admin\Login\Controller\Login' => 'Login\Controller\LoginController',
             
              
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
