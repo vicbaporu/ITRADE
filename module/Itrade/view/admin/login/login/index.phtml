@@ -1,5 +1,60 @@
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <img src="/img/admin/login/logo-blanco.png" class="img-responsive" alt="Responsive image">
-    </div>
+<script src="/js/login/login.js"></script>
+<style>
+    .admin_login_container input{
+        //font-size: 10px;
+    }
+</style>
+<!--<a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">-->
+
+
+<div class="row top admin_login_container">
+	<div class="col-lg-7 col-lg-offset-5 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 text-center panel-login">
+		<div class="row">
+			<form action="/login/in" method="post">
+				
+				<input id="btnLogin" type="submit" class="hidden">
+				<div class="col-lg-4">
+					
+					<img src="/img/login/logo.png" alt="" class="img-responsive"><br>
+					<input name="empleado_email" id="txtUser" name="txtUser" type="email" required class="form-control username" placeholder="<?php echo  $this->translate('Email')?>">
+					
+					<div class="form-group has-feedback ">
+						<input name="empleado_password" name="txtPass" id="txtPass"type="password" required class="form-control password" placeholder="<?php echo  $this->translate('Contraseña')?>" /> 	 	
+						<!--<span  id="plhPass"class="icon-right-arrow form-control-feedback"></span>-->
+						<img id="plhPass" class="form-control-feedback" alt="" src="/img/pass.png" style="top: 0px;">
+					</div>
+		        </div>
+
+			</form>
+
+		</div>
+		
+		
+		<div class="row">
+			<div class="page-header col-lg-4  ">
+
+				<?php if ($mensaje != ""): ?>
+					<div class="alert alert-danger" role="alert"><?php echo $mensaje ?></div>
+				<?php endif ?>
+				<div class="checkbox top ">
+					<label class="white">
+						<input type="checkbox"> <?php echo  $this->translate('No cerrar sesión')?>
+					</label>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="row">
+			
+			<a class="col-lg-4 col-lg-offset- "href="">
+				<div class="white"><?php echo  $this->translate('Olvidaste tu nombre de usuario o contraseña?')?>
+				</div>
+			</a>
+			
+		</div>
+
+	</div>
+
 </div>
+

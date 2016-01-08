@@ -74,10 +74,6 @@ return array(
                         'type'    => 'literal',
                         'options' => array(
                             'route'    => '/catalogo',
-                            'defaults' => array(
-                                'controller'    => 'Catalogo\Controller\EmpleadoController',
-                                'action'        => 'index',
-                            ),
                         ),
                         'may_terminate' => false,
                         'child_routes' => array(
@@ -86,7 +82,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/empleados[/:action][/:id][/]',
                                     'defaults' => array(
-                                        'controller'    => 'Catalogo\Controller\Empleado',
+                                        'controller'    => 'Admin\Catalogo\Controller\Empleado',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -96,7 +92,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/proveedores[/:action][/:id][/]',
                                     'defaults' => array(
-                                        'controller'    => 'Catalogo\Controller\Proveedor',
+                                        'controller'    => 'Admin\Catalogo\Controller\Proveedor',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -207,28 +203,23 @@ return array(
              * Website
              */
             'Website\Controller\Index' => 'Website\Controller\IndexController',
-            
             'Website\Controller\Servicios' => 'Website\Controller\ServiciosController',
-
             'Website\Controller\Contacto' => 'Website\Controller\ContactoController',
-
             'Website\Controller\Login' => 'Website\Controller\LoginController',
             /*
-             * START ADMIN
+             * ADMIN
              */
             
-            //CATALOGO
-            'Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
-            'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
-            //LOGIN
-            'Login\Controller\Login' => 'Login\Controller\LoginController',
-            
+             //CATALOGO
+
+            'Admin\Catalogo\Controller\Empleado' => 'Admin\Catalogo\Controller\EmpleadoController',
+            'Admin\Catalogo\Controller\Proveedor' => 'Admin\Catalogo\Controller\ProveedorController',
              
-            'Controller\Index' => 'Admin\Controller\IndexController',
-            
-            /*
-             * END ADMIN
-             */
+             //LOGIN
+            'Login\Controller\Login' => 'Login\Controller\LoginController',
+
+                         
+            'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             
             
             /*

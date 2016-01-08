@@ -18,7 +18,7 @@ class AuthListener implements ListenerAggregateInterface {
     /*
      * Enlace con el listener de la aplicacion con la accion principal de onDispatch y maxima prioridad 1000
      */
-    public function attach(EventManagerInterface $events, $priority = 1000){
+    public function attach(EventManagerInterface $events, $priority = 900){
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'), $priority);
     }
     
@@ -49,25 +49,26 @@ class AuthListener implements ListenerAggregateInterface {
         $controller = $matches->getParam('controller');
         
         $module = explode('\\', $controller); $module = $module[0];
+        
         $action = $matches->getParam('action');
 
         define("redirect", $matches->getMatchedRouteName());
-        
+
         switch ($module){
             case 'Admin':{
               
                 /* Rutas excluidas de verificación */
                 $excludeControllers = array(
-                    'Admin\Login\Controller\Login',
+                    'Login\Controller\Login',
                 );
-                
-                
+             
+               
                 /* Verificamos si es una ruta excluida ó si hay una sesión activa */
                 if (in_array( $controller , $excludeControllers, true ) || $AouthSession->isActive() ) {  
                     return;
                 }else{
                     
-                    $matches->setParam('controller', 'Admin\Login\Controller\Login');
+                    $matches->setParam('controller', 'Login\Controller\Login');
                     $matches->setParam('action', 'index');
                 }
                 

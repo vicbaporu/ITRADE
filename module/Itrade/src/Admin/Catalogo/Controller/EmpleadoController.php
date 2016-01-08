@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Catalogo\Controller;
+namespace Admin\Catalogo\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -16,11 +16,11 @@ class EmpleadoController extends AbstractActionController
 {
     public function indexAction()
     {
-        
-        return new ViewModel(array(
-            'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
-        ));
-        
+        $view_model = new ViewModel();
+        $view_model->setTemplate('admin/catalogo/empleado/index');
+        $view_model->setVariable('successMessages', json_encode($this->flashMessenger()->getSuccessMessages()));
+        return $view_model;
+
     }
     
     public function changepasswordAction(){
@@ -49,9 +49,7 @@ class EmpleadoController extends AbstractActionController
         $viewModel->setTerminal(true);
         $viewModel->setVariable('id', $id);
         return $viewModel;
-        
-      
-        
+
     }
 
 
@@ -167,9 +165,10 @@ class EmpleadoController extends AbstractActionController
         $form = new \Catalogo\Form\EmpleadoForm($mexico_states);
         
         //RETORNAMOS A NUESTRA VISTA
-        return new ViewModel(array(
-            'form' => $form
-        ));
+        $view_model = new ViewModel();
+        $view_model->setTemplate('admin/catalogo/empleado/nuevo');
+        $view_model->setVariable('form', $form);
+        return $view_model;
     }
     
     public function editarAction(){
@@ -302,12 +301,16 @@ class EmpleadoController extends AbstractActionController
             
             //REMOVEMOS EL CAMPO DE LA FECHA
             $form->get('empleado_iniciocontrato')->setValue('');
+            
             //RETORNAMOS A NUESTRA VISTA
-            return new ViewModel(array(
+            $view_model = new ViewModel();
+            $view_model->setTemplate('admin/catalogo/empleado/editar');
+            $view_model->setVariables(array(
                 'entity' => json_encode($entity->toArray(\BasePeer::TYPE_FIELDNAME)),
                 'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
                 'form' => $form
             ));
+            return $view_model;
         
            
             
@@ -385,12 +388,14 @@ class EmpleadoController extends AbstractActionController
             
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
+        $viewModel->setTemplate('admin/catalogo/empleado/eliminar');
         
         if(!$valid){
-            $viewModel->setTemplate('catalogo/empleado/eliminar_error');
+            $viewModel->setTemplate('admin/catalogo/empleado/eliminar_error');
         }
 
         return $viewModel;
+        
     }
     
     public function serversideAction(){

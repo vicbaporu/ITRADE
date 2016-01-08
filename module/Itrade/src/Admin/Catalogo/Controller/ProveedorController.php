@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Catalogo\Controller;
+namespace Admin\Catalogo\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -17,9 +17,10 @@ class ProveedorController extends AbstractActionController
     public function indexAction()
     {
         
-        return new ViewModel(array(
-            'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
-        ));
+        $view_model = new ViewModel();
+        $view_model->setTemplate('admin/catalogo/proveedor/index');
+        $view_model->setVariable('successMessages', json_encode($this->flashMessenger()->getSuccessMessages()));
+        return $view_model;
         
     }
 
@@ -52,9 +53,10 @@ class ProveedorController extends AbstractActionController
         $form = new \Catalogo\Form\ProveedorForm();
         
         //RETORNAMOS A NUESTRA VISTA
-        return new ViewModel(array(
-            'form' => $form
-        ));
+        $view_model = new ViewModel();
+        $view_model->setTemplate('admin/catalogo/proveedor/nuevo');
+        $view_model->setVariable('form', $form);
+        return $view_model;
         
     }
     
@@ -115,19 +117,22 @@ class ProveedorController extends AbstractActionController
                 $files_array[] = $tmp;
             }
             
-       
+
             //RETORNAMOS A NUESTRA VISTA
-            return new ViewModel(array(
+            $view_model = new ViewModel();
+            $view_model->setTemplate('admin/catalogo/proveedor/editar');
+            $view_model->setVariables(array(
                 'entity' => json_encode($entity->toArray(\BasePeer::TYPE_FIELDNAME)),
                 'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
                 'files' => json_encode($files_array),
                 'form' => $form
             ));
+            return $view_model;
         
            
             
         }else{
-            return $this->redirect()->toRoute('admin/catalogo/empleados', array('action' => 'index'));
+            return $this->redirect()->toRoute('admin/catalogo/proveedor', array('action' => 'index'));
         }
         
     }
@@ -158,9 +163,12 @@ class ProveedorController extends AbstractActionController
         }
         
         $id = $this->params()->fromQuery('id');
-         
-        $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
+
+        //RETORNAMOS A NUESTRA VISTA
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true);
+        $view_model->setTemplate('admin/catalogo/proveedor/eliminar');
+        return $view_model;
 
 
         return $viewModel;

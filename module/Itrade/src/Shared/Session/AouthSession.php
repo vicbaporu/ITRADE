@@ -24,13 +24,13 @@ class AouthSession extends AbstractActionController {
             $session["empleado_foto"] =  (array_key_exists("empleado_foto", $session ) && !is_null($session["empleado_foto"])) ? $session["empleado_foto"] : '/img/admin/profiles/avatar_default.jpg';
 
             $session_data = new Container('session_data');
-            $session_data->idempleado           = $session["idempleadoacceso"];
-            $session_data->empleado_nombre            = $session["idclinica"];
-            $session_data->empleado_apellidopaterno           = $session["idempleado"];
-            $session_data->empleado_apallidomaterno                = $session["idrol"];
-            $session_data->empleado_email                = $session["rol"];
-            $session_data->empleado_estatus      = $session["empleadoacceso_username"];
-            $session_data->empleado_rol      = $session["empleado_nombre"];
+            $session_data->idempleado           = $session["idempleado"];
+            $session_data->empleado_nombre            = $session["empleado_nombre"];
+            $session_data->empleado_apellidopaterno           = $session["empleado_apellidopaterno"];
+            $session_data->empleado_apallidomaterno                = $session["empleado_apallidomaterno"];
+            $session_data->empleado_email                = $session["empleado_email"];
+            $session_data->empleado_estatus      = $session["empleado_estatus"];
+            $session_data->empleado_rol      = $session["empleado_rol"];
             $session_data->empleado_foto        = $session["empleado_foto"];
           
 
