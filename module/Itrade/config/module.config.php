@@ -97,6 +97,36 @@ return array(
                                     ),
                                 ),
                             ),
+                            'gastos' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/gastos[/:action][/:id][/]',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Catalogo\Controller\Gastos',
+                                        'action'        => 'index',
+                                    ),
+                                    'constraints' => array(
+                                        'action' => 'index|nuevo|editar|serverside|eliminar',
+                                        'id' => '[0-9]*',
+                                    ),
+                                    
+                                ),
+                            ),
+                            'catergoria-gastos' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/categorias-gastos[/:action][/:id][/]',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Catalogo\Controller\Categoriagastos',
+                                        'action'        => 'index',
+                                    ),
+                                    'constraints' => array(
+                                        'action' => 'index|nuevo|editar|serverside|eliminar',
+                                        'id' => '[0-9]*',
+                                    ),
+                                    
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -214,6 +244,8 @@ return array(
 
             'Admin\Catalogo\Controller\Empleado' => 'Admin\Catalogo\Controller\EmpleadoController',
             'Admin\Catalogo\Controller\Proveedor' => 'Admin\Catalogo\Controller\ProveedorController',
+            'Admin\Catalogo\Controller\Gastos' => 'Admin\Catalogo\Controller\GastosController',
+            'Admin\Catalogo\Controller\Categoriagastos' => 'Admin\Catalogo\Controller\CategoriagastosController',
              
              //LOGIN
             'Login\Controller\Login' => 'Login\Controller\LoginController',
