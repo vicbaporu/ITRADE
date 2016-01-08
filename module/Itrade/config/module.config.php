@@ -62,7 +62,7 @@ return array(
                         'options' => array(
                             'route'    => '/login[/:action]',
                             'defaults' => array(
-                                'controller'    => 'Admin\Login\Controller\Login',
+                                'controller'    => 'Login\Controller\Login',
                                 'action'        => 'index',
                             ),
                         ),
@@ -75,7 +75,7 @@ return array(
                         'options' => array(
                             'route'    => '/catalogo',
                             'defaults' => array(
-                                'controller'    => 'Admin\Catalogo\Controller\EmpleadoController',
+                                'controller'    => 'Catalogo\Controller\EmpleadoController',
                                 'action'        => 'index',
                             ),
                         ),
@@ -86,7 +86,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/empleados[/:action][/:id][/]',
                                     'defaults' => array(
-                                        'controller'    => 'Admin\Catalogo\Controller\Empleado',
+                                        'controller'    => 'Catalogo\Controller\Empleado',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -96,7 +96,7 @@ return array(
                                 'options' => array(
                                     'route'    => '/proveedores[/:action][/:id][/]',
                                     'defaults' => array(
-                                        'controller'    => 'Admin\Catalogo\Controller\Proveedor',
+                                        'controller'    => 'Catalogo\Controller\Proveedor',
                                         'action'        => 'index',
                                     ),
                                 ),
@@ -218,13 +218,13 @@ return array(
              */
             
             //CATALOGO
-            'Admin\Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
-            'Admin\'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
+            'Catalogo\Controller\Empleado' => 'Catalogo\Controller\EmpleadoController',
+            'Catalogo\Controller\Proveedor' => 'Catalogo\Controller\ProveedorController',
             //LOGIN
-            'Admin\Login\Controller\Login' => 'Login\Controller\LoginController',
+            'Login\Controller\Login' => 'Login\Controller\LoginController',
             
              
-            'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            'Controller\Index' => 'Admin\Controller\IndexController',
             
             /*
              * END ADMIN

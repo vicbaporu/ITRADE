@@ -66,8 +66,8 @@ class AuthListener implements ListenerAggregateInterface {
                 if (in_array( $controller , $excludeControllers, true ) || $AouthSession->isActive() ) {  
                     return;
                 }else{
-                   
-                    $matches->setParam('controller', 'Login\Controller\Login');
+                    
+                    $matches->setParam('controller', 'Admin\Login\Controller\Login');
                     $matches->setParam('action', 'index');
                 }
                 

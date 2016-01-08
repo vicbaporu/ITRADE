@@ -34,36 +34,38 @@ class TemplateMapListener implements ListenerAggregateInterface
         $controller_of_route = $controller_params['controller'];  
 
         $section = new classReflection($controller_of_route.'Controller');
-    
+        
 
         $section = $section ->getFileName();   
-        $section = explode(addslashes('src'),  $section);
-        $section = explode("\\",$section[1]);
+        $section = explode('/src/',  $section);
+        $section = explode("/",$section[1]);
+
+                
        
         $template_map=$e->getApplication()->getServiceManager()->get('viewtemplatemapresolver');
        
-        
+       
         //$section[0] = 'Website';
-        switch ($section[1])
+        switch ($section[0])
         {
             case 'Website':
             
             {
                 $template_map->merge(
                     array(
-                        'layout/layout'      => __DIR__.'\..\..\..\view\website\layout\layout.phtml',
-                        'error/404'          => __DIR__.'\..\..\..\view\website\theme\layout\error\404.phtml',
-                        'error/index'        => __DIR__.'\..\..\..\view\website\theme\layout\error\index.phtml',
-                                                                              
-                ));
+                        'layout/layout'      => __DIR__.'/../../../view/website/layout/layout.phtml',
+                        'error/404'          => __DIR__.'/../../../view/website/theme/layout/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/website/theme/layout/error/index.phtml',                                                        
+                    ));
                 break;
             }
             case 'Admin':{
+               
                 $template_map->merge(
                     array(
-                        'layout/layout'      => __DIR__.'\..\..\..\view\admin\layout\layout.phtml',
-                        'error/404'          => __DIR__.'\..\..\..\view\admin\theme\layout\error\404.phtml',
-                        'error/index'        => __DIR__.'\..\..\..\view\admin\theme\layout\error\index.phtml',
+                        'layout/layout'      => __DIR__.'/../../../view/admin/layout/layout.phtml',
+                        'error/404'          => __DIR__.'/../../../view/admin/theme/layout/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/admin/theme/layout/error/index.phtml',
                                                                               
                 ));
                 break;
@@ -71,9 +73,9 @@ class TemplateMapListener implements ListenerAggregateInterface
             case 'Client':{
                 $template_map->merge(
                     array(
-                        'layout/layout'      => __DIR__.'\..\..\..\view\client\layout\layout.phtml',
-                        'error/404'          => __DIR__.'\..\..\..\view\client\theme\layout\error\404.phtml',
-                        'error/index'        => __DIR__.'\..\..\..\view\client\theme\layout\error\index.phtml',
+                        'layout/layout'      => __DIR__.'/../../../view/client/layout/layout.phtml',
+                        'error/404'          => __DIR__.'/../../../view/client/theme/layout/error/404.phtml',
+                        'error/index'        => __DIR__.'/../../../view/client/theme/layout/error/index.phtml',
                                                                               
                 ));
                 break;
