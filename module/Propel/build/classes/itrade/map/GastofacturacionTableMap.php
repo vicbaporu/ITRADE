@@ -40,7 +40,7 @@ class GastofacturacionTableMap extends TableMap
         // columns
         $this->addPrimaryKey('idgastofacturacion', 'Idgastofacturacion', 'INTEGER', true, null, null);
         $this->addForeignKey('idcategoriagasto', 'Idcategoriagasto', 'INTEGER', 'categoriagasto', 'idcategoriagasto', true, null, null);
-        $this->addColumn('gastofacturacion_nombre', 'GastofacturacionNombre', 'VARCHAR', false, 255, null);
+        $this->addColumn('gastofacturacion_nombre', 'GastofacturacionNombre', 'VARCHAR', true, 255, null);
         $this->addColumn('gastofacturacion_descripcion', 'GastofacturacionDescripcion', 'LONGVARCHAR', false, null, null);
         $this->addColumn('gastofacturacion_iva', 'GastofacturacionIva', 'CHAR', false, null, null);
         $this->getColumn('gastofacturacion_iva', false)->setValueSet(array (

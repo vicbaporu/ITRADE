@@ -286,6 +286,7 @@ class EmpleadoForm extends Form
                 'required' => true,
                 'class' => 'form-control validate-ajax',
                 'dirname' => '/catalogo/empleados'
+                
             ),
         ));
          

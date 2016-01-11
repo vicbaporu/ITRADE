@@ -11,23 +11,27 @@
   </table>
   <table name="cliente" phpName="Cliente" idMethod="native">
     <column name="idcliente" phpName="Idcliente" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="cliente_email" phpName="ClienteEmail" type="VARCHAR" size="45" required="false"/>
+    <column name="cliente_password" phpName="ClientePassword" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_razonsocial" phpName="ClienteRazonsocial" type="VARCHAR" size="255" required="false"/>
     <column name="cliente_rfc" phpName="ClienteRfc" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_calle" phpName="ClienteCalle" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_numero" phpName="ClienteNumero" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_interior" phpName="ClienteInterior" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_colonia" phpName="ClienteColonia" type="VARCHAR" size="45" required="false"/>
+    <column name="cliente_codigopostal" phpName="ClienteCodigopostal" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_ciudad" phpName="ClienteCiudad" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_estado" phpName="ClienteEstado" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_pais" phpName="ClientePais" type="VARCHAR" size="45" required="false"/>
-    <column name="cliente_email" phpName="ClienteEmail" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_telefono" phpName="ClienteTelefono" type="VARCHAR" size="45" required="false"/>
+    <column name="cliente_celular" phpName="ClienteCelular" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_nombrecontacto" phpName="ClienteNombrecontacto" type="VARCHAR" size="255" required="false"/>
-    <column name="cliente_cumpleanios" phpName="ClienteCumpleanios" type="VARCHAR" size="45" required="false"/>
+    <column name="cliente_cumpleanios" phpName="ClienteCumpleanios" type="DATE" required="false"/>
     <column name="cliente_callefiscal" phpName="ClienteCallefiscal" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_numerofiscal" phpName="ClienteNumerofiscal" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_interiorfiscal" phpName="ClienteInteriorfiscal" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_coloniafiscal" phpName="ClienteColoniafiscal" type="VARCHAR" size="45" required="false"/>
+    <column name="cliente_codigopostalfiscal" phpName="ClienteCodigopostalfiscal" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_ciudadfiscal" phpName="ClienteCiudadfiscal" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_estadofiscal" phpName="ClienteEstadofiscal" type="VARCHAR" size="45" required="false"/>
     <column name="cliente_paisfiscal" phpName="ClientePaisfiscal" type="VARCHAR" size="45" required="false"/>
@@ -46,6 +50,7 @@
     <column name="cliente_archivoszip" phpName="ClienteArchivoszip" type="VARCHAR" size="45" required="false"/>
     <column name="idempleadocomercial" phpName="Idempleadocomercial" type="INTEGER" required="false"/>
     <column name="idempleadooperaciones" phpName="Idempleadooperaciones" type="INTEGER" required="false"/>
+    <column name="cliente_ultimologin" phpName="ClienteUltimologin" type="TIMESTAMP" required="false"/>
     <foreign-key foreignTable="empleado" name="idempleadocomercial_cliente" onDelete="SET NULL" onUpdate="SET NULL">
       <reference local="idempleadocomercial" foreign="idempleado"/>
     </foreign-key>
@@ -189,21 +194,21 @@
   </table>
   <table name="expedientehistorial" phpName="Expedientehistorial" idMethod="native">
     <column name="idexpedientehistorial" phpName="Idexpedientehistorial" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
-    <column name="idexpediente" phpName="Idexpediente" type="INTEGER" required="false"/>
+    <column name="idexpedienteservicio" phpName="Idexpedienteservicio" type="INTEGER" required="false"/>
     <column name="idestadoservicio" phpName="Idestadoservicio" type="INTEGER" required="false"/>
     <column name="expedientehistorial_fecha" phpName="ExpedientehistorialFecha" type="TIMESTAMP" required="false"/>
     <column name="expedientehistorial_nota" phpName="ExpedientehistorialNota" type="VARCHAR" size="45" required="false"/>
-    <foreign-key foreignTable="expediente" name="idexpediente_expedientehistorial" onDelete="CASCADE" onUpdate="CASCADE">
-      <reference local="idexpediente" foreign="idexpediente"/>
+    <foreign-key foreignTable="expedienteservicio" name="idexpedienteservicio_expedientehistorial" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="idexpedienteservicio" foreign="idexpedienteservicio"/>
     </foreign-key>
     <foreign-key foreignTable="servicioestado" name="idservicioestado_expedientehistorial" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idestadoservicio" foreign="idservicioestado"/>
     </foreign-key>
-    <index name="idexpediente_expedientehistorial_idx">
-      <index-column name="idexpediente"/>
-    </index>
     <index name="idservicioestado_expedientehistorial_idx">
       <index-column name="idestadoservicio"/>
+    </index>
+    <index name="idexpedienteservicio_expedientehistorial_idx">
+      <index-column name="idexpedienteservicio"/>
     </index>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
@@ -234,7 +239,7 @@
   <table name="gastofacturacion" phpName="Gastofacturacion" idMethod="native">
     <column name="idgastofacturacion" phpName="Idgastofacturacion" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="idcategoriagasto" phpName="Idcategoriagasto" type="INTEGER" required="true"/>
-    <column name="gastofacturacion_nombre" phpName="GastofacturacionNombre" type="VARCHAR" size="255" required="false"/>
+    <column name="gastofacturacion_nombre" phpName="GastofacturacionNombre" type="VARCHAR" size="255" required="true"/>
     <column name="gastofacturacion_descripcion" phpName="GastofacturacionDescripcion" type="LONGVARCHAR" required="false"/>
     <column name="gastofacturacion_iva" phpName="GastofacturacionIva" type="CHAR" sqlType="enum('0','16','4')" required="false"/>
     <foreign-key foreignTable="categoriagasto" name="idcategoriagasto_gastofacturacion" onDelete="CASCADE" onUpdate="CASCADE">
@@ -249,6 +254,7 @@
   </table>
   <table name="proveedorcliente" phpName="Proveedorcliente" idMethod="native">
     <column name="idproveedorcliente" phpName="Idproveedorcliente" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="idcliente" phpName="Idcliente" type="INTEGER" required="true"/>
     <column name="proveedorcliente_taxid" phpName="ProveedorclienteTaxid" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_calle" phpName="ProveedorclienteCalle" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_numero" phpName="ProveedorclienteNumero" type="VARCHAR" size="45" required="false"/>
@@ -260,6 +266,12 @@
     <column name="proveedorcliente_nombrecontacto" phpName="ProveedorclienteNombrecontacto" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_emailcontacto" phpName="ProveedorclienteEmailcontacto" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_telefonocontacto" phpName="ProveedorclienteTelefonocontacto" type="VARCHAR" size="45" required="false"/>
+    <foreign-key foreignTable="cliente" name="proveedorcliente_idcliente" onDelete="RESTRICT" onUpdate="RESTRICT">
+      <reference local="idcliente" foreign="idcliente"/>
+    </foreign-key>
+    <index name="proveedorcliente_idcliente">
+      <index-column name="idcliente"/>
+    </index>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
     </vendor>

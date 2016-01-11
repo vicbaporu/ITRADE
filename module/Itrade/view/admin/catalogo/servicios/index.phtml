@@ -1,0 +1,46 @@
+<div class="list_container">
+    <ul class="breadcrumb">
+        <li>
+            <p>Catalogo</p>
+        </li>
+        <li>
+            <a href="/catalogo/servicios">Servicios</a>
+        </li>
+    </ul>
+    <div class="page-title">
+        <h3><span class="semi-bold">SERVICIOS</span></h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <br>
+                </div>
+                <div class="grid-body no-border">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Medio</th>
+                                <th>Opciones</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--CUSTOM SCRIPT-->
+<script src="/js/admin/catalogo/servicios.js"></script>
+<script>
+    $(document).ready(function() {
+        var servicios = $('.list_container').servicios({successMessages:<?php echo $successMessages?>});
+        servicios.list();
+    }); 
+</script>
+

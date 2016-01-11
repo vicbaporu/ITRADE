@@ -394,9 +394,6 @@ abstract class BaseExpedientePeer
         // Invalidate objects in ExpedientegastoPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ExpedientegastoPeer::clearInstancePool();
-        // Invalidate objects in ExpedientehistorialPeer instance pool,
-        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
-        ExpedientehistorialPeer::clearInstancePool();
         // Invalidate objects in ExpedienteservicioPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ExpedienteservicioPeer::clearInstancePool();
@@ -989,12 +986,6 @@ abstract class BaseExpedientePeer
 
             $criteria->add(ExpedientegastoPeer::IDEXPEDIENTE, $obj->getIdexpediente());
             $affectedRows += ExpedientegastoPeer::doDelete($criteria, $con);
-
-            // delete related Expedientehistorial objects
-            $criteria = new Criteria(ExpedientehistorialPeer::DATABASE_NAME);
-
-            $criteria->add(ExpedientehistorialPeer::IDEXPEDIENTE, $obj->getIdexpediente());
-            $affectedRows += ExpedientehistorialPeer::doDelete($criteria, $con);
 
             // delete related Expedienteservicio objects
             $criteria = new Criteria(ExpedienteservicioPeer::DATABASE_NAME);

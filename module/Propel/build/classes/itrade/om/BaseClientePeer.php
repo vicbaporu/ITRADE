@@ -24,16 +24,22 @@ abstract class BaseClientePeer
     const TM_CLASS = 'ClienteTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 36;
+    const NUM_COLUMNS = 41;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 36;
+    const NUM_HYDRATE_COLUMNS = 41;
 
     /** the column name for the idcliente field */
     const IDCLIENTE = 'cliente.idcliente';
+
+    /** the column name for the cliente_email field */
+    const CLIENTE_EMAIL = 'cliente.cliente_email';
+
+    /** the column name for the cliente_password field */
+    const CLIENTE_PASSWORD = 'cliente.cliente_password';
 
     /** the column name for the cliente_razonsocial field */
     const CLIENTE_RAZONSOCIAL = 'cliente.cliente_razonsocial';
@@ -53,6 +59,9 @@ abstract class BaseClientePeer
     /** the column name for the cliente_colonia field */
     const CLIENTE_COLONIA = 'cliente.cliente_colonia';
 
+    /** the column name for the cliente_codigopostal field */
+    const CLIENTE_CODIGOPOSTAL = 'cliente.cliente_codigopostal';
+
     /** the column name for the cliente_ciudad field */
     const CLIENTE_CIUDAD = 'cliente.cliente_ciudad';
 
@@ -62,11 +71,11 @@ abstract class BaseClientePeer
     /** the column name for the cliente_pais field */
     const CLIENTE_PAIS = 'cliente.cliente_pais';
 
-    /** the column name for the cliente_email field */
-    const CLIENTE_EMAIL = 'cliente.cliente_email';
-
     /** the column name for the cliente_telefono field */
     const CLIENTE_TELEFONO = 'cliente.cliente_telefono';
+
+    /** the column name for the cliente_celular field */
+    const CLIENTE_CELULAR = 'cliente.cliente_celular';
 
     /** the column name for the cliente_nombrecontacto field */
     const CLIENTE_NOMBRECONTACTO = 'cliente.cliente_nombrecontacto';
@@ -85,6 +94,9 @@ abstract class BaseClientePeer
 
     /** the column name for the cliente_coloniafiscal field */
     const CLIENTE_COLONIAFISCAL = 'cliente.cliente_coloniafiscal';
+
+    /** the column name for the cliente_codigopostalfiscal field */
+    const CLIENTE_CODIGOPOSTALFISCAL = 'cliente.cliente_codigopostalfiscal';
 
     /** the column name for the cliente_ciudadfiscal field */
     const CLIENTE_CIUDADFISCAL = 'cliente.cliente_ciudadfiscal';
@@ -140,6 +152,9 @@ abstract class BaseClientePeer
     /** the column name for the idempleadooperaciones field */
     const IDEMPLEADOOPERACIONES = 'cliente.idempleadooperaciones';
 
+    /** the column name for the cliente_ultimologin field */
+    const CLIENTE_ULTIMOLOGIN = 'cliente.cliente_ultimologin';
+
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
@@ -159,12 +174,12 @@ abstract class BaseClientePeer
      * e.g. ClientePeer::$fieldNames[ClientePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idcliente', 'ClienteRazonsocial', 'ClienteRfc', 'ClienteCalle', 'ClienteNumero', 'ClienteInterior', 'ClienteColonia', 'ClienteCiudad', 'ClienteEstado', 'ClientePais', 'ClienteEmail', 'ClienteTelefono', 'ClienteNombrecontacto', 'ClienteCumpleanios', 'ClienteCallefiscal', 'ClienteNumerofiscal', 'ClienteInteriorfiscal', 'ClienteColoniafiscal', 'ClienteCiudadfiscal', 'ClienteEstadofiscal', 'ClientePaisfiscal', 'ClientePadronimportador', 'ClienteEncargadoconferido', 'ClienteR1', 'ClienteR2', 'ClienteIdentificacionrepresentantelegal', 'ClienteRfcrepresentantelegal', 'ClienteActaconstitutiva', 'ClientePodernotarial', 'ClienteCartaencomienda', 'ClienteComprobantedomicilio', 'ClienteComprobanteclabe', 'ClienteClabe', 'ClienteArchivoszip', 'Idempleadocomercial', 'Idempleadooperaciones', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idcliente', 'clienteRazonsocial', 'clienteRfc', 'clienteCalle', 'clienteNumero', 'clienteInterior', 'clienteColonia', 'clienteCiudad', 'clienteEstado', 'clientePais', 'clienteEmail', 'clienteTelefono', 'clienteNombrecontacto', 'clienteCumpleanios', 'clienteCallefiscal', 'clienteNumerofiscal', 'clienteInteriorfiscal', 'clienteColoniafiscal', 'clienteCiudadfiscal', 'clienteEstadofiscal', 'clientePaisfiscal', 'clientePadronimportador', 'clienteEncargadoconferido', 'clienteR1', 'clienteR2', 'clienteIdentificacionrepresentantelegal', 'clienteRfcrepresentantelegal', 'clienteActaconstitutiva', 'clientePodernotarial', 'clienteCartaencomienda', 'clienteComprobantedomicilio', 'clienteComprobanteclabe', 'clienteClabe', 'clienteArchivoszip', 'idempleadocomercial', 'idempleadooperaciones', ),
-        BasePeer::TYPE_COLNAME => array (ClientePeer::IDCLIENTE, ClientePeer::CLIENTE_RAZONSOCIAL, ClientePeer::CLIENTE_RFC, ClientePeer::CLIENTE_CALLE, ClientePeer::CLIENTE_NUMERO, ClientePeer::CLIENTE_INTERIOR, ClientePeer::CLIENTE_COLONIA, ClientePeer::CLIENTE_CIUDAD, ClientePeer::CLIENTE_ESTADO, ClientePeer::CLIENTE_PAIS, ClientePeer::CLIENTE_EMAIL, ClientePeer::CLIENTE_TELEFONO, ClientePeer::CLIENTE_NOMBRECONTACTO, ClientePeer::CLIENTE_CUMPLEANIOS, ClientePeer::CLIENTE_CALLEFISCAL, ClientePeer::CLIENTE_NUMEROFISCAL, ClientePeer::CLIENTE_INTERIORFISCAL, ClientePeer::CLIENTE_COLONIAFISCAL, ClientePeer::CLIENTE_CIUDADFISCAL, ClientePeer::CLIENTE_ESTADOFISCAL, ClientePeer::CLIENTE_PAISFISCAL, ClientePeer::CLIENTE_PADRONIMPORTADOR, ClientePeer::CLIENTE_ENCARGADOCONFERIDO, ClientePeer::CLIENTE_R1, ClientePeer::CLIENTE_R2, ClientePeer::CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL, ClientePeer::CLIENTE_RFCREPRESENTANTELEGAL, ClientePeer::CLIENTE_ACTACONSTITUTIVA, ClientePeer::CLIENTE_PODERNOTARIAL, ClientePeer::CLIENTE_CARTAENCOMIENDA, ClientePeer::CLIENTE_COMPROBANTEDOMICILIO, ClientePeer::CLIENTE_COMPROBANTECLABE, ClientePeer::CLIENTE_CLABE, ClientePeer::CLIENTE_ARCHIVOSZIP, ClientePeer::IDEMPLEADOCOMERCIAL, ClientePeer::IDEMPLEADOOPERACIONES, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDCLIENTE', 'CLIENTE_RAZONSOCIAL', 'CLIENTE_RFC', 'CLIENTE_CALLE', 'CLIENTE_NUMERO', 'CLIENTE_INTERIOR', 'CLIENTE_COLONIA', 'CLIENTE_CIUDAD', 'CLIENTE_ESTADO', 'CLIENTE_PAIS', 'CLIENTE_EMAIL', 'CLIENTE_TELEFONO', 'CLIENTE_NOMBRECONTACTO', 'CLIENTE_CUMPLEANIOS', 'CLIENTE_CALLEFISCAL', 'CLIENTE_NUMEROFISCAL', 'CLIENTE_INTERIORFISCAL', 'CLIENTE_COLONIAFISCAL', 'CLIENTE_CIUDADFISCAL', 'CLIENTE_ESTADOFISCAL', 'CLIENTE_PAISFISCAL', 'CLIENTE_PADRONIMPORTADOR', 'CLIENTE_ENCARGADOCONFERIDO', 'CLIENTE_R1', 'CLIENTE_R2', 'CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL', 'CLIENTE_RFCREPRESENTANTELEGAL', 'CLIENTE_ACTACONSTITUTIVA', 'CLIENTE_PODERNOTARIAL', 'CLIENTE_CARTAENCOMIENDA', 'CLIENTE_COMPROBANTEDOMICILIO', 'CLIENTE_COMPROBANTECLABE', 'CLIENTE_CLABE', 'CLIENTE_ARCHIVOSZIP', 'IDEMPLEADOCOMERCIAL', 'IDEMPLEADOOPERACIONES', ),
-        BasePeer::TYPE_FIELDNAME => array ('idcliente', 'cliente_razonsocial', 'cliente_rfc', 'cliente_calle', 'cliente_numero', 'cliente_interior', 'cliente_colonia', 'cliente_ciudad', 'cliente_estado', 'cliente_pais', 'cliente_email', 'cliente_telefono', 'cliente_nombrecontacto', 'cliente_cumpleanios', 'cliente_callefiscal', 'cliente_numerofiscal', 'cliente_interiorfiscal', 'cliente_coloniafiscal', 'cliente_ciudadfiscal', 'cliente_estadofiscal', 'cliente_paisfiscal', 'cliente_padronimportador', 'cliente_encargadoconferido', 'cliente_r1', 'cliente_r2', 'cliente_identificacionrepresentantelegal', 'cliente_rfcrepresentantelegal', 'cliente_actaconstitutiva', 'cliente_podernotarial', 'cliente_cartaencomienda', 'cliente_comprobantedomicilio', 'cliente_comprobanteclabe', 'cliente_clabe', 'cliente_archivoszip', 'idempleadocomercial', 'idempleadooperaciones', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
+        BasePeer::TYPE_PHPNAME => array ('Idcliente', 'ClienteEmail', 'ClientePassword', 'ClienteRazonsocial', 'ClienteRfc', 'ClienteCalle', 'ClienteNumero', 'ClienteInterior', 'ClienteColonia', 'ClienteCodigopostal', 'ClienteCiudad', 'ClienteEstado', 'ClientePais', 'ClienteTelefono', 'ClienteCelular', 'ClienteNombrecontacto', 'ClienteCumpleanios', 'ClienteCallefiscal', 'ClienteNumerofiscal', 'ClienteInteriorfiscal', 'ClienteColoniafiscal', 'ClienteCodigopostalfiscal', 'ClienteCiudadfiscal', 'ClienteEstadofiscal', 'ClientePaisfiscal', 'ClientePadronimportador', 'ClienteEncargadoconferido', 'ClienteR1', 'ClienteR2', 'ClienteIdentificacionrepresentantelegal', 'ClienteRfcrepresentantelegal', 'ClienteActaconstitutiva', 'ClientePodernotarial', 'ClienteCartaencomienda', 'ClienteComprobantedomicilio', 'ClienteComprobanteclabe', 'ClienteClabe', 'ClienteArchivoszip', 'Idempleadocomercial', 'Idempleadooperaciones', 'ClienteUltimologin', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idcliente', 'clienteEmail', 'clientePassword', 'clienteRazonsocial', 'clienteRfc', 'clienteCalle', 'clienteNumero', 'clienteInterior', 'clienteColonia', 'clienteCodigopostal', 'clienteCiudad', 'clienteEstado', 'clientePais', 'clienteTelefono', 'clienteCelular', 'clienteNombrecontacto', 'clienteCumpleanios', 'clienteCallefiscal', 'clienteNumerofiscal', 'clienteInteriorfiscal', 'clienteColoniafiscal', 'clienteCodigopostalfiscal', 'clienteCiudadfiscal', 'clienteEstadofiscal', 'clientePaisfiscal', 'clientePadronimportador', 'clienteEncargadoconferido', 'clienteR1', 'clienteR2', 'clienteIdentificacionrepresentantelegal', 'clienteRfcrepresentantelegal', 'clienteActaconstitutiva', 'clientePodernotarial', 'clienteCartaencomienda', 'clienteComprobantedomicilio', 'clienteComprobanteclabe', 'clienteClabe', 'clienteArchivoszip', 'idempleadocomercial', 'idempleadooperaciones', 'clienteUltimologin', ),
+        BasePeer::TYPE_COLNAME => array (ClientePeer::IDCLIENTE, ClientePeer::CLIENTE_EMAIL, ClientePeer::CLIENTE_PASSWORD, ClientePeer::CLIENTE_RAZONSOCIAL, ClientePeer::CLIENTE_RFC, ClientePeer::CLIENTE_CALLE, ClientePeer::CLIENTE_NUMERO, ClientePeer::CLIENTE_INTERIOR, ClientePeer::CLIENTE_COLONIA, ClientePeer::CLIENTE_CODIGOPOSTAL, ClientePeer::CLIENTE_CIUDAD, ClientePeer::CLIENTE_ESTADO, ClientePeer::CLIENTE_PAIS, ClientePeer::CLIENTE_TELEFONO, ClientePeer::CLIENTE_CELULAR, ClientePeer::CLIENTE_NOMBRECONTACTO, ClientePeer::CLIENTE_CUMPLEANIOS, ClientePeer::CLIENTE_CALLEFISCAL, ClientePeer::CLIENTE_NUMEROFISCAL, ClientePeer::CLIENTE_INTERIORFISCAL, ClientePeer::CLIENTE_COLONIAFISCAL, ClientePeer::CLIENTE_CODIGOPOSTALFISCAL, ClientePeer::CLIENTE_CIUDADFISCAL, ClientePeer::CLIENTE_ESTADOFISCAL, ClientePeer::CLIENTE_PAISFISCAL, ClientePeer::CLIENTE_PADRONIMPORTADOR, ClientePeer::CLIENTE_ENCARGADOCONFERIDO, ClientePeer::CLIENTE_R1, ClientePeer::CLIENTE_R2, ClientePeer::CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL, ClientePeer::CLIENTE_RFCREPRESENTANTELEGAL, ClientePeer::CLIENTE_ACTACONSTITUTIVA, ClientePeer::CLIENTE_PODERNOTARIAL, ClientePeer::CLIENTE_CARTAENCOMIENDA, ClientePeer::CLIENTE_COMPROBANTEDOMICILIO, ClientePeer::CLIENTE_COMPROBANTECLABE, ClientePeer::CLIENTE_CLABE, ClientePeer::CLIENTE_ARCHIVOSZIP, ClientePeer::IDEMPLEADOCOMERCIAL, ClientePeer::IDEMPLEADOOPERACIONES, ClientePeer::CLIENTE_ULTIMOLOGIN, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDCLIENTE', 'CLIENTE_EMAIL', 'CLIENTE_PASSWORD', 'CLIENTE_RAZONSOCIAL', 'CLIENTE_RFC', 'CLIENTE_CALLE', 'CLIENTE_NUMERO', 'CLIENTE_INTERIOR', 'CLIENTE_COLONIA', 'CLIENTE_CODIGOPOSTAL', 'CLIENTE_CIUDAD', 'CLIENTE_ESTADO', 'CLIENTE_PAIS', 'CLIENTE_TELEFONO', 'CLIENTE_CELULAR', 'CLIENTE_NOMBRECONTACTO', 'CLIENTE_CUMPLEANIOS', 'CLIENTE_CALLEFISCAL', 'CLIENTE_NUMEROFISCAL', 'CLIENTE_INTERIORFISCAL', 'CLIENTE_COLONIAFISCAL', 'CLIENTE_CODIGOPOSTALFISCAL', 'CLIENTE_CIUDADFISCAL', 'CLIENTE_ESTADOFISCAL', 'CLIENTE_PAISFISCAL', 'CLIENTE_PADRONIMPORTADOR', 'CLIENTE_ENCARGADOCONFERIDO', 'CLIENTE_R1', 'CLIENTE_R2', 'CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL', 'CLIENTE_RFCREPRESENTANTELEGAL', 'CLIENTE_ACTACONSTITUTIVA', 'CLIENTE_PODERNOTARIAL', 'CLIENTE_CARTAENCOMIENDA', 'CLIENTE_COMPROBANTEDOMICILIO', 'CLIENTE_COMPROBANTECLABE', 'CLIENTE_CLABE', 'CLIENTE_ARCHIVOSZIP', 'IDEMPLEADOCOMERCIAL', 'IDEMPLEADOOPERACIONES', 'CLIENTE_ULTIMOLOGIN', ),
+        BasePeer::TYPE_FIELDNAME => array ('idcliente', 'cliente_email', 'cliente_password', 'cliente_razonsocial', 'cliente_rfc', 'cliente_calle', 'cliente_numero', 'cliente_interior', 'cliente_colonia', 'cliente_codigopostal', 'cliente_ciudad', 'cliente_estado', 'cliente_pais', 'cliente_telefono', 'cliente_celular', 'cliente_nombrecontacto', 'cliente_cumpleanios', 'cliente_callefiscal', 'cliente_numerofiscal', 'cliente_interiorfiscal', 'cliente_coloniafiscal', 'cliente_codigopostalfiscal', 'cliente_ciudadfiscal', 'cliente_estadofiscal', 'cliente_paisfiscal', 'cliente_padronimportador', 'cliente_encargadoconferido', 'cliente_r1', 'cliente_r2', 'cliente_identificacionrepresentantelegal', 'cliente_rfcrepresentantelegal', 'cliente_actaconstitutiva', 'cliente_podernotarial', 'cliente_cartaencomienda', 'cliente_comprobantedomicilio', 'cliente_comprobanteclabe', 'cliente_clabe', 'cliente_archivoszip', 'idempleadocomercial', 'idempleadooperaciones', 'cliente_ultimologin', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, )
     );
 
     /**
@@ -174,12 +189,12 @@ abstract class BaseClientePeer
      * e.g. ClientePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idcliente' => 0, 'ClienteRazonsocial' => 1, 'ClienteRfc' => 2, 'ClienteCalle' => 3, 'ClienteNumero' => 4, 'ClienteInterior' => 5, 'ClienteColonia' => 6, 'ClienteCiudad' => 7, 'ClienteEstado' => 8, 'ClientePais' => 9, 'ClienteEmail' => 10, 'ClienteTelefono' => 11, 'ClienteNombrecontacto' => 12, 'ClienteCumpleanios' => 13, 'ClienteCallefiscal' => 14, 'ClienteNumerofiscal' => 15, 'ClienteInteriorfiscal' => 16, 'ClienteColoniafiscal' => 17, 'ClienteCiudadfiscal' => 18, 'ClienteEstadofiscal' => 19, 'ClientePaisfiscal' => 20, 'ClientePadronimportador' => 21, 'ClienteEncargadoconferido' => 22, 'ClienteR1' => 23, 'ClienteR2' => 24, 'ClienteIdentificacionrepresentantelegal' => 25, 'ClienteRfcrepresentantelegal' => 26, 'ClienteActaconstitutiva' => 27, 'ClientePodernotarial' => 28, 'ClienteCartaencomienda' => 29, 'ClienteComprobantedomicilio' => 30, 'ClienteComprobanteclabe' => 31, 'ClienteClabe' => 32, 'ClienteArchivoszip' => 33, 'Idempleadocomercial' => 34, 'Idempleadooperaciones' => 35, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idcliente' => 0, 'clienteRazonsocial' => 1, 'clienteRfc' => 2, 'clienteCalle' => 3, 'clienteNumero' => 4, 'clienteInterior' => 5, 'clienteColonia' => 6, 'clienteCiudad' => 7, 'clienteEstado' => 8, 'clientePais' => 9, 'clienteEmail' => 10, 'clienteTelefono' => 11, 'clienteNombrecontacto' => 12, 'clienteCumpleanios' => 13, 'clienteCallefiscal' => 14, 'clienteNumerofiscal' => 15, 'clienteInteriorfiscal' => 16, 'clienteColoniafiscal' => 17, 'clienteCiudadfiscal' => 18, 'clienteEstadofiscal' => 19, 'clientePaisfiscal' => 20, 'clientePadronimportador' => 21, 'clienteEncargadoconferido' => 22, 'clienteR1' => 23, 'clienteR2' => 24, 'clienteIdentificacionrepresentantelegal' => 25, 'clienteRfcrepresentantelegal' => 26, 'clienteActaconstitutiva' => 27, 'clientePodernotarial' => 28, 'clienteCartaencomienda' => 29, 'clienteComprobantedomicilio' => 30, 'clienteComprobanteclabe' => 31, 'clienteClabe' => 32, 'clienteArchivoszip' => 33, 'idempleadocomercial' => 34, 'idempleadooperaciones' => 35, ),
-        BasePeer::TYPE_COLNAME => array (ClientePeer::IDCLIENTE => 0, ClientePeer::CLIENTE_RAZONSOCIAL => 1, ClientePeer::CLIENTE_RFC => 2, ClientePeer::CLIENTE_CALLE => 3, ClientePeer::CLIENTE_NUMERO => 4, ClientePeer::CLIENTE_INTERIOR => 5, ClientePeer::CLIENTE_COLONIA => 6, ClientePeer::CLIENTE_CIUDAD => 7, ClientePeer::CLIENTE_ESTADO => 8, ClientePeer::CLIENTE_PAIS => 9, ClientePeer::CLIENTE_EMAIL => 10, ClientePeer::CLIENTE_TELEFONO => 11, ClientePeer::CLIENTE_NOMBRECONTACTO => 12, ClientePeer::CLIENTE_CUMPLEANIOS => 13, ClientePeer::CLIENTE_CALLEFISCAL => 14, ClientePeer::CLIENTE_NUMEROFISCAL => 15, ClientePeer::CLIENTE_INTERIORFISCAL => 16, ClientePeer::CLIENTE_COLONIAFISCAL => 17, ClientePeer::CLIENTE_CIUDADFISCAL => 18, ClientePeer::CLIENTE_ESTADOFISCAL => 19, ClientePeer::CLIENTE_PAISFISCAL => 20, ClientePeer::CLIENTE_PADRONIMPORTADOR => 21, ClientePeer::CLIENTE_ENCARGADOCONFERIDO => 22, ClientePeer::CLIENTE_R1 => 23, ClientePeer::CLIENTE_R2 => 24, ClientePeer::CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL => 25, ClientePeer::CLIENTE_RFCREPRESENTANTELEGAL => 26, ClientePeer::CLIENTE_ACTACONSTITUTIVA => 27, ClientePeer::CLIENTE_PODERNOTARIAL => 28, ClientePeer::CLIENTE_CARTAENCOMIENDA => 29, ClientePeer::CLIENTE_COMPROBANTEDOMICILIO => 30, ClientePeer::CLIENTE_COMPROBANTECLABE => 31, ClientePeer::CLIENTE_CLABE => 32, ClientePeer::CLIENTE_ARCHIVOSZIP => 33, ClientePeer::IDEMPLEADOCOMERCIAL => 34, ClientePeer::IDEMPLEADOOPERACIONES => 35, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDCLIENTE' => 0, 'CLIENTE_RAZONSOCIAL' => 1, 'CLIENTE_RFC' => 2, 'CLIENTE_CALLE' => 3, 'CLIENTE_NUMERO' => 4, 'CLIENTE_INTERIOR' => 5, 'CLIENTE_COLONIA' => 6, 'CLIENTE_CIUDAD' => 7, 'CLIENTE_ESTADO' => 8, 'CLIENTE_PAIS' => 9, 'CLIENTE_EMAIL' => 10, 'CLIENTE_TELEFONO' => 11, 'CLIENTE_NOMBRECONTACTO' => 12, 'CLIENTE_CUMPLEANIOS' => 13, 'CLIENTE_CALLEFISCAL' => 14, 'CLIENTE_NUMEROFISCAL' => 15, 'CLIENTE_INTERIORFISCAL' => 16, 'CLIENTE_COLONIAFISCAL' => 17, 'CLIENTE_CIUDADFISCAL' => 18, 'CLIENTE_ESTADOFISCAL' => 19, 'CLIENTE_PAISFISCAL' => 20, 'CLIENTE_PADRONIMPORTADOR' => 21, 'CLIENTE_ENCARGADOCONFERIDO' => 22, 'CLIENTE_R1' => 23, 'CLIENTE_R2' => 24, 'CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL' => 25, 'CLIENTE_RFCREPRESENTANTELEGAL' => 26, 'CLIENTE_ACTACONSTITUTIVA' => 27, 'CLIENTE_PODERNOTARIAL' => 28, 'CLIENTE_CARTAENCOMIENDA' => 29, 'CLIENTE_COMPROBANTEDOMICILIO' => 30, 'CLIENTE_COMPROBANTECLABE' => 31, 'CLIENTE_CLABE' => 32, 'CLIENTE_ARCHIVOSZIP' => 33, 'IDEMPLEADOCOMERCIAL' => 34, 'IDEMPLEADOOPERACIONES' => 35, ),
-        BasePeer::TYPE_FIELDNAME => array ('idcliente' => 0, 'cliente_razonsocial' => 1, 'cliente_rfc' => 2, 'cliente_calle' => 3, 'cliente_numero' => 4, 'cliente_interior' => 5, 'cliente_colonia' => 6, 'cliente_ciudad' => 7, 'cliente_estado' => 8, 'cliente_pais' => 9, 'cliente_email' => 10, 'cliente_telefono' => 11, 'cliente_nombrecontacto' => 12, 'cliente_cumpleanios' => 13, 'cliente_callefiscal' => 14, 'cliente_numerofiscal' => 15, 'cliente_interiorfiscal' => 16, 'cliente_coloniafiscal' => 17, 'cliente_ciudadfiscal' => 18, 'cliente_estadofiscal' => 19, 'cliente_paisfiscal' => 20, 'cliente_padronimportador' => 21, 'cliente_encargadoconferido' => 22, 'cliente_r1' => 23, 'cliente_r2' => 24, 'cliente_identificacionrepresentantelegal' => 25, 'cliente_rfcrepresentantelegal' => 26, 'cliente_actaconstitutiva' => 27, 'cliente_podernotarial' => 28, 'cliente_cartaencomienda' => 29, 'cliente_comprobantedomicilio' => 30, 'cliente_comprobanteclabe' => 31, 'cliente_clabe' => 32, 'cliente_archivoszip' => 33, 'idempleadocomercial' => 34, 'idempleadooperaciones' => 35, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
+        BasePeer::TYPE_PHPNAME => array ('Idcliente' => 0, 'ClienteEmail' => 1, 'ClientePassword' => 2, 'ClienteRazonsocial' => 3, 'ClienteRfc' => 4, 'ClienteCalle' => 5, 'ClienteNumero' => 6, 'ClienteInterior' => 7, 'ClienteColonia' => 8, 'ClienteCodigopostal' => 9, 'ClienteCiudad' => 10, 'ClienteEstado' => 11, 'ClientePais' => 12, 'ClienteTelefono' => 13, 'ClienteCelular' => 14, 'ClienteNombrecontacto' => 15, 'ClienteCumpleanios' => 16, 'ClienteCallefiscal' => 17, 'ClienteNumerofiscal' => 18, 'ClienteInteriorfiscal' => 19, 'ClienteColoniafiscal' => 20, 'ClienteCodigopostalfiscal' => 21, 'ClienteCiudadfiscal' => 22, 'ClienteEstadofiscal' => 23, 'ClientePaisfiscal' => 24, 'ClientePadronimportador' => 25, 'ClienteEncargadoconferido' => 26, 'ClienteR1' => 27, 'ClienteR2' => 28, 'ClienteIdentificacionrepresentantelegal' => 29, 'ClienteRfcrepresentantelegal' => 30, 'ClienteActaconstitutiva' => 31, 'ClientePodernotarial' => 32, 'ClienteCartaencomienda' => 33, 'ClienteComprobantedomicilio' => 34, 'ClienteComprobanteclabe' => 35, 'ClienteClabe' => 36, 'ClienteArchivoszip' => 37, 'Idempleadocomercial' => 38, 'Idempleadooperaciones' => 39, 'ClienteUltimologin' => 40, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idcliente' => 0, 'clienteEmail' => 1, 'clientePassword' => 2, 'clienteRazonsocial' => 3, 'clienteRfc' => 4, 'clienteCalle' => 5, 'clienteNumero' => 6, 'clienteInterior' => 7, 'clienteColonia' => 8, 'clienteCodigopostal' => 9, 'clienteCiudad' => 10, 'clienteEstado' => 11, 'clientePais' => 12, 'clienteTelefono' => 13, 'clienteCelular' => 14, 'clienteNombrecontacto' => 15, 'clienteCumpleanios' => 16, 'clienteCallefiscal' => 17, 'clienteNumerofiscal' => 18, 'clienteInteriorfiscal' => 19, 'clienteColoniafiscal' => 20, 'clienteCodigopostalfiscal' => 21, 'clienteCiudadfiscal' => 22, 'clienteEstadofiscal' => 23, 'clientePaisfiscal' => 24, 'clientePadronimportador' => 25, 'clienteEncargadoconferido' => 26, 'clienteR1' => 27, 'clienteR2' => 28, 'clienteIdentificacionrepresentantelegal' => 29, 'clienteRfcrepresentantelegal' => 30, 'clienteActaconstitutiva' => 31, 'clientePodernotarial' => 32, 'clienteCartaencomienda' => 33, 'clienteComprobantedomicilio' => 34, 'clienteComprobanteclabe' => 35, 'clienteClabe' => 36, 'clienteArchivoszip' => 37, 'idempleadocomercial' => 38, 'idempleadooperaciones' => 39, 'clienteUltimologin' => 40, ),
+        BasePeer::TYPE_COLNAME => array (ClientePeer::IDCLIENTE => 0, ClientePeer::CLIENTE_EMAIL => 1, ClientePeer::CLIENTE_PASSWORD => 2, ClientePeer::CLIENTE_RAZONSOCIAL => 3, ClientePeer::CLIENTE_RFC => 4, ClientePeer::CLIENTE_CALLE => 5, ClientePeer::CLIENTE_NUMERO => 6, ClientePeer::CLIENTE_INTERIOR => 7, ClientePeer::CLIENTE_COLONIA => 8, ClientePeer::CLIENTE_CODIGOPOSTAL => 9, ClientePeer::CLIENTE_CIUDAD => 10, ClientePeer::CLIENTE_ESTADO => 11, ClientePeer::CLIENTE_PAIS => 12, ClientePeer::CLIENTE_TELEFONO => 13, ClientePeer::CLIENTE_CELULAR => 14, ClientePeer::CLIENTE_NOMBRECONTACTO => 15, ClientePeer::CLIENTE_CUMPLEANIOS => 16, ClientePeer::CLIENTE_CALLEFISCAL => 17, ClientePeer::CLIENTE_NUMEROFISCAL => 18, ClientePeer::CLIENTE_INTERIORFISCAL => 19, ClientePeer::CLIENTE_COLONIAFISCAL => 20, ClientePeer::CLIENTE_CODIGOPOSTALFISCAL => 21, ClientePeer::CLIENTE_CIUDADFISCAL => 22, ClientePeer::CLIENTE_ESTADOFISCAL => 23, ClientePeer::CLIENTE_PAISFISCAL => 24, ClientePeer::CLIENTE_PADRONIMPORTADOR => 25, ClientePeer::CLIENTE_ENCARGADOCONFERIDO => 26, ClientePeer::CLIENTE_R1 => 27, ClientePeer::CLIENTE_R2 => 28, ClientePeer::CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL => 29, ClientePeer::CLIENTE_RFCREPRESENTANTELEGAL => 30, ClientePeer::CLIENTE_ACTACONSTITUTIVA => 31, ClientePeer::CLIENTE_PODERNOTARIAL => 32, ClientePeer::CLIENTE_CARTAENCOMIENDA => 33, ClientePeer::CLIENTE_COMPROBANTEDOMICILIO => 34, ClientePeer::CLIENTE_COMPROBANTECLABE => 35, ClientePeer::CLIENTE_CLABE => 36, ClientePeer::CLIENTE_ARCHIVOSZIP => 37, ClientePeer::IDEMPLEADOCOMERCIAL => 38, ClientePeer::IDEMPLEADOOPERACIONES => 39, ClientePeer::CLIENTE_ULTIMOLOGIN => 40, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDCLIENTE' => 0, 'CLIENTE_EMAIL' => 1, 'CLIENTE_PASSWORD' => 2, 'CLIENTE_RAZONSOCIAL' => 3, 'CLIENTE_RFC' => 4, 'CLIENTE_CALLE' => 5, 'CLIENTE_NUMERO' => 6, 'CLIENTE_INTERIOR' => 7, 'CLIENTE_COLONIA' => 8, 'CLIENTE_CODIGOPOSTAL' => 9, 'CLIENTE_CIUDAD' => 10, 'CLIENTE_ESTADO' => 11, 'CLIENTE_PAIS' => 12, 'CLIENTE_TELEFONO' => 13, 'CLIENTE_CELULAR' => 14, 'CLIENTE_NOMBRECONTACTO' => 15, 'CLIENTE_CUMPLEANIOS' => 16, 'CLIENTE_CALLEFISCAL' => 17, 'CLIENTE_NUMEROFISCAL' => 18, 'CLIENTE_INTERIORFISCAL' => 19, 'CLIENTE_COLONIAFISCAL' => 20, 'CLIENTE_CODIGOPOSTALFISCAL' => 21, 'CLIENTE_CIUDADFISCAL' => 22, 'CLIENTE_ESTADOFISCAL' => 23, 'CLIENTE_PAISFISCAL' => 24, 'CLIENTE_PADRONIMPORTADOR' => 25, 'CLIENTE_ENCARGADOCONFERIDO' => 26, 'CLIENTE_R1' => 27, 'CLIENTE_R2' => 28, 'CLIENTE_IDENTIFICACIONREPRESENTANTELEGAL' => 29, 'CLIENTE_RFCREPRESENTANTELEGAL' => 30, 'CLIENTE_ACTACONSTITUTIVA' => 31, 'CLIENTE_PODERNOTARIAL' => 32, 'CLIENTE_CARTAENCOMIENDA' => 33, 'CLIENTE_COMPROBANTEDOMICILIO' => 34, 'CLIENTE_COMPROBANTECLABE' => 35, 'CLIENTE_CLABE' => 36, 'CLIENTE_ARCHIVOSZIP' => 37, 'IDEMPLEADOCOMERCIAL' => 38, 'IDEMPLEADOOPERACIONES' => 39, 'CLIENTE_ULTIMOLOGIN' => 40, ),
+        BasePeer::TYPE_FIELDNAME => array ('idcliente' => 0, 'cliente_email' => 1, 'cliente_password' => 2, 'cliente_razonsocial' => 3, 'cliente_rfc' => 4, 'cliente_calle' => 5, 'cliente_numero' => 6, 'cliente_interior' => 7, 'cliente_colonia' => 8, 'cliente_codigopostal' => 9, 'cliente_ciudad' => 10, 'cliente_estado' => 11, 'cliente_pais' => 12, 'cliente_telefono' => 13, 'cliente_celular' => 14, 'cliente_nombrecontacto' => 15, 'cliente_cumpleanios' => 16, 'cliente_callefiscal' => 17, 'cliente_numerofiscal' => 18, 'cliente_interiorfiscal' => 19, 'cliente_coloniafiscal' => 20, 'cliente_codigopostalfiscal' => 21, 'cliente_ciudadfiscal' => 22, 'cliente_estadofiscal' => 23, 'cliente_paisfiscal' => 24, 'cliente_padronimportador' => 25, 'cliente_encargadoconferido' => 26, 'cliente_r1' => 27, 'cliente_r2' => 28, 'cliente_identificacionrepresentantelegal' => 29, 'cliente_rfcrepresentantelegal' => 30, 'cliente_actaconstitutiva' => 31, 'cliente_podernotarial' => 32, 'cliente_cartaencomienda' => 33, 'cliente_comprobantedomicilio' => 34, 'cliente_comprobanteclabe' => 35, 'cliente_clabe' => 36, 'cliente_archivoszip' => 37, 'idempleadocomercial' => 38, 'idempleadooperaciones' => 39, 'cliente_ultimologin' => 40, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, )
     );
 
     /**
@@ -254,23 +269,27 @@ abstract class BaseClientePeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(ClientePeer::IDCLIENTE);
+            $criteria->addSelectColumn(ClientePeer::CLIENTE_EMAIL);
+            $criteria->addSelectColumn(ClientePeer::CLIENTE_PASSWORD);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_RAZONSOCIAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_RFC);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_CALLE);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_NUMERO);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_INTERIOR);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_COLONIA);
+            $criteria->addSelectColumn(ClientePeer::CLIENTE_CODIGOPOSTAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_CIUDAD);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_ESTADO);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_PAIS);
-            $criteria->addSelectColumn(ClientePeer::CLIENTE_EMAIL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_TELEFONO);
+            $criteria->addSelectColumn(ClientePeer::CLIENTE_CELULAR);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_NOMBRECONTACTO);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_CUMPLEANIOS);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_CALLEFISCAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_NUMEROFISCAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_INTERIORFISCAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_COLONIAFISCAL);
+            $criteria->addSelectColumn(ClientePeer::CLIENTE_CODIGOPOSTALFISCAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_CIUDADFISCAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_ESTADOFISCAL);
             $criteria->addSelectColumn(ClientePeer::CLIENTE_PAISFISCAL);
@@ -289,25 +308,30 @@ abstract class BaseClientePeer
             $criteria->addSelectColumn(ClientePeer::CLIENTE_ARCHIVOSZIP);
             $criteria->addSelectColumn(ClientePeer::IDEMPLEADOCOMERCIAL);
             $criteria->addSelectColumn(ClientePeer::IDEMPLEADOOPERACIONES);
+            $criteria->addSelectColumn(ClientePeer::CLIENTE_ULTIMOLOGIN);
         } else {
             $criteria->addSelectColumn($alias . '.idcliente');
+            $criteria->addSelectColumn($alias . '.cliente_email');
+            $criteria->addSelectColumn($alias . '.cliente_password');
             $criteria->addSelectColumn($alias . '.cliente_razonsocial');
             $criteria->addSelectColumn($alias . '.cliente_rfc');
             $criteria->addSelectColumn($alias . '.cliente_calle');
             $criteria->addSelectColumn($alias . '.cliente_numero');
             $criteria->addSelectColumn($alias . '.cliente_interior');
             $criteria->addSelectColumn($alias . '.cliente_colonia');
+            $criteria->addSelectColumn($alias . '.cliente_codigopostal');
             $criteria->addSelectColumn($alias . '.cliente_ciudad');
             $criteria->addSelectColumn($alias . '.cliente_estado');
             $criteria->addSelectColumn($alias . '.cliente_pais');
-            $criteria->addSelectColumn($alias . '.cliente_email');
             $criteria->addSelectColumn($alias . '.cliente_telefono');
+            $criteria->addSelectColumn($alias . '.cliente_celular');
             $criteria->addSelectColumn($alias . '.cliente_nombrecontacto');
             $criteria->addSelectColumn($alias . '.cliente_cumpleanios');
             $criteria->addSelectColumn($alias . '.cliente_callefiscal');
             $criteria->addSelectColumn($alias . '.cliente_numerofiscal');
             $criteria->addSelectColumn($alias . '.cliente_interiorfiscal');
             $criteria->addSelectColumn($alias . '.cliente_coloniafiscal');
+            $criteria->addSelectColumn($alias . '.cliente_codigopostalfiscal');
             $criteria->addSelectColumn($alias . '.cliente_ciudadfiscal');
             $criteria->addSelectColumn($alias . '.cliente_estadofiscal');
             $criteria->addSelectColumn($alias . '.cliente_paisfiscal');
@@ -326,6 +350,7 @@ abstract class BaseClientePeer
             $criteria->addSelectColumn($alias . '.cliente_archivoszip');
             $criteria->addSelectColumn($alias . '.idempleadocomercial');
             $criteria->addSelectColumn($alias . '.idempleadooperaciones');
+            $criteria->addSelectColumn($alias . '.cliente_ultimologin');
         }
     }
 

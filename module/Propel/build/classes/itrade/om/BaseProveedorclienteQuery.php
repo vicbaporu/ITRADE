@@ -7,6 +7,7 @@
  *
  *
  * @method ProveedorclienteQuery orderByIdproveedorcliente($order = Criteria::ASC) Order by the idproveedorcliente column
+ * @method ProveedorclienteQuery orderByIdcliente($order = Criteria::ASC) Order by the idcliente column
  * @method ProveedorclienteQuery orderByProveedorclienteTaxid($order = Criteria::ASC) Order by the proveedorcliente_taxid column
  * @method ProveedorclienteQuery orderByProveedorclienteCalle($order = Criteria::ASC) Order by the proveedorcliente_calle column
  * @method ProveedorclienteQuery orderByProveedorclienteNumero($order = Criteria::ASC) Order by the proveedorcliente_numero column
@@ -20,6 +21,7 @@
  * @method ProveedorclienteQuery orderByProveedorclienteTelefonocontacto($order = Criteria::ASC) Order by the proveedorcliente_telefonocontacto column
  *
  * @method ProveedorclienteQuery groupByIdproveedorcliente() Group by the idproveedorcliente column
+ * @method ProveedorclienteQuery groupByIdcliente() Group by the idcliente column
  * @method ProveedorclienteQuery groupByProveedorclienteTaxid() Group by the proveedorcliente_taxid column
  * @method ProveedorclienteQuery groupByProveedorclienteCalle() Group by the proveedorcliente_calle column
  * @method ProveedorclienteQuery groupByProveedorclienteNumero() Group by the proveedorcliente_numero column
@@ -36,9 +38,14 @@
  * @method ProveedorclienteQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method ProveedorclienteQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method ProveedorclienteQuery leftJoinCliente($relationAlias = null) Adds a LEFT JOIN clause to the query using the Cliente relation
+ * @method ProveedorclienteQuery rightJoinCliente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Cliente relation
+ * @method ProveedorclienteQuery innerJoinCliente($relationAlias = null) Adds a INNER JOIN clause to the query using the Cliente relation
+ *
  * @method Proveedorcliente findOne(PropelPDO $con = null) Return the first Proveedorcliente matching the query
  * @method Proveedorcliente findOneOrCreate(PropelPDO $con = null) Return the first Proveedorcliente matching the query, or a new Proveedorcliente object populated from the query conditions when no match is found
  *
+ * @method Proveedorcliente findOneByIdcliente(int $idcliente) Return the first Proveedorcliente filtered by the idcliente column
  * @method Proveedorcliente findOneByProveedorclienteTaxid(string $proveedorcliente_taxid) Return the first Proveedorcliente filtered by the proveedorcliente_taxid column
  * @method Proveedorcliente findOneByProveedorclienteCalle(string $proveedorcliente_calle) Return the first Proveedorcliente filtered by the proveedorcliente_calle column
  * @method Proveedorcliente findOneByProveedorclienteNumero(string $proveedorcliente_numero) Return the first Proveedorcliente filtered by the proveedorcliente_numero column
@@ -52,6 +59,7 @@
  * @method Proveedorcliente findOneByProveedorclienteTelefonocontacto(string $proveedorcliente_telefonocontacto) Return the first Proveedorcliente filtered by the proveedorcliente_telefonocontacto column
  *
  * @method array findByIdproveedorcliente(int $idproveedorcliente) Return Proveedorcliente objects filtered by the idproveedorcliente column
+ * @method array findByIdcliente(int $idcliente) Return Proveedorcliente objects filtered by the idcliente column
  * @method array findByProveedorclienteTaxid(string $proveedorcliente_taxid) Return Proveedorcliente objects filtered by the proveedorcliente_taxid column
  * @method array findByProveedorclienteCalle(string $proveedorcliente_calle) Return Proveedorcliente objects filtered by the proveedorcliente_calle column
  * @method array findByProveedorclienteNumero(string $proveedorcliente_numero) Return Proveedorcliente objects filtered by the proveedorcliente_numero column
@@ -170,7 +178,7 @@ abstract class BaseProveedorclienteQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idproveedorcliente`, `proveedorcliente_taxid`, `proveedorcliente_calle`, `proveedorcliente_numero`, `proveedorcliente_interior`, `proveedorcliente_colonia`, `proveedorcliente_ciudad`, `proveedorcliente_estado`, `proveedorcliente_pais`, `proveedorcliente_nombrecontacto`, `proveedorcliente_emailcontacto`, `proveedorcliente_telefonocontacto` FROM `proveedorcliente` WHERE `idproveedorcliente` = :p0';
+        $sql = 'SELECT `idproveedorcliente`, `idcliente`, `proveedorcliente_taxid`, `proveedorcliente_calle`, `proveedorcliente_numero`, `proveedorcliente_interior`, `proveedorcliente_colonia`, `proveedorcliente_ciudad`, `proveedorcliente_estado`, `proveedorcliente_pais`, `proveedorcliente_nombrecontacto`, `proveedorcliente_emailcontacto`, `proveedorcliente_telefonocontacto` FROM `proveedorcliente` WHERE `idproveedorcliente` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -299,6 +307,50 @@ abstract class BaseProveedorclienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedorclientePeer::IDPROVEEDORCLIENTE, $idproveedorcliente, $comparison);
+    }
+
+    /**
+     * Filter the query on the idcliente column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByIdcliente(1234); // WHERE idcliente = 1234
+     * $query->filterByIdcliente(array(12, 34)); // WHERE idcliente IN (12, 34)
+     * $query->filterByIdcliente(array('min' => 12)); // WHERE idcliente >= 12
+     * $query->filterByIdcliente(array('max' => 12)); // WHERE idcliente <= 12
+     * </code>
+     *
+     * @see       filterByCliente()
+     *
+     * @param     mixed $idcliente The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedorclienteQuery The current query, for fluid interface
+     */
+    public function filterByIdcliente($idcliente = null, $comparison = null)
+    {
+        if (is_array($idcliente)) {
+            $useMinMax = false;
+            if (isset($idcliente['min'])) {
+                $this->addUsingAlias(ProveedorclientePeer::IDCLIENTE, $idcliente['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($idcliente['max'])) {
+                $this->addUsingAlias(ProveedorclientePeer::IDCLIENTE, $idcliente['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedorclientePeer::IDCLIENTE, $idcliente, $comparison);
     }
 
     /**
@@ -618,6 +670,82 @@ abstract class BaseProveedorclienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, $proveedorclienteTelefonocontacto, $comparison);
+    }
+
+    /**
+     * Filter the query by a related Cliente object
+     *
+     * @param   Cliente|PropelObjectCollection $cliente The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 ProveedorclienteQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByCliente($cliente, $comparison = null)
+    {
+        if ($cliente instanceof Cliente) {
+            return $this
+                ->addUsingAlias(ProveedorclientePeer::IDCLIENTE, $cliente->getIdcliente(), $comparison);
+        } elseif ($cliente instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(ProveedorclientePeer::IDCLIENTE, $cliente->toKeyValue('PrimaryKey', 'Idcliente'), $comparison);
+        } else {
+            throw new PropelException('filterByCliente() only accepts arguments of type Cliente or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Cliente relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ProveedorclienteQuery The current query, for fluid interface
+     */
+    public function joinCliente($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Cliente');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Cliente');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Cliente relation Cliente object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   ClienteQuery A secondary query class using the current class as primary query
+     */
+    public function useClienteQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinCliente($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Cliente', 'ClienteQuery');
     }
 
     /**

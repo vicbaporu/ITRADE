@@ -26,23 +26,27 @@ DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente`
 (
     `idcliente` INTEGER NOT NULL AUTO_INCREMENT,
+    `cliente_email` VARCHAR(45),
+    `cliente_password` VARCHAR(45),
     `cliente_razonsocial` VARCHAR(255),
     `cliente_rfc` VARCHAR(45),
     `cliente_calle` VARCHAR(45),
     `cliente_numero` VARCHAR(45),
     `cliente_interior` VARCHAR(45),
     `cliente_colonia` VARCHAR(45),
+    `cliente_codigopostal` VARCHAR(45),
     `cliente_ciudad` VARCHAR(45),
     `cliente_estado` VARCHAR(45),
     `cliente_pais` VARCHAR(45),
-    `cliente_email` VARCHAR(45),
     `cliente_telefono` VARCHAR(45),
+    `cliente_celular` VARCHAR(45),
     `cliente_nombrecontacto` VARCHAR(255),
-    `cliente_cumpleanios` VARCHAR(45),
+    `cliente_cumpleanios` DATE,
     `cliente_callefiscal` VARCHAR(45),
     `cliente_numerofiscal` VARCHAR(45),
     `cliente_interiorfiscal` VARCHAR(45),
     `cliente_coloniafiscal` VARCHAR(45),
+    `cliente_codigopostalfiscal` VARCHAR(45),
     `cliente_ciudadfiscal` VARCHAR(45),
     `cliente_estadofiscal` VARCHAR(45),
     `cliente_paisfiscal` VARCHAR(45),
@@ -61,6 +65,7 @@ CREATE TABLE `cliente`
     `cliente_archivoszip` VARCHAR(45),
     `idempleadocomercial` INTEGER,
     `idempleadooperaciones` INTEGER,
+    `cliente_ultimologin` DATETIME,
     PRIMARY KEY (`idcliente`),
     INDEX `idempleadocomercial` (`idempleadocomercial`),
     INDEX `idempleadooperaciones` (`idempleadooperaciones`),
@@ -236,16 +241,16 @@ DROP TABLE IF EXISTS `expedientehistorial`;
 CREATE TABLE `expedientehistorial`
 (
     `idexpedientehistorial` INTEGER NOT NULL AUTO_INCREMENT,
-    `idexpediente` INTEGER,
+    `idexpedienteservicio` INTEGER,
     `idestadoservicio` INTEGER,
     `expedientehistorial_fecha` DATETIME,
     `expedientehistorial_nota` VARCHAR(45),
     PRIMARY KEY (`idexpedientehistorial`),
-    INDEX `idexpediente_expedientehistorial_idx` (`idexpediente`),
     INDEX `idservicioestado_expedientehistorial_idx` (`idestadoservicio`),
-    CONSTRAINT `idexpediente_expedientehistorial`
-        FOREIGN KEY (`idexpediente`)
-        REFERENCES `expediente` (`idexpediente`)
+    INDEX `idexpedienteservicio_expedientehistorial_idx` (`idexpedienteservicio`),
+    CONSTRAINT `idexpedienteservicio_expedientehistorial`
+        FOREIGN KEY (`idexpedienteservicio`)
+        REFERENCES `expedienteservicio` (`idexpedienteservicio`)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT `idservicioestado_expedientehistorial`
@@ -293,7 +298,7 @@ CREATE TABLE `gastofacturacion`
 (
     `idgastofacturacion` INTEGER NOT NULL AUTO_INCREMENT,
     `idcategoriagasto` INTEGER NOT NULL,
-    `gastofacturacion_nombre` VARCHAR(255),
+    `gastofacturacion_nombre` VARCHAR(255) NOT NULL,
     `gastofacturacion_descripcion` TEXT,
     `gastofacturacion_iva` enum('0','16','4'),
     PRIMARY KEY (`idgastofacturacion`),
@@ -314,6 +319,7 @@ DROP TABLE IF EXISTS `proveedorcliente`;
 CREATE TABLE `proveedorcliente`
 (
     `idproveedorcliente` INTEGER NOT NULL AUTO_INCREMENT,
+    `idcliente` INTEGER NOT NULL,
     `proveedorcliente_taxid` VARCHAR(45),
     `proveedorcliente_calle` VARCHAR(45),
     `proveedorcliente_numero` VARCHAR(45),
@@ -325,7 +331,11 @@ CREATE TABLE `proveedorcliente`
     `proveedorcliente_nombrecontacto` VARCHAR(45),
     `proveedorcliente_emailcontacto` VARCHAR(45),
     `proveedorcliente_telefonocontacto` VARCHAR(45),
-    PRIMARY KEY (`idproveedorcliente`)
+    PRIMARY KEY (`idproveedorcliente`),
+    INDEX `proveedorcliente_idcliente` (`idcliente`),
+    CONSTRAINT `proveedorcliente_idcliente`
+        FOREIGN KEY (`idcliente`)
+        REFERENCES `cliente` (`idcliente`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

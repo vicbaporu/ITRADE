@@ -1,0 +1,56 @@
+<div class="list_container">
+    <ul class="breadcrumb">
+        <li>
+             <a class="active" href="/clientes">Clientes</a>
+        </li>
+    </ul>
+    <div class="page-title">
+        <h3><span class="semi-bold">CLIENTES</span></h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <div class="tools">
+                        <a id="user-options" class="dropdown-toggle pull-right " href="#" data-toggle="dropdown" style="background: none">
+                            <div class="iconset top-settings-dark "></div>
+                        </a>
+                        <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
+                            <li>
+                                <a style="background: none"href="/clientes/nuevo"><i class="fa fa-plus"></i> Registro cliente</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <br>
+                </div>
+                <div class="grid-body no-border">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>Razón social</th>
+                                <th>Nombre de contacto</th>
+                                <th>Correo electrónico</th>
+                                <th>Teléfono</th>
+                                <th>Ciudad</th>
+                                <th>País</th>
+                                <th>Opciones</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--CUSTOM SCRIPT-->
+<script src="/js/admin/clientes/clientes.js"></script>
+<script>
+    $(document).ready(function() {
+        var clientes = $('.list_container').clientes({successMessages:<?php echo $successMessages?>});
+        clientes.list();
+    }); 
+</script>
+

@@ -53,6 +53,7 @@ class ExpedienteservicioTableMap extends TableMap
     {
         $this->addRelation('Expediente', 'Expediente', RelationMap::MANY_TO_ONE, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Servicio', 'Servicio', RelationMap::MANY_TO_ONE, array('idservicio' => 'idservicio', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Expedientehistorial', 'Expedientehistorial', RelationMap::ONE_TO_MANY, array('idexpedienteservicio' => 'idexpedienteservicio', ), 'CASCADE', 'CASCADE', 'Expedientehistorials');
     } // buildRelations()
 
 } // ExpedienteservicioTableMap

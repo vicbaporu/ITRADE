@@ -24,16 +24,19 @@ abstract class BaseProveedorclientePeer
     const TM_CLASS = 'ProveedorclienteTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 12;
+    const NUM_COLUMNS = 13;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 12;
+    const NUM_HYDRATE_COLUMNS = 13;
 
     /** the column name for the idproveedorcliente field */
     const IDPROVEEDORCLIENTE = 'proveedorcliente.idproveedorcliente';
+
+    /** the column name for the idcliente field */
+    const IDCLIENTE = 'proveedorcliente.idcliente';
 
     /** the column name for the proveedorcliente_taxid field */
     const PROVEEDORCLIENTE_TAXID = 'proveedorcliente.proveedorcliente_taxid';
@@ -87,12 +90,12 @@ abstract class BaseProveedorclientePeer
      * e.g. ProveedorclientePeer::$fieldNames[ProveedorclientePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente', 'ProveedorclienteTaxid', 'ProveedorclienteCalle', 'ProveedorclienteNumero', 'ProveedorclienteInterior', 'ProveedorclienteColonia', 'ProveedorclienteCiudad', 'ProveedorclienteEstado', 'ProveedorclientePais', 'ProveedorclienteNombrecontacto', 'ProveedorclienteEmailcontacto', 'ProveedorclienteTelefonocontacto', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente', 'proveedorclienteTaxid', 'proveedorclienteCalle', 'proveedorclienteNumero', 'proveedorclienteInterior', 'proveedorclienteColonia', 'proveedorclienteCiudad', 'proveedorclienteEstado', 'proveedorclientePais', 'proveedorclienteNombrecontacto', 'proveedorclienteEmailcontacto', 'proveedorclienteTelefonocontacto', ),
-        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE', 'PROVEEDORCLIENTE_TAXID', 'PROVEEDORCLIENTE_CALLE', 'PROVEEDORCLIENTE_NUMERO', 'PROVEEDORCLIENTE_INTERIOR', 'PROVEEDORCLIENTE_COLONIA', 'PROVEEDORCLIENTE_CIUDAD', 'PROVEEDORCLIENTE_ESTADO', 'PROVEEDORCLIENTE_PAIS', 'PROVEEDORCLIENTE_NOMBRECONTACTO', 'PROVEEDORCLIENTE_EMAILCONTACTO', 'PROVEEDORCLIENTE_TELEFONOCONTACTO', ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente', 'proveedorcliente_taxid', 'proveedorcliente_calle', 'proveedorcliente_numero', 'proveedorcliente_interior', 'proveedorcliente_colonia', 'proveedorcliente_ciudad', 'proveedorcliente_estado', 'proveedorcliente_pais', 'proveedorcliente_nombrecontacto', 'proveedorcliente_emailcontacto', 'proveedorcliente_telefonocontacto', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente', 'Idcliente', 'ProveedorclienteTaxid', 'ProveedorclienteCalle', 'ProveedorclienteNumero', 'ProveedorclienteInterior', 'ProveedorclienteColonia', 'ProveedorclienteCiudad', 'ProveedorclienteEstado', 'ProveedorclientePais', 'ProveedorclienteNombrecontacto', 'ProveedorclienteEmailcontacto', 'ProveedorclienteTelefonocontacto', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente', 'idcliente', 'proveedorclienteTaxid', 'proveedorclienteCalle', 'proveedorclienteNumero', 'proveedorclienteInterior', 'proveedorclienteColonia', 'proveedorclienteCiudad', 'proveedorclienteEstado', 'proveedorclientePais', 'proveedorclienteNombrecontacto', 'proveedorclienteEmailcontacto', 'proveedorclienteTelefonocontacto', ),
+        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE, ProveedorclientePeer::IDCLIENTE, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE', 'IDCLIENTE', 'PROVEEDORCLIENTE_TAXID', 'PROVEEDORCLIENTE_CALLE', 'PROVEEDORCLIENTE_NUMERO', 'PROVEEDORCLIENTE_INTERIOR', 'PROVEEDORCLIENTE_COLONIA', 'PROVEEDORCLIENTE_CIUDAD', 'PROVEEDORCLIENTE_ESTADO', 'PROVEEDORCLIENTE_PAIS', 'PROVEEDORCLIENTE_NOMBRECONTACTO', 'PROVEEDORCLIENTE_EMAILCONTACTO', 'PROVEEDORCLIENTE_TELEFONOCONTACTO', ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente', 'idcliente', 'proveedorcliente_taxid', 'proveedorcliente_calle', 'proveedorcliente_numero', 'proveedorcliente_interior', 'proveedorcliente_colonia', 'proveedorcliente_ciudad', 'proveedorcliente_estado', 'proveedorcliente_pais', 'proveedorcliente_nombrecontacto', 'proveedorcliente_emailcontacto', 'proveedorcliente_telefonocontacto', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
     );
 
     /**
@@ -102,12 +105,12 @@ abstract class BaseProveedorclientePeer
      * e.g. ProveedorclientePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente' => 0, 'ProveedorclienteTaxid' => 1, 'ProveedorclienteCalle' => 2, 'ProveedorclienteNumero' => 3, 'ProveedorclienteInterior' => 4, 'ProveedorclienteColonia' => 5, 'ProveedorclienteCiudad' => 6, 'ProveedorclienteEstado' => 7, 'ProveedorclientePais' => 8, 'ProveedorclienteNombrecontacto' => 9, 'ProveedorclienteEmailcontacto' => 10, 'ProveedorclienteTelefonocontacto' => 11, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente' => 0, 'proveedorclienteTaxid' => 1, 'proveedorclienteCalle' => 2, 'proveedorclienteNumero' => 3, 'proveedorclienteInterior' => 4, 'proveedorclienteColonia' => 5, 'proveedorclienteCiudad' => 6, 'proveedorclienteEstado' => 7, 'proveedorclientePais' => 8, 'proveedorclienteNombrecontacto' => 9, 'proveedorclienteEmailcontacto' => 10, 'proveedorclienteTelefonocontacto' => 11, ),
-        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE => 0, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID => 1, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE => 2, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO => 3, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR => 4, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA => 5, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD => 6, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO => 7, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS => 8, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO => 9, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO => 10, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO => 11, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE' => 0, 'PROVEEDORCLIENTE_TAXID' => 1, 'PROVEEDORCLIENTE_CALLE' => 2, 'PROVEEDORCLIENTE_NUMERO' => 3, 'PROVEEDORCLIENTE_INTERIOR' => 4, 'PROVEEDORCLIENTE_COLONIA' => 5, 'PROVEEDORCLIENTE_CIUDAD' => 6, 'PROVEEDORCLIENTE_ESTADO' => 7, 'PROVEEDORCLIENTE_PAIS' => 8, 'PROVEEDORCLIENTE_NOMBRECONTACTO' => 9, 'PROVEEDORCLIENTE_EMAILCONTACTO' => 10, 'PROVEEDORCLIENTE_TELEFONOCONTACTO' => 11, ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente' => 0, 'proveedorcliente_taxid' => 1, 'proveedorcliente_calle' => 2, 'proveedorcliente_numero' => 3, 'proveedorcliente_interior' => 4, 'proveedorcliente_colonia' => 5, 'proveedorcliente_ciudad' => 6, 'proveedorcliente_estado' => 7, 'proveedorcliente_pais' => 8, 'proveedorcliente_nombrecontacto' => 9, 'proveedorcliente_emailcontacto' => 10, 'proveedorcliente_telefonocontacto' => 11, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente' => 0, 'Idcliente' => 1, 'ProveedorclienteTaxid' => 2, 'ProveedorclienteCalle' => 3, 'ProveedorclienteNumero' => 4, 'ProveedorclienteInterior' => 5, 'ProveedorclienteColonia' => 6, 'ProveedorclienteCiudad' => 7, 'ProveedorclienteEstado' => 8, 'ProveedorclientePais' => 9, 'ProveedorclienteNombrecontacto' => 10, 'ProveedorclienteEmailcontacto' => 11, 'ProveedorclienteTelefonocontacto' => 12, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente' => 0, 'idcliente' => 1, 'proveedorclienteTaxid' => 2, 'proveedorclienteCalle' => 3, 'proveedorclienteNumero' => 4, 'proveedorclienteInterior' => 5, 'proveedorclienteColonia' => 6, 'proveedorclienteCiudad' => 7, 'proveedorclienteEstado' => 8, 'proveedorclientePais' => 9, 'proveedorclienteNombrecontacto' => 10, 'proveedorclienteEmailcontacto' => 11, 'proveedorclienteTelefonocontacto' => 12, ),
+        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE => 0, ProveedorclientePeer::IDCLIENTE => 1, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID => 2, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE => 3, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO => 4, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR => 5, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA => 6, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD => 7, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO => 8, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS => 9, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO => 10, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO => 11, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO => 12, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE' => 0, 'IDCLIENTE' => 1, 'PROVEEDORCLIENTE_TAXID' => 2, 'PROVEEDORCLIENTE_CALLE' => 3, 'PROVEEDORCLIENTE_NUMERO' => 4, 'PROVEEDORCLIENTE_INTERIOR' => 5, 'PROVEEDORCLIENTE_COLONIA' => 6, 'PROVEEDORCLIENTE_CIUDAD' => 7, 'PROVEEDORCLIENTE_ESTADO' => 8, 'PROVEEDORCLIENTE_PAIS' => 9, 'PROVEEDORCLIENTE_NOMBRECONTACTO' => 10, 'PROVEEDORCLIENTE_EMAILCONTACTO' => 11, 'PROVEEDORCLIENTE_TELEFONOCONTACTO' => 12, ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente' => 0, 'idcliente' => 1, 'proveedorcliente_taxid' => 2, 'proveedorcliente_calle' => 3, 'proveedorcliente_numero' => 4, 'proveedorcliente_interior' => 5, 'proveedorcliente_colonia' => 6, 'proveedorcliente_ciudad' => 7, 'proveedorcliente_estado' => 8, 'proveedorcliente_pais' => 9, 'proveedorcliente_nombrecontacto' => 10, 'proveedorcliente_emailcontacto' => 11, 'proveedorcliente_telefonocontacto' => 12, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
     );
 
     /**
@@ -182,6 +185,7 @@ abstract class BaseProveedorclientePeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(ProveedorclientePeer::IDPROVEEDORCLIENTE);
+            $criteria->addSelectColumn(ProveedorclientePeer::IDCLIENTE);
             $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_TAXID);
             $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_CALLE);
             $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO);
@@ -195,6 +199,7 @@ abstract class BaseProveedorclientePeer
             $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO);
         } else {
             $criteria->addSelectColumn($alias . '.idproveedorcliente');
+            $criteria->addSelectColumn($alias . '.idcliente');
             $criteria->addSelectColumn($alias . '.proveedorcliente_taxid');
             $criteria->addSelectColumn($alias . '.proveedorcliente_calle');
             $criteria->addSelectColumn($alias . '.proveedorcliente_numero');
@@ -504,6 +509,244 @@ abstract class BaseProveedorclientePeer
         }
 
         return array($obj, $col);
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Cliente table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinCliente(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(ProveedorclientePeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            ProveedorclientePeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(ProveedorclientePeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(ProveedorclientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(ProveedorclientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of Proveedorcliente objects pre-filled with their Cliente objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Proveedorcliente objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinCliente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ProveedorclientePeer::DATABASE_NAME);
+        }
+
+        ProveedorclientePeer::addSelectColumns($criteria);
+        $startcol = ProveedorclientePeer::NUM_HYDRATE_COLUMNS;
+        ClientePeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(ProveedorclientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ProveedorclientePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ProveedorclientePeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = ProveedorclientePeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ProveedorclientePeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = ClientePeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = ClientePeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = ClientePeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    ClientePeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Proveedorcliente) to $obj2 (Cliente)
+                $obj2->addProveedorcliente($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining all related tables
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(ProveedorclientePeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            ProveedorclientePeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(ProveedorclientePeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(ProveedorclientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(ProveedorclientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+    /**
+     * Selects a collection of Proveedorcliente objects pre-filled with all related objects.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Proveedorcliente objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ProveedorclientePeer::DATABASE_NAME);
+        }
+
+        ProveedorclientePeer::addSelectColumns($criteria);
+        $startcol2 = ProveedorclientePeer::NUM_HYDRATE_COLUMNS;
+
+        ClientePeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + ClientePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(ProveedorclientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ProveedorclientePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ProveedorclientePeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = ProveedorclientePeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ProveedorclientePeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+            // Add objects for joined Cliente rows
+
+            $key2 = ClientePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = ClientePeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = ClientePeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    ClientePeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (Proveedorcliente) to the collection in $obj2 (Cliente)
+                $obj2->addProveedorcliente($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
     }
 
     /**

@@ -39,7 +39,7 @@ class ExpedientehistorialTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idexpedientehistorial', 'Idexpedientehistorial', 'INTEGER', true, null, null);
-        $this->addForeignKey('idexpediente', 'Idexpediente', 'INTEGER', 'expediente', 'idexpediente', false, null, null);
+        $this->addForeignKey('idexpedienteservicio', 'Idexpedienteservicio', 'INTEGER', 'expedienteservicio', 'idexpedienteservicio', false, null, null);
         $this->addForeignKey('idestadoservicio', 'Idestadoservicio', 'INTEGER', 'servicioestado', 'idservicioestado', false, null, null);
         $this->addColumn('expedientehistorial_fecha', 'ExpedientehistorialFecha', 'TIMESTAMP', false, null, null);
         $this->addColumn('expedientehistorial_nota', 'ExpedientehistorialNota', 'VARCHAR', false, 45, null);
@@ -51,7 +51,7 @@ class ExpedientehistorialTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Expediente', 'Expediente', RelationMap::MANY_TO_ONE, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Expedienteservicio', 'Expedienteservicio', RelationMap::MANY_TO_ONE, array('idexpedienteservicio' => 'idexpedienteservicio', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Servicioestado', 'Servicioestado', RelationMap::MANY_TO_ONE, array('idestadoservicio' => 'idservicioestado', ), 'CASCADE', 'CASCADE');
     } // buildRelations()
 

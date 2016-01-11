@@ -35,8 +35,8 @@ abstract class BaseExpedientehistorialPeer
     /** the column name for the idexpedientehistorial field */
     const IDEXPEDIENTEHISTORIAL = 'expedientehistorial.idexpedientehistorial';
 
-    /** the column name for the idexpediente field */
-    const IDEXPEDIENTE = 'expedientehistorial.idexpediente';
+    /** the column name for the idexpedienteservicio field */
+    const IDEXPEDIENTESERVICIO = 'expedientehistorial.idexpedienteservicio';
 
     /** the column name for the idestadoservicio field */
     const IDESTADOSERVICIO = 'expedientehistorial.idestadoservicio';
@@ -66,11 +66,11 @@ abstract class BaseExpedientehistorialPeer
      * e.g. ExpedientehistorialPeer::$fieldNames[ExpedientehistorialPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientehistorial', 'Idexpediente', 'Idestadoservicio', 'ExpedientehistorialFecha', 'ExpedientehistorialNota', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientehistorial', 'idexpediente', 'idestadoservicio', 'expedientehistorialFecha', 'expedientehistorialNota', ),
-        BasePeer::TYPE_COLNAME => array (ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL, ExpedientehistorialPeer::IDEXPEDIENTE, ExpedientehistorialPeer::IDESTADOSERVICIO, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_FECHA, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_NOTA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEHISTORIAL', 'IDEXPEDIENTE', 'IDESTADOSERVICIO', 'EXPEDIENTEHISTORIAL_FECHA', 'EXPEDIENTEHISTORIAL_NOTA', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientehistorial', 'idexpediente', 'idestadoservicio', 'expedientehistorial_fecha', 'expedientehistorial_nota', ),
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientehistorial', 'Idexpedienteservicio', 'Idestadoservicio', 'ExpedientehistorialFecha', 'ExpedientehistorialNota', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientehistorial', 'idexpedienteservicio', 'idestadoservicio', 'expedientehistorialFecha', 'expedientehistorialNota', ),
+        BasePeer::TYPE_COLNAME => array (ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL, ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, ExpedientehistorialPeer::IDESTADOSERVICIO, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_FECHA, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_NOTA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEHISTORIAL', 'IDEXPEDIENTESERVICIO', 'IDESTADOSERVICIO', 'EXPEDIENTEHISTORIAL_FECHA', 'EXPEDIENTEHISTORIAL_NOTA', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientehistorial', 'idexpedienteservicio', 'idestadoservicio', 'expedientehistorial_fecha', 'expedientehistorial_nota', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
@@ -81,11 +81,11 @@ abstract class BaseExpedientehistorialPeer
      * e.g. ExpedientehistorialPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientehistorial' => 0, 'Idexpediente' => 1, 'Idestadoservicio' => 2, 'ExpedientehistorialFecha' => 3, 'ExpedientehistorialNota' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientehistorial' => 0, 'idexpediente' => 1, 'idestadoservicio' => 2, 'expedientehistorialFecha' => 3, 'expedientehistorialNota' => 4, ),
-        BasePeer::TYPE_COLNAME => array (ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL => 0, ExpedientehistorialPeer::IDEXPEDIENTE => 1, ExpedientehistorialPeer::IDESTADOSERVICIO => 2, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_FECHA => 3, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_NOTA => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEHISTORIAL' => 0, 'IDEXPEDIENTE' => 1, 'IDESTADOSERVICIO' => 2, 'EXPEDIENTEHISTORIAL_FECHA' => 3, 'EXPEDIENTEHISTORIAL_NOTA' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientehistorial' => 0, 'idexpediente' => 1, 'idestadoservicio' => 2, 'expedientehistorial_fecha' => 3, 'expedientehistorial_nota' => 4, ),
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientehistorial' => 0, 'Idexpedienteservicio' => 1, 'Idestadoservicio' => 2, 'ExpedientehistorialFecha' => 3, 'ExpedientehistorialNota' => 4, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientehistorial' => 0, 'idexpedienteservicio' => 1, 'idestadoservicio' => 2, 'expedientehistorialFecha' => 3, 'expedientehistorialNota' => 4, ),
+        BasePeer::TYPE_COLNAME => array (ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL => 0, ExpedientehistorialPeer::IDEXPEDIENTESERVICIO => 1, ExpedientehistorialPeer::IDESTADOSERVICIO => 2, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_FECHA => 3, ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_NOTA => 4, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEHISTORIAL' => 0, 'IDEXPEDIENTESERVICIO' => 1, 'IDESTADOSERVICIO' => 2, 'EXPEDIENTEHISTORIAL_FECHA' => 3, 'EXPEDIENTEHISTORIAL_NOTA' => 4, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientehistorial' => 0, 'idexpedienteservicio' => 1, 'idestadoservicio' => 2, 'expedientehistorial_fecha' => 3, 'expedientehistorial_nota' => 4, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
@@ -161,13 +161,13 @@ abstract class BaseExpedientehistorialPeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL);
-            $criteria->addSelectColumn(ExpedientehistorialPeer::IDEXPEDIENTE);
+            $criteria->addSelectColumn(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO);
             $criteria->addSelectColumn(ExpedientehistorialPeer::IDESTADOSERVICIO);
             $criteria->addSelectColumn(ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_FECHA);
             $criteria->addSelectColumn(ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_NOTA);
         } else {
             $criteria->addSelectColumn($alias . '.idexpedientehistorial');
-            $criteria->addSelectColumn($alias . '.idexpediente');
+            $criteria->addSelectColumn($alias . '.idexpedienteservicio');
             $criteria->addSelectColumn($alias . '.idestadoservicio');
             $criteria->addSelectColumn($alias . '.expedientehistorial_fecha');
             $criteria->addSelectColumn($alias . '.expedientehistorial_nota');
@@ -473,7 +473,7 @@ abstract class BaseExpedientehistorialPeer
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Expediente table
+     * Returns the number of rows matching criteria, joining the related Expedienteservicio table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -481,7 +481,7 @@ abstract class BaseExpedientehistorialPeer
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinExpediente(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinExpedienteservicio(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -508,7 +508,7 @@ abstract class BaseExpedientehistorialPeer
             $con = Propel::getConnection(ExpedientehistorialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, ExpedienteservicioPeer::IDEXPEDIENTESERVICIO, $join_behavior);
 
         $stmt = BasePeer::doCount($criteria, $con);
 
@@ -575,7 +575,7 @@ abstract class BaseExpedientehistorialPeer
 
 
     /**
-     * Selects a collection of Expedientehistorial objects pre-filled with their Expediente objects.
+     * Selects a collection of Expedientehistorial objects pre-filled with their Expedienteservicio objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
@@ -583,7 +583,7 @@ abstract class BaseExpedientehistorialPeer
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinExpediente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinExpedienteservicio(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -594,9 +594,9 @@ abstract class BaseExpedientehistorialPeer
 
         ExpedientehistorialPeer::addSelectColumns($criteria);
         $startcol = ExpedientehistorialPeer::NUM_HYDRATE_COLUMNS;
-        ExpedientePeer::addSelectColumns($criteria);
+        ExpedienteservicioPeer::addSelectColumns($criteria);
 
-        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, ExpedienteservicioPeer::IDEXPEDIENTESERVICIO, $join_behavior);
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
@@ -616,19 +616,19 @@ abstract class BaseExpedientehistorialPeer
                 ExpedientehistorialPeer::addInstanceToPool($obj1, $key1);
             } // if $obj1 already loaded
 
-            $key2 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol);
+            $key2 = ExpedienteservicioPeer::getPrimaryKeyHashFromRow($row, $startcol);
             if ($key2 !== null) {
-                $obj2 = ExpedientePeer::getInstanceFromPool($key2);
+                $obj2 = ExpedienteservicioPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = ExpedientePeer::getOMClass();
+                    $cls = ExpedienteservicioPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol);
-                    ExpedientePeer::addInstanceToPool($obj2, $key2);
+                    ExpedienteservicioPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 already loaded
 
-                // Add the $obj1 (Expedientehistorial) to $obj2 (Expediente)
+                // Add the $obj1 (Expedientehistorial) to $obj2 (Expedienteservicio)
                 $obj2->addExpedientehistorial($obj1);
 
             } // if joined row was not null
@@ -744,7 +744,7 @@ abstract class BaseExpedientehistorialPeer
             $con = Propel::getConnection(ExpedientehistorialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, ExpedienteservicioPeer::IDEXPEDIENTESERVICIO, $join_behavior);
 
         $criteria->addJoin(ExpedientehistorialPeer::IDESTADOSERVICIO, ServicioestadoPeer::IDSERVICIOESTADO, $join_behavior);
 
@@ -782,13 +782,13 @@ abstract class BaseExpedientehistorialPeer
         ExpedientehistorialPeer::addSelectColumns($criteria);
         $startcol2 = ExpedientehistorialPeer::NUM_HYDRATE_COLUMNS;
 
-        ExpedientePeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + ExpedientePeer::NUM_HYDRATE_COLUMNS;
+        ExpedienteservicioPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + ExpedienteservicioPeer::NUM_HYDRATE_COLUMNS;
 
         ServicioestadoPeer::addSelectColumns($criteria);
         $startcol4 = $startcol3 + ServicioestadoPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, ExpedienteservicioPeer::IDEXPEDIENTESERVICIO, $join_behavior);
 
         $criteria->addJoin(ExpedientehistorialPeer::IDESTADOSERVICIO, ServicioestadoPeer::IDSERVICIOESTADO, $join_behavior);
 
@@ -809,21 +809,21 @@ abstract class BaseExpedientehistorialPeer
                 ExpedientehistorialPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-            // Add objects for joined Expediente rows
+            // Add objects for joined Expedienteservicio rows
 
-            $key2 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            $key2 = ExpedienteservicioPeer::getPrimaryKeyHashFromRow($row, $startcol2);
             if ($key2 !== null) {
-                $obj2 = ExpedientePeer::getInstanceFromPool($key2);
+                $obj2 = ExpedienteservicioPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = ExpedientePeer::getOMClass();
+                    $cls = ExpedienteservicioPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    ExpedientePeer::addInstanceToPool($obj2, $key2);
+                    ExpedienteservicioPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 loaded
 
-                // Add the $obj1 (Expedientehistorial) to the collection in $obj2 (Expediente)
+                // Add the $obj1 (Expedientehistorial) to the collection in $obj2 (Expedienteservicio)
                 $obj2->addExpedientehistorial($obj1);
             } // if joined row not null
 
@@ -854,7 +854,7 @@ abstract class BaseExpedientehistorialPeer
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related Expediente table
+     * Returns the number of rows matching criteria, joining the related Expedienteservicio table
      *
      * @param      Criteria $criteria
      * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
@@ -862,7 +862,7 @@ abstract class BaseExpedientehistorialPeer
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
      * @return int Number of matching rows.
      */
-    public static function doCountJoinAllExceptExpediente(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinAllExceptExpedienteservicio(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
@@ -940,7 +940,7 @@ abstract class BaseExpedientehistorialPeer
             $con = Propel::getConnection(ExpedientehistorialPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, ExpedienteservicioPeer::IDEXPEDIENTESERVICIO, $join_behavior);
 
         $stmt = BasePeer::doCount($criteria, $con);
 
@@ -956,7 +956,7 @@ abstract class BaseExpedientehistorialPeer
 
 
     /**
-     * Selects a collection of Expedientehistorial objects pre-filled with all related objects except Expediente.
+     * Selects a collection of Expedientehistorial objects pre-filled with all related objects except Expedienteservicio.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -965,7 +965,7 @@ abstract class BaseExpedientehistorialPeer
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptExpediente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptExpedienteservicio(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -1053,10 +1053,10 @@ abstract class BaseExpedientehistorialPeer
         ExpedientehistorialPeer::addSelectColumns($criteria);
         $startcol2 = ExpedientehistorialPeer::NUM_HYDRATE_COLUMNS;
 
-        ExpedientePeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + ExpedientePeer::NUM_HYDRATE_COLUMNS;
+        ExpedienteservicioPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + ExpedienteservicioPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTE, ExpedientePeer::IDEXPEDIENTE, $join_behavior);
+        $criteria->addJoin(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, ExpedienteservicioPeer::IDEXPEDIENTESERVICIO, $join_behavior);
 
 
         $stmt = BasePeer::doSelect($criteria, $con);
@@ -1076,21 +1076,21 @@ abstract class BaseExpedientehistorialPeer
                 ExpedientehistorialPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-                // Add objects for joined Expediente rows
+                // Add objects for joined Expedienteservicio rows
 
-                $key2 = ExpedientePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                $key2 = ExpedienteservicioPeer::getPrimaryKeyHashFromRow($row, $startcol2);
                 if ($key2 !== null) {
-                    $obj2 = ExpedientePeer::getInstanceFromPool($key2);
+                    $obj2 = ExpedienteservicioPeer::getInstanceFromPool($key2);
                     if (!$obj2) {
 
-                        $cls = ExpedientePeer::getOMClass();
+                        $cls = ExpedienteservicioPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    ExpedientePeer::addInstanceToPool($obj2, $key2);
+                    ExpedienteservicioPeer::addInstanceToPool($obj2, $key2);
                 } // if $obj2 already loaded
 
-                // Add the $obj1 (Expedientehistorial) to the collection in $obj2 (Expediente)
+                // Add the $obj1 (Expedientehistorial) to the collection in $obj2 (Expedienteservicio)
                 $obj2->addExpedientehistorial($obj1);
 
             } // if joined row is not null

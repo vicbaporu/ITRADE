@@ -127,6 +127,54 @@ return array(
                                     
                                 ),
                             ),
+                            'servicios' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/servicios[/:action][/:id][/]',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Catalogo\Controller\Servicios',
+                                        'action'        => 'index',
+                                    ),
+                                    'constraints' => array(
+                                        'action' => 'index|nuevo|editar|serverside|eliminar',
+                                        'id' => '[0-9]*',
+                                    ),
+                                    
+                                ),
+                            ),
+                        ),
+                    ),
+                    'clientes' => array(
+                        'type'    => 'literal',
+                        'options' => array(
+                            'route'    => '/clientes',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                'action'        => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'serverside' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/serverside',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'serverside',
+                                    ),
+                                ),
+                            ),
+                            'nuevo' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/nuevo',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'nuevo',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
@@ -246,9 +294,13 @@ return array(
             'Admin\Catalogo\Controller\Proveedor' => 'Admin\Catalogo\Controller\ProveedorController',
             'Admin\Catalogo\Controller\Gastos' => 'Admin\Catalogo\Controller\GastosController',
             'Admin\Catalogo\Controller\Categoriagastos' => 'Admin\Catalogo\Controller\CategoriagastosController',
+            'Admin\Catalogo\Controller\Servicios' => 'Admin\Catalogo\Controller\ServiciosController',
              
              //LOGIN
             'Login\Controller\Login' => 'Login\Controller\LoginController',
+            
+            //CLIENTES
+            'Admin\Clientes\Controller\Clientes' => 'Admin\Clientes\Controller\ClientesController',
 
                          
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',

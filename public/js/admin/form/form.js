@@ -27,6 +27,15 @@ $(document).ready(function(){
                 $(this).siblings('i').addClass('fa fa-exclamation');
                 $(this).closest('div').siblings('span.error').text('Este campo no puede ir vacío');
             }
+            if($(this).hasClass('email-field') && $(this).val() !== ""){
+                var valid = true;
+                if(!validateEmail($(this).val())){
+                    error = true;
+                    $(this).closest('div').addClass('error-control');
+                    $(this).siblings('i').addClass('fa fa-exclamation');
+                    $(this).closest('div').siblings('span.error').text('Por favor ingrese un correo electronico valido');
+                }
+            }
         });
         
         //Validacion de campos vacios select
@@ -41,7 +50,7 @@ $(document).ready(function(){
         });
         
         
-        if(!empty){
+        if(!empty && !error){
             
             
                 //LAS VALIDACIONES AJAX
@@ -61,7 +70,6 @@ $(document).ready(function(){
                        dataType: 'json',
                        data:{field:field,value:value},
                        success:function(data){
-                           console.log(data.exist);
                           if(data.exist){
                               error = true;
                               input.closest('div').addClass('error-control');
@@ -92,6 +100,12 @@ $(document).ready(function(){
         
         
     });
+    
+    
+    function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
             
 //        console.log($form);return;
 //        $form.find('span.error').remove();

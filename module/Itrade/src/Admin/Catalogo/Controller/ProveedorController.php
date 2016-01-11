@@ -132,7 +132,7 @@ class ProveedorController extends AbstractActionController
            
             
         }else{
-            return $this->redirect()->toRoute('admin/catalogo/proveedor', array('action' => 'index'));
+            return $this->redirect()->toRoute('admin/catalogo/proveedores', array('action' => 'index'));
         }
         
     }

@@ -36,10 +36,10 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     protected $idexpedientehistorial;
 
     /**
-     * The value for the idexpediente field.
+     * The value for the idexpedienteservicio field.
      * @var        int
      */
-    protected $idexpediente;
+    protected $idexpedienteservicio;
 
     /**
      * The value for the idestadoservicio field.
@@ -60,9 +60,9 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     protected $expedientehistorial_nota;
 
     /**
-     * @var        Expediente
+     * @var        Expedienteservicio
      */
-    protected $aExpediente;
+    protected $aExpedienteservicio;
 
     /**
      * @var        Servicioestado
@@ -101,14 +101,14 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [idexpediente] column value.
+     * Get the [idexpedienteservicio] column value.
      *
      * @return int
      */
-    public function getIdexpediente()
+    public function getIdexpedienteservicio()
     {
 
-        return $this->idexpediente;
+        return $this->idexpedienteservicio;
     }
 
     /**
@@ -195,29 +195,29 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     } // setIdexpedientehistorial()
 
     /**
-     * Set the value of [idexpediente] column.
+     * Set the value of [idexpedienteservicio] column.
      *
      * @param  int $v new value
      * @return Expedientehistorial The current object (for fluent API support)
      */
-    public function setIdexpediente($v)
+    public function setIdexpedienteservicio($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->idexpediente !== $v) {
-            $this->idexpediente = $v;
-            $this->modifiedColumns[] = ExpedientehistorialPeer::IDEXPEDIENTE;
+        if ($this->idexpedienteservicio !== $v) {
+            $this->idexpedienteservicio = $v;
+            $this->modifiedColumns[] = ExpedientehistorialPeer::IDEXPEDIENTESERVICIO;
         }
 
-        if ($this->aExpediente !== null && $this->aExpediente->getIdexpediente() !== $v) {
-            $this->aExpediente = null;
+        if ($this->aExpedienteservicio !== null && $this->aExpedienteservicio->getIdexpedienteservicio() !== $v) {
+            $this->aExpedienteservicio = null;
         }
 
 
         return $this;
-    } // setIdexpediente()
+    } // setIdexpedienteservicio()
 
     /**
      * Set the value of [idestadoservicio] column.
@@ -321,7 +321,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
         try {
 
             $this->idexpedientehistorial = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->idexpediente = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->idexpedienteservicio = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->idestadoservicio = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
             $this->expedientehistorial_fecha = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->expedientehistorial_nota = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
@@ -357,8 +357,8 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
-        if ($this->aExpediente !== null && $this->idexpediente !== $this->aExpediente->getIdexpediente()) {
-            $this->aExpediente = null;
+        if ($this->aExpedienteservicio !== null && $this->idexpedienteservicio !== $this->aExpedienteservicio->getIdexpedienteservicio()) {
+            $this->aExpedienteservicio = null;
         }
         if ($this->aServicioestado !== null && $this->idestadoservicio !== $this->aServicioestado->getIdservicioestado()) {
             $this->aServicioestado = null;
@@ -402,7 +402,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aExpediente = null;
+            $this->aExpedienteservicio = null;
             $this->aServicioestado = null;
         } // if (deep)
     }
@@ -522,11 +522,11 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aExpediente !== null) {
-                if ($this->aExpediente->isModified() || $this->aExpediente->isNew()) {
-                    $affectedRows += $this->aExpediente->save($con);
+            if ($this->aExpedienteservicio !== null) {
+                if ($this->aExpedienteservicio->isModified() || $this->aExpedienteservicio->isNew()) {
+                    $affectedRows += $this->aExpedienteservicio->save($con);
                 }
-                $this->setExpediente($this->aExpediente);
+                $this->setExpedienteservicio($this->aExpedienteservicio);
             }
 
             if ($this->aServicioestado !== null) {
@@ -576,8 +576,8 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL)) {
             $modifiedColumns[':p' . $index++]  = '`idexpedientehistorial`';
         }
-        if ($this->isColumnModified(ExpedientehistorialPeer::IDEXPEDIENTE)) {
-            $modifiedColumns[':p' . $index++]  = '`idexpediente`';
+        if ($this->isColumnModified(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO)) {
+            $modifiedColumns[':p' . $index++]  = '`idexpedienteservicio`';
         }
         if ($this->isColumnModified(ExpedientehistorialPeer::IDESTADOSERVICIO)) {
             $modifiedColumns[':p' . $index++]  = '`idestadoservicio`';
@@ -602,8 +602,8 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
                     case '`idexpedientehistorial`':
                         $stmt->bindValue($identifier, $this->idexpedientehistorial, PDO::PARAM_INT);
                         break;
-                    case '`idexpediente`':
-                        $stmt->bindValue($identifier, $this->idexpediente, PDO::PARAM_INT);
+                    case '`idexpedienteservicio`':
+                        $stmt->bindValue($identifier, $this->idexpedienteservicio, PDO::PARAM_INT);
                         break;
                     case '`idestadoservicio`':
                         $stmt->bindValue($identifier, $this->idestadoservicio, PDO::PARAM_INT);
@@ -713,9 +713,9 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aExpediente !== null) {
-                if (!$this->aExpediente->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aExpediente->getValidationFailures());
+            if ($this->aExpedienteservicio !== null) {
+                if (!$this->aExpedienteservicio->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aExpedienteservicio->getValidationFailures());
                 }
             }
 
@@ -770,7 +770,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
                 return $this->getIdexpedientehistorial();
                 break;
             case 1:
-                return $this->getIdexpediente();
+                return $this->getIdexpedienteservicio();
                 break;
             case 2:
                 return $this->getIdestadoservicio();
@@ -811,7 +811,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
         $keys = ExpedientehistorialPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getIdexpedientehistorial(),
-            $keys[1] => $this->getIdexpediente(),
+            $keys[1] => $this->getIdexpedienteservicio(),
             $keys[2] => $this->getIdestadoservicio(),
             $keys[3] => $this->getExpedientehistorialFecha(),
             $keys[4] => $this->getExpedientehistorialNota(),
@@ -822,8 +822,8 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
-            if (null !== $this->aExpediente) {
-                $result['Expediente'] = $this->aExpediente->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            if (null !== $this->aExpedienteservicio) {
+                $result['Expedienteservicio'] = $this->aExpedienteservicio->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
             if (null !== $this->aServicioestado) {
                 $result['Servicioestado'] = $this->aServicioestado->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
@@ -866,7 +866,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
                 $this->setIdexpedientehistorial($value);
                 break;
             case 1:
-                $this->setIdexpediente($value);
+                $this->setIdexpedienteservicio($value);
                 break;
             case 2:
                 $this->setIdestadoservicio($value);
@@ -902,7 +902,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
         $keys = ExpedientehistorialPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setIdexpedientehistorial($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setIdexpediente($arr[$keys[1]]);
+        if (array_key_exists($keys[1], $arr)) $this->setIdexpedienteservicio($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setIdestadoservicio($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setExpedientehistorialFecha($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setExpedientehistorialNota($arr[$keys[4]]);
@@ -918,7 +918,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
         $criteria = new Criteria(ExpedientehistorialPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL)) $criteria->add(ExpedientehistorialPeer::IDEXPEDIENTEHISTORIAL, $this->idexpedientehistorial);
-        if ($this->isColumnModified(ExpedientehistorialPeer::IDEXPEDIENTE)) $criteria->add(ExpedientehistorialPeer::IDEXPEDIENTE, $this->idexpediente);
+        if ($this->isColumnModified(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO)) $criteria->add(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, $this->idexpedienteservicio);
         if ($this->isColumnModified(ExpedientehistorialPeer::IDESTADOSERVICIO)) $criteria->add(ExpedientehistorialPeer::IDESTADOSERVICIO, $this->idestadoservicio);
         if ($this->isColumnModified(ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_FECHA)) $criteria->add(ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_FECHA, $this->expedientehistorial_fecha);
         if ($this->isColumnModified(ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_NOTA)) $criteria->add(ExpedientehistorialPeer::EXPEDIENTEHISTORIAL_NOTA, $this->expedientehistorial_nota);
@@ -985,7 +985,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setIdexpediente($this->getIdexpediente());
+        $copyObj->setIdexpedienteservicio($this->getIdexpedienteservicio());
         $copyObj->setIdestadoservicio($this->getIdestadoservicio());
         $copyObj->setExpedientehistorialFecha($this->getExpedientehistorialFecha());
         $copyObj->setExpedientehistorialNota($this->getExpedientehistorialNota());
@@ -1048,24 +1048,24 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     }
 
     /**
-     * Declares an association between this object and a Expediente object.
+     * Declares an association between this object and a Expedienteservicio object.
      *
-     * @param                  Expediente $v
+     * @param                  Expedienteservicio $v
      * @return Expedientehistorial The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setExpediente(Expediente $v = null)
+    public function setExpedienteservicio(Expedienteservicio $v = null)
     {
         if ($v === null) {
-            $this->setIdexpediente(NULL);
+            $this->setIdexpedienteservicio(NULL);
         } else {
-            $this->setIdexpediente($v->getIdexpediente());
+            $this->setIdexpedienteservicio($v->getIdexpedienteservicio());
         }
 
-        $this->aExpediente = $v;
+        $this->aExpedienteservicio = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the Expediente object, it will not be re-added.
+        // If this object has already been added to the Expedienteservicio object, it will not be re-added.
         if ($v !== null) {
             $v->addExpedientehistorial($this);
         }
@@ -1076,27 +1076,27 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
 
 
     /**
-     * Get the associated Expediente object
+     * Get the associated Expedienteservicio object
      *
      * @param PropelPDO $con Optional Connection object.
      * @param $doQuery Executes a query to get the object if required
-     * @return Expediente The associated Expediente object.
+     * @return Expedienteservicio The associated Expedienteservicio object.
      * @throws PropelException
      */
-    public function getExpediente(PropelPDO $con = null, $doQuery = true)
+    public function getExpedienteservicio(PropelPDO $con = null, $doQuery = true)
     {
-        if ($this->aExpediente === null && ($this->idexpediente !== null) && $doQuery) {
-            $this->aExpediente = ExpedienteQuery::create()->findPk($this->idexpediente, $con);
+        if ($this->aExpedienteservicio === null && ($this->idexpedienteservicio !== null) && $doQuery) {
+            $this->aExpedienteservicio = ExpedienteservicioQuery::create()->findPk($this->idexpedienteservicio, $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aExpediente->addExpedientehistorials($this);
+                $this->aExpedienteservicio->addExpedientehistorials($this);
              */
         }
 
-        return $this->aExpediente;
+        return $this->aExpedienteservicio;
     }
 
     /**
@@ -1157,7 +1157,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     public function clear()
     {
         $this->idexpedientehistorial = null;
-        $this->idexpediente = null;
+        $this->idexpedienteservicio = null;
         $this->idestadoservicio = null;
         $this->expedientehistorial_fecha = null;
         $this->expedientehistorial_nota = null;
@@ -1183,8 +1183,8 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->aExpediente instanceof Persistent) {
-              $this->aExpediente->clearAllReferences($deep);
+            if ($this->aExpedienteservicio instanceof Persistent) {
+              $this->aExpedienteservicio->clearAllReferences($deep);
             }
             if ($this->aServicioestado instanceof Persistent) {
               $this->aServicioestado->clearAllReferences($deep);
@@ -1193,7 +1193,7 @@ abstract class BaseExpedientehistorial extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        $this->aExpediente = null;
+        $this->aExpedienteservicio = null;
         $this->aServicioestado = null;
     }
 

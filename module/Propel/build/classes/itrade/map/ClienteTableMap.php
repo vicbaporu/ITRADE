@@ -39,23 +39,27 @@ class ClienteTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idcliente', 'Idcliente', 'INTEGER', true, null, null);
+        $this->addColumn('cliente_email', 'ClienteEmail', 'VARCHAR', false, 45, null);
+        $this->addColumn('cliente_password', 'ClientePassword', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_razonsocial', 'ClienteRazonsocial', 'VARCHAR', false, 255, null);
         $this->addColumn('cliente_rfc', 'ClienteRfc', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_calle', 'ClienteCalle', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_numero', 'ClienteNumero', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_interior', 'ClienteInterior', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_colonia', 'ClienteColonia', 'VARCHAR', false, 45, null);
+        $this->addColumn('cliente_codigopostal', 'ClienteCodigopostal', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_ciudad', 'ClienteCiudad', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_estado', 'ClienteEstado', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_pais', 'ClientePais', 'VARCHAR', false, 45, null);
-        $this->addColumn('cliente_email', 'ClienteEmail', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_telefono', 'ClienteTelefono', 'VARCHAR', false, 45, null);
+        $this->addColumn('cliente_celular', 'ClienteCelular', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_nombrecontacto', 'ClienteNombrecontacto', 'VARCHAR', false, 255, null);
-        $this->addColumn('cliente_cumpleanios', 'ClienteCumpleanios', 'VARCHAR', false, 45, null);
+        $this->addColumn('cliente_cumpleanios', 'ClienteCumpleanios', 'DATE', false, null, null);
         $this->addColumn('cliente_callefiscal', 'ClienteCallefiscal', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_numerofiscal', 'ClienteNumerofiscal', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_interiorfiscal', 'ClienteInteriorfiscal', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_coloniafiscal', 'ClienteColoniafiscal', 'VARCHAR', false, 45, null);
+        $this->addColumn('cliente_codigopostalfiscal', 'ClienteCodigopostalfiscal', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_ciudadfiscal', 'ClienteCiudadfiscal', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_estadofiscal', 'ClienteEstadofiscal', 'VARCHAR', false, 45, null);
         $this->addColumn('cliente_paisfiscal', 'ClientePaisfiscal', 'VARCHAR', false, 45, null);
@@ -74,6 +78,7 @@ class ClienteTableMap extends TableMap
         $this->addColumn('cliente_archivoszip', 'ClienteArchivoszip', 'VARCHAR', false, 45, null);
         $this->addForeignKey('idempleadocomercial', 'Idempleadocomercial', 'INTEGER', 'empleado', 'idempleado', false, null, null);
         $this->addForeignKey('idempleadooperaciones', 'Idempleadooperaciones', 'INTEGER', 'empleado', 'idempleado', false, null, null);
+        $this->addColumn('cliente_ultimologin', 'ClienteUltimologin', 'TIMESTAMP', false, null, null);
         // validators
     } // initialize()
 
@@ -85,6 +90,7 @@ class ClienteTableMap extends TableMap
         $this->addRelation('EmpleadoRelatedByIdempleadocomercial', 'Empleado', RelationMap::MANY_TO_ONE, array('idempleadocomercial' => 'idempleado', ), 'SET NULL', 'SET NULL');
         $this->addRelation('EmpleadoRelatedByIdempleadooperaciones', 'Empleado', RelationMap::MANY_TO_ONE, array('idempleadooperaciones' => 'idempleado', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Expediente', 'Expediente', RelationMap::ONE_TO_MANY, array('idcliente' => 'idcliente', ), 'SET NULL', 'SET NULL', 'Expedientes');
+        $this->addRelation('Proveedorcliente', 'Proveedorcliente', RelationMap::ONE_TO_MANY, array('idcliente' => 'idcliente', ), null, null, 'Proveedorclientes');
     } // buildRelations()
 
 } // ClienteTableMap

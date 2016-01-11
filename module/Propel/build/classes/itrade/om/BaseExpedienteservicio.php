@@ -70,6 +70,12 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
     protected $aServicio;
 
     /**
+     * @var        PropelObjectCollection|Expedientehistorial[] Collection to store aggregation of Expedientehistorial objects.
+     */
+    protected $collExpedientehistorials;
+    protected $collExpedientehistorialsPartial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -88,6 +94,12 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
      * @var        boolean
      */
     protected $alreadyInClearAllReferencesDeep = false;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $expedientehistorialsScheduledForDeletion = null;
 
     /**
      * Get the [idexpedienteservicio] column value.
@@ -435,6 +447,8 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
 
             $this->aExpediente = null;
             $this->aServicio = null;
+            $this->collExpedientehistorials = null;
+
         } // if (deep)
     }
 
@@ -576,6 +590,23 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
                 }
                 $affectedRows += 1;
                 $this->resetModified();
+            }
+
+            if ($this->expedientehistorialsScheduledForDeletion !== null) {
+                if (!$this->expedientehistorialsScheduledForDeletion->isEmpty()) {
+                    ExpedientehistorialQuery::create()
+                        ->filterByPrimaryKeys($this->expedientehistorialsScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->expedientehistorialsScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collExpedientehistorials !== null) {
+                foreach ($this->collExpedientehistorials as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
             }
 
             $this->alreadyInSave = false;
@@ -762,6 +793,14 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
             }
 
 
+                if ($this->collExpedientehistorials !== null) {
+                    foreach ($this->collExpedientehistorials as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -858,6 +897,9 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
             }
             if (null !== $this->aServicio) {
                 $result['Servicio'] = $this->aServicio->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->collExpedientehistorials) {
+                $result['Expedientehistorials'] = $this->collExpedientehistorials->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1028,6 +1070,12 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
             // store object hash to prevent cycle
             $this->startCopy = true;
 
+            foreach ($this->getExpedientehistorials() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addExpedientehistorial($relObj->copy($deepCopy));
+                }
+            }
+
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
@@ -1182,6 +1230,272 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
         return $this->aServicio;
     }
 
+
+    /**
+     * Initializes a collection based on the name of a relation.
+     * Avoids crafting an 'init[$relationName]s' method name
+     * that wouldn't work when StandardEnglishPluralizer is used.
+     *
+     * @param string $relationName The name of the relation to initialize
+     * @return void
+     */
+    public function initRelation($relationName)
+    {
+        if ('Expedientehistorial' == $relationName) {
+            $this->initExpedientehistorials();
+        }
+    }
+
+    /**
+     * Clears out the collExpedientehistorials collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return Expedienteservicio The current object (for fluent API support)
+     * @see        addExpedientehistorials()
+     */
+    public function clearExpedientehistorials()
+    {
+        $this->collExpedientehistorials = null; // important to set this to null since that means it is uninitialized
+        $this->collExpedientehistorialsPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collExpedientehistorials collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialExpedientehistorials($v = true)
+    {
+        $this->collExpedientehistorialsPartial = $v;
+    }
+
+    /**
+     * Initializes the collExpedientehistorials collection.
+     *
+     * By default this just sets the collExpedientehistorials collection to an empty array (like clearcollExpedientehistorials());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initExpedientehistorials($overrideExisting = true)
+    {
+        if (null !== $this->collExpedientehistorials && !$overrideExisting) {
+            return;
+        }
+        $this->collExpedientehistorials = new PropelObjectCollection();
+        $this->collExpedientehistorials->setModel('Expedientehistorial');
+    }
+
+    /**
+     * Gets an array of Expedientehistorial objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Expedienteservicio is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Expedientehistorial[] List of Expedientehistorial objects
+     * @throws PropelException
+     */
+    public function getExpedientehistorials($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collExpedientehistorialsPartial && !$this->isNew();
+        if (null === $this->collExpedientehistorials || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collExpedientehistorials) {
+                // return empty collection
+                $this->initExpedientehistorials();
+            } else {
+                $collExpedientehistorials = ExpedientehistorialQuery::create(null, $criteria)
+                    ->filterByExpedienteservicio($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collExpedientehistorialsPartial && count($collExpedientehistorials)) {
+                      $this->initExpedientehistorials(false);
+
+                      foreach ($collExpedientehistorials as $obj) {
+                        if (false == $this->collExpedientehistorials->contains($obj)) {
+                          $this->collExpedientehistorials->append($obj);
+                        }
+                      }
+
+                      $this->collExpedientehistorialsPartial = true;
+                    }
+
+                    $collExpedientehistorials->getInternalIterator()->rewind();
+
+                    return $collExpedientehistorials;
+                }
+
+                if ($partial && $this->collExpedientehistorials) {
+                    foreach ($this->collExpedientehistorials as $obj) {
+                        if ($obj->isNew()) {
+                            $collExpedientehistorials[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collExpedientehistorials = $collExpedientehistorials;
+                $this->collExpedientehistorialsPartial = false;
+            }
+        }
+
+        return $this->collExpedientehistorials;
+    }
+
+    /**
+     * Sets a collection of Expedientehistorial objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $expedientehistorials A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return Expedienteservicio The current object (for fluent API support)
+     */
+    public function setExpedientehistorials(PropelCollection $expedientehistorials, PropelPDO $con = null)
+    {
+        $expedientehistorialsToDelete = $this->getExpedientehistorials(new Criteria(), $con)->diff($expedientehistorials);
+
+
+        $this->expedientehistorialsScheduledForDeletion = $expedientehistorialsToDelete;
+
+        foreach ($expedientehistorialsToDelete as $expedientehistorialRemoved) {
+            $expedientehistorialRemoved->setExpedienteservicio(null);
+        }
+
+        $this->collExpedientehistorials = null;
+        foreach ($expedientehistorials as $expedientehistorial) {
+            $this->addExpedientehistorial($expedientehistorial);
+        }
+
+        $this->collExpedientehistorials = $expedientehistorials;
+        $this->collExpedientehistorialsPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Expedientehistorial objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related Expedientehistorial objects.
+     * @throws PropelException
+     */
+    public function countExpedientehistorials(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collExpedientehistorialsPartial && !$this->isNew();
+        if (null === $this->collExpedientehistorials || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collExpedientehistorials) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getExpedientehistorials());
+            }
+            $query = ExpedientehistorialQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByExpedienteservicio($this)
+                ->count($con);
+        }
+
+        return count($this->collExpedientehistorials);
+    }
+
+    /**
+     * Method called to associate a Expedientehistorial object to this object
+     * through the Expedientehistorial foreign key attribute.
+     *
+     * @param    Expedientehistorial $l Expedientehistorial
+     * @return Expedienteservicio The current object (for fluent API support)
+     */
+    public function addExpedientehistorial(Expedientehistorial $l)
+    {
+        if ($this->collExpedientehistorials === null) {
+            $this->initExpedientehistorials();
+            $this->collExpedientehistorialsPartial = true;
+        }
+
+        if (!in_array($l, $this->collExpedientehistorials->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddExpedientehistorial($l);
+
+            if ($this->expedientehistorialsScheduledForDeletion and $this->expedientehistorialsScheduledForDeletion->contains($l)) {
+                $this->expedientehistorialsScheduledForDeletion->remove($this->expedientehistorialsScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Expedientehistorial $expedientehistorial The expedientehistorial object to add.
+     */
+    protected function doAddExpedientehistorial($expedientehistorial)
+    {
+        $this->collExpedientehistorials[]= $expedientehistorial;
+        $expedientehistorial->setExpedienteservicio($this);
+    }
+
+    /**
+     * @param	Expedientehistorial $expedientehistorial The expedientehistorial object to remove.
+     * @return Expedienteservicio The current object (for fluent API support)
+     */
+    public function removeExpedientehistorial($expedientehistorial)
+    {
+        if ($this->getExpedientehistorials()->contains($expedientehistorial)) {
+            $this->collExpedientehistorials->remove($this->collExpedientehistorials->search($expedientehistorial));
+            if (null === $this->expedientehistorialsScheduledForDeletion) {
+                $this->expedientehistorialsScheduledForDeletion = clone $this->collExpedientehistorials;
+                $this->expedientehistorialsScheduledForDeletion->clear();
+            }
+            $this->expedientehistorialsScheduledForDeletion[]= $expedientehistorial;
+            $expedientehistorial->setExpedienteservicio(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Expedienteservicio is new, it will return
+     * an empty collection; or if this Expedienteservicio has previously
+     * been saved, it will retrieve related Expedientehistorials from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Expedienteservicio.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Expedientehistorial[] List of Expedientehistorial objects
+     */
+    public function getExpedientehistorialsJoinServicioestado($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ExpedientehistorialQuery::create(null, $criteria);
+        $query->joinWith('Servicioestado', $join_behavior);
+
+        return $this->getExpedientehistorials($query, $con);
+    }
+
     /**
      * Clears the current object and sets all attributes to their default values
      */
@@ -1214,6 +1528,11 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->collExpedientehistorials) {
+                foreach ($this->collExpedientehistorials as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->aExpediente instanceof Persistent) {
               $this->aExpediente->clearAllReferences($deep);
             }
@@ -1224,6 +1543,10 @@ abstract class BaseExpedienteservicio extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        if ($this->collExpedientehistorials instanceof PropelCollection) {
+            $this->collExpedientehistorials->clearIterator();
+        }
+        $this->collExpedientehistorials = null;
         $this->aExpediente = null;
         $this->aServicio = null;
     }

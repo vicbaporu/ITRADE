@@ -42,10 +42,6 @@
  * @method ExpedienteQuery rightJoinExpedientegasto($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedientegasto relation
  * @method ExpedienteQuery innerJoinExpedientegasto($relationAlias = null) Adds a INNER JOIN clause to the query using the Expedientegasto relation
  *
- * @method ExpedienteQuery leftJoinExpedientehistorial($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expedientehistorial relation
- * @method ExpedienteQuery rightJoinExpedientehistorial($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedientehistorial relation
- * @method ExpedienteQuery innerJoinExpedientehistorial($relationAlias = null) Adds a INNER JOIN clause to the query using the Expedientehistorial relation
- *
  * @method ExpedienteQuery leftJoinExpedienteservicio($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expedienteservicio relation
  * @method ExpedienteQuery rightJoinExpedienteservicio($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedienteservicio relation
  * @method ExpedienteQuery innerJoinExpedienteservicio($relationAlias = null) Adds a INNER JOIN clause to the query using the Expedienteservicio relation
@@ -831,80 +827,6 @@ abstract class BaseExpedienteQuery extends ModelCriteria
         return $this
             ->joinExpedientegasto($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Expedientegasto', 'ExpedientegastoQuery');
-    }
-
-    /**
-     * Filter the query by a related Expedientehistorial object
-     *
-     * @param   Expedientehistorial|PropelObjectCollection $expedientehistorial  the related object to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return                 ExpedienteQuery The current query, for fluid interface
-     * @throws PropelException - if the provided filter is invalid.
-     */
-    public function filterByExpedientehistorial($expedientehistorial, $comparison = null)
-    {
-        if ($expedientehistorial instanceof Expedientehistorial) {
-            return $this
-                ->addUsingAlias(ExpedientePeer::IDEXPEDIENTE, $expedientehistorial->getIdexpediente(), $comparison);
-        } elseif ($expedientehistorial instanceof PropelObjectCollection) {
-            return $this
-                ->useExpedientehistorialQuery()
-                ->filterByPrimaryKeys($expedientehistorial->getPrimaryKeys())
-                ->endUse();
-        } else {
-            throw new PropelException('filterByExpedientehistorial() only accepts arguments of type Expedientehistorial or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the Expedientehistorial relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return ExpedienteQuery The current query, for fluid interface
-     */
-    public function joinExpedientehistorial($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Expedientehistorial');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'Expedientehistorial');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the Expedientehistorial relation Expedientehistorial object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   ExpedientehistorialQuery A secondary query class using the current class as primary query
-     */
-    public function useExpedientehistorialQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
-    {
-        return $this
-            ->joinExpedientehistorial($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Expedientehistorial', 'ExpedientehistorialQuery');
     }
 
     /**

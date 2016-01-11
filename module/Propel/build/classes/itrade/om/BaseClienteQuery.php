@@ -7,23 +7,27 @@
  *
  *
  * @method ClienteQuery orderByIdcliente($order = Criteria::ASC) Order by the idcliente column
+ * @method ClienteQuery orderByClienteEmail($order = Criteria::ASC) Order by the cliente_email column
+ * @method ClienteQuery orderByClientePassword($order = Criteria::ASC) Order by the cliente_password column
  * @method ClienteQuery orderByClienteRazonsocial($order = Criteria::ASC) Order by the cliente_razonsocial column
  * @method ClienteQuery orderByClienteRfc($order = Criteria::ASC) Order by the cliente_rfc column
  * @method ClienteQuery orderByClienteCalle($order = Criteria::ASC) Order by the cliente_calle column
  * @method ClienteQuery orderByClienteNumero($order = Criteria::ASC) Order by the cliente_numero column
  * @method ClienteQuery orderByClienteInterior($order = Criteria::ASC) Order by the cliente_interior column
  * @method ClienteQuery orderByClienteColonia($order = Criteria::ASC) Order by the cliente_colonia column
+ * @method ClienteQuery orderByClienteCodigopostal($order = Criteria::ASC) Order by the cliente_codigopostal column
  * @method ClienteQuery orderByClienteCiudad($order = Criteria::ASC) Order by the cliente_ciudad column
  * @method ClienteQuery orderByClienteEstado($order = Criteria::ASC) Order by the cliente_estado column
  * @method ClienteQuery orderByClientePais($order = Criteria::ASC) Order by the cliente_pais column
- * @method ClienteQuery orderByClienteEmail($order = Criteria::ASC) Order by the cliente_email column
  * @method ClienteQuery orderByClienteTelefono($order = Criteria::ASC) Order by the cliente_telefono column
+ * @method ClienteQuery orderByClienteCelular($order = Criteria::ASC) Order by the cliente_celular column
  * @method ClienteQuery orderByClienteNombrecontacto($order = Criteria::ASC) Order by the cliente_nombrecontacto column
  * @method ClienteQuery orderByClienteCumpleanios($order = Criteria::ASC) Order by the cliente_cumpleanios column
  * @method ClienteQuery orderByClienteCallefiscal($order = Criteria::ASC) Order by the cliente_callefiscal column
  * @method ClienteQuery orderByClienteNumerofiscal($order = Criteria::ASC) Order by the cliente_numerofiscal column
  * @method ClienteQuery orderByClienteInteriorfiscal($order = Criteria::ASC) Order by the cliente_interiorfiscal column
  * @method ClienteQuery orderByClienteColoniafiscal($order = Criteria::ASC) Order by the cliente_coloniafiscal column
+ * @method ClienteQuery orderByClienteCodigopostalfiscal($order = Criteria::ASC) Order by the cliente_codigopostalfiscal column
  * @method ClienteQuery orderByClienteCiudadfiscal($order = Criteria::ASC) Order by the cliente_ciudadfiscal column
  * @method ClienteQuery orderByClienteEstadofiscal($order = Criteria::ASC) Order by the cliente_estadofiscal column
  * @method ClienteQuery orderByClientePaisfiscal($order = Criteria::ASC) Order by the cliente_paisfiscal column
@@ -42,25 +46,30 @@
  * @method ClienteQuery orderByClienteArchivoszip($order = Criteria::ASC) Order by the cliente_archivoszip column
  * @method ClienteQuery orderByIdempleadocomercial($order = Criteria::ASC) Order by the idempleadocomercial column
  * @method ClienteQuery orderByIdempleadooperaciones($order = Criteria::ASC) Order by the idempleadooperaciones column
+ * @method ClienteQuery orderByClienteUltimologin($order = Criteria::ASC) Order by the cliente_ultimologin column
  *
  * @method ClienteQuery groupByIdcliente() Group by the idcliente column
+ * @method ClienteQuery groupByClienteEmail() Group by the cliente_email column
+ * @method ClienteQuery groupByClientePassword() Group by the cliente_password column
  * @method ClienteQuery groupByClienteRazonsocial() Group by the cliente_razonsocial column
  * @method ClienteQuery groupByClienteRfc() Group by the cliente_rfc column
  * @method ClienteQuery groupByClienteCalle() Group by the cliente_calle column
  * @method ClienteQuery groupByClienteNumero() Group by the cliente_numero column
  * @method ClienteQuery groupByClienteInterior() Group by the cliente_interior column
  * @method ClienteQuery groupByClienteColonia() Group by the cliente_colonia column
+ * @method ClienteQuery groupByClienteCodigopostal() Group by the cliente_codigopostal column
  * @method ClienteQuery groupByClienteCiudad() Group by the cliente_ciudad column
  * @method ClienteQuery groupByClienteEstado() Group by the cliente_estado column
  * @method ClienteQuery groupByClientePais() Group by the cliente_pais column
- * @method ClienteQuery groupByClienteEmail() Group by the cliente_email column
  * @method ClienteQuery groupByClienteTelefono() Group by the cliente_telefono column
+ * @method ClienteQuery groupByClienteCelular() Group by the cliente_celular column
  * @method ClienteQuery groupByClienteNombrecontacto() Group by the cliente_nombrecontacto column
  * @method ClienteQuery groupByClienteCumpleanios() Group by the cliente_cumpleanios column
  * @method ClienteQuery groupByClienteCallefiscal() Group by the cliente_callefiscal column
  * @method ClienteQuery groupByClienteNumerofiscal() Group by the cliente_numerofiscal column
  * @method ClienteQuery groupByClienteInteriorfiscal() Group by the cliente_interiorfiscal column
  * @method ClienteQuery groupByClienteColoniafiscal() Group by the cliente_coloniafiscal column
+ * @method ClienteQuery groupByClienteCodigopostalfiscal() Group by the cliente_codigopostalfiscal column
  * @method ClienteQuery groupByClienteCiudadfiscal() Group by the cliente_ciudadfiscal column
  * @method ClienteQuery groupByClienteEstadofiscal() Group by the cliente_estadofiscal column
  * @method ClienteQuery groupByClientePaisfiscal() Group by the cliente_paisfiscal column
@@ -79,6 +88,7 @@
  * @method ClienteQuery groupByClienteArchivoszip() Group by the cliente_archivoszip column
  * @method ClienteQuery groupByIdempleadocomercial() Group by the idempleadocomercial column
  * @method ClienteQuery groupByIdempleadooperaciones() Group by the idempleadooperaciones column
+ * @method ClienteQuery groupByClienteUltimologin() Group by the cliente_ultimologin column
  *
  * @method ClienteQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ClienteQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -96,26 +106,34 @@
  * @method ClienteQuery rightJoinExpediente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expediente relation
  * @method ClienteQuery innerJoinExpediente($relationAlias = null) Adds a INNER JOIN clause to the query using the Expediente relation
  *
+ * @method ClienteQuery leftJoinProveedorcliente($relationAlias = null) Adds a LEFT JOIN clause to the query using the Proveedorcliente relation
+ * @method ClienteQuery rightJoinProveedorcliente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Proveedorcliente relation
+ * @method ClienteQuery innerJoinProveedorcliente($relationAlias = null) Adds a INNER JOIN clause to the query using the Proveedorcliente relation
+ *
  * @method Cliente findOne(PropelPDO $con = null) Return the first Cliente matching the query
  * @method Cliente findOneOrCreate(PropelPDO $con = null) Return the first Cliente matching the query, or a new Cliente object populated from the query conditions when no match is found
  *
+ * @method Cliente findOneByClienteEmail(string $cliente_email) Return the first Cliente filtered by the cliente_email column
+ * @method Cliente findOneByClientePassword(string $cliente_password) Return the first Cliente filtered by the cliente_password column
  * @method Cliente findOneByClienteRazonsocial(string $cliente_razonsocial) Return the first Cliente filtered by the cliente_razonsocial column
  * @method Cliente findOneByClienteRfc(string $cliente_rfc) Return the first Cliente filtered by the cliente_rfc column
  * @method Cliente findOneByClienteCalle(string $cliente_calle) Return the first Cliente filtered by the cliente_calle column
  * @method Cliente findOneByClienteNumero(string $cliente_numero) Return the first Cliente filtered by the cliente_numero column
  * @method Cliente findOneByClienteInterior(string $cliente_interior) Return the first Cliente filtered by the cliente_interior column
  * @method Cliente findOneByClienteColonia(string $cliente_colonia) Return the first Cliente filtered by the cliente_colonia column
+ * @method Cliente findOneByClienteCodigopostal(string $cliente_codigopostal) Return the first Cliente filtered by the cliente_codigopostal column
  * @method Cliente findOneByClienteCiudad(string $cliente_ciudad) Return the first Cliente filtered by the cliente_ciudad column
  * @method Cliente findOneByClienteEstado(string $cliente_estado) Return the first Cliente filtered by the cliente_estado column
  * @method Cliente findOneByClientePais(string $cliente_pais) Return the first Cliente filtered by the cliente_pais column
- * @method Cliente findOneByClienteEmail(string $cliente_email) Return the first Cliente filtered by the cliente_email column
  * @method Cliente findOneByClienteTelefono(string $cliente_telefono) Return the first Cliente filtered by the cliente_telefono column
+ * @method Cliente findOneByClienteCelular(string $cliente_celular) Return the first Cliente filtered by the cliente_celular column
  * @method Cliente findOneByClienteNombrecontacto(string $cliente_nombrecontacto) Return the first Cliente filtered by the cliente_nombrecontacto column
  * @method Cliente findOneByClienteCumpleanios(string $cliente_cumpleanios) Return the first Cliente filtered by the cliente_cumpleanios column
  * @method Cliente findOneByClienteCallefiscal(string $cliente_callefiscal) Return the first Cliente filtered by the cliente_callefiscal column
  * @method Cliente findOneByClienteNumerofiscal(string $cliente_numerofiscal) Return the first Cliente filtered by the cliente_numerofiscal column
  * @method Cliente findOneByClienteInteriorfiscal(string $cliente_interiorfiscal) Return the first Cliente filtered by the cliente_interiorfiscal column
  * @method Cliente findOneByClienteColoniafiscal(string $cliente_coloniafiscal) Return the first Cliente filtered by the cliente_coloniafiscal column
+ * @method Cliente findOneByClienteCodigopostalfiscal(string $cliente_codigopostalfiscal) Return the first Cliente filtered by the cliente_codigopostalfiscal column
  * @method Cliente findOneByClienteCiudadfiscal(string $cliente_ciudadfiscal) Return the first Cliente filtered by the cliente_ciudadfiscal column
  * @method Cliente findOneByClienteEstadofiscal(string $cliente_estadofiscal) Return the first Cliente filtered by the cliente_estadofiscal column
  * @method Cliente findOneByClientePaisfiscal(string $cliente_paisfiscal) Return the first Cliente filtered by the cliente_paisfiscal column
@@ -134,25 +152,30 @@
  * @method Cliente findOneByClienteArchivoszip(string $cliente_archivoszip) Return the first Cliente filtered by the cliente_archivoszip column
  * @method Cliente findOneByIdempleadocomercial(int $idempleadocomercial) Return the first Cliente filtered by the idempleadocomercial column
  * @method Cliente findOneByIdempleadooperaciones(int $idempleadooperaciones) Return the first Cliente filtered by the idempleadooperaciones column
+ * @method Cliente findOneByClienteUltimologin(string $cliente_ultimologin) Return the first Cliente filtered by the cliente_ultimologin column
  *
  * @method array findByIdcliente(int $idcliente) Return Cliente objects filtered by the idcliente column
+ * @method array findByClienteEmail(string $cliente_email) Return Cliente objects filtered by the cliente_email column
+ * @method array findByClientePassword(string $cliente_password) Return Cliente objects filtered by the cliente_password column
  * @method array findByClienteRazonsocial(string $cliente_razonsocial) Return Cliente objects filtered by the cliente_razonsocial column
  * @method array findByClienteRfc(string $cliente_rfc) Return Cliente objects filtered by the cliente_rfc column
  * @method array findByClienteCalle(string $cliente_calle) Return Cliente objects filtered by the cliente_calle column
  * @method array findByClienteNumero(string $cliente_numero) Return Cliente objects filtered by the cliente_numero column
  * @method array findByClienteInterior(string $cliente_interior) Return Cliente objects filtered by the cliente_interior column
  * @method array findByClienteColonia(string $cliente_colonia) Return Cliente objects filtered by the cliente_colonia column
+ * @method array findByClienteCodigopostal(string $cliente_codigopostal) Return Cliente objects filtered by the cliente_codigopostal column
  * @method array findByClienteCiudad(string $cliente_ciudad) Return Cliente objects filtered by the cliente_ciudad column
  * @method array findByClienteEstado(string $cliente_estado) Return Cliente objects filtered by the cliente_estado column
  * @method array findByClientePais(string $cliente_pais) Return Cliente objects filtered by the cliente_pais column
- * @method array findByClienteEmail(string $cliente_email) Return Cliente objects filtered by the cliente_email column
  * @method array findByClienteTelefono(string $cliente_telefono) Return Cliente objects filtered by the cliente_telefono column
+ * @method array findByClienteCelular(string $cliente_celular) Return Cliente objects filtered by the cliente_celular column
  * @method array findByClienteNombrecontacto(string $cliente_nombrecontacto) Return Cliente objects filtered by the cliente_nombrecontacto column
  * @method array findByClienteCumpleanios(string $cliente_cumpleanios) Return Cliente objects filtered by the cliente_cumpleanios column
  * @method array findByClienteCallefiscal(string $cliente_callefiscal) Return Cliente objects filtered by the cliente_callefiscal column
  * @method array findByClienteNumerofiscal(string $cliente_numerofiscal) Return Cliente objects filtered by the cliente_numerofiscal column
  * @method array findByClienteInteriorfiscal(string $cliente_interiorfiscal) Return Cliente objects filtered by the cliente_interiorfiscal column
  * @method array findByClienteColoniafiscal(string $cliente_coloniafiscal) Return Cliente objects filtered by the cliente_coloniafiscal column
+ * @method array findByClienteCodigopostalfiscal(string $cliente_codigopostalfiscal) Return Cliente objects filtered by the cliente_codigopostalfiscal column
  * @method array findByClienteCiudadfiscal(string $cliente_ciudadfiscal) Return Cliente objects filtered by the cliente_ciudadfiscal column
  * @method array findByClienteEstadofiscal(string $cliente_estadofiscal) Return Cliente objects filtered by the cliente_estadofiscal column
  * @method array findByClientePaisfiscal(string $cliente_paisfiscal) Return Cliente objects filtered by the cliente_paisfiscal column
@@ -171,6 +194,7 @@
  * @method array findByClienteArchivoszip(string $cliente_archivoszip) Return Cliente objects filtered by the cliente_archivoszip column
  * @method array findByIdempleadocomercial(int $idempleadocomercial) Return Cliente objects filtered by the idempleadocomercial column
  * @method array findByIdempleadooperaciones(int $idempleadooperaciones) Return Cliente objects filtered by the idempleadooperaciones column
+ * @method array findByClienteUltimologin(string $cliente_ultimologin) Return Cliente objects filtered by the cliente_ultimologin column
  *
  * @package    propel.generator.itrade.om
  */
@@ -278,7 +302,7 @@ abstract class BaseClienteQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idcliente`, `cliente_razonsocial`, `cliente_rfc`, `cliente_calle`, `cliente_numero`, `cliente_interior`, `cliente_colonia`, `cliente_ciudad`, `cliente_estado`, `cliente_pais`, `cliente_email`, `cliente_telefono`, `cliente_nombrecontacto`, `cliente_cumpleanios`, `cliente_callefiscal`, `cliente_numerofiscal`, `cliente_interiorfiscal`, `cliente_coloniafiscal`, `cliente_ciudadfiscal`, `cliente_estadofiscal`, `cliente_paisfiscal`, `cliente_padronimportador`, `cliente_encargadoconferido`, `cliente_r1`, `cliente_r2`, `cliente_identificacionrepresentantelegal`, `cliente_rfcrepresentantelegal`, `cliente_actaconstitutiva`, `cliente_podernotarial`, `cliente_cartaencomienda`, `cliente_comprobantedomicilio`, `cliente_comprobanteclabe`, `cliente_clabe`, `cliente_archivoszip`, `idempleadocomercial`, `idempleadooperaciones` FROM `cliente` WHERE `idcliente` = :p0';
+        $sql = 'SELECT `idcliente`, `cliente_email`, `cliente_password`, `cliente_razonsocial`, `cliente_rfc`, `cliente_calle`, `cliente_numero`, `cliente_interior`, `cliente_colonia`, `cliente_codigopostal`, `cliente_ciudad`, `cliente_estado`, `cliente_pais`, `cliente_telefono`, `cliente_celular`, `cliente_nombrecontacto`, `cliente_cumpleanios`, `cliente_callefiscal`, `cliente_numerofiscal`, `cliente_interiorfiscal`, `cliente_coloniafiscal`, `cliente_codigopostalfiscal`, `cliente_ciudadfiscal`, `cliente_estadofiscal`, `cliente_paisfiscal`, `cliente_padronimportador`, `cliente_encargadoconferido`, `cliente_r1`, `cliente_r2`, `cliente_identificacionrepresentantelegal`, `cliente_rfcrepresentantelegal`, `cliente_actaconstitutiva`, `cliente_podernotarial`, `cliente_cartaencomienda`, `cliente_comprobantedomicilio`, `cliente_comprobanteclabe`, `cliente_clabe`, `cliente_archivoszip`, `idempleadocomercial`, `idempleadooperaciones`, `cliente_ultimologin` FROM `cliente` WHERE `idcliente` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -407,6 +431,64 @@ abstract class BaseClienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ClientePeer::IDCLIENTE, $idcliente, $comparison);
+    }
+
+    /**
+     * Filter the query on the cliente_email column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByClienteEmail('fooValue');   // WHERE cliente_email = 'fooValue'
+     * $query->filterByClienteEmail('%fooValue%'); // WHERE cliente_email LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $clienteEmail The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function filterByClienteEmail($clienteEmail = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($clienteEmail)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $clienteEmail)) {
+                $clienteEmail = str_replace('*', '%', $clienteEmail);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientePeer::CLIENTE_EMAIL, $clienteEmail, $comparison);
+    }
+
+    /**
+     * Filter the query on the cliente_password column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByClientePassword('fooValue');   // WHERE cliente_password = 'fooValue'
+     * $query->filterByClientePassword('%fooValue%'); // WHERE cliente_password LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $clientePassword The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function filterByClientePassword($clientePassword = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($clientePassword)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $clientePassword)) {
+                $clientePassword = str_replace('*', '%', $clientePassword);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientePeer::CLIENTE_PASSWORD, $clientePassword, $comparison);
     }
 
     /**
@@ -584,6 +666,35 @@ abstract class BaseClienteQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the cliente_codigopostal column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByClienteCodigopostal('fooValue');   // WHERE cliente_codigopostal = 'fooValue'
+     * $query->filterByClienteCodigopostal('%fooValue%'); // WHERE cliente_codigopostal LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $clienteCodigopostal The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function filterByClienteCodigopostal($clienteCodigopostal = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($clienteCodigopostal)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $clienteCodigopostal)) {
+                $clienteCodigopostal = str_replace('*', '%', $clienteCodigopostal);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientePeer::CLIENTE_CODIGOPOSTAL, $clienteCodigopostal, $comparison);
+    }
+
+    /**
      * Filter the query on the cliente_ciudad column
      *
      * Example usage:
@@ -671,35 +782,6 @@ abstract class BaseClienteQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the cliente_email column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByClienteEmail('fooValue');   // WHERE cliente_email = 'fooValue'
-     * $query->filterByClienteEmail('%fooValue%'); // WHERE cliente_email LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $clienteEmail The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ClienteQuery The current query, for fluid interface
-     */
-    public function filterByClienteEmail($clienteEmail = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($clienteEmail)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $clienteEmail)) {
-                $clienteEmail = str_replace('*', '%', $clienteEmail);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ClientePeer::CLIENTE_EMAIL, $clienteEmail, $comparison);
-    }
-
-    /**
      * Filter the query on the cliente_telefono column
      *
      * Example usage:
@@ -726,6 +808,35 @@ abstract class BaseClienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ClientePeer::CLIENTE_TELEFONO, $clienteTelefono, $comparison);
+    }
+
+    /**
+     * Filter the query on the cliente_celular column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByClienteCelular('fooValue');   // WHERE cliente_celular = 'fooValue'
+     * $query->filterByClienteCelular('%fooValue%'); // WHERE cliente_celular LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $clienteCelular The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function filterByClienteCelular($clienteCelular = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($clienteCelular)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $clienteCelular)) {
+                $clienteCelular = str_replace('*', '%', $clienteCelular);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientePeer::CLIENTE_CELULAR, $clienteCelular, $comparison);
     }
 
     /**
@@ -762,24 +873,38 @@ abstract class BaseClienteQuery extends ModelCriteria
      *
      * Example usage:
      * <code>
-     * $query->filterByClienteCumpleanios('fooValue');   // WHERE cliente_cumpleanios = 'fooValue'
-     * $query->filterByClienteCumpleanios('%fooValue%'); // WHERE cliente_cumpleanios LIKE '%fooValue%'
+     * $query->filterByClienteCumpleanios('2011-03-14'); // WHERE cliente_cumpleanios = '2011-03-14'
+     * $query->filterByClienteCumpleanios('now'); // WHERE cliente_cumpleanios = '2011-03-14'
+     * $query->filterByClienteCumpleanios(array('max' => 'yesterday')); // WHERE cliente_cumpleanios < '2011-03-13'
      * </code>
      *
-     * @param     string $clienteCumpleanios The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     mixed $clienteCumpleanios The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ClienteQuery The current query, for fluid interface
      */
     public function filterByClienteCumpleanios($clienteCumpleanios = null, $comparison = null)
     {
-        if (null === $comparison) {
-            if (is_array($clienteCumpleanios)) {
+        if (is_array($clienteCumpleanios)) {
+            $useMinMax = false;
+            if (isset($clienteCumpleanios['min'])) {
+                $this->addUsingAlias(ClientePeer::CLIENTE_CUMPLEANIOS, $clienteCumpleanios['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($clienteCumpleanios['max'])) {
+                $this->addUsingAlias(ClientePeer::CLIENTE_CUMPLEANIOS, $clienteCumpleanios['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $clienteCumpleanios)) {
-                $clienteCumpleanios = str_replace('*', '%', $clienteCumpleanios);
-                $comparison = Criteria::LIKE;
             }
         }
 
@@ -900,6 +1025,35 @@ abstract class BaseClienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ClientePeer::CLIENTE_COLONIAFISCAL, $clienteColoniafiscal, $comparison);
+    }
+
+    /**
+     * Filter the query on the cliente_codigopostalfiscal column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByClienteCodigopostalfiscal('fooValue');   // WHERE cliente_codigopostalfiscal = 'fooValue'
+     * $query->filterByClienteCodigopostalfiscal('%fooValue%'); // WHERE cliente_codigopostalfiscal LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $clienteCodigopostalfiscal The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function filterByClienteCodigopostalfiscal($clienteCodigopostalfiscal = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($clienteCodigopostalfiscal)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $clienteCodigopostalfiscal)) {
+                $clienteCodigopostalfiscal = str_replace('*', '%', $clienteCodigopostalfiscal);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientePeer::CLIENTE_CODIGOPOSTALFISCAL, $clienteCodigopostalfiscal, $comparison);
     }
 
     /**
@@ -1455,6 +1609,49 @@ abstract class BaseClienteQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the cliente_ultimologin column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByClienteUltimologin('2011-03-14'); // WHERE cliente_ultimologin = '2011-03-14'
+     * $query->filterByClienteUltimologin('now'); // WHERE cliente_ultimologin = '2011-03-14'
+     * $query->filterByClienteUltimologin(array('max' => 'yesterday')); // WHERE cliente_ultimologin < '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $clienteUltimologin The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function filterByClienteUltimologin($clienteUltimologin = null, $comparison = null)
+    {
+        if (is_array($clienteUltimologin)) {
+            $useMinMax = false;
+            if (isset($clienteUltimologin['min'])) {
+                $this->addUsingAlias(ClientePeer::CLIENTE_ULTIMOLOGIN, $clienteUltimologin['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($clienteUltimologin['max'])) {
+                $this->addUsingAlias(ClientePeer::CLIENTE_ULTIMOLOGIN, $clienteUltimologin['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ClientePeer::CLIENTE_ULTIMOLOGIN, $clienteUltimologin, $comparison);
+    }
+
+    /**
      * Filter the query by a related Empleado object
      *
      * @param   Empleado|PropelObjectCollection $empleado The related object(s) to use as filter
@@ -1678,6 +1875,80 @@ abstract class BaseClienteQuery extends ModelCriteria
         return $this
             ->joinExpediente($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Expediente', 'ExpedienteQuery');
+    }
+
+    /**
+     * Filter the query by a related Proveedorcliente object
+     *
+     * @param   Proveedorcliente|PropelObjectCollection $proveedorcliente  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 ClienteQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByProveedorcliente($proveedorcliente, $comparison = null)
+    {
+        if ($proveedorcliente instanceof Proveedorcliente) {
+            return $this
+                ->addUsingAlias(ClientePeer::IDCLIENTE, $proveedorcliente->getIdcliente(), $comparison);
+        } elseif ($proveedorcliente instanceof PropelObjectCollection) {
+            return $this
+                ->useProveedorclienteQuery()
+                ->filterByPrimaryKeys($proveedorcliente->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByProveedorcliente() only accepts arguments of type Proveedorcliente or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Proveedorcliente relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function joinProveedorcliente($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Proveedorcliente');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Proveedorcliente');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Proveedorcliente relation Proveedorcliente object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   ProveedorclienteQuery A secondary query class using the current class as primary query
+     */
+    public function useProveedorclienteQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinProveedorcliente($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Proveedorcliente', 'ProveedorclienteQuery');
     }
 
     /**

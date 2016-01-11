@@ -1353,10 +1353,10 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
      * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return PropelObjectCollection|Expedientehistorial[] List of Expedientehistorial objects
      */
-    public function getExpedientehistorialsJoinExpediente($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getExpedientehistorialsJoinExpedienteservicio($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $query = ExpedientehistorialQuery::create(null, $criteria);
-        $query->joinWith('Expediente', $join_behavior);
+        $query->joinWith('Expedienteservicio', $join_behavior);
 
         return $this->getExpedientehistorials($query, $con);
     }

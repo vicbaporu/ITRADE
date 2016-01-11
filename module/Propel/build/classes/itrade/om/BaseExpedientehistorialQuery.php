@@ -7,13 +7,13 @@
  *
  *
  * @method ExpedientehistorialQuery orderByIdexpedientehistorial($order = Criteria::ASC) Order by the idexpedientehistorial column
- * @method ExpedientehistorialQuery orderByIdexpediente($order = Criteria::ASC) Order by the idexpediente column
+ * @method ExpedientehistorialQuery orderByIdexpedienteservicio($order = Criteria::ASC) Order by the idexpedienteservicio column
  * @method ExpedientehistorialQuery orderByIdestadoservicio($order = Criteria::ASC) Order by the idestadoservicio column
  * @method ExpedientehistorialQuery orderByExpedientehistorialFecha($order = Criteria::ASC) Order by the expedientehistorial_fecha column
  * @method ExpedientehistorialQuery orderByExpedientehistorialNota($order = Criteria::ASC) Order by the expedientehistorial_nota column
  *
  * @method ExpedientehistorialQuery groupByIdexpedientehistorial() Group by the idexpedientehistorial column
- * @method ExpedientehistorialQuery groupByIdexpediente() Group by the idexpediente column
+ * @method ExpedientehistorialQuery groupByIdexpedienteservicio() Group by the idexpedienteservicio column
  * @method ExpedientehistorialQuery groupByIdestadoservicio() Group by the idestadoservicio column
  * @method ExpedientehistorialQuery groupByExpedientehistorialFecha() Group by the expedientehistorial_fecha column
  * @method ExpedientehistorialQuery groupByExpedientehistorialNota() Group by the expedientehistorial_nota column
@@ -22,9 +22,9 @@
  * @method ExpedientehistorialQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method ExpedientehistorialQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method ExpedientehistorialQuery leftJoinExpediente($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expediente relation
- * @method ExpedientehistorialQuery rightJoinExpediente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expediente relation
- * @method ExpedientehistorialQuery innerJoinExpediente($relationAlias = null) Adds a INNER JOIN clause to the query using the Expediente relation
+ * @method ExpedientehistorialQuery leftJoinExpedienteservicio($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expedienteservicio relation
+ * @method ExpedientehistorialQuery rightJoinExpedienteservicio($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedienteservicio relation
+ * @method ExpedientehistorialQuery innerJoinExpedienteservicio($relationAlias = null) Adds a INNER JOIN clause to the query using the Expedienteservicio relation
  *
  * @method ExpedientehistorialQuery leftJoinServicioestado($relationAlias = null) Adds a LEFT JOIN clause to the query using the Servicioestado relation
  * @method ExpedientehistorialQuery rightJoinServicioestado($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Servicioestado relation
@@ -33,13 +33,13 @@
  * @method Expedientehistorial findOne(PropelPDO $con = null) Return the first Expedientehistorial matching the query
  * @method Expedientehistorial findOneOrCreate(PropelPDO $con = null) Return the first Expedientehistorial matching the query, or a new Expedientehistorial object populated from the query conditions when no match is found
  *
- * @method Expedientehistorial findOneByIdexpediente(int $idexpediente) Return the first Expedientehistorial filtered by the idexpediente column
+ * @method Expedientehistorial findOneByIdexpedienteservicio(int $idexpedienteservicio) Return the first Expedientehistorial filtered by the idexpedienteservicio column
  * @method Expedientehistorial findOneByIdestadoservicio(int $idestadoservicio) Return the first Expedientehistorial filtered by the idestadoservicio column
  * @method Expedientehistorial findOneByExpedientehistorialFecha(string $expedientehistorial_fecha) Return the first Expedientehistorial filtered by the expedientehistorial_fecha column
  * @method Expedientehistorial findOneByExpedientehistorialNota(string $expedientehistorial_nota) Return the first Expedientehistorial filtered by the expedientehistorial_nota column
  *
  * @method array findByIdexpedientehistorial(int $idexpedientehistorial) Return Expedientehistorial objects filtered by the idexpedientehistorial column
- * @method array findByIdexpediente(int $idexpediente) Return Expedientehistorial objects filtered by the idexpediente column
+ * @method array findByIdexpedienteservicio(int $idexpedienteservicio) Return Expedientehistorial objects filtered by the idexpedienteservicio column
  * @method array findByIdestadoservicio(int $idestadoservicio) Return Expedientehistorial objects filtered by the idestadoservicio column
  * @method array findByExpedientehistorialFecha(string $expedientehistorial_fecha) Return Expedientehistorial objects filtered by the expedientehistorial_fecha column
  * @method array findByExpedientehistorialNota(string $expedientehistorial_nota) Return Expedientehistorial objects filtered by the expedientehistorial_nota column
@@ -150,7 +150,7 @@ abstract class BaseExpedientehistorialQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpedientehistorial`, `idexpediente`, `idestadoservicio`, `expedientehistorial_fecha`, `expedientehistorial_nota` FROM `expedientehistorial` WHERE `idexpedientehistorial` = :p0';
+        $sql = 'SELECT `idexpedientehistorial`, `idexpedienteservicio`, `idestadoservicio`, `expedientehistorial_fecha`, `expedientehistorial_nota` FROM `expedientehistorial` WHERE `idexpedientehistorial` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -282,19 +282,19 @@ abstract class BaseExpedientehistorialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the idexpediente column
+     * Filter the query on the idexpedienteservicio column
      *
      * Example usage:
      * <code>
-     * $query->filterByIdexpediente(1234); // WHERE idexpediente = 1234
-     * $query->filterByIdexpediente(array(12, 34)); // WHERE idexpediente IN (12, 34)
-     * $query->filterByIdexpediente(array('min' => 12)); // WHERE idexpediente >= 12
-     * $query->filterByIdexpediente(array('max' => 12)); // WHERE idexpediente <= 12
+     * $query->filterByIdexpedienteservicio(1234); // WHERE idexpedienteservicio = 1234
+     * $query->filterByIdexpedienteservicio(array(12, 34)); // WHERE idexpedienteservicio IN (12, 34)
+     * $query->filterByIdexpedienteservicio(array('min' => 12)); // WHERE idexpedienteservicio >= 12
+     * $query->filterByIdexpedienteservicio(array('max' => 12)); // WHERE idexpedienteservicio <= 12
      * </code>
      *
-     * @see       filterByExpediente()
+     * @see       filterByExpedienteservicio()
      *
-     * @param     mixed $idexpediente The value to use as filter.
+     * @param     mixed $idexpedienteservicio The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -302,16 +302,16 @@ abstract class BaseExpedientehistorialQuery extends ModelCriteria
      *
      * @return ExpedientehistorialQuery The current query, for fluid interface
      */
-    public function filterByIdexpediente($idexpediente = null, $comparison = null)
+    public function filterByIdexpedienteservicio($idexpedienteservicio = null, $comparison = null)
     {
-        if (is_array($idexpediente)) {
+        if (is_array($idexpedienteservicio)) {
             $useMinMax = false;
-            if (isset($idexpediente['min'])) {
-                $this->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTE, $idexpediente['min'], Criteria::GREATER_EQUAL);
+            if (isset($idexpedienteservicio['min'])) {
+                $this->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, $idexpedienteservicio['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($idexpediente['max'])) {
-                $this->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTE, $idexpediente['max'], Criteria::LESS_EQUAL);
+            if (isset($idexpedienteservicio['max'])) {
+                $this->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, $idexpedienteservicio['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -322,7 +322,7 @@ abstract class BaseExpedientehistorialQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTE, $idexpediente, $comparison);
+        return $this->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, $idexpedienteservicio, $comparison);
     }
 
     /**
@@ -442,43 +442,43 @@ abstract class BaseExpedientehistorialQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Expediente object
+     * Filter the query by a related Expedienteservicio object
      *
-     * @param   Expediente|PropelObjectCollection $expediente The related object(s) to use as filter
+     * @param   Expedienteservicio|PropelObjectCollection $expedienteservicio The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return                 ExpedientehistorialQuery The current query, for fluid interface
      * @throws PropelException - if the provided filter is invalid.
      */
-    public function filterByExpediente($expediente, $comparison = null)
+    public function filterByExpedienteservicio($expedienteservicio, $comparison = null)
     {
-        if ($expediente instanceof Expediente) {
+        if ($expedienteservicio instanceof Expedienteservicio) {
             return $this
-                ->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTE, $expediente->getIdexpediente(), $comparison);
-        } elseif ($expediente instanceof PropelObjectCollection) {
+                ->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, $expedienteservicio->getIdexpedienteservicio(), $comparison);
+        } elseif ($expedienteservicio instanceof PropelObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTE, $expediente->toKeyValue('PrimaryKey', 'Idexpediente'), $comparison);
+                ->addUsingAlias(ExpedientehistorialPeer::IDEXPEDIENTESERVICIO, $expedienteservicio->toKeyValue('PrimaryKey', 'Idexpedienteservicio'), $comparison);
         } else {
-            throw new PropelException('filterByExpediente() only accepts arguments of type Expediente or PropelCollection');
+            throw new PropelException('filterByExpedienteservicio() only accepts arguments of type Expedienteservicio or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Expediente relation
+     * Adds a JOIN clause to the query using the Expedienteservicio relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return ExpedientehistorialQuery The current query, for fluid interface
      */
-    public function joinExpediente($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinExpedienteservicio($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Expediente');
+        $relationMap = $tableMap->getRelation('Expedienteservicio');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -493,14 +493,14 @@ abstract class BaseExpedientehistorialQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Expediente');
+            $this->addJoinObject($join, 'Expedienteservicio');
         }
 
         return $this;
     }
 
     /**
-     * Use the Expediente relation Expediente object
+     * Use the Expedienteservicio relation Expedienteservicio object
      *
      * @see       useQuery()
      *
@@ -508,13 +508,13 @@ abstract class BaseExpedientehistorialQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   ExpedienteQuery A secondary query class using the current class as primary query
+     * @return   ExpedienteservicioQuery A secondary query class using the current class as primary query
      */
-    public function useExpedienteQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useExpedienteservicioQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
-            ->joinExpediente($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Expediente', 'ExpedienteQuery');
+            ->joinExpedienteservicio($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Expedienteservicio', 'ExpedienteservicioQuery');
     }
 
     /**

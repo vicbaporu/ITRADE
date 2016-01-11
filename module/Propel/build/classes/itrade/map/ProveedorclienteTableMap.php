@@ -39,6 +39,7 @@ class ProveedorclienteTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idproveedorcliente', 'Idproveedorcliente', 'INTEGER', true, null, null);
+        $this->addForeignKey('idcliente', 'Idcliente', 'INTEGER', 'cliente', 'idcliente', true, null, null);
         $this->addColumn('proveedorcliente_taxid', 'ProveedorclienteTaxid', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedorcliente_calle', 'ProveedorclienteCalle', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedorcliente_numero', 'ProveedorclienteNumero', 'VARCHAR', false, 45, null);
@@ -58,6 +59,7 @@ class ProveedorclienteTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Cliente', 'Cliente', RelationMap::MANY_TO_ONE, array('idcliente' => 'idcliente', ), null, null);
     } // buildRelations()
 
 } // ProveedorclienteTableMap
