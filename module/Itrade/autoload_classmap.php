@@ -22,6 +22,7 @@ return array(
     'Shared\CustomListener\LangListener'                  => __DIR__ . '/src/Shared/CustomListener/LangListener.php',
     'Shared\CustomListener\TemplateMapListener'           => __DIR__ . '/src/Shared/CustomListener/TemplateMapListener.php',
     'Shared\GeneralFunction\Geolocation'                  => __DIR__ . '/src/Shared/GeneralFunction/Geolocation.php',
+    'Shared\GeneralFunction\Itrademailer'                 => __DIR__ . '/src/Shared/GeneralFunction/Itrademailer.php',
     'Shared\Session\AouthSession'                         => __DIR__ . '/src/Shared/Session/AouthSession.php',
     'Website\Controller\ContactoController'               => __DIR__ . '/src/Website/Controller/ContactoController.php',
     'Website\Controller\IndexController'                  => __DIR__ . '/src/Website/Controller/IndexController.php',

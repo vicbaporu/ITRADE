@@ -53,35 +53,35 @@ $(document).ready(function(){
         if(!empty && !error){
             
             
-                //LAS VALIDACIONES AJAX
-               $form.find('input.validate-ajax').each(function(){
+            //LAS VALIDACIONES AJAX
+           $form.find('input.validate-ajax').each(function(){
 
-                   var url = $(this).attr('dirname');
+               var url = $(this).attr('dirname');
 
-                   var field = $(this).attr('name');
-                   var value = $(this).val();
-                   var input = $(this);
+               var field = $(this).attr('name');
+               var value = $(this).val();
+               var input = $(this);
+     
+               $.ajax({
 
-                   $.ajax({
-
-                       url:url+'/validateajax',
-                       type:'POST',
-                       async: false,
-                       dataType: 'json',
-                       data:{field:field,value:value},
-                       success:function(data){
-                          if(data.exist){
-                              error = true;
-                              input.closest('div').addClass('error-control');
-                              input.siblings('i').addClass('fa fa-exclamation');
-                              input.closest('div').siblings('span.error').text(data.msj);
-                          }
-                       }
-                   });
-
+                   url:url+'/validateajax',
+                   type:'POST',
+                   async: false,
+                   dataType: 'json',
+                   data:{field:field,value:value},
+                   success:function(data){
+                      if(data.exist){
+                          error = true;
+                          input.closest('div').addClass('error-control');
+                          input.siblings('i').addClass('fa fa-exclamation');
+                          input.closest('div').siblings('span.error').text(data.msj);
+                      }
+                   }
                });
+
+           });
             
-            if(empty || error){
+           if(empty || error){
                 e.preventDefault();
             }else{
                 $form.submit();

@@ -95,7 +95,7 @@ class ClientesController extends AbstractActionController
                     $tmp['cliente_ciudad'].=', '.$value->getClienteEstado();
                 }
                 $tmp['cliente_pais'] = $value->getClientePais();
-                $tmp['servicio_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/editar/'.$value->getIdcliente().'"><i class="fa fa-pencil"></i></a>';
+                $tmp['cliente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/editar/'.$value->getIdcliente().'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
                 $data[] = $tmp;
  
             }  
@@ -137,10 +137,31 @@ class ClientesController extends AbstractActionController
                 $entity->setClienteCumpleanios($cliente_cumpleanios);
             }
             
+            $cliente_password = $this->generatePassword();
             
-            echo '<pre>';var_dump($entity->toArray()); echo '</pre>';exit();
+            //SETIAMOS LA CONTRASEÑA DEL PASSWORD
+            $entity->setClientePassword(md5($cliente_password));
             
+            $entity->save();
             
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            //VALIDAMOS SI ENVIAMOS EL CORREO DE BIENVENIDA
+            if(isset($post_data['cliente_sendemail'])){
+                if($post_data['cliente_sendemail'] == '1'){
+                    
+                    $itrade_mailer = new \Shared\GeneralFunction\Itrademailer();
+                    $enviar_correo = $itrade_mailer->welcomeEmail($entity,$cliente_password);
+                    if($enviar_correo){
+                        $this->flashMessenger()->addSuccessMessage('Correo electronico de bienvenida enviado exitosamente!');
+                    }
+                    
+                }
+            } 
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toRoute('admin/clientes/editar', array('id' => $entity->getIdcliente()));
+
         }
         
         $form = new \Admin\Clientes\Form\ClientesForm();
@@ -152,4 +173,47 @@ class ClientesController extends AbstractActionController
         return $view_model;
         
     }
+    
+    public function editarAction(){
+        echo '<pre>';var_dump('$route');echo '</pre>';exit();
+    }
+    
+    function generatePassword($length = 8) {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $count = mb_strlen($chars);
+
+        for ($i = 0, $result = ''; $i < $length; $i++) {
+            $index = rand(0, $count - 1);
+            $result .= mb_substr($chars, $index, 1);
+        }
+
+        return $result;
+    }
+    
+    public function validateajaxAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            $query = new \ClienteQuery();
+       
+            $query->filterBy(\BasePeer::translateFieldname('cliente', $post_data['field'], \BasePeer::TYPE_FIELDNAME, \BasePeer::TYPE_PHPNAME), $post_data['value'], \Criteria::EQUAL);
+            
+            $exist = $query->exists();
+            
+            if($post_data['field'] == 'cliente_email'){
+                $msj = 'correo electrónico en uso';
+            }
+            
+            return $this->getResponse()->setContent(json_encode(array('exist' => $exist,'msj' => $msj)));
+            
+            
+        }
+        
+       
+    }
+
 }

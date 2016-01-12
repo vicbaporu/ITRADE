@@ -105,6 +105,7 @@ class ClientesForm extends Form
                     'label' => 'Ciudad',
                 ),
                 'attributes' => array(
+                    'required' => true,
                     'class' => 'form-control',
                 ),
             ));
@@ -127,6 +128,7 @@ class ClientesForm extends Form
                    'label' => 'Pais',
                ),
                'attributes' => array(
+                   'required' => true,
                    'class' => 'form-control',
                ),
            ));

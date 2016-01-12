@@ -175,6 +175,26 @@ return array(
                                     ),
                                 ),
                             ),
+                            'editar' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/ver[/:id]',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'editar',
+                                    ),
+                                ),
+                            ),
+                            'validateajax' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/validateajax',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'validateajax',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
