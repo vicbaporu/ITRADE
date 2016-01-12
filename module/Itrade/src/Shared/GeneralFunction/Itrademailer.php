@@ -32,6 +32,7 @@ class Itrademailer {
         $mail->Port = $this->port; 
 	$mail->Username = $this->username;   
 	$mail->Password = $this->password;
+        $mail->charSet = 'UTF-8'; 
         $mail->SetFrom('system@itrademexico.com.mx', 'ITRADE');
         $mail->Subject = 'Bienvenido a ITRADE';
         //EL CONTENIDO
