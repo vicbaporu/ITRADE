@@ -13,7 +13,6 @@ class IndexController extends AbstractActionController
     	$mexico_states = \Shared\GeneralFunction\Geolocation::getMexicoStates();
         //$form = new \Catalogo\Form\ClienteForm();
         $form = new \Client\Form\ClienteForm($mexico_states);
-       
 
         //RETORNAMOS A NUESTRA VISTA
         return new ViewModel(array(

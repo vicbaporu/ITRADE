@@ -95,7 +95,7 @@ class ClientesController extends AbstractActionController
                     $tmp['cliente_ciudad'].=', '.$value->getClienteEstado();
                 }
                 $tmp['cliente_pais'] = $value->getClientePais();
-                $tmp['cliente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/editar/'.$value->getIdcliente().'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
+                $tmp['cliente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/ver/'.$value->getIdcliente().'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
                 $data[] = $tmp;
  
             }  
@@ -175,7 +175,37 @@ class ClientesController extends AbstractActionController
     }
     
     public function editarAction(){
-        echo '<pre>';var_dump('$route');echo '</pre>';exit();
+        
+        $id = $this->params()->fromRoute('id');
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+        }
+       
+        $exist = \ClienteQuery::create()->filterByIdcliente($id)->exists();
+        
+        if($exist){
+            
+            $entity = \ClienteQuery::create()->findPk($id);
+            $form = new \Admin\Clientes\Form\ClientesForm();
+            $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+            //RETORNAMOS A NUESTRA VISTA
+            $view_model = new ViewModel();
+            $view_model->setTemplate('admin/clientes/clientes/editar');
+            $view_model->setVariables(array(
+                'entity' => json_encode($entity->toArray(\BasePeer::TYPE_FIELDNAME)),
+                'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
+                'form' => $form
+            ));
+            return $view_model;
+            
+            
+        }else{
+            return $this->redirect()->toRoute('admin/clientes', array('action' => 'index'));
+        }
+      
     }
     
     function generatePassword($length = 8) {

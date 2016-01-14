@@ -284,8 +284,6 @@ class EmpleadoController extends AbstractActionController
             return $this->redirect()->toRoute('admin/catalogo/empleados', array('action' => 'editar','id' => $entity->getIdempleado()));
         }
         
-        
-        
         $exist = \EmpleadoQuery::create()->filterByIdempleado($id)->exists();
         
         if($exist){

@@ -17,6 +17,11 @@ class ClientesForm extends Form
         $this->setAttribute('method', 'post');
 
             //Datos generales
+        
+            $this->add(array(
+                'name' => 'idcliente',
+                'type' => 'Hidden',
+            ));
 
             $this->add(array(
                 'name' => 'cliente_nombrecontacto',

@@ -158,6 +158,21 @@
                     showCloseButton: true,
                 });	
             });
+            
+            //INICIALIZAMOS EL FUNCIONAMIENTO DE NUESTRAS TABS
+            var $tabs = $container.find('#myTab');
+            
+            $tabs.find('a').on('click',function(e){
+                e.preventDefault();
+                var href = $(this).attr('href');
+               
+                //OCULTAMOS Y MOSTRAMOS LAS PESTAÑAS
+                $tabs.find('li').removeClass('active');
+                $(this).closest('li').addClass('active');
+                //OCULTAMOS Y MOSTRAMOS LOS PANELES
+                $container.find('.tab-pane').hide();
+                $container.find('.tab-pane'+href).show();
+            });
 
         }
         
@@ -181,8 +196,7 @@
 
               
             if(edit){
-            
-                
+                                
             }
         }
 
