@@ -72,13 +72,14 @@ class ClienteTableMap extends TableMap
         $this->addColumn('cliente_actaconstitutiva', 'ClienteActaconstitutiva', 'LONGVARCHAR', false, null, null);
         $this->addColumn('cliente_podernotarial', 'ClientePodernotarial', 'LONGVARCHAR', false, null, null);
         $this->addColumn('cliente_cartaencomienda', 'ClienteCartaencomienda', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('cliente_comprobantedomicilio', 'ClienteComprobantedomicilio', 'VARCHAR', false, 45, null);
+        $this->addColumn('cliente_comprobantedomicilio', 'ClienteComprobantedomicilio', 'LONGVARCHAR', false, null, null);
         $this->addColumn('cliente_comprobanteclabe', 'ClienteComprobanteclabe', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('cliente_clabe', 'ClienteClabe', 'VARCHAR', false, 45, null);
-        $this->addColumn('cliente_archivoszip', 'ClienteArchivoszip', 'VARCHAR', false, 45, null);
+        $this->addColumn('cliente_clabe', 'ClienteClabe', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('cliente_archivoszip', 'ClienteArchivoszip', 'LONGVARCHAR', false, null, null);
         $this->addForeignKey('idempleadocomercial', 'Idempleadocomercial', 'INTEGER', 'empleado', 'idempleado', false, null, null);
         $this->addForeignKey('idempleadooperaciones', 'Idempleadooperaciones', 'INTEGER', 'empleado', 'idempleado', false, null, null);
         $this->addColumn('cliente_ultimologin', 'ClienteUltimologin', 'TIMESTAMP', false, null, null);
+        $this->addColumn('cliente_fotografiasdomicilio', 'ClienteFotografiasdomicilio', 'LONGVARCHAR', false, null, null);
         // validators
     } // initialize()
 

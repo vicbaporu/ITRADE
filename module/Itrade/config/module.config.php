@@ -195,6 +195,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'changepassword' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/changepassword',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'changepassword',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),

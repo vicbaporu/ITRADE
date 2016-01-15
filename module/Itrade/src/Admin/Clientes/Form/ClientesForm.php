@@ -303,177 +303,177 @@ class ClientesForm extends Form
 
 
         //Datos legales
-            $this->add(array(
-                'name' => 'cliente_padron',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Padron',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control dropzone no-margin dz-clickable',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_encargo',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Encargo Conferido',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_R1',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'R1 de la empresa',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_R2',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'R2 de la empresa',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_identificacion',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Identificacion del representante legal',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_rfc_empresa',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'RFC de la empresa',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_rfc_representante',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'RFC del representante legal',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_acta',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Acta constitutiva de la empresa',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_poder',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Poder notarial',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_carta',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Carta',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_comprobante_domicilio',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Comprobante de domicilio',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_clabe',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Cuenta bancaria CLABE',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'application/pdf',
-                ),
-                 
-            ));
-
-            $this->add(array(
-                'name' => 'cliente_carpeta',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Carpeta ZIP,RAR',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control',
-                    'accept'=> 'zip/.zip,.rar',
-                    'multiple' => 'true',
-                ),
-                 
-            ));
-            $this->add(array(
-                'name' => 'cliente_foto_domicilio',
-                'type' => 'File',
-                'options' => array(
-                    'label' => 'Fotografías del domicilio',
-                ),
-                 'attributes' => array(
-                    'class' => 'form-control ',
-                    'accept'=> 'image/*',
-                    'multiple' => 'true',
-                ),
-                 
-            ));
+//            $this->add(array(
+//                'name' => 'cliente_padron',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Padron',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control dropzone no-margin dz-clickable',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_encargo',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Encargo Conferido',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_R1',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'R1 de la empresa',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_R2',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'R2 de la empresa',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_identificacion',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Identificacion del representante legal',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_rfc_empresa',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'RFC de la empresa',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_rfc_representante',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'RFC del representante legal',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_acta',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Acta constitutiva de la empresa',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_poder',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Poder notarial',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_carta',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Carta',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_comprobante_domicilio',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Comprobante de domicilio',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_clabe',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Cuenta bancaria CLABE',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'application/pdf',
+//                ),
+//                 
+//            ));
+//
+//            $this->add(array(
+//                'name' => 'cliente_carpeta',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Carpeta ZIP,RAR',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control',
+//                    'accept'=> 'zip/.zip,.rar',
+//                    'multiple' => 'true',
+//                ),
+//                 
+//            ));
+//            $this->add(array(
+//                'name' => 'cliente_foto_domicilio',
+//                'type' => 'File',
+//                'options' => array(
+//                    'label' => 'Fotografías del domicilio',
+//                ),
+//                 'attributes' => array(
+//                    'class' => 'form-control ',
+//                    'accept'=> 'image/*',
+//                    'multiple' => 'true',
+//                ),
+//                 
+//            ));
 
         //Terminan datos legales
 

@@ -276,6 +276,12 @@ abstract class BaseCliente extends BaseObject implements Persistent
     protected $cliente_ultimologin;
 
     /**
+     * The value for the cliente_fotografiasdomicilio field.
+     * @var        string
+     */
+    protected $cliente_fotografiasdomicilio;
+
+    /**
      * @var        Empleado
      */
     protected $aEmpleadoRelatedByIdempleadocomercial;
@@ -836,6 +842,17 @@ abstract class BaseCliente extends BaseObject implements Persistent
 
         return $dt->format($format);
 
+    }
+
+    /**
+     * Get the [cliente_fotografiasdomicilio] column value.
+     *
+     * @return string
+     */
+    public function getClienteFotografiasdomicilio()
+    {
+
+        return $this->cliente_fotografiasdomicilio;
     }
 
     /**
@@ -1712,6 +1729,27 @@ abstract class BaseCliente extends BaseObject implements Persistent
     } // setClienteUltimologin()
 
     /**
+     * Set the value of [cliente_fotografiasdomicilio] column.
+     *
+     * @param  string $v new value
+     * @return Cliente The current object (for fluent API support)
+     */
+    public function setClienteFotografiasdomicilio($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->cliente_fotografiasdomicilio !== $v) {
+            $this->cliente_fotografiasdomicilio = $v;
+            $this->modifiedColumns[] = ClientePeer::CLIENTE_FOTOGRAFIASDOMICILIO;
+        }
+
+
+        return $this;
+    } // setClienteFotografiasdomicilio()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -1784,6 +1822,7 @@ abstract class BaseCliente extends BaseObject implements Persistent
             $this->idempleadocomercial = ($row[$startcol + 38] !== null) ? (int) $row[$startcol + 38] : null;
             $this->idempleadooperaciones = ($row[$startcol + 39] !== null) ? (int) $row[$startcol + 39] : null;
             $this->cliente_ultimologin = ($row[$startcol + 40] !== null) ? (string) $row[$startcol + 40] : null;
+            $this->cliente_fotografiasdomicilio = ($row[$startcol + 41] !== null) ? (string) $row[$startcol + 41] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -1793,7 +1832,7 @@ abstract class BaseCliente extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 41; // 41 = ClientePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 42; // 42 = ClientePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Cliente object", $e);
@@ -2194,6 +2233,9 @@ abstract class BaseCliente extends BaseObject implements Persistent
         if ($this->isColumnModified(ClientePeer::CLIENTE_ULTIMOLOGIN)) {
             $modifiedColumns[':p' . $index++]  = '`cliente_ultimologin`';
         }
+        if ($this->isColumnModified(ClientePeer::CLIENTE_FOTOGRAFIASDOMICILIO)) {
+            $modifiedColumns[':p' . $index++]  = '`cliente_fotografiasdomicilio`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `cliente` (%s) VALUES (%s)',
@@ -2327,6 +2369,9 @@ abstract class BaseCliente extends BaseObject implements Persistent
                         break;
                     case '`cliente_ultimologin`':
                         $stmt->bindValue($identifier, $this->cliente_ultimologin, PDO::PARAM_STR);
+                        break;
+                    case '`cliente_fotografiasdomicilio`':
+                        $stmt->bindValue($identifier, $this->cliente_fotografiasdomicilio, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -2619,6 +2664,9 @@ abstract class BaseCliente extends BaseObject implements Persistent
             case 40:
                 return $this->getClienteUltimologin();
                 break;
+            case 41:
+                return $this->getClienteFotografiasdomicilio();
+                break;
             default:
                 return null;
                 break;
@@ -2689,6 +2737,7 @@ abstract class BaseCliente extends BaseObject implements Persistent
             $keys[38] => $this->getIdempleadocomercial(),
             $keys[39] => $this->getIdempleadooperaciones(),
             $keys[40] => $this->getClienteUltimologin(),
+            $keys[41] => $this->getClienteFotografiasdomicilio(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -2865,6 +2914,9 @@ abstract class BaseCliente extends BaseObject implements Persistent
             case 40:
                 $this->setClienteUltimologin($value);
                 break;
+            case 41:
+                $this->setClienteFotografiasdomicilio($value);
+                break;
         } // switch()
     }
 
@@ -2930,6 +2982,7 @@ abstract class BaseCliente extends BaseObject implements Persistent
         if (array_key_exists($keys[38], $arr)) $this->setIdempleadocomercial($arr[$keys[38]]);
         if (array_key_exists($keys[39], $arr)) $this->setIdempleadooperaciones($arr[$keys[39]]);
         if (array_key_exists($keys[40], $arr)) $this->setClienteUltimologin($arr[$keys[40]]);
+        if (array_key_exists($keys[41], $arr)) $this->setClienteFotografiasdomicilio($arr[$keys[41]]);
     }
 
     /**
@@ -2982,6 +3035,7 @@ abstract class BaseCliente extends BaseObject implements Persistent
         if ($this->isColumnModified(ClientePeer::IDEMPLEADOCOMERCIAL)) $criteria->add(ClientePeer::IDEMPLEADOCOMERCIAL, $this->idempleadocomercial);
         if ($this->isColumnModified(ClientePeer::IDEMPLEADOOPERACIONES)) $criteria->add(ClientePeer::IDEMPLEADOOPERACIONES, $this->idempleadooperaciones);
         if ($this->isColumnModified(ClientePeer::CLIENTE_ULTIMOLOGIN)) $criteria->add(ClientePeer::CLIENTE_ULTIMOLOGIN, $this->cliente_ultimologin);
+        if ($this->isColumnModified(ClientePeer::CLIENTE_FOTOGRAFIASDOMICILIO)) $criteria->add(ClientePeer::CLIENTE_FOTOGRAFIASDOMICILIO, $this->cliente_fotografiasdomicilio);
 
         return $criteria;
     }
@@ -3085,6 +3139,7 @@ abstract class BaseCliente extends BaseObject implements Persistent
         $copyObj->setIdempleadocomercial($this->getIdempleadocomercial());
         $copyObj->setIdempleadooperaciones($this->getIdempleadooperaciones());
         $copyObj->setClienteUltimologin($this->getClienteUltimologin());
+        $copyObj->setClienteFotografiasdomicilio($this->getClienteFotografiasdomicilio());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -3774,6 +3829,7 @@ abstract class BaseCliente extends BaseObject implements Persistent
         $this->idempleadocomercial = null;
         $this->idempleadooperaciones = null;
         $this->cliente_ultimologin = null;
+        $this->cliente_fotografiasdomicilio = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

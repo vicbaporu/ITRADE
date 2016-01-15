@@ -44,13 +44,14 @@
     <column name="cliente_actaconstitutiva" phpName="ClienteActaconstitutiva" type="LONGVARCHAR" required="false"/>
     <column name="cliente_podernotarial" phpName="ClientePodernotarial" type="LONGVARCHAR" required="false"/>
     <column name="cliente_cartaencomienda" phpName="ClienteCartaencomienda" type="LONGVARCHAR" required="false"/>
-    <column name="cliente_comprobantedomicilio" phpName="ClienteComprobantedomicilio" type="VARCHAR" size="45" required="false"/>
+    <column name="cliente_comprobantedomicilio" phpName="ClienteComprobantedomicilio" type="LONGVARCHAR" required="false"/>
     <column name="cliente_comprobanteclabe" phpName="ClienteComprobanteclabe" type="LONGVARCHAR" required="false"/>
-    <column name="cliente_clabe" phpName="ClienteClabe" type="VARCHAR" size="45" required="false"/>
-    <column name="cliente_archivoszip" phpName="ClienteArchivoszip" type="VARCHAR" size="45" required="false"/>
+    <column name="cliente_clabe" phpName="ClienteClabe" type="LONGVARCHAR" required="false"/>
+    <column name="cliente_archivoszip" phpName="ClienteArchivoszip" type="LONGVARCHAR" required="false"/>
     <column name="idempleadocomercial" phpName="Idempleadocomercial" type="INTEGER" required="false"/>
     <column name="idempleadooperaciones" phpName="Idempleadooperaciones" type="INTEGER" required="false"/>
     <column name="cliente_ultimologin" phpName="ClienteUltimologin" type="TIMESTAMP" required="false"/>
+    <column name="cliente_fotografiasdomicilio" phpName="ClienteFotografiasdomicilio" type="LONGVARCHAR" required="false"/>
     <foreign-key foreignTable="empleado" name="idempleadocomercial_cliente" onDelete="SET NULL" onUpdate="SET NULL">
       <reference local="idempleadocomercial" foreign="idempleado"/>
     </foreign-key>

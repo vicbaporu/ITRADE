@@ -46,6 +46,7 @@ class EmpleadoController extends AbstractActionController
         
         $id = $this->params()->fromQuery('id');
         $viewModel = new ViewModel();
+        $viewModel  ->setTemplate('admin/catalogo/empleado/changepassword');
         $viewModel->setTerminal(true);
         $viewModel->setVariable('id', $id);
         return $viewModel;

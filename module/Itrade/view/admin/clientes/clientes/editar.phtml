@@ -12,7 +12,7 @@
         <h3><span class="semi-bold"><?php echo strtoupper($form->get('cliente_razonsocial')->getValue())?></span></h3>
     </div>
     <?php 
-        $form->setAttribute('action', '/clientes/nuevo');
+        $form->setAttribute('action', '/clientes/ver/'.$form->get('idcliente')->getValue());
         $form->setAttribute('novalidate', true);
         $form->setAttribute('enctype', 'multipart/form-data');
 
@@ -44,6 +44,7 @@
                                     <span class="help req">*</span>
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
+                                        <?php echo $this->formHidden($form->get('idcliente')) ?>
                                         <?php echo $this->formText($form->get('cliente_nombrecontacto')) ?>
                                     </div>
                                     <span class="error"></span>
@@ -327,7 +328,13 @@
                 <div class="grid-title no-border">
                     <h4><span class="semi-bold">Datos de acceso</span></h4>
                     <div class="tools">
+                        <a id="user-options" class="dropdown-toggle config" href="javascript:;" data-toggle="dropdown"></a>
                         <a class="collapse" href="javascript:;"></a>
+                        <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
+                            <li>
+                                <a id="change_password" style="background: none"href="javascript:void(0)"><i class="fa fa-key"></i> Cambiar contraseña</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="grid-body no-border">
@@ -346,14 +353,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4">
+<!--                        <div class="col-md-4 col-sm-4 col-xs-4">
                             <div class="row-fluid">
                                 <div class="checkbox check-success " style="margin-top: 35px;">
                                     <input name="cliente_sendemail" type="checkbox" checked="checked" value="1">
                                     <label for="checkbox2">¿Enviar correo de bienvenida?</label>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -365,13 +372,45 @@
                 </div>
             </div>
             </div>
-            <div class="tab-pane" id="legal">
+            <div class="tab-pane" id="legal" style="display: none">
                 <div class="grid simple ">
                     <div class="grid-title no-border">
                         <h4><span class="semi-bold">Perfil Legal</span></h4>
                         <div class="tools">
                             <a class="collapse" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="grid-body no-border">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <li id="cliente_padronimportador">Padrón de importadores (Formato SAT)<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_encargadoconferido">Encargo conferido (Confirmación solicitud vía Internet)<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_r1" >R1 de la empresa<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_r2">R2 en caso de aplicar<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_identificacionrepresentantelegal">Identificación del representante legal<span class="legal_validation "><i class=""></i></span></li>
                             </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <li id="cliente_rfcrepresentantelegal">RFC del representante legal<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_actaconstitutiva">Acta constitutiva de la empresa<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_podernotarial">Poder notarial en caso de que aplique<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_cartaencomienda">Carta encomienda hoja membretada<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_comprobantedomicilio">Comprobante de domicilio<span class="legal_validation "><i class=""></i></span></li>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <li id="cliente_comprobanteclabe">Cuenta bancaria CLABE (para reintegrar saldo a favor)<span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_archivoszip">Carpeta ZIP archivos: .key, .cer. clave privada y la clave cifrada. (para tramite de ventanilla única) <span class="legal_validation "><i class=""></i></span></li>
+                                <li id="cliente_fotografiasdomicilio">Fotografías del domicilio fiscal<span class="legal_validation "><i class=""></i></span></li>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="row-fluid" style="margin-top: 20px;">
+                                    <div class="dropzone" id="mydropzone"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -385,14 +424,18 @@
         echo $this->form()->closeTag(); 
     ?>
 </div>
+<!--DROPZONE-->
+<script src="/plugins/admin/dropzone/dropzone.js"></script>
+<script src="/plugins/admin/download/download.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/admin/dropzone/css/dropzone.css">
 <!--CUSTOM SCRIPT-->
 <script src="/js/admin/clientes/clientes.js"></script>
 <script type="text/javascript">
     
     $(document).ready(function() {
         //FORM BIND
-        var $form = $('.form_container').clientes(true);
-        $form.formBind();
+        var $form = $('.form_container').clientes({successMessages:<?php echo $successMessages?>});
+        $form.formBind(true,<?php echo $entity?>);
         
     });
 </script>

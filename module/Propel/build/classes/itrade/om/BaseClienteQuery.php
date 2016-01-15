@@ -47,6 +47,7 @@
  * @method ClienteQuery orderByIdempleadocomercial($order = Criteria::ASC) Order by the idempleadocomercial column
  * @method ClienteQuery orderByIdempleadooperaciones($order = Criteria::ASC) Order by the idempleadooperaciones column
  * @method ClienteQuery orderByClienteUltimologin($order = Criteria::ASC) Order by the cliente_ultimologin column
+ * @method ClienteQuery orderByClienteFotografiasdomicilio($order = Criteria::ASC) Order by the cliente_fotografiasdomicilio column
  *
  * @method ClienteQuery groupByIdcliente() Group by the idcliente column
  * @method ClienteQuery groupByClienteEmail() Group by the cliente_email column
@@ -89,6 +90,7 @@
  * @method ClienteQuery groupByIdempleadocomercial() Group by the idempleadocomercial column
  * @method ClienteQuery groupByIdempleadooperaciones() Group by the idempleadooperaciones column
  * @method ClienteQuery groupByClienteUltimologin() Group by the cliente_ultimologin column
+ * @method ClienteQuery groupByClienteFotografiasdomicilio() Group by the cliente_fotografiasdomicilio column
  *
  * @method ClienteQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ClienteQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -153,6 +155,7 @@
  * @method Cliente findOneByIdempleadocomercial(int $idempleadocomercial) Return the first Cliente filtered by the idempleadocomercial column
  * @method Cliente findOneByIdempleadooperaciones(int $idempleadooperaciones) Return the first Cliente filtered by the idempleadooperaciones column
  * @method Cliente findOneByClienteUltimologin(string $cliente_ultimologin) Return the first Cliente filtered by the cliente_ultimologin column
+ * @method Cliente findOneByClienteFotografiasdomicilio(string $cliente_fotografiasdomicilio) Return the first Cliente filtered by the cliente_fotografiasdomicilio column
  *
  * @method array findByIdcliente(int $idcliente) Return Cliente objects filtered by the idcliente column
  * @method array findByClienteEmail(string $cliente_email) Return Cliente objects filtered by the cliente_email column
@@ -195,6 +198,7 @@
  * @method array findByIdempleadocomercial(int $idempleadocomercial) Return Cliente objects filtered by the idempleadocomercial column
  * @method array findByIdempleadooperaciones(int $idempleadooperaciones) Return Cliente objects filtered by the idempleadooperaciones column
  * @method array findByClienteUltimologin(string $cliente_ultimologin) Return Cliente objects filtered by the cliente_ultimologin column
+ * @method array findByClienteFotografiasdomicilio(string $cliente_fotografiasdomicilio) Return Cliente objects filtered by the cliente_fotografiasdomicilio column
  *
  * @package    propel.generator.itrade.om
  */
@@ -302,7 +306,7 @@ abstract class BaseClienteQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idcliente`, `cliente_email`, `cliente_password`, `cliente_razonsocial`, `cliente_rfc`, `cliente_calle`, `cliente_numero`, `cliente_interior`, `cliente_colonia`, `cliente_codigopostal`, `cliente_ciudad`, `cliente_estado`, `cliente_pais`, `cliente_telefono`, `cliente_celular`, `cliente_nombrecontacto`, `cliente_cumpleanios`, `cliente_callefiscal`, `cliente_numerofiscal`, `cliente_interiorfiscal`, `cliente_coloniafiscal`, `cliente_codigopostalfiscal`, `cliente_ciudadfiscal`, `cliente_estadofiscal`, `cliente_paisfiscal`, `cliente_padronimportador`, `cliente_encargadoconferido`, `cliente_r1`, `cliente_r2`, `cliente_identificacionrepresentantelegal`, `cliente_rfcrepresentantelegal`, `cliente_actaconstitutiva`, `cliente_podernotarial`, `cliente_cartaencomienda`, `cliente_comprobantedomicilio`, `cliente_comprobanteclabe`, `cliente_clabe`, `cliente_archivoszip`, `idempleadocomercial`, `idempleadooperaciones`, `cliente_ultimologin` FROM `cliente` WHERE `idcliente` = :p0';
+        $sql = 'SELECT `idcliente`, `cliente_email`, `cliente_password`, `cliente_razonsocial`, `cliente_rfc`, `cliente_calle`, `cliente_numero`, `cliente_interior`, `cliente_colonia`, `cliente_codigopostal`, `cliente_ciudad`, `cliente_estado`, `cliente_pais`, `cliente_telefono`, `cliente_celular`, `cliente_nombrecontacto`, `cliente_cumpleanios`, `cliente_callefiscal`, `cliente_numerofiscal`, `cliente_interiorfiscal`, `cliente_coloniafiscal`, `cliente_codigopostalfiscal`, `cliente_ciudadfiscal`, `cliente_estadofiscal`, `cliente_paisfiscal`, `cliente_padronimportador`, `cliente_encargadoconferido`, `cliente_r1`, `cliente_r2`, `cliente_identificacionrepresentantelegal`, `cliente_rfcrepresentantelegal`, `cliente_actaconstitutiva`, `cliente_podernotarial`, `cliente_cartaencomienda`, `cliente_comprobantedomicilio`, `cliente_comprobanteclabe`, `cliente_clabe`, `cliente_archivoszip`, `idempleadocomercial`, `idempleadooperaciones`, `cliente_ultimologin`, `cliente_fotografiasdomicilio` FROM `cliente` WHERE `idcliente` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -1649,6 +1653,35 @@ abstract class BaseClienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ClientePeer::CLIENTE_ULTIMOLOGIN, $clienteUltimologin, $comparison);
+    }
+
+    /**
+     * Filter the query on the cliente_fotografiasdomicilio column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByClienteFotografiasdomicilio('fooValue');   // WHERE cliente_fotografiasdomicilio = 'fooValue'
+     * $query->filterByClienteFotografiasdomicilio('%fooValue%'); // WHERE cliente_fotografiasdomicilio LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $clienteFotografiasdomicilio The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function filterByClienteFotografiasdomicilio($clienteFotografiasdomicilio = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($clienteFotografiasdomicilio)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $clienteFotografiasdomicilio)) {
+                $clienteFotografiasdomicilio = str_replace('*', '%', $clienteFotografiasdomicilio);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientePeer::CLIENTE_FOTOGRAFIASDOMICILIO, $clienteFotografiasdomicilio, $comparison);
     }
 
     /**

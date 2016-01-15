@@ -182,6 +182,32 @@ class ClientesController extends AbstractActionController
         
         if($request->isPost()){
             
+            $post_data = $request->getPost();
+            
+            //INSTANCIAMOS NUESTRA ENTIDAD
+            $entity = \ClienteQuery::create()->findPk($id);
+            
+            //SETIAMOS NUESTROS DATOS CON EXCEPCIONES
+            foreach($post_data as $key => $value){
+                if(\ClientePeer::getTableMap()->hasColumn($key) && !empty($value) && $key != 'cliente_cumpleanios'){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            if(!empty($post_data['cliente_cumpleanios'])){
+                
+                $cliente_cumpleanios = date_create_from_format('d/m/Y', $post_data['cliente_cumpleanios']);
+                $entity->setClienteCumpleanios($cliente_cumpleanios);
+            }
+            
+            $entity->save();
+            
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toRoute('admin/clientes/editar', array('id' => $entity->getIdcliente()));
+            
         }
        
         $exist = \ClienteQuery::create()->filterByIdcliente($id)->exists();
@@ -244,6 +270,48 @@ class ClientesController extends AbstractActionController
         }
         
        
+    }
+    
+    public function changepasswordAction(){
+        
+        $request = $this->getRequest();
+       
+        if($request->isPost()){
+            $post_data = $request->getPost();
+            
+            $id = $post_data['idcliente'];
+            $entity = \ClienteQuery::create()->findPk($id);
+            
+            $entity->setClientePassword(md5($post_data['cliente_password']));
+            
+            $entity->save();
+            
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            //VALIDAMOS SI ENVIAMOS EL CORREO DE BIENVENIDA
+            if(isset($post_data['cliente_sendemail'])){
+                if($post_data['cliente_sendemail'] == '1'){
+                    
+                    $itrade_mailer = new \Shared\GeneralFunction\Itrademailer();
+                    $enviar_correo = $itrade_mailer->welcomeEmail($entity,$post_data['cliente_password']);
+                    if($enviar_correo){
+                        $this->flashMessenger()->addSuccessMessage('Correo electronico de bienvenida enviado exitosamente!');
+                    }
+                    
+                }
+            }       
+           //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+           return $this->redirect()->toRoute('admin/clientes/editar', array('id' => $entity->getIdcliente()));
+
+        }
+        
+        $id = $this->params()->fromQuery('id');
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('admin/clientes/clientes/changepassword');
+        $viewModel->setTerminal(true);
+        $viewModel->setVariable('id', $id);
+        return $viewModel;
+
     }
 
 }
