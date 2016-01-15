@@ -313,5 +313,18 @@ class ClientesController extends AbstractActionController
         return $viewModel;
 
     }
+    
+    public function selectfileAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){}
+        
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('admin/clientes/clientes/selectfile');
+        $viewModel->setTerminal(true);
+        return $viewModel;
+
+    }
 
 }

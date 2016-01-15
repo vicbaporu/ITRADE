@@ -205,6 +205,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'selectfile' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/selectfile',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'selectfile',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),

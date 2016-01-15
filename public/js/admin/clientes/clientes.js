@@ -320,6 +320,16 @@
                     url: "/clientes/legaldropzone",
                     addRemoveLinks: true,
                     dictRemoveFile:'Eliminar',
+                    addedfile:function(data){            
+                        $.ajax({
+                        url:'/clientes/selectfile',
+                            success:function(source){
+                                 source = $('<div>'+source+'</div>');
+                                 $container.append(source);
+                                 source.find('.modal').modal();
+                            }
+                        });
+                    }
                 });
                 
                 $container.find('input[name=cliente_email]').removeClass('validate-ajax');
