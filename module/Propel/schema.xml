@@ -267,6 +267,7 @@
     <column name="proveedorcliente_nombrecontacto" phpName="ProveedorclienteNombrecontacto" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_emailcontacto" phpName="ProveedorclienteEmailcontacto" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_telefonocontacto" phpName="ProveedorclienteTelefonocontacto" type="VARCHAR" size="45" required="false"/>
+    <column name="proveedorcliente_nombre" phpName="ProveedorclienteNombre" type="VARCHAR" size="45" required="false"/>
     <foreign-key foreignTable="cliente" name="proveedorcliente_idcliente" onDelete="RESTRICT" onUpdate="RESTRICT">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>

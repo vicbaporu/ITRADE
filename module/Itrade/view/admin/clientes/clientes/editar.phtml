@@ -23,7 +23,7 @@
             <ul id="myTab" class="nav nav-tabs" style="margin-bottom: 15px;">
                 <li class="active"><a href="#info">Info</a></li>
                 <li><a href="#legal">Perfil legal</a></li>
-                <li><a href="#expediente">Expedientes</a></li>
+                <li><a href="#proveedores">Proveedores</a></li>
                 <li><a href="#files">Archivos</a></li>
             </ul>
             <div class="tab-pane" id="info">
@@ -372,6 +372,39 @@
                 </div>
             </div>
             </div>
+            <div class="tab-pane" id="proveedores" style="display: none">
+                <div class="grid simple">
+                    <div class="grid-title no-border">
+                        <div class="tools">
+                            <a id="user-options" class="dropdown-toggle pull-right " href="#" data-toggle="dropdown" style="background: none">
+                                <div class="iconset top-settings-dark "></div>
+                            </a>
+                            <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
+                                <li>
+                                    <a style="background: none"href="/clientes/ver/1/proveedores/nuevo"><i class="fa fa-plus"></i> Registro proveedor</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="grid-body no-border">
+                        <table id="table_proveedores" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tax ID</th>
+                                    <th>Contacto</th>
+                                    <th>Teléfono</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane" id="legal" style="display: none">
                 <div class="grid simple ">
                     <div class="grid-title no-border">
@@ -409,6 +442,9 @@
                                 <div class="row-fluid" style="margin-top: 20px;">
                                     <div class="dropzone" id="mydropzone"></div>
                                 </div>
+                            </div>
+                             <div class="col-sm-12">
+                        
                             </div>
                         </div>
                     </div>

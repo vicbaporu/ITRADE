@@ -1,6 +1,6 @@
 
     <div class="modal fade" tabindex="-1" role="dialog">
-        <form method="post" action="/clientes/changepassword">
+<!--        <form method="post" action="/clientes/changepassword">-->
       <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -9,103 +9,73 @@
         </div>
           <div class="modal-body">
               <div class="row">
-<!--                  <div class="col-sm-12">
-                       <div class="radio-success">
-                           <input name="cliente_legal_file" type="radio" value="cliente_padronimportador">
-                            <label>Padrón de importadores (Formato SAT)</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                       <div class="radio radio-success">
-                           <input name="cliente_legal_file" type="radio" value="cliente_padronimportador">
-                            <label>Padrón de importadores (Formato SAT)</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_encargadoconferido">
-                            <label>Encargo conferido (Confirmación solicitud vía Internet)</label>
-                        </div>
-                    </div>
-                   <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_r1">
-                            <label>R1 de la empresa</label>
-                        </div>
-                    </div>
-                   <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_r2">
-                            <label>R2 en caso de aplicar</label>
-                        </div>
-                    </div>
-                   <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_identificacionrepresentantelegal">
-                            <label>Identificación del representante legal</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_rfcarchivo">
-                            <label>RFC de la empresa</label>
-                        </div>
-                    </div>
                   <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_rfcrepresentantelegal">
-                            <label>RFC del representante legal</label>
+                        <div class="radio radio-success">
+                            <p>
+                                <input id="padronimportador" checked type="radio" value="padronimportador" name="optionyes">
+                                <label for="padronimportador">Padrón de importadores (Formato SAT)</label>
+                            </p>
+                            <p>
+                                <input id="encargadoconferido" type="radio" value="encargadoconferido" name="optionyes">
+                                <label for="encargadoconferido">Encargo conferido (Confirmación solicitud vía Internet)</label>
+                            </p>
+                            <p> 
+                                <input id="r1" type="radio" value="r1" name="optionyes">
+                                <label for="r1">R1 de la empresa</label>
+                            </p>
+                            <p> 
+                                <input id="r2" type="radio" value="r2" name="optionyes">
+                                <label for="r2">R2 de la empresa</label>
+                            </p>
+                            <p> 
+                                <input id="identificacionrepresentantelegal" type="radio" value="identificacionrepresentantelegal" name="optionyes">
+                                <label for="identificacionrepresentantelegal">Identificación del representante legal</label>
+                            </p>
+<!--                            <p> 
+                                <input id="rfcarchivo" type="radio" value="rfcarchivo" name="optionyes">
+                                <label for="rfcarchivo">RFC de la empresa</label>
+                            </p>-->
+                            <p> 
+                                <input id="rfcrepresentantelegal" type="radio" value="rfcrepresentantelegal" name="optionyes">
+                                <label for="rfcrepresentantelegal">RFC del representante legal</label>
+                            </p>
+                            <p> 
+                                <input id="actaconstitutiva" type="radio" value="actaconstitutiva" name="optionyes">
+                                <label for="actaconstitutiva">Acta constitutiva de la empresa</label>
+                            </p>
+                            <p> 
+                                <input id="podernotarial" type="radio" value="podernotarial" name="optionyes">
+                                <label for="podernotarial">Poder notarial</label>
+                            </p>
+                            <p> 
+                                <input id="cartaencomienda" type="radio" value="cartaencomienda" name="optionyes">
+                                <label for="cartaencomienda">Carta encomienda hoja membretada</label>
+                            </p>
+                            <p> 
+                                <input id="comprobantedomicilio" type="radio" value="comprobantedomicilio" name="optionyes">
+                                <label for="comprobantedomicilio">Comprobante de domicilio</label>
+                            </p>
+                            <p> 
+                                <input id="comprobanteclabe" type="radio" value="comprobanteclabe" name="optionyes">
+                                <label for="comprobanteclabe">Cuenta bancaria CLABE</label>
+                            </p>
+                            <p> 
+                                <input id="archivoszip" type="radio" value="archivoszip" name="optionyes">
+                                <label for="archivoszip">Carpeta ZIP archivos: .key, .cer. clave privada y la clave cifrada</label>
+                            </p>
+                            <p> 
+                                <input id="fotografiasdomicilio" type="radio" value="fotografiasdomicilio" name="optionyes">
+                                <label for="fotografiasdomicilio">Fotografías del domicilio fiscal</label>
+                            </p>
                         </div>
-                    </div>
-                  <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_actaconstitutiva">
-                            <label>Acta constitutiva de la empresa</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_podernotarial">
-                            <label>Poder notarial en caso de que aplique</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_cartaencomienda">
-                            <label>Carta encomienda hoja membretada</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_comprobantedomicilio">
-                            <label>Comprobante de domicilio</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_comprobanteclabe">
-                            <label>Cuenta bancaria CLABE</label>
-                        </div>
-                    </div>
-                   <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_archivoszip">
-                            <label>Carpeta ZIP archivos: .key, .cer. clave privada y la clave cifrada</label>
-                        </div>
-                    </div>
-                  <div class="col-sm-12">
-                       <div class="radio radio-success">
-                            <input name="cliente_legal_file" type="radio" value="cliente_fotografiasdomicilio">
-                            <label>Fotografías del domicilio fiscal</label>
-                        </div>
-                    </div>-->
+                  </div>
               </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button btn-action="submit" type="submit" class="btn btn-success"><i class="fa fa-cloud-upload"></i>Subir archivo</button>
+            <button btn-action="submit" type="submit" class="btn btn-success"><i class="fa fa-cloud-upload"></i> Subir archivo</button>
           </div>
         </div>
-      </div><
-      </form>
+      </div>
+      <!--</form>-->
     </div>

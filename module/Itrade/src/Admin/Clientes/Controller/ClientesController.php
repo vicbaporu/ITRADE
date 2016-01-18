@@ -326,5 +326,208 @@ class ClientesController extends AbstractActionController
         return $viewModel;
 
     }
+    
+    public function legaldropzoneAction(){
+        
+        $perfil_legal = array(
+            'cliente_padronimportador' => 'PADRON IMPORTADOR',
+            'cliente_encargadoconferido' => 'ENCARGO COFERIDO',
+            'cliente_r1' => 'R1',
+            'cliente_r2' => 'R2',
+            'cliente_identificacionrepresentantelegal' => 'IDENTIFICACION REPRESENTANTE LEGAL',
+            'cliente_rfcrepresentantelegal' => 'RFC REPRESENTANTE LEGAL',
+            'cliente_actaconstitutiva' => 'ACTA CONSTITUTIVA',
+            'cliente_podernotarial' => 'PODER NOTARIAL',
+            'cliente_cartaencomienda' => 'CARTA ENCOMIENDA',
+            'cliente_comprobantedomicilio' => 'COMPROBANTE DE DOMICILIO',
+            'cliente_comprobanteclabe' => 'CLABE',
+            'cliente_archivoszip' => 'ARCHIVOS ZIP',
+            'cliente_fotografiasdomicilio' => 'FOTOGRAFIAS DOMICILIO',
+        );
+        
+        $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/clientes';
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            $files = $request->getFiles();
+            
+            //OBTENEMOS EL ID DEL CLIENTE
+             $id = $post_data['idcliente'];
+             $name = $post_data['file_name'];
+             
+             
+            $tempFile = $files['file']['tmp_name'];
+            $typeFile = $files['file']['type']; $typeFile = explode('/', $typeFile); $typeFile= $typeFile[1];
+            
+            
+            $targetFile = '/files/clientes'. '/'. $id.'/perfil_legal/'.$perfil_legal[$name].'.'.$typeFile;
+           
+            if (!file_exists($storeFolder. '/'. $id)) {
+                mkdir($storeFolder. '/'. $id, 0777, true);
+                if (!file_exists($storeFolder. '/'. $id.'/perfil_legal')) {
+                    mkdir($storeFolder. '/'. $id.'/perfil_legal', 0777, true);
+                }
+            }
+            
+            $response = move_uploaded_file($tempFile,$_SERVER['DOCUMENT_ROOT'].$targetFile);
+            
+            
+            $cliente = \ClienteQuery::create()->findPk($id);
+            $cliente->setByName($post_data['file_name'], $targetFile,  \BasePeer::TYPE_FIELDNAME);
+            $cliente->save();
+            
+            return $this->getResponse()->setContent(json_encode($response));
 
+            
+        }
+        
+        
+    }
+    
+    public function legaldropzonedownloadAction(){
+        
+         $request = $this->getRequest();
+         
+         if($request->isPost()){
+             
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $idcliente = $post_data['idcliente'];
+            
+            $entity = \ClienteQuery::create()->findPk($idcliente);
+            
+            $file_path = $entity->getByName($id, \BasePeer::TYPE_FIELDNAME);
+            $file_name = explode('/files/clientes/'.$entity->getIdcliente().'/perfil_legal/', $file_path);
+            $file_name = $file_name[1];
+            
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$file_path;
+           
+            $file_base64 = base64_encode(file_get_contents($taget_file));
+            $file_type = mime_content_type($taget_file);
+            
+            return $this->getResponse()->setContent(json_encode(array('base64' => $file_base64, 'type' => $file_type,'name' => $file_name)));
+            
+             
+         }
+        
+    }
+    
+    public function legaldropzonedeleteAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $idcliente = $post_data['idcliente'];
+            
+            $entity = \ClienteQuery::create()->findPk($idcliente);
+            $path = $entity->getByName($id, \BasePeer::TYPE_FIELDNAME);
+            $entity->setByName($id, NULL,\BasePeer::TYPE_FIELDNAME);
+            
+            //Eliminamos del sistema de archivos
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$path;
+            unlink($taget_file);
+            
+            //Eliminamos de la base de datos
+            $entity->save();
+            
+            return $this->getResponse()->setContent(json_encode(true));
+                       
+        }
+    }
+    
+    public function proveedorserversideAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            //EL MAPEO DE NUESTRA TABALA
+            $table_map = array(
+                0 => 'proveedorcliente_nombre',
+                1 => 'proveedorcliente_taxid',
+                2 => 'proveedorcliente_nombrecontacto',
+                3 => 'proveedorcliente_telefonocontacto',
+            );
+            
+            $post_data = $request->getPost();
+           
+            //NUESTRA QUERY
+            $query = new \ProveedorclienteQuery();
+            $query->filterByIdcliente($post_data['idcliente']);
+            
+            //ORDER 
+            if(isset($post_data['order'])){
+                $order = $table_map[$post_data['order'][0]['column']];
+                $dir = $post_data['order'][0]['dir'];
+                $query->orderBy($order, $dir);
+            }else{
+                $query->orderByIdcliente(\Criteria::DESC);
+            }
+
+            if(!empty($post_data['search']['value'])){
+                
+                $search = $post_data['search']['value'];
+
+                $c = new \Criteria();
+                
+                $c1= $c->getNewCriterion('proveedorcliente.proveedorcliente_nombre', '%'.$search.'%', \Criteria::LIKE);
+                $c2= $c->getNewCriterion('proveedorcliente.proveedorcliente_taxid', '%'.$search.'%', \Criteria::LIKE);
+                $c3= $c->getNewCriterion('proveedorcliente.proveedorcliente_nombrecontacto', '%'.$search.'%', \Criteria::LIKE);
+                $c4= $c->getNewCriterion('proveedorcliente.proveedorcliente_telefonocontacto', '%'.$search.'%', \Criteria::LIKE);
+ 
+                $c1->addOr($c2)->addOr($c3)->addOr($c4);
+
+                $query->addAnd($c1);
+               
+            }
+
+            //EL TOTAL DE LA BUSQUEDA
+            $recordsFiltered = $query->count();
+            
+            //LIMIT
+            $query->setOffset((int)$post_data['start']);
+            $query->setLimit((int)$post_data['length']);
+            
+             //DAMOS EL FORMATO CORRECTO
+            $data = array();
+            $value = new \Proveedorcliente();
+            foreach ($query->find() as $value){
+
+                $tmp['DT_RowId'] = $value->getIdproveedorcliente();
+                $tmp['proveedorcliente_nombre'] = $value->getProveedorclienteNombre();
+                $tmp['proveedorcliente_taxid'] =  $value->getProveedorclienteTaxid();
+                $tmp['proveedorcliente_nombrecontacto'] = $value->getProveedorclienteNombrecontacto();
+                $tmp['proveedorcliente_telefonocontacto'] = $value->getProveedorclienteTelefonocontacto();
+                $tmp['cliente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/ver/'.$value->getIdcliente().'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
+                $data[] = $tmp;
+ 
+            }  
+            
+            //El arreglo que regresamos
+            $json_data = array(
+                "draw"            => (int)$post_data['draw'],
+                "recordsFiltered" => $recordsFiltered,
+                "data"            => $data,
+                "page"            => $post_data['url_params']['page']
+            );
+
+            
+            return $this->getResponse()->setContent(json_encode($json_data));
+
+        }
+    }
+    
+    public function proveedornuevoAction(){
+        echo '<pre>';var_dump('$apiResponse'); echo '</pre>';exit();
+    }
 }

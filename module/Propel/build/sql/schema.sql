@@ -332,6 +332,7 @@ CREATE TABLE `proveedorcliente`
     `proveedorcliente_nombrecontacto` VARCHAR(45),
     `proveedorcliente_emailcontacto` VARCHAR(45),
     `proveedorcliente_telefonocontacto` VARCHAR(45),
+    `proveedorcliente_nombre` VARCHAR(45),
     PRIMARY KEY (`idproveedorcliente`),
     INDEX `proveedorcliente_idcliente` (`idcliente`),
     CONSTRAINT `proveedorcliente_idcliente`

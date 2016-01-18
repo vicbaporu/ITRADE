@@ -51,6 +51,7 @@ class ProveedorclienteTableMap extends TableMap
         $this->addColumn('proveedorcliente_nombrecontacto', 'ProveedorclienteNombrecontacto', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedorcliente_emailcontacto', 'ProveedorclienteEmailcontacto', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedorcliente_telefonocontacto', 'ProveedorclienteTelefonocontacto', 'VARCHAR', false, 45, null);
+        $this->addColumn('proveedorcliente_nombre', 'ProveedorclienteNombre', 'VARCHAR', false, 45, null);
         // validators
     } // initialize()
 

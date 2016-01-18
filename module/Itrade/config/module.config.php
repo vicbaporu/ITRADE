@@ -178,10 +178,32 @@ return array(
                             'editar' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/ver[/:id]',
+                                    'route'    => '/ver/:id',
                                     'defaults' => array(
                                         'controller'    => 'Admin\Clientes\Controller\Clientes',
                                         'action'        => 'editar',
+                                    ),
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'proveedores' => array(
+                                        'type'    => 'Segment',
+                                        'options' => array(
+                                            'route'    => '/proveedores',
+                                        ),
+                                        'may_terminate' => true,
+                                        'child_routes' => array(
+                                            'nuevo' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/nuevo',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Clientes',
+                                                        'action' => 'proveedornuevo',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -215,6 +237,48 @@ return array(
                                     ),
                                 ),
                             ),
+                            
+                            'legaldropzone' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/legaldropzone',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'legaldropzone',
+                                    ),
+                                ),
+                            ),
+                            'legaldropzonedownload' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/legaldropzonedownload',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'legaldropzonedownload',
+                                    ),
+                                ),
+                            ),
+                            'legaldropzonedelete' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/legaldropzonedelete',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'legaldropzonedelete',
+                                    ),
+                                ),
+                            ),
+                            'proveedorserverside' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/proveedorserverside',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'proveedorserverside',
+                                    ),
+                                ),
+                            ),
+                            
                         ),
                     ),
                 ),

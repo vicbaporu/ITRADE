@@ -108,6 +108,12 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
     protected $proveedorcliente_telefonocontacto;
 
     /**
+     * The value for the proveedorcliente_nombre field.
+     * @var        string
+     */
+    protected $proveedorcliente_nombre;
+
+    /**
      * @var        Cliente
      */
     protected $aCliente;
@@ -273,6 +279,17 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
     {
 
         return $this->proveedorcliente_telefonocontacto;
+    }
+
+    /**
+     * Get the [proveedorcliente_nombre] column value.
+     *
+     * @return string
+     */
+    public function getProveedorclienteNombre()
+    {
+
+        return $this->proveedorcliente_nombre;
     }
 
     /**
@@ -553,6 +570,27 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
     } // setProveedorclienteTelefonocontacto()
 
     /**
+     * Set the value of [proveedorcliente_nombre] column.
+     *
+     * @param  string $v new value
+     * @return Proveedorcliente The current object (for fluent API support)
+     */
+    public function setProveedorclienteNombre($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->proveedorcliente_nombre !== $v) {
+            $this->proveedorcliente_nombre = $v;
+            $this->modifiedColumns[] = ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE;
+        }
+
+
+        return $this;
+    } // setProveedorclienteNombre()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -597,6 +635,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             $this->proveedorcliente_nombrecontacto = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
             $this->proveedorcliente_emailcontacto = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
             $this->proveedorcliente_telefonocontacto = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
+            $this->proveedorcliente_nombre = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -606,7 +645,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 13; // 13 = ProveedorclientePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 14; // 14 = ProveedorclientePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Proveedorcliente object", $e);
@@ -873,6 +912,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO)) {
             $modifiedColumns[':p' . $index++]  = '`proveedorcliente_telefonocontacto`';
         }
+        if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE)) {
+            $modifiedColumns[':p' . $index++]  = '`proveedorcliente_nombre`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `proveedorcliente` (%s) VALUES (%s)',
@@ -922,6 +964,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
                         break;
                     case '`proveedorcliente_telefonocontacto`':
                         $stmt->bindValue($identifier, $this->proveedorcliente_telefonocontacto, PDO::PARAM_STR);
+                        break;
+                    case '`proveedorcliente_nombre`':
+                        $stmt->bindValue($identifier, $this->proveedorcliente_nombre, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1108,6 +1153,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             case 12:
                 return $this->getProveedorclienteTelefonocontacto();
                 break;
+            case 13:
+                return $this->getProveedorclienteNombre();
+                break;
             default:
                 return null;
                 break;
@@ -1150,6 +1198,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             $keys[10] => $this->getProveedorclienteNombrecontacto(),
             $keys[11] => $this->getProveedorclienteEmailcontacto(),
             $keys[12] => $this->getProveedorclienteTelefonocontacto(),
+            $keys[13] => $this->getProveedorclienteNombre(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1233,6 +1282,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             case 12:
                 $this->setProveedorclienteTelefonocontacto($value);
                 break;
+            case 13:
+                $this->setProveedorclienteNombre($value);
+                break;
         } // switch()
     }
 
@@ -1270,6 +1322,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if (array_key_exists($keys[10], $arr)) $this->setProveedorclienteNombrecontacto($arr[$keys[10]]);
         if (array_key_exists($keys[11], $arr)) $this->setProveedorclienteEmailcontacto($arr[$keys[11]]);
         if (array_key_exists($keys[12], $arr)) $this->setProveedorclienteTelefonocontacto($arr[$keys[12]]);
+        if (array_key_exists($keys[13], $arr)) $this->setProveedorclienteNombre($arr[$keys[13]]);
     }
 
     /**
@@ -1294,6 +1347,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO, $this->proveedorcliente_nombrecontacto);
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO, $this->proveedorcliente_emailcontacto);
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, $this->proveedorcliente_telefonocontacto);
+        if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE, $this->proveedorcliente_nombre);
 
         return $criteria;
     }
@@ -1369,6 +1423,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         $copyObj->setProveedorclienteNombrecontacto($this->getProveedorclienteNombrecontacto());
         $copyObj->setProveedorclienteEmailcontacto($this->getProveedorclienteEmailcontacto());
         $copyObj->setProveedorclienteTelefonocontacto($this->getProveedorclienteTelefonocontacto());
+        $copyObj->setProveedorclienteNombre($this->getProveedorclienteNombre());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1497,6 +1552,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         $this->proveedorcliente_nombrecontacto = null;
         $this->proveedorcliente_emailcontacto = null;
         $this->proveedorcliente_telefonocontacto = null;
+        $this->proveedorcliente_nombre = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
