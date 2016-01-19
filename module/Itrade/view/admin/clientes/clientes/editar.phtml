@@ -405,6 +405,26 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane" id="files" style="display: none">
+                <div class="grid simple ">
+                    <div class="grid-title no-border">
+                        <h4><span class="semi-bold">Archivos</span></h4>
+                        <div class="tools">
+                            <a class="collapse" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="grid-body no-border">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="row-fluid" style="margin-top: 20px;">
+                                    <div class="dropzone" id="dropzonefiles"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane" id="legal" style="display: none">
                 <div class="grid simple ">
                     <div class="grid-title no-border">
@@ -471,7 +491,7 @@
     $(document).ready(function() {
         //FORM BIND
         var $form = $('.form_container').clientes({successMessages:<?php echo $successMessages?>});
-        $form.formBind(true,<?php echo $entity?>);
+        $form.formBind(true,<?php echo $entity?>,<?php echo $files?>);
         
     });
 </script>

@@ -104,6 +104,10 @@
  * @method ClienteQuery rightJoinEmpleadoRelatedByIdempleadooperaciones($relationAlias = null) Adds a RIGHT JOIN clause to the query using the EmpleadoRelatedByIdempleadooperaciones relation
  * @method ClienteQuery innerJoinEmpleadoRelatedByIdempleadooperaciones($relationAlias = null) Adds a INNER JOIN clause to the query using the EmpleadoRelatedByIdempleadooperaciones relation
  *
+ * @method ClienteQuery leftJoinClientearchivo($relationAlias = null) Adds a LEFT JOIN clause to the query using the Clientearchivo relation
+ * @method ClienteQuery rightJoinClientearchivo($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Clientearchivo relation
+ * @method ClienteQuery innerJoinClientearchivo($relationAlias = null) Adds a INNER JOIN clause to the query using the Clientearchivo relation
+ *
  * @method ClienteQuery leftJoinExpediente($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expediente relation
  * @method ClienteQuery rightJoinExpediente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expediente relation
  * @method ClienteQuery innerJoinExpediente($relationAlias = null) Adds a INNER JOIN clause to the query using the Expediente relation
@@ -1834,6 +1838,80 @@ abstract class BaseClienteQuery extends ModelCriteria
         return $this
             ->joinEmpleadoRelatedByIdempleadooperaciones($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'EmpleadoRelatedByIdempleadooperaciones', 'EmpleadoQuery');
+    }
+
+    /**
+     * Filter the query by a related Clientearchivo object
+     *
+     * @param   Clientearchivo|PropelObjectCollection $clientearchivo  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 ClienteQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByClientearchivo($clientearchivo, $comparison = null)
+    {
+        if ($clientearchivo instanceof Clientearchivo) {
+            return $this
+                ->addUsingAlias(ClientePeer::IDCLIENTE, $clientearchivo->getIdcliente(), $comparison);
+        } elseif ($clientearchivo instanceof PropelObjectCollection) {
+            return $this
+                ->useClientearchivoQuery()
+                ->filterByPrimaryKeys($clientearchivo->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByClientearchivo() only accepts arguments of type Clientearchivo or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Clientearchivo relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ClienteQuery The current query, for fluid interface
+     */
+    public function joinClientearchivo($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Clientearchivo');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Clientearchivo');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Clientearchivo relation Clientearchivo object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   ClientearchivoQuery A secondary query class using the current class as primary query
+     */
+    public function useClientearchivoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinClientearchivo($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Clientearchivo', 'ClientearchivoQuery');
     }
 
     /**

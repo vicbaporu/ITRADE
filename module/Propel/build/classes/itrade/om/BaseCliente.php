@@ -292,6 +292,12 @@ abstract class BaseCliente extends BaseObject implements Persistent
     protected $aEmpleadoRelatedByIdempleadooperaciones;
 
     /**
+     * @var        PropelObjectCollection|Clientearchivo[] Collection to store aggregation of Clientearchivo objects.
+     */
+    protected $collClientearchivos;
+    protected $collClientearchivosPartial;
+
+    /**
      * @var        PropelObjectCollection|Expediente[] Collection to store aggregation of Expediente objects.
      */
     protected $collExpedientes;
@@ -322,6 +328,12 @@ abstract class BaseCliente extends BaseObject implements Persistent
      * @var        boolean
      */
     protected $alreadyInClearAllReferencesDeep = false;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $clientearchivosScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
@@ -1902,6 +1914,8 @@ abstract class BaseCliente extends BaseObject implements Persistent
 
             $this->aEmpleadoRelatedByIdempleadocomercial = null;
             $this->aEmpleadoRelatedByIdempleadooperaciones = null;
+            $this->collClientearchivos = null;
+
             $this->collExpedientes = null;
 
             $this->collProveedorclientes = null;
@@ -2047,6 +2061,23 @@ abstract class BaseCliente extends BaseObject implements Persistent
                 }
                 $affectedRows += 1;
                 $this->resetModified();
+            }
+
+            if ($this->clientearchivosScheduledForDeletion !== null) {
+                if (!$this->clientearchivosScheduledForDeletion->isEmpty()) {
+                    ClientearchivoQuery::create()
+                        ->filterByPrimaryKeys($this->clientearchivosScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->clientearchivosScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collClientearchivos !== null) {
+                foreach ($this->collClientearchivos as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
             }
 
             if ($this->expedientesScheduledForDeletion !== null) {
@@ -2490,6 +2521,14 @@ abstract class BaseCliente extends BaseObject implements Persistent
             }
 
 
+                if ($this->collClientearchivos !== null) {
+                    foreach ($this->collClientearchivos as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
                 if ($this->collExpedientes !== null) {
                     foreach ($this->collExpedientes as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
@@ -2750,6 +2789,9 @@ abstract class BaseCliente extends BaseObject implements Persistent
             }
             if (null !== $this->aEmpleadoRelatedByIdempleadooperaciones) {
                 $result['EmpleadoRelatedByIdempleadooperaciones'] = $this->aEmpleadoRelatedByIdempleadooperaciones->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->collClientearchivos) {
+                $result['Clientearchivos'] = $this->collClientearchivos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collExpedientes) {
                 $result['Expedientes'] = $this->collExpedientes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -3148,6 +3190,12 @@ abstract class BaseCliente extends BaseObject implements Persistent
             // store object hash to prevent cycle
             $this->startCopy = true;
 
+            foreach ($this->getClientearchivos() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addClientearchivo($relObj->copy($deepCopy));
+                }
+            }
+
             foreach ($this->getExpedientes() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addExpediente($relObj->copy($deepCopy));
@@ -3325,12 +3373,240 @@ abstract class BaseCliente extends BaseObject implements Persistent
      */
     public function initRelation($relationName)
     {
+        if ('Clientearchivo' == $relationName) {
+            $this->initClientearchivos();
+        }
         if ('Expediente' == $relationName) {
             $this->initExpedientes();
         }
         if ('Proveedorcliente' == $relationName) {
             $this->initProveedorclientes();
         }
+    }
+
+    /**
+     * Clears out the collClientearchivos collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return Cliente The current object (for fluent API support)
+     * @see        addClientearchivos()
+     */
+    public function clearClientearchivos()
+    {
+        $this->collClientearchivos = null; // important to set this to null since that means it is uninitialized
+        $this->collClientearchivosPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collClientearchivos collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialClientearchivos($v = true)
+    {
+        $this->collClientearchivosPartial = $v;
+    }
+
+    /**
+     * Initializes the collClientearchivos collection.
+     *
+     * By default this just sets the collClientearchivos collection to an empty array (like clearcollClientearchivos());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initClientearchivos($overrideExisting = true)
+    {
+        if (null !== $this->collClientearchivos && !$overrideExisting) {
+            return;
+        }
+        $this->collClientearchivos = new PropelObjectCollection();
+        $this->collClientearchivos->setModel('Clientearchivo');
+    }
+
+    /**
+     * Gets an array of Clientearchivo objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Cliente is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Clientearchivo[] List of Clientearchivo objects
+     * @throws PropelException
+     */
+    public function getClientearchivos($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collClientearchivosPartial && !$this->isNew();
+        if (null === $this->collClientearchivos || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collClientearchivos) {
+                // return empty collection
+                $this->initClientearchivos();
+            } else {
+                $collClientearchivos = ClientearchivoQuery::create(null, $criteria)
+                    ->filterByCliente($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collClientearchivosPartial && count($collClientearchivos)) {
+                      $this->initClientearchivos(false);
+
+                      foreach ($collClientearchivos as $obj) {
+                        if (false == $this->collClientearchivos->contains($obj)) {
+                          $this->collClientearchivos->append($obj);
+                        }
+                      }
+
+                      $this->collClientearchivosPartial = true;
+                    }
+
+                    $collClientearchivos->getInternalIterator()->rewind();
+
+                    return $collClientearchivos;
+                }
+
+                if ($partial && $this->collClientearchivos) {
+                    foreach ($this->collClientearchivos as $obj) {
+                        if ($obj->isNew()) {
+                            $collClientearchivos[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collClientearchivos = $collClientearchivos;
+                $this->collClientearchivosPartial = false;
+            }
+        }
+
+        return $this->collClientearchivos;
+    }
+
+    /**
+     * Sets a collection of Clientearchivo objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $clientearchivos A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return Cliente The current object (for fluent API support)
+     */
+    public function setClientearchivos(PropelCollection $clientearchivos, PropelPDO $con = null)
+    {
+        $clientearchivosToDelete = $this->getClientearchivos(new Criteria(), $con)->diff($clientearchivos);
+
+
+        $this->clientearchivosScheduledForDeletion = $clientearchivosToDelete;
+
+        foreach ($clientearchivosToDelete as $clientearchivoRemoved) {
+            $clientearchivoRemoved->setCliente(null);
+        }
+
+        $this->collClientearchivos = null;
+        foreach ($clientearchivos as $clientearchivo) {
+            $this->addClientearchivo($clientearchivo);
+        }
+
+        $this->collClientearchivos = $clientearchivos;
+        $this->collClientearchivosPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Clientearchivo objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related Clientearchivo objects.
+     * @throws PropelException
+     */
+    public function countClientearchivos(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collClientearchivosPartial && !$this->isNew();
+        if (null === $this->collClientearchivos || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collClientearchivos) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getClientearchivos());
+            }
+            $query = ClientearchivoQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByCliente($this)
+                ->count($con);
+        }
+
+        return count($this->collClientearchivos);
+    }
+
+    /**
+     * Method called to associate a Clientearchivo object to this object
+     * through the Clientearchivo foreign key attribute.
+     *
+     * @param    Clientearchivo $l Clientearchivo
+     * @return Cliente The current object (for fluent API support)
+     */
+    public function addClientearchivo(Clientearchivo $l)
+    {
+        if ($this->collClientearchivos === null) {
+            $this->initClientearchivos();
+            $this->collClientearchivosPartial = true;
+        }
+
+        if (!in_array($l, $this->collClientearchivos->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddClientearchivo($l);
+
+            if ($this->clientearchivosScheduledForDeletion and $this->clientearchivosScheduledForDeletion->contains($l)) {
+                $this->clientearchivosScheduledForDeletion->remove($this->clientearchivosScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Clientearchivo $clientearchivo The clientearchivo object to add.
+     */
+    protected function doAddClientearchivo($clientearchivo)
+    {
+        $this->collClientearchivos[]= $clientearchivo;
+        $clientearchivo->setCliente($this);
+    }
+
+    /**
+     * @param	Clientearchivo $clientearchivo The clientearchivo object to remove.
+     * @return Cliente The current object (for fluent API support)
+     */
+    public function removeClientearchivo($clientearchivo)
+    {
+        if ($this->getClientearchivos()->contains($clientearchivo)) {
+            $this->collClientearchivos->remove($this->collClientearchivos->search($clientearchivo));
+            if (null === $this->clientearchivosScheduledForDeletion) {
+                $this->clientearchivosScheduledForDeletion = clone $this->collClientearchivos;
+                $this->clientearchivosScheduledForDeletion->clear();
+            }
+            $this->clientearchivosScheduledForDeletion[]= clone $clientearchivo;
+            $clientearchivo->setCliente(null);
+        }
+
+        return $this;
     }
 
     /**
@@ -3852,6 +4128,11 @@ abstract class BaseCliente extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->collClientearchivos) {
+                foreach ($this->collClientearchivos as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collExpedientes) {
                 foreach ($this->collExpedientes as $o) {
                     $o->clearAllReferences($deep);
@@ -3872,6 +4153,10 @@ abstract class BaseCliente extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        if ($this->collClientearchivos instanceof PropelCollection) {
+            $this->collClientearchivos->clearIterator();
+        }
+        $this->collClientearchivos = null;
         if ($this->collExpedientes instanceof PropelCollection) {
             $this->collExpedientes->clearIterator();
         }

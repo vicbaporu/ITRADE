@@ -14,6 +14,7 @@ return array(
     'Catalogo\Form\ServiciosForm'                         => __DIR__ . '/src/Admin/Catalogo/Form/ServiciosForm.php',
     'Admin\Clientes\Controller\ClientesController'        => __DIR__ . '/src/Admin/Clientes/Controller/ClientesController.php',
     'Admin\Clientes\Form\ClientesForm'                    => __DIR__ . '/src/Admin/Clientes/Form/ClientesForm.php',
+    'Admin\Clientes\Form\ProveedorForm'                   => __DIR__ . '/src/Admin/Clientes/Form/ProveedorForm.php',
     'Admin\Controller\IndexController'                    => __DIR__ . '/src/Admin/Controller/IndexController.php',
     'Login\Controller\LoginController'                    => __DIR__ . '/src/Admin/Login/Controller/LoginController.php',
     'Client\Controller\IndexController'                   => __DIR__ . '/src/Client/Controller/IndexController.php',

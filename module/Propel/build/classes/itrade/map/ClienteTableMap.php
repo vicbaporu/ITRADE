@@ -90,6 +90,7 @@ class ClienteTableMap extends TableMap
     {
         $this->addRelation('EmpleadoRelatedByIdempleadocomercial', 'Empleado', RelationMap::MANY_TO_ONE, array('idempleadocomercial' => 'idempleado', ), 'SET NULL', 'SET NULL');
         $this->addRelation('EmpleadoRelatedByIdempleadooperaciones', 'Empleado', RelationMap::MANY_TO_ONE, array('idempleadooperaciones' => 'idempleado', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Clientearchivo', 'Clientearchivo', RelationMap::ONE_TO_MANY, array('idcliente' => 'idcliente', ), null, null, 'Clientearchivos');
         $this->addRelation('Expediente', 'Expediente', RelationMap::ONE_TO_MANY, array('idcliente' => 'idcliente', ), 'SET NULL', 'SET NULL', 'Expedientes');
         $this->addRelation('Proveedorcliente', 'Proveedorcliente', RelationMap::ONE_TO_MANY, array('idcliente' => 'idcliente', ), null, null, 'Proveedorclientes');
     } // buildRelations()

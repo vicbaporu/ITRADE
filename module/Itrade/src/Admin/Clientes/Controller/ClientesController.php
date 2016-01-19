@@ -217,13 +217,30 @@ class ClientesController extends AbstractActionController
             $entity = \ClienteQuery::create()->findPk($id);
             $form = new \Admin\Clientes\Form\ClientesForm();
             $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+            
+            //LOS ARCHIVOS
+            $files = \ClientearchivoQuery::create()->filterByIdcliente($entity->getIdcliente())->find();
+            
+            $files_array = array();
+            $file = new \Clientearchivo();
+            foreach ($files as $file){
+                $file_path = $file->getClientearchivoArchivo();
+                $file_name = explode('files/clientes/'.$entity->getIdcliente().'/', $file->getClientearchivoArchivo());
+                $tmp['id'] = $file->getIdclientearchivo();
+                $tmp['name'] = $file_name[1];
+                $tmp['size'] = $file->getClientearchivoSize();
+                $tmp['type']= mime_content_type($_SERVER['DOCUMENT_ROOT'].'/'.$file->getClientearchivoArchivo());
+                $files_array[] = $tmp;
+            }
+
             //RETORNAMOS A NUESTRA VISTA
             $view_model = new ViewModel();
             $view_model->setTemplate('admin/clientes/clientes/editar');
             $view_model->setVariables(array(
                 'entity' => json_encode($entity->toArray(\BasePeer::TYPE_FIELDNAME)),
                 'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
-                'form' => $form
+                'form' => $form,
+                'files' => json_encode($files_array),
             ));
             return $view_model;
             
@@ -355,8 +372,8 @@ class ClientesController extends AbstractActionController
             $files = $request->getFiles();
             
             //OBTENEMOS EL ID DEL CLIENTE
-             $id = $post_data['idcliente'];
-             $name = $post_data['file_name'];
+            $id = $post_data['idcliente'];
+            $name = $post_data['file_name'];
              
              
             $tempFile = $files['file']['tmp_name'];
@@ -508,7 +525,7 @@ class ClientesController extends AbstractActionController
                 $tmp['proveedorcliente_taxid'] =  $value->getProveedorclienteTaxid();
                 $tmp['proveedorcliente_nombrecontacto'] = $value->getProveedorclienteNombrecontacto();
                 $tmp['proveedorcliente_telefonocontacto'] = $value->getProveedorclienteTelefonocontacto();
-                $tmp['cliente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/ver/'.$value->getIdcliente().'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
+                $tmp['proveedorcliente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/ver/'.$value->getIdcliente().'/proveedores/editar/'.$value->getIdproveedorcliente().'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
                 $data[] = $tmp;
  
             }  
@@ -528,6 +545,208 @@ class ClientesController extends AbstractActionController
     }
     
     public function proveedornuevoAction(){
-        echo '<pre>';var_dump('$apiResponse'); echo '</pre>';exit();
+        
+        $request = $this->getRequest();
+        $idcliente = $this->params()->fromRoute('id');
+        $cliente = \ClienteQuery::create()->findPk($idcliente);
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            $entity = new \Proveedorcliente();
+            
+            foreach($post_data as $key => $value){
+                if(\ProveedorclientePeer::getTableMap()->hasColumn($key) && !empty($value) && $key != 'cliente_cumpleanios'){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            $entity->setIdcliente($idcliente);
+            
+            $entity->save();
+            
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toUrl('/clientes/ver/'.$idcliente.'?active=proveedores');
+
+        }
+        
+        $form = new \Admin\Clientes\Form\ProveedorForm($idcliente);
+        $view_model = new ViewModel();
+        $view_model->setTemplate('admin/clientes/proveedor/nuevo');
+        $view_model->setVariable('form', $form);
+        $view_model->setVariable('cliente', $cliente);
+        return $view_model;
+        
+        
+        
+    }
+    
+    public function proveedoreditarAction(){
+        
+        $idcliente = $this->params()->fromRoute('id');
+        $idproveedor = $this->params()->fromRoute('idproveedor');
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            $entity = \ProveedorclienteQuery::create()->findPk($idproveedor);
+            
+            foreach($post_data as $key => $value){
+                if(\ProveedorclientePeer::getTableMap()->hasColumn($key) && !empty($value) && $key != 'cliente_cumpleanios'){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            $entity->save();
+            
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toUrl('/clientes/ver/'.$idcliente.'?active=proveedores');
+            
+        }
+        $exist = \ProveedorclienteQuery::create()->filterByIdproveedorcliente($idproveedor)->exists();
+        
+        if($exist){
+            
+            $entity = \ProveedorclienteQuery::create()->findPk($idproveedor);
+            $cliente = \ClienteQuery::create()->findPk($idcliente);
+            $form = new \Admin\Clientes\Form\ProveedorForm($idcliente);
+            $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+            $view_model = new ViewModel();
+            $view_model->setTemplate('admin/clientes/proveedor/editar');
+            $view_model->setVariables(array(
+                'entity' => $entity,
+                'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
+                'form' => $form,
+                'cliente' => $cliente
+            ));
+            return $view_model;
+
+        }else{
+             return $this->redirect()->toUrl('/clientes/ver/'.$idcliente.'?active=proveedores');
+        }
+        
+  
+    }
+    
+    public function proveedoreliminarAction(){
+        
+        $request = $this->getRequest();
+        $id = $this->params()->fromRoute('idproveedor');
+        $idcliente = $this->params()->fromRoute('id');
+        
+        if($request->isPost()){
+            
+            $entity = \ProveedorclienteQuery::create()->findPk($id);
+            
+            $entity->delete();
+            
+            $this->flashMessenger()->addSuccessMessage('Registro eliminado exitosamente!');
+            
+            return $this->getResponse()->setContent(json_encode(true));
+        }
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('admin/clientes/proveedor/eliminar');
+        
+        return $viewModel;
+        
+    }
+    
+     public function filesdropzoneAction(){
+            
+         $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/clientes';
+         
+         $request = $this->getRequest();
+         
+         if($request->isPost()){
+             
+             $post_data = $request->getPost();
+             $files = $request->getFiles();
+             
+             $id = $post_data['id'];
+             
+             $tempFile = $files['file']['tmp_name']; 
+             $targetFile =  $storeFolder. '/'. $id.'/'.$_FILES['file']['name'];
+             
+            if (!file_exists($storeFolder. '/'. $id)) {
+                mkdir($storeFolder. '/'. $id, 0777, true);
+            }
+            
+            move_uploaded_file($tempFile,$targetFile);
+            
+            //Guardamos en nuestra base de datos
+             $cliente_archivo = new \Clientearchivo();
+             $cliente_archivo->setIdcliente($id);
+             $cliente_archivo->setClientearchivoArchivo('/files/clientes'. '/'. $id.'/'.$_FILES['file']['name']);
+             $cliente_archivo->setClientearchivoSize($_FILES['file']['size']);
+             
+             $cliente_archivo->save();
+             
+             return $this->getResponse()->setContent(json_encode(array('response' => true, 'id' => $cliente_archivo->getIdclientearchivo())));
+
+
+         }
+     }
+     
+     public function filesdropzonedownloadAction(){
+         
+         $request = $this->getRequest();
+         
+         if($request->isPost()){
+             
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $entity = \ClientearchivoQuery::create()->findPk($id);
+            
+            $file_path = $entity->getClientearchivoArchivo();
+            $file_name = explode('/files/clientes/'.$entity->getidcliente().'/', $entity->getClientearchivoArchivo());
+            $file_name = $file_name[1];
+            
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getClientearchivoArchivo();
+            
+            $file_base64 = base64_encode(file_get_contents($taget_file));
+            $file_type = mime_content_type($taget_file);
+            
+            return $this->getResponse()->setContent(json_encode(array('base64' => $file_base64, 'type' => $file_type,'name' => $file_name)));
+            
+             
+         }
+         
+     }
+     
+    public function filesdropzonedeleteAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $entity = \ClientearchivoQuery::create()->findPk($id);
+            
+            //Eliminamos del sistema de archivos
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getClientearchivoArchivo();
+            unlink($taget_file);
+            
+            //Eliminamos de la base de datos
+            $entity->delete();
+            
+            return $this->getResponse()->setContent(json_encode(true));
+                       
+        }
+        
     }
 }

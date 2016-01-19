@@ -203,6 +203,26 @@ return array(
                                                     ),
                                                 ),
                                             ),
+                                            'editar' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/editar/:idproveedor',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Clientes',
+                                                        'action' => 'proveedoreditar',
+                                                    ),
+                                                ),
+                                            ),
+                                            'eliminar' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/eliminar/:idproveedor',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Clientes',
+                                                        'action' => 'proveedoreliminar',
+                                                    ),
+                                                ),
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -248,6 +268,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'filesdropzone' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/filesdropzone',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'filesdropzone',
+                                    ),
+                                ),
+                            ),
                             'legaldropzonedownload' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
@@ -258,6 +288,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'filesdropzonedownload' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/filesdropzonedownload',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'filesdropzonedownload',
+                                    ),
+                                ),
+                            ),
                             'legaldropzonedelete' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
@@ -265,6 +305,16 @@ return array(
                                     'defaults' => array(
                                         'controller'    => 'Admin\Clientes\Controller\Clientes',
                                         'action'        => 'legaldropzonedelete',
+                                    ),
+                                ),
+                            ),
+                            'filesdropzonedelete' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/filesdropzonedelete',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'filesdropzonedelete',
                                     ),
                                 ),
                             ),

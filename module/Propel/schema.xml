@@ -68,6 +68,21 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
+  <table name="clientearchivo" phpName="Clientearchivo" idMethod="native">
+    <column name="idclientearchivo" phpName="Idclientearchivo" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="idcliente" phpName="Idcliente" type="INTEGER" required="true"/>
+    <column name="clientearchivo_archivo" phpName="ClientearchivoArchivo" type="LONGVARCHAR" required="true"/>
+    <column name="clientearchivo_size" phpName="ClientearchivoSize" type="VARCHAR" size="45" required="true"/>
+    <foreign-key foreignTable="cliente" name="idcliente_clientearchivo" onDelete="RESTRICT" onUpdate="RESTRICT">
+      <reference local="idcliente" foreign="idcliente"/>
+    </foreign-key>
+    <index name="idcliente">
+      <index-column name="idcliente"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
   <table name="empleado" phpName="Empleado" idMethod="native">
     <column name="idempleado" phpName="Idempleado" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="empleado_nombre" phpName="EmpleadoNombre" type="VARCHAR" size="45" required="true"/>
@@ -256,7 +271,11 @@
   <table name="proveedorcliente" phpName="Proveedorcliente" idMethod="native">
     <column name="idproveedorcliente" phpName="Idproveedorcliente" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="idcliente" phpName="Idcliente" type="INTEGER" required="true"/>
+    <column name="proveedorcliente_nombre" phpName="ProveedorclienteNombre" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_taxid" phpName="ProveedorclienteTaxid" type="VARCHAR" size="45" required="false"/>
+    <column name="proveedorcliente_nombrecontacto" phpName="ProveedorclienteNombrecontacto" type="VARCHAR" size="45" required="false"/>
+    <column name="proveedorcliente_telefonocontacto" phpName="ProveedorclienteTelefonocontacto" type="VARCHAR" size="45" required="false"/>
+    <column name="proveedorcliente_emailcontacto" phpName="ProveedorclienteEmailcontacto" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_calle" phpName="ProveedorclienteCalle" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_numero" phpName="ProveedorclienteNumero" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_interior" phpName="ProveedorclienteInterior" type="VARCHAR" size="45" required="false"/>
@@ -264,10 +283,6 @@
     <column name="proveedorcliente_ciudad" phpName="ProveedorclienteCiudad" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_estado" phpName="ProveedorclienteEstado" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_pais" phpName="ProveedorclientePais" type="VARCHAR" size="45" required="false"/>
-    <column name="proveedorcliente_nombrecontacto" phpName="ProveedorclienteNombrecontacto" type="VARCHAR" size="45" required="false"/>
-    <column name="proveedorcliente_emailcontacto" phpName="ProveedorclienteEmailcontacto" type="VARCHAR" size="45" required="false"/>
-    <column name="proveedorcliente_telefonocontacto" phpName="ProveedorclienteTelefonocontacto" type="VARCHAR" size="45" required="false"/>
-    <column name="proveedorcliente_nombre" phpName="ProveedorclienteNombre" type="VARCHAR" size="45" required="false"/>
     <foreign-key foreignTable="cliente" name="proveedorcliente_idcliente" onDelete="RESTRICT" onUpdate="RESTRICT">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>

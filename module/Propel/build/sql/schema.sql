@@ -83,6 +83,25 @@ CREATE TABLE `cliente`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- clientearchivo
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `clientearchivo`;
+
+CREATE TABLE `clientearchivo`
+(
+    `idclientearchivo` INTEGER NOT NULL AUTO_INCREMENT,
+    `idcliente` INTEGER NOT NULL,
+    `clientearchivo_archivo` TEXT NOT NULL,
+    `clientearchivo_size` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`idclientearchivo`),
+    INDEX `idcliente` (`idcliente`),
+    CONSTRAINT `idcliente_clientearchivo`
+        FOREIGN KEY (`idcliente`)
+        REFERENCES `cliente` (`idcliente`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- empleado
 -- ---------------------------------------------------------------------
 
@@ -321,7 +340,11 @@ CREATE TABLE `proveedorcliente`
 (
     `idproveedorcliente` INTEGER NOT NULL AUTO_INCREMENT,
     `idcliente` INTEGER NOT NULL,
+    `proveedorcliente_nombre` VARCHAR(45),
     `proveedorcliente_taxid` VARCHAR(45),
+    `proveedorcliente_nombrecontacto` VARCHAR(45),
+    `proveedorcliente_telefonocontacto` VARCHAR(45),
+    `proveedorcliente_emailcontacto` VARCHAR(45),
     `proveedorcliente_calle` VARCHAR(45),
     `proveedorcliente_numero` VARCHAR(45),
     `proveedorcliente_interior` VARCHAR(45),
@@ -329,10 +352,6 @@ CREATE TABLE `proveedorcliente`
     `proveedorcliente_ciudad` VARCHAR(45),
     `proveedorcliente_estado` VARCHAR(45),
     `proveedorcliente_pais` VARCHAR(45),
-    `proveedorcliente_nombrecontacto` VARCHAR(45),
-    `proveedorcliente_emailcontacto` VARCHAR(45),
-    `proveedorcliente_telefonocontacto` VARCHAR(45),
-    `proveedorcliente_nombre` VARCHAR(45),
     PRIMARY KEY (`idproveedorcliente`),
     INDEX `proveedorcliente_idcliente` (`idcliente`),
     CONSTRAINT `proveedorcliente_idcliente`

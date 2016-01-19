@@ -8,7 +8,11 @@
  *
  * @method ProveedorclienteQuery orderByIdproveedorcliente($order = Criteria::ASC) Order by the idproveedorcliente column
  * @method ProveedorclienteQuery orderByIdcliente($order = Criteria::ASC) Order by the idcliente column
+ * @method ProveedorclienteQuery orderByProveedorclienteNombre($order = Criteria::ASC) Order by the proveedorcliente_nombre column
  * @method ProveedorclienteQuery orderByProveedorclienteTaxid($order = Criteria::ASC) Order by the proveedorcliente_taxid column
+ * @method ProveedorclienteQuery orderByProveedorclienteNombrecontacto($order = Criteria::ASC) Order by the proveedorcliente_nombrecontacto column
+ * @method ProveedorclienteQuery orderByProveedorclienteTelefonocontacto($order = Criteria::ASC) Order by the proveedorcliente_telefonocontacto column
+ * @method ProveedorclienteQuery orderByProveedorclienteEmailcontacto($order = Criteria::ASC) Order by the proveedorcliente_emailcontacto column
  * @method ProveedorclienteQuery orderByProveedorclienteCalle($order = Criteria::ASC) Order by the proveedorcliente_calle column
  * @method ProveedorclienteQuery orderByProveedorclienteNumero($order = Criteria::ASC) Order by the proveedorcliente_numero column
  * @method ProveedorclienteQuery orderByProveedorclienteInterior($order = Criteria::ASC) Order by the proveedorcliente_interior column
@@ -16,14 +20,14 @@
  * @method ProveedorclienteQuery orderByProveedorclienteCiudad($order = Criteria::ASC) Order by the proveedorcliente_ciudad column
  * @method ProveedorclienteQuery orderByProveedorclienteEstado($order = Criteria::ASC) Order by the proveedorcliente_estado column
  * @method ProveedorclienteQuery orderByProveedorclientePais($order = Criteria::ASC) Order by the proveedorcliente_pais column
- * @method ProveedorclienteQuery orderByProveedorclienteNombrecontacto($order = Criteria::ASC) Order by the proveedorcliente_nombrecontacto column
- * @method ProveedorclienteQuery orderByProveedorclienteEmailcontacto($order = Criteria::ASC) Order by the proveedorcliente_emailcontacto column
- * @method ProveedorclienteQuery orderByProveedorclienteTelefonocontacto($order = Criteria::ASC) Order by the proveedorcliente_telefonocontacto column
- * @method ProveedorclienteQuery orderByProveedorclienteNombre($order = Criteria::ASC) Order by the proveedorcliente_nombre column
  *
  * @method ProveedorclienteQuery groupByIdproveedorcliente() Group by the idproveedorcliente column
  * @method ProveedorclienteQuery groupByIdcliente() Group by the idcliente column
+ * @method ProveedorclienteQuery groupByProveedorclienteNombre() Group by the proveedorcliente_nombre column
  * @method ProveedorclienteQuery groupByProveedorclienteTaxid() Group by the proveedorcliente_taxid column
+ * @method ProveedorclienteQuery groupByProveedorclienteNombrecontacto() Group by the proveedorcliente_nombrecontacto column
+ * @method ProveedorclienteQuery groupByProveedorclienteTelefonocontacto() Group by the proveedorcliente_telefonocontacto column
+ * @method ProveedorclienteQuery groupByProveedorclienteEmailcontacto() Group by the proveedorcliente_emailcontacto column
  * @method ProveedorclienteQuery groupByProveedorclienteCalle() Group by the proveedorcliente_calle column
  * @method ProveedorclienteQuery groupByProveedorclienteNumero() Group by the proveedorcliente_numero column
  * @method ProveedorclienteQuery groupByProveedorclienteInterior() Group by the proveedorcliente_interior column
@@ -31,10 +35,6 @@
  * @method ProveedorclienteQuery groupByProveedorclienteCiudad() Group by the proveedorcliente_ciudad column
  * @method ProveedorclienteQuery groupByProveedorclienteEstado() Group by the proveedorcliente_estado column
  * @method ProveedorclienteQuery groupByProveedorclientePais() Group by the proveedorcliente_pais column
- * @method ProveedorclienteQuery groupByProveedorclienteNombrecontacto() Group by the proveedorcliente_nombrecontacto column
- * @method ProveedorclienteQuery groupByProveedorclienteEmailcontacto() Group by the proveedorcliente_emailcontacto column
- * @method ProveedorclienteQuery groupByProveedorclienteTelefonocontacto() Group by the proveedorcliente_telefonocontacto column
- * @method ProveedorclienteQuery groupByProveedorclienteNombre() Group by the proveedorcliente_nombre column
  *
  * @method ProveedorclienteQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ProveedorclienteQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -48,7 +48,11 @@
  * @method Proveedorcliente findOneOrCreate(PropelPDO $con = null) Return the first Proveedorcliente matching the query, or a new Proveedorcliente object populated from the query conditions when no match is found
  *
  * @method Proveedorcliente findOneByIdcliente(int $idcliente) Return the first Proveedorcliente filtered by the idcliente column
+ * @method Proveedorcliente findOneByProveedorclienteNombre(string $proveedorcliente_nombre) Return the first Proveedorcliente filtered by the proveedorcliente_nombre column
  * @method Proveedorcliente findOneByProveedorclienteTaxid(string $proveedorcliente_taxid) Return the first Proveedorcliente filtered by the proveedorcliente_taxid column
+ * @method Proveedorcliente findOneByProveedorclienteNombrecontacto(string $proveedorcliente_nombrecontacto) Return the first Proveedorcliente filtered by the proveedorcliente_nombrecontacto column
+ * @method Proveedorcliente findOneByProveedorclienteTelefonocontacto(string $proveedorcliente_telefonocontacto) Return the first Proveedorcliente filtered by the proveedorcliente_telefonocontacto column
+ * @method Proveedorcliente findOneByProveedorclienteEmailcontacto(string $proveedorcliente_emailcontacto) Return the first Proveedorcliente filtered by the proveedorcliente_emailcontacto column
  * @method Proveedorcliente findOneByProveedorclienteCalle(string $proveedorcliente_calle) Return the first Proveedorcliente filtered by the proveedorcliente_calle column
  * @method Proveedorcliente findOneByProveedorclienteNumero(string $proveedorcliente_numero) Return the first Proveedorcliente filtered by the proveedorcliente_numero column
  * @method Proveedorcliente findOneByProveedorclienteInterior(string $proveedorcliente_interior) Return the first Proveedorcliente filtered by the proveedorcliente_interior column
@@ -56,14 +60,14 @@
  * @method Proveedorcliente findOneByProveedorclienteCiudad(string $proveedorcliente_ciudad) Return the first Proveedorcliente filtered by the proveedorcliente_ciudad column
  * @method Proveedorcliente findOneByProveedorclienteEstado(string $proveedorcliente_estado) Return the first Proveedorcliente filtered by the proveedorcliente_estado column
  * @method Proveedorcliente findOneByProveedorclientePais(string $proveedorcliente_pais) Return the first Proveedorcliente filtered by the proveedorcliente_pais column
- * @method Proveedorcliente findOneByProveedorclienteNombrecontacto(string $proveedorcliente_nombrecontacto) Return the first Proveedorcliente filtered by the proveedorcliente_nombrecontacto column
- * @method Proveedorcliente findOneByProveedorclienteEmailcontacto(string $proveedorcliente_emailcontacto) Return the first Proveedorcliente filtered by the proveedorcliente_emailcontacto column
- * @method Proveedorcliente findOneByProveedorclienteTelefonocontacto(string $proveedorcliente_telefonocontacto) Return the first Proveedorcliente filtered by the proveedorcliente_telefonocontacto column
- * @method Proveedorcliente findOneByProveedorclienteNombre(string $proveedorcliente_nombre) Return the first Proveedorcliente filtered by the proveedorcliente_nombre column
  *
  * @method array findByIdproveedorcliente(int $idproveedorcliente) Return Proveedorcliente objects filtered by the idproveedorcliente column
  * @method array findByIdcliente(int $idcliente) Return Proveedorcliente objects filtered by the idcliente column
+ * @method array findByProveedorclienteNombre(string $proveedorcliente_nombre) Return Proveedorcliente objects filtered by the proveedorcliente_nombre column
  * @method array findByProveedorclienteTaxid(string $proveedorcliente_taxid) Return Proveedorcliente objects filtered by the proveedorcliente_taxid column
+ * @method array findByProveedorclienteNombrecontacto(string $proveedorcliente_nombrecontacto) Return Proveedorcliente objects filtered by the proveedorcliente_nombrecontacto column
+ * @method array findByProveedorclienteTelefonocontacto(string $proveedorcliente_telefonocontacto) Return Proveedorcliente objects filtered by the proveedorcliente_telefonocontacto column
+ * @method array findByProveedorclienteEmailcontacto(string $proveedorcliente_emailcontacto) Return Proveedorcliente objects filtered by the proveedorcliente_emailcontacto column
  * @method array findByProveedorclienteCalle(string $proveedorcliente_calle) Return Proveedorcliente objects filtered by the proveedorcliente_calle column
  * @method array findByProveedorclienteNumero(string $proveedorcliente_numero) Return Proveedorcliente objects filtered by the proveedorcliente_numero column
  * @method array findByProveedorclienteInterior(string $proveedorcliente_interior) Return Proveedorcliente objects filtered by the proveedorcliente_interior column
@@ -71,10 +75,6 @@
  * @method array findByProveedorclienteCiudad(string $proveedorcliente_ciudad) Return Proveedorcliente objects filtered by the proveedorcliente_ciudad column
  * @method array findByProveedorclienteEstado(string $proveedorcliente_estado) Return Proveedorcliente objects filtered by the proveedorcliente_estado column
  * @method array findByProveedorclientePais(string $proveedorcliente_pais) Return Proveedorcliente objects filtered by the proveedorcliente_pais column
- * @method array findByProveedorclienteNombrecontacto(string $proveedorcliente_nombrecontacto) Return Proveedorcliente objects filtered by the proveedorcliente_nombrecontacto column
- * @method array findByProveedorclienteEmailcontacto(string $proveedorcliente_emailcontacto) Return Proveedorcliente objects filtered by the proveedorcliente_emailcontacto column
- * @method array findByProveedorclienteTelefonocontacto(string $proveedorcliente_telefonocontacto) Return Proveedorcliente objects filtered by the proveedorcliente_telefonocontacto column
- * @method array findByProveedorclienteNombre(string $proveedorcliente_nombre) Return Proveedorcliente objects filtered by the proveedorcliente_nombre column
  *
  * @package    propel.generator.itrade.om
  */
@@ -182,7 +182,7 @@ abstract class BaseProveedorclienteQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idproveedorcliente`, `idcliente`, `proveedorcliente_taxid`, `proveedorcliente_calle`, `proveedorcliente_numero`, `proveedorcliente_interior`, `proveedorcliente_colonia`, `proveedorcliente_ciudad`, `proveedorcliente_estado`, `proveedorcliente_pais`, `proveedorcliente_nombrecontacto`, `proveedorcliente_emailcontacto`, `proveedorcliente_telefonocontacto`, `proveedorcliente_nombre` FROM `proveedorcliente` WHERE `idproveedorcliente` = :p0';
+        $sql = 'SELECT `idproveedorcliente`, `idcliente`, `proveedorcliente_nombre`, `proveedorcliente_taxid`, `proveedorcliente_nombrecontacto`, `proveedorcliente_telefonocontacto`, `proveedorcliente_emailcontacto`, `proveedorcliente_calle`, `proveedorcliente_numero`, `proveedorcliente_interior`, `proveedorcliente_colonia`, `proveedorcliente_ciudad`, `proveedorcliente_estado`, `proveedorcliente_pais` FROM `proveedorcliente` WHERE `idproveedorcliente` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -358,6 +358,35 @@ abstract class BaseProveedorclienteQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the proveedorcliente_nombre column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByProveedorclienteNombre('fooValue');   // WHERE proveedorcliente_nombre = 'fooValue'
+     * $query->filterByProveedorclienteNombre('%fooValue%'); // WHERE proveedorcliente_nombre LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $proveedorclienteNombre The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedorclienteQuery The current query, for fluid interface
+     */
+    public function filterByProveedorclienteNombre($proveedorclienteNombre = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($proveedorclienteNombre)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $proveedorclienteNombre)) {
+                $proveedorclienteNombre = str_replace('*', '%', $proveedorclienteNombre);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE, $proveedorclienteNombre, $comparison);
+    }
+
+    /**
      * Filter the query on the proveedorcliente_taxid column
      *
      * Example usage:
@@ -384,6 +413,93 @@ abstract class BaseProveedorclienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_TAXID, $proveedorclienteTaxid, $comparison);
+    }
+
+    /**
+     * Filter the query on the proveedorcliente_nombrecontacto column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByProveedorclienteNombrecontacto('fooValue');   // WHERE proveedorcliente_nombrecontacto = 'fooValue'
+     * $query->filterByProveedorclienteNombrecontacto('%fooValue%'); // WHERE proveedorcliente_nombrecontacto LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $proveedorclienteNombrecontacto The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedorclienteQuery The current query, for fluid interface
+     */
+    public function filterByProveedorclienteNombrecontacto($proveedorclienteNombrecontacto = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($proveedorclienteNombrecontacto)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $proveedorclienteNombrecontacto)) {
+                $proveedorclienteNombrecontacto = str_replace('*', '%', $proveedorclienteNombrecontacto);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO, $proveedorclienteNombrecontacto, $comparison);
+    }
+
+    /**
+     * Filter the query on the proveedorcliente_telefonocontacto column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByProveedorclienteTelefonocontacto('fooValue');   // WHERE proveedorcliente_telefonocontacto = 'fooValue'
+     * $query->filterByProveedorclienteTelefonocontacto('%fooValue%'); // WHERE proveedorcliente_telefonocontacto LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $proveedorclienteTelefonocontacto The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedorclienteQuery The current query, for fluid interface
+     */
+    public function filterByProveedorclienteTelefonocontacto($proveedorclienteTelefonocontacto = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($proveedorclienteTelefonocontacto)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $proveedorclienteTelefonocontacto)) {
+                $proveedorclienteTelefonocontacto = str_replace('*', '%', $proveedorclienteTelefonocontacto);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, $proveedorclienteTelefonocontacto, $comparison);
+    }
+
+    /**
+     * Filter the query on the proveedorcliente_emailcontacto column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByProveedorclienteEmailcontacto('fooValue');   // WHERE proveedorcliente_emailcontacto = 'fooValue'
+     * $query->filterByProveedorclienteEmailcontacto('%fooValue%'); // WHERE proveedorcliente_emailcontacto LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $proveedorclienteEmailcontacto The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedorclienteQuery The current query, for fluid interface
+     */
+    public function filterByProveedorclienteEmailcontacto($proveedorclienteEmailcontacto = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($proveedorclienteEmailcontacto)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $proveedorclienteEmailcontacto)) {
+                $proveedorclienteEmailcontacto = str_replace('*', '%', $proveedorclienteEmailcontacto);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO, $proveedorclienteEmailcontacto, $comparison);
     }
 
     /**
@@ -587,122 +703,6 @@ abstract class BaseProveedorclienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_PAIS, $proveedorclientePais, $comparison);
-    }
-
-    /**
-     * Filter the query on the proveedorcliente_nombrecontacto column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByProveedorclienteNombrecontacto('fooValue');   // WHERE proveedorcliente_nombrecontacto = 'fooValue'
-     * $query->filterByProveedorclienteNombrecontacto('%fooValue%'); // WHERE proveedorcliente_nombrecontacto LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $proveedorclienteNombrecontacto The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ProveedorclienteQuery The current query, for fluid interface
-     */
-    public function filterByProveedorclienteNombrecontacto($proveedorclienteNombrecontacto = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($proveedorclienteNombrecontacto)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $proveedorclienteNombrecontacto)) {
-                $proveedorclienteNombrecontacto = str_replace('*', '%', $proveedorclienteNombrecontacto);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO, $proveedorclienteNombrecontacto, $comparison);
-    }
-
-    /**
-     * Filter the query on the proveedorcliente_emailcontacto column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByProveedorclienteEmailcontacto('fooValue');   // WHERE proveedorcliente_emailcontacto = 'fooValue'
-     * $query->filterByProveedorclienteEmailcontacto('%fooValue%'); // WHERE proveedorcliente_emailcontacto LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $proveedorclienteEmailcontacto The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ProveedorclienteQuery The current query, for fluid interface
-     */
-    public function filterByProveedorclienteEmailcontacto($proveedorclienteEmailcontacto = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($proveedorclienteEmailcontacto)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $proveedorclienteEmailcontacto)) {
-                $proveedorclienteEmailcontacto = str_replace('*', '%', $proveedorclienteEmailcontacto);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO, $proveedorclienteEmailcontacto, $comparison);
-    }
-
-    /**
-     * Filter the query on the proveedorcliente_telefonocontacto column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByProveedorclienteTelefonocontacto('fooValue');   // WHERE proveedorcliente_telefonocontacto = 'fooValue'
-     * $query->filterByProveedorclienteTelefonocontacto('%fooValue%'); // WHERE proveedorcliente_telefonocontacto LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $proveedorclienteTelefonocontacto The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ProveedorclienteQuery The current query, for fluid interface
-     */
-    public function filterByProveedorclienteTelefonocontacto($proveedorclienteTelefonocontacto = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($proveedorclienteTelefonocontacto)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $proveedorclienteTelefonocontacto)) {
-                $proveedorclienteTelefonocontacto = str_replace('*', '%', $proveedorclienteTelefonocontacto);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, $proveedorclienteTelefonocontacto, $comparison);
-    }
-
-    /**
-     * Filter the query on the proveedorcliente_nombre column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByProveedorclienteNombre('fooValue');   // WHERE proveedorcliente_nombre = 'fooValue'
-     * $query->filterByProveedorclienteNombre('%fooValue%'); // WHERE proveedorcliente_nombre LIKE '%fooValue%'
-     * </code>
-     *
-     * @param     string $proveedorclienteNombre The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ProveedorclienteQuery The current query, for fluid interface
-     */
-    public function filterByProveedorclienteNombre($proveedorclienteNombre = null, $comparison = null)
-    {
-        if (null === $comparison) {
-            if (is_array($proveedorclienteNombre)) {
-                $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $proveedorclienteNombre)) {
-                $proveedorclienteNombre = str_replace('*', '%', $proveedorclienteNombre);
-                $comparison = Criteria::LIKE;
-            }
-        }
-
-        return $this->addUsingAlias(ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE, $proveedorclienteNombre, $comparison);
     }
 
     /**
