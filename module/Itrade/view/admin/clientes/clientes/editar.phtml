@@ -324,6 +324,43 @@
                     </div>
                 </div>
             </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Personal a cargo</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('idempleadocomercial')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formSelect($form->get('idempleadocomercial')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('idempleadooperaciones')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formSelect($form->get('idempleadooperaciones')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="grid simple">   
                 <div class="grid-title no-border">
                     <h4><span class="semi-bold">Datos de acceso</span></h4>

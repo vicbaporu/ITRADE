@@ -215,7 +215,16 @@ class ClientesController extends AbstractActionController
         if($exist){
             
             $entity = \ClienteQuery::create()->findPk($id);
-            $form = new \Admin\Clientes\Form\ClientesForm();
+            
+            $empleados = \EmpleadoQuery::create()->filterByIdempleado(1, \Criteria::NOT_EQUAL)->find();
+            $empleados_array = array();
+            $empleado = new \Empleado();
+            foreach ($empleados as $empleado){
+                $id = $empleado->getIdempleado();
+                $empleados_array[$id] = $empleado->getEmpleadoNombre().' '.$empleado->getEmpleadoApellidopaterno().' '.$empleado->getEmpleadoApallidomaterno();
+            }
+            
+            $form = new \Admin\Clientes\Form\ClientesForm($empleados_array);
             $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
             
             //LOS ARCHIVOS
@@ -377,11 +386,13 @@ class ClientesController extends AbstractActionController
              
              
             $tempFile = $files['file']['tmp_name'];
-            $typeFile = $files['file']['type']; $typeFile = explode('/', $typeFile); $typeFile= $typeFile[1];
+            $typeFile = $files['file']['type'];
+            $typeFile = explode('/', $typeFile); 
+            $typeFile= $typeFile[1];
             
             
             $targetFile = '/files/clientes'. '/'. $id.'/perfil_legal/'.$perfil_legal[$name].'.'.$typeFile;
-           
+
             if (!file_exists($storeFolder. '/'. $id)) {
                 mkdir($storeFolder. '/'. $id, 0777, true);
                 if (!file_exists($storeFolder. '/'. $id.'/perfil_legal')) {
@@ -390,7 +401,6 @@ class ClientesController extends AbstractActionController
             }
             
             $response = move_uploaded_file($tempFile,$_SERVER['DOCUMENT_ROOT'].$targetFile);
-            
             
             $cliente = \ClienteQuery::create()->findPk($id);
             $cliente->setByName($post_data['file_name'], $targetFile,  \BasePeer::TYPE_FIELDNAME);
