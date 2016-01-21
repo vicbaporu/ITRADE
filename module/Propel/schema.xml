@@ -52,7 +52,7 @@
     <column name="idempleadooperaciones" phpName="Idempleadooperaciones" type="INTEGER" required="false"/>
     <column name="cliente_ultimologin" phpName="ClienteUltimologin" type="TIMESTAMP" required="false"/>
     <column name="cliente_fotografiasdomicilio" phpName="ClienteFotografiasdomicilio" type="LONGVARCHAR" required="false"/>
-    <foreign-key foreignTable="empleado" name="idempleadocomercial_cliente" onDelete="SET NULL" onUpdate="SET NULL">
+    <foreign-key foreignTable="empleado" name="idempleadocomercial_cliente" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idempleadocomercial" foreign="idempleado"/>
     </foreign-key>
     <foreign-key foreignTable="empleado" name="idempleadooperaciones_cliente" onDelete="CASCADE" onUpdate="CASCADE">
@@ -121,17 +121,18 @@
     <column name="expediente_fechafin" phpName="ExpedienteFechafin" type="DATE" required="false"/>
     <column name="expediente_precio" phpName="ExpedientePrecio" type="DECIMAL" size="10" scale="2" required="false"/>
     <column name="expediente_tipo" phpName="ExpedienteTipo" type="CHAR" sqlType="enum('exportacion','importacion')" required="true"/>
-    <foreign-key foreignTable="cliente" name="idcliente_expediente" onDelete="RESTRICT" onUpdate="RESTRICT">
+    <column name="expediente_estatus" phpName="ExpedienteEstatus" type="CHAR" sqlType="enum('abierto','cerrado')" required="true"/>
+    <foreign-key foreignTable="cliente" name="idcliente_expediente" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>
-    <foreign-key foreignTable="proveedorcliente" name="idconsignatarioembarcador_expediente" onDelete="RESTRICT" onUpdate="RESTRICT">
+    <foreign-key foreignTable="proveedorcliente" name="idconsignatarioembarcador_expediente" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idconsignatarioembarcador" foreign="idproveedorcliente"/>
     </foreign-key>
-    <index name="idcliente">
-      <index-column name="idcliente"/>
-    </index>
     <index name="idconsignatarioembarcador">
       <index-column name="idconsignatarioembarcador"/>
+    </index>
+    <index name="idcliente">
+      <index-column name="idcliente"/>
     </index>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
@@ -293,7 +294,7 @@
     <column name="proveedorcliente_estado" phpName="ProveedorclienteEstado" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_pais" phpName="ProveedorclientePais" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_tipo" phpName="ProveedorclienteTipo" type="CHAR" sqlType="enum('proveedor','cliente')" required="false"/>
-    <foreign-key foreignTable="cliente" name="proveedorcliente_idcliente" onDelete="RESTRICT" onUpdate="RESTRICT">
+    <foreign-key foreignTable="cliente" name="idcliente_proveedorcliente" onDelete="RESTRICT" onUpdate="RESTRICT">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>
     <index name="proveedorcliente_idcliente">

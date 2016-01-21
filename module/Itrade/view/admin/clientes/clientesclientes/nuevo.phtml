@@ -1,0 +1,221 @@
+<div class="empleado_form_container">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/clientes">Clientes</a>
+        </li>
+        <li>
+            <a href="/clientes/ver/<?php echo $cliente->getIdcliente()?>"><?php echo $cliente->getClienteRazonsocial()?></a>
+        </li>
+        <li>
+            <a href="/clientes/ver/<?php echo $cliente->getIdcliente()?>?active=clientes">Clientes</a>
+        </li>
+        <li>
+            <a class="active" href="/clientes/ver/<?php echo $cliente->getIdcliente()?>/clientes/nuevo">Registro</a>
+        </li>
+    </ul>
+    <div class="page-title">
+        <h3>REGISTRO <span class="semi-bold">CLIENTES</span></h3>
+    </div>
+    <?php 
+        $form->setAttribute('action', '/clientes/ver/'.$cliente->getIdcliente().'/clientes/nuevo');
+        $form->setAttribute('novalidate', true);
+        $form->setAttribute('enctype', 'multipart/form-data');
+
+        echo $this->form()->openTag($form); 
+    ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Información general</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formHidden($form->get('idcliente')) ?>
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_nombre')) ?>  
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_nombre')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_taxid')) ?>  
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_taxid')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_nombrecontacto')) ?>  
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_nombrecontacto')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div    class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_telefonocontacto')) ?> 
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_telefonocontacto')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div    class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_emailcontacto')) ?> 
+                                    <span class="help req">*</span>
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_emailcontacto')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <h4><span class="semi-bold">Dirección</span></h4>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="grid-body no-border">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_calle')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_calle')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_numero')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_numero')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_interior')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_interior')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_colonia')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_colonia')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_ciudad')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_ciudad')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_estado')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_estado')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row-fluid">
+                                <div class="form-group">
+                                    <?php echo $this->formLabel($form->get('proveedorcliente_pais')) ?>  
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('proveedorcliente_pais')) ?>
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="pull-right">
+                        <button btn_action="submit" class="btn btn-primary btn-cons" type="button">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+    <?php 
+        echo $this->form()->closeTag(); 
+    ?>
+</div>
+
+

@@ -84,6 +84,12 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     protected $expediente_tipo;
 
     /**
+     * The value for the expediente_estatus field.
+     * @var        string
+     */
+    protected $expediente_estatus;
+
+    /**
      * @var        Cliente
      */
     protected $aCliente;
@@ -319,6 +325,17 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [expediente_estatus] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteEstatus()
+    {
+
+        return $this->expediente_estatus;
+    }
+
+    /**
      * Set the value of [idexpediente] column.
      *
      * @param  int $v new value
@@ -520,6 +537,27 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     } // setExpedienteTipo()
 
     /**
+     * Set the value of [expediente_estatus] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteEstatus($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_estatus !== $v) {
+            $this->expediente_estatus = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_ESTATUS;
+        }
+
+
+        return $this;
+    } // setExpedienteEstatus()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -560,6 +598,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             $this->expediente_fechafin = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
             $this->expediente_precio = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
             $this->expediente_tipo = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+            $this->expediente_estatus = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -569,7 +608,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 9; // 9 = ExpedientePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 10; // 10 = ExpedientePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Expediente object", $e);
@@ -911,6 +950,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_TIPO)) {
             $modifiedColumns[':p' . $index++]  = '`expediente_tipo`';
         }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_ESTATUS)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_estatus`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `expediente` (%s) VALUES (%s)',
@@ -948,6 +990,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                         break;
                     case '`expediente_tipo`':
                         $stmt->bindValue($identifier, $this->expediente_tipo, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_estatus`':
+                        $stmt->bindValue($identifier, $this->expediente_estatus, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1160,6 +1205,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             case 8:
                 return $this->getExpedienteTipo();
                 break;
+            case 9:
+                return $this->getExpedienteEstatus();
+                break;
             default:
                 return null;
                 break;
@@ -1198,6 +1246,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             $keys[6] => $this->getExpedienteFechafin(),
             $keys[7] => $this->getExpedientePrecio(),
             $keys[8] => $this->getExpedienteTipo(),
+            $keys[9] => $this->getExpedienteEstatus(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1284,6 +1333,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             case 8:
                 $this->setExpedienteTipo($value);
                 break;
+            case 9:
+                $this->setExpedienteEstatus($value);
+                break;
         } // switch()
     }
 
@@ -1317,6 +1369,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if (array_key_exists($keys[6], $arr)) $this->setExpedienteFechafin($arr[$keys[6]]);
         if (array_key_exists($keys[7], $arr)) $this->setExpedientePrecio($arr[$keys[7]]);
         if (array_key_exists($keys[8], $arr)) $this->setExpedienteTipo($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setExpedienteEstatus($arr[$keys[9]]);
     }
 
     /**
@@ -1337,6 +1390,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FECHAFIN)) $criteria->add(ExpedientePeer::EXPEDIENTE_FECHAFIN, $this->expediente_fechafin);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIO)) $criteria->add(ExpedientePeer::EXPEDIENTE_PRECIO, $this->expediente_precio);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_TIPO)) $criteria->add(ExpedientePeer::EXPEDIENTE_TIPO, $this->expediente_tipo);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_ESTATUS)) $criteria->add(ExpedientePeer::EXPEDIENTE_ESTATUS, $this->expediente_estatus);
 
         return $criteria;
     }
@@ -1408,6 +1462,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         $copyObj->setExpedienteFechafin($this->getExpedienteFechafin());
         $copyObj->setExpedientePrecio($this->getExpedientePrecio());
         $copyObj->setExpedienteTipo($this->getExpedienteTipo());
+        $copyObj->setExpedienteEstatus($this->getExpedienteEstatus());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -2658,6 +2713,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         $this->expediente_fechafin = null;
         $this->expediente_precio = null;
         $this->expediente_tipo = null;
+        $this->expediente_estatus = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
