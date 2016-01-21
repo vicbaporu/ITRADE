@@ -284,9 +284,10 @@
     </vendor>
   </table>
   <table name="proveedoritradearchivo" phpName="Proveedoritradearchivo" idMethod="native">
-    <column name="idproveedoritradearchivo" phpName="Idproveedoritradearchivo" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="idproveedoritradearchivo" phpName="Idproveedoritradearchivo" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="idproveedoritrade" phpName="Idproveedoritrade" type="INTEGER" required="true"/>
     <column name="proveedoritradearchivo_archivo" phpName="ProveedoritradearchivoArchivo" type="LONGVARCHAR" required="true"/>
+    <column name="proveedoritradearchivo_size" phpName="ProveedoritradearchivoSize" type="VARCHAR" size="45" required="true"/>
     <foreign-key foreignTable="proveedoritrade" name="idproveedoritrade_proveedoritradearchivo" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idproveedoritrade" foreign="idproveedoritrade"/>
     </foreign-key>

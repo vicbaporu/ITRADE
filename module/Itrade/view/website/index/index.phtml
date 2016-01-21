@@ -17,6 +17,7 @@
 	$mail = new PHPMailer;
 
 
+
 	$mail->isSMTP();                                      	// Set mailer to use SMTP
 	$mail->Host = 'smtp.gmail.com server';  				// Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               	// Enable SMTP authentication
@@ -24,6 +25,7 @@
 	$mail->Username = 'mail@server.com';                 	// SMTP username
 	$mail->SMTPSecure = 'ssl';                            	// Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 465;                                    	// TCP port to connect to
+
 
 	$mail->setFrom($email, 'ITRADE Contacto');
 	$mail->addAddress('mailtorecipe@server.com', $nombre);  // Add a recipient

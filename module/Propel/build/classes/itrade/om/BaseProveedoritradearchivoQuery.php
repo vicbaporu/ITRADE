@@ -9,10 +9,12 @@
  * @method ProveedoritradearchivoQuery orderByIdproveedoritradearchivo($order = Criteria::ASC) Order by the idproveedoritradearchivo column
  * @method ProveedoritradearchivoQuery orderByIdproveedoritrade($order = Criteria::ASC) Order by the idproveedoritrade column
  * @method ProveedoritradearchivoQuery orderByProveedoritradearchivoArchivo($order = Criteria::ASC) Order by the proveedoritradearchivo_archivo column
+ * @method ProveedoritradearchivoQuery orderByProveedoritradearchivoSize($order = Criteria::ASC) Order by the proveedoritradearchivo_size column
  *
  * @method ProveedoritradearchivoQuery groupByIdproveedoritradearchivo() Group by the idproveedoritradearchivo column
  * @method ProveedoritradearchivoQuery groupByIdproveedoritrade() Group by the idproveedoritrade column
  * @method ProveedoritradearchivoQuery groupByProveedoritradearchivoArchivo() Group by the proveedoritradearchivo_archivo column
+ * @method ProveedoritradearchivoQuery groupByProveedoritradearchivoSize() Group by the proveedoritradearchivo_size column
  *
  * @method ProveedoritradearchivoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ProveedoritradearchivoQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -27,10 +29,12 @@
  *
  * @method Proveedoritradearchivo findOneByIdproveedoritrade(int $idproveedoritrade) Return the first Proveedoritradearchivo filtered by the idproveedoritrade column
  * @method Proveedoritradearchivo findOneByProveedoritradearchivoArchivo(string $proveedoritradearchivo_archivo) Return the first Proveedoritradearchivo filtered by the proveedoritradearchivo_archivo column
+ * @method Proveedoritradearchivo findOneByProveedoritradearchivoSize(string $proveedoritradearchivo_size) Return the first Proveedoritradearchivo filtered by the proveedoritradearchivo_size column
  *
  * @method array findByIdproveedoritradearchivo(int $idproveedoritradearchivo) Return Proveedoritradearchivo objects filtered by the idproveedoritradearchivo column
  * @method array findByIdproveedoritrade(int $idproveedoritrade) Return Proveedoritradearchivo objects filtered by the idproveedoritrade column
  * @method array findByProveedoritradearchivoArchivo(string $proveedoritradearchivo_archivo) Return Proveedoritradearchivo objects filtered by the proveedoritradearchivo_archivo column
+ * @method array findByProveedoritradearchivoSize(string $proveedoritradearchivo_size) Return Proveedoritradearchivo objects filtered by the proveedoritradearchivo_size column
  *
  * @package    propel.generator.itrade.om
  */
@@ -138,7 +142,7 @@ abstract class BaseProveedoritradearchivoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idproveedoritradearchivo`, `idproveedoritrade`, `proveedoritradearchivo_archivo` FROM `proveedoritradearchivo` WHERE `idproveedoritradearchivo` = :p0';
+        $sql = 'SELECT `idproveedoritradearchivo`, `idproveedoritrade`, `proveedoritradearchivo_archivo`, `proveedoritradearchivo_size` FROM `proveedoritradearchivo` WHERE `idproveedoritradearchivo` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -340,6 +344,35 @@ abstract class BaseProveedoritradearchivoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO, $proveedoritradearchivoArchivo, $comparison);
+    }
+
+    /**
+     * Filter the query on the proveedoritradearchivo_size column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByProveedoritradearchivoSize('fooValue');   // WHERE proveedoritradearchivo_size = 'fooValue'
+     * $query->filterByProveedoritradearchivoSize('%fooValue%'); // WHERE proveedoritradearchivo_size LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $proveedoritradearchivoSize The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ProveedoritradearchivoQuery The current query, for fluid interface
+     */
+    public function filterByProveedoritradearchivoSize($proveedoritradearchivoSize = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($proveedoritradearchivoSize)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $proveedoritradearchivoSize)) {
+                $proveedoritradearchivoSize = str_replace('*', '%', $proveedoritradearchivoSize);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE, $proveedoritradearchivoSize, $comparison);
     }
 
     /**

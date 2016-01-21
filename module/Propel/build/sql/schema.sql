@@ -361,9 +361,10 @@ DROP TABLE IF EXISTS `proveedoritradearchivo`;
 
 CREATE TABLE `proveedoritradearchivo`
 (
-    `idproveedoritradearchivo` INTEGER NOT NULL,
+    `idproveedoritradearchivo` INTEGER NOT NULL AUTO_INCREMENT,
     `idproveedoritrade` INTEGER NOT NULL,
     `proveedoritradearchivo_archivo` TEXT NOT NULL,
+    `proveedoritradearchivo_size` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`idproveedoritradearchivo`),
     INDEX `idproveedoritrade` (`idproveedoritrade`),
     CONSTRAINT `idproveedoritrade_proveedoritradearchivo`

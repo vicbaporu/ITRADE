@@ -24,13 +24,13 @@ abstract class BaseProveedoritradearchivoPeer
     const TM_CLASS = 'ProveedoritradearchivoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 3;
+    const NUM_COLUMNS = 4;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 3;
+    const NUM_HYDRATE_COLUMNS = 4;
 
     /** the column name for the idproveedoritradearchivo field */
     const IDPROVEEDORITRADEARCHIVO = 'proveedoritradearchivo.idproveedoritradearchivo';
@@ -40,6 +40,9 @@ abstract class BaseProveedoritradearchivoPeer
 
     /** the column name for the proveedoritradearchivo_archivo field */
     const PROVEEDORITRADEARCHIVO_ARCHIVO = 'proveedoritradearchivo.proveedoritradearchivo_archivo';
+
+    /** the column name for the proveedoritradearchivo_size field */
+    const PROVEEDORITRADEARCHIVO_SIZE = 'proveedoritradearchivo.proveedoritradearchivo_size';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -60,12 +63,12 @@ abstract class BaseProveedoritradearchivoPeer
      * e.g. ProveedoritradearchivoPeer::$fieldNames[ProveedoritradearchivoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedoritradearchivo', 'Idproveedoritrade', 'ProveedoritradearchivoArchivo', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritradearchivo', 'idproveedoritrade', 'proveedoritradearchivoArchivo', ),
-        BasePeer::TYPE_COLNAME => array (ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO, ProveedoritradearchivoPeer::IDPROVEEDORITRADE, ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADEARCHIVO', 'IDPROVEEDORITRADE', 'PROVEEDORITRADEARCHIVO_ARCHIVO', ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedoritradearchivo', 'idproveedoritrade', 'proveedoritradearchivo_archivo', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedoritradearchivo', 'Idproveedoritrade', 'ProveedoritradearchivoArchivo', 'ProveedoritradearchivoSize', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritradearchivo', 'idproveedoritrade', 'proveedoritradearchivoArchivo', 'proveedoritradearchivoSize', ),
+        BasePeer::TYPE_COLNAME => array (ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO, ProveedoritradearchivoPeer::IDPROVEEDORITRADE, ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO, ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADEARCHIVO', 'IDPROVEEDORITRADE', 'PROVEEDORITRADEARCHIVO_ARCHIVO', 'PROVEEDORITRADEARCHIVO_SIZE', ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedoritradearchivo', 'idproveedoritrade', 'proveedoritradearchivo_archivo', 'proveedoritradearchivo_size', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 
     /**
@@ -75,12 +78,12 @@ abstract class BaseProveedoritradearchivoPeer
      * e.g. ProveedoritradearchivoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedoritradearchivo' => 0, 'Idproveedoritrade' => 1, 'ProveedoritradearchivoArchivo' => 2, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritradearchivo' => 0, 'idproveedoritrade' => 1, 'proveedoritradearchivoArchivo' => 2, ),
-        BasePeer::TYPE_COLNAME => array (ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO => 0, ProveedoritradearchivoPeer::IDPROVEEDORITRADE => 1, ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO => 2, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADEARCHIVO' => 0, 'IDPROVEEDORITRADE' => 1, 'PROVEEDORITRADEARCHIVO_ARCHIVO' => 2, ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedoritradearchivo' => 0, 'idproveedoritrade' => 1, 'proveedoritradearchivo_archivo' => 2, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedoritradearchivo' => 0, 'Idproveedoritrade' => 1, 'ProveedoritradearchivoArchivo' => 2, 'ProveedoritradearchivoSize' => 3, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedoritradearchivo' => 0, 'idproveedoritrade' => 1, 'proveedoritradearchivoArchivo' => 2, 'proveedoritradearchivoSize' => 3, ),
+        BasePeer::TYPE_COLNAME => array (ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO => 0, ProveedoritradearchivoPeer::IDPROVEEDORITRADE => 1, ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO => 2, ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE => 3, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORITRADEARCHIVO' => 0, 'IDPROVEEDORITRADE' => 1, 'PROVEEDORITRADEARCHIVO_ARCHIVO' => 2, 'PROVEEDORITRADEARCHIVO_SIZE' => 3, ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedoritradearchivo' => 0, 'idproveedoritrade' => 1, 'proveedoritradearchivo_archivo' => 2, 'proveedoritradearchivo_size' => 3, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 
     /**
@@ -157,10 +160,12 @@ abstract class BaseProveedoritradearchivoPeer
             $criteria->addSelectColumn(ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO);
             $criteria->addSelectColumn(ProveedoritradearchivoPeer::IDPROVEEDORITRADE);
             $criteria->addSelectColumn(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_ARCHIVO);
+            $criteria->addSelectColumn(ProveedoritradearchivoPeer::PROVEEDORITRADEARCHIVO_SIZE);
         } else {
             $criteria->addSelectColumn($alias . '.idproveedoritradearchivo');
             $criteria->addSelectColumn($alias . '.idproveedoritrade');
             $criteria->addSelectColumn($alias . '.proveedoritradearchivo_archivo');
+            $criteria->addSelectColumn($alias . '.proveedoritradearchivo_size');
         }
     }
 
@@ -752,6 +757,10 @@ abstract class BaseProveedoritradearchivoPeer
             $criteria = clone $values; // rename for clarity
         } else {
             $criteria = $values->buildCriteria(); // build Criteria from Proveedoritradearchivo object
+        }
+
+        if ($criteria->containsKey(ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO) && $criteria->keyContainsValue(ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.ProveedoritradearchivoPeer::IDPROVEEDORITRADEARCHIVO.')');
         }
 
 

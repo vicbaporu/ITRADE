@@ -14,7 +14,7 @@
         <h3><span class="semi-bold"><?php echo strtoupper($form->get('proveedoritrade_nombre')->getValue())?></span></h3>
     </div>
     <?php 
-        $form->setAttribute('action', '/catalogo/empleados/editar/'.$form->get('idproveedoritrade')->getValue());
+        $form->setAttribute('action', '/catalogo/proveedores/editar/'.$form->get('idproveedoritrade')->getValue());
         $form->setAttribute('novalidate', true);
         $form->setAttribute('enctype', 'multipart/form-data');
 
@@ -39,6 +39,7 @@
                                     <span class="help req">*</span>
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
+                                        <?php echo $this->formHidden($form->get('idproveedoritrade')) ?>
                                         <?php echo $this->formText($form->get('proveedoritrade_nombre')) ?>
                                     </div>
                                     <span class="error"></span>
@@ -252,15 +253,16 @@
 <!--CUSTOM SCRIPT-->
 <script src="/js/admin/catalogo/proveedor.js"></script>
 <!--DROPZONE-->
-<script src="/plugins/admin/dropzone/dropzone.min.js"></script>
+<script src="/plugins/admin/dropzone/dropzone.js"></script>
+<script src="/plugins/admin/download/download.js"></script>
 <link rel="stylesheet" type="text/css" href="/plugins/admin/dropzone/css/dropzone.css">
 <script type="text/javascript">
     
     $(document).ready(function() {
         
         //FORM BIND
-        var $form = $('.form_container').proveedor();
-        $form.formBind();
+        var $form = $('.form_container').proveedor({successMessages:<?php echo $successMessages?>});
+        $form.formBind(<?php echo $files?>);
 
     });
 </script>

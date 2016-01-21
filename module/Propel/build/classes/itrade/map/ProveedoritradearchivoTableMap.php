@@ -36,11 +36,12 @@ class ProveedoritradearchivoTableMap extends TableMap
         $this->setPhpName('Proveedoritradearchivo');
         $this->setClassname('Proveedoritradearchivo');
         $this->setPackage('itrade');
-        $this->setUseIdGenerator(false);
+        $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idproveedoritradearchivo', 'Idproveedoritradearchivo', 'INTEGER', true, null, null);
         $this->addForeignKey('idproveedoritrade', 'Idproveedoritrade', 'INTEGER', 'proveedoritrade', 'idproveedoritrade', true, null, null);
         $this->addColumn('proveedoritradearchivo_archivo', 'ProveedoritradearchivoArchivo', 'LONGVARCHAR', true, null, null);
+        $this->addColumn('proveedoritradearchivo_size', 'ProveedoritradearchivoSize', 'VARCHAR', true, 45, null);
         // validators
     } // initialize()
 
