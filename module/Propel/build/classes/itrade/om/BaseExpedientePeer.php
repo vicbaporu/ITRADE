@@ -24,19 +24,22 @@ abstract class BaseExpedientePeer
     const TM_CLASS = 'ExpedienteTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 7;
+    const NUM_COLUMNS = 9;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 7;
+    const NUM_HYDRATE_COLUMNS = 9;
 
     /** the column name for the idexpediente field */
     const IDEXPEDIENTE = 'expediente.idexpediente';
 
     /** the column name for the idcliente field */
     const IDCLIENTE = 'expediente.idcliente';
+
+    /** the column name for the idconsignatarioembarcador field */
+    const IDCONSIGNATARIOEMBARCADOR = 'expediente.idconsignatarioembarcador';
 
     /** the column name for the expediente_listaempaque field */
     const EXPEDIENTE_LISTAEMPAQUE = 'expediente.expediente_listaempaque';
@@ -52,6 +55,13 @@ abstract class BaseExpedientePeer
 
     /** the column name for the expediente_precio field */
     const EXPEDIENTE_PRECIO = 'expediente.expediente_precio';
+
+    /** the column name for the expediente_tipo field */
+    const EXPEDIENTE_TIPO = 'expediente.expediente_tipo';
+
+    /** The enumerated values for the expediente_tipo field */
+    const EXPEDIENTE_TIPO_EXPORTACION = 'exportacion';
+    const EXPEDIENTE_TIPO_IMPORTACION = 'importacion';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -72,12 +82,12 @@ abstract class BaseExpedientePeer
      * e.g. ExpedientePeer::$fieldNames[ExpedientePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpediente', 'Idcliente', 'ExpedienteListaempaque', 'ExpedienteFactura', 'ExpedienteFechainicio', 'ExpedienteFechafin', 'ExpedientePrecio', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente', 'idcliente', 'expedienteListaempaque', 'expedienteFactura', 'expedienteFechainicio', 'expedienteFechafin', 'expedientePrecio', ),
-        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE, ExpedientePeer::IDCLIENTE, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE, ExpedientePeer::EXPEDIENTE_FACTURA, ExpedientePeer::EXPEDIENTE_FECHAINICIO, ExpedientePeer::EXPEDIENTE_FECHAFIN, ExpedientePeer::EXPEDIENTE_PRECIO, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE', 'IDCLIENTE', 'EXPEDIENTE_LISTAEMPAQUE', 'EXPEDIENTE_FACTURA', 'EXPEDIENTE_FECHAINICIO', 'EXPEDIENTE_FECHAFIN', 'EXPEDIENTE_PRECIO', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpediente', 'idcliente', 'expediente_listaempaque', 'expediente_factura', 'expediente_fechainicio', 'expediente_fechafin', 'expediente_precio', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpediente', 'Idcliente', 'Idconsignatarioembarcador', 'ExpedienteListaempaque', 'ExpedienteFactura', 'ExpedienteFechainicio', 'ExpedienteFechafin', 'ExpedientePrecio', 'ExpedienteTipo', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expedienteListaempaque', 'expedienteFactura', 'expedienteFechainicio', 'expedienteFechafin', 'expedientePrecio', 'expedienteTipo', ),
+        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE, ExpedientePeer::IDCLIENTE, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE, ExpedientePeer::EXPEDIENTE_FACTURA, ExpedientePeer::EXPEDIENTE_FECHAINICIO, ExpedientePeer::EXPEDIENTE_FECHAFIN, ExpedientePeer::EXPEDIENTE_PRECIO, ExpedientePeer::EXPEDIENTE_TIPO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE', 'IDCLIENTE', 'IDCONSIGNATARIOEMBARCADOR', 'EXPEDIENTE_LISTAEMPAQUE', 'EXPEDIENTE_FACTURA', 'EXPEDIENTE_FECHAINICIO', 'EXPEDIENTE_FECHAFIN', 'EXPEDIENTE_PRECIO', 'EXPEDIENTE_TIPO', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expediente_listaempaque', 'expediente_factura', 'expediente_fechainicio', 'expediente_fechafin', 'expediente_precio', 'expediente_tipo', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
     /**
@@ -87,12 +97,20 @@ abstract class BaseExpedientePeer
      * e.g. ExpedientePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpediente' => 0, 'Idcliente' => 1, 'ExpedienteListaempaque' => 2, 'ExpedienteFactura' => 3, 'ExpedienteFechainicio' => 4, 'ExpedienteFechafin' => 5, 'ExpedientePrecio' => 6, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'expedienteListaempaque' => 2, 'expedienteFactura' => 3, 'expedienteFechainicio' => 4, 'expedienteFechafin' => 5, 'expedientePrecio' => 6, ),
-        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE => 0, ExpedientePeer::IDCLIENTE => 1, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE => 2, ExpedientePeer::EXPEDIENTE_FACTURA => 3, ExpedientePeer::EXPEDIENTE_FECHAINICIO => 4, ExpedientePeer::EXPEDIENTE_FECHAFIN => 5, ExpedientePeer::EXPEDIENTE_PRECIO => 6, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE' => 0, 'IDCLIENTE' => 1, 'EXPEDIENTE_LISTAEMPAQUE' => 2, 'EXPEDIENTE_FACTURA' => 3, 'EXPEDIENTE_FECHAINICIO' => 4, 'EXPEDIENTE_FECHAFIN' => 5, 'EXPEDIENTE_PRECIO' => 6, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'expediente_listaempaque' => 2, 'expediente_factura' => 3, 'expediente_fechainicio' => 4, 'expediente_fechafin' => 5, 'expediente_precio' => 6, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpediente' => 0, 'Idcliente' => 1, 'Idconsignatarioembarcador' => 2, 'ExpedienteListaempaque' => 3, 'ExpedienteFactura' => 4, 'ExpedienteFechainicio' => 5, 'ExpedienteFechafin' => 6, 'ExpedientePrecio' => 7, 'ExpedienteTipo' => 8, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expedienteListaempaque' => 3, 'expedienteFactura' => 4, 'expedienteFechainicio' => 5, 'expedienteFechafin' => 6, 'expedientePrecio' => 7, 'expedienteTipo' => 8, ),
+        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE => 0, ExpedientePeer::IDCLIENTE => 1, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR => 2, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE => 3, ExpedientePeer::EXPEDIENTE_FACTURA => 4, ExpedientePeer::EXPEDIENTE_FECHAINICIO => 5, ExpedientePeer::EXPEDIENTE_FECHAFIN => 6, ExpedientePeer::EXPEDIENTE_PRECIO => 7, ExpedientePeer::EXPEDIENTE_TIPO => 8, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE' => 0, 'IDCLIENTE' => 1, 'IDCONSIGNATARIOEMBARCADOR' => 2, 'EXPEDIENTE_LISTAEMPAQUE' => 3, 'EXPEDIENTE_FACTURA' => 4, 'EXPEDIENTE_FECHAINICIO' => 5, 'EXPEDIENTE_FECHAFIN' => 6, 'EXPEDIENTE_PRECIO' => 7, 'EXPEDIENTE_TIPO' => 8, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expediente_listaempaque' => 3, 'expediente_factura' => 4, 'expediente_fechainicio' => 5, 'expediente_fechafin' => 6, 'expediente_precio' => 7, 'expediente_tipo' => 8, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+    );
+
+    /** The enumerated values for this table */
+    protected static $enumValueSets = array(
+        ExpedientePeer::EXPEDIENTE_TIPO => array(
+            ExpedientePeer::EXPEDIENTE_TIPO_EXPORTACION,
+            ExpedientePeer::EXPEDIENTE_TIPO_IMPORTACION,
+        ),
     );
 
     /**
@@ -135,6 +153,51 @@ abstract class BaseExpedientePeer
     }
 
     /**
+     * Gets the list of values for all ENUM columns
+     * @return array
+     */
+    public static function getValueSets()
+    {
+      return ExpedientePeer::$enumValueSets;
+    }
+
+    /**
+     * Gets the list of values for an ENUM column
+     *
+     * @param string $colname The ENUM column name.
+     *
+     * @return array list of possible values for the column
+     */
+    public static function getValueSet($colname)
+    {
+        $valueSets = ExpedientePeer::getValueSets();
+
+        if (!isset($valueSets[$colname])) {
+            throw new PropelException(sprintf('Column "%s" has no ValueSet.', $colname));
+        }
+
+        return $valueSets[$colname];
+    }
+
+    /**
+     * Gets the SQL value for the ENUM column value
+     *
+     * @param string $colname ENUM column name.
+     * @param string $enumVal ENUM value.
+     *
+     * @return int SQL value
+     */
+    public static function getSqlValueForEnum($colname, $enumVal)
+    {
+        $values = ExpedientePeer::getValueSet($colname);
+        if (!in_array($enumVal, $values)) {
+            throw new PropelException(sprintf('Value "%s" is not accepted in this enumerated column', $colname));
+        }
+
+        return array_search($enumVal, $values);
+    }
+
+    /**
      * Convenience method which changes table.column to alias.column.
      *
      * Using this method you can maintain SQL abstraction while using column aliases.
@@ -168,19 +231,23 @@ abstract class BaseExpedientePeer
         if (null === $alias) {
             $criteria->addSelectColumn(ExpedientePeer::IDEXPEDIENTE);
             $criteria->addSelectColumn(ExpedientePeer::IDCLIENTE);
+            $criteria->addSelectColumn(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURA);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FECHAINICIO);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FECHAFIN);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_PRECIO);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_TIPO);
         } else {
             $criteria->addSelectColumn($alias . '.idexpediente');
             $criteria->addSelectColumn($alias . '.idcliente');
+            $criteria->addSelectColumn($alias . '.idconsignatarioembarcador');
             $criteria->addSelectColumn($alias . '.expediente_listaempaque');
             $criteria->addSelectColumn($alias . '.expediente_factura');
             $criteria->addSelectColumn($alias . '.expediente_fechainicio');
             $criteria->addSelectColumn($alias . '.expediente_fechafin');
             $criteria->addSelectColumn($alias . '.expediente_precio');
+            $criteria->addSelectColumn($alias . '.expediente_tipo');
         }
     }
 
@@ -546,6 +613,57 @@ abstract class BaseExpedientePeer
 
 
     /**
+     * Returns the number of rows matching criteria, joining the related Proveedorcliente table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinProveedorcliente(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(ExpedientePeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            ExpedientePeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(ExpedientePeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(ExpedientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ProveedorclientePeer::IDPROVEEDORCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
      * Selects a collection of Expediente objects pre-filled with their Cliente objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -613,6 +731,73 @@ abstract class BaseExpedientePeer
 
 
     /**
+     * Selects a collection of Expediente objects pre-filled with their Proveedorcliente objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Expediente objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinProveedorcliente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ExpedientePeer::DATABASE_NAME);
+        }
+
+        ExpedientePeer::addSelectColumns($criteria);
+        $startcol = ExpedientePeer::NUM_HYDRATE_COLUMNS;
+        ProveedorclientePeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ProveedorclientePeer::IDPROVEEDORCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ExpedientePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ExpedientePeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = ExpedientePeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ExpedientePeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = ProveedorclientePeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = ProveedorclientePeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = ProveedorclientePeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    ProveedorclientePeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Expediente) to $obj2 (Proveedorcliente)
+                $obj2->addExpediente($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
      * Returns the number of rows matching criteria, joining all related tables
      *
      * @param      Criteria $criteria
@@ -649,6 +834,8 @@ abstract class BaseExpedientePeer
         }
 
         $criteria->addJoin(ExpedientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+        $criteria->addJoin(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ProveedorclientePeer::IDPROVEEDORCLIENTE, $join_behavior);
 
         $stmt = BasePeer::doCount($criteria, $con);
 
@@ -687,7 +874,12 @@ abstract class BaseExpedientePeer
         ClientePeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + ClientePeer::NUM_HYDRATE_COLUMNS;
 
+        ProveedorclientePeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + ProveedorclientePeer::NUM_HYDRATE_COLUMNS;
+
         $criteria->addJoin(ExpedientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+        $criteria->addJoin(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ProveedorclientePeer::IDPROVEEDORCLIENTE, $join_behavior);
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
@@ -723,6 +915,274 @@ abstract class BaseExpedientePeer
                 // Add the $obj1 (Expediente) to the collection in $obj2 (Cliente)
                 $obj2->addExpediente($obj1);
             } // if joined row not null
+
+            // Add objects for joined Proveedorcliente rows
+
+            $key3 = ProveedorclientePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            if ($key3 !== null) {
+                $obj3 = ProveedorclientePeer::getInstanceFromPool($key3);
+                if (!$obj3) {
+
+                    $cls = ProveedorclientePeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    ProveedorclientePeer::addInstanceToPool($obj3, $key3);
+                } // if obj3 loaded
+
+                // Add the $obj1 (Expediente) to the collection in $obj3 (Proveedorcliente)
+                $obj3->addExpediente($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Cliente table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptCliente(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(ExpedientePeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            ExpedientePeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(ExpedientePeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(ExpedientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ProveedorclientePeer::IDPROVEEDORCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related Proveedorcliente table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptProveedorcliente(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(ExpedientePeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            ExpedientePeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(ExpedientePeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(ExpedientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(ExpedientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of Expediente objects pre-filled with all related objects except Cliente.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Expediente objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptCliente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ExpedientePeer::DATABASE_NAME);
+        }
+
+        ExpedientePeer::addSelectColumns($criteria);
+        $startcol2 = ExpedientePeer::NUM_HYDRATE_COLUMNS;
+
+        ProveedorclientePeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + ProveedorclientePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ProveedorclientePeer::IDPROVEEDORCLIENTE, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ExpedientePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ExpedientePeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = ExpedientePeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ExpedientePeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined Proveedorcliente rows
+
+                $key2 = ProveedorclientePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = ProveedorclientePeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+
+                        $cls = ProveedorclientePeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    ProveedorclientePeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Expediente) to the collection in $obj2 (Proveedorcliente)
+                $obj2->addExpediente($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Expediente objects pre-filled with all related objects except Proveedorcliente.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Expediente objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptProveedorcliente(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(ExpedientePeer::DATABASE_NAME);
+        }
+
+        ExpedientePeer::addSelectColumns($criteria);
+        $startcol2 = ExpedientePeer::NUM_HYDRATE_COLUMNS;
+
+        ClientePeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + ClientePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(ExpedientePeer::IDCLIENTE, ClientePeer::IDCLIENTE, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = ExpedientePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = ExpedientePeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = ExpedientePeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                ExpedientePeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined Cliente rows
+
+                $key2 = ClientePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = ClientePeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+
+                        $cls = ClientePeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    ClientePeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Expediente) to the collection in $obj2 (Cliente)
+                $obj2->addExpediente($obj1);
+
+            } // if joined row is not null
 
             $results[] = $obj1;
         }

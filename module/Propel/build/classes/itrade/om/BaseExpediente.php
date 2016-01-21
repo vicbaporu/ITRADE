@@ -42,6 +42,12 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     protected $idcliente;
 
     /**
+     * The value for the idconsignatarioembarcador field.
+     * @var        int
+     */
+    protected $idconsignatarioembarcador;
+
+    /**
      * The value for the expediente_listaempaque field.
      * @var        string
      */
@@ -72,9 +78,20 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     protected $expediente_precio;
 
     /**
+     * The value for the expediente_tipo field.
+     * @var        string
+     */
+    protected $expediente_tipo;
+
+    /**
      * @var        Cliente
      */
     protected $aCliente;
+
+    /**
+     * @var        Proveedorcliente
+     */
+    protected $aProveedorcliente;
 
     /**
      * @var        PropelObjectCollection|Expedienteanticipo[] Collection to store aggregation of Expedienteanticipo objects.
@@ -164,6 +181,17 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     {
 
         return $this->idcliente;
+    }
+
+    /**
+     * Get the [idconsignatarioembarcador] column value.
+     *
+     * @return int
+     */
+    public function getIdconsignatarioembarcador()
+    {
+
+        return $this->idconsignatarioembarcador;
     }
 
     /**
@@ -280,6 +308,17 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [expediente_tipo] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteTipo()
+    {
+
+        return $this->expediente_tipo;
+    }
+
+    /**
      * Set the value of [idexpediente] column.
      *
      * @param  int $v new value
@@ -324,6 +363,31 @@ abstract class BaseExpediente extends BaseObject implements Persistent
 
         return $this;
     } // setIdcliente()
+
+    /**
+     * Set the value of [idconsignatarioembarcador] column.
+     *
+     * @param  int $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setIdconsignatarioembarcador($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->idconsignatarioembarcador !== $v) {
+            $this->idconsignatarioembarcador = $v;
+            $this->modifiedColumns[] = ExpedientePeer::IDCONSIGNATARIOEMBARCADOR;
+        }
+
+        if ($this->aProveedorcliente !== null && $this->aProveedorcliente->getIdproveedorcliente() !== $v) {
+            $this->aProveedorcliente = null;
+        }
+
+
+        return $this;
+    } // setIdconsignatarioembarcador()
 
     /**
      * Set the value of [expediente_listaempaque] column.
@@ -435,6 +499,27 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     } // setExpedientePrecio()
 
     /**
+     * Set the value of [expediente_tipo] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteTipo($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_tipo !== $v) {
+            $this->expediente_tipo = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_TIPO;
+        }
+
+
+        return $this;
+    } // setExpedienteTipo()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -468,11 +553,13 @@ abstract class BaseExpediente extends BaseObject implements Persistent
 
             $this->idexpediente = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->idcliente = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
-            $this->expediente_listaempaque = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->expediente_factura = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->expediente_fechainicio = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->expediente_fechafin = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->expediente_precio = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->idconsignatarioembarcador = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+            $this->expediente_listaempaque = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->expediente_factura = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->expediente_fechainicio = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->expediente_fechafin = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->expediente_precio = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->expediente_tipo = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -482,7 +569,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 7; // 7 = ExpedientePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 9; // 9 = ExpedientePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Expediente object", $e);
@@ -507,6 +594,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
 
         if ($this->aCliente !== null && $this->idcliente !== $this->aCliente->getIdcliente()) {
             $this->aCliente = null;
+        }
+        if ($this->aProveedorcliente !== null && $this->idconsignatarioembarcador !== $this->aProveedorcliente->getIdproveedorcliente()) {
+            $this->aProveedorcliente = null;
         }
     } // ensureConsistency
 
@@ -548,6 +638,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($deep) {  // also de-associate any related objects?
 
             $this->aCliente = null;
+            $this->aProveedorcliente = null;
             $this->collExpedienteanticipos = null;
 
             $this->collExpedientearchivos = null;
@@ -681,6 +772,13 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                 $this->setCliente($this->aCliente);
             }
 
+            if ($this->aProveedorcliente !== null) {
+                if ($this->aProveedorcliente->isModified() || $this->aProveedorcliente->isNew()) {
+                    $affectedRows += $this->aProveedorcliente->save($con);
+                }
+                $this->setProveedorcliente($this->aProveedorcliente);
+            }
+
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -792,6 +890,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientePeer::IDCLIENTE)) {
             $modifiedColumns[':p' . $index++]  = '`idcliente`';
         }
+        if ($this->isColumnModified(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR)) {
+            $modifiedColumns[':p' . $index++]  = '`idconsignatarioembarcador`';
+        }
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE)) {
             $modifiedColumns[':p' . $index++]  = '`expediente_listaempaque`';
         }
@@ -806,6 +907,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         }
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIO)) {
             $modifiedColumns[':p' . $index++]  = '`expediente_precio`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_TIPO)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_tipo`';
         }
 
         $sql = sprintf(
@@ -824,6 +928,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                     case '`idcliente`':
                         $stmt->bindValue($identifier, $this->idcliente, PDO::PARAM_INT);
                         break;
+                    case '`idconsignatarioembarcador`':
+                        $stmt->bindValue($identifier, $this->idconsignatarioembarcador, PDO::PARAM_INT);
+                        break;
                     case '`expediente_listaempaque`':
                         $stmt->bindValue($identifier, $this->expediente_listaempaque, PDO::PARAM_STR);
                         break;
@@ -838,6 +945,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                         break;
                     case '`expediente_precio`':
                         $stmt->bindValue($identifier, $this->expediente_precio, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_tipo`':
+                        $stmt->bindValue($identifier, $this->expediente_tipo, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -944,6 +1054,12 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                 }
             }
 
+            if ($this->aProveedorcliente !== null) {
+                if (!$this->aProveedorcliente->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aProveedorcliente->getValidationFailures());
+                }
+            }
+
 
             if (($retval = ExpedientePeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
@@ -1024,19 +1140,25 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                 return $this->getIdcliente();
                 break;
             case 2:
-                return $this->getExpedienteListaempaque();
+                return $this->getIdconsignatarioembarcador();
                 break;
             case 3:
-                return $this->getExpedienteFactura();
+                return $this->getExpedienteListaempaque();
                 break;
             case 4:
-                return $this->getExpedienteFechainicio();
+                return $this->getExpedienteFactura();
                 break;
             case 5:
-                return $this->getExpedienteFechafin();
+                return $this->getExpedienteFechainicio();
                 break;
             case 6:
+                return $this->getExpedienteFechafin();
+                break;
+            case 7:
                 return $this->getExpedientePrecio();
+                break;
+            case 8:
+                return $this->getExpedienteTipo();
                 break;
             default:
                 return null;
@@ -1069,11 +1191,13 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         $result = array(
             $keys[0] => $this->getIdexpediente(),
             $keys[1] => $this->getIdcliente(),
-            $keys[2] => $this->getExpedienteListaempaque(),
-            $keys[3] => $this->getExpedienteFactura(),
-            $keys[4] => $this->getExpedienteFechainicio(),
-            $keys[5] => $this->getExpedienteFechafin(),
-            $keys[6] => $this->getExpedientePrecio(),
+            $keys[2] => $this->getIdconsignatarioembarcador(),
+            $keys[3] => $this->getExpedienteListaempaque(),
+            $keys[4] => $this->getExpedienteFactura(),
+            $keys[5] => $this->getExpedienteFechainicio(),
+            $keys[6] => $this->getExpedienteFechafin(),
+            $keys[7] => $this->getExpedientePrecio(),
+            $keys[8] => $this->getExpedienteTipo(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1083,6 +1207,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($includeForeignObjects) {
             if (null !== $this->aCliente) {
                 $result['Cliente'] = $this->aCliente->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aProveedorcliente) {
+                $result['Proveedorcliente'] = $this->aProveedorcliente->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
             if (null !== $this->collExpedienteanticipos) {
                 $result['Expedienteanticipos'] = $this->collExpedienteanticipos->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -1137,19 +1264,25 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                 $this->setIdcliente($value);
                 break;
             case 2:
-                $this->setExpedienteListaempaque($value);
+                $this->setIdconsignatarioembarcador($value);
                 break;
             case 3:
-                $this->setExpedienteFactura($value);
+                $this->setExpedienteListaempaque($value);
                 break;
             case 4:
-                $this->setExpedienteFechainicio($value);
+                $this->setExpedienteFactura($value);
                 break;
             case 5:
-                $this->setExpedienteFechafin($value);
+                $this->setExpedienteFechainicio($value);
                 break;
             case 6:
+                $this->setExpedienteFechafin($value);
+                break;
+            case 7:
                 $this->setExpedientePrecio($value);
+                break;
+            case 8:
+                $this->setExpedienteTipo($value);
                 break;
         } // switch()
     }
@@ -1177,11 +1310,13 @@ abstract class BaseExpediente extends BaseObject implements Persistent
 
         if (array_key_exists($keys[0], $arr)) $this->setIdexpediente($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setIdcliente($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setExpedienteListaempaque($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setExpedienteFactura($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setExpedienteFechainicio($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setExpedienteFechafin($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setExpedientePrecio($arr[$keys[6]]);
+        if (array_key_exists($keys[2], $arr)) $this->setIdconsignatarioembarcador($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setExpedienteListaempaque($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setExpedienteFactura($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setExpedienteFechainicio($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setExpedienteFechafin($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setExpedientePrecio($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setExpedienteTipo($arr[$keys[8]]);
     }
 
     /**
@@ -1195,11 +1330,13 @@ abstract class BaseExpediente extends BaseObject implements Persistent
 
         if ($this->isColumnModified(ExpedientePeer::IDEXPEDIENTE)) $criteria->add(ExpedientePeer::IDEXPEDIENTE, $this->idexpediente);
         if ($this->isColumnModified(ExpedientePeer::IDCLIENTE)) $criteria->add(ExpedientePeer::IDCLIENTE, $this->idcliente);
+        if ($this->isColumnModified(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR)) $criteria->add(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, $this->idconsignatarioembarcador);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE)) $criteria->add(ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE, $this->expediente_listaempaque);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURA)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURA, $this->expediente_factura);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FECHAINICIO)) $criteria->add(ExpedientePeer::EXPEDIENTE_FECHAINICIO, $this->expediente_fechainicio);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FECHAFIN)) $criteria->add(ExpedientePeer::EXPEDIENTE_FECHAFIN, $this->expediente_fechafin);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIO)) $criteria->add(ExpedientePeer::EXPEDIENTE_PRECIO, $this->expediente_precio);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_TIPO)) $criteria->add(ExpedientePeer::EXPEDIENTE_TIPO, $this->expediente_tipo);
 
         return $criteria;
     }
@@ -1264,11 +1401,13 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setIdcliente($this->getIdcliente());
+        $copyObj->setIdconsignatarioembarcador($this->getIdconsignatarioembarcador());
         $copyObj->setExpedienteListaempaque($this->getExpedienteListaempaque());
         $copyObj->setExpedienteFactura($this->getExpedienteFactura());
         $copyObj->setExpedienteFechainicio($this->getExpedienteFechainicio());
         $copyObj->setExpedienteFechafin($this->getExpedienteFechafin());
         $copyObj->setExpedientePrecio($this->getExpedientePrecio());
+        $copyObj->setExpedienteTipo($this->getExpedienteTipo());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1401,6 +1540,58 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         }
 
         return $this->aCliente;
+    }
+
+    /**
+     * Declares an association between this object and a Proveedorcliente object.
+     *
+     * @param                  Proveedorcliente $v
+     * @return Expediente The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setProveedorcliente(Proveedorcliente $v = null)
+    {
+        if ($v === null) {
+            $this->setIdconsignatarioembarcador(NULL);
+        } else {
+            $this->setIdconsignatarioembarcador($v->getIdproveedorcliente());
+        }
+
+        $this->aProveedorcliente = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the Proveedorcliente object, it will not be re-added.
+        if ($v !== null) {
+            $v->addExpediente($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated Proveedorcliente object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return Proveedorcliente The associated Proveedorcliente object.
+     * @throws PropelException
+     */
+    public function getProveedorcliente(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aProveedorcliente === null && ($this->idconsignatarioembarcador !== null) && $doQuery) {
+            $this->aProveedorcliente = ProveedorclienteQuery::create()->findPk($this->idconsignatarioembarcador, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aProveedorcliente->addExpedientes($this);
+             */
+        }
+
+        return $this->aProveedorcliente;
     }
 
 
@@ -2460,11 +2651,13 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     {
         $this->idexpediente = null;
         $this->idcliente = null;
+        $this->idconsignatarioembarcador = null;
         $this->expediente_listaempaque = null;
         $this->expediente_factura = null;
         $this->expediente_fechainicio = null;
         $this->expediente_fechafin = null;
         $this->expediente_precio = null;
+        $this->expediente_tipo = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -2510,6 +2703,9 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             if ($this->aCliente instanceof Persistent) {
               $this->aCliente->clearAllReferences($deep);
             }
+            if ($this->aProveedorcliente instanceof Persistent) {
+              $this->aProveedorcliente->clearAllReferences($deep);
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
@@ -2531,6 +2727,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         }
         $this->collExpedienteservicios = null;
         $this->aCliente = null;
+        $this->aProveedorcliente = null;
     }
 
     /**

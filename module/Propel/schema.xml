@@ -113,17 +113,25 @@
   </table>
   <table name="expediente" phpName="Expediente" idMethod="native">
     <column name="idexpediente" phpName="Idexpediente" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
-    <column name="idcliente" phpName="Idcliente" type="INTEGER" required="false"/>
+    <column name="idcliente" phpName="Idcliente" type="INTEGER" required="true"/>
+    <column name="idconsignatarioembarcador" phpName="Idconsignatarioembarcador" type="INTEGER" required="true"/>
     <column name="expediente_listaempaque" phpName="ExpedienteListaempaque" type="LONGVARCHAR" required="false"/>
     <column name="expediente_factura" phpName="ExpedienteFactura" type="VARCHAR" size="45" required="false"/>
     <column name="expediente_fechainicio" phpName="ExpedienteFechainicio" type="DATE" required="true"/>
     <column name="expediente_fechafin" phpName="ExpedienteFechafin" type="DATE" required="false"/>
     <column name="expediente_precio" phpName="ExpedientePrecio" type="DECIMAL" size="10" scale="2" required="false"/>
-    <foreign-key foreignTable="cliente" name="idcliente_expediente" onDelete="SET NULL" onUpdate="SET NULL">
+    <column name="expediente_tipo" phpName="ExpedienteTipo" type="CHAR" sqlType="enum('exportacion','importacion')" required="true"/>
+    <foreign-key foreignTable="cliente" name="idcliente_expediente" onDelete="RESTRICT" onUpdate="RESTRICT">
       <reference local="idcliente" foreign="idcliente"/>
+    </foreign-key>
+    <foreign-key foreignTable="proveedorcliente" name="idconsignatarioembarcador_expediente" onDelete="RESTRICT" onUpdate="RESTRICT">
+      <reference local="idconsignatarioembarcador" foreign="idproveedorcliente"/>
     </foreign-key>
     <index name="idcliente">
       <index-column name="idcliente"/>
+    </index>
+    <index name="idconsignatarioembarcador">
+      <index-column name="idconsignatarioembarcador"/>
     </index>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
@@ -180,6 +188,7 @@
     <column name="expedientegasto_monto" phpName="ExpedientegastoMonto" type="DECIMAL" size="10" scale="2" required="true"/>
     <column name="expedientegasto_tipo" phpName="ExpedientegastoTipo" type="CHAR" sqlType="enum('gastorecibir','gastoconocido','cobro')" required="true"/>
     <column name="expedientegasto_comprobante" phpName="ExpedientegastoComprobante" type="LONGVARCHAR" required="false"/>
+    <column name="expedientegasto_nota" phpName="ExpedientegastoNota" type="LONGVARCHAR" required="false"/>
     <foreign-key foreignTable="empleado" name="idempleado_expedientegasto" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idempleado" foreign="idempleado"/>
     </foreign-key>
@@ -283,6 +292,7 @@
     <column name="proveedorcliente_ciudad" phpName="ProveedorclienteCiudad" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_estado" phpName="ProveedorclienteEstado" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_pais" phpName="ProveedorclientePais" type="VARCHAR" size="45" required="false"/>
+    <column name="proveedorcliente_tipo" phpName="ProveedorclienteTipo" type="CHAR" sqlType="enum('proveedor','cliente')" required="false"/>
     <foreign-key foreignTable="cliente" name="proveedorcliente_idcliente" onDelete="RESTRICT" onUpdate="RESTRICT">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>

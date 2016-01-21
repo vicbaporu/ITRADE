@@ -24,13 +24,13 @@ abstract class BaseProveedorclientePeer
     const TM_CLASS = 'ProveedorclienteTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 14;
+    const NUM_COLUMNS = 15;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 14;
+    const NUM_HYDRATE_COLUMNS = 15;
 
     /** the column name for the idproveedorcliente field */
     const IDPROVEEDORCLIENTE = 'proveedorcliente.idproveedorcliente';
@@ -74,6 +74,13 @@ abstract class BaseProveedorclientePeer
     /** the column name for the proveedorcliente_pais field */
     const PROVEEDORCLIENTE_PAIS = 'proveedorcliente.proveedorcliente_pais';
 
+    /** the column name for the proveedorcliente_tipo field */
+    const PROVEEDORCLIENTE_TIPO = 'proveedorcliente.proveedorcliente_tipo';
+
+    /** The enumerated values for the proveedorcliente_tipo field */
+    const PROVEEDORCLIENTE_TIPO_PROVEEDOR = 'proveedor';
+    const PROVEEDORCLIENTE_TIPO_CLIENTE = 'cliente';
+
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
@@ -93,12 +100,12 @@ abstract class BaseProveedorclientePeer
      * e.g. ProveedorclientePeer::$fieldNames[ProveedorclientePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente', 'Idcliente', 'ProveedorclienteNombre', 'ProveedorclienteTaxid', 'ProveedorclienteNombrecontacto', 'ProveedorclienteTelefonocontacto', 'ProveedorclienteEmailcontacto', 'ProveedorclienteCalle', 'ProveedorclienteNumero', 'ProveedorclienteInterior', 'ProveedorclienteColonia', 'ProveedorclienteCiudad', 'ProveedorclienteEstado', 'ProveedorclientePais', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente', 'idcliente', 'proveedorclienteNombre', 'proveedorclienteTaxid', 'proveedorclienteNombrecontacto', 'proveedorclienteTelefonocontacto', 'proveedorclienteEmailcontacto', 'proveedorclienteCalle', 'proveedorclienteNumero', 'proveedorclienteInterior', 'proveedorclienteColonia', 'proveedorclienteCiudad', 'proveedorclienteEstado', 'proveedorclientePais', ),
-        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE, ProveedorclientePeer::IDCLIENTE, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE', 'IDCLIENTE', 'PROVEEDORCLIENTE_NOMBRE', 'PROVEEDORCLIENTE_TAXID', 'PROVEEDORCLIENTE_NOMBRECONTACTO', 'PROVEEDORCLIENTE_TELEFONOCONTACTO', 'PROVEEDORCLIENTE_EMAILCONTACTO', 'PROVEEDORCLIENTE_CALLE', 'PROVEEDORCLIENTE_NUMERO', 'PROVEEDORCLIENTE_INTERIOR', 'PROVEEDORCLIENTE_COLONIA', 'PROVEEDORCLIENTE_CIUDAD', 'PROVEEDORCLIENTE_ESTADO', 'PROVEEDORCLIENTE_PAIS', ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente', 'idcliente', 'proveedorcliente_nombre', 'proveedorcliente_taxid', 'proveedorcliente_nombrecontacto', 'proveedorcliente_telefonocontacto', 'proveedorcliente_emailcontacto', 'proveedorcliente_calle', 'proveedorcliente_numero', 'proveedorcliente_interior', 'proveedorcliente_colonia', 'proveedorcliente_ciudad', 'proveedorcliente_estado', 'proveedorcliente_pais', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente', 'Idcliente', 'ProveedorclienteNombre', 'ProveedorclienteTaxid', 'ProveedorclienteNombrecontacto', 'ProveedorclienteTelefonocontacto', 'ProveedorclienteEmailcontacto', 'ProveedorclienteCalle', 'ProveedorclienteNumero', 'ProveedorclienteInterior', 'ProveedorclienteColonia', 'ProveedorclienteCiudad', 'ProveedorclienteEstado', 'ProveedorclientePais', 'ProveedorclienteTipo', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente', 'idcliente', 'proveedorclienteNombre', 'proveedorclienteTaxid', 'proveedorclienteNombrecontacto', 'proveedorclienteTelefonocontacto', 'proveedorclienteEmailcontacto', 'proveedorclienteCalle', 'proveedorclienteNumero', 'proveedorclienteInterior', 'proveedorclienteColonia', 'proveedorclienteCiudad', 'proveedorclienteEstado', 'proveedorclientePais', 'proveedorclienteTipo', ),
+        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE, ProveedorclientePeer::IDCLIENTE, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS, ProveedorclientePeer::PROVEEDORCLIENTE_TIPO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE', 'IDCLIENTE', 'PROVEEDORCLIENTE_NOMBRE', 'PROVEEDORCLIENTE_TAXID', 'PROVEEDORCLIENTE_NOMBRECONTACTO', 'PROVEEDORCLIENTE_TELEFONOCONTACTO', 'PROVEEDORCLIENTE_EMAILCONTACTO', 'PROVEEDORCLIENTE_CALLE', 'PROVEEDORCLIENTE_NUMERO', 'PROVEEDORCLIENTE_INTERIOR', 'PROVEEDORCLIENTE_COLONIA', 'PROVEEDORCLIENTE_CIUDAD', 'PROVEEDORCLIENTE_ESTADO', 'PROVEEDORCLIENTE_PAIS', 'PROVEEDORCLIENTE_TIPO', ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente', 'idcliente', 'proveedorcliente_nombre', 'proveedorcliente_taxid', 'proveedorcliente_nombrecontacto', 'proveedorcliente_telefonocontacto', 'proveedorcliente_emailcontacto', 'proveedorcliente_calle', 'proveedorcliente_numero', 'proveedorcliente_interior', 'proveedorcliente_colonia', 'proveedorcliente_ciudad', 'proveedorcliente_estado', 'proveedorcliente_pais', 'proveedorcliente_tipo', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
     );
 
     /**
@@ -108,12 +115,20 @@ abstract class BaseProveedorclientePeer
      * e.g. ProveedorclientePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente' => 0, 'Idcliente' => 1, 'ProveedorclienteNombre' => 2, 'ProveedorclienteTaxid' => 3, 'ProveedorclienteNombrecontacto' => 4, 'ProveedorclienteTelefonocontacto' => 5, 'ProveedorclienteEmailcontacto' => 6, 'ProveedorclienteCalle' => 7, 'ProveedorclienteNumero' => 8, 'ProveedorclienteInterior' => 9, 'ProveedorclienteColonia' => 10, 'ProveedorclienteCiudad' => 11, 'ProveedorclienteEstado' => 12, 'ProveedorclientePais' => 13, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente' => 0, 'idcliente' => 1, 'proveedorclienteNombre' => 2, 'proveedorclienteTaxid' => 3, 'proveedorclienteNombrecontacto' => 4, 'proveedorclienteTelefonocontacto' => 5, 'proveedorclienteEmailcontacto' => 6, 'proveedorclienteCalle' => 7, 'proveedorclienteNumero' => 8, 'proveedorclienteInterior' => 9, 'proveedorclienteColonia' => 10, 'proveedorclienteCiudad' => 11, 'proveedorclienteEstado' => 12, 'proveedorclientePais' => 13, ),
-        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE => 0, ProveedorclientePeer::IDCLIENTE => 1, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE => 2, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID => 3, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO => 4, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO => 5, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO => 6, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE => 7, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO => 8, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR => 9, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA => 10, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD => 11, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO => 12, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS => 13, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE' => 0, 'IDCLIENTE' => 1, 'PROVEEDORCLIENTE_NOMBRE' => 2, 'PROVEEDORCLIENTE_TAXID' => 3, 'PROVEEDORCLIENTE_NOMBRECONTACTO' => 4, 'PROVEEDORCLIENTE_TELEFONOCONTACTO' => 5, 'PROVEEDORCLIENTE_EMAILCONTACTO' => 6, 'PROVEEDORCLIENTE_CALLE' => 7, 'PROVEEDORCLIENTE_NUMERO' => 8, 'PROVEEDORCLIENTE_INTERIOR' => 9, 'PROVEEDORCLIENTE_COLONIA' => 10, 'PROVEEDORCLIENTE_CIUDAD' => 11, 'PROVEEDORCLIENTE_ESTADO' => 12, 'PROVEEDORCLIENTE_PAIS' => 13, ),
-        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente' => 0, 'idcliente' => 1, 'proveedorcliente_nombre' => 2, 'proveedorcliente_taxid' => 3, 'proveedorcliente_nombrecontacto' => 4, 'proveedorcliente_telefonocontacto' => 5, 'proveedorcliente_emailcontacto' => 6, 'proveedorcliente_calle' => 7, 'proveedorcliente_numero' => 8, 'proveedorcliente_interior' => 9, 'proveedorcliente_colonia' => 10, 'proveedorcliente_ciudad' => 11, 'proveedorcliente_estado' => 12, 'proveedorcliente_pais' => 13, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+        BasePeer::TYPE_PHPNAME => array ('Idproveedorcliente' => 0, 'Idcliente' => 1, 'ProveedorclienteNombre' => 2, 'ProveedorclienteTaxid' => 3, 'ProveedorclienteNombrecontacto' => 4, 'ProveedorclienteTelefonocontacto' => 5, 'ProveedorclienteEmailcontacto' => 6, 'ProveedorclienteCalle' => 7, 'ProveedorclienteNumero' => 8, 'ProveedorclienteInterior' => 9, 'ProveedorclienteColonia' => 10, 'ProveedorclienteCiudad' => 11, 'ProveedorclienteEstado' => 12, 'ProveedorclientePais' => 13, 'ProveedorclienteTipo' => 14, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idproveedorcliente' => 0, 'idcliente' => 1, 'proveedorclienteNombre' => 2, 'proveedorclienteTaxid' => 3, 'proveedorclienteNombrecontacto' => 4, 'proveedorclienteTelefonocontacto' => 5, 'proveedorclienteEmailcontacto' => 6, 'proveedorclienteCalle' => 7, 'proveedorclienteNumero' => 8, 'proveedorclienteInterior' => 9, 'proveedorclienteColonia' => 10, 'proveedorclienteCiudad' => 11, 'proveedorclienteEstado' => 12, 'proveedorclientePais' => 13, 'proveedorclienteTipo' => 14, ),
+        BasePeer::TYPE_COLNAME => array (ProveedorclientePeer::IDPROVEEDORCLIENTE => 0, ProveedorclientePeer::IDCLIENTE => 1, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRE => 2, ProveedorclientePeer::PROVEEDORCLIENTE_TAXID => 3, ProveedorclientePeer::PROVEEDORCLIENTE_NOMBRECONTACTO => 4, ProveedorclientePeer::PROVEEDORCLIENTE_TELEFONOCONTACTO => 5, ProveedorclientePeer::PROVEEDORCLIENTE_EMAILCONTACTO => 6, ProveedorclientePeer::PROVEEDORCLIENTE_CALLE => 7, ProveedorclientePeer::PROVEEDORCLIENTE_NUMERO => 8, ProveedorclientePeer::PROVEEDORCLIENTE_INTERIOR => 9, ProveedorclientePeer::PROVEEDORCLIENTE_COLONIA => 10, ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD => 11, ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO => 12, ProveedorclientePeer::PROVEEDORCLIENTE_PAIS => 13, ProveedorclientePeer::PROVEEDORCLIENTE_TIPO => 14, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDPROVEEDORCLIENTE' => 0, 'IDCLIENTE' => 1, 'PROVEEDORCLIENTE_NOMBRE' => 2, 'PROVEEDORCLIENTE_TAXID' => 3, 'PROVEEDORCLIENTE_NOMBRECONTACTO' => 4, 'PROVEEDORCLIENTE_TELEFONOCONTACTO' => 5, 'PROVEEDORCLIENTE_EMAILCONTACTO' => 6, 'PROVEEDORCLIENTE_CALLE' => 7, 'PROVEEDORCLIENTE_NUMERO' => 8, 'PROVEEDORCLIENTE_INTERIOR' => 9, 'PROVEEDORCLIENTE_COLONIA' => 10, 'PROVEEDORCLIENTE_CIUDAD' => 11, 'PROVEEDORCLIENTE_ESTADO' => 12, 'PROVEEDORCLIENTE_PAIS' => 13, 'PROVEEDORCLIENTE_TIPO' => 14, ),
+        BasePeer::TYPE_FIELDNAME => array ('idproveedorcliente' => 0, 'idcliente' => 1, 'proveedorcliente_nombre' => 2, 'proveedorcliente_taxid' => 3, 'proveedorcliente_nombrecontacto' => 4, 'proveedorcliente_telefonocontacto' => 5, 'proveedorcliente_emailcontacto' => 6, 'proveedorcliente_calle' => 7, 'proveedorcliente_numero' => 8, 'proveedorcliente_interior' => 9, 'proveedorcliente_colonia' => 10, 'proveedorcliente_ciudad' => 11, 'proveedorcliente_estado' => 12, 'proveedorcliente_pais' => 13, 'proveedorcliente_tipo' => 14, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+    );
+
+    /** The enumerated values for this table */
+    protected static $enumValueSets = array(
+        ProveedorclientePeer::PROVEEDORCLIENTE_TIPO => array(
+            ProveedorclientePeer::PROVEEDORCLIENTE_TIPO_PROVEEDOR,
+            ProveedorclientePeer::PROVEEDORCLIENTE_TIPO_CLIENTE,
+        ),
     );
 
     /**
@@ -153,6 +168,51 @@ abstract class BaseProveedorclientePeer
         }
 
         return ProveedorclientePeer::$fieldNames[$type];
+    }
+
+    /**
+     * Gets the list of values for all ENUM columns
+     * @return array
+     */
+    public static function getValueSets()
+    {
+      return ProveedorclientePeer::$enumValueSets;
+    }
+
+    /**
+     * Gets the list of values for an ENUM column
+     *
+     * @param string $colname The ENUM column name.
+     *
+     * @return array list of possible values for the column
+     */
+    public static function getValueSet($colname)
+    {
+        $valueSets = ProveedorclientePeer::getValueSets();
+
+        if (!isset($valueSets[$colname])) {
+            throw new PropelException(sprintf('Column "%s" has no ValueSet.', $colname));
+        }
+
+        return $valueSets[$colname];
+    }
+
+    /**
+     * Gets the SQL value for the ENUM column value
+     *
+     * @param string $colname ENUM column name.
+     * @param string $enumVal ENUM value.
+     *
+     * @return int SQL value
+     */
+    public static function getSqlValueForEnum($colname, $enumVal)
+    {
+        $values = ProveedorclientePeer::getValueSet($colname);
+        if (!in_array($enumVal, $values)) {
+            throw new PropelException(sprintf('Value "%s" is not accepted in this enumerated column', $colname));
+        }
+
+        return array_search($enumVal, $values);
     }
 
     /**
@@ -201,6 +261,7 @@ abstract class BaseProveedorclientePeer
             $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD);
             $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO);
             $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_PAIS);
+            $criteria->addSelectColumn(ProveedorclientePeer::PROVEEDORCLIENTE_TIPO);
         } else {
             $criteria->addSelectColumn($alias . '.idproveedorcliente');
             $criteria->addSelectColumn($alias . '.idcliente');
@@ -216,6 +277,7 @@ abstract class BaseProveedorclientePeer
             $criteria->addSelectColumn($alias . '.proveedorcliente_ciudad');
             $criteria->addSelectColumn($alias . '.proveedorcliente_estado');
             $criteria->addSelectColumn($alias . '.proveedorcliente_pais');
+            $criteria->addSelectColumn($alias . '.proveedorcliente_tipo');
         }
     }
 

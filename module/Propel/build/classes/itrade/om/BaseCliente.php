@@ -2082,10 +2082,9 @@ abstract class BaseCliente extends BaseObject implements Persistent
 
             if ($this->expedientesScheduledForDeletion !== null) {
                 if (!$this->expedientesScheduledForDeletion->isEmpty()) {
-                    foreach ($this->expedientesScheduledForDeletion as $expediente) {
-                        // need to save related object because we set the relation to null
-                        $expediente->save($con);
-                    }
+                    ExpedienteQuery::create()
+                        ->filterByPrimaryKeys($this->expedientesScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
                     $this->expedientesScheduledForDeletion = null;
                 }
             }
@@ -3827,11 +3826,36 @@ abstract class BaseCliente extends BaseObject implements Persistent
                 $this->expedientesScheduledForDeletion = clone $this->collExpedientes;
                 $this->expedientesScheduledForDeletion->clear();
             }
-            $this->expedientesScheduledForDeletion[]= $expediente;
+            $this->expedientesScheduledForDeletion[]= clone $expediente;
             $expediente->setCliente(null);
         }
 
         return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Cliente is new, it will return
+     * an empty collection; or if this Cliente has previously
+     * been saved, it will retrieve related Expedientes from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Cliente.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Expediente[] List of Expediente objects
+     */
+    public function getExpedientesJoinProveedorcliente($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ExpedienteQuery::create(null, $criteria);
+        $query->joinWith('Proveedorcliente', $join_behavior);
+
+        return $this->getExpedientes($query, $con);
     }
 
     /**

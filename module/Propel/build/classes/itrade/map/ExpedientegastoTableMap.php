@@ -52,6 +52,7 @@ class ExpedientegastoTableMap extends TableMap
   2 => 'cobro',
 ));
         $this->addColumn('expedientegasto_comprobante', 'ExpedientegastoComprobante', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('expedientegasto_nota', 'ExpedientegastoNota', 'LONGVARCHAR', false, null, null);
         // validators
     } // initialize()
 

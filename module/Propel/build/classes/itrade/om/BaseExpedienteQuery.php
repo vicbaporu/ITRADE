@@ -8,19 +8,23 @@
  *
  * @method ExpedienteQuery orderByIdexpediente($order = Criteria::ASC) Order by the idexpediente column
  * @method ExpedienteQuery orderByIdcliente($order = Criteria::ASC) Order by the idcliente column
+ * @method ExpedienteQuery orderByIdconsignatarioembarcador($order = Criteria::ASC) Order by the idconsignatarioembarcador column
  * @method ExpedienteQuery orderByExpedienteListaempaque($order = Criteria::ASC) Order by the expediente_listaempaque column
  * @method ExpedienteQuery orderByExpedienteFactura($order = Criteria::ASC) Order by the expediente_factura column
  * @method ExpedienteQuery orderByExpedienteFechainicio($order = Criteria::ASC) Order by the expediente_fechainicio column
  * @method ExpedienteQuery orderByExpedienteFechafin($order = Criteria::ASC) Order by the expediente_fechafin column
  * @method ExpedienteQuery orderByExpedientePrecio($order = Criteria::ASC) Order by the expediente_precio column
+ * @method ExpedienteQuery orderByExpedienteTipo($order = Criteria::ASC) Order by the expediente_tipo column
  *
  * @method ExpedienteQuery groupByIdexpediente() Group by the idexpediente column
  * @method ExpedienteQuery groupByIdcliente() Group by the idcliente column
+ * @method ExpedienteQuery groupByIdconsignatarioembarcador() Group by the idconsignatarioembarcador column
  * @method ExpedienteQuery groupByExpedienteListaempaque() Group by the expediente_listaempaque column
  * @method ExpedienteQuery groupByExpedienteFactura() Group by the expediente_factura column
  * @method ExpedienteQuery groupByExpedienteFechainicio() Group by the expediente_fechainicio column
  * @method ExpedienteQuery groupByExpedienteFechafin() Group by the expediente_fechafin column
  * @method ExpedienteQuery groupByExpedientePrecio() Group by the expediente_precio column
+ * @method ExpedienteQuery groupByExpedienteTipo() Group by the expediente_tipo column
  *
  * @method ExpedienteQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ExpedienteQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -29,6 +33,10 @@
  * @method ExpedienteQuery leftJoinCliente($relationAlias = null) Adds a LEFT JOIN clause to the query using the Cliente relation
  * @method ExpedienteQuery rightJoinCliente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Cliente relation
  * @method ExpedienteQuery innerJoinCliente($relationAlias = null) Adds a INNER JOIN clause to the query using the Cliente relation
+ *
+ * @method ExpedienteQuery leftJoinProveedorcliente($relationAlias = null) Adds a LEFT JOIN clause to the query using the Proveedorcliente relation
+ * @method ExpedienteQuery rightJoinProveedorcliente($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Proveedorcliente relation
+ * @method ExpedienteQuery innerJoinProveedorcliente($relationAlias = null) Adds a INNER JOIN clause to the query using the Proveedorcliente relation
  *
  * @method ExpedienteQuery leftJoinExpedienteanticipo($relationAlias = null) Adds a LEFT JOIN clause to the query using the Expedienteanticipo relation
  * @method ExpedienteQuery rightJoinExpedienteanticipo($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Expedienteanticipo relation
@@ -50,19 +58,23 @@
  * @method Expediente findOneOrCreate(PropelPDO $con = null) Return the first Expediente matching the query, or a new Expediente object populated from the query conditions when no match is found
  *
  * @method Expediente findOneByIdcliente(int $idcliente) Return the first Expediente filtered by the idcliente column
+ * @method Expediente findOneByIdconsignatarioembarcador(int $idconsignatarioembarcador) Return the first Expediente filtered by the idconsignatarioembarcador column
  * @method Expediente findOneByExpedienteListaempaque(string $expediente_listaempaque) Return the first Expediente filtered by the expediente_listaempaque column
  * @method Expediente findOneByExpedienteFactura(string $expediente_factura) Return the first Expediente filtered by the expediente_factura column
  * @method Expediente findOneByExpedienteFechainicio(string $expediente_fechainicio) Return the first Expediente filtered by the expediente_fechainicio column
  * @method Expediente findOneByExpedienteFechafin(string $expediente_fechafin) Return the first Expediente filtered by the expediente_fechafin column
  * @method Expediente findOneByExpedientePrecio(string $expediente_precio) Return the first Expediente filtered by the expediente_precio column
+ * @method Expediente findOneByExpedienteTipo(string $expediente_tipo) Return the first Expediente filtered by the expediente_tipo column
  *
  * @method array findByIdexpediente(int $idexpediente) Return Expediente objects filtered by the idexpediente column
  * @method array findByIdcliente(int $idcliente) Return Expediente objects filtered by the idcliente column
+ * @method array findByIdconsignatarioembarcador(int $idconsignatarioembarcador) Return Expediente objects filtered by the idconsignatarioembarcador column
  * @method array findByExpedienteListaempaque(string $expediente_listaempaque) Return Expediente objects filtered by the expediente_listaempaque column
  * @method array findByExpedienteFactura(string $expediente_factura) Return Expediente objects filtered by the expediente_factura column
  * @method array findByExpedienteFechainicio(string $expediente_fechainicio) Return Expediente objects filtered by the expediente_fechainicio column
  * @method array findByExpedienteFechafin(string $expediente_fechafin) Return Expediente objects filtered by the expediente_fechafin column
  * @method array findByExpedientePrecio(string $expediente_precio) Return Expediente objects filtered by the expediente_precio column
+ * @method array findByExpedienteTipo(string $expediente_tipo) Return Expediente objects filtered by the expediente_tipo column
  *
  * @package    propel.generator.itrade.om
  */
@@ -170,7 +182,7 @@ abstract class BaseExpedienteQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpediente`, `idcliente`, `expediente_listaempaque`, `expediente_factura`, `expediente_fechainicio`, `expediente_fechafin`, `expediente_precio` FROM `expediente` WHERE `idexpediente` = :p0';
+        $sql = 'SELECT `idexpediente`, `idcliente`, `idconsignatarioembarcador`, `expediente_listaempaque`, `expediente_factura`, `expediente_fechainicio`, `expediente_fechafin`, `expediente_precio`, `expediente_tipo` FROM `expediente` WHERE `idexpediente` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -343,6 +355,50 @@ abstract class BaseExpedienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ExpedientePeer::IDCLIENTE, $idcliente, $comparison);
+    }
+
+    /**
+     * Filter the query on the idconsignatarioembarcador column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByIdconsignatarioembarcador(1234); // WHERE idconsignatarioembarcador = 1234
+     * $query->filterByIdconsignatarioembarcador(array(12, 34)); // WHERE idconsignatarioembarcador IN (12, 34)
+     * $query->filterByIdconsignatarioembarcador(array('min' => 12)); // WHERE idconsignatarioembarcador >= 12
+     * $query->filterByIdconsignatarioembarcador(array('max' => 12)); // WHERE idconsignatarioembarcador <= 12
+     * </code>
+     *
+     * @see       filterByProveedorcliente()
+     *
+     * @param     mixed $idconsignatarioembarcador The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedienteQuery The current query, for fluid interface
+     */
+    public function filterByIdconsignatarioembarcador($idconsignatarioembarcador = null, $comparison = null)
+    {
+        if (is_array($idconsignatarioembarcador)) {
+            $useMinMax = false;
+            if (isset($idconsignatarioembarcador['min'])) {
+                $this->addUsingAlias(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, $idconsignatarioembarcador['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($idconsignatarioembarcador['max'])) {
+                $this->addUsingAlias(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, $idconsignatarioembarcador['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, $idconsignatarioembarcador, $comparison);
     }
 
     /**
@@ -532,6 +588,35 @@ abstract class BaseExpedienteQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the expediente_tipo column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedienteTipo('fooValue');   // WHERE expediente_tipo = 'fooValue'
+     * $query->filterByExpedienteTipo('%fooValue%'); // WHERE expediente_tipo LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $expedienteTipo The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedienteQuery The current query, for fluid interface
+     */
+    public function filterByExpedienteTipo($expedienteTipo = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($expedienteTipo)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $expedienteTipo)) {
+                $expedienteTipo = str_replace('*', '%', $expedienteTipo);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_TIPO, $expedienteTipo, $comparison);
+    }
+
+    /**
      * Filter the query by a related Cliente object
      *
      * @param   Cliente|PropelObjectCollection $cliente The related object(s) to use as filter
@@ -565,7 +650,7 @@ abstract class BaseExpedienteQuery extends ModelCriteria
      *
      * @return ExpedienteQuery The current query, for fluid interface
      */
-    public function joinCliente($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinCliente($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Cliente');
@@ -600,11 +685,87 @@ abstract class BaseExpedienteQuery extends ModelCriteria
      *
      * @return   ClienteQuery A secondary query class using the current class as primary query
      */
-    public function useClienteQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useClienteQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinCliente($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Cliente', 'ClienteQuery');
+    }
+
+    /**
+     * Filter the query by a related Proveedorcliente object
+     *
+     * @param   Proveedorcliente|PropelObjectCollection $proveedorcliente The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 ExpedienteQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByProveedorcliente($proveedorcliente, $comparison = null)
+    {
+        if ($proveedorcliente instanceof Proveedorcliente) {
+            return $this
+                ->addUsingAlias(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, $proveedorcliente->getIdproveedorcliente(), $comparison);
+        } elseif ($proveedorcliente instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, $proveedorcliente->toKeyValue('PrimaryKey', 'Idproveedorcliente'), $comparison);
+        } else {
+            throw new PropelException('filterByProveedorcliente() only accepts arguments of type Proveedorcliente or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Proveedorcliente relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ExpedienteQuery The current query, for fluid interface
+     */
+    public function joinProveedorcliente($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Proveedorcliente');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Proveedorcliente');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Proveedorcliente relation Proveedorcliente object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   ProveedorclienteQuery A secondary query class using the current class as primary query
+     */
+    public function useProveedorclienteQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinProveedorcliente($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Proveedorcliente', 'ProveedorclienteQuery');
     }
 
     /**

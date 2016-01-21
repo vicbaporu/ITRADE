@@ -340,11 +340,8 @@
                                     data: {id: file.id},
                                     dataType: 'json',
                                     success: function (base64) {
-
                                         download("data:" + base64.type + ";base64," + base64.base64, base64.name, base64.type);
-
                                     }
-
                                 });
 
                             });

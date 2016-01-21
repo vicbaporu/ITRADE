@@ -114,9 +114,21 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
     protected $proveedorcliente_pais;
 
     /**
+     * The value for the proveedorcliente_tipo field.
+     * @var        string
+     */
+    protected $proveedorcliente_tipo;
+
+    /**
      * @var        Cliente
      */
     protected $aCliente;
+
+    /**
+     * @var        PropelObjectCollection|Expediente[] Collection to store aggregation of Expediente objects.
+     */
+    protected $collExpedientes;
+    protected $collExpedientesPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -137,6 +149,12 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
      * @var        boolean
      */
     protected $alreadyInClearAllReferencesDeep = false;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $expedientesScheduledForDeletion = null;
 
     /**
      * Get the [idproveedorcliente] column value.
@@ -290,6 +308,17 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
     {
 
         return $this->proveedorcliente_pais;
+    }
+
+    /**
+     * Get the [proveedorcliente_tipo] column value.
+     *
+     * @return string
+     */
+    public function getProveedorclienteTipo()
+    {
+
+        return $this->proveedorcliente_tipo;
     }
 
     /**
@@ -591,6 +620,27 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
     } // setProveedorclientePais()
 
     /**
+     * Set the value of [proveedorcliente_tipo] column.
+     *
+     * @param  string $v new value
+     * @return Proveedorcliente The current object (for fluent API support)
+     */
+    public function setProveedorclienteTipo($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->proveedorcliente_tipo !== $v) {
+            $this->proveedorcliente_tipo = $v;
+            $this->modifiedColumns[] = ProveedorclientePeer::PROVEEDORCLIENTE_TIPO;
+        }
+
+
+        return $this;
+    } // setProveedorclienteTipo()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -636,6 +686,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             $this->proveedorcliente_ciudad = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
             $this->proveedorcliente_estado = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
             $this->proveedorcliente_pais = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
+            $this->proveedorcliente_tipo = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -645,7 +696,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 14; // 14 = ProveedorclientePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 15; // 15 = ProveedorclientePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Proveedorcliente object", $e);
@@ -711,6 +762,8 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if ($deep) {  // also de-associate any related objects?
 
             $this->aCliente = null;
+            $this->collExpedientes = null;
+
         } // if (deep)
     }
 
@@ -847,6 +900,23 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
                 $this->resetModified();
             }
 
+            if ($this->expedientesScheduledForDeletion !== null) {
+                if (!$this->expedientesScheduledForDeletion->isEmpty()) {
+                    ExpedienteQuery::create()
+                        ->filterByPrimaryKeys($this->expedientesScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->expedientesScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collExpedientes !== null) {
+                foreach ($this->collExpedientes as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -915,6 +985,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_PAIS)) {
             $modifiedColumns[':p' . $index++]  = '`proveedorcliente_pais`';
         }
+        if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_TIPO)) {
+            $modifiedColumns[':p' . $index++]  = '`proveedorcliente_tipo`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `proveedorcliente` (%s) VALUES (%s)',
@@ -967,6 +1040,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
                         break;
                     case '`proveedorcliente_pais`':
                         $stmt->bindValue($identifier, $this->proveedorcliente_pais, PDO::PARAM_STR);
+                        break;
+                    case '`proveedorcliente_tipo`':
+                        $stmt->bindValue($identifier, $this->proveedorcliente_tipo, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1079,6 +1155,14 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             }
 
 
+                if ($this->collExpedientes !== null) {
+                    foreach ($this->collExpedientes as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -1156,6 +1240,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             case 13:
                 return $this->getProveedorclientePais();
                 break;
+            case 14:
+                return $this->getProveedorclienteTipo();
+                break;
             default:
                 return null;
                 break;
@@ -1199,6 +1286,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             $keys[11] => $this->getProveedorclienteCiudad(),
             $keys[12] => $this->getProveedorclienteEstado(),
             $keys[13] => $this->getProveedorclientePais(),
+            $keys[14] => $this->getProveedorclienteTipo(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1208,6 +1296,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if ($includeForeignObjects) {
             if (null !== $this->aCliente) {
                 $result['Cliente'] = $this->aCliente->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->collExpedientes) {
+                $result['Expedientes'] = $this->collExpedientes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1285,6 +1376,9 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             case 13:
                 $this->setProveedorclientePais($value);
                 break;
+            case 14:
+                $this->setProveedorclienteTipo($value);
+                break;
         } // switch()
     }
 
@@ -1323,6 +1417,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if (array_key_exists($keys[11], $arr)) $this->setProveedorclienteCiudad($arr[$keys[11]]);
         if (array_key_exists($keys[12], $arr)) $this->setProveedorclienteEstado($arr[$keys[12]]);
         if (array_key_exists($keys[13], $arr)) $this->setProveedorclientePais($arr[$keys[13]]);
+        if (array_key_exists($keys[14], $arr)) $this->setProveedorclienteTipo($arr[$keys[14]]);
     }
 
     /**
@@ -1348,6 +1443,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_CIUDAD, $this->proveedorcliente_ciudad);
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_ESTADO, $this->proveedorcliente_estado);
         if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_PAIS)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_PAIS, $this->proveedorcliente_pais);
+        if ($this->isColumnModified(ProveedorclientePeer::PROVEEDORCLIENTE_TIPO)) $criteria->add(ProveedorclientePeer::PROVEEDORCLIENTE_TIPO, $this->proveedorcliente_tipo);
 
         return $criteria;
     }
@@ -1424,6 +1520,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         $copyObj->setProveedorclienteCiudad($this->getProveedorclienteCiudad());
         $copyObj->setProveedorclienteEstado($this->getProveedorclienteEstado());
         $copyObj->setProveedorclientePais($this->getProveedorclientePais());
+        $copyObj->setProveedorclienteTipo($this->getProveedorclienteTipo());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1431,6 +1528,12 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             $copyObj->setNew(false);
             // store object hash to prevent cycle
             $this->startCopy = true;
+
+            foreach ($this->getExpedientes() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addExpediente($relObj->copy($deepCopy));
+                }
+            }
 
             //unflag object copy
             $this->startCopy = false;
@@ -1534,6 +1637,272 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         return $this->aCliente;
     }
 
+
+    /**
+     * Initializes a collection based on the name of a relation.
+     * Avoids crafting an 'init[$relationName]s' method name
+     * that wouldn't work when StandardEnglishPluralizer is used.
+     *
+     * @param string $relationName The name of the relation to initialize
+     * @return void
+     */
+    public function initRelation($relationName)
+    {
+        if ('Expediente' == $relationName) {
+            $this->initExpedientes();
+        }
+    }
+
+    /**
+     * Clears out the collExpedientes collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return Proveedorcliente The current object (for fluent API support)
+     * @see        addExpedientes()
+     */
+    public function clearExpedientes()
+    {
+        $this->collExpedientes = null; // important to set this to null since that means it is uninitialized
+        $this->collExpedientesPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collExpedientes collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialExpedientes($v = true)
+    {
+        $this->collExpedientesPartial = $v;
+    }
+
+    /**
+     * Initializes the collExpedientes collection.
+     *
+     * By default this just sets the collExpedientes collection to an empty array (like clearcollExpedientes());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initExpedientes($overrideExisting = true)
+    {
+        if (null !== $this->collExpedientes && !$overrideExisting) {
+            return;
+        }
+        $this->collExpedientes = new PropelObjectCollection();
+        $this->collExpedientes->setModel('Expediente');
+    }
+
+    /**
+     * Gets an array of Expediente objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Proveedorcliente is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Expediente[] List of Expediente objects
+     * @throws PropelException
+     */
+    public function getExpedientes($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collExpedientesPartial && !$this->isNew();
+        if (null === $this->collExpedientes || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collExpedientes) {
+                // return empty collection
+                $this->initExpedientes();
+            } else {
+                $collExpedientes = ExpedienteQuery::create(null, $criteria)
+                    ->filterByProveedorcliente($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collExpedientesPartial && count($collExpedientes)) {
+                      $this->initExpedientes(false);
+
+                      foreach ($collExpedientes as $obj) {
+                        if (false == $this->collExpedientes->contains($obj)) {
+                          $this->collExpedientes->append($obj);
+                        }
+                      }
+
+                      $this->collExpedientesPartial = true;
+                    }
+
+                    $collExpedientes->getInternalIterator()->rewind();
+
+                    return $collExpedientes;
+                }
+
+                if ($partial && $this->collExpedientes) {
+                    foreach ($this->collExpedientes as $obj) {
+                        if ($obj->isNew()) {
+                            $collExpedientes[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collExpedientes = $collExpedientes;
+                $this->collExpedientesPartial = false;
+            }
+        }
+
+        return $this->collExpedientes;
+    }
+
+    /**
+     * Sets a collection of Expediente objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $expedientes A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return Proveedorcliente The current object (for fluent API support)
+     */
+    public function setExpedientes(PropelCollection $expedientes, PropelPDO $con = null)
+    {
+        $expedientesToDelete = $this->getExpedientes(new Criteria(), $con)->diff($expedientes);
+
+
+        $this->expedientesScheduledForDeletion = $expedientesToDelete;
+
+        foreach ($expedientesToDelete as $expedienteRemoved) {
+            $expedienteRemoved->setProveedorcliente(null);
+        }
+
+        $this->collExpedientes = null;
+        foreach ($expedientes as $expediente) {
+            $this->addExpediente($expediente);
+        }
+
+        $this->collExpedientes = $expedientes;
+        $this->collExpedientesPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Expediente objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related Expediente objects.
+     * @throws PropelException
+     */
+    public function countExpedientes(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collExpedientesPartial && !$this->isNew();
+        if (null === $this->collExpedientes || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collExpedientes) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getExpedientes());
+            }
+            $query = ExpedienteQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByProveedorcliente($this)
+                ->count($con);
+        }
+
+        return count($this->collExpedientes);
+    }
+
+    /**
+     * Method called to associate a Expediente object to this object
+     * through the Expediente foreign key attribute.
+     *
+     * @param    Expediente $l Expediente
+     * @return Proveedorcliente The current object (for fluent API support)
+     */
+    public function addExpediente(Expediente $l)
+    {
+        if ($this->collExpedientes === null) {
+            $this->initExpedientes();
+            $this->collExpedientesPartial = true;
+        }
+
+        if (!in_array($l, $this->collExpedientes->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddExpediente($l);
+
+            if ($this->expedientesScheduledForDeletion and $this->expedientesScheduledForDeletion->contains($l)) {
+                $this->expedientesScheduledForDeletion->remove($this->expedientesScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Expediente $expediente The expediente object to add.
+     */
+    protected function doAddExpediente($expediente)
+    {
+        $this->collExpedientes[]= $expediente;
+        $expediente->setProveedorcliente($this);
+    }
+
+    /**
+     * @param	Expediente $expediente The expediente object to remove.
+     * @return Proveedorcliente The current object (for fluent API support)
+     */
+    public function removeExpediente($expediente)
+    {
+        if ($this->getExpedientes()->contains($expediente)) {
+            $this->collExpedientes->remove($this->collExpedientes->search($expediente));
+            if (null === $this->expedientesScheduledForDeletion) {
+                $this->expedientesScheduledForDeletion = clone $this->collExpedientes;
+                $this->expedientesScheduledForDeletion->clear();
+            }
+            $this->expedientesScheduledForDeletion[]= clone $expediente;
+            $expediente->setProveedorcliente(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Proveedorcliente is new, it will return
+     * an empty collection; or if this Proveedorcliente has previously
+     * been saved, it will retrieve related Expedientes from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Proveedorcliente.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Expediente[] List of Expediente objects
+     */
+    public function getExpedientesJoinCliente($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = ExpedienteQuery::create(null, $criteria);
+        $query->joinWith('Cliente', $join_behavior);
+
+        return $this->getExpedientes($query, $con);
+    }
+
     /**
      * Clears the current object and sets all attributes to their default values
      */
@@ -1553,6 +1922,7 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
         $this->proveedorcliente_ciudad = null;
         $this->proveedorcliente_estado = null;
         $this->proveedorcliente_pais = null;
+        $this->proveedorcliente_tipo = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -1575,6 +1945,11 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->collExpedientes) {
+                foreach ($this->collExpedientes as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->aCliente instanceof Persistent) {
               $this->aCliente->clearAllReferences($deep);
             }
@@ -1582,6 +1957,10 @@ abstract class BaseProveedorcliente extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        if ($this->collExpedientes instanceof PropelCollection) {
+            $this->collExpedientes->clearIterator();
+        }
+        $this->collExpedientes = null;
         $this->aCliente = null;
     }
 

@@ -227,6 +227,25 @@ return array(
                                     ),
                                 ),
                             ),
+                            'clientes' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/clientes',
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'nuevo' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '/nuevo',
+                                            'defaults' => array(
+                                                'controller' => 'Admin\Clientes\Controller\Proveedorclientes',
+                                                'action' => 'nuevo',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
                             'validateajax' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
@@ -455,7 +474,7 @@ return array(
             
             //CLIENTES
             'Admin\Clientes\Controller\Clientes' => 'Admin\Clientes\Controller\ClientesController',
-
+            'Admin\Clientes\Controller\Proveedorclientes' => 'Admin\Clientes\Controller\ProveedorclientesController',
                          
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             

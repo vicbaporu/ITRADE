@@ -490,7 +490,7 @@ class ClientesController extends AbstractActionController
            
             //NUESTRA QUERY
             $query = new \ProveedorclienteQuery();
-            $query->filterByIdcliente($post_data['idcliente']);
+            $query->filterByIdcliente($post_data['idcliente'])->filterByproveedorclienteTipo('proveedor');
             
             //ORDER 
             if(isset($post_data['order'])){
@@ -563,7 +563,7 @@ class ClientesController extends AbstractActionController
         if($request->isPost()){
             
             $post_data = $request->getPost();
-            
+           
             $entity = new \Proveedorcliente();
             
             foreach($post_data as $key => $value){
@@ -573,7 +573,8 @@ class ClientesController extends AbstractActionController
             }
             
             $entity->setIdcliente($idcliente);
-            
+            $entity->setProveedorclienteTipo('proveedor');
+             
             $entity->save();
             
             $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');

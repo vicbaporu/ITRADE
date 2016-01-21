@@ -1946,7 +1946,7 @@ abstract class BaseClienteQuery extends ModelCriteria
      *
      * @return ClienteQuery The current query, for fluid interface
      */
-    public function joinExpediente($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinExpediente($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Expediente');
@@ -1981,7 +1981,7 @@ abstract class BaseClienteQuery extends ModelCriteria
      *
      * @return   ExpedienteQuery A secondary query class using the current class as primary query
      */
-    public function useExpedienteQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useExpedienteQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinExpediente($relationAlias, $joinType)

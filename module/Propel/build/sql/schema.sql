@@ -144,19 +144,23 @@ DROP TABLE IF EXISTS `expediente`;
 CREATE TABLE `expediente`
 (
     `idexpediente` INTEGER NOT NULL AUTO_INCREMENT,
-    `idcliente` INTEGER,
+    `idcliente` INTEGER NOT NULL,
+    `idconsignatarioembarcador` INTEGER NOT NULL,
     `expediente_listaempaque` TEXT,
     `expediente_factura` VARCHAR(45),
     `expediente_fechainicio` DATE NOT NULL,
     `expediente_fechafin` DATE,
     `expediente_precio` DECIMAL(10,2),
+    `expediente_tipo` enum('exportacion','importacion') NOT NULL,
     PRIMARY KEY (`idexpediente`),
     INDEX `idcliente` (`idcliente`),
+    INDEX `idconsignatarioembarcador` (`idconsignatarioembarcador`),
     CONSTRAINT `idcliente_expediente`
         FOREIGN KEY (`idcliente`)
-        REFERENCES `cliente` (`idcliente`)
-        ON UPDATE SET NULL
-        ON DELETE SET NULL
+        REFERENCES `cliente` (`idcliente`),
+    CONSTRAINT `idconsignatarioembarcador_expediente`
+        FOREIGN KEY (`idconsignatarioembarcador`)
+        REFERENCES `proveedorcliente` (`idproveedorcliente`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -229,6 +233,7 @@ CREATE TABLE `expedientegasto`
     `expedientegasto_monto` DECIMAL(10,2) NOT NULL,
     `expedientegasto_tipo` enum('gastorecibir','gastoconocido','cobro') NOT NULL,
     `expedientegasto_comprobante` TEXT,
+    `expedientegasto_nota` TEXT,
     PRIMARY KEY (`idexpedientegasto`),
     INDEX `idgastofacturacion` (`idgastofacturacion`),
     INDEX `idproveedoritrade` (`idproveedoritrade`),
@@ -352,6 +357,7 @@ CREATE TABLE `proveedorcliente`
     `proveedorcliente_ciudad` VARCHAR(45),
     `proveedorcliente_estado` VARCHAR(45),
     `proveedorcliente_pais` VARCHAR(45),
+    `proveedorcliente_tipo` enum('proveedor','cliente'),
     PRIMARY KEY (`idproveedorcliente`),
     INDEX `proveedorcliente_idcliente` (`idcliente`),
     CONSTRAINT `proveedorcliente_idcliente`

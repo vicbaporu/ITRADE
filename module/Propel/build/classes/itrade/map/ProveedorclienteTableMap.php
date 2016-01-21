@@ -52,6 +52,11 @@ class ProveedorclienteTableMap extends TableMap
         $this->addColumn('proveedorcliente_ciudad', 'ProveedorclienteCiudad', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedorcliente_estado', 'ProveedorclienteEstado', 'VARCHAR', false, 45, null);
         $this->addColumn('proveedorcliente_pais', 'ProveedorclientePais', 'VARCHAR', false, 45, null);
+        $this->addColumn('proveedorcliente_tipo', 'ProveedorclienteTipo', 'CHAR', false, null, null);
+        $this->getColumn('proveedorcliente_tipo', false)->setValueSet(array (
+  0 => 'proveedor',
+  1 => 'cliente',
+));
         // validators
     } // initialize()
 
@@ -61,6 +66,7 @@ class ProveedorclienteTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('Cliente', 'Cliente', RelationMap::MANY_TO_ONE, array('idcliente' => 'idcliente', ), null, null);
+        $this->addRelation('Expediente', 'Expediente', RelationMap::ONE_TO_MANY, array('idproveedorcliente' => 'idconsignatarioembarcador', ), null, null, 'Expedientes');
     } // buildRelations()
 
 } // ProveedorclienteTableMap
