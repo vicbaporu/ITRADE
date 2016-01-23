@@ -16,6 +16,7 @@
  * @method ExpedienteQuery orderByExpedientePrecio($order = Criteria::ASC) Order by the expediente_precio column
  * @method ExpedienteQuery orderByExpedienteTipo($order = Criteria::ASC) Order by the expediente_tipo column
  * @method ExpedienteQuery orderByExpedienteEstatus($order = Criteria::ASC) Order by the expediente_estatus column
+ * @method ExpedienteQuery orderByExpedienteFolio($order = Criteria::ASC) Order by the expediente_folio column
  *
  * @method ExpedienteQuery groupByIdexpediente() Group by the idexpediente column
  * @method ExpedienteQuery groupByIdcliente() Group by the idcliente column
@@ -27,6 +28,7 @@
  * @method ExpedienteQuery groupByExpedientePrecio() Group by the expediente_precio column
  * @method ExpedienteQuery groupByExpedienteTipo() Group by the expediente_tipo column
  * @method ExpedienteQuery groupByExpedienteEstatus() Group by the expediente_estatus column
+ * @method ExpedienteQuery groupByExpedienteFolio() Group by the expediente_folio column
  *
  * @method ExpedienteQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ExpedienteQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -68,6 +70,7 @@
  * @method Expediente findOneByExpedientePrecio(string $expediente_precio) Return the first Expediente filtered by the expediente_precio column
  * @method Expediente findOneByExpedienteTipo(string $expediente_tipo) Return the first Expediente filtered by the expediente_tipo column
  * @method Expediente findOneByExpedienteEstatus(string $expediente_estatus) Return the first Expediente filtered by the expediente_estatus column
+ * @method Expediente findOneByExpedienteFolio(string $expediente_folio) Return the first Expediente filtered by the expediente_folio column
  *
  * @method array findByIdexpediente(int $idexpediente) Return Expediente objects filtered by the idexpediente column
  * @method array findByIdcliente(int $idcliente) Return Expediente objects filtered by the idcliente column
@@ -79,6 +82,7 @@
  * @method array findByExpedientePrecio(string $expediente_precio) Return Expediente objects filtered by the expediente_precio column
  * @method array findByExpedienteTipo(string $expediente_tipo) Return Expediente objects filtered by the expediente_tipo column
  * @method array findByExpedienteEstatus(string $expediente_estatus) Return Expediente objects filtered by the expediente_estatus column
+ * @method array findByExpedienteFolio(string $expediente_folio) Return Expediente objects filtered by the expediente_folio column
  *
  * @package    propel.generator.itrade.om
  */
@@ -186,7 +190,7 @@ abstract class BaseExpedienteQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpediente`, `idcliente`, `idconsignatarioembarcador`, `expediente_listaempaque`, `expediente_factura`, `expediente_fechainicio`, `expediente_fechafin`, `expediente_precio`, `expediente_tipo`, `expediente_estatus` FROM `expediente` WHERE `idexpediente` = :p0';
+        $sql = 'SELECT `idexpediente`, `idcliente`, `idconsignatarioembarcador`, `expediente_listaempaque`, `expediente_factura`, `expediente_fechainicio`, `expediente_fechafin`, `expediente_precio`, `expediente_tipo`, `expediente_estatus`, `expediente_folio` FROM `expediente` WHERE `idexpediente` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -647,6 +651,35 @@ abstract class BaseExpedienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_ESTATUS, $expedienteEstatus, $comparison);
+    }
+
+    /**
+     * Filter the query on the expediente_folio column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedienteFolio('fooValue');   // WHERE expediente_folio = 'fooValue'
+     * $query->filterByExpedienteFolio('%fooValue%'); // WHERE expediente_folio LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $expedienteFolio The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedienteQuery The current query, for fluid interface
+     */
+    public function filterByExpedienteFolio($expedienteFolio = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($expedienteFolio)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $expedienteFolio)) {
+                $expedienteFolio = str_replace('*', '%', $expedienteFolio);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_FOLIO, $expedienteFolio, $comparison);
     }
 
     /**

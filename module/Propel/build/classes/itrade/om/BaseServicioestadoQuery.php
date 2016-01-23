@@ -9,13 +9,11 @@
  * @method ServicioestadoQuery orderByIdservicioestado($order = Criteria::ASC) Order by the idservicioestado column
  * @method ServicioestadoQuery orderByIdservicio($order = Criteria::ASC) Order by the idservicio column
  * @method ServicioestadoQuery orderByServicioestadoNombre($order = Criteria::ASC) Order by the servicioestado_nombre column
- * @method ServicioestadoQuery orderByServicioestadoComodin($order = Criteria::ASC) Order by the servicioestado_comodin column
  * @method ServicioestadoQuery orderByServicioestadoJerarquia($order = Criteria::ASC) Order by the servicioestado_jerarquia column
  *
  * @method ServicioestadoQuery groupByIdservicioestado() Group by the idservicioestado column
  * @method ServicioestadoQuery groupByIdservicio() Group by the idservicio column
  * @method ServicioestadoQuery groupByServicioestadoNombre() Group by the servicioestado_nombre column
- * @method ServicioestadoQuery groupByServicioestadoComodin() Group by the servicioestado_comodin column
  * @method ServicioestadoQuery groupByServicioestadoJerarquia() Group by the servicioestado_jerarquia column
  *
  * @method ServicioestadoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
@@ -35,13 +33,11 @@
  *
  * @method Servicioestado findOneByIdservicio(int $idservicio) Return the first Servicioestado filtered by the idservicio column
  * @method Servicioestado findOneByServicioestadoNombre(string $servicioestado_nombre) Return the first Servicioestado filtered by the servicioestado_nombre column
- * @method Servicioestado findOneByServicioestadoComodin(boolean $servicioestado_comodin) Return the first Servicioestado filtered by the servicioestado_comodin column
  * @method Servicioestado findOneByServicioestadoJerarquia(int $servicioestado_jerarquia) Return the first Servicioestado filtered by the servicioestado_jerarquia column
  *
  * @method array findByIdservicioestado(int $idservicioestado) Return Servicioestado objects filtered by the idservicioestado column
  * @method array findByIdservicio(int $idservicio) Return Servicioestado objects filtered by the idservicio column
  * @method array findByServicioestadoNombre(string $servicioestado_nombre) Return Servicioestado objects filtered by the servicioestado_nombre column
- * @method array findByServicioestadoComodin(boolean $servicioestado_comodin) Return Servicioestado objects filtered by the servicioestado_comodin column
  * @method array findByServicioestadoJerarquia(int $servicioestado_jerarquia) Return Servicioestado objects filtered by the servicioestado_jerarquia column
  *
  * @package    propel.generator.itrade.om
@@ -150,7 +146,7 @@ abstract class BaseServicioestadoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idservicioestado`, `idservicio`, `servicioestado_nombre`, `servicioestado_comodin`, `servicioestado_jerarquia` FROM `servicioestado` WHERE `idservicioestado` = :p0';
+        $sql = 'SELECT `idservicioestado`, `idservicio`, `servicioestado_nombre`, `servicioestado_jerarquia` FROM `servicioestado` WHERE `idservicioestado` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -352,33 +348,6 @@ abstract class BaseServicioestadoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ServicioestadoPeer::SERVICIOESTADO_NOMBRE, $servicioestadoNombre, $comparison);
-    }
-
-    /**
-     * Filter the query on the servicioestado_comodin column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByServicioestadoComodin(true); // WHERE servicioestado_comodin = true
-     * $query->filterByServicioestadoComodin('yes'); // WHERE servicioestado_comodin = true
-     * </code>
-     *
-     * @param     boolean|string $servicioestadoComodin The value to use as filter.
-     *              Non-boolean arguments are converted using the following rules:
-     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
-     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
-     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ServicioestadoQuery The current query, for fluid interface
-     */
-    public function filterByServicioestadoComodin($servicioestadoComodin = null, $comparison = null)
-    {
-        if (is_string($servicioestadoComodin)) {
-            $servicioestadoComodin = in_array(strtolower($servicioestadoComodin), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
-        }
-
-        return $this->addUsingAlias(ServicioestadoPeer::SERVICIOESTADO_COMODIN, $servicioestadoComodin, $comparison);
     }
 
     /**

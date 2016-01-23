@@ -318,6 +318,7 @@
                          iDisplayLength:25,
                          order:[],
                          columns: [
+                            { data: "expediente_folio" },
                             { data: "expediente_fechainicio" },
                             { data: "expediente_tipo" },   
                             { data: "expediente_consignatario" , bSortable: false},

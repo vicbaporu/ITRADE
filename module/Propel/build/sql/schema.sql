@@ -153,6 +153,7 @@ CREATE TABLE `expediente`
     `expediente_precio` DECIMAL(10,2),
     `expediente_tipo` enum('exportacion','importacion') NOT NULL,
     `expediente_estatus` enum('abierto','cerrado') NOT NULL,
+    `expediente_folio` VARCHAR(45),
     PRIMARY KEY (`idexpediente`),
     INDEX `idconsignatarioembarcador` (`idconsignatarioembarcador`),
     INDEX `idcliente` (`idcliente`),
@@ -452,7 +453,7 @@ CREATE TABLE `servicio`
 (
     `idservicio` INTEGER NOT NULL AUTO_INCREMENT,
     `servicio_tipo` enum('importacion','exportacion') NOT NULL,
-    `servicio_medio` enum('terrestre','aereo','maritimo') NOT NULL,
+    `servicio_medio` enum('Terrestre LTL','Terrestre FTL','Aereo','Maritimo FCL','Maritimo LCL') NOT NULL,
     `servicio_nombre` VARCHAR(45) NOT NULL,
     `servicio_descripcion` VARCHAR(45),
     PRIMARY KEY (`idservicio`)
@@ -468,8 +469,7 @@ CREATE TABLE `servicioestado`
 (
     `idservicioestado` INTEGER NOT NULL AUTO_INCREMENT,
     `idservicio` INTEGER NOT NULL,
-    `servicioestado_nombre` VARCHAR(45) NOT NULL,
-    `servicioestado_comodin` TINYINT(1) NOT NULL,
+    `servicioestado_nombre` VARCHAR(100) NOT NULL,
     `servicioestado_jerarquia` INTEGER NOT NULL,
     PRIMARY KEY (`idservicioestado`),
     INDEX `idservicio` (`idservicio`),

@@ -56,6 +56,7 @@ class ExpedienteTableMap extends TableMap
   0 => 'abierto',
   1 => 'cerrado',
 ));
+        $this->addColumn('expediente_folio', 'ExpedienteFolio', 'VARCHAR', false, 45, null);
         // validators
     } // initialize()
 

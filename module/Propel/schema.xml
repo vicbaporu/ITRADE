@@ -122,6 +122,7 @@
     <column name="expediente_precio" phpName="ExpedientePrecio" type="DECIMAL" size="10" scale="2" required="false"/>
     <column name="expediente_tipo" phpName="ExpedienteTipo" type="CHAR" sqlType="enum('exportacion','importacion')" required="true"/>
     <column name="expediente_estatus" phpName="ExpedienteEstatus" type="CHAR" sqlType="enum('abierto','cerrado')" required="true"/>
+    <column name="expediente_folio" phpName="ExpedienteFolio" type="VARCHAR" size="45" required="false"/>
     <foreign-key foreignTable="cliente" name="idcliente_expediente" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>
@@ -361,7 +362,7 @@
   <table name="servicio" phpName="Servicio" idMethod="native">
     <column name="idservicio" phpName="Idservicio" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="servicio_tipo" phpName="ServicioTipo" type="CHAR" sqlType="enum('importacion','exportacion')" required="true"/>
-    <column name="servicio_medio" phpName="ServicioMedio" type="CHAR" sqlType="enum('terrestre','aereo','maritimo')" required="true"/>
+    <column name="servicio_medio" phpName="ServicioMedio" type="CHAR" sqlType="enum('Terrestre LTL','Terrestre FTL','Aereo','Maritimo FCL','Maritimo LCL')" required="true"/>
     <column name="servicio_nombre" phpName="ServicioNombre" type="VARCHAR" size="45" required="true"/>
     <column name="servicio_descripcion" phpName="ServicioDescripcion" type="VARCHAR" size="45" required="false"/>
     <vendor type="mysql">
@@ -371,8 +372,7 @@
   <table name="servicioestado" phpName="Servicioestado" idMethod="native">
     <column name="idservicioestado" phpName="Idservicioestado" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="idservicio" phpName="Idservicio" type="INTEGER" required="true"/>
-    <column name="servicioestado_nombre" phpName="ServicioestadoNombre" type="VARCHAR" size="45" required="true"/>
-    <column name="servicioestado_comodin" phpName="ServicioestadoComodin" type="BOOLEAN" size="1" required="true"/>
+    <column name="servicioestado_nombre" phpName="ServicioestadoNombre" type="VARCHAR" size="100" required="true"/>
     <column name="servicioestado_jerarquia" phpName="ServicioestadoJerarquia" type="INTEGER" required="true"/>
     <foreign-key foreignTable="servicio" name="idservicio_servicioestado" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idservicio" foreign="idservicio"/>

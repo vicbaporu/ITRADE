@@ -23,11 +23,12 @@ class ExpedientesController extends AbstractActionController
             
             //EL MAPEO DE NUESTRA TABALA
             $table_map = array(
-                0 => 'expediente_fechainicio',
-                1 => 'expediente_tipo',
-                2 => 'expediente_consignatario',
-                3 => 'expediente_embarcador',
-                4 => 'expediente_estatus',
+                0 => 'expediente_folio',
+                1 => 'expediente_fechainicio',
+                2 => 'expediente_tipo',
+                3 => 'expediente_consignatario',
+                4 => 'expediente_embarcador',
+                5 => 'expediente_estatus',
             );
                         
             $post_data = $request->getPost();
@@ -57,8 +58,9 @@ class ExpedientesController extends AbstractActionController
                 $c2= $c->getNewCriterion('cliente.cliente_razonsocial', '%'.$search.'%', \Criteria::LIKE);
                 $c3= $c->getNewCriterion('proveedorcliente.proveedorcliente_nombre', '%'.$search.'%', \Criteria::LIKE);
                 $c4= $c->getNewCriterion('expediente.expediente_estatus', '%'.$search.'%', \Criteria::LIKE);
- 
-                $c1->addOr($c2)->addOr($c3)->addOr($c4);
+                $c5= $c->getNewCriterion('expediente.expediente_folio', '%'.$search.'%', \Criteria::LIKE);
+                
+                $c1->addOr($c2)->addOr($c3)->addOr($c4)->addOr($c5);
 
                 $query->addAnd($c1);
                
@@ -76,17 +78,19 @@ class ExpedientesController extends AbstractActionController
             $value = new \Expediente();
             foreach ($query->find() as $value){
                 $tmp['DT_RowId'] = $value->getIdexpediente();
+                $tmp['expediente_folio'] = $value->getExpedienteFolio();
                 $tmp['expediente_fechainicio'] = $value->getExpedienteFechainicio('d/m/Y');
-                $tmp['expediente_tipo'] = ucfirst($value->getExpedienteTipo());
                 if($value->getExpedienteTipo() == 'importacion'){
+                    $tmp['expediente_tipo'] = ucfirst('Importación');
                     $tmp['expediente_consignatario'] = $value->getCliente()->getClienteRazonsocial();
                     $tmp['expediente_embarcador']    = $value->getProveedorcliente()->getProveedorclienteTaxid();
                 }else{
+                    $tmp['expediente_tipo'] = ucfirst('Exportación');
                     $tmp['expediente_consignatario']    = $value->getProveedorcliente()->getProveedorclienteNombre();
                     $tmp['expediente_embarcador'] = $value->getCliente()->getClienteRazonsocial();
                 }
                 $tmp['expediente_estatus'] = ucfirst($value->getExpedienteEstatus());
-                $tmp['expediente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/ver/'.$value->getIdcliente().'/clientes/editar/'.$value->getIdexpediente()
+                $tmp['expediente_options'] = '<a data-toggle="tooltip" data-placement="left" title="Editar" href="/clientes/ver/'.$value->getIdcliente().'/expedientes/ver/'.$value->getIdexpediente()
                         .'"><i class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>';
                 $data[] = $tmp;
  
@@ -107,7 +111,32 @@ class ExpedientesController extends AbstractActionController
     }
     
     public function editarAction(){
-        echo '<pre>';var_dump('$apiResponse'); echo '</pre>';exit();
+        
+        $request = $this->getRequest();
+        
+        $idcliente = $this->params()->fromRoute('id');
+        $idexpediente = $this->params()->fromRoute('idexpediente');
+        
+        if($request->isPost()){}
+        
+        $exist = \ExpedienteQuery::create()->filterByIdexpediente($idexpediente)->exists();
+        
+        if($exist){
+            
+            $entity = \ExpedienteQuery::create()->findPk($idcliente);
+            $cliente = $entity->getCliente();
+            $view_model = new ViewModel();
+            $view_model->setTemplate('admin/clientes/expedientes/editar');
+            $view_model->setVariables(array(
+                'entity' => $entity,
+                'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
+                'cliente' => $cliente,
+            ));
+            return $view_model;
+        }else{
+             return $this->redirect()->toUrl('/clientes/ver/'.$idcliente.'?active=expedientes');
+        }
+     
     }
     
     public function nuevoAction(){
@@ -132,9 +161,21 @@ class ExpedientesController extends AbstractActionController
             $entity->setExpedienteFechainicio(new \DateTime());
             //EL ESTATUS
             $entity->setExpedienteEstatus('abierto');
-         
+            
+            $date = new \DateTime();
+            
             $entity->save();
             
+            //CREAMOS EL FOLIO
+            $folio = 'ITR'.$date->format('m').$date->format('y');
+            if((int)$entity->getIdexpediente() < 10){
+                $folio.='0';
+            }
+            $folio.=$entity->getIdexpediente();
+            
+            $entity->setExpedienteFolio($folio);
+            $entity->save();
+
             $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
             
             //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR

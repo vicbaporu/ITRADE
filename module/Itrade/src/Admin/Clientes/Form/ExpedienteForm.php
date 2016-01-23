@@ -47,8 +47,8 @@ class ExpedienteForm extends Form
                 'label' => 'Tipo',
                 'empty_option' => 'Sin especificar',
                 'value_options' => array(
-                    'exportacion' => 'Exportacion',
-                    'importacion' => 'Importacion',
+                    'exportacion' => 'Exportación',
+                    'importacion' => 'Importación',
                 ),
             ),
             'attributes' => array(

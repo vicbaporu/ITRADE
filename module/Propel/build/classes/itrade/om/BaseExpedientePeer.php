@@ -24,13 +24,13 @@ abstract class BaseExpedientePeer
     const TM_CLASS = 'ExpedienteTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 10;
+    const NUM_COLUMNS = 11;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 10;
+    const NUM_HYDRATE_COLUMNS = 11;
 
     /** the column name for the idexpediente field */
     const IDEXPEDIENTE = 'expediente.idexpediente';
@@ -62,6 +62,9 @@ abstract class BaseExpedientePeer
     /** the column name for the expediente_estatus field */
     const EXPEDIENTE_ESTATUS = 'expediente.expediente_estatus';
 
+    /** the column name for the expediente_folio field */
+    const EXPEDIENTE_FOLIO = 'expediente.expediente_folio';
+
     /** The enumerated values for the expediente_tipo field */
     const EXPEDIENTE_TIPO_EXPORTACION = 'exportacion';
     const EXPEDIENTE_TIPO_IMPORTACION = 'importacion';
@@ -89,12 +92,12 @@ abstract class BaseExpedientePeer
      * e.g. ExpedientePeer::$fieldNames[ExpedientePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpediente', 'Idcliente', 'Idconsignatarioembarcador', 'ExpedienteListaempaque', 'ExpedienteFactura', 'ExpedienteFechainicio', 'ExpedienteFechafin', 'ExpedientePrecio', 'ExpedienteTipo', 'ExpedienteEstatus', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expedienteListaempaque', 'expedienteFactura', 'expedienteFechainicio', 'expedienteFechafin', 'expedientePrecio', 'expedienteTipo', 'expedienteEstatus', ),
-        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE, ExpedientePeer::IDCLIENTE, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE, ExpedientePeer::EXPEDIENTE_FACTURA, ExpedientePeer::EXPEDIENTE_FECHAINICIO, ExpedientePeer::EXPEDIENTE_FECHAFIN, ExpedientePeer::EXPEDIENTE_PRECIO, ExpedientePeer::EXPEDIENTE_TIPO, ExpedientePeer::EXPEDIENTE_ESTATUS, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE', 'IDCLIENTE', 'IDCONSIGNATARIOEMBARCADOR', 'EXPEDIENTE_LISTAEMPAQUE', 'EXPEDIENTE_FACTURA', 'EXPEDIENTE_FECHAINICIO', 'EXPEDIENTE_FECHAFIN', 'EXPEDIENTE_PRECIO', 'EXPEDIENTE_TIPO', 'EXPEDIENTE_ESTATUS', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expediente_listaempaque', 'expediente_factura', 'expediente_fechainicio', 'expediente_fechafin', 'expediente_precio', 'expediente_tipo', 'expediente_estatus', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpediente', 'Idcliente', 'Idconsignatarioembarcador', 'ExpedienteListaempaque', 'ExpedienteFactura', 'ExpedienteFechainicio', 'ExpedienteFechafin', 'ExpedientePrecio', 'ExpedienteTipo', 'ExpedienteEstatus', 'ExpedienteFolio', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expedienteListaempaque', 'expedienteFactura', 'expedienteFechainicio', 'expedienteFechafin', 'expedientePrecio', 'expedienteTipo', 'expedienteEstatus', 'expedienteFolio', ),
+        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE, ExpedientePeer::IDCLIENTE, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE, ExpedientePeer::EXPEDIENTE_FACTURA, ExpedientePeer::EXPEDIENTE_FECHAINICIO, ExpedientePeer::EXPEDIENTE_FECHAFIN, ExpedientePeer::EXPEDIENTE_PRECIO, ExpedientePeer::EXPEDIENTE_TIPO, ExpedientePeer::EXPEDIENTE_ESTATUS, ExpedientePeer::EXPEDIENTE_FOLIO, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE', 'IDCLIENTE', 'IDCONSIGNATARIOEMBARCADOR', 'EXPEDIENTE_LISTAEMPAQUE', 'EXPEDIENTE_FACTURA', 'EXPEDIENTE_FECHAINICIO', 'EXPEDIENTE_FECHAFIN', 'EXPEDIENTE_PRECIO', 'EXPEDIENTE_TIPO', 'EXPEDIENTE_ESTATUS', 'EXPEDIENTE_FOLIO', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expediente_listaempaque', 'expediente_factura', 'expediente_fechainicio', 'expediente_fechafin', 'expediente_precio', 'expediente_tipo', 'expediente_estatus', 'expediente_folio', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
     );
 
     /**
@@ -104,12 +107,12 @@ abstract class BaseExpedientePeer
      * e.g. ExpedientePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpediente' => 0, 'Idcliente' => 1, 'Idconsignatarioembarcador' => 2, 'ExpedienteListaempaque' => 3, 'ExpedienteFactura' => 4, 'ExpedienteFechainicio' => 5, 'ExpedienteFechafin' => 6, 'ExpedientePrecio' => 7, 'ExpedienteTipo' => 8, 'ExpedienteEstatus' => 9, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expedienteListaempaque' => 3, 'expedienteFactura' => 4, 'expedienteFechainicio' => 5, 'expedienteFechafin' => 6, 'expedientePrecio' => 7, 'expedienteTipo' => 8, 'expedienteEstatus' => 9, ),
-        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE => 0, ExpedientePeer::IDCLIENTE => 1, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR => 2, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE => 3, ExpedientePeer::EXPEDIENTE_FACTURA => 4, ExpedientePeer::EXPEDIENTE_FECHAINICIO => 5, ExpedientePeer::EXPEDIENTE_FECHAFIN => 6, ExpedientePeer::EXPEDIENTE_PRECIO => 7, ExpedientePeer::EXPEDIENTE_TIPO => 8, ExpedientePeer::EXPEDIENTE_ESTATUS => 9, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE' => 0, 'IDCLIENTE' => 1, 'IDCONSIGNATARIOEMBARCADOR' => 2, 'EXPEDIENTE_LISTAEMPAQUE' => 3, 'EXPEDIENTE_FACTURA' => 4, 'EXPEDIENTE_FECHAINICIO' => 5, 'EXPEDIENTE_FECHAFIN' => 6, 'EXPEDIENTE_PRECIO' => 7, 'EXPEDIENTE_TIPO' => 8, 'EXPEDIENTE_ESTATUS' => 9, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expediente_listaempaque' => 3, 'expediente_factura' => 4, 'expediente_fechainicio' => 5, 'expediente_fechafin' => 6, 'expediente_precio' => 7, 'expediente_tipo' => 8, 'expediente_estatus' => 9, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpediente' => 0, 'Idcliente' => 1, 'Idconsignatarioembarcador' => 2, 'ExpedienteListaempaque' => 3, 'ExpedienteFactura' => 4, 'ExpedienteFechainicio' => 5, 'ExpedienteFechafin' => 6, 'ExpedientePrecio' => 7, 'ExpedienteTipo' => 8, 'ExpedienteEstatus' => 9, 'ExpedienteFolio' => 10, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expedienteListaempaque' => 3, 'expedienteFactura' => 4, 'expedienteFechainicio' => 5, 'expedienteFechafin' => 6, 'expedientePrecio' => 7, 'expedienteTipo' => 8, 'expedienteEstatus' => 9, 'expedienteFolio' => 10, ),
+        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE => 0, ExpedientePeer::IDCLIENTE => 1, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR => 2, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE => 3, ExpedientePeer::EXPEDIENTE_FACTURA => 4, ExpedientePeer::EXPEDIENTE_FECHAINICIO => 5, ExpedientePeer::EXPEDIENTE_FECHAFIN => 6, ExpedientePeer::EXPEDIENTE_PRECIO => 7, ExpedientePeer::EXPEDIENTE_TIPO => 8, ExpedientePeer::EXPEDIENTE_ESTATUS => 9, ExpedientePeer::EXPEDIENTE_FOLIO => 10, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE' => 0, 'IDCLIENTE' => 1, 'IDCONSIGNATARIOEMBARCADOR' => 2, 'EXPEDIENTE_LISTAEMPAQUE' => 3, 'EXPEDIENTE_FACTURA' => 4, 'EXPEDIENTE_FECHAINICIO' => 5, 'EXPEDIENTE_FECHAFIN' => 6, 'EXPEDIENTE_PRECIO' => 7, 'EXPEDIENTE_TIPO' => 8, 'EXPEDIENTE_ESTATUS' => 9, 'EXPEDIENTE_FOLIO' => 10, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expediente_listaempaque' => 3, 'expediente_factura' => 4, 'expediente_fechainicio' => 5, 'expediente_fechafin' => 6, 'expediente_precio' => 7, 'expediente_tipo' => 8, 'expediente_estatus' => 9, 'expediente_folio' => 10, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
     );
 
     /** The enumerated values for this table */
@@ -250,6 +253,7 @@ abstract class BaseExpedientePeer
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_PRECIO);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_TIPO);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_ESTATUS);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FOLIO);
         } else {
             $criteria->addSelectColumn($alias . '.idexpediente');
             $criteria->addSelectColumn($alias . '.idcliente');
@@ -261,6 +265,7 @@ abstract class BaseExpedientePeer
             $criteria->addSelectColumn($alias . '.expediente_precio');
             $criteria->addSelectColumn($alias . '.expediente_tipo');
             $criteria->addSelectColumn($alias . '.expediente_estatus');
+            $criteria->addSelectColumn($alias . '.expediente_folio');
         }
     }
 
