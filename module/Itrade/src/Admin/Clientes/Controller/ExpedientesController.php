@@ -124,11 +124,18 @@ class ExpedientesController extends AbstractActionController
         if($exist){
             
             $entity = \ExpedienteQuery::create()->findPk($idcliente);
+            $form = new \Admin\Clientes\Form\ExpedienteForm($idcliente);
+            $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+            
+            $form->get('expediente_fechainicio')->setValue($entity->getExpedienteFechainicio('d/m/Y'));
+            $form->get('expediente_fechafin')->setValue($entity->getExpedienteFechafin('d/m/Y'));
+            
             $cliente = $entity->getCliente();
             $view_model = new ViewModel();
             $view_model->setTemplate('admin/clientes/expedientes/editar');
             $view_model->setVariables(array(
                 'entity' => $entity,
+                'form' => $form,
                 'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
                 'cliente' => $cliente,
             ));
@@ -209,6 +216,18 @@ class ExpedientesController extends AbstractActionController
         return $this->getResponse()->setContent(json_encode($result));
         
         
+    }
+    
+    public function dropzoneAction(){
+        
+        $idexpediente = $this->params()->fromRoute('idexpediente');
+        
+        $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/expedientes';
+        
+        
+        
+        
+       echo '<pre>';var_dump($idexpediente);echo '</pre>';exit();
     }
 
 }

@@ -56,6 +56,49 @@ class ExpedienteForm extends Form
                 'required' => true,
             ),
         ));
+        
+        $this->add(array(
+            'name' => 'expediente_estatus',
+            'type' => 'Select',
+            'options' => array(
+                'label' => 'Tipo',
+                'empty_option' => 'Sin especificar',
+                'value_options' => array(
+                    'abierto' => 'Abierto',
+                    'cerrado' => 'Cerrado',
+                ),
+            ),
+            'attributes' => array(
+                'class' => 'width-100',
+                'required' => true,
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'expediente_fechainicio',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Fecha de apertura',
+            ),
+            'attributes' => array(
+                'required' => true,
+                'disabled' => true,
+                'class' => 'form-control',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'expediente_fechafin',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Fecha de cierre',
+            ),
+            'attributes' => array(
+                 'disabled' => true,    
+                'class' => 'form-control',
+            ),
+        ));
+        
                
     }
 }

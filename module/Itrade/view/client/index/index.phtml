@@ -1,27 +1,31 @@
 <div class="empleado_form_container">
     
-    <ul class="breadcrumb">
-        <li>
-            <p>Catalogo</p>
-        </li>
-        <li>
-            <a href="/catalogo/empleados">Empleados</a>
-        </li>
-        <li>
-            <a class="active" href="/catalogo/empleados/nuevo">Registro</a>
-        </li>
-    </ul>
+
     <div class="page-title">
-        <h3>REGISTRO <span class="semi-bold">EMPLEADO</span></h3>
+        <h3><span class="semi-bold">CLIENTE</span></h3>
     </div>
+
+
+    <?php if ($message == "success"): ?>
+        <div class="alert alert-success">
+            <button data-dismiss="alert" class="close"><i class="glyphicon glyphicon-remove"></i></button>
+            <h3 class="text-center">Usuario modificado correctamente</h3>
+        </div>
+    <?php elseif ($message != "" && $message != "success"): ?>
+        <div class="alert alert-danger">
+            <button data-dismiss="alert" class="close"></button>
+            Success: The <a class="link" href="#">page</a> has been added.                                
+        </div>
+    <?php endif ?>
     <?php 
 
 
-        $form->setAttribute('action', '/catalogo/empleados/nuevo');
+        $form->setAttribute('action', '/');
         $form->setAttribute('novalidate', true);
         $form->setAttribute('enctype', 'multipart/form-data');
 
         echo $this->form()->openTag($form); 
+        
     ?>
 
 
@@ -87,6 +91,7 @@
                                         <i class=""></i>
                                         <?php echo $this->formText($form->get('cliente_numero_exterior')) ?>
                                     </div>
+                                    <span class="error"></span>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +232,7 @@
                                             <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span> 
                                         </div>
                                     </div>
-                                      
+                                    <span class="error"></span>
                                 </div>
                             </div>
                         </div>
@@ -297,6 +302,7 @@
                                         <i class=""></i>
                                         <?php echo $this->formText($form->get('cliente_f_numero_exterior')) ?>
                                     </div>
+                                    <span class="error"></span>
                                 </div>
                             </div>
                         </div>
@@ -596,6 +602,14 @@
                     </div>
                 </div>
             </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="pull-right">
+                        <button btn_action="submit" class="btn btn-primary btn-cons" type="button">Guardar</button>
+                    </div>
+                </div>
+            </div>
+
    
         </div>
     </div>

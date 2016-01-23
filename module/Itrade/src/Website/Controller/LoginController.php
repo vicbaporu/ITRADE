@@ -22,12 +22,14 @@ class LoginController extends AbstractActionController
     		$user = $post_data['txtUser'];
     		$pass = md5($post_data['txtPass']);
 
-    		$empleado = \EmpleadoQuery::create()
-			->filterByEmpleadoEmail($user)
+    		$cliente = \ClienteQuery::create()
+			->filterByClienteEmail($user)
 			->find();
-
-			if(count($empleado)!=0)
+ 			
+			if(count($cliente)!=0)
 			{
+			var_dump($cliente);
+				/*
 				foreach($empleado as $emp) 
 				{
 				  if($emp->getEmpleadoEmail() == $user && $emp->getEmpleadoPassword() == $pass)
@@ -39,6 +41,7 @@ class LoginController extends AbstractActionController
 				  }
 				}
 			}
+			*/
 	  		$message = "Correo electrónico o contraseña incorrecta";
     	}
 		
