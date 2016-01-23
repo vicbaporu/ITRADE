@@ -8,9 +8,11 @@ class ClienteForm extends Form
 {
     public function __construct($mexico_states = null,$data)
     {
-        $countries = array(
-                'México',
-                'Estados Unidos'
+
+        $countries = array
+            (
+                'mexico'            => 'México',
+                'estados unidos'    => 'Estados Unidos'
             );
 
         parent::__construct('cliente_form');
@@ -110,7 +112,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
-                    //'value' => $data->getClienteCP(),
+                    'value' => $data->getClienteCodigopostal(),
                 ),
             ));
             $this->add(array(
@@ -120,9 +122,9 @@ class ClienteForm extends Form
                     'label' => 'Estado',
                     'empty_option' => 'Seleccione un estado',
                     'value_options' => $mexico_states,
-                    'value_selected' => $data->getClienteEstado(),
                 ),
                 'attributes' => array(
+                    'value' => $data->getClienteEstado(),
                     'class' => 'width-100',
                 ),
             ));
@@ -132,10 +134,11 @@ class ClienteForm extends Form
                 'options' => array(
                     'label' => 'País',
                     'empty_option' => 'Seleccione un país',
-                    'value_options' => $countries
+                    'value_options' => $countries,
                     
                 ),
                 'attributes' => array(
+                    'value' => $data->getClientePais(),
                     'class' => 'width-100',
                 ),
             ));
@@ -148,6 +151,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteEmail(),
                 ),
             ));
             $this->add(array(
@@ -159,6 +163,8 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteTelefono(),
+
                 ),
             ));
             $this->add(array(
@@ -195,6 +201,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    //$data->getClienteNombrecontacto(),
                 ),
             ));
             $this->add(array(
@@ -217,6 +224,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteCallefiscal(),
                 ),
             ));
             $this->add(array(
@@ -228,6 +236,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteNumerofiscal(),
                 ),
             ));
             $this->add(array(
@@ -239,6 +248,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteInteriorfiscal(),
                 ),
             ));
             $this->add(array(
@@ -250,6 +260,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteColoniafiscal(),
                 ),
             ));
             $this->add(array(
@@ -261,6 +272,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteCiudadfiscal(),
                 ),
             ));
             $this->add(array(
@@ -272,6 +284,7 @@ class ClienteForm extends Form
                 'attributes' => array(
                     'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteCodigopostalfiscal(),
                 ),
             ));
             $this->add(array(
@@ -285,6 +298,7 @@ class ClienteForm extends Form
                 ),
                 'attributes' => array(
                     'class' => 'width-100',
+                    'value' => $data->getClienteEstadofiscal(),
                 ),
             ));
             $this->add(array(
@@ -298,6 +312,7 @@ class ClienteForm extends Form
                 ),
                 'attributes' => array(
                     'class' => 'width-100',
+                    'value' => $data->getClientePaisfiscal(),
                 ),
             ));
         //Terminan datos fiscales

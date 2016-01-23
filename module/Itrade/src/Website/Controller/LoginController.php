@@ -4,17 +4,30 @@ namespace Website\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Zend\Session\Container;
-
-
 class LoginController extends AbstractActionController
 {
+
+
     public function indexAction()
     {
     	$request = $this->getRequest();
         $message="";
+
+        /*
+        $user = 'lopez.victor94@gmail.com';
+        $pass = md5('qwerty');
+        $entity = new \Empleado();
+        $entity->setEmpleadoEmail($user);
+        
+        //SETIAMOS LA CONTRASEÑA EN MD5
+        $entity->setEmpleadoPassword($pass);
+        $entity->save();
+		*/
+
+
     	if($request->isPost())
-    	{
+    	{	
+
     		$success = false;
     		
 
@@ -22,26 +35,47 @@ class LoginController extends AbstractActionController
     		$user = $post_data['txtUser'];
     		$pass = md5($post_data['txtPass']);
 
-    		$cliente = \ClienteQuery::create()
+    		$entity = \ClienteQuery::create()
 			->filterByClienteEmail($user)
 			->find();
  			
-			if(count($cliente)!=0)
-			{
-			var_dump($cliente);
-				/*
-				foreach($empleado as $emp) 
+ 			//Crear un usuario
+ 			/*
+			$entity = new \Cliente();
+	        $entity->setClienteEmail($user);
+	        
+	        //SETIAMOS LA CONTRASEÑA EN MD5
+	        $entity->setClientePassword($pass);
+	        $entity->save();
+			*/			
+			
+			if(count($entity)!=0)
+			{				
+
+				foreach($entity as $client) 
 				{
-				  if($emp->getEmpleadoEmail() == $user && $emp->getEmpleadoPassword() == $pass)
+				  if($client->getClienteEmail() == $user && $client->getClientePassword() == $pass )
 				  {
-				  	$userSession = new Container('user');
-        			$userSession->username = 'vic';	
-        			echo $userSession->username;
-				  	return $this->redirect()->toUrl('http://clientes.itrade/');
+
+				  	//Nuesta session
+                	$session = new \Shared\Session\ClientSession();
+                	$session->Create(array(
+	                    'idcliente' 		=> $client->getIdCliente(),
+	                    'cliente_nombre' 	=> $client->getClienteNombrecontacto(),
+	                    'cliente_email' 	=> $client->getClienteEmail()
+	                ));
+	                echo $session->isActive();
+	                
+	                //var_dump($session->getData());
+				  	
+				  	//return $this->redirect()->toUrl('http://clientes.itrade/');
+				  	//return $this->redirect()->toRoute('clientes');
 				  }
 				}
+				
 			}
-			*/
+			
+			
 	  		$message = "Correo electrónico o contraseña incorrecta";
     	}
 		
@@ -53,4 +87,6 @@ class LoginController extends AbstractActionController
 	    return $viewModel;
 
     }
+
+    
 }

@@ -66,7 +66,7 @@ class ProveedorclienteTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('Cliente', 'Cliente', RelationMap::MANY_TO_ONE, array('idcliente' => 'idcliente', ), null, null);
-        $this->addRelation('Expediente', 'Expediente', RelationMap::ONE_TO_MANY, array('idproveedorcliente' => 'idconsignatarioembarcador', ), 'CASCADE', 'CASCADE', 'Expedientes');
+        $this->addRelation('Expediente', 'Expediente', RelationMap::ONE_TO_MANY, array('idproveedorcliente' => 'idconsignatarioembarcador', ), null, null, 'Expedientes');
     } // buildRelations()
 
 } // ProveedorclienteTableMap

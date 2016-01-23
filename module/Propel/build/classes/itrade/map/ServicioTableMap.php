@@ -46,11 +46,9 @@ class ServicioTableMap extends TableMap
 ));
         $this->addColumn('servicio_medio', 'ServicioMedio', 'CHAR', true, null, null);
         $this->getColumn('servicio_medio', false)->setValueSet(array (
-  0 => 'Terrestre LTL',
-  1 => 'Terrestre FTL',
-  2 => 'Aereo',
-  3 => 'Maritimo FCL',
-  4 => 'Maritimo LCL',
+  0 => 'terrestre',
+  1 => 'aereo',
+  2 => 'maritimo',
 ));
         $this->addColumn('servicio_nombre', 'ServicioNombre', 'VARCHAR', true, 45, null);
         $this->addColumn('servicio_descripcion', 'ServicioDescripcion', 'VARCHAR', false, 45, null);

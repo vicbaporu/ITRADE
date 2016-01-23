@@ -1262,9 +1262,10 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
 
             if ($this->clientesRelatedByIdempleadocomercialScheduledForDeletion !== null) {
                 if (!$this->clientesRelatedByIdempleadocomercialScheduledForDeletion->isEmpty()) {
-                    ClienteQuery::create()
-                        ->filterByPrimaryKeys($this->clientesRelatedByIdempleadocomercialScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->clientesRelatedByIdempleadocomercialScheduledForDeletion as $clienteRelatedByIdempleadocomercial) {
+                        // need to save related object because we set the relation to null
+                        $clienteRelatedByIdempleadocomercial->save($con);
+                    }
                     $this->clientesRelatedByIdempleadocomercialScheduledForDeletion = null;
                 }
             }
