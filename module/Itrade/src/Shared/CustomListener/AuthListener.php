@@ -10,6 +10,7 @@ use Zend\EventManager\ListenerAggregateInterface;
 
 use Zend\Code\Reflection\ClassReflection;
 use Shared\Session\AouthSession;
+use Shared\Session\ClientSession;
 
 class AuthListener implements ListenerAggregateInterface {
     
@@ -43,11 +44,15 @@ class AuthListener implements ListenerAggregateInterface {
      */
     public function onDispatch (MvcEvent $e){
        
-        $matches = $e->getRouteMatch();        
+        $matches = $e->getRouteMatch();     
+
+        //Sesion para admin   
         $AouthSession  = new AouthSession();
+        //Sesion para cliente
+        $ClientSession  = new ClientSession();
         
+
         $controller = $matches->getParam('controller');
-       
         $module = explode('\\', $controller); $module = $module[0];
         
         $action = $matches->getParam('action');
@@ -73,6 +78,26 @@ class AuthListener implements ListenerAggregateInterface {
                 }
                 
             }
+            /*
+            case 'Clientes':{
+              
+                // Rutas excluidas de verificación 
+                $excludeControllers = array(
+                    
+                );
+             
+                // Verificamos si es una ruta excluida ó si hay una sesión activa 
+                if (in_array( $controller , $excludeControllers, true ) || $ClientSession->isActive() ) {  
+                    return;
+                }else{
+                    
+                    $matches->setParam('controller', 'Login\Controller\Login');
+                    $matches->setParam('action', 'index');
+                }
+                
+            }
+            */
+
         }
         
         return;

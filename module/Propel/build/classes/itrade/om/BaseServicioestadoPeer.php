@@ -24,13 +24,13 @@ abstract class BaseServicioestadoPeer
     const TM_CLASS = 'ServicioestadoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 4;
+    const NUM_COLUMNS = 5;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 4;
+    const NUM_HYDRATE_COLUMNS = 5;
 
     /** the column name for the idservicioestado field */
     const IDSERVICIOESTADO = 'servicioestado.idservicioestado';
@@ -40,6 +40,9 @@ abstract class BaseServicioestadoPeer
 
     /** the column name for the servicioestado_nombre field */
     const SERVICIOESTADO_NOMBRE = 'servicioestado.servicioestado_nombre';
+
+    /** the column name for the servicioestado_comodin field */
+    const SERVICIOESTADO_COMODIN = 'servicioestado.servicioestado_comodin';
 
     /** the column name for the servicioestado_jerarquia field */
     const SERVICIOESTADO_JERARQUIA = 'servicioestado.servicioestado_jerarquia';
@@ -63,12 +66,12 @@ abstract class BaseServicioestadoPeer
      * e.g. ServicioestadoPeer::$fieldNames[ServicioestadoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idservicioestado', 'Idservicio', 'ServicioestadoNombre', 'ServicioestadoJerarquia', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idservicioestado', 'idservicio', 'servicioestadoNombre', 'servicioestadoJerarquia', ),
-        BasePeer::TYPE_COLNAME => array (ServicioestadoPeer::IDSERVICIOESTADO, ServicioestadoPeer::IDSERVICIO, ServicioestadoPeer::SERVICIOESTADO_NOMBRE, ServicioestadoPeer::SERVICIOESTADO_JERARQUIA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDSERVICIOESTADO', 'IDSERVICIO', 'SERVICIOESTADO_NOMBRE', 'SERVICIOESTADO_JERARQUIA', ),
-        BasePeer::TYPE_FIELDNAME => array ('idservicioestado', 'idservicio', 'servicioestado_nombre', 'servicioestado_jerarquia', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+        BasePeer::TYPE_PHPNAME => array ('Idservicioestado', 'Idservicio', 'ServicioestadoNombre', 'ServicioestadoComodin', 'ServicioestadoJerarquia', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idservicioestado', 'idservicio', 'servicioestadoNombre', 'servicioestadoComodin', 'servicioestadoJerarquia', ),
+        BasePeer::TYPE_COLNAME => array (ServicioestadoPeer::IDSERVICIOESTADO, ServicioestadoPeer::IDSERVICIO, ServicioestadoPeer::SERVICIOESTADO_NOMBRE, ServicioestadoPeer::SERVICIOESTADO_COMODIN, ServicioestadoPeer::SERVICIOESTADO_JERARQUIA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDSERVICIOESTADO', 'IDSERVICIO', 'SERVICIOESTADO_NOMBRE', 'SERVICIOESTADO_COMODIN', 'SERVICIOESTADO_JERARQUIA', ),
+        BasePeer::TYPE_FIELDNAME => array ('idservicioestado', 'idservicio', 'servicioestado_nombre', 'servicioestado_comodin', 'servicioestado_jerarquia', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
     /**
@@ -78,12 +81,12 @@ abstract class BaseServicioestadoPeer
      * e.g. ServicioestadoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idservicioestado' => 0, 'Idservicio' => 1, 'ServicioestadoNombre' => 2, 'ServicioestadoJerarquia' => 3, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idservicioestado' => 0, 'idservicio' => 1, 'servicioestadoNombre' => 2, 'servicioestadoJerarquia' => 3, ),
-        BasePeer::TYPE_COLNAME => array (ServicioestadoPeer::IDSERVICIOESTADO => 0, ServicioestadoPeer::IDSERVICIO => 1, ServicioestadoPeer::SERVICIOESTADO_NOMBRE => 2, ServicioestadoPeer::SERVICIOESTADO_JERARQUIA => 3, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDSERVICIOESTADO' => 0, 'IDSERVICIO' => 1, 'SERVICIOESTADO_NOMBRE' => 2, 'SERVICIOESTADO_JERARQUIA' => 3, ),
-        BasePeer::TYPE_FIELDNAME => array ('idservicioestado' => 0, 'idservicio' => 1, 'servicioestado_nombre' => 2, 'servicioestado_jerarquia' => 3, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+        BasePeer::TYPE_PHPNAME => array ('Idservicioestado' => 0, 'Idservicio' => 1, 'ServicioestadoNombre' => 2, 'ServicioestadoComodin' => 3, 'ServicioestadoJerarquia' => 4, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idservicioestado' => 0, 'idservicio' => 1, 'servicioestadoNombre' => 2, 'servicioestadoComodin' => 3, 'servicioestadoJerarquia' => 4, ),
+        BasePeer::TYPE_COLNAME => array (ServicioestadoPeer::IDSERVICIOESTADO => 0, ServicioestadoPeer::IDSERVICIO => 1, ServicioestadoPeer::SERVICIOESTADO_NOMBRE => 2, ServicioestadoPeer::SERVICIOESTADO_COMODIN => 3, ServicioestadoPeer::SERVICIOESTADO_JERARQUIA => 4, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDSERVICIOESTADO' => 0, 'IDSERVICIO' => 1, 'SERVICIOESTADO_NOMBRE' => 2, 'SERVICIOESTADO_COMODIN' => 3, 'SERVICIOESTADO_JERARQUIA' => 4, ),
+        BasePeer::TYPE_FIELDNAME => array ('idservicioestado' => 0, 'idservicio' => 1, 'servicioestado_nombre' => 2, 'servicioestado_comodin' => 3, 'servicioestado_jerarquia' => 4, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
     /**
@@ -160,11 +163,13 @@ abstract class BaseServicioestadoPeer
             $criteria->addSelectColumn(ServicioestadoPeer::IDSERVICIOESTADO);
             $criteria->addSelectColumn(ServicioestadoPeer::IDSERVICIO);
             $criteria->addSelectColumn(ServicioestadoPeer::SERVICIOESTADO_NOMBRE);
+            $criteria->addSelectColumn(ServicioestadoPeer::SERVICIOESTADO_COMODIN);
             $criteria->addSelectColumn(ServicioestadoPeer::SERVICIOESTADO_JERARQUIA);
         } else {
             $criteria->addSelectColumn($alias . '.idservicioestado');
             $criteria->addSelectColumn($alias . '.idservicio');
             $criteria->addSelectColumn($alias . '.servicioestado_nombre');
+            $criteria->addSelectColumn($alias . '.servicioestado_comodin');
             $criteria->addSelectColumn($alias . '.servicioestado_jerarquia');
         }
     }

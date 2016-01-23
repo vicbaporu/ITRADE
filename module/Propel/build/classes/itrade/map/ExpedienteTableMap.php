@@ -51,12 +51,6 @@ class ExpedienteTableMap extends TableMap
   0 => 'exportacion',
   1 => 'importacion',
 ));
-        $this->addColumn('expediente_estatus', 'ExpedienteEstatus', 'CHAR', true, null, null);
-        $this->getColumn('expediente_estatus', false)->setValueSet(array (
-  0 => 'abierto',
-  1 => 'cerrado',
-));
-        $this->addColumn('expediente_folio', 'ExpedienteFolio', 'VARCHAR', false, 45, null);
         // validators
     } // initialize()
 
@@ -65,8 +59,8 @@ class ExpedienteTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Cliente', 'Cliente', RelationMap::MANY_TO_ONE, array('idcliente' => 'idcliente', ), 'CASCADE', 'CASCADE');
-        $this->addRelation('Proveedorcliente', 'Proveedorcliente', RelationMap::MANY_TO_ONE, array('idconsignatarioembarcador' => 'idproveedorcliente', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Cliente', 'Cliente', RelationMap::MANY_TO_ONE, array('idcliente' => 'idcliente', ), null, null);
+        $this->addRelation('Proveedorcliente', 'Proveedorcliente', RelationMap::MANY_TO_ONE, array('idconsignatarioembarcador' => 'idproveedorcliente', ), null, null);
         $this->addRelation('Expedienteanticipo', 'Expedienteanticipo', RelationMap::ONE_TO_MANY, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE', 'Expedienteanticipos');
         $this->addRelation('Expedientearchivo', 'Expedientearchivo', RelationMap::ONE_TO_MANY, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE', 'Expedientearchivos');
         $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE', 'Expedientegastos');
