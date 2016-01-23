@@ -38,10 +38,11 @@
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="row-fluid">
                                 <div class="form-group">
-                                    <label>Estatus</label>  
+                                    <?php echo $this->formHidden($form->get('idexpediente')) ?> 
+                                    <?php echo $this->formLabel($form->get('expediente_estatus')) ?>  
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
-                                        <input disabled value="<?php echo $entity->getExpedienteEstatus()?>"type="text" class="width-100">
+                                        <?php echo $this->formSelect($form->get('expediente_estatus')) ?>
                                     </div>
                                     <span class="error"></span>
                                 </div>
@@ -52,10 +53,10 @@
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="row-fluid">
                                 <div class="form-group">
-                                    <label>Fecha de apertura</label>  
+                                    <?php echo $this->formLabel($form->get('expediente_fechainicio')) ?> 
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
-                                        <input disabled value="<?php echo $entity->getExpedienteFechainicio('d/m/Y')?>"type="text" class="width-100">
+                                        <?php echo $this->formText($form->get('expediente_fechainicio')) ?> 
                                     </div>
                                     <span class="error"></span>
                                 </div>
@@ -64,10 +65,10 @@
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="row-fluid">
                                 <div class="form-group">
-                                    <label>Fecha de cierre</label>  
+                                    <?php echo $this->formLabel($form->get('expediente_fechafin')) ?>  
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
-                                        <input disabled value="<?php echo $entity->getExpedienteFechafin('d/m/Y')?>"type="text" class="width-100">
+                                         <?php echo $this->formText($form->get('expediente_fechafin')) ?>
                                     </div>
                                     <span class="error"></span>
                                 </div>
@@ -76,6 +77,76 @@
                     </div>
                 </div>
             </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <div class="grid-title no-border">
+                        <h4><span class="semi-bold">Facturación</span></h4>
+                        <div class="tools">
+                            <a class="collapse" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="grid-body no-border">
+                        <table id="table_facturacion" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Cargos a recibir</th>
+                                    <th>Cargos conocidos</th>
+                                    <th>Conceptos de facturación</th>
+                                    <th>Sujetos a IVA</th>
+                                    <th>No sujetos a IVA</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <div class="grid-title no-border">
+                        <h4><span class="semi-bold">Servicios</span></h4>
+                        <div class="tools">
+                            <a class="collapse" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="grid-body no-border">
+                        <table id="table_facturacion" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Creación</th>
+                                    <th>Servicio</th>
+                                    <th>Estatus (Actual)</th>
+                                    <th>Fecha final</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple ">
+                    <div class="grid-title no-border">
+                        <h4><span class="semi-bold">Archivos</span></h4>
+                        <div class="tools">
+                            <a class="collapse" href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <div class="grid-body no-border">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="row-fluid" style="margin-top: 20px;">
+                                    <div class="dropzone" id="mydropzone"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="form-actions">
                 <div class="row">
                     <div class="pull-right">
@@ -91,11 +162,12 @@
 </div>
 <!--CUSTOM SCRIPT-->
 <script src="/js/admin/expedientes/expediente.js"></script>
-
+<!--DROPZONE-->
+<script src="/plugins/admin/dropzone/dropzone.js"></script>
+<script src="/plugins/admin/download/download.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/admin/dropzone/css/dropzone.css">
 <script type="text/javascript">
-    
     $(document).ready(function() {
-        
         //FORM BIND
         var $form = $('.form_container').expediente();
         $form.formBind();

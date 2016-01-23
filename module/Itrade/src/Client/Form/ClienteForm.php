@@ -6,7 +6,7 @@ use Zend\Form\Form;
 
 class ClienteForm extends Form
 {
-    public function __construct($mexico_states = null)
+    public function __construct($mexico_states = null,$data)
     {
         $countries = array(
                 'México',
@@ -24,8 +24,9 @@ class ClienteForm extends Form
                     'label' => 'Razón Social',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteRazonsocial(),
                 ),
             ));
             $this->add(array(
@@ -35,8 +36,9 @@ class ClienteForm extends Form
                     'label' => 'RFC',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteRfc(),
                 ),
             ));
             $this->add(array(
@@ -46,8 +48,9 @@ class ClienteForm extends Form
                     'label' => 'Calle',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteCalle(),
                 ),
             ));
             $this->add(array(
@@ -57,8 +60,9 @@ class ClienteForm extends Form
                     'label' => 'Número exterior',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteNumero(),
                 ),
             ));
             $this->add(array(
@@ -68,8 +72,9 @@ class ClienteForm extends Form
                     'label' => 'Número Interior',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteInterior(),
                 ),
             ));
             $this->add(array(
@@ -79,8 +84,9 @@ class ClienteForm extends Form
                     'label' => 'Colonia',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteColonia(),
                 ),
             ));
             $this->add(array(
@@ -90,8 +96,9 @@ class ClienteForm extends Form
                     'label' => 'Ciudad',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteCiudad(),
                 ),
             ));
             $this->add(array(
@@ -101,8 +108,9 @@ class ClienteForm extends Form
                     'label' => 'Código Postal',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    //'value' => $data->getClienteCP(),
                 ),
             ));
             $this->add(array(
@@ -111,8 +119,8 @@ class ClienteForm extends Form
                 'options' => array(
                     'label' => 'Estado',
                     'empty_option' => 'Seleccione un estado',
-                    'value_options' => $mexico_states
-                    
+                    'value_options' => $mexico_states,
+                    'value_selected' => $data->getClienteEstado(),
                 ),
                 'attributes' => array(
                     'class' => 'width-100',
@@ -138,7 +146,7 @@ class ClienteForm extends Form
                     'label' => 'E-mail',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -149,7 +157,7 @@ class ClienteForm extends Form
                     'label' => 'Teléfono',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -160,8 +168,9 @@ class ClienteForm extends Form
                     'label' => 'Nombre',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
+                    'value' => $data->getClienteNombrecontacto(),
                 ),
             ));
             $this->add(array(
@@ -184,7 +193,7 @@ class ClienteForm extends Form
                     'label' => 'Razón Social',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -195,7 +204,7 @@ class ClienteForm extends Form
                     'label' => 'RFC',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -206,7 +215,7 @@ class ClienteForm extends Form
                     'label' => 'Calle',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -217,7 +226,7 @@ class ClienteForm extends Form
                     'label' => 'Número exterior',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -228,7 +237,7 @@ class ClienteForm extends Form
                     'label' => 'Número Interior',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -239,7 +248,7 @@ class ClienteForm extends Form
                     'label' => 'Colonia',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -250,7 +259,7 @@ class ClienteForm extends Form
                     'label' => 'Ciudad',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -261,7 +270,7 @@ class ClienteForm extends Form
                     'label' => 'Código Postal',
                 ),
                 'attributes' => array(
-                    'required' => true,
+                    'required' => false,
                     'class' => 'form-control',
                 ),
             ));
@@ -449,7 +458,7 @@ class ClienteForm extends Form
                  'attributes' => array(
                     'class' => 'form-control',
                     'accept'=> 'zip/.zip,.rar',
-                    'multiple' => 'true',
+                    'multiple' => 'false',
                 ),
                  
             ));
@@ -462,7 +471,7 @@ class ClienteForm extends Form
                  'attributes' => array(
                     'class' => 'form-control ',
                     'accept'=> 'image/*',
-                    'multiple' => 'true',
+                    'multiple' => 'false',
                 ),
                  
             ));

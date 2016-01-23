@@ -301,6 +301,19 @@ return array(
                                                         'action' => 'editar',
                                                     ),
                                                 ),
+                                                'may_terminate' => true,
+                                                'child_routes' => array(
+                                                    'dropzone' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/dropzone',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'dropzone',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
                                             ),
                                             'serverside' => array(
                                                 'type' => 'Segment',
