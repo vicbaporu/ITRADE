@@ -40,8 +40,8 @@ table tbody td.options a:not(:first-child){
 }
 
 input[type=file]{
-    padding-left: 0;
-    padding-top: 0;
+    padding-left: 0 !important;
+    padding-top: 0 !important;
 }
 
 span.legal_validation.ok i{

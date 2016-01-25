@@ -130,6 +130,16 @@ class ExpedientesController extends AbstractActionController
             $form->get('expediente_fechainicio')->setValue($entity->getExpedienteFechainicio('d/m/Y'));
             $form->get('expediente_fechafin')->setValue($entity->getExpedienteFechafin('d/m/Y'));
             
+            //FACTURACION
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->groupByIdgastofacturacion()->withColumn('SUM(expedientegasto_monto)','SUMA')->find();
+            
+            //damos el formato para la tabla
+            $expedientes_gastos_array = array();
+            $expediente_gasto = new \Expedientegasto();
+            foreach ($expedientes_gastos as $expediente_gasto){
+                //$tmp[]
+            }
+            
             $cliente = $entity->getCliente();
             $view_model = new ViewModel();
             $view_model->setTemplate('admin/clientes/expedientes/editar');
@@ -229,5 +239,100 @@ class ExpedientesController extends AbstractActionController
         
        echo '<pre>';var_dump($idexpediente);echo '</pre>';exit();
     }
+    
+    public function nuevocargoAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            $post_files = $request->getFiles();
+            
+            $auth = new \Shared\Session\AouthSession();
+            $auth = $auth->getData();
+            
+            $entity = new \Expedientegasto();
+               
+                     
+            foreach($post_data as $key => $value){
+                if(\ExpedientegastoPeer::getTableMap()->hasColumn($key) && !empty($value) && $key != 'expedientegasto_fecha'){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            //LA FECHA
+            $expedientegasto_fecha = \DateTime::createFromFormat('d/m/Y', $post_data['expedientegasto_fecha']);
+            $entity->setExpedientegastoFecha($expedientegasto_fecha);
+            
+            $entity->setIdempleado($auth['idempleado']);
 
+            $entity->save();
+            
+            //El comprobante
+            if(!empty($post_files['expedientegasto_comprobante']['name'])){
+                
+                $target_path = "/files/expedientesgastos/";
+                $target_path = $target_path . $entity->getIdexpedientegasto() .'_'.basename( $post_files['expedientegasto_comprobante']['name']);
+                
+                if(move_uploaded_file($_FILES['expedientegasto_comprobante']['tmp_name'],$_SERVER['DOCUMENT_ROOT'].$target_path)){
+                    $entity->setExpedientegastoComprobante($target_path);
+                    $entity->save();
+                }
+
+            }
+            
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toUrl('/clientes/ver/'.$entity->getExpediente()->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente());
+            
+            
+
+        }
+        
+        $idexpediente = $this->params()->fromQuery('id');
+        $entity = \ExpedienteQuery::create()->findPk($idexpediente);
+        
+        //LAS CATEGORIAS DE NUESTROS GASTOS
+        $categoriasgasto = \CategoriagastoQuery::create()->find();
+        $categoriasgasto_array = array();
+        foreach ($categoriasgasto as $categoriagastos){
+            $id = $categoriagastos->getIdcategoriagasto();
+            $categoriasgasto_array[$id] = $categoriagastos->getCategoriagastoNombre();
+        }
+        
+        //LOS PROVEEDORES
+        $proveedores = \ProveedoritradeQuery::create()->filterByIdproveedoritrade(1,  \Criteria::NOT_EQUAL)->find();
+        $proveedores_array = array();
+        $proveedor = new \Proveedoritrade();
+        foreach ($proveedores as $proveedor){
+            $id = $proveedor->getIdproveedoritrade();
+            $proveedores_array[$id] = $proveedor->getProveedoritradeNombre();
+        }
+        
+        //INSTANCIAMOS NUESTRO FORMULARIO
+        $form = new \Admin\Clientes\Form\ExpedientegastoForm($idexpediente,$categoriasgasto_array,$proveedores_array);
+        
+        //Enviamos a la vista
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true)
+                   ->setVariable('form', $form)
+                   ->setVariable('entity', $entity) 
+                   ->setTemplate('/clientes/expedientes/modal/nuevocargo');
+        
+        return $view_model;
+                
+
+    }
+
+    public function getcargosAction(){
+        
+        $idcategoria = $this->params()->fromQuery('idcategoria');
+        
+        $result = \GastofacturacionQuery::create()->filterByIdcategoriagasto($idcategoria)->find()->toArray(null,false,\BasePeer::TYPE_FIELDNAME);
+       
+        return $this->getResponse()->setContent(json_encode($result));
+
+    }
 }

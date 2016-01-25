@@ -65,7 +65,7 @@
         plugin.formBind = function(edit,entity){
             
             var idcliente = $container.find('input[name=idcliente]').val();
-            var idcliente = $container.find('input[name=idexpediente]').val();
+            var idexpediente = $container.find('input[name=idexpediente]').val();
             
             var edit = typeof edit != 'undefined' ? true : false;
             
@@ -219,6 +219,70 @@
                 });
             myDropzone.autoDiscover = false;
             
+            //NUEVO CARGO
+            $container.find('a#nuevo_cargo').on('click',function(){
+               
+                $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/nuevocargo',
+                        data:{id:idexpediente},
+                        success:function(source){
+                             source = $('<div>'+source+'</div>');
+                             
+                             //SELECT 2 DEL MODAL
+                             source.find("select").select2({
+                                placeholder: "Select a state",
+                                allowClear: true,
+                                language: "es"
+                            });
+                            
+                            source.find('select[name=idcategoriagasto]').select2().on('change', function (e) {
+                                
+                                $container.find('select[name=idgastofacturacion] option:not(:first-child)').remove();
+                                $("select[name=idgastofacturacion]").select2("val", "");
+                
+                                var idcategoriagasto = e.val;
+                                
+                                if(idcategoriagasto != ""){
+                                    
+                                    $.ajax({
+                                        dataType:'json',
+                                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/getcargos',
+                                        data:{idcategoria:idcategoriagasto},
+                                        success:function(data)
+                                        {
+                                            $.each(data,function(){
+                                                var option = $('<option>').text(this.gastofacturacion_nombre);
+                                                option.attr('value',this.idgastofacturacion)
+                                                source.find('select[name=idgastofacturacion]').append(option);
+                                            });
+                                            source.find('select[name=idgastofacturacion]').select2("enable",true);
+                                        }
+                                    });
+                                }else {
+
+                                    source.find('select[name=idgastofacturacion]').select2("enable", false);
+
+                                }
+                            });
+                            
+                            //NUMERIC DEL CAMPO MONTO
+                            source.find('input[name=expedientegasto_monto]').numeric();
+                            
+                            //INICIALIZAMOS NUESTRO CALENDARIO
+                            console.log(source.find('.input-append.date'));
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
+            
+            
+                             $container.append(source);
+                             source.find('.modal').modal();
+                        }
+                    });     
+    
+            });
 
         }
 

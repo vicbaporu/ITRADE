@@ -313,6 +313,26 @@ return array(
                                                             ),
                                                         ),
                                                     ),
+                                                    'nuevocargo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/nuevocargo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'nuevocargo',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'getcargos' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/getcargos',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'getcargos',
+                                                            ),
+                                                        ),
+                                                    ),
                                                 ),
                                             ),
                                             'serverside' => array(
