@@ -78,7 +78,7 @@ class IndexController extends AbstractActionController
             //Creamos el directorio del cliente si no existe
             if(!file_exists($upload_folder))
                 mkdir($upload_folder);
-
+            
             $names = array
             (
                 'cliente_padron',
