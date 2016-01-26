@@ -169,3 +169,93 @@ msgstr "Cargo conocido"
 
 msgid "cobro"
 msgstr "Cobro"
+
+msgid "Inicio"
+msgstr "Home"
+
+msgid "Servicios"
+msgstr "Services"
+
+msgid "Recursos"
+msgstr "Resources"
+
+msgid "Contacto"
+msgstr "Contact"
+
+msgid "Iniciar sesión"
+msgstr "Log in"
+
+msgid "COMIENZA A EXPORTAR HOY MISMO"
+msgstr "START EXPORTING TODAY"
+
+msgid "SOLUCIONES LOGISTICAS Y ADUANALES"
+msgstr "CUSTOMS AND LOGISTIC SOLUTIONS"
+
+msgid "RAPIDEZ, EFICENCIA  Y SEGURIDAD"
+msgstr "QUICKNESS, EFFICIENCY AND SECURITY"
+
+msgid "Lee mas acerca de nuestros servicios"
+msgstr "Read more about our services"
+
+msgid "ASESORIA EN LOGISTICA Y COMERCIO EXTERIOR"
+msgstr "LOGISTICS AND INTERNACIONAL TRADE CONSULTING" 
+
+msgid "Bienvenido a ITRADE"
+msgstr "Welcome to ITRADE" 
+
+msgid "ITRADE es una empresa mexicana dedicada a brindar soluciones logísticas y aduaneras,  nuestro servicio es personalizado y atendido por personas responsables, honestas y con experiencia en comercio internacional. Lo que nos distingue es la eficiencia y resultados alcanzados. Elaboramos una planeación estratégica aduanal y logística para reducir tiempos, riesgos y costos en las importaciones y exportaciones. Nuestro compromiso es con usted y su negocio."
+msgstr "ITRADE is a mexican company dedicated to provide customs and logistic solutions. Our services are personalized and attended by responsible, honest and experienced people in internacional trade consulting. Our commitment is with you and your business." 
+
+msgid "Nuestra Visión es convertirnos en un departamento externo de logística para las empresas, capaz de poder ofrecer un servicio de calidad y soluciones a la demanda de nuestros clientes."
+msgstr "Our vision is to become the external logistics deparment; capable to fulfill any company’s demands."
+
+msgid "CONTÁCTENOS," 
+msgstr "CONTACT US,"
+
+msgid "Podemos ayudarle." 
+msgstr "We can help you."
+
+msgid "Nombre" 
+msgstr "Name"
+
+msgid "Empresa" 
+msgstr "Company"
+ 
+msgid "Teléfono" 
+msgstr "Phone"
+
+msgid "Mensaje" 
+msgstr "Message"
+
+msgid "Servicio" 
+msgstr "Service"
+
+msgid "Enviar" 
+msgstr "Send"
+
+msgid "Marítimo" 
+msgstr "Oceanfreight"
+
+msgid "Aéreo" 
+msgstr "Airfreight"
+
+msgid "Terrestre" 
+msgstr "Inland freight"
+
+msgid "Aduana" 
+msgstr "Customs clearance"
+
+msgid "Seguro" 
+msgstr "Insurance"
+
+msgid " Oficina: +52(33)20010565"
+msgstr " Office: +52(33)20010565" 
+
+msgid "COTIZAR"
+msgstr "QUOTE REQUEST"
+
+msgid "En ITRADE MÉXICO ponemos a su servicio soluciones integrales en logística y transporte para sus importaciones, exportaciones, distribución a nivel nacional e internacional, despacho de aduanas, manejo de mercancía peligrosas, perecederos y aseguramiento."
+msgstr "ITRADE provides every service you could possibly need regarding imports, exports, national and international distributions, customs clearance, dangerous and perishable goods handling and merchandise’s insurance."
+
+
+

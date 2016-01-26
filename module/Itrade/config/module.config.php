@@ -524,8 +524,8 @@ return array(
                     'servicios' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/servicios[/:lang]',
-                            'route'    => '/servicios[/:lang]',
+                            'route'    => '[/:lang]/servicios',
+                            'route'    => '[/:lang]/servicios',
                             'defaults' => array(
                                 'controller'    => 'Website\Controller\Servicios',
                                 'action'        => 'index',

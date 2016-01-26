@@ -81,7 +81,97 @@
             <div class="grid simple">
                 <div class="grid-title no-border">
                     <div class="grid-title no-border">
-                        <h4><span class="semi-bold">Facturación</span></h4>
+                        <h4><span class="semi-bold">Facturación MXN</span></h4>
+                        <div class="tools">
+                            <a id="user-options" class="dropdown-toggle config" href="javascript:;" data-toggle="dropdown"></a>
+                            <a class="collapse" href="javascript:;"></a>
+
+                            <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
+                                <li>
+                                    <a id="nuevo_cargo" style="background: none"href="javascript:void(0)"><i class="fa fa-plus"></i> Nuevo cargo</a>
+                                    <a id="ver_cargos" style="background: none"href="javascript:void(0)"><i class="fa fa-eye"></i>Ver cargos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="grid-body no-border">
+                        <?php setlocale(LC_MONETARY, 'en_US'); ?>
+                        <table id="table_facturacion" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Cargos a recibir</th>
+                                    <th>Cargos conocidos</th>
+                                    <th>Conceptos de facturación</th>
+                                    <th>Sujetos a IVA</th>
+                                    <th>No sujetos a IVA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($facturacion as $key => $value) :?>
+                                    <tr class="main"id="<?php echo $value['id']?>">
+                                        <td class="center"><i class="fa fa-plus-circle collapse"></i></td>
+                                        <td><?php echo money_format('%(#10n', (float)$value['cargos_recibir'])?></td>
+                                        <td><?php echo money_format('%(#10n', (float)$value['cargos_conocidos'])?></td>
+                                        <td><?php echo $key?></td>
+                                        <td><?php echo money_format('%(#10n', (float)$value['sujetos_iva'])?></td>
+                                        <td><?php echo money_format('%(#10n', (float)$value['no_sujetos_iva'])?></td>
+                                    </tr>
+                                    <tr class="details" style="display: none">
+                                        <td colspan="6">
+                                            <table class="table inner-table">
+                                                <thead>
+                                                    <th>Fecha</th>
+                                                    <th>Ejecutivo</th>
+                                                    <th>Tipo</th>
+                                                    <th>Monto</th>
+                                                    <th>Comprobante</th>
+                                                     <th>Nota</th>
+                                                    <th>Opciones</th>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($value['details'] as $keyDetails => $valueDetails) :?>
+                                                        <tr id="<?php echo $valueDetails['idexpedientegasto']?>">
+                                                            <td><?php echo date_format(new DateTime($valueDetails['expedientegasto_fecha']), 'd/m/Y H:i')?></td>
+                                                            <td><?php echo $valueDetails['empleado_nombre']?></td>
+                                                            <td><?php echo $this->translate($valueDetails['expedientegasto_tipo'])?></td>
+                                                            <td><?php echo money_format('%(#10n', (float)$valueDetails['expedientegasto_monto'])?></td>
+                                                            <td><?php echo $valueDetails['expedientegasto_comprobante']?></td>
+                                                            <td><?php echo $valueDetails['expedientegasto_nota']?></td>
+                                                            <td><a data-toggle="tooltip" data-placement="left" title="Editar" href="javascript:;"><i  class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></i></a></td>
+                                                        </tr>
+                                                    <?php endforeach;?>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Subtotal: </td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['subtotal'])?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">I.V.A: </td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['iva'])?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Total: </td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['total'])?></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <div class="grid-title no-border">
+                        <h4><span class="semi-bold">Facturación USD</span></h4>
                         <div class="tools">
                             <a id="user-options" class="dropdown-toggle config" href="javascript:;" data-toggle="dropdown"></a>
                             <a class="collapse" href="javascript:;"></a>
