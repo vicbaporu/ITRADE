@@ -302,8 +302,7 @@ return array(
                                                     ),
                                                 ),
                                                 'may_terminate' => true,
-                                                'child_routes' => array(
-                                                    
+                                                'child_routes' => array( 
                                                     'dropzone' => array(
                                                         'type' => 'Segment',
                                                         'options' => array(
@@ -311,6 +310,26 @@ return array(
                                                             'defaults' => array(
                                                                 'controller' => 'Admin\Clientes\Controller\Expedientes',
                                                                 'action' => 'dropzone',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'dropzonedownload' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/dropzonedownload',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'dropzonedownload',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'dropzonedelete' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/dropzonedelete',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'dropzonedelete',
                                                             ),
                                                         ),
                                                     ),
@@ -331,6 +350,16 @@ return array(
                                                             'defaults' => array(
                                                                 'controller' => 'Admin\Clientes\Controller\Expedientes',
                                                                 'action' => 'getcargos',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'getcomprobantefacturacion' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/getcomprobantefacturacion',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'getcomprobantefacturacion',
                                                             ),
                                                         ),
                                                     ),

@@ -159,3 +159,13 @@ msgstr ""
 #: view/website/servicios/index.phtml:1
 msgid "Esta es la area de servicios"
 msgstr ""
+
+#: ENTIDAD EXPEDIENTE
+msgid "gastorecibir"
+msgstr "Cargo a recibir"
+
+msgid "gastoconocido"
+msgstr "Cargo conocido"
+
+msgid "cobro"
+msgstr "Cobro"

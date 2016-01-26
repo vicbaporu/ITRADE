@@ -2853,7 +2853,7 @@ abstract class BaseEmpleado extends BaseObject implements Persistent
                 $this->expedientearchivosScheduledForDeletion = clone $this->collExpedientearchivos;
                 $this->expedientearchivosScheduledForDeletion->clear();
             }
-            $this->expedientearchivosScheduledForDeletion[]= clone $expedientearchivo;
+            $this->expedientearchivosScheduledForDeletion[]= $expedientearchivo;
             $expedientearchivo->setEmpleado(null);
         }
 
