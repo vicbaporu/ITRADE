@@ -302,8 +302,7 @@ return array(
                                                     ),
                                                 ),
                                                 'may_terminate' => true,
-                                                'child_routes' => array(
-                                                    
+                                                'child_routes' => array(    
                                                     'dropzone' => array(
                                                         'type' => 'Segment',
                                                         'options' => array(
