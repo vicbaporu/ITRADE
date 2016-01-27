@@ -90,4 +90,74 @@ class AouthSession extends AbstractActionController {
     }
 
 }
+
+class ClientSession extends AbstractActionController 
+{
+
+    /**
+     * 
+     * @param array $session
+     * @param type $expirationTime
+     */
+    public function Create( array $session=null) 
+    {
+    
+        $session["idcliente"]       = array_key_exists( "idcliente", $session )         ? $session["idcliente"] : null;
+        $session["cliente_nombre"]  = array_key_exists( "cliente_nombre", $session )    ? $session["cliente_nombre"] : null;
+        $session["cliente_email"]   = array_key_exists( "cliente_email", $session )     ? $session["empleado_apellidopaterno"] : null;
+        
+        $session_client = new Container('session_client');
+
+        $session_client->idcliente            = $session["idcliente"];
+        $session_client->cliente_nombre       = $session["cliente_nombre"];
+        $session_client->email                = $session["email"];
+    }
+    
+    /**
+     * 
+     * @return boolean
+     */
+    public function Close() 
+    {
+        
+        $session_client                   = new Container('session_client');
+        $session_client->idcliente        = null;
+        $session_client->cliente_nombre   = null;
+        $session_client->cliente_email    = null;
+
+        $session_client->getManager()->getStorage()->clear('session_client');
+        
+        return true;  
+    }
+    
+    /**
+     * 
+     * @return boolean
+     */
+    public function isActive() {    
+        $session_client = new Container('session_client');
+
+        if( $session_client->idcliente != null)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * 
+     * @return array
+     */
+    public function getData() 
+    {
+        $session_client = new Container('session_client');
+        
+        return array(
+            "idcliente"         => $session_client->idcliente,
+            "cliente_nombre"    => $session_client->cliente_nombre,
+            "cliente_email"     => $session_client->cliente_email,
+        );
+    }
+
+}
+
 ?>

@@ -73,8 +73,8 @@ CREATE TABLE `cliente`
     CONSTRAINT `idempleadocomercial_cliente`
         FOREIGN KEY (`idempleadocomercial`)
         REFERENCES `empleado` (`idempleado`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
+        ON UPDATE SET NULL
+        ON DELETE SET NULL,
     CONSTRAINT `idempleadooperaciones_cliente`
         FOREIGN KEY (`idempleadooperaciones`)
         REFERENCES `empleado` (`idempleado`)
@@ -152,21 +152,15 @@ CREATE TABLE `expediente`
     `expediente_fechafin` DATE,
     `expediente_precio` DECIMAL(10,2),
     `expediente_tipo` enum('exportacion','importacion') NOT NULL,
-    `expediente_estatus` enum('abierto','cerrado') NOT NULL,
-    `expediente_folio` VARCHAR(45),
     PRIMARY KEY (`idexpediente`),
-    INDEX `idconsignatarioembarcador` (`idconsignatarioembarcador`),
     INDEX `idcliente` (`idcliente`),
+    INDEX `idconsignatarioembarcador` (`idconsignatarioembarcador`),
     CONSTRAINT `idcliente_expediente`
         FOREIGN KEY (`idcliente`)
-        REFERENCES `cliente` (`idcliente`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
+        REFERENCES `cliente` (`idcliente`),
     CONSTRAINT `idconsignatarioembarcador_expediente`
         FOREIGN KEY (`idconsignatarioembarcador`)
         REFERENCES `proveedorcliente` (`idproveedorcliente`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -366,7 +360,7 @@ CREATE TABLE `proveedorcliente`
     `proveedorcliente_tipo` enum('proveedor','cliente'),
     PRIMARY KEY (`idproveedorcliente`),
     INDEX `proveedorcliente_idcliente` (`idcliente`),
-    CONSTRAINT `idcliente_proveedorcliente`
+    CONSTRAINT `proveedorcliente_idcliente`
         FOREIGN KEY (`idcliente`)
         REFERENCES `cliente` (`idcliente`)
 ) ENGINE=InnoDB;
@@ -453,7 +447,7 @@ CREATE TABLE `servicio`
 (
     `idservicio` INTEGER NOT NULL AUTO_INCREMENT,
     `servicio_tipo` enum('importacion','exportacion') NOT NULL,
-    `servicio_medio` enum('Terrestre LTL','Terrestre FTL','Aereo','Maritimo FCL','Maritimo LCL') NOT NULL,
+    `servicio_medio` enum('terrestre','aereo','maritimo') NOT NULL,
     `servicio_nombre` VARCHAR(45) NOT NULL,
     `servicio_descripcion` VARCHAR(45),
     PRIMARY KEY (`idservicio`)
@@ -469,7 +463,8 @@ CREATE TABLE `servicioestado`
 (
     `idservicioestado` INTEGER NOT NULL AUTO_INCREMENT,
     `idservicio` INTEGER NOT NULL,
-    `servicioestado_nombre` VARCHAR(100) NOT NULL,
+    `servicioestado_nombre` VARCHAR(45) NOT NULL,
+    `servicioestado_comodin` TINYINT(1) NOT NULL,
     `servicioestado_jerarquia` INTEGER NOT NULL,
     PRIMARY KEY (`idservicioestado`),
     INDEX `idservicio` (`idservicio`),

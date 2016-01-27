@@ -675,7 +675,7 @@ class ClientesController extends AbstractActionController
      public function filesdropzoneAction(){
             
          $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/clientes';
-
+         
          $request = $this->getRequest();
          
          if($request->isPost()){
