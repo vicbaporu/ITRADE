@@ -67,7 +67,7 @@ class ClientesForm extends Form
                 'name' => 'cliente_telefono',
                 'type' => 'Text',
                 'options' => array(
-                    'label' => 'Teléfono',
+                    'label' => 'Teléfono ',
                 ),
                 'attributes' => array(
                     'required' => true,
