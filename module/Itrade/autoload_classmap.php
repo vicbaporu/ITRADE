@@ -22,6 +22,7 @@ return array(
     'Admin\Controller\IndexController'                      => __DIR__ . '/src/Admin/Controller/IndexController.php',
     'Login\Controller\LoginController'                      => __DIR__ . '/src/Admin/Login/Controller/LoginController.php',
     'Client\Controller\IndexController'                     => __DIR__ . '/src/Client/Controller/IndexController.php',
+    'Client\Files\SaveFiles'                                => __DIR__ . '/src/Client/Files/SaveFiles.php',
     'Client\Form\ClienteForm'                               => __DIR__ . '/src/Client/Form/ClienteForm.php',
     'Shared\CustomListener\AuthListener'                    => __DIR__ . '/src/Shared/CustomListener/AuthListener.php',
     'Shared\CustomListener\LangListener'                    => __DIR__ . '/src/Shared/CustomListener/LangListener.php',
