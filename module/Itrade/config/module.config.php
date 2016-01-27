@@ -13,7 +13,7 @@ return array(
     'router' => array(
         'routes' => array(
             /*
-             * ADMIN
+             * Clientes
              */
             'client' => array(
                 'type' => 'Hostname',
@@ -22,6 +22,8 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+
+
                     'home' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -29,6 +31,19 @@ return array(
                             'defaults' => array(
                                 'controller'    => 'Client\Controller\Index',
                                 'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    'login' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '[/:lang]/login',
+                            'defaults' => array(
+                                'controller'    => 'Client\Controller\Login',
+                                'action'        => 'index',
+                            ),
+                            'constraints' => array(
+                                'lang' => 'es|en',
                             ),
                         ),
                     ),
@@ -557,10 +572,10 @@ return array(
             /*
              * Website
              */
-            'Website\Controller\Index' => 'Website\Controller\IndexController',
-            'Website\Controller\Servicios' => 'Website\Controller\ServiciosController',
-            'Website\Controller\Contacto' => 'Website\Controller\ContactoController',
-            'Website\Controller\Login' => 'Website\Controller\LoginController',
+            'Website\Controller\Index'      => 'Website\Controller\IndexController',
+            'Website\Controller\Servicios'  => 'Website\Controller\ServiciosController',
+            'Website\Controller\Contacto'   => 'Website\Controller\ContactoController',
+            'Website\Controller\Login'      => 'Website\Controller\LoginController',
             /*
              * ADMIN
              */
@@ -586,7 +601,8 @@ return array(
             /*
              * CLIENT
              */
-            'Client\Controller\Index' => 'Client\Controller\IndexController',
+            'Client\Controller\Index'       => 'Client\Controller\IndexController',
+            'Client\Controller\Login'       => 'Client\Controller\LoginController',
         ),
     ),
     'view_manager' => array(
