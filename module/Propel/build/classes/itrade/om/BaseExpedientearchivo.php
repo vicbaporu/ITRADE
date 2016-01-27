@@ -66,10 +66,10 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     protected $expedientearchivo_archivo;
 
     /**
-     * The value for the expedientearchivo_nota field.
+     * The value for the expedientearchivo_size field.
      * @var        string
      */
-    protected $expedientearchivo_nota;
+    protected $expedientearchivo_size;
 
     /**
      * @var        Empleado
@@ -197,14 +197,14 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [expedientearchivo_nota] column value.
+     * Get the [expedientearchivo_size] column value.
      *
      * @return string
      */
-    public function getExpedientearchivoNota()
+    public function getExpedientearchivoSize()
     {
 
-        return $this->expedientearchivo_nota;
+        return $this->expedientearchivo_size;
     }
 
     /**
@@ -344,25 +344,25 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
     } // setExpedientearchivoArchivo()
 
     /**
-     * Set the value of [expedientearchivo_nota] column.
+     * Set the value of [expedientearchivo_size] column.
      *
      * @param  string $v new value
      * @return Expedientearchivo The current object (for fluent API support)
      */
-    public function setExpedientearchivoNota($v)
+    public function setExpedientearchivoSize($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->expedientearchivo_nota !== $v) {
-            $this->expedientearchivo_nota = $v;
-            $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA;
+        if ($this->expedientearchivo_size !== $v) {
+            $this->expedientearchivo_size = $v;
+            $this->modifiedColumns[] = ExpedientearchivoPeer::EXPEDIENTEARCHIVO_SIZE;
         }
 
 
         return $this;
-    } // setExpedientearchivoNota()
+    } // setExpedientearchivoSize()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -402,7 +402,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
             $this->expedientearchivo_fecha = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->expedientearchivo_tipo = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
             $this->expedientearchivo_archivo = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->expedientearchivo_nota = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->expedientearchivo_size = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -669,8 +669,8 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO)) {
             $modifiedColumns[':p' . $index++]  = '`expedientearchivo_archivo`';
         }
-        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA)) {
-            $modifiedColumns[':p' . $index++]  = '`expedientearchivo_nota`';
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_SIZE)) {
+            $modifiedColumns[':p' . $index++]  = '`expedientearchivo_size`';
         }
 
         $sql = sprintf(
@@ -701,8 +701,8 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
                     case '`expedientearchivo_archivo`':
                         $stmt->bindValue($identifier, $this->expedientearchivo_archivo, PDO::PARAM_STR);
                         break;
-                    case '`expedientearchivo_nota`':
-                        $stmt->bindValue($identifier, $this->expedientearchivo_nota, PDO::PARAM_STR);
+                    case '`expedientearchivo_size`':
+                        $stmt->bindValue($identifier, $this->expedientearchivo_size, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -875,7 +875,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
                 return $this->getExpedientearchivoArchivo();
                 break;
             case 6:
-                return $this->getExpedientearchivoNota();
+                return $this->getExpedientearchivoSize();
                 break;
             default:
                 return null;
@@ -912,7 +912,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
             $keys[3] => $this->getExpedientearchivoFecha(),
             $keys[4] => $this->getExpedientearchivoTipo(),
             $keys[5] => $this->getExpedientearchivoArchivo(),
-            $keys[6] => $this->getExpedientearchivoNota(),
+            $keys[6] => $this->getExpedientearchivoSize(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -979,7 +979,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
                 $this->setExpedientearchivoArchivo($value);
                 break;
             case 6:
-                $this->setExpedientearchivoNota($value);
+                $this->setExpedientearchivoSize($value);
                 break;
         } // switch()
     }
@@ -1011,7 +1011,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
         if (array_key_exists($keys[3], $arr)) $this->setExpedientearchivoFecha($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setExpedientearchivoTipo($arr[$keys[4]]);
         if (array_key_exists($keys[5], $arr)) $this->setExpedientearchivoArchivo($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setExpedientearchivoNota($arr[$keys[6]]);
+        if (array_key_exists($keys[6], $arr)) $this->setExpedientearchivoSize($arr[$keys[6]]);
     }
 
     /**
@@ -1029,7 +1029,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_FECHA, $this->expedientearchivo_fecha);
         if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_TIPO, $this->expedientearchivo_tipo);
         if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_ARCHIVO, $this->expedientearchivo_archivo);
-        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_NOTA, $this->expedientearchivo_nota);
+        if ($this->isColumnModified(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_SIZE)) $criteria->add(ExpedientearchivoPeer::EXPEDIENTEARCHIVO_SIZE, $this->expedientearchivo_size);
 
         return $criteria;
     }
@@ -1098,7 +1098,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
         $copyObj->setExpedientearchivoFecha($this->getExpedientearchivoFecha());
         $copyObj->setExpedientearchivoTipo($this->getExpedientearchivoTipo());
         $copyObj->setExpedientearchivoArchivo($this->getExpedientearchivoArchivo());
-        $copyObj->setExpedientearchivoNota($this->getExpedientearchivoNota());
+        $copyObj->setExpedientearchivoSize($this->getExpedientearchivoSize());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1272,7 +1272,7 @@ abstract class BaseExpedientearchivo extends BaseObject implements Persistent
         $this->expedientearchivo_fecha = null;
         $this->expedientearchivo_tipo = null;
         $this->expedientearchivo_archivo = null;
-        $this->expedientearchivo_nota = null;
+        $this->expedientearchivo_size = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

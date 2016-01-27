@@ -159,11 +159,11 @@
   <table name="expedientearchivo" phpName="Expedientearchivo" idMethod="native">
     <column name="idexpedientearchivo" phpName="Idexpedientearchivo" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="idexpediente" phpName="Idexpediente" type="INTEGER" required="true"/>
-    <column name="idempleado" phpName="Idempleado" type="INTEGER" required="true"/>
-    <column name="expedientearchivo_fecha" phpName="ExpedientearchivoFecha" type="TIMESTAMP" required="true"/>
-    <column name="expedientearchivo_tipo" phpName="ExpedientearchivoTipo" type="CHAR" sqlType="enum('blawb','certificadoorigen','polizaseguro','facturamercancia','facturashipper','pedimento','packinglist','msds','eir','estimaciongastos','documentosaduanales','otro')" required="true"/>
+    <column name="idempleado" phpName="Idempleado" type="INTEGER" required="false"/>
+    <column name="expedientearchivo_fecha" phpName="ExpedientearchivoFecha" type="TIMESTAMP" required="false"/>
+    <column name="expedientearchivo_tipo" phpName="ExpedientearchivoTipo" type="CHAR" sqlType="enum('blawb','certificadoorigen','polizaseguro','facturamercancia','facturashipper','pedimento','packinglist','msds','eir','estimaciongastos','documentosaduanales','otro')" required="false"/>
     <column name="expedientearchivo_archivo" phpName="ExpedientearchivoArchivo" type="LONGVARCHAR" required="true"/>
-    <column name="expedientearchivo_nota" phpName="ExpedientearchivoNota" type="LONGVARCHAR" required="false"/>
+    <column name="expedientearchivo_size" phpName="ExpedientearchivoSize" type="LONGVARCHAR" required="true"/>
     <foreign-key foreignTable="empleado" name="idempleado_expedientearchivo" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idempleado" foreign="idempleado"/>
     </foreign-key>

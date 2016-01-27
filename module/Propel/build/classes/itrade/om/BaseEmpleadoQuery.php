@@ -1193,7 +1193,7 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
      *
      * @return EmpleadoQuery The current query, for fluid interface
      */
-    public function joinExpedientearchivo($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinExpedientearchivo($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Expedientearchivo');
@@ -1228,7 +1228,7 @@ abstract class BaseEmpleadoQuery extends ModelCriteria
      *
      * @return   ExpedientearchivoQuery A secondary query class using the current class as primary query
      */
-    public function useExpedientearchivoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useExpedientearchivoQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinExpedientearchivo($relationAlias, $joinType)

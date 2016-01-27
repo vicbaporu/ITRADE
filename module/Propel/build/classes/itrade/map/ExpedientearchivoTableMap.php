@@ -40,9 +40,9 @@ class ExpedientearchivoTableMap extends TableMap
         // columns
         $this->addPrimaryKey('idexpedientearchivo', 'Idexpedientearchivo', 'INTEGER', true, null, null);
         $this->addForeignKey('idexpediente', 'Idexpediente', 'INTEGER', 'expediente', 'idexpediente', true, null, null);
-        $this->addForeignKey('idempleado', 'Idempleado', 'INTEGER', 'empleado', 'idempleado', true, null, null);
-        $this->addColumn('expedientearchivo_fecha', 'ExpedientearchivoFecha', 'TIMESTAMP', true, null, null);
-        $this->addColumn('expedientearchivo_tipo', 'ExpedientearchivoTipo', 'CHAR', true, null, null);
+        $this->addForeignKey('idempleado', 'Idempleado', 'INTEGER', 'empleado', 'idempleado', false, null, null);
+        $this->addColumn('expedientearchivo_fecha', 'ExpedientearchivoFecha', 'TIMESTAMP', false, null, null);
+        $this->addColumn('expedientearchivo_tipo', 'ExpedientearchivoTipo', 'CHAR', false, null, null);
         $this->getColumn('expedientearchivo_tipo', false)->setValueSet(array (
   0 => 'blawb',
   1 => 'certificadoorigen',
@@ -58,7 +58,7 @@ class ExpedientearchivoTableMap extends TableMap
   11 => 'otro',
 ));
         $this->addColumn('expedientearchivo_archivo', 'ExpedientearchivoArchivo', 'LONGVARCHAR', true, null, null);
-        $this->addColumn('expedientearchivo_nota', 'ExpedientearchivoNota', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('expedientearchivo_size', 'ExpedientearchivoSize', 'LONGVARCHAR', true, null, null);
         // validators
     } // initialize()
 

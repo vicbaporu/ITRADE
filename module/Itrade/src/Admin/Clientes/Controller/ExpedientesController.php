@@ -110,6 +110,25 @@ class ExpedientesController extends AbstractActionController
         }
     }
     
+    public function getcomprobantefacturacionAction(){
+        
+        $idexpedientegasto = $this->params()->fromQuery('id');
+        $entity = \ExpedientegastoQuery::create()->findPk($idexpedientegasto);
+        
+        $file_path = $entity->getExpedientegastoComprobante();
+        $file_name = explode('/files/expedientesgastos/',$entity->getExpedientegastoComprobante());
+        $file_name = $file_name[1];
+        
+        $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getExpedientegastoComprobante();
+        
+        $file_base64 = base64_encode(file_get_contents($taget_file));
+        $file_type = mime_content_type($taget_file);
+        
+        return $this->getResponse()->setContent(json_encode(array('base64' => $file_base64, 'type' => $file_type,'name' => $file_name)));
+        
+        
+    }
+    
     public function editarAction(){
         
         $request = $this->getRequest();
@@ -123,21 +142,88 @@ class ExpedientesController extends AbstractActionController
         
         if($exist){
             
-            $entity = \ExpedienteQuery::create()->findPk($idcliente);
+            $entity = \ExpedienteQuery::create()->findPk($idexpediente);
             $form = new \Admin\Clientes\Form\ExpedienteForm($idcliente);
             $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
             
             $form->get('expediente_fechainicio')->setValue($entity->getExpedienteFechainicio('d/m/Y'));
             $form->get('expediente_fechafin')->setValue($entity->getExpedienteFechafin('d/m/Y'));
             
+            //ARCHIVOS
+            $files = \ExpedientearchivoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->find();
+            $files_array = array();
+            $file = new \Expedientearchivo();
+            foreach ($files as $file){
+                $file_path = $file->getExpedientearchivoArchivo();
+                $file_name = explode('files/expedientes/'.$entity->getIdexpediente().'/', $file->getExpedientearchivoArchivo());
+                $tmp['id'] = $file->getIdexpedientearchivo();
+                $tmp['name'] = $file_name[1];
+                $tmp['size'] = $file->getExpedientearchivoSize();
+                $tmp['type']= mime_content_type($_SERVER['DOCUMENT_ROOT'].'/'.$file->getExpedientearchivoArchivo());
+                $files_array[] = $tmp;
+            }
             //FACTURACION
-            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->groupByIdgastofacturacion()->withColumn('SUM(expedientegasto_monto)','SUMA')->find();
             
-            //damos el formato para la tabla
+            //El esqueleto de nuestro arreglo
+            $totales = array(
+                'subtotal' => 0,
+                'iva' => 0,
+                'total' => 0,
+            );
+            
+            $expedientes_gastos = \ExpedientegastoQuery::create()->orderByExpedientegastoFecha(\Criteria::DESC)->filterByIdexpediente($entity->getIdexpediente())->groupByIdgastofacturacion()->find();
+
             $expedientes_gastos_array = array();
-            $expediente_gasto = new \Expedientegasto();
+            
             foreach ($expedientes_gastos as $expediente_gasto){
-                //$tmp[]
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $expedientes_gastos_array[$key] = array(
+                    'id' => $expediente_gasto->getIdgastofacturacion(),
+                    'cargos_recibir' => '', 
+                    'cargos_conocidos' => '', 
+                    'sujetos_iva' => '', 
+                    'no_sujetos_iva' => '', 
+                );
+                $expedientes_gastos_array[$key]['details'] = \ExpedientegastoQuery::create()->orderByIdexpedientegasto(\Criteria::DESC)->joinEmpleado()->withColumn('CONCAT(empleado_nombre,empleado_apellidopaterno,empleado_apallidomaterno)','empleado_nombre')->filterByIdexpediente($entity->getIdexpediente())->filterByIdgastofacturacion($expediente_gasto->getIdgastofacturacion())->find()->toArray(null,false,\BasePeer::TYPE_FIELDNAME);
+            }
+
+            //cargos conocidos
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastorecibir')->withColumn('SUM(expedientegasto_monto)','gastorecibir_total')->groupByIdgastofacturacion()->find();
+            foreach ($expedientes_gastos as $expediente_gasto){
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $expedientes_gastos_array[$key]['cargos_recibir'] = $expediente_gasto->getVirtualColumn('gastorecibir_total');
+            }
+            
+            //cargos conocidos
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastoconocido')->withColumn('SUM(expedientegasto_monto)','gastoconocido_total')->groupByIdgastofacturacion()->find();
+            foreach ($expedientes_gastos as $expediente_gasto){
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $expedientes_gastos_array[$key]['cargos_conocidos'] = $expediente_gasto->getVirtualColumn('gastoconocido_total');
+            }
+            
+            //cargos conocidos
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('cobro')->withColumn('SUM(expedientegasto_monto)','cobro_total')->groupByIdgastofacturacion()->find();
+            foreach ($expedientes_gastos as $expediente_gasto){
+                
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $iva = $expediente_gasto->getGastofacturacion()->getGastofacturacionIva();
+                
+                if($iva == 0){
+                    $expedientes_gastos_array[$key]['no_sujetos_iva'] = $expediente_gasto->getVirtualColumn('cobro_total');
+                    $calc_iva = $expediente_gasto->getVirtualColumn('cobro_total') * (float)('0.'.$iva);
+                    $cal_sub = $expediente_gasto->getVirtualColumn('cobro_total') - $calc_iva;
+                    $totales['subtotal']+=$cal_sub;
+                    $totales['iva']+=$calc_iva;
+                    $totales['total']+=$expediente_gasto->getVirtualColumn('cobro_total');
+                }else{
+                    $expedientes_gastos_array[$key]['sujetos_iva'] = $expediente_gasto->getVirtualColumn('cobro_total');
+                    $calc_iva = $expediente_gasto->getVirtualColumn('cobro_total') * (float)('0.'.$iva);
+                    $cal_sub = $expediente_gasto->getVirtualColumn('cobro_total') - $calc_iva;
+                    $totales['subtotal']+=$cal_sub;
+                    $totales['iva']+=$calc_iva;
+                    $totales['total']+=$expediente_gasto->getVirtualColumn('cobro_total');
+                }
+                
             }
             
             $cliente = $entity->getCliente();
@@ -148,6 +234,9 @@ class ExpedientesController extends AbstractActionController
                 'form' => $form,
                 'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),
                 'cliente' => $cliente,
+                'facturacion' => $expedientes_gastos_array,
+                'totales' => $totales,
+                'files' => json_encode($files_array),
             ));
             return $view_model;
         }else{
@@ -234,6 +323,32 @@ class ExpedientesController extends AbstractActionController
         
         $storeFolder = $_SERVER['DOCUMENT_ROOT'].'/files/expedientes';
         
+         $request = $this->getRequest();
+        
+         if($request->isPost()){
+             
+             $files = $request->getFiles();
+            
+             $tempFile = $files['file']['tmp_name'];
+             
+             $targetFile =  $storeFolder. '/'. $idexpediente.'/'.$_FILES['file']['name'];
+             
+             if (!file_exists($storeFolder. '/'. $idexpediente)) {
+                mkdir($storeFolder. '/'. $idexpediente, 0777, true);
+             }
+             
+             move_uploaded_file($tempFile,$targetFile);
+             
+             //Guardamos en nuestra base de datos
+             $entity  = new \Expedientearchivo();
+             $entity->setIdexpediente($idexpediente);
+             $entity->setExpedientearchivoArchivo('/files/expedientes'. '/'. $idexpediente.'/'.$_FILES['file']['name']);
+             $entity->setExpedientearchivoSize($_FILES['file']['size']);
+             
+             $entity->save();
+             
+             return $this->getResponse()->setContent(json_encode(array('response' => true, 'id' => $entity->getExpedientearchivoArchivo())));
+         }
         
         
         
@@ -334,5 +449,57 @@ class ExpedientesController extends AbstractActionController
        
         return $this->getResponse()->setContent(json_encode($result));
 
+    }
+    
+    public function dropzonedownloadAction(){
+        
+         $request = $this->getRequest();
+         
+         if($request->isPost()){
+             
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $entity = \ExpedientearchivoQuery::create()->findPk($id);
+            
+            $file_path = $entity->getExpedientearchivoArchivo();
+            $file_name = explode('/files/expedientes/'.$entity->getIdexpediente().'/', $entity->getExpedientearchivoArchivo());
+            $file_name = $file_name[1];
+            
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getExpedientearchivoArchivo();
+            
+            $file_base64 = base64_encode(file_get_contents($taget_file));
+            $file_type = mime_content_type($taget_file);
+            
+            return $this->getResponse()->setContent(json_encode(array('base64' => $file_base64, 'type' => $file_type,'name' => $file_name)));
+            
+             
+         }
+        
+    }
+    
+    public function dropzonedeleteAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            //obtnemos el id del archivo
+            $id = $post_data['id'];
+            $entity = \ExpedientearchivoQuery::create()->findPk($id);
+            
+            //Eliminamos del sistema de archivos
+            $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getExpedientearchivoArchivo();
+            unlink($taget_file);
+            
+            //Eliminamos de la base de datos
+            $entity->delete();
+            
+            return $this->getResponse()->setContent(json_encode(true));
+                       
+        }
     }
 }

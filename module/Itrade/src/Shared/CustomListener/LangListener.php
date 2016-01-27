@@ -31,7 +31,7 @@ class LangListener implements ListenerAggregateInterface
     {
         
     	$controller_params = $e->getRouteMatch()->getParams();
-
+        
         if(isset($controller_params['lang'])){
             
             $lang = $controller_params['lang'];
@@ -41,6 +41,9 @@ class LangListener implements ListenerAggregateInterface
             if($lang == 'en'){
                 $translator->setLocale($lang.'_US');
             }
+        }else{
+            $translator = $e->getApplication()->getServiceManager()->get('translator');
+            $translator->setLocale('en_US');
         }
         
         
