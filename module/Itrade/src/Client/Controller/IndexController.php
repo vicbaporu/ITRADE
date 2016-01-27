@@ -78,12 +78,13 @@ class IndexController extends AbstractActionController
             //Creamos el directorio del cliente si no existe
             if(!file_exists($upload_folder))
                 mkdir($upload_folder);
-            
+
             $names = array
             (
                 'cliente_padron',
                 'cliente_encargoconferido',
             );
+            /*
             foreach ($post_files as $file ) 
             {
                 $i = 0;
@@ -98,11 +99,26 @@ class IndexController extends AbstractActionController
                 }
                 $i++;
             }
-            
+            */
+
+            //Verificamos que el usuario haya subido algún archivo
+            $file = $post_files['cliente_padron'];
+            if($file['name'] != "")
+            {
+                 if( !$fileClass->validateFile($file) == "") 
+                    //Si el archivo que se quiso subir tiene error
+                    $message = $message.$fileClass->validateFile($file);
+                else
+                {
+                    //Si se valido que el archivo sea correcto
+                    $fileClass->saveFile($upload_folder,$file,'cliente_padron');
+                    //Insertamos a la base de datos
+                    $entity->setClientePadronimportador("/files/clientes/".$id."/cliente_padron.".$fileClass->getType($file));
+                }
+            }
 
 
-
-            
+            $debug = $message;
             //copy($post_files['cliente_padron']['tmp_name'], $upload_folder);
 
 
@@ -120,6 +136,8 @@ class IndexController extends AbstractActionController
 			->find();	  		
 	  		*/
     	}
+        else
+            $message = "";
 
 
     	$mexico_states = \Shared\GeneralFunction\Geolocation::getMexicoStates();
