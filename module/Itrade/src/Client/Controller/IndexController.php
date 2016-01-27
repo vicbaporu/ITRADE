@@ -105,6 +105,7 @@ class IndexController extends AbstractActionController
             $file = $post_files['cliente_padron'];
             if($file['name'] != "")
             {
+                $debug  = $file;
                  if( !$fileClass->validateFile($file) == "") 
                     //Si el archivo que se quiso subir tiene error
                     $message = $message.$fileClass->validateFile($file);
