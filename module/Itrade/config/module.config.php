@@ -343,6 +343,26 @@ return array(
                                                             ),
                                                         ),
                                                     ),
+                                                    'editarcargo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/editarcargo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'editarcargo',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'eliminarcargo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/eliminarcargo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'eliminarcargo',
+                                                            ),
+                                                        ),
+                                                    ),
                                                     'getcargos' => array(
                                                         'type' => 'Segment',
                                                         'options' => array(

@@ -162,16 +162,25 @@ class ExpedientesController extends AbstractActionController
                 $tmp['type']= mime_content_type($_SERVER['DOCUMENT_ROOT'].'/'.$file->getExpedientearchivoArchivo());
                 $files_array[] = $tmp;
             }
-            //FACTURACION
+            //FACTURACION MXN
             
             //El esqueleto de nuestro arreglo
             $totales = array(
                 'subtotal' => 0,
                 'iva' => 0,
                 'total' => 0,
+                'utilidad' => 0,
             );
             
-            $expedientes_gastos = \ExpedientegastoQuery::create()->orderByExpedientegastoFecha(\Criteria::DESC)->filterByIdexpediente($entity->getIdexpediente())->groupByIdgastofacturacion()->find();
+            //El esqueleto de nuestro arreglo
+            $totales_usd = array(
+                'subtotal' => 0,
+                'iva' => 0,
+                'total' => 0,
+                'utilidad' => 0,
+            );
+            
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('mxn')->orderByExpedientegastoFecha(\Criteria::DESC)->filterByIdexpediente($entity->getIdexpediente())->groupByIdgastofacturacion()->find();
 
             $expedientes_gastos_array = array();
             
@@ -184,26 +193,31 @@ class ExpedientesController extends AbstractActionController
                     'sujetos_iva' => '', 
                     'no_sujetos_iva' => '', 
                 );
-                $expedientes_gastos_array[$key]['details'] = \ExpedientegastoQuery::create()->orderByIdexpedientegasto(\Criteria::DESC)->joinEmpleado()->withColumn('CONCAT(empleado_nombre,empleado_apellidopaterno,empleado_apallidomaterno)','empleado_nombre')->filterByIdexpediente($entity->getIdexpediente())->filterByIdgastofacturacion($expediente_gasto->getIdgastofacturacion())->find()->toArray(null,false,\BasePeer::TYPE_FIELDNAME);
+                $expedientes_gastos_array[$key]['details'] = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('mxn')->orderByIdexpedientegasto(\Criteria::DESC)->joinEmpleado()->withColumn('CONCAT(empleado_nombre,empleado_apellidopaterno,empleado_apallidomaterno)','empleado_nombre')->filterByIdexpediente($entity->getIdexpediente())->filterByIdgastofacturacion($expediente_gasto->getIdgastofacturacion())->find()->toArray(null,false,\BasePeer::TYPE_FIELDNAME);
             }
 
             //cargos conocidos
-            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastorecibir')->withColumn('SUM(expedientegasto_monto)','gastorecibir_total')->groupByIdgastofacturacion()->find();
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('mxn')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastorecibir')->withColumn('SUM(expedientegasto_monto)','gastorecibir_total')->groupByIdgastofacturacion()->find();
             foreach ($expedientes_gastos as $expediente_gasto){
                 $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
                 $expedientes_gastos_array[$key]['cargos_recibir'] = $expediente_gasto->getVirtualColumn('gastorecibir_total');
             }
             
             //cargos conocidos
-            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastoconocido')->withColumn('SUM(expedientegasto_monto)','gastoconocido_total')->groupByIdgastofacturacion()->find();
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('mxn')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastoconocido')->withColumn('SUM(expedientegasto_monto)','gastoconocido_total')->groupByIdgastofacturacion()->find();
+            $cargos_conocidos = 0.00;
             foreach ($expedientes_gastos as $expediente_gasto){
+                $cargos_conocidos = $expediente_gasto->getVirtualColumn('gastoconocido_total');
                 $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
                 $expedientes_gastos_array[$key]['cargos_conocidos'] = $expediente_gasto->getVirtualColumn('gastoconocido_total');
             }
             
             //cargos conocidos
-            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('cobro')->withColumn('SUM(expedientegasto_monto)','cobro_total')->groupByIdgastofacturacion()->find();
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('mxn')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('cobro')->withColumn('SUM(expedientegasto_monto)','cobro_total')->groupByIdgastofacturacion()->find();
+            $cobros = 0.00;
             foreach ($expedientes_gastos as $expediente_gasto){
+                
+                $cobros = $expediente_gasto->getVirtualColumn('cobro_total');
                 
                 $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
                 $iva = $expediente_gasto->getGastofacturacion()->getGastofacturacionIva();
@@ -214,17 +228,79 @@ class ExpedientesController extends AbstractActionController
                     $cal_sub = $expediente_gasto->getVirtualColumn('cobro_total') - $calc_iva;
                     $totales['subtotal']+=$cal_sub;
                     $totales['iva']+=$calc_iva;
-                    $totales['total']+=$expediente_gasto->getVirtualColumn('cobro_total');
+                    $totales['total']+=$expediente_gasto->getVirtualColumn('cobro_total')+ $calc_iva;
                 }else{
                     $expedientes_gastos_array[$key]['sujetos_iva'] = $expediente_gasto->getVirtualColumn('cobro_total');
                     $calc_iva = $expediente_gasto->getVirtualColumn('cobro_total') * (float)('0.'.$iva);
-                    $cal_sub = $expediente_gasto->getVirtualColumn('cobro_total') - $calc_iva;
+                    $cal_sub = $expediente_gasto->getVirtualColumn('cobro_total');
                     $totales['subtotal']+=$cal_sub;
                     $totales['iva']+=$calc_iva;
-                    $totales['total']+=$expediente_gasto->getVirtualColumn('cobro_total');
+                    $totales['total']+=$expediente_gasto->getVirtualColumn('cobro_total') + $calc_iva;
                 }
                 
             }
+            $totales['utilidad'] = $cobros - $cargos_conocidos;
+            
+            //FACTURACION USD
+            
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('usd')->filterByExpedientegastoMoneda('usd')->orderByExpedientegastoFecha(\Criteria::DESC)->filterByIdexpediente($entity->getIdexpediente())->groupByIdgastofacturacion()->find();
+            
+            $expedientes_gastos_usd_array = array();
+            
+            foreach ($expedientes_gastos as $expediente_gasto){
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $expedientes_gastos_usd_array[$key] = array(
+                    'id' => $expediente_gasto->getIdgastofacturacion(),
+                    'cargos_recibir' => '', 
+                    'cargos_conocidos' => '', 
+                    'sujetos_iva' => '', 
+                    'no_sujetos_iva' => '', 
+                );
+                $expedientes_gastos_usd_array[$key]['details'] = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('usd')->orderByIdexpedientegasto(\Criteria::DESC)->joinEmpleado()->withColumn('CONCAT(empleado_nombre,empleado_apellidopaterno,empleado_apallidomaterno)','empleado_nombre')->filterByIdexpediente($entity->getIdexpediente())->filterByIdgastofacturacion($expediente_gasto->getIdgastofacturacion())->find()->toArray(null,false,\BasePeer::TYPE_FIELDNAME);
+            }
+            
+            //cargos conocidos
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('usd')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastorecibir')->withColumn('SUM(expedientegasto_monto)','gastorecibir_total')->groupByIdgastofacturacion()->find();
+            foreach ($expedientes_gastos as $expediente_gasto){
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $expedientes_gastos_usd_array[$key]['cargos_recibir'] = $expediente_gasto->getVirtualColumn('gastorecibir_total');
+            }
+            
+            //cargos conocidos
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('usd')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('gastoconocido')->withColumn('SUM(expedientegasto_monto)','gastoconocido_total')->groupByIdgastofacturacion()->find();
+            $cargos_conocidos = 0.00;
+            foreach ($expedientes_gastos as $expediente_gasto){
+                $cargos_conocidos = $expediente_gasto->getVirtualColumn('gastoconocido_total');
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $expedientes_gastos_usd_array[$key]['cargos_conocidos'] = $expediente_gasto->getVirtualColumn('gastoconocido_total');
+            }
+            
+            //cargos conocidos
+            $cobros = 0.00;
+            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('usd')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('cobro')->withColumn('SUM(expedientegasto_monto)','cobro_total')->groupByIdgastofacturacion()->find();
+            foreach ($expedientes_gastos as $expediente_gasto){
+                $cobros = $expediente_gasto->getVirtualColumn('cobro_total');
+                $key = $expediente_gasto->getGastofacturacion()->getGastofacturacionNombre();
+                $iva = $expediente_gasto->getGastofacturacion()->getGastofacturacionIva();
+                
+                if($iva == 0){
+                    $expedientes_gastos_usd_array[$key]['no_sujetos_iva'] = $expediente_gasto->getVirtualColumn('cobro_total');
+                    $calc_iva = $expediente_gasto->getVirtualColumn('cobro_total') * (float)('0.'.$iva);
+                    $cal_sub = $expediente_gasto->getVirtualColumn('cobro_total') - $calc_iva;
+                    $totales_usd['subtotal']+=$cal_sub;
+                    $totales_usd['iva']+=$calc_iva;
+                    $totales_usd['total']+=$expediente_gasto->getVirtualColumn('cobro_total')+ $calc_iva;
+                }else{
+                    $expedientes_gastos_usd_array[$key]['sujetos_iva'] = $expediente_gasto->getVirtualColumn('cobro_total');
+                    $calc_iva = $expediente_gasto->getVirtualColumn('cobro_total') * (float)('0.'.$iva);
+                    $cal_sub = $expediente_gasto->getVirtualColumn('cobro_total');
+                    $totales_usd['subtotal']+=$cal_sub;
+                    $totales_usd['iva']+=$calc_iva;
+                    $totales_usd['total']+=$expediente_gasto->getVirtualColumn('cobro_total') + $calc_iva;
+                }
+                
+            }
+            $totales_usd['utilidad'] = $cobros - $cargos_conocidos;
             
             $cliente = $entity->getCliente();
             $view_model = new ViewModel();
@@ -236,6 +312,8 @@ class ExpedientesController extends AbstractActionController
                 'cliente' => $cliente,
                 'facturacion' => $expedientes_gastos_array,
                 'totales' => $totales,
+                'facturacion_usd' => $expedientes_gastos_usd_array,
+                'totales_usd' => $totales_usd,
                 'files' => json_encode($files_array),
             ));
             return $view_model;
@@ -368,8 +446,7 @@ class ExpedientesController extends AbstractActionController
             $auth = $auth->getData();
             
             $entity = new \Expedientegasto();
-               
-                     
+      
             foreach($post_data as $key => $value){
                 if(\ExpedientegastoPeer::getTableMap()->hasColumn($key) && !empty($value) && $key != 'expedientegasto_fecha'){
                     $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
@@ -405,8 +482,9 @@ class ExpedientesController extends AbstractActionController
             
 
         }
-        
         $idexpediente = $this->params()->fromQuery('id');
+        $moneda = $this->params()->fromQuery('moneda');
+        
         $entity = \ExpedienteQuery::create()->findPk($idexpediente);
         
         //LAS CATEGORIAS DE NUESTROS GASTOS
@@ -427,7 +505,7 @@ class ExpedientesController extends AbstractActionController
         }
         
         //INSTANCIAMOS NUESTRO FORMULARIO
-        $form = new \Admin\Clientes\Form\ExpedientegastoForm($idexpediente,$categoriasgasto_array,$proveedores_array);
+        $form = new \Admin\Clientes\Form\ExpedientegastoForm($idexpediente,$categoriasgasto_array,$proveedores_array,$moneda);
         
         //Enviamos a la vista
         $view_model = new ViewModel();
@@ -438,6 +516,139 @@ class ExpedientesController extends AbstractActionController
         
         return $view_model;
                 
+
+    }
+    
+    public function eliminarcargoAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $id = $request->getPost('id');
+            
+            $entity = \ExpedientegastoQuery::create()->findPk($id);
+            
+            $entity->delete();
+            
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro eliminado exitosamente!');
+            
+            if($entity->isDeleted()){
+                return $this->getResponse()->setContent(json_encode(true));
+            }
+
+        }
+        
+        $id = $this->params()->fromQuery('id');
+
+        //RETORNAMOS A NUESTRA VISTA
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true);
+        $view_model->setTemplate('/clientes/expedientes/modal/eliminarcargo');
+        
+        return $view_model;
+
+    }
+    
+    public function editarcargoAction(){
+        
+        $request = $this->getRequest();
+        
+        $idgasto = $this->params()->fromQuery('id');
+        $entity = \ExpedientegastoQuery::create()->findPk($idgasto);
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            $post_files = $request->getFiles();
+            
+            $auth = new \Shared\Session\AouthSession();
+            $auth = $auth->getData();
+            
+           
+            $entity = \ExpedientegastoQuery::create()->findPk($post_data['idexpedientegasto']);
+            
+            foreach($post_data as $key => $value){
+                if(\ExpedientegastoPeer::getTableMap()->hasColumn($key) && !empty($value) && $key != 'expedientegasto_fecha'){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            //LA FECHA
+            $expedientegasto_fecha = \DateTime::createFromFormat('d/m/Y', $post_data['expedientegasto_fecha']);
+            $entity->setExpedientegastoFecha($expedientegasto_fecha);
+
+            $entity->setIdempleado($auth['idempleado']);
+            
+            $entity->save();
+            
+            //El comprobante
+            if(!empty($post_files['expedientegasto_comprobante']['name'])){
+                
+                $target_path = "/files/expedientesgastos/";
+                $target_path = $target_path . $entity->getIdexpedientegasto() .'_'.basename( $post_files['expedientegasto_comprobante']['name']);
+                
+                if(move_uploaded_file($_FILES['expedientegasto_comprobante']['tmp_name'],$_SERVER['DOCUMENT_ROOT'].$target_path)){
+                    $entity->setExpedientegastoComprobante($target_path);
+                    $entity->save();
+                }
+
+            }
+            
+
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toUrl('/clientes/ver/'.$entity->getExpediente()->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente());
+            
+        }
+        
+        //LAS CATEGORIAS DE NUESTROS GASTOS
+        $categoriasgasto = \CategoriagastoQuery::create()->find();
+        $categoriasgasto_array = array();
+        foreach ($categoriasgasto as $categoriagastos){
+            $id = $categoriagastos->getIdcategoriagasto();
+            $categoriasgasto_array[$id] = $categoriagastos->getCategoriagastoNombre();
+        }
+        
+        //LOS PROVEEDORES
+        $proveedores = \ProveedoritradeQuery::create()->filterByIdproveedoritrade(1,  \Criteria::NOT_EQUAL)->find();
+        $proveedores_array = array();
+        foreach ($proveedores as $proveedor){
+            $id = $proveedor->getIdproveedoritrade();
+            $proveedores_array[$id] = $proveedor->getProveedoritradeNombre();
+        }
+        
+        //gastos de facturacion
+        $gastos_facturacion = \GastofacturacionQuery::create()->filterByIdcategoriagasto($entity->getGastofacturacion()->getIdcategoriagasto())->find();
+        $gastos_facturacion_array = array();
+        foreach ($gastos_facturacion as $gasto_facturacion){
+            $id = $gasto_facturacion->getIdgastofacturacion();
+            $gastos_facturacion_array[$id] = $gasto_facturacion->getGastofacturacionNombre();
+        }
+
+        //INSTANCIAMOS NUESTRO FORMULARIO
+        $form = new \Admin\Clientes\Form\ExpedientegastoForm($entity->getIdexpediente(),$categoriasgasto_array,$proveedores_array,$entity->getExpedientegastoMoneda(),$gastos_facturacion_array);
+        
+        //Ponemos nuetros datos al formulario....
+        $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+        
+        $form->get('expedientegasto_fecha')->setValue($entity->getExpedientegastoFecha('d/m/Y'));
+        $form->get('idcategoriagasto')->setValue($entity->getGastofacturacion()->getIdcategoriagasto());
+        $form->get('idgastofacturacion')->setValue($entity->getIdgastofacturacion());
+        $form->get('idgastofacturacion')->setAttribute('disabled', false);
+        
+        //Enviamos a la vista
+        $view_model = new ViewModel(); 
+        $view_model->setTerminal(true)
+                   ->setVariable('form', $form)
+                   ->setVariable('entity', $entity) 
+                   ->setTemplate('/clientes/expedientes/modal/editarcargo');
+        
+        return $view_model;
 
     }
 

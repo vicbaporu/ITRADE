@@ -53,6 +53,11 @@ class ExpedientegastoTableMap extends TableMap
 ));
         $this->addColumn('expedientegasto_comprobante', 'ExpedientegastoComprobante', 'LONGVARCHAR', false, null, null);
         $this->addColumn('expedientegasto_nota', 'ExpedientegastoNota', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('expedientegasto_moneda', 'ExpedientegastoMoneda', 'CHAR', true, null, null);
+        $this->getColumn('expedientegasto_moneda', false)->setValueSet(array (
+  0 => 'mxn',
+  1 => 'usd',
+));
         // validators
     } // initialize()
 

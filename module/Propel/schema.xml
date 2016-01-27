@@ -119,10 +119,11 @@
     <column name="expediente_factura" phpName="ExpedienteFactura" type="VARCHAR" size="45" required="false"/>
     <column name="expediente_fechainicio" phpName="ExpedienteFechainicio" type="DATE" required="true"/>
     <column name="expediente_fechafin" phpName="ExpedienteFechafin" type="DATE" required="false"/>
-    <column name="expediente_precio" phpName="ExpedientePrecio" type="DECIMAL" size="10" scale="2" required="false"/>
+    <column name="expediente_preciomxn" phpName="ExpedientePreciomxn" type="DECIMAL" size="10" scale="2" required="false"/>
     <column name="expediente_tipo" phpName="ExpedienteTipo" type="CHAR" sqlType="enum('exportacion','importacion')" required="true"/>
     <column name="expediente_estatus" phpName="ExpedienteEstatus" type="CHAR" sqlType="enum('abierto','cerrado')" required="true"/>
     <column name="expediente_folio" phpName="ExpedienteFolio" type="VARCHAR" size="45" required="false"/>
+    <column name="expediente_preciousd" phpName="ExpedientePreciousd" type="DECIMAL" size="10" scale="2" required="false"/>
     <foreign-key foreignTable="cliente" name="idcliente_expediente" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>
@@ -191,6 +192,7 @@
     <column name="expedientegasto_tipo" phpName="ExpedientegastoTipo" type="CHAR" sqlType="enum('gastorecibir','gastoconocido','cobro')" required="true"/>
     <column name="expedientegasto_comprobante" phpName="ExpedientegastoComprobante" type="LONGVARCHAR" required="false"/>
     <column name="expedientegasto_nota" phpName="ExpedientegastoNota" type="LONGVARCHAR" required="false"/>
+    <column name="expedientegasto_moneda" phpName="ExpedientegastoMoneda" type="CHAR" sqlType="enum('mxn','usd')" required="true"/>
     <foreign-key foreignTable="empleado" name="idempleado_expedientegasto" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idempleado" foreign="idempleado"/>
     </foreign-key>

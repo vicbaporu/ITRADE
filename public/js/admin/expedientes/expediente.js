@@ -199,11 +199,13 @@
 
                 
                 //NUEVO CARGO
-                $container.find('a#nuevo_cargo').on('click',function(){
-
+                $container.find('a#nuevo_cargo_mxn,a#nuevo_cargo_usd').on('click',function(){
+                    var id = $(this).attr('id');
+                    var moneda = id.split('nuevo_cargo_');
+                    var moneda = moneda[1];
                     $.ajax({
                             url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/nuevocargo',
-                            data:{id:idexpediente},
+                            data:{id:idexpediente,moneda:moneda},
                             success:function(source){
                                  source = $('<div>'+source+'</div>');
 
@@ -248,7 +250,6 @@
                                 source.find('input[name=expedientegasto_monto]').numeric();
 
                                 //INICIALIZAMOS NUESTRO CALENDARIO
-                                console.log(source.find('.input-append.date'));
                                 source.find('.input-append.date').datepicker({
                                     autoclose: true,
                                     todayHighlight: true,
@@ -262,7 +263,100 @@
                         });     
 
                 });
+                
+                //EDITAR CARGO
+                $container.find('a.editar_cargo').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/editarcargo',
+                        data:{id:id},
+                        success:function(source){
+                            source = $('<div>'+source+'</div>');
+                            
+                            //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                           source.find('select[name=idcategoriagasto]').select2().on('change', function (e) {
 
+                                    $container.find('select[name=idgastofacturacion] option:not(:first-child)').remove();
+                                    $("select[name=idgastofacturacion]").select2("val", "");
+
+                                    var idcategoriagasto = e.val;
+
+                                    if(idcategoriagasto != ""){
+
+                                        $.ajax({
+                                            dataType:'json',
+                                            url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/getcargos',
+                                            data:{idcategoria:idcategoriagasto},
+                                            success:function(data)
+                                            {
+                                                $.each(data,function(){
+                                                    var option = $('<option>').text(this.gastofacturacion_nombre);
+                                                    option.attr('value',this.idgastofacturacion)
+                                                    source.find('select[name=idgastofacturacion]').append(option);
+                                                });
+                                                source.find('select[name=idgastofacturacion]').select2("enable",true);
+                                            }
+                                        });
+                                    }else {
+
+                                        source.find('select[name=idgastofacturacion]').select2("enable", false);
+
+                                    }
+                                });
+                           
+                           //NUMERIC DEL CAMPO MONTO
+                            source.find('input[name=expedientegasto_monto]').numeric();
+
+                            //INICIALIZAMOS NUESTRO CALENDARIO
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
+                                
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                    
+                    
+                });
+                
+                //ELIMINAR CARGO
+                $container.find('a.eliminar_cargo').on('click',function(){
+                    
+                    var id = $(this).closest('tr').attr('id');
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarcargo',
+                        data:{id:id},
+                        success: function (source) {
+                            source = $('<div>'+source+'</div>');
+                            source.find('button[btn-action=eliminar]').on('click', function () {
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarcargo',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {id: id},
+                                    success: function (data) {
+                                        if (data) {
+                                            window.location.replace('/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente);
+                                        }
+                                    }
+                                });
+                            });
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                    
+                });
+                
                 //DATATABLE FACTURACION
 
                /*

@@ -24,13 +24,13 @@ abstract class BaseExpedientegastoPeer
     const TM_CLASS = 'ExpedientegastoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 10;
+    const NUM_COLUMNS = 11;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 10;
+    const NUM_HYDRATE_COLUMNS = 11;
 
     /** the column name for the idexpedientegasto field */
     const IDEXPEDIENTEGASTO = 'expedientegasto.idexpedientegasto';
@@ -62,10 +62,17 @@ abstract class BaseExpedientegastoPeer
     /** the column name for the expedientegasto_nota field */
     const EXPEDIENTEGASTO_NOTA = 'expedientegasto.expedientegasto_nota';
 
+    /** the column name for the expedientegasto_moneda field */
+    const EXPEDIENTEGASTO_MONEDA = 'expedientegasto.expedientegasto_moneda';
+
     /** The enumerated values for the expedientegasto_tipo field */
     const EXPEDIENTEGASTO_TIPO_GASTORECIBIR = 'gastorecibir';
     const EXPEDIENTEGASTO_TIPO_GASTOCONOCIDO = 'gastoconocido';
     const EXPEDIENTEGASTO_TIPO_COBRO = 'cobro';
+
+    /** The enumerated values for the expedientegasto_moneda field */
+    const EXPEDIENTEGASTO_MONEDA_MXN = 'mxn';
+    const EXPEDIENTEGASTO_MONEDA_USD = 'usd';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -86,12 +93,12 @@ abstract class BaseExpedientegastoPeer
      * e.g. ExpedientegastoPeer::$fieldNames[ExpedientegastoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto', 'Idexpediente', 'Idgastofacturacion', 'Idproveedoritrade', 'Idempleado', 'ExpedientegastoFecha', 'ExpedientegastoMonto', 'ExpedientegastoTipo', 'ExpedientegastoComprobante', 'ExpedientegastoNota', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'idempleado', 'expedientegastoFecha', 'expedientegastoMonto', 'expedientegastoTipo', 'expedientegastoComprobante', 'expedientegastoNota', ),
-        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO, ExpedientegastoPeer::IDEXPEDIENTE, ExpedientegastoPeer::IDGASTOFACTURACION, ExpedientegastoPeer::IDPROVEEDORITRADE, ExpedientegastoPeer::IDEMPLEADO, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE, ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO', 'IDEXPEDIENTE', 'IDGASTOFACTURACION', 'IDPROVEEDORITRADE', 'IDEMPLEADO', 'EXPEDIENTEGASTO_FECHA', 'EXPEDIENTEGASTO_MONTO', 'EXPEDIENTEGASTO_TIPO', 'EXPEDIENTEGASTO_COMPROBANTE', 'EXPEDIENTEGASTO_NOTA', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'idempleado', 'expedientegasto_fecha', 'expedientegasto_monto', 'expedientegasto_tipo', 'expedientegasto_comprobante', 'expedientegasto_nota', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto', 'Idexpediente', 'Idgastofacturacion', 'Idproveedoritrade', 'Idempleado', 'ExpedientegastoFecha', 'ExpedientegastoMonto', 'ExpedientegastoTipo', 'ExpedientegastoComprobante', 'ExpedientegastoNota', 'ExpedientegastoMoneda', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'idempleado', 'expedientegastoFecha', 'expedientegastoMonto', 'expedientegastoTipo', 'expedientegastoComprobante', 'expedientegastoNota', 'expedientegastoMoneda', ),
+        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO, ExpedientegastoPeer::IDEXPEDIENTE, ExpedientegastoPeer::IDGASTOFACTURACION, ExpedientegastoPeer::IDPROVEEDORITRADE, ExpedientegastoPeer::IDEMPLEADO, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE, ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA, ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO', 'IDEXPEDIENTE', 'IDGASTOFACTURACION', 'IDPROVEEDORITRADE', 'IDEMPLEADO', 'EXPEDIENTEGASTO_FECHA', 'EXPEDIENTEGASTO_MONTO', 'EXPEDIENTEGASTO_TIPO', 'EXPEDIENTEGASTO_COMPROBANTE', 'EXPEDIENTEGASTO_NOTA', 'EXPEDIENTEGASTO_MONEDA', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto', 'idexpediente', 'idgastofacturacion', 'idproveedoritrade', 'idempleado', 'expedientegasto_fecha', 'expedientegasto_monto', 'expedientegasto_tipo', 'expedientegasto_comprobante', 'expedientegasto_nota', 'expedientegasto_moneda', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
     );
 
     /**
@@ -101,12 +108,12 @@ abstract class BaseExpedientegastoPeer
      * e.g. ExpedientegastoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto' => 0, 'Idexpediente' => 1, 'Idgastofacturacion' => 2, 'Idproveedoritrade' => 3, 'Idempleado' => 4, 'ExpedientegastoFecha' => 5, 'ExpedientegastoMonto' => 6, 'ExpedientegastoTipo' => 7, 'ExpedientegastoComprobante' => 8, 'ExpedientegastoNota' => 9, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'idempleado' => 4, 'expedientegastoFecha' => 5, 'expedientegastoMonto' => 6, 'expedientegastoTipo' => 7, 'expedientegastoComprobante' => 8, 'expedientegastoNota' => 9, ),
-        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO => 0, ExpedientegastoPeer::IDEXPEDIENTE => 1, ExpedientegastoPeer::IDGASTOFACTURACION => 2, ExpedientegastoPeer::IDPROVEEDORITRADE => 3, ExpedientegastoPeer::IDEMPLEADO => 4, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA => 5, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO => 6, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO => 7, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE => 8, ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA => 9, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO' => 0, 'IDEXPEDIENTE' => 1, 'IDGASTOFACTURACION' => 2, 'IDPROVEEDORITRADE' => 3, 'IDEMPLEADO' => 4, 'EXPEDIENTEGASTO_FECHA' => 5, 'EXPEDIENTEGASTO_MONTO' => 6, 'EXPEDIENTEGASTO_TIPO' => 7, 'EXPEDIENTEGASTO_COMPROBANTE' => 8, 'EXPEDIENTEGASTO_NOTA' => 9, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'idempleado' => 4, 'expedientegasto_fecha' => 5, 'expedientegasto_monto' => 6, 'expedientegasto_tipo' => 7, 'expedientegasto_comprobante' => 8, 'expedientegasto_nota' => 9, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedientegasto' => 0, 'Idexpediente' => 1, 'Idgastofacturacion' => 2, 'Idproveedoritrade' => 3, 'Idempleado' => 4, 'ExpedientegastoFecha' => 5, 'ExpedientegastoMonto' => 6, 'ExpedientegastoTipo' => 7, 'ExpedientegastoComprobante' => 8, 'ExpedientegastoNota' => 9, 'ExpedientegastoMoneda' => 10, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'idempleado' => 4, 'expedientegastoFecha' => 5, 'expedientegastoMonto' => 6, 'expedientegastoTipo' => 7, 'expedientegastoComprobante' => 8, 'expedientegastoNota' => 9, 'expedientegastoMoneda' => 10, ),
+        BasePeer::TYPE_COLNAME => array (ExpedientegastoPeer::IDEXPEDIENTEGASTO => 0, ExpedientegastoPeer::IDEXPEDIENTE => 1, ExpedientegastoPeer::IDGASTOFACTURACION => 2, ExpedientegastoPeer::IDPROVEEDORITRADE => 3, ExpedientegastoPeer::IDEMPLEADO => 4, ExpedientegastoPeer::EXPEDIENTEGASTO_FECHA => 5, ExpedientegastoPeer::EXPEDIENTEGASTO_MONTO => 6, ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO => 7, ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE => 8, ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA => 9, ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA => 10, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEGASTO' => 0, 'IDEXPEDIENTE' => 1, 'IDGASTOFACTURACION' => 2, 'IDPROVEEDORITRADE' => 3, 'IDEMPLEADO' => 4, 'EXPEDIENTEGASTO_FECHA' => 5, 'EXPEDIENTEGASTO_MONTO' => 6, 'EXPEDIENTEGASTO_TIPO' => 7, 'EXPEDIENTEGASTO_COMPROBANTE' => 8, 'EXPEDIENTEGASTO_NOTA' => 9, 'EXPEDIENTEGASTO_MONEDA' => 10, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedientegasto' => 0, 'idexpediente' => 1, 'idgastofacturacion' => 2, 'idproveedoritrade' => 3, 'idempleado' => 4, 'expedientegasto_fecha' => 5, 'expedientegasto_monto' => 6, 'expedientegasto_tipo' => 7, 'expedientegasto_comprobante' => 8, 'expedientegasto_nota' => 9, 'expedientegasto_moneda' => 10, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
     );
 
     /** The enumerated values for this table */
@@ -115,6 +122,10 @@ abstract class BaseExpedientegastoPeer
             ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_GASTORECIBIR,
             ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_GASTOCONOCIDO,
             ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_COBRO,
+        ),
+        ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA => array(
+            ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA_MXN,
+            ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA_USD,
         ),
     );
 
@@ -244,6 +255,7 @@ abstract class BaseExpedientegastoPeer
             $criteria->addSelectColumn(ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO);
             $criteria->addSelectColumn(ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE);
             $criteria->addSelectColumn(ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA);
+            $criteria->addSelectColumn(ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA);
         } else {
             $criteria->addSelectColumn($alias . '.idexpedientegasto');
             $criteria->addSelectColumn($alias . '.idexpediente');
@@ -255,6 +267,7 @@ abstract class BaseExpedientegastoPeer
             $criteria->addSelectColumn($alias . '.expedientegasto_tipo');
             $criteria->addSelectColumn($alias . '.expedientegasto_comprobante');
             $criteria->addSelectColumn($alias . '.expedientegasto_nota');
+            $criteria->addSelectColumn($alias . '.expedientegasto_moneda');
         }
     }
 

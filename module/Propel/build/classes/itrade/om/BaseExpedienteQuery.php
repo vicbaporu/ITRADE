@@ -13,10 +13,11 @@
  * @method ExpedienteQuery orderByExpedienteFactura($order = Criteria::ASC) Order by the expediente_factura column
  * @method ExpedienteQuery orderByExpedienteFechainicio($order = Criteria::ASC) Order by the expediente_fechainicio column
  * @method ExpedienteQuery orderByExpedienteFechafin($order = Criteria::ASC) Order by the expediente_fechafin column
- * @method ExpedienteQuery orderByExpedientePrecio($order = Criteria::ASC) Order by the expediente_precio column
+ * @method ExpedienteQuery orderByExpedientePreciomxn($order = Criteria::ASC) Order by the expediente_preciomxn column
  * @method ExpedienteQuery orderByExpedienteTipo($order = Criteria::ASC) Order by the expediente_tipo column
  * @method ExpedienteQuery orderByExpedienteEstatus($order = Criteria::ASC) Order by the expediente_estatus column
  * @method ExpedienteQuery orderByExpedienteFolio($order = Criteria::ASC) Order by the expediente_folio column
+ * @method ExpedienteQuery orderByExpedientePreciousd($order = Criteria::ASC) Order by the expediente_preciousd column
  *
  * @method ExpedienteQuery groupByIdexpediente() Group by the idexpediente column
  * @method ExpedienteQuery groupByIdcliente() Group by the idcliente column
@@ -25,10 +26,11 @@
  * @method ExpedienteQuery groupByExpedienteFactura() Group by the expediente_factura column
  * @method ExpedienteQuery groupByExpedienteFechainicio() Group by the expediente_fechainicio column
  * @method ExpedienteQuery groupByExpedienteFechafin() Group by the expediente_fechafin column
- * @method ExpedienteQuery groupByExpedientePrecio() Group by the expediente_precio column
+ * @method ExpedienteQuery groupByExpedientePreciomxn() Group by the expediente_preciomxn column
  * @method ExpedienteQuery groupByExpedienteTipo() Group by the expediente_tipo column
  * @method ExpedienteQuery groupByExpedienteEstatus() Group by the expediente_estatus column
  * @method ExpedienteQuery groupByExpedienteFolio() Group by the expediente_folio column
+ * @method ExpedienteQuery groupByExpedientePreciousd() Group by the expediente_preciousd column
  *
  * @method ExpedienteQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ExpedienteQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -67,10 +69,11 @@
  * @method Expediente findOneByExpedienteFactura(string $expediente_factura) Return the first Expediente filtered by the expediente_factura column
  * @method Expediente findOneByExpedienteFechainicio(string $expediente_fechainicio) Return the first Expediente filtered by the expediente_fechainicio column
  * @method Expediente findOneByExpedienteFechafin(string $expediente_fechafin) Return the first Expediente filtered by the expediente_fechafin column
- * @method Expediente findOneByExpedientePrecio(string $expediente_precio) Return the first Expediente filtered by the expediente_precio column
+ * @method Expediente findOneByExpedientePreciomxn(string $expediente_preciomxn) Return the first Expediente filtered by the expediente_preciomxn column
  * @method Expediente findOneByExpedienteTipo(string $expediente_tipo) Return the first Expediente filtered by the expediente_tipo column
  * @method Expediente findOneByExpedienteEstatus(string $expediente_estatus) Return the first Expediente filtered by the expediente_estatus column
  * @method Expediente findOneByExpedienteFolio(string $expediente_folio) Return the first Expediente filtered by the expediente_folio column
+ * @method Expediente findOneByExpedientePreciousd(string $expediente_preciousd) Return the first Expediente filtered by the expediente_preciousd column
  *
  * @method array findByIdexpediente(int $idexpediente) Return Expediente objects filtered by the idexpediente column
  * @method array findByIdcliente(int $idcliente) Return Expediente objects filtered by the idcliente column
@@ -79,10 +82,11 @@
  * @method array findByExpedienteFactura(string $expediente_factura) Return Expediente objects filtered by the expediente_factura column
  * @method array findByExpedienteFechainicio(string $expediente_fechainicio) Return Expediente objects filtered by the expediente_fechainicio column
  * @method array findByExpedienteFechafin(string $expediente_fechafin) Return Expediente objects filtered by the expediente_fechafin column
- * @method array findByExpedientePrecio(string $expediente_precio) Return Expediente objects filtered by the expediente_precio column
+ * @method array findByExpedientePreciomxn(string $expediente_preciomxn) Return Expediente objects filtered by the expediente_preciomxn column
  * @method array findByExpedienteTipo(string $expediente_tipo) Return Expediente objects filtered by the expediente_tipo column
  * @method array findByExpedienteEstatus(string $expediente_estatus) Return Expediente objects filtered by the expediente_estatus column
  * @method array findByExpedienteFolio(string $expediente_folio) Return Expediente objects filtered by the expediente_folio column
+ * @method array findByExpedientePreciousd(string $expediente_preciousd) Return Expediente objects filtered by the expediente_preciousd column
  *
  * @package    propel.generator.itrade.om
  */
@@ -190,7 +194,7 @@ abstract class BaseExpedienteQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpediente`, `idcliente`, `idconsignatarioembarcador`, `expediente_listaempaque`, `expediente_factura`, `expediente_fechainicio`, `expediente_fechafin`, `expediente_precio`, `expediente_tipo`, `expediente_estatus`, `expediente_folio` FROM `expediente` WHERE `idexpediente` = :p0';
+        $sql = 'SELECT `idexpediente`, `idcliente`, `idconsignatarioembarcador`, `expediente_listaempaque`, `expediente_factura`, `expediente_fechainicio`, `expediente_fechafin`, `expediente_preciomxn`, `expediente_tipo`, `expediente_estatus`, `expediente_folio`, `expediente_preciousd` FROM `expediente` WHERE `idexpediente` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -554,17 +558,17 @@ abstract class BaseExpedienteQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the expediente_precio column
+     * Filter the query on the expediente_preciomxn column
      *
      * Example usage:
      * <code>
-     * $query->filterByExpedientePrecio(1234); // WHERE expediente_precio = 1234
-     * $query->filterByExpedientePrecio(array(12, 34)); // WHERE expediente_precio IN (12, 34)
-     * $query->filterByExpedientePrecio(array('min' => 12)); // WHERE expediente_precio >= 12
-     * $query->filterByExpedientePrecio(array('max' => 12)); // WHERE expediente_precio <= 12
+     * $query->filterByExpedientePreciomxn(1234); // WHERE expediente_preciomxn = 1234
+     * $query->filterByExpedientePreciomxn(array(12, 34)); // WHERE expediente_preciomxn IN (12, 34)
+     * $query->filterByExpedientePreciomxn(array('min' => 12)); // WHERE expediente_preciomxn >= 12
+     * $query->filterByExpedientePreciomxn(array('max' => 12)); // WHERE expediente_preciomxn <= 12
      * </code>
      *
-     * @param     mixed $expedientePrecio The value to use as filter.
+     * @param     mixed $expedientePreciomxn The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -572,16 +576,16 @@ abstract class BaseExpedienteQuery extends ModelCriteria
      *
      * @return ExpedienteQuery The current query, for fluid interface
      */
-    public function filterByExpedientePrecio($expedientePrecio = null, $comparison = null)
+    public function filterByExpedientePreciomxn($expedientePreciomxn = null, $comparison = null)
     {
-        if (is_array($expedientePrecio)) {
+        if (is_array($expedientePreciomxn)) {
             $useMinMax = false;
-            if (isset($expedientePrecio['min'])) {
-                $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIO, $expedientePrecio['min'], Criteria::GREATER_EQUAL);
+            if (isset($expedientePreciomxn['min'])) {
+                $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIOMXN, $expedientePreciomxn['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($expedientePrecio['max'])) {
-                $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIO, $expedientePrecio['max'], Criteria::LESS_EQUAL);
+            if (isset($expedientePreciomxn['max'])) {
+                $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIOMXN, $expedientePreciomxn['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -592,7 +596,7 @@ abstract class BaseExpedienteQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIO, $expedientePrecio, $comparison);
+        return $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIOMXN, $expedientePreciomxn, $comparison);
     }
 
     /**
@@ -680,6 +684,48 @@ abstract class BaseExpedienteQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_FOLIO, $expedienteFolio, $comparison);
+    }
+
+    /**
+     * Filter the query on the expediente_preciousd column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedientePreciousd(1234); // WHERE expediente_preciousd = 1234
+     * $query->filterByExpedientePreciousd(array(12, 34)); // WHERE expediente_preciousd IN (12, 34)
+     * $query->filterByExpedientePreciousd(array('min' => 12)); // WHERE expediente_preciousd >= 12
+     * $query->filterByExpedientePreciousd(array('max' => 12)); // WHERE expediente_preciousd <= 12
+     * </code>
+     *
+     * @param     mixed $expedientePreciousd The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedienteQuery The current query, for fluid interface
+     */
+    public function filterByExpedientePreciousd($expedientePreciousd = null, $comparison = null)
+    {
+        if (is_array($expedientePreciousd)) {
+            $useMinMax = false;
+            if (isset($expedientePreciousd['min'])) {
+                $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIOUSD, $expedientePreciousd['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($expedientePreciousd['max'])) {
+                $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIOUSD, $expedientePreciousd['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientePeer::EXPEDIENTE_PRECIOUSD, $expedientePreciousd, $comparison);
     }
 
     /**

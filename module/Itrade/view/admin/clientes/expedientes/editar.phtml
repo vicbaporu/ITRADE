@@ -88,8 +88,7 @@
 
                             <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
                                 <li>
-                                    <a id="nuevo_cargo" style="background: none"href="javascript:void(0)"><i class="fa fa-plus"></i> Nuevo cargo</a>
-                                    <a id="ver_cargos" style="background: none"href="javascript:void(0)"><i class="fa fa-eye"></i>Ver cargos</a>
+                                    <a id="nuevo_cargo_mxn" style="background: none"href="javascript:void(0)"><i class="fa fa-plus"></i> Nuevo cargo</a>
                                 </li>
                             </ul>
                         </div>
@@ -100,11 +99,11 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Cargos a recibir</th>
-                                    <th>Cargos conocidos</th>
+                                    <th>Cargos estimados</th>
+                                    <th>Cargos realizados</th>
                                     <th>Conceptos de facturación</th>
-                                    <th>Sujetos a IVA</th>
-                                    <th>No sujetos a IVA</th>
+                                    <th>Venta sujeta a IVA</th>
+                                    <th>Venta no sujeta a IVA</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -138,7 +137,7 @@
                                                             <td><?php echo money_format('%(#10n', (float)$valueDetails['expedientegasto_monto'])?></td>
                                                             <td><?php echo $valueDetails['expedientegasto_comprobante']?></td>
                                                             <td><?php echo $valueDetails['expedientegasto_nota']?></td>
-                                                            <td><a data-toggle="tooltip" data-placement="left" title="Editar" href="javascript:;"><i  class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></i></a></td>
+                                                            <td><a  class="editar_cargo" data-toggle="tooltip" data-placement="left" title="Editar" href="javascript:;"><i  class="fa fa-pencil"></i></a><a class="eliminar_cargo" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></i></a></td>
                                                         </tr>
                                                     <?php endforeach;?>
                                                 </tbody>
@@ -161,10 +160,16 @@
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">Total: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['total'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['total']).' MXN'?></td>
                                 </tr>
                             </tfoot>
                         </table>
+                        <?php 
+                            $color = 'black';
+                            if($totales['utilidad'] < 0 ){$color = 'red';}
+                            elseif($totales['utilidad'] > 0 ){$color = 'green';}
+                        ?>
+                        <p><strong>UTILIDAD: </strong><span style="color:<?php echo $color?>"><?php echo money_format('%10n', (float)$totales['utilidad']).' MXN'?></span></p>
                     </div>
                 </div>
             </div>
@@ -178,8 +183,7 @@
 
                             <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
                                 <li>
-                                    <a id="nuevo_cargo" style="background: none"href="javascript:void(0)"><i class="fa fa-plus"></i> Nuevo cargo</a>
-                                    <a id="ver_cargos" style="background: none"href="javascript:void(0)"><i class="fa fa-eye"></i>Ver cargos</a>
+                                    <a id="nuevo_cargo_usd" style="background: none"href="javascript:void(0)"><i class="fa fa-plus"></i> Nuevo cargo</a>
                                 </li>
                             </ul>
                         </div>
@@ -190,15 +194,15 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Cargos a recibir</th>
-                                    <th>Cargos conocidos</th>
+                                    <th>Cargos estimados</th>
+                                    <th>Cargos realizados</th>
                                     <th>Conceptos de facturación</th>
-                                    <th>Sujetos a IVA</th>
-                                    <th>No sujetos a IVA</th>
+                                    <th>Venta sujeta a IVA</th>
+                                    <th>Venta no sujeta a IVA</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($facturacion as $key => $value) :?>
+                                <?php foreach ($facturacion_usd as $key => $value) :?>
                                     <tr class="main"id="<?php echo $value['id']?>">
                                         <td class="center"><i class="fa fa-plus-circle collapse"></i></td>
                                         <td><?php echo money_format('%(#10n', (float)$value['cargos_recibir'])?></td>
@@ -228,7 +232,7 @@
                                                             <td><?php echo money_format('%(#10n', (float)$valueDetails['expedientegasto_monto'])?></td>
                                                             <td><?php echo $valueDetails['expedientegasto_comprobante']?></td>
                                                             <td><?php echo $valueDetails['expedientegasto_nota']?></td>
-                                                            <td><a data-toggle="tooltip" data-placement="left" title="Editar" href="javascript:;"><i  class="fa fa-pencil"></i></a><a class="delete" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></i></a></td>
+                                                            <td><a class="editar_cargo" data-toggle="tooltip" data-placement="left" title="Editar" href="javascript:;"><i  class="fa fa-pencil"></i></a><a class="eliminar_cargo" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></i></a></td>
                                                         </tr>
                                                     <?php endforeach;?>
                                                 </tbody>
@@ -241,20 +245,26 @@
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">Subtotal: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['subtotal'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['subtotal'])?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">I.V.A: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['iva'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['iva'])?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">Total: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['total'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['total']).' USD'?></td>
                                 </tr>
                             </tfoot>
                         </table>
+                        <?php 
+                            $color = 'black';
+                            if($totales_usd['utilidad'] < 0 ){$color = 'red';}
+                            elseif($totales_usd['utilidad'] > 0 ){$color = 'green';}
+                        ?>
+                        <p><strong>UTILIDAD: </strong><span style="color:<?php echo $color?>"><?php echo money_format('%10n', (float)$totales_usd['utilidad']).' USD'?></span></p>
                     </div>
                 </div>
             </div>

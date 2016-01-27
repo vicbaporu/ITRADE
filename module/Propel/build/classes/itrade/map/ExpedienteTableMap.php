@@ -45,7 +45,7 @@ class ExpedienteTableMap extends TableMap
         $this->addColumn('expediente_factura', 'ExpedienteFactura', 'VARCHAR', false, 45, null);
         $this->addColumn('expediente_fechainicio', 'ExpedienteFechainicio', 'DATE', true, null, null);
         $this->addColumn('expediente_fechafin', 'ExpedienteFechafin', 'DATE', false, null, null);
-        $this->addColumn('expediente_precio', 'ExpedientePrecio', 'DECIMAL', false, 10, null);
+        $this->addColumn('expediente_preciomxn', 'ExpedientePreciomxn', 'DECIMAL', false, 10, null);
         $this->addColumn('expediente_tipo', 'ExpedienteTipo', 'CHAR', true, null, null);
         $this->getColumn('expediente_tipo', false)->setValueSet(array (
   0 => 'exportacion',
@@ -57,6 +57,7 @@ class ExpedienteTableMap extends TableMap
   1 => 'cerrado',
 ));
         $this->addColumn('expediente_folio', 'ExpedienteFolio', 'VARCHAR', false, 45, null);
+        $this->addColumn('expediente_preciousd', 'ExpedientePreciousd', 'DECIMAL', false, 10, null);
         // validators
     } // initialize()
 

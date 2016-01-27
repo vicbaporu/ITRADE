@@ -90,6 +90,12 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
     protected $expedientegasto_nota;
 
     /**
+     * The value for the expedientegasto_moneda field.
+     * @var        string
+     */
+    protected $expedientegasto_moneda;
+
+    /**
      * @var        Empleado
      */
     protected $aEmpleado;
@@ -266,6 +272,17 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
     {
 
         return $this->expedientegasto_nota;
+    }
+
+    /**
+     * Get the [expedientegasto_moneda] column value.
+     *
+     * @return string
+     */
+    public function getExpedientegastoMoneda()
+    {
+
+        return $this->expedientegasto_moneda;
     }
 
     /**
@@ -497,6 +514,27 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
     } // setExpedientegastoNota()
 
     /**
+     * Set the value of [expedientegasto_moneda] column.
+     *
+     * @param  string $v new value
+     * @return Expedientegasto The current object (for fluent API support)
+     */
+    public function setExpedientegastoMoneda($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expedientegasto_moneda !== $v) {
+            $this->expedientegasto_moneda = $v;
+            $this->modifiedColumns[] = ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA;
+        }
+
+
+        return $this;
+    } // setExpedientegastoMoneda()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -538,6 +576,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             $this->expedientegasto_tipo = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
             $this->expedientegasto_comprobante = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
             $this->expedientegasto_nota = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+            $this->expedientegasto_moneda = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -547,7 +586,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 10; // 10 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 11; // 11 = ExpedientegastoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Expedientegasto object", $e);
@@ -838,6 +877,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA)) {
             $modifiedColumns[':p' . $index++]  = '`expedientegasto_nota`';
         }
+        if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA)) {
+            $modifiedColumns[':p' . $index++]  = '`expedientegasto_moneda`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `expedientegasto` (%s) VALUES (%s)',
@@ -878,6 +920,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
                         break;
                     case '`expedientegasto_nota`':
                         $stmt->bindValue($identifier, $this->expedientegasto_nota, PDO::PARAM_STR);
+                        break;
+                    case '`expedientegasto_moneda`':
+                        $stmt->bindValue($identifier, $this->expedientegasto_moneda, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1073,6 +1118,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             case 9:
                 return $this->getExpedientegastoNota();
                 break;
+            case 10:
+                return $this->getExpedientegastoMoneda();
+                break;
             default:
                 return null;
                 break;
@@ -1112,6 +1160,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             $keys[7] => $this->getExpedientegastoTipo(),
             $keys[8] => $this->getExpedientegastoComprobante(),
             $keys[9] => $this->getExpedientegastoNota(),
+            $keys[10] => $this->getExpedientegastoMoneda(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1195,6 +1244,9 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
             case 9:
                 $this->setExpedientegastoNota($value);
                 break;
+            case 10:
+                $this->setExpedientegastoMoneda($value);
+                break;
         } // switch()
     }
 
@@ -1229,6 +1281,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         if (array_key_exists($keys[7], $arr)) $this->setExpedientegastoTipo($arr[$keys[7]]);
         if (array_key_exists($keys[8], $arr)) $this->setExpedientegastoComprobante($arr[$keys[8]]);
         if (array_key_exists($keys[9], $arr)) $this->setExpedientegastoNota($arr[$keys[9]]);
+        if (array_key_exists($keys[10], $arr)) $this->setExpedientegastoMoneda($arr[$keys[10]]);
     }
 
     /**
@@ -1250,6 +1303,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO)) $criteria->add(ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO, $this->expedientegasto_tipo);
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE)) $criteria->add(ExpedientegastoPeer::EXPEDIENTEGASTO_COMPROBANTE, $this->expedientegasto_comprobante);
         if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA)) $criteria->add(ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA, $this->expedientegasto_nota);
+        if ($this->isColumnModified(ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA)) $criteria->add(ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA, $this->expedientegasto_moneda);
 
         return $criteria;
     }
@@ -1322,6 +1376,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         $copyObj->setExpedientegastoTipo($this->getExpedientegastoTipo());
         $copyObj->setExpedientegastoComprobante($this->getExpedientegastoComprobante());
         $copyObj->setExpedientegastoNota($this->getExpedientegastoNota());
+        $copyObj->setExpedientegastoMoneda($this->getExpedientegastoMoneda());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1603,6 +1658,7 @@ abstract class BaseExpedientegasto extends BaseObject implements Persistent
         $this->expedientegasto_tipo = null;
         $this->expedientegasto_comprobante = null;
         $this->expedientegasto_nota = null;
+        $this->expedientegasto_moneda = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

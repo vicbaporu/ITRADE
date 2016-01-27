@@ -16,16 +16,13 @@
 
 	$mail = new PHPMailer;
 
-
-
 	$mail->isSMTP();                                      	// Set mailer to use SMTP
-	$mail->Host = 'smtp.gmail.com server';  				// Specify main and backup SMTP servers
+	$mail->Host = 'smtp.gmail.com server';  		// Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               	// Enable SMTP authentication
 	$mail->Password = '********';                           // SMTP password
 	$mail->Username = 'mail@server.com';                 	// SMTP username
 	$mail->SMTPSecure = 'ssl';                            	// Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 465;                                    	// TCP port to connect to
-
 
 	$mail->setFrom($email, 'ITRADE Contacto');
 	$mail->addAddress('mailtorecipe@server.com', $nombre);  // Add a recipient
@@ -123,10 +120,8 @@
 	</div>
 
 	<div class="col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-0 ">
-		<h3 class="bold specialAlign"><?php echo  $this->translate('Especialistas en el manejo de
-carga y transporte.')?> </h3>
-		<small class="specialAlign col-xs-12"><?php echo  $this->translate('Elaboramos la planeación estratégica aduanal y logística de tu empresa para reducir tiempos, riesgos y costos en las importaciones y exportaciones.
-Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.')?>
+		<h3 class="bold specialAlign"><?php echo  $this->translate('Especialistas en el manejo de carga y transporte')?> </h3>
+		<small class="col-xs-12" style="padding-left: 0px;"><?php echo  $this->translate('Elaboramos la planeación estratégica aduanal y logística de tu empresa para reducir tiempos, riesgos y costos en las importaciones y exportaciones. Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.')?>
 		</small>
 	</div>
 </div>
@@ -144,7 +139,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group  row">
 				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="nombre"><?php echo  $this->translate('Nombre')?>: *</label>
+					<label style="margin-top: 5px;" for="nombre"><?php echo  $this->translate('Nombre')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8  col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -153,7 +148,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="empresa"><?php echo  $this->translate('Empresa')?>:</label>
+					<label style="margin-top: 5px;" for="empresa"><?php echo  $this->translate('Empresa')?>:</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="empresa" name="empresa" >
@@ -162,13 +157,13 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 			
 			<div class="form-group row ">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="email"><?php echo  $this->translate('E-mail')?>: *</label>
+					<label style="margin-top: 5px;" for="email"><?php echo  $this->translate('E-mail')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="email" name="email" required>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign top-sm ">
-					<label for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
+					<label style="margin-top: 5px;" for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12 top-sm">
 					<input type="text" class="form-control" id="telefono" name="telefono" required>
@@ -178,7 +173,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="mensaje"><?php echo  $this->translate('Mensaje')?>: *</label>
+					<label style="margin-top: 5px;" for="mensaje"><?php echo  $this->translate('Mensaje')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<textarea name="mensaje" id="mensaje" class="form-control" rows="3" required></textarea>
@@ -187,7 +182,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="mensaje"><?php echo  $this->translate('Servicio')?>: *</label>
+					<label style="margin-top: 5px;" for="mensaje"><?php echo  $this->translate('Servicio')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					

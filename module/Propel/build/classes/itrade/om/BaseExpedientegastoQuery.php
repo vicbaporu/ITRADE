@@ -16,6 +16,7 @@
  * @method ExpedientegastoQuery orderByExpedientegastoTipo($order = Criteria::ASC) Order by the expedientegasto_tipo column
  * @method ExpedientegastoQuery orderByExpedientegastoComprobante($order = Criteria::ASC) Order by the expedientegasto_comprobante column
  * @method ExpedientegastoQuery orderByExpedientegastoNota($order = Criteria::ASC) Order by the expedientegasto_nota column
+ * @method ExpedientegastoQuery orderByExpedientegastoMoneda($order = Criteria::ASC) Order by the expedientegasto_moneda column
  *
  * @method ExpedientegastoQuery groupByIdexpedientegasto() Group by the idexpedientegasto column
  * @method ExpedientegastoQuery groupByIdexpediente() Group by the idexpediente column
@@ -27,6 +28,7 @@
  * @method ExpedientegastoQuery groupByExpedientegastoTipo() Group by the expedientegasto_tipo column
  * @method ExpedientegastoQuery groupByExpedientegastoComprobante() Group by the expedientegasto_comprobante column
  * @method ExpedientegastoQuery groupByExpedientegastoNota() Group by the expedientegasto_nota column
+ * @method ExpedientegastoQuery groupByExpedientegastoMoneda() Group by the expedientegasto_moneda column
  *
  * @method ExpedientegastoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ExpedientegastoQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -60,6 +62,7 @@
  * @method Expedientegasto findOneByExpedientegastoTipo(string $expedientegasto_tipo) Return the first Expedientegasto filtered by the expedientegasto_tipo column
  * @method Expedientegasto findOneByExpedientegastoComprobante(string $expedientegasto_comprobante) Return the first Expedientegasto filtered by the expedientegasto_comprobante column
  * @method Expedientegasto findOneByExpedientegastoNota(string $expedientegasto_nota) Return the first Expedientegasto filtered by the expedientegasto_nota column
+ * @method Expedientegasto findOneByExpedientegastoMoneda(string $expedientegasto_moneda) Return the first Expedientegasto filtered by the expedientegasto_moneda column
  *
  * @method array findByIdexpedientegasto(int $idexpedientegasto) Return Expedientegasto objects filtered by the idexpedientegasto column
  * @method array findByIdexpediente(int $idexpediente) Return Expedientegasto objects filtered by the idexpediente column
@@ -71,6 +74,7 @@
  * @method array findByExpedientegastoTipo(string $expedientegasto_tipo) Return Expedientegasto objects filtered by the expedientegasto_tipo column
  * @method array findByExpedientegastoComprobante(string $expedientegasto_comprobante) Return Expedientegasto objects filtered by the expedientegasto_comprobante column
  * @method array findByExpedientegastoNota(string $expedientegasto_nota) Return Expedientegasto objects filtered by the expedientegasto_nota column
+ * @method array findByExpedientegastoMoneda(string $expedientegasto_moneda) Return Expedientegasto objects filtered by the expedientegasto_moneda column
  *
  * @package    propel.generator.itrade.om
  */
@@ -178,7 +182,7 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpedientegasto`, `idexpediente`, `idgastofacturacion`, `idproveedoritrade`, `idempleado`, `expedientegasto_fecha`, `expedientegasto_monto`, `expedientegasto_tipo`, `expedientegasto_comprobante`, `expedientegasto_nota` FROM `expedientegasto` WHERE `idexpedientegasto` = :p0';
+        $sql = 'SELECT `idexpedientegasto`, `idexpediente`, `idgastofacturacion`, `idproveedoritrade`, `idempleado`, `expedientegasto_fecha`, `expedientegasto_monto`, `expedientegasto_tipo`, `expedientegasto_comprobante`, `expedientegasto_nota`, `expedientegasto_moneda` FROM `expedientegasto` WHERE `idexpedientegasto` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -655,6 +659,35 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ExpedientegastoPeer::EXPEDIENTEGASTO_NOTA, $expedientegastoNota, $comparison);
+    }
+
+    /**
+     * Filter the query on the expedientegasto_moneda column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedientegastoMoneda('fooValue');   // WHERE expedientegasto_moneda = 'fooValue'
+     * $query->filterByExpedientegastoMoneda('%fooValue%'); // WHERE expedientegasto_moneda LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $expedientegastoMoneda The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedientegastoQuery The current query, for fluid interface
+     */
+    public function filterByExpedientegastoMoneda($expedientegastoMoneda = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($expedientegastoMoneda)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $expedientegastoMoneda)) {
+                $expedientegastoMoneda = str_replace('*', '%', $expedientegastoMoneda);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA, $expedientegastoMoneda, $comparison);
     }
 
     /**
