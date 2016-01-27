@@ -40,7 +40,8 @@ class ServicioestadoTableMap extends TableMap
         // columns
         $this->addPrimaryKey('idservicioestado', 'Idservicioestado', 'INTEGER', true, null, null);
         $this->addForeignKey('idservicio', 'Idservicio', 'INTEGER', 'servicio', 'idservicio', true, null, null);
-        $this->addColumn('servicioestado_nombre', 'ServicioestadoNombre', 'VARCHAR', true, 100, null);
+        $this->addColumn('servicioestado_nombre', 'ServicioestadoNombre', 'VARCHAR', true, 45, null);
+        $this->addColumn('servicioestado_comodin', 'ServicioestadoComodin', 'BOOLEAN', true, 1, null);
         $this->addColumn('servicioestado_jerarquia', 'ServicioestadoJerarquia', 'INTEGER', true, null, null);
         // validators
     } // initialize()

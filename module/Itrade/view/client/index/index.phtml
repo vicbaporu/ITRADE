@@ -1,3 +1,4 @@
+<?php var_dump($debug); ?>
 <div class="empleado_form_container">
     
 
@@ -14,20 +15,18 @@
     <?php elseif ($message != "" && $message != "success"): ?>
         <div class="alert alert-danger">
             <button data-dismiss="alert" class="close"></button>
-            Success: The <a class="link" href="#">page</a> has been added.                                
+            <?php echo $message ?>
         </div>
     <?php endif ?>
     <?php 
-
 
         $form->setAttribute('action', '/');
         $form->setAttribute('novalidate', true);
         $form->setAttribute('enctype', 'multipart/form-data');
 
         echo $this->form()->openTag($form); 
-        
-    ?>
 
+    ?>
 
     <div class="row">
         <div class="col-md-12">

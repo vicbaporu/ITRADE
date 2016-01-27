@@ -79,7 +79,7 @@ class EmpleadoTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('ClienteRelatedByIdempleadocomercial', 'Cliente', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleadocomercial', ), 'CASCADE', 'CASCADE', 'ClientesRelatedByIdempleadocomercial');
+        $this->addRelation('ClienteRelatedByIdempleadocomercial', 'Cliente', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleadocomercial', ), 'SET NULL', 'SET NULL', 'ClientesRelatedByIdempleadocomercial');
         $this->addRelation('ClienteRelatedByIdempleadooperaciones', 'Cliente', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleadooperaciones', ), 'CASCADE', 'CASCADE', 'ClientesRelatedByIdempleadooperaciones');
         $this->addRelation('Expedientearchivo', 'Expedientearchivo', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleado', ), 'CASCADE', 'CASCADE', 'Expedientearchivos');
         $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idempleado' => 'idempleado', ), 'CASCADE', 'CASCADE', 'Expedientegastos');
