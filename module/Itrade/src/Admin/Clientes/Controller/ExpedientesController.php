@@ -83,7 +83,7 @@ class ExpedientesController extends AbstractActionController
                 if($value->getExpedienteTipo() == 'importacion'){
                     $tmp['expediente_tipo'] = ucfirst('Importación');
                     $tmp['expediente_consignatario'] = $value->getCliente()->getClienteRazonsocial();
-                    $tmp['expediente_embarcador']    = $value->getProveedorcliente()->getProveedorclienteTaxid();
+                    $tmp['expediente_embarcador']    = $value->getProveedorcliente()->getProveedorclienteNombre();
                 }else{
                     $tmp['expediente_tipo'] = ucfirst('Exportación');
                     $tmp['expediente_consignatario']    = $value->getProveedorcliente()->getProveedorclienteNombre();

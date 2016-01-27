@@ -58,6 +58,7 @@
 		<li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
 		<li data-target="#mainCarousel" data-slide-to="1"></li>
 		<li data-target="#mainCarousel" data-slide-to="2"></li>
+                <li data-target="#mainCarousel" data-slide-to="3"></li>
 		</ol>
 
 		<!-- Wrapper for slides -->
@@ -69,7 +70,7 @@
 			  </div>
 			</div>
 			<div class="item">
-			  <a href="/servicios"><img src="img/u19.png" alt="..."></a>
+			  <a href="/<?php echo lan?>/servicios"><img src="img/u19.png" alt="..."></a>
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm top"><br><br>
 				<h2 id="textCar2"><?php echo  $this->translate('RAPIDEZ, EFICENCIA  Y SEGURIDAD')?></h2>
 				<h4><?php echo  $this->translate('Lee mas acerca de nuestros servicios')?></h4>
@@ -82,7 +83,7 @@
 			  </div>
 			</div>
 			<div class="item">
-			  <img src="img/u35.jpg" alt="...">
+			  <img src="img/s4.png" alt="...">
 			  <div class="carousel-caption text-left row hidden-xs hidden-sm">
 				<h2 id="textCar4"><?php echo  $this->translate('ASESORIA EN LOGISTICA Y COMERCIO EXTERIOR')?></h2>
 			  </div>
@@ -108,8 +109,8 @@
 	<div class="col-lg-6 col-lg-offset-0 col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-0 top">
 
 		<small class="specialAlign col-xs-12 col-sm-12 ">
-		<h3 class="bold specialAlign"><?php echo  $this->translate('Bienvenido a ITRADE México')?></h3>
-		<?php echo  $this->translate('Itrade es una empresa de capital mexicano dedicada a brindar soluciones logísticas y aduaneras, nuestro servicio es personalizado y atendido por personas responsables, honestas y con experiencia en comercio internacional. Nuestro compromiso es con usted y su negocio, nos distinguimos por nuestra eficacia y resultados alcanzados. Elaboramos una planeación estratégica aduanal y logística para reducir tiempos, riesgos y costos en las importaciones y exportaciones.')?>
+		<h3 class="bold specialAlign"><?php echo  $this->translate('Bienvenido a ITRADE')?></h3>
+		<?php echo  $this->translate('ITRADE es una empresa mexicana dedicada a brindar soluciones logísticas y aduaneras,  nuestro servicio es personalizado y atendido por personas responsables, honestas y con experiencia en comercio internacional. Lo que nos distingue es la eficiencia y resultados alcanzados. Elaboramos una planeación estratégica aduanal y logística para reducir tiempos, riesgos y costos en las importaciones y exportaciones. Nuestro compromiso es con usted y su negocio.')?>
  		<br><br>
 		<?php echo  $this->translate('Nuestra Visión es convertirnos en un departamento externo de logística para las empresas, capaz de poder ofrecer un servicio de calidad y soluciones a la demanda de nuestros clientes.')?>
 		</small>
@@ -135,8 +136,8 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 <div id="contacto" class="  row top blue">
 	<div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
-		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Contactanos')?></h1>
-		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Nosotros podemos ayudarte.')?> </h3>
+		<h1 class="textWhite specialAlign"><?php echo  $this->translate('CONTÁCTENOS,')?></h1>
+		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Podemos ayudarle.')?> </h3>
 	</div>
 	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot ">
 		<form class="textWhite" action="http://itrade" method="post">
@@ -161,7 +162,7 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 			
 			<div class="form-group row ">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="email"><?php echo  $this->translate('Dirección de e-mail')?>: *</label>
+					<label for="email"><?php echo  $this->translate('E-mail')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="email" name="email" required>
@@ -186,13 +187,13 @@ Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes.
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="mensaje"><?php echo  $this->translate('Tipo de servicio')?>: *</label>
+					<label for="mensaje"><?php echo  $this->translate('Servicio')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					
 					<select name="cbServicio" id="cbServicio" class="form-control">
 						<option value="maritimo"><?php echo  $this->translate('Marítimo')?></option>
-						<option value="aereo"><?php echo  $this->translate('Aereo')?></option>
+						<option value="aereo"><?php echo  $this->translate('Aéreo')?></option>
 						<option value="terrestre"><?php echo  $this->translate('Terrestre')?></option>
 						<option value="aduana"><?php echo  $this->translate('Aduana')?></option>
 						<option value="seguro"><?php echo  $this->translate('Seguro')?></option>
