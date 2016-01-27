@@ -118,7 +118,6 @@ class IndexController extends AbstractActionController
             }
 
 
-            $debug = $message;
             //copy($post_files['cliente_padron']['tmp_name'], $upload_folder);
 
 

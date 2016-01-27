@@ -46,8 +46,7 @@ Class SaveFiles
 
 	public function saveFile($url,$file,$name)
 	{
-		$file_type = explode('/', $file['type']);
-		$file_type = $file_type[1];
+		$file_type = getType($file);
 		if($file_type != '')
 			copy($file['tmp_name'], $url.$name.'.'.$file_type);
 	}
