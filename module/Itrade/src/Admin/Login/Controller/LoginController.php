@@ -73,6 +73,6 @@ class LoginController extends AbstractActionController
          
          $AouthSession = new \Shared\Session\AouthSession();
          $AouthSession->Close();
-         return $this->redirect()->toRoute('admin/login');
+         return $this->redirect()->toUrl('/login');
     }
 }
