@@ -59,7 +59,7 @@ class AuthListener implements ListenerAggregateInterface {
         $action = $matches->getParam('action');
 
         define("redirect", $matches->getMatchedRouteName());
-
+        
         switch ($module)
         {
             case 'Admin':{
@@ -79,6 +79,7 @@ class AuthListener implements ListenerAggregateInterface {
                     $matches->setParam('action', 'index');
                 }
                 
+                return;
             }
             
             case 'Client':
@@ -102,6 +103,7 @@ class AuthListener implements ListenerAggregateInterface {
               
                 }
                 
+                return;
             }
             
 
