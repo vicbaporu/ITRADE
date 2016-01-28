@@ -6,7 +6,7 @@ use Zend\Form\Form;
 
 class ExpedientegastoForm extends Form
 {
-    public function __construct($idexpediente, $idcategoriagasto = array(), $idproveedoritrade=array())
+    public function __construct($idexpediente, $idcategoriagasto = array(), $idproveedoritrade=array(),$moneda,$idgastofacturacion=array())
     {
         // we want to ignore the name passed
         parent::__construct('expedientegasto_form');
@@ -25,6 +25,14 @@ class ExpedientegastoForm extends Form
             ),
         ));
         
+        $this->add(array(
+            'name' => 'expedientegasto_moneda',
+            'type' => 'Hidden',
+            'attributes' => array(
+                'value' => $moneda,
+            ),
+        ));
+
         $this->add(array(
             'name' => 'idcategoriagasto',
             'type' => 'Select',
@@ -45,7 +53,7 @@ class ExpedientegastoForm extends Form
             'options' => array(
                 'label' => 'Concepto',
                 'empty_option' => 'Sin especificar',
-                'value_options' => array(),
+                'value_options' => $idgastofacturacion
             ),
             'attributes' => array(
                 'class' => 'width-100',
@@ -100,9 +108,9 @@ class ExpedientegastoForm extends Form
                 'label' => 'Consignatario/Embarcador',
                 'empty_option' => 'Sin especificar',
                 'value_options' => array(
-                    'gastorecibir' => 'Cargo a recibir',
-                    'gastoconocido' => 'Cargo conocido',
-                    'cobro' => 'Cobro',
+                    'gastorecibir' => 'Cargo estimado',
+                    'gastoconocido' => 'Cargo realizado',
+                    'cobro' => 'Venta',
                 ),
             ),
             'attributes' => array(

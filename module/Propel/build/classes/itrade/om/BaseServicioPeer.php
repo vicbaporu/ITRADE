@@ -52,9 +52,11 @@ abstract class BaseServicioPeer
     const SERVICIO_TIPO_EXPORTACION = 'exportacion';
 
     /** The enumerated values for the servicio_medio field */
-    const SERVICIO_MEDIO_TERRESTRE = 'terrestre';
-    const SERVICIO_MEDIO_AEREO = 'aereo';
-    const SERVICIO_MEDIO_MARITIMO = 'maritimo';
+    const SERVICIO_MEDIO_TERRESTRE_LTL = 'Terrestre LTL';
+    const SERVICIO_MEDIO_TERRESTRE_FTL = 'Terrestre FTL';
+    const SERVICIO_MEDIO_AEREO = 'Aereo';
+    const SERVICIO_MEDIO_MARITIMO_FCL = 'Maritimo FCL';
+    const SERVICIO_MEDIO_MARITIMO_LCL = 'Maritimo LCL';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -105,9 +107,11 @@ abstract class BaseServicioPeer
             ServicioPeer::SERVICIO_TIPO_EXPORTACION,
         ),
         ServicioPeer::SERVICIO_MEDIO => array(
-            ServicioPeer::SERVICIO_MEDIO_TERRESTRE,
+            ServicioPeer::SERVICIO_MEDIO_TERRESTRE_LTL,
+            ServicioPeer::SERVICIO_MEDIO_TERRESTRE_FTL,
             ServicioPeer::SERVICIO_MEDIO_AEREO,
-            ServicioPeer::SERVICIO_MEDIO_MARITIMO,
+            ServicioPeer::SERVICIO_MEDIO_MARITIMO_FCL,
+            ServicioPeer::SERVICIO_MEDIO_MARITIMO_LCL,
         ),
     );
 

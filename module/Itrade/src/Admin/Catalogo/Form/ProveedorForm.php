@@ -45,7 +45,7 @@ class ProveedorForm extends Form
             'name' => 'proveedoritrade_telefono',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Teléfono',
+                'label' => 'Teléfono ',
             ),
             'attributes' => array(
                 'required' => true,

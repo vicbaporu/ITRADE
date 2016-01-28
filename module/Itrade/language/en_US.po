@@ -257,5 +257,8 @@ msgstr "QUOTE REQUEST"
 msgid "En ITRADE MÉXICO ponemos a su servicio soluciones integrales en logística y transporte para sus importaciones, exportaciones, distribución a nivel nacional e internacional, despacho de aduanas, manejo de mercancía peligrosas, perecederos y aseguramiento."
 msgstr "ITRADE provides every service you could possibly need regarding imports, exports, national and international distributions, customs clearance, dangerous and perishable goods handling and merchandise’s insurance."
 
+msgid "Elaboramos la planeación estratégica aduanal y logística de tu empresa para reducir tiempos, riesgos y costos en las importaciones y exportaciones. Ofrecemos un servicio de calidad y soluciones a la demanda de nuestros clientes."
+msgstr "We develop your company’s customs and logistics strategic planning; in order to reduce time, risks and costs in importations and exportations. We offer a quality service and solutions to our customers’ demands."
 
-
+msgid "Especialistas en el manejo de carga y transporte"
+msgstr "Cargo’s handling and transportation specialists"

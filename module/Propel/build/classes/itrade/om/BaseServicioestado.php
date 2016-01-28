@@ -48,12 +48,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
     protected $servicioestado_nombre;
 
     /**
-     * The value for the servicioestado_comodin field.
-     * @var        boolean
-     */
-    protected $servicioestado_comodin;
-
-    /**
      * The value for the servicioestado_jerarquia field.
      * @var        int
      */
@@ -127,17 +121,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
     {
 
         return $this->servicioestado_nombre;
-    }
-
-    /**
-     * Get the [servicioestado_comodin] column value.
-     *
-     * @return boolean
-     */
-    public function getServicioestadoComodin()
-    {
-
-        return $this->servicioestado_comodin;
     }
 
     /**
@@ -219,35 +202,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
     } // setServicioestadoNombre()
 
     /**
-     * Sets the value of the [servicioestado_comodin] column.
-     * Non-boolean arguments are converted using the following rules:
-     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
-     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
-     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
-     *
-     * @param boolean|integer|string $v The new value
-     * @return Servicioestado The current object (for fluent API support)
-     */
-    public function setServicioestadoComodin($v)
-    {
-        if ($v !== null) {
-            if (is_string($v)) {
-                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
-            } else {
-                $v = (boolean) $v;
-            }
-        }
-
-        if ($this->servicioestado_comodin !== $v) {
-            $this->servicioestado_comodin = $v;
-            $this->modifiedColumns[] = ServicioestadoPeer::SERVICIOESTADO_COMODIN;
-        }
-
-
-        return $this;
-    } // setServicioestadoComodin()
-
-    /**
      * Set the value of [servicioestado_jerarquia] column.
      *
      * @param  int $v new value
@@ -303,8 +257,7 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
             $this->idservicioestado = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->idservicio = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->servicioestado_nombre = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->servicioestado_comodin = ($row[$startcol + 3] !== null) ? (boolean) $row[$startcol + 3] : null;
-            $this->servicioestado_jerarquia = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+            $this->servicioestado_jerarquia = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -314,7 +267,7 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 5; // 5 = ServicioestadoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 4; // 4 = ServicioestadoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Servicioestado object", $e);
@@ -570,9 +523,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
         if ($this->isColumnModified(ServicioestadoPeer::SERVICIOESTADO_NOMBRE)) {
             $modifiedColumns[':p' . $index++]  = '`servicioestado_nombre`';
         }
-        if ($this->isColumnModified(ServicioestadoPeer::SERVICIOESTADO_COMODIN)) {
-            $modifiedColumns[':p' . $index++]  = '`servicioestado_comodin`';
-        }
         if ($this->isColumnModified(ServicioestadoPeer::SERVICIOESTADO_JERARQUIA)) {
             $modifiedColumns[':p' . $index++]  = '`servicioestado_jerarquia`';
         }
@@ -595,9 +545,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
                         break;
                     case '`servicioestado_nombre`':
                         $stmt->bindValue($identifier, $this->servicioestado_nombre, PDO::PARAM_STR);
-                        break;
-                    case '`servicioestado_comodin`':
-                        $stmt->bindValue($identifier, (int) $this->servicioestado_comodin, PDO::PARAM_INT);
                         break;
                     case '`servicioestado_jerarquia`':
                         $stmt->bindValue($identifier, $this->servicioestado_jerarquia, PDO::PARAM_INT);
@@ -766,9 +713,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
                 return $this->getServicioestadoNombre();
                 break;
             case 3:
-                return $this->getServicioestadoComodin();
-                break;
-            case 4:
                 return $this->getServicioestadoJerarquia();
                 break;
             default:
@@ -803,8 +747,7 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
             $keys[0] => $this->getIdservicioestado(),
             $keys[1] => $this->getIdservicio(),
             $keys[2] => $this->getServicioestadoNombre(),
-            $keys[3] => $this->getServicioestadoComodin(),
-            $keys[4] => $this->getServicioestadoJerarquia(),
+            $keys[3] => $this->getServicioestadoJerarquia(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -862,9 +805,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
                 $this->setServicioestadoNombre($value);
                 break;
             case 3:
-                $this->setServicioestadoComodin($value);
-                break;
-            case 4:
                 $this->setServicioestadoJerarquia($value);
                 break;
         } // switch()
@@ -894,8 +834,7 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
         if (array_key_exists($keys[0], $arr)) $this->setIdservicioestado($arr[$keys[0]]);
         if (array_key_exists($keys[1], $arr)) $this->setIdservicio($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setServicioestadoNombre($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setServicioestadoComodin($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setServicioestadoJerarquia($arr[$keys[4]]);
+        if (array_key_exists($keys[3], $arr)) $this->setServicioestadoJerarquia($arr[$keys[3]]);
     }
 
     /**
@@ -910,7 +849,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
         if ($this->isColumnModified(ServicioestadoPeer::IDSERVICIOESTADO)) $criteria->add(ServicioestadoPeer::IDSERVICIOESTADO, $this->idservicioestado);
         if ($this->isColumnModified(ServicioestadoPeer::IDSERVICIO)) $criteria->add(ServicioestadoPeer::IDSERVICIO, $this->idservicio);
         if ($this->isColumnModified(ServicioestadoPeer::SERVICIOESTADO_NOMBRE)) $criteria->add(ServicioestadoPeer::SERVICIOESTADO_NOMBRE, $this->servicioestado_nombre);
-        if ($this->isColumnModified(ServicioestadoPeer::SERVICIOESTADO_COMODIN)) $criteria->add(ServicioestadoPeer::SERVICIOESTADO_COMODIN, $this->servicioestado_comodin);
         if ($this->isColumnModified(ServicioestadoPeer::SERVICIOESTADO_JERARQUIA)) $criteria->add(ServicioestadoPeer::SERVICIOESTADO_JERARQUIA, $this->servicioestado_jerarquia);
 
         return $criteria;
@@ -977,7 +915,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
     {
         $copyObj->setIdservicio($this->getIdservicio());
         $copyObj->setServicioestadoNombre($this->getServicioestadoNombre());
-        $copyObj->setServicioestadoComodin($this->getServicioestadoComodin());
         $copyObj->setServicioestadoJerarquia($this->getServicioestadoJerarquia());
 
         if ($deepCopy && !$this->startCopy) {
@@ -1369,7 +1306,6 @@ abstract class BaseServicioestado extends BaseObject implements Persistent
         $this->idservicioestado = null;
         $this->idservicio = null;
         $this->servicioestado_nombre = null;
-        $this->servicioestado_comodin = null;
         $this->servicioestado_jerarquia = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;

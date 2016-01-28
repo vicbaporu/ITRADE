@@ -73,8 +73,8 @@ CREATE TABLE `cliente`
     CONSTRAINT `idempleadocomercial_cliente`
         FOREIGN KEY (`idempleadocomercial`)
         REFERENCES `empleado` (`idempleado`)
-        ON UPDATE SET NULL
-        ON DELETE SET NULL,
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT `idempleadooperaciones_cliente`
         FOREIGN KEY (`idempleadooperaciones`)
         REFERENCES `empleado` (`idempleado`)
@@ -150,17 +150,24 @@ CREATE TABLE `expediente`
     `expediente_factura` VARCHAR(45),
     `expediente_fechainicio` DATE NOT NULL,
     `expediente_fechafin` DATE,
-    `expediente_precio` DECIMAL(10,2),
+    `expediente_preciomxn` DECIMAL(10,2),
     `expediente_tipo` enum('exportacion','importacion') NOT NULL,
+    `expediente_estatus` enum('abierto','cerrado') NOT NULL,
+    `expediente_folio` VARCHAR(45),
+    `expediente_preciousd` DECIMAL(10,2),
     PRIMARY KEY (`idexpediente`),
-    INDEX `idcliente` (`idcliente`),
     INDEX `idconsignatarioembarcador` (`idconsignatarioembarcador`),
+    INDEX `idcliente` (`idcliente`),
     CONSTRAINT `idcliente_expediente`
         FOREIGN KEY (`idcliente`)
-        REFERENCES `cliente` (`idcliente`),
+        REFERENCES `cliente` (`idcliente`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT `idconsignatarioembarcador_expediente`
         FOREIGN KEY (`idconsignatarioembarcador`)
         REFERENCES `proveedorcliente` (`idproveedorcliente`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -234,6 +241,7 @@ CREATE TABLE `expedientegasto`
     `expedientegasto_tipo` enum('gastorecibir','gastoconocido','cobro') NOT NULL,
     `expedientegasto_comprobante` TEXT,
     `expedientegasto_nota` TEXT,
+    `expedientegasto_moneda` enum('mxn','usd') NOT NULL,
     PRIMARY KEY (`idexpedientegasto`),
     INDEX `idgastofacturacion` (`idgastofacturacion`),
     INDEX `idproveedoritrade` (`idproveedoritrade`),
@@ -360,7 +368,7 @@ CREATE TABLE `proveedorcliente`
     `proveedorcliente_tipo` enum('proveedor','cliente'),
     PRIMARY KEY (`idproveedorcliente`),
     INDEX `proveedorcliente_idcliente` (`idcliente`),
-    CONSTRAINT `proveedorcliente_idcliente`
+    CONSTRAINT `idcliente_proveedorcliente`
         FOREIGN KEY (`idcliente`)
         REFERENCES `cliente` (`idcliente`)
 ) ENGINE=InnoDB;
@@ -447,7 +455,7 @@ CREATE TABLE `servicio`
 (
     `idservicio` INTEGER NOT NULL AUTO_INCREMENT,
     `servicio_tipo` enum('importacion','exportacion') NOT NULL,
-    `servicio_medio` enum('terrestre','aereo','maritimo') NOT NULL,
+    `servicio_medio` enum('Terrestre LTL','Terrestre FTL','Aereo','Maritimo FCL','Maritimo LCL') NOT NULL,
     `servicio_nombre` VARCHAR(45) NOT NULL,
     `servicio_descripcion` VARCHAR(45),
     PRIMARY KEY (`idservicio`)
@@ -463,8 +471,7 @@ CREATE TABLE `servicioestado`
 (
     `idservicioestado` INTEGER NOT NULL AUTO_INCREMENT,
     `idservicio` INTEGER NOT NULL,
-    `servicioestado_nombre` VARCHAR(45) NOT NULL,
-    `servicioestado_comodin` TINYINT(1) NOT NULL,
+    `servicioestado_nombre` VARCHAR(100) NOT NULL,
     `servicioestado_jerarquia` INTEGER NOT NULL,
     PRIMARY KEY (`idservicioestado`),
     INDEX `idservicio` (`idservicio`),

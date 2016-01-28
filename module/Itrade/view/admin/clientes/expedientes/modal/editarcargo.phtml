@@ -1,6 +1,6 @@
 <div class="modal fade" tabindex="-1" role="dialog">
     <?php 
-        $form->setAttribute('action', '/clientes/ver/'.$entity->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente().'/nuevocargo');
+        $form->setAttribute('action', '/clientes/ver/'.$entity->getExpediente()->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente().'/editarcargo');
         $form->setAttribute('enctype', 'multipart/form-data');
 
         echo $this->form()->openTag($form); 
@@ -16,8 +16,9 @@
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="row-fluid">
                         <div class="form-group">
-                            <?php echo $this->formHidden($form->get('expedientegasto_moneda')) ?>
                             <?php echo $this->formHidden($form->get('idexpediente')) ?>
+                            <?php echo $this->formHidden($form->get('expedientegasto_moneda')) ?>
+                            <?php echo $this->formHidden($form->get('idexpedientegasto')) ?>
                             <?php echo $this->formLabel($form->get('expedientegasto_fecha')) ?>  
                             <div class="controls">
                                 <div class="input-with-icon  right">
