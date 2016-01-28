@@ -21,8 +21,8 @@ class IndexController extends AbstractActionController
         $message="success";
 
 
-        $id = $session->getData()['idcliente'];
-        //$id = 1;
+        //$id = $session->getData()['idcliente'];
+        $id = 1;
 
         $entity = \ClienteQuery::create()->findPk($id);
 
@@ -139,8 +139,7 @@ class IndexController extends AbstractActionController
     	}
         else
             $message = "";
-
-        $session->Close();    	
+  	
 
         $mexico_states = \Shared\GeneralFunction\Geolocation::getMexicoStates();
         $form = new \Client\Form\ClienteForm($mexico_states,$entity);

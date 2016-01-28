@@ -42,7 +42,8 @@ class AuthListener implements ListenerAggregateInterface {
      * 
      * Excluye las rutas publicas de la verificación
      */
-    public function onDispatch (MvcEvent $e){
+    public function onDispatch (MvcEvent $e)
+    {
        
         $matches = $e->getRouteMatch();     
 
@@ -59,7 +60,8 @@ class AuthListener implements ListenerAggregateInterface {
 
         define("redirect", $matches->getMatchedRouteName());
 
-        switch ($module){
+        switch ($module)
+        {
             case 'Admin':{
               
                 /* Rutas excluidas de verificación */
@@ -79,19 +81,23 @@ class AuthListener implements ListenerAggregateInterface {
                 
             }
             
-            case 'Clientes':{
+            case 'Client':
+            {
               
                 // Rutas excluidas de verificación 
                 $excludeControllers = array(
-                    'Controller\Login'
+                    'Client\Controller\Login'
                 );
-             
+                //var_dump($controller);  
+                //var_dump($excludeControllers);             
                 // Verificamos si es una ruta excluida ó si hay una sesión activa 
-                if (in_array( $controller , $excludeControllers, true ) || $ClientSession->isActive() ) {  
+                if (in_array( $controller , $excludeControllers, true ) || $ClientSession->isActive() ) 
+                {  
                     return;
-                }else{
-                    
-                    $matches->setParam('controller', 'Controller\Login');
+                }
+                else
+                {
+                    $matches->setParam('controller', 'Client\Controller\Login');
                     $matches->setParam('action', 'index');
               
                 }
@@ -102,15 +108,6 @@ class AuthListener implements ListenerAggregateInterface {
         }
         
         return;
-        
-        
-        
-         
-        
-        
-        
-        
-        
 
     }
 

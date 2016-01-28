@@ -124,49 +124,49 @@ $( document ).ready(function()
 
   //Asignacion de estilos para el detalle
     $("#detalleMaritimo").css("display","none"); 
-    $("#detalleMaritimo").css("position","relative");
+    $("#detalleMaritimo").css("position","absolute");
     $("#detalleMaritimo").css("background-color","rgba(0,0,0,.8)");
     $("#detalleMaritimo").css("color","white");
     $("#detalleMaritimo").css("opacity","1");
 
     $("#detalleMaritimo").css("bottom",height);
-    $("#detalleMaritimo").css("margin-bottom",-height);
-    $("#detalleMaritimo").css("left",width/3);
+    $("#detalleMaritimo").css("left",(width/3)+1);
 
     $("#detalleMaritimo").css("height",height);
+    $("#detalleMaritimo").css("margin-bottom",-height);
     $("#detalleMaritimo").css("width", (width/3)*2  );
 
 
     $("#detalleTerrestre").css("display","none"); 
-    $("#detalleTerrestre").css("position","relative");
+    $("#detalleTerrestre").css("position","absolute");
     $("#detalleTerrestre").css("background-color","rgba(0,0,0,.8)");
     $("#detalleTerrestre").css("color","white");
     $("#detalleTerrestre").css("opacity","1");
 
     $("#detalleTerrestre").css("bottom",height);
     $("#detalleTerrestre").css("margin-bottom",-height);
-    $("#detalleTerrestre").css("right",0);
+    
 
     $("#detalleTerrestre").css("height",height);
-    $("#detalleTerrestre").css("width", (width/3)*2  );
+    $("#detalleTerrestre").css("width", ((width/3)*2)+2  );
 
 
     $("#detalleAduana").css("display","none"); 
-    $("#detalleAduana").css("position","relative");
+    $("#detalleAduana").css("position","absolute");
     $("#detalleAduana").css("background-color","rgba(0,0,0,.8)");
     $("#detalleAduana").css("color","white");
     $("#detalleAduana").css("opacity","1");
 
     $("#detalleAduana").css("bottom",height);
     $("#detalleAduana").css("margin-bottom",-height);
-    $("#detalleAduana").css("left",width/3);
+    $("#detalleAduana").css("left",(width/3)+1);
 
     $("#detalleAduana").css("height",height);
     $("#detalleAduana").css("width", (width/3)*2  );
 
 
     $("#detalleLogistica").css("display","none"); 
-    $("#detalleLogistica").css("position","relative");
+    $("#detalleLogistica").css("position","absolute");
     $("#detalleLogistica").css("background-color","rgba(0,0,0,.8)");
     $("#detalleLogistica").css("color","white");
     $("#detalleLogistica").css("opacity","1");
@@ -175,7 +175,7 @@ $( document ).ready(function()
     $("#detalleLogistica").css("margin-bottom",-height);
 
     $("#detalleLogistica").css("height",height);
-    $("#detalleLogistica").css("width", (width/3)*2  );
+    $("#detalleLogistica").css("width", ((width/3)*2)+2  );
 
     $("#detalleAereo").css("display","none"); 
     $("#detalleAereo").css("position","relative");

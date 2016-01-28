@@ -79,6 +79,10 @@ class LoginController extends AbstractActionController
 	  		$message = "Correo electrónico o contraseña incorrecta";
     	}
 		
+		//Romper la sesion
+		$session = new \Shared\Session\ClientSession();
+    	$session->Close();  
+
 
     	$layout = $this->layout();
 	    $layout->setTemplate('website/layout/layout_login');
