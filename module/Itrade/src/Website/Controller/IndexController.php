@@ -16,6 +16,9 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+    	$session = new \Shared\Session\ClientSession();
+        $test = $session->getData()['cliente_nombre'];
+	             
     	$layout = $this->layout();
 	    $layout->setTemplate('website/layout/layout');
         return new ViewModel();

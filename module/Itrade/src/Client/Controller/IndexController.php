@@ -2,9 +2,10 @@
 
 namespace Client\Controller;
 
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
+use Zend\Session\Container;
 
 class IndexController extends AbstractActionController
 {
@@ -21,7 +22,7 @@ class IndexController extends AbstractActionController
 
 
         $id = $session->getData()['idcliente'];
-        $id = 1;
+        //$id = 1;
 
         $entity = \ClienteQuery::create()->findPk($id);
 
@@ -139,12 +140,16 @@ class IndexController extends AbstractActionController
         else
             $message = "";
 
+        $session->Close();    	
 
-    	$mexico_states = \Shared\GeneralFunction\Geolocation::getMexicoStates();
+        $mexico_states = \Shared\GeneralFunction\Geolocation::getMexicoStates();
         $form = new \Client\Form\ClienteForm($mexico_states,$entity);
        
         //$form = new \Catalogo\Form\ClienteForm();
         
+        $layout = $this->layout();
+        $layout->setTemplate('client/layout/layout');
+
         //RETORNAMOS A NUESTRA VISTA
         return new ViewModel(array(
             'form' 		=> $form,
@@ -153,4 +158,5 @@ class IndexController extends AbstractActionController
             'debug'     => $debug
         ));
     }
+
 }

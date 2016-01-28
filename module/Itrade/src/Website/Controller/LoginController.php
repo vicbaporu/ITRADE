@@ -3,6 +3,7 @@ namespace Website\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class LoginController extends AbstractActionController
 {
@@ -64,12 +65,11 @@ class LoginController extends AbstractActionController
 	                    'cliente_nombre' 	=> $client->getClienteNombrecontacto(),
 	                    'cliente_email' 	=> $client->getClienteEmail()
 	                ));
-	                echo $session->isActive();
 	                
 	                //var_dump($session->getData());
 				  	
-				  	//return $this->redirect()->toUrl('http://clientes.itrade/');
-				  	//return $this->redirect()->toRoute('clientes');
+				  	return $this->redirect()->toUrl('http://itrade/');
+				  	//return $this->redirect()->toRoute('client');
 				  }
 				}
 				
