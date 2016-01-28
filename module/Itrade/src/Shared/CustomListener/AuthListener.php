@@ -93,7 +93,7 @@ class AuthListener implements ListenerAggregateInterface {
                     
                     $matches->setParam('controller', 'Controller\Login');
                     $matches->setParam('action', 'index');
-             * 
+              
                 }
                 
             }
