@@ -262,3 +262,16 @@ msgstr "We develop your company’s customs and logistics strategic planning; in
 
 msgid "Especialistas en el manejo de carga y transporte"
 msgstr "Cargo’s handling and transportation specialists"
+
+msgid "Acércate a nosotros, será un gusto apoyarte!"
+msgstr "Come and visit us. It will be a pleasure to support you!"
+
+msgid "Llámanos!"
+msgstr "Call us!"
+
+msgid "Servicio al Cliente:"
+msgstr "Customer service"
+
+msgid "Soporte Logístico:"
+msgstr "Logistic support"
+

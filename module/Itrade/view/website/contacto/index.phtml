@@ -128,15 +128,15 @@
 
 <div id="contacto" class="  row top blue">
 	<div class="col-lg-4 col-xs-12 col-sm-12 col-md-4">
-		<h1 class="textWhite specialAlign"><?php echo  $this->translate('Contactanos')?></h1>
-		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Nosotros podemos ayudarte.')?> </h3>
+		<h1 class="textWhite specialAlign"><?php echo  $this->translate('CONTÁCTENOS,')?></h1>
+		<h3 class="textWhite specialAlign"><?php echo  $this->translate('Podemos ayudarle.')?> </h3>
 	</div>
 	<div class="col-lg-8 col-xs-12 col-sm-12 col-md-8 bot ">
 		<form class="textWhite" action="http://itrade" method="post">
 
 			<div class="form-group  row">
 				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="nombre"><?php echo  $this->translate('Nombre')?>: *</label>
+					<label style="margin-top: 5px;" for="nombre"><?php echo  $this->translate('Nombre')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8  col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -145,7 +145,7 @@
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-lg-offset-0 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="empresa"><?php echo  $this->translate('Empresa')?>:</label>
+					<label style="margin-top: 5px;" for="empresa"><?php echo  $this->translate('Empresa')?>:</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="empresa" name="empresa" >
@@ -154,13 +154,13 @@
 			
 			<div class="form-group row ">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="email"><?php echo  $this->translate('Dirección de e-mail')?>: *</label>
+					<label style="margin-top: 5px;" for="email"><?php echo  $this->translate('Dirección de e-mail')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
 					<input type="text" class="form-control" id="email" name="email" required>
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 formAlign top-sm ">
-					<label for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
+					<label style="margin-top: 5px;" for="telefono"><?php echo  $this->translate('Teléfono')?>: *</label>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12 top-sm">
 					<input type="text" class="form-control" id="telefono" name="telefono" required>
@@ -170,7 +170,7 @@
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="mensaje"><?php echo  $this->translate('Mensaje')?>: *</label>
+					<label style="margin-top: 5px;" for="mensaje"><?php echo  $this->translate('Mensaje')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<textarea name="mensaje" id="mensaje" class="form-control" rows="3" required></textarea>
@@ -179,7 +179,7 @@
 
 			<div class="form-group row">
 				<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 formAlign ">
-					<label for="mensaje"><?php echo  $this->translate('Tipo de servicio')?>: *</label>
+					<label style="margin-top: 5px;" for="mensaje"><?php echo  $this->translate('Tipo de servicio')?>: *</label>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					
@@ -190,9 +190,9 @@
 							<option value="maritimo"><?php echo  $this->translate('Marítimo')?></option>
 						<?php endif ?>
 						<?php if ($servicio == 'aereo'): ?>
-							<option value="aereo" selected><?php echo  $this->translate('Aereo')?></option>
+							<option value="aereo" selected><?php echo  $this->translate('Aéreo')?></option>
 						<?php else: ?>
-							<option value="aereo"><?php echo  $this->translate('Aereo')?></option>
+							<option value="aereo"><?php echo  $this->translate('Aéreo')?></option>
 						<?php endif ?>
 						<?php if ($servicio == 'terrestre'): ?>
 							<option selected value="terrestre"><?php echo  $this->translate('Terrestre')?></option>
