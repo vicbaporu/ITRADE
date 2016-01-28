@@ -242,14 +242,140 @@ return array(
                                     ),
                                 ),
                             ),
-                            'clientes' => array(
+                        ),
+                    ),
+                    'clientes' => array(
+                        'type'    => 'literal',
+                        'options' => array(
+                            'route'    => '/clientes',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                'action'        => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'serverside' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/clientes',
+                                    'route'    => '/serverside',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'serverside',
+                                    ),
+                                ),
+                            ),
+                            'nuevo' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/nuevo',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'nuevo',
+                                    ),
+                                ),
+                            ),
+                            'editar' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/ver/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'editar',
+                                    ),
                                 ),
                                 'may_terminate' => true,
                                 'child_routes' => array(
-                                    'nuevo' => array(
+                                    'proveedores' => array(
+                                        'type'    => 'Segment',
+                                        'options' => array(
+                                            'route'    => '/proveedores',
+                                        ),
+                                        'may_terminate' => true,
+                                        'child_routes' => array(
+                                            'nuevo' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/nuevo',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Clientes',
+                                                        'action' => 'proveedornuevo',
+                                                    ),
+                                                ),
+                                            ),
+                                            'editar' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/editar/:idproveedor',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Clientes',
+                                                        'action' => 'proveedoreditar',
+                                                    ),
+                                                ),
+                                            ),
+                                            'eliminar' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/eliminar/:idproveedor',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Clientes',
+                                                        'action' => 'proveedoreliminar',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    'clientes' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '/clientes',
+                                        ),
+                                        'may_terminate' => true,
+                                        'child_routes' => array(
+                                            'nuevo' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/nuevo',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Proveedorclientes',
+                                                        'action' => 'nuevo',
+                                                    ),
+                                                ),
+                                            ),
+                                            'serverside' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/serverside',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Proveedorclientes',
+                                                        'action' => 'serverside',
+                                                    ),
+                                                ),
+                                            ),
+                                            'editar' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/editar/:idclientecliente',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Proveedorclientes',
+                                                        'action' => 'editar',
+                                                    ),
+                                                ),
+                                            ),
+                                            'eliminar' => array(
+                                                'type' => 'Segment',
+                                                'options' => array(
+                                                    'route' => '/eliminar/:idclientecliente',
+                                                    'defaults' => array(
+                                                        'controller' => 'Admin\Clientes\Controller\Proveedorclientes',
+                                                        'action' => 'eliminar',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    //
+                                    'expedientes' => array(
                                         'type' => 'Segment',
                                         'options' => array(
                                             'route' => '/expedientes',
@@ -276,9 +402,7 @@ return array(
                                                     ),
                                                 ),
                                                 'may_terminate' => true,
-
                                                 'child_routes' => array( 
-
                                                     'dropzone' => array(
                                                         'type' => 'Segment',
                                                         'options' => array(
@@ -316,26 +440,6 @@ return array(
                                                             'defaults' => array(
                                                                 'controller' => 'Admin\Clientes\Controller\Expedientes',
                                                                 'action' => 'nuevocargo',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    'editarcargo' => array(
-                                                        'type' => 'Segment',
-                                                        'options' => array(
-                                                            'route' => '/editarcargo',
-                                                            'defaults' => array(
-                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
-                                                                'action' => 'editarcargo',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    'eliminarcargo' => array(
-                                                        'type' => 'Segment',
-                                                        'options' => array(
-                                                            'route' => '/eliminarcargo',
-                                                            'defaults' => array(
-                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
-                                                                'action' => 'eliminarcargo',
                                                             ),
                                                         ),
                                                     ),
@@ -614,7 +718,7 @@ return array(
             //CLIENTES
             'Admin\Clientes\Controller\Clientes' => 'Admin\Clientes\Controller\ClientesController',
             'Admin\Clientes\Controller\Proveedorclientes' => 'Admin\Clientes\Controller\ProveedorclientesController',
-                         
+            'Admin\Clientes\Controller\Expedientes' => 'Admin\Clientes\Controller\ExpedientesController',
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             
             

@@ -154,7 +154,7 @@
                  url: '/json/datatable/lang_es.json',
                  async:false,
                  success: function (data) {
-                    $table = $container.find('table').DataTable({
+                    $table = tableElement.DataTable({
                          autoWidth: false,
                          serverSide: true,
                          processing: true,
@@ -207,6 +207,160 @@
                                         
                                         source.find('.modal').modal();
                                   
+                                    }
+                                });
+                                
+                            });
+                            //responsiveHelper.createExpandIcon(nRow);
+                        },
+                        
+                    });
+
+                    //INICIALIZAMOS NUESTROS SELECT
+                    $container.find("select").select2({
+                        minimumResultsForSearch: -1
+                    });
+                    
+                 }
+            });
+        };
+        
+        plugin.listClientes = function(){
+            
+            var tableElement = $('#table_clientes');
+            var idcliente = $container.find('input[name=idcliente]').val();
+            
+            $.ajax({
+                 url: '/json/datatable/lang_es.json',
+                 async:false,
+                 success: function (data) {
+                    $table = tableElement.DataTable({
+                         autoWidth: false,
+                         serverSide: true,
+                         processing: true,
+                         language:data,
+                         iDisplayLength:25,
+                         order:[],
+                         columns: [
+                            { data: "proveedorcliente_nombre" },
+                            { data: "proveedorcliente_taxid" },                           
+                            { data: "proveedorcliente_nombrecontacto" },
+                            { data: "proveedorcliente_telefonocontacto" },
+                            { data: "proveedorcliente_options",bSearchable: false, bSortable: false, className:'options'},
+                        ],
+                        ajax: {
+                            url: '/clientes/ver/'+idcliente+'/clientes/serverside',
+                            type: 'POST',
+                            async:false,
+                            data:{idcliente:idcliente},
+                        },
+                        fnDrawCallback : function (oSettings) {                            
+                        },
+                        fnRowCallback  : function (nRow) {
+                            
+                            //DELETE MODAL
+                            $(nRow).find('td.options a.delete').on('click',function(){
+                                var id = $(this).closest('tr').attr('id');
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/clientes/eliminar/'+id,
+                                    //data:{id:id},
+                                    success:function(source){
+                                        source = $('<div>'+source+'</div>');
+                                        source.find('button[btn-action=eliminar]').on('click',function(){
+                                            $.ajax({
+                                                url:'/clientes/ver/'+idcliente+'/clientes/eliminar/'+id,
+                                                type:'POST',
+                                                dataType:'json',
+                                                data:{id:id},
+                                                success:function(data){
+                                                    if(data){
+                                                        window.location.replace('/clientes/ver/'+idcliente+'?active=clientes');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                        
+                                        $container.append(source);
+                                        source.find('.modal').modal();
+
+                                    }
+                                });
+                                
+                            });
+                            //responsiveHelper.createExpandIcon(nRow);
+                        },
+                        
+                    });
+
+                    //INICIALIZAMOS NUESTROS SELECT
+                    $container.find("select").select2({
+                        minimumResultsForSearch: -1
+                    });
+                    
+                 }
+            });
+        };
+        
+        plugin.listExpedientes = function(){
+            
+            var tableElement = $('#table_expedientes');
+            var idcliente = $container.find('input[name=idcliente]').val();
+            
+            $.ajax({
+                 url: '/json/datatable/lang_es.json',
+                 async:false,
+                 success: function (data) {
+                    $table = tableElement.DataTable({
+                         autoWidth: false,
+                         serverSide: true,
+                         processing: true,
+                         language:data,
+                         iDisplayLength:25,
+                         order:[],
+                         columns: [
+                            { data: "expediente_folio" },
+                            { data: "expediente_fechainicio" },
+                            { data: "expediente_tipo" },   
+                            { data: "expediente_consignatario" , bSortable: false},
+                            { data: "expediente_embarcador" , bSortable: false},
+                            { data: "expediente_estatus" },
+                            { data: "expediente_options",bSearchable: false, bSortable: false, className:'options'},
+                        ],
+                        ajax: {
+                            url: '/clientes/ver/'+idcliente+'/expedientes/serverside',
+                            type: 'POST',
+                            async:false,
+                            data:{idcliente:idcliente},
+                        },
+                        fnDrawCallback : function (oSettings) {                            
+                        },
+                        fnRowCallback  : function (nRow) {
+                            
+                            //DELETE MODAL
+                            $(nRow).find('td.options a.delete').on('click',function(){
+                                var id = $(this).closest('tr').attr('id');
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/clientes/eliminar/'+id,
+                                    //data:{id:id},
+                                    success:function(source){
+                                        source = $('<div>'+source+'</div>');
+                                        source.find('button[btn-action=eliminar]').on('click',function(){
+                                            $.ajax({
+                                                url:'/clientes/ver/'+idcliente+'/clientes/eliminar/'+id,
+                                                type:'POST',
+                                                dataType:'json',
+                                                data:{id:id},
+                                                success:function(data){
+                                                    if(data){
+                                                        window.location.replace('/clientes/ver/'+idcliente+'?active=clientes');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                        
+                                        $container.append(source);
+                                        source.find('.modal').modal();
+
                                     }
                                 });
                                 
@@ -809,6 +963,8 @@
                 
                 
                 plugin.listProveedores();
+                plugin.listClientes();
+                plugin.listExpedientes();
                 
                 
             }
