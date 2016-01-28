@@ -78,12 +78,12 @@ class AuthListener implements ListenerAggregateInterface {
                 }
                 
             }
-            /*
+            
             case 'Clientes':{
               
                 // Rutas excluidas de verificación 
                 $excludeControllers = array(
-                    
+                    'Controller\Login'
                 );
              
                 // Verificamos si es una ruta excluida ó si hay una sesión activa 
@@ -91,13 +91,13 @@ class AuthListener implements ListenerAggregateInterface {
                     return;
                 }else{
                     
-                    $matches->setParam('controller', 'Login\Controller\Login');
+                    $matches->setParam('controller', 'Controller\Login');
                     $matches->setParam('action', 'index');
              * 
                 }
                 
             }
-            */
+            
 
         }
         
