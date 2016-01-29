@@ -8,7 +8,7 @@
 	$email 		= $_POST['email'];
 	$telefono 	= $_POST['telefono'];
 	$mensaje 	= $_POST['mensaje'];
-	$servicio   = $_POST['servicio'];
+	$servicio       = $_POST['cbServicio'];
 
 	$bodyMessage = 'Nombre: '.$nombre.'<br>Empresa: '.$empresa.'<br>Email: '.$email.'<br>Telefono: '.$telefono.'<br>Mensaje: '.$mensaje.'<br><br> Ponte en contacto con el<br>Tipo de servicio: '.$servicio;
 
@@ -17,15 +17,15 @@
 	$mail = new PHPMailer;
 
 	$mail->isSMTP();                                      	// Set mailer to use SMTP
-	$mail->Host = 'smtp.gmail.com server';  		// Specify main and backup SMTP servers
+	$mail->Host = ' mail.itrademexico.mx';  		// Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               	// Enable SMTP authentication
-	$mail->Password = '********';                           // SMTP password
-	$mail->Username = 'mail@server.com';                 	// SMTP username
+	$mail->Password = 'ItradeMexic0';                           // SMTP password
+	$mail->Username = 'website@itrademexico.com.mx';                 	// SMTP username
 	$mail->SMTPSecure = 'ssl';                            	// Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 465;                                    	// TCP port to connect to
 
-	$mail->setFrom($email, 'ITRADE Contacto');
-	$mail->addAddress('mailtorecipe@server.com', $nombre);  // Add a recipient
+	$mail->setFrom('website@itrademexico.com.mx', 'ITRADE Contacto ');
+	$mail->addAddress('dcastanedob@gmail.com', $nombre);  // Add a recipient
 
 	$mail->isHTML(true);                                  	// Set email format to HTML
 
@@ -35,7 +35,7 @@
 
 	if(!$mail->send()) 
 	{?>
-	    <div class="alert alert-danger" role="alert">Lo siento '.$nombre.' no pudimos enviar el correo </div>
+	    <div class="alert alert-danger" role="alert">Lo siento <?php echo $nombre?> no pudimos enviar el correo </div>
     <?php 
 	} else 
 	{?>
