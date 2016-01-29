@@ -18,7 +18,7 @@ return array(
             'client' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => 'clientes.itrade',
+                    'route' => 'clientes.itrademexico.mx',
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
@@ -55,7 +55,7 @@ return array(
             'admin' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => 'admin.itrade',
+                    'route' => 'admin.itrademexico.mx',
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
@@ -601,7 +601,7 @@ return array(
             'website' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => 'itrade',
+                    'route' => 'itrademexico.mx',
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
