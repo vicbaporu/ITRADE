@@ -601,10 +601,10 @@ return array(
             'website' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => ':2nd.:1st',
+                    'route' => ':2nd.:1st[.:1st]',
                     'contraints' => array(
                         '2nd' => 'itrademexico|itradelogisticayaduana',
-                        '1st' => 'mx|com|com.mx|org',
+                        '1st' => 'mx|com|org',
                     ),
                 ),
                 'may_terminate' => true,
