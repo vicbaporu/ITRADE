@@ -601,7 +601,11 @@ return array(
             'website' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => 'itrademexico.mx',
+                    'route' => ':2nd.:1st',
+                    'contraints' => array(
+                        '2nd' => 'itrademexico|itradelogisticayaduana',
+                        '1st' => 'mx|com|com.mx|org',
+                    ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
