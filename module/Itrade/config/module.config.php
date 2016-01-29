@@ -603,7 +603,7 @@ return array(
                 'options' => array(
                     'route' => ':domains',
                     'contraints' => array(
-                        'domains' => 'itrade|itrademexico.mx',
+                        'domains' => 'itrademexico.mx',
                     ),
                 ),
                 'may_terminate' => true,
