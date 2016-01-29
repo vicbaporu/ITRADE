@@ -20,18 +20,26 @@
 	$mail->Host = ' mail.itrademexico.mx';  		// Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               	// Enable SMTP authentication
 	$mail->Password = 'ItradeMexic0';                           // SMTP password
-	$mail->Username = 'website@itrademexico.com.mx';                 	// SMTP username
+	$mail->Username = 'website@itrademexico.mx';                 	// SMTP username
 	$mail->SMTPSecure = 'ssl';                            	// Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 465;                                    	// TCP port to connect to
 
-	$mail->setFrom('website@itrademexico.com.mx', 'ITRADE Contacto ');
-	$mail->addAddress('dcastanedob@gmail.com', $nombre);  // Add a recipient
+	$mail->setFrom('website@itrademexico.mx', 'CONTACTO ITRADE WEBSITE ');
+	$mail->addAddress('luis.contreras@itrademexico.com.mx', $nombre);  // Add a recipient
 
 	$mail->isHTML(true);                                  	// Set email format to HTML
 
-	$mail->Subject = 'Ponte en contacto WEB';
-	$mail->Body    = $bodyMessage;
-	//	$mail->AltBody = '';
+	$mail->Subject = 'CONTACTO ITRADE WEBSITE';
+        
+        $body = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/files/email/contact_email.html');
+        $body = str_replace('@@nombre', $nombre, $body);
+        $body = str_replace('@@empresa', $empresa, $body);
+        $body = str_replace('@@email', $email, $body);
+        $body = str_replace('@@telefono', $telefono, $body);
+        $body = str_replace('@@servicio', $servicio, $body);
+        $body = str_replace('@@mensaje', $mensaje, $body);
+
+	$mail->Body    = $body;
 
 	if(!$mail->send()) 
 	{?>
