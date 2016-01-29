@@ -602,6 +602,7 @@ return array(
                 'type' => 'Hostname',
                 'options' => array(
                     'route' => 'itrademexico.mx',
+                    'route' => 'www.itrademexico.mx',
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
