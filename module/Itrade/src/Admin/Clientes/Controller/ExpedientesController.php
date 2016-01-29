@@ -302,10 +302,14 @@ class ExpedientesController extends AbstractActionController
             }
             $totales_usd['utilidad'] = $cobros - $cargos_conocidos;
             
+            //SERVICIOS
+            $servicios = \ExpedienteservicioQuery::create()->filterByIdexpediente($entity->getIdexpediente())->find();
+            
             $cliente = $entity->getCliente();
             $view_model = new ViewModel();
             $view_model->setTemplate('admin/clientes/expedientes/editar');
             $view_model->setVariables(array(
+                'servicios' => $servicios,
                 'entity' => $entity,
                 'form' => $form,
                 'successMessages' => json_encode($this->flashMessenger()->getSuccessMessages()),

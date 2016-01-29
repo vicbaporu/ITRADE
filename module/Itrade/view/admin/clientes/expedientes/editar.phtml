@@ -273,22 +273,46 @@
                     <div class="grid-title no-border">
                         <h4><span class="semi-bold">Servicios</span></h4>
                         <div class="tools">
+                            <a id="user-options" class="dropdown-toggle config" href="javascript:;" data-toggle="dropdown"></a>
                             <a class="collapse" href="javascript:;"></a>
+
+                            <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
+                                <li>
+                                    <a id="nuevo_servicio" style="background: none"href="javascript:void(0)"><i class="fa fa-plus"></i> Nuevo servicio</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="grid-body no-border">
-                        <table id="table_servicios" class="table">
+                        <table id="table_servicios" class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Creación</th>
                                     <th>Servicio</th>
                                     <th>Estatus (Actual)</th>
-                                    <th>Fecha final</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php $servicio = new Expedienteservicio()?>
+                                <?php foreach ($servicios as $servicio) :?>
+                                    <!-- OBTENEMOS EL SERVICIO ACTUAL DEL SERVICIO-->
+                                    <?php 
+                                        $estatus_actual = 'N/D';
+                                        $query = ExpedientehistorialQuery::create()->filterByIdexpedienteservicio($servicio->getIdexpedienteservicio())->orderByIdestadoservicio(Criteria::DESC)->findOne();
+                                        if(!is_null($query)){
+                                            $estatus_actual = $query->getServicioestado()->getServicioestadoNombre();
+                                        }
+                                    ?>
+                                    <tr id="<?php echo $servicio->getIdexpedienteservicio()?>">
+                                        <td class="center"><i class="fa fa-plus-circle collapse"></i></td>
+                                        <td><?php echo $servicio->getExpedienteservicioFecha('d/m/Y')?></td>
+                                        <td><?php echo $servicio->getServicio()->getServicioNombre()?></td>
+                                        <td><?php echo $estatus_actual?></td>
+                                        <td><a class="eliminar_servicio" href="javascript:void(0)" title="Eliminar" data-placement="left" data-toggle="tooltip"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></a></td>
+                                    </tr>   
+                                <?php endforeach;?>
                             </tbody>
                         </table>
                     </div>

@@ -180,8 +180,7 @@
                             });
                         },
                     });
-                myDropzone.autoDiscover = false;
-                
+                myDropzone.autoDiscover = false;            
                 $.each(files, function (key, value) {
 
 
@@ -196,7 +195,6 @@
 
 
                 });
-
                 
                 //NUEVO CARGO
                 $container.find('a#nuevo_cargo_mxn,a#nuevo_cargo_usd').on('click',function(){
