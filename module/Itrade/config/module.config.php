@@ -601,10 +601,7 @@ return array(
             'website' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => ':domains',
-                    'contraints' => array(
-                        'domains' => 'itrademexico.mx',
-                    ),
+                    'route' => 'itrademexico.mx',
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
