@@ -560,9 +560,15 @@ abstract class BaseClientePeer
      */
     public static function clearRelatedInstancePool()
     {
+        // Invalidate objects in ClientearchivoPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        ClientearchivoPeer::clearInstancePool();
         // Invalidate objects in ExpedientePeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ExpedientePeer::clearInstancePool();
+        // Invalidate objects in ProveedorclientePeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        ProveedorclientePeer::clearInstancePool();
     }
 
     /**
@@ -1476,11 +1482,23 @@ abstract class BaseClientePeer
         foreach ($objects as $obj) {
 
 
+            // delete related Clientearchivo objects
+            $criteria = new Criteria(ClientearchivoPeer::DATABASE_NAME);
+
+            $criteria->add(ClientearchivoPeer::IDCLIENTE, $obj->getIdcliente());
+            $affectedRows += ClientearchivoPeer::doDelete($criteria, $con);
+
             // delete related Expediente objects
             $criteria = new Criteria(ExpedientePeer::DATABASE_NAME);
 
             $criteria->add(ExpedientePeer::IDCLIENTE, $obj->getIdcliente());
             $affectedRows += ExpedientePeer::doDelete($criteria, $con);
+
+            // delete related Proveedorcliente objects
+            $criteria = new Criteria(ProveedorclientePeer::DATABASE_NAME);
+
+            $criteria->add(ProveedorclientePeer::IDCLIENTE, $obj->getIdcliente());
+            $affectedRows += ProveedorclientePeer::doDelete($criteria, $con);
         }
 
         return $affectedRows;

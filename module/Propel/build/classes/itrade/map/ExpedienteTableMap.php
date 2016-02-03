@@ -45,7 +45,6 @@ class ExpedienteTableMap extends TableMap
         $this->addColumn('expediente_factura', 'ExpedienteFactura', 'VARCHAR', false, 45, null);
         $this->addColumn('expediente_fechainicio', 'ExpedienteFechainicio', 'DATE', true, null, null);
         $this->addColumn('expediente_fechafin', 'ExpedienteFechafin', 'DATE', false, null, null);
-        $this->addColumn('expediente_preciomxn', 'ExpedientePreciomxn', 'DECIMAL', false, 10, null);
         $this->addColumn('expediente_tipo', 'ExpedienteTipo', 'CHAR', true, null, null);
         $this->getColumn('expediente_tipo', false)->setValueSet(array (
   0 => 'exportacion',
@@ -57,7 +56,27 @@ class ExpedienteTableMap extends TableMap
   1 => 'cerrado',
 ));
         $this->addColumn('expediente_folio', 'ExpedienteFolio', 'VARCHAR', false, 45, null);
+        $this->addColumn('expediente_preciomxn', 'ExpedientePreciomxn', 'DECIMAL', false, 10, null);
         $this->addColumn('expediente_preciousd', 'ExpedientePreciousd', 'DECIMAL', false, 10, null);
+        $this->addColumn('expediente_estatuspago', 'ExpedienteEstatuspago', 'BOOLEAN', false, 1, null);
+        $this->addColumn('expediente_facturacionmxn', 'ExpedienteFacturacionmxn', 'CHAR', false, null, null);
+        $this->getColumn('expediente_facturacionmxn', false)->setValueSet(array (
+  0 => 'nofacturada',
+  1 => 'facturada',
+  2 => 'cancelada',
+));
+        $this->addColumn('expediente_facturacionusd', 'ExpedienteFacturacionusd', 'CHAR', false, null, null);
+        $this->getColumn('expediente_facturacionusd', false)->setValueSet(array (
+  0 => 'nofacturada',
+  1 => 'facturada',
+  2 => 'cancelada',
+));
+        $this->addColumn('expediente_pendientepagomxn', 'ExpedientePendientepagomxn', 'DECIMAL', false, 10, null);
+        $this->addColumn('expediente_pendientepagousd', 'ExpedientePendientepagousd', 'DECIMAL', false, 10, null);
+        $this->addColumn('expediente_facturapdfmxn', 'ExpedienteFacturapdfmxn', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('expediente_facturaxmlmxn', 'ExpedienteFacturaxmlmxn', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('expediente_facturapdfusd', 'ExpedienteFacturapdfusd', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('expediente_facturaxmlusd', 'ExpedienteFacturaxmlusd', 'LONGVARCHAR', false, null, null);
         // validators
     } // initialize()
 

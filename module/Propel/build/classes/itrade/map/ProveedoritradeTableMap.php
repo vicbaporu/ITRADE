@@ -60,7 +60,7 @@ class ProveedoritradeTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idproveedoritrade' => 'idproveedoritrade', ), null, null, 'Expedientegastos');
+        $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idproveedoritrade' => 'idproveedoritrade', ), 'CASCADE', 'CASCADE', 'Expedientegastos');
         $this->addRelation('Proveedoritradearchivo', 'Proveedoritradearchivo', RelationMap::ONE_TO_MANY, array('idproveedoritrade' => 'idproveedoritrade', ), 'CASCADE', 'CASCADE', 'Proveedoritradearchivos');
         $this->addRelation('Proveedoritradeservicio', 'Proveedoritradeservicio', RelationMap::ONE_TO_MANY, array('idproveedoritrade' => 'idproveedoritrade', ), 'CASCADE', 'CASCADE', 'Proveedoritradeservicios');
     } // buildRelations()

@@ -17,10 +17,10 @@
 	$mail = new PHPMailer;
 
 	$mail->isSMTP();                                      	// Set mailer to use SMTP
-	$mail->Host = ' smtp.zoho.com';  		// Specify main and backup SMTP servers
+	$mail->Host = ' mail.itrademexico.mx';  		// Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               	// Enable SMTP authentication
-	$mail->Password = 'customer1234';                           // SMTP password
-	$mail->Username = 'customer@itrademexico.com.mx';                 	// SMTP username
+        $mail->Password = 'Itrade1234';                           // SMTP password
+	$mail->Username = 'website@itrademexico.mx';                 	// SMTP username
 	$mail->SMTPSecure = 'ssl';                            	// Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 465;                                    	// TCP port to connect to
 
@@ -30,6 +30,7 @@
 	$mail->isHTML(true);                                  	// Set email format to HTML
 
 	$mail->Subject = 'CONTACTO ITRADE WEBSITE';
+        $mail->SMTPDebug  = 0;
         
         $body = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/files/email/contact_email.html');
         $body = str_replace('@@nombre', $nombre, $body);

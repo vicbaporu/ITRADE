@@ -68,8 +68,8 @@ class ExpedientegastoTableMap extends TableMap
     {
         $this->addRelation('Empleado', 'Empleado', RelationMap::MANY_TO_ONE, array('idempleado' => 'idempleado', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Expediente', 'Expediente', RelationMap::MANY_TO_ONE, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE');
-        $this->addRelation('Gastofacturacion', 'Gastofacturacion', RelationMap::MANY_TO_ONE, array('idgastofacturacion' => 'idgastofacturacion', ), null, null);
-        $this->addRelation('Proveedoritrade', 'Proveedoritrade', RelationMap::MANY_TO_ONE, array('idproveedoritrade' => 'idproveedoritrade', ), null, null);
+        $this->addRelation('Gastofacturacion', 'Gastofacturacion', RelationMap::MANY_TO_ONE, array('idgastofacturacion' => 'idgastofacturacion', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Proveedoritrade', 'Proveedoritrade', RelationMap::MANY_TO_ONE, array('idproveedoritrade' => 'idproveedoritrade', ), 'CASCADE', 'CASCADE');
     } // buildRelations()
 
 } // ExpedientegastoTableMap

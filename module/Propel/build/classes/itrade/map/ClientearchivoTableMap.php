@@ -50,7 +50,7 @@ class ClientearchivoTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Cliente', 'Cliente', RelationMap::MANY_TO_ONE, array('idcliente' => 'idcliente', ), null, null);
+        $this->addRelation('Cliente', 'Cliente', RelationMap::MANY_TO_ONE, array('idcliente' => 'idcliente', ), 'CASCADE', 'CASCADE');
     } // buildRelations()
 
 } // ClientearchivoTableMap

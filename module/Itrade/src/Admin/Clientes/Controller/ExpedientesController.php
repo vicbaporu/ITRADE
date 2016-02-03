@@ -305,6 +305,15 @@ class ExpedientesController extends AbstractActionController
             //SERVICIOS
             $servicios = \ExpedienteservicioQuery::create()->filterByIdexpediente($entity->getIdexpediente())->find();
             
+            //CONSIGNATARIO, EMBARCADOR
+            if($entity->getExpedienteTipo() == 'importacion'){
+                $consignatario = $entity->getCliente()->getClienteRazonsocial();
+                $embarcador = $entity->getProveedorcliente()->getProveedorclienteNombre();
+            }else{
+                $embarcador = $entity->getCliente()->getClienteRazonsocial();
+                $consignatario = $entity->getProveedorcliente()->getProveedorclienteNombre();
+            }
+            
             $cliente = $entity->getCliente();
             $view_model = new ViewModel();
             $view_model->setTemplate('admin/clientes/expedientes/editar');
@@ -319,6 +328,8 @@ class ExpedientesController extends AbstractActionController
                 'facturacion_usd' => $expedientes_gastos_usd_array,
                 'totales_usd' => $totales_usd,
                 'files' => json_encode($files_array),
+                'consignatario' => $consignatario,
+                'embarcador' => $embarcador
             ));
             return $view_model;
         }else{

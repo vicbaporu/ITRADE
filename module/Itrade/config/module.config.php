@@ -22,8 +22,6 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-
-
                     'home' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -159,6 +157,16 @@ return array(
                             ),
                         ),
                     ),
+                    'expedientes' => array(
+                        'type'    => 'segment',
+                        'options' => array(
+                            'route'    => '/expedientes[/:action]',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Expedientes\Controller\Expedientes',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
                     'clientes' => array(
                         'type'    => 'literal',
                         'options' => array(
@@ -272,6 +280,16 @@ return array(
                                     'defaults' => array(
                                         'controller'    => 'Admin\Clientes\Controller\Clientes',
                                         'action'        => 'nuevo',
+                                    ),
+                                ),
+                            ),
+                            'eliminar' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/eliminar',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Clientes\Controller\Clientes',
+                                        'action'        => 'eliminar',
                                     ),
                                 ),
                             ),
@@ -661,13 +679,13 @@ return array(
             'website' => array(
                 'type' => 'Hostname',
                 'options' => array(
-//                    'route' => 'itrade',
-                    'route' => ':3nd.:2st[.:1st]',
-                    'contraints' => array(
-                        '3nd' => 'itrademexico|itradelogisticayaduana',
-                        '2st' => 'mx|com|org',
-                        '1st' => 'mx|com|org',
-                    ),
+                    'route' => 'itrade',
+//                    'route' => ':3nd.:2st[.:1st]',
+//                    'contraints' => array(
+//                        '3nd' => 'itrademexico|itradelogisticayaduana',
+//                        '2st' => 'mx|com|org',
+//                        '1st' => 'mx|com|org',
+//                    ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
@@ -786,6 +804,9 @@ return array(
             'Admin\Clientes\Controller\Proveedorclientes' => 'Admin\Clientes\Controller\ProveedorclientesController',
             'Admin\Clientes\Controller\Expedientes' => 'Admin\Clientes\Controller\ExpedientesController',
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            
+            //
+            'Admin\Expedientes\Controller\Expedientes' => 'Admin\Expedientes\Controller\ExpedientesController',
             
             
             /*

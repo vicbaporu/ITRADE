@@ -73,7 +73,7 @@
     <column name="idcliente" phpName="Idcliente" type="INTEGER" required="true"/>
     <column name="clientearchivo_archivo" phpName="ClientearchivoArchivo" type="LONGVARCHAR" required="true"/>
     <column name="clientearchivo_size" phpName="ClientearchivoSize" type="VARCHAR" size="45" required="true"/>
-    <foreign-key foreignTable="cliente" name="idcliente_clientearchivo" onDelete="RESTRICT" onUpdate="RESTRICT">
+    <foreign-key foreignTable="cliente" name="idcliente_clientearchivo" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>
     <index name="idcliente">
@@ -119,11 +119,20 @@
     <column name="expediente_factura" phpName="ExpedienteFactura" type="VARCHAR" size="45" required="false"/>
     <column name="expediente_fechainicio" phpName="ExpedienteFechainicio" type="DATE" required="true"/>
     <column name="expediente_fechafin" phpName="ExpedienteFechafin" type="DATE" required="false"/>
-    <column name="expediente_preciomxn" phpName="ExpedientePreciomxn" type="DECIMAL" size="10" scale="2" required="false"/>
     <column name="expediente_tipo" phpName="ExpedienteTipo" type="CHAR" sqlType="enum('exportacion','importacion')" required="true"/>
     <column name="expediente_estatus" phpName="ExpedienteEstatus" type="CHAR" sqlType="enum('abierto','cerrado')" required="true"/>
     <column name="expediente_folio" phpName="ExpedienteFolio" type="VARCHAR" size="45" required="false"/>
+    <column name="expediente_preciomxn" phpName="ExpedientePreciomxn" type="DECIMAL" size="10" scale="2" required="false"/>
     <column name="expediente_preciousd" phpName="ExpedientePreciousd" type="DECIMAL" size="10" scale="2" required="false"/>
+    <column name="expediente_estatuspago" phpName="ExpedienteEstatuspago" type="BOOLEAN" size="1" required="false"/>
+    <column name="expediente_facturacionmxn" phpName="ExpedienteFacturacionmxn" type="CHAR" sqlType="enum('nofacturada','facturada','cancelada')" required="false"/>
+    <column name="expediente_facturacionusd" phpName="ExpedienteFacturacionusd" type="CHAR" sqlType="enum('nofacturada','facturada','cancelada')" required="false"/>
+    <column name="expediente_pendientepagomxn" phpName="ExpedientePendientepagomxn" type="DECIMAL" size="10" scale="2" required="false"/>
+    <column name="expediente_pendientepagousd" phpName="ExpedientePendientepagousd" type="DECIMAL" size="10" scale="2" required="false"/>
+    <column name="expediente_facturapdfmxn" phpName="ExpedienteFacturapdfmxn" type="LONGVARCHAR" required="false"/>
+    <column name="expediente_facturaxmlmxn" phpName="ExpedienteFacturaxmlmxn" type="LONGVARCHAR" required="false"/>
+    <column name="expediente_facturapdfusd" phpName="ExpedienteFacturapdfusd" type="LONGVARCHAR" required="false"/>
+    <column name="expediente_facturaxmlusd" phpName="ExpedienteFacturaxmlusd" type="LONGVARCHAR" required="false"/>
     <foreign-key foreignTable="cliente" name="idcliente_expediente" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>
@@ -199,10 +208,10 @@
     <foreign-key foreignTable="expediente" name="idexpediente_expedientegasto" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idexpediente" foreign="idexpediente"/>
     </foreign-key>
-    <foreign-key foreignTable="gastofacturacion" name="idgastofacturacion_expedientegasto" onDelete="RESTRICT" onUpdate="RESTRICT">
+    <foreign-key foreignTable="gastofacturacion" name="idgastofacturacion_expedientegasto" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idgastofacturacion" foreign="idgastofacturacion"/>
     </foreign-key>
-    <foreign-key foreignTable="proveedoritrade" name="idproveedoritrade_expedientegasto" onDelete="RESTRICT" onUpdate="RESTRICT">
+    <foreign-key foreignTable="proveedoritrade" name="idproveedoritrade_expedientegasto" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idproveedoritrade" foreign="idproveedoritrade"/>
     </foreign-key>
     <index name="idgastofacturacion">
@@ -297,7 +306,7 @@
     <column name="proveedorcliente_estado" phpName="ProveedorclienteEstado" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_pais" phpName="ProveedorclientePais" type="VARCHAR" size="45" required="false"/>
     <column name="proveedorcliente_tipo" phpName="ProveedorclienteTipo" type="CHAR" sqlType="enum('proveedor','cliente')" required="false"/>
-    <foreign-key foreignTable="cliente" name="idcliente_proveedorcliente" onDelete="RESTRICT" onUpdate="RESTRICT">
+    <foreign-key foreignTable="cliente" name="idcliente_proveedorcliente" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idcliente" foreign="idcliente"/>
     </foreign-key>
     <index name="proveedorcliente_idcliente">

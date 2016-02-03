@@ -22,6 +22,7 @@ return array(
     'Admin\Clientes\Form\ProveedorForm'                     => __DIR__ . '/src/Admin/Clientes/Form/ProveedorForm.php',
     'Admin\Clientes\Form\ServicioForm'                      => __DIR__ . '/src/Admin/Clientes/Form/ServicioForm.php',
     'Admin\Controller\IndexController'                      => __DIR__ . '/src/Admin/Controller/IndexController.php',
+    'Admin\Expedientes\Controller\ExpedientesController'    => __DIR__ . '/src/Admin/Expedientes/Controller/ExpedientesController.php',
     'Login\Controller\LoginController'                      => __DIR__ . '/src/Admin/Login/Controller/LoginController.php',
     'Client\Controller\IndexController'                     => __DIR__ . '/src/Client/Controller/IndexController.php',
     'Client\Controller\LoginController'                     => __DIR__ . '/src/Client/Controller/LoginController.php',

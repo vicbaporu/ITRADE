@@ -1,0 +1,57 @@
+<div class="list_container">
+    <ul class="breadcrumb">
+        <li>
+             <a class="active" href="/expedientes">Expedientes</a>
+        </li>
+    </ul>
+    <div class="page-title">
+        <h3><span class="semi-bold">EXPEDIENTES</span></h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-title no-border">
+                    <div class="tools">
+<!--                        <a id="user-options" class="dropdown-toggle pull-right " href="#" data-toggle="dropdown" style="background: none">
+                            <div class="iconset top-settings-dark "></div>
+                        </a>
+                        <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
+                            <li>
+                                <a style="background: none"href="/clientes/nuevo"><i class="fa fa-plus"></i> Registro cliente</a>
+                            </li>
+                        </ul>-->
+                    </div>
+                    <br>
+                </div>
+                
+                <div class="grid-body no-border">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>FOLIO</th>
+                                <th>FECHA DE APERTURA</th>
+                                <th>TIPO</th>
+                                <th>CONSIGNATARIO</th>
+                                <th>EMBARCADOR</th>
+                                <th>ESTATUS</th>
+                                <th>OPCIONES</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--CUSTOM SCRIPT-->
+<script src="/js/admin/expedientes/expedientesModule.js"></script>
+<script>
+    $(document).ready(function() {
+        var expedientesModule = $('.list_container').expedientesModule({successMessages:<?php echo $successMessages?>});
+        expedientesModule.list();
+    }); 
+</script>
+
