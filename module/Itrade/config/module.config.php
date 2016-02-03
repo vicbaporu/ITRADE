@@ -661,12 +661,13 @@ return array(
             'website' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => 'itrade',
-//                    'route' => ':2nd.:1st[.:1st]',
-//                    'contraints' => array(
-//                        '2nd' => 'itrademexico|itradelogisticayaduana',
-//                        '1st' => 'mx|com|org',
-//                    ),
+//                    'route' => 'itrade',
+                    'route' => ':3nd.:2st[.:1st]',
+                    'contraints' => array(
+                        '3nd' => 'itrademexico|itradelogisticayaduana',
+                        '2st' => 'mx|com|org',
+                        '1st' => 'mx|com|org',
+                    ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
