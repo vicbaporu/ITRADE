@@ -17,10 +17,10 @@
 	$mail = new PHPMailer;
 
 	$mail->isSMTP();                                      	// Set mailer to use SMTP
-	$mail->Host = ' mail.itrademexico.mx';  		// Specify main and backup SMTP servers
+	$mail->Host = ' smtp.zoho.com';  		// Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               	// Enable SMTP authentication
-	$mail->Password = 'ItradeMexic0';                           // SMTP password
-	$mail->Username = 'website@itrademexico.mx';                 	// SMTP username
+	$mail->Password = 'customer1234';                           // SMTP password
+	$mail->Username = 'customer@itrademexico.com.mx';                 	// SMTP username
 	$mail->SMTPSecure = 'ssl';                            	// Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 465;                                    	// TCP port to connect to
 
