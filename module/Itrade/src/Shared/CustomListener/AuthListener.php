@@ -54,6 +54,7 @@ class AuthListener implements ListenerAggregateInterface {
         
 
         $controller = $matches->getParam('controller');
+        
         $module = explode('\\', $controller); $module = $module[0];
         
         $action = $matches->getParam('action');

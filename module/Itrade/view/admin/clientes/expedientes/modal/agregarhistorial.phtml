@@ -1,0 +1,61 @@
+<div class="modal fade" tabindex="-1" role="dialog">
+    <?php 
+        $form->setAttribute('action', '/clientes/ver/'.$entity->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente().'/agregarhistorial');
+        $form->setAttribute('enctype', 'multipart/form-data');
+
+        echo $this->form()->openTag($form); 
+    ?>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Nuevo registro de actividad</h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <?php echo $this->formHidden($form->get('idexpedienteservicio')) ?>
+                            <?php echo $this->formLabel($form->get('idestadoservicio')) ?>  
+                            <span class="help req">*</span>
+                            <div class="input-with-icon right" style="margin-top: 7px;">
+                                <i class=""></i>
+                                <?php echo $this->formSelect($form->get('idestadoservicio')) ?>
+                            </div>
+                            <span class="error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <?php echo $this->formLabel($form->get('expedientehistorial_nota')) ?>  
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <?php echo $this->formTextarea($form->get('expedientehistorial_nota')) ?>
+                            </div>
+                            <span class="error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row-fluid">
+                        <div class="checkbox check-success ">
+                            <input id="checkbox2" name="sendemail" type="checkbox" checked="checked" value="1">
+                            <label for="checkbox2">Enviar notificacion al cliente</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button btn-action="submit" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </form>
+</div><!-- /.modal -->
+

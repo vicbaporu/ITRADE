@@ -55,7 +55,7 @@ return array(
             'admin' => array(
                 'type' => 'Hostname',
                 'options' => array(
-                    'route' => 'admin.itrademexico.mx',
+                    'route' => 'admin.itrade',
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
@@ -463,6 +463,66 @@ return array(
                                                             ),
                                                         ),
                                                     ),
+                                                    'nuevoservicio' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/nuevoservicio',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'nuevoservicio',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'eliminarservicio' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/eliminarservicio',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'eliminarservicio',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'getservicios' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/getservicios',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'getservicios',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'agregarhistorial' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/agregarhistorial',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'agregarhistorial',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'eliminarhistorial' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/eliminarhistorial',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'eliminarhistorial',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'editarhistorial' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/editarhistorial',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'editarhistorial',
+                                                            ),
+                                                        ),
+                                                    ),
                                                 ),
                                             ),
                                             'serverside' => array(
@@ -601,12 +661,12 @@ return array(
             'website' => array(
                 'type' => 'Hostname',
                 'options' => array(
-//                      'route' => 'itrade',
-                    'route' => ':2nd.:1st[.:1st]',
-                    'contraints' => array(
-                        '2nd' => 'itrademexico|itradelogisticayaduana',
-                        '1st' => 'mx|com|org',
-                    ),
+                    'route' => 'itrade',
+//                    'route' => ':2nd.:1st[.:1st]',
+//                    'contraints' => array(
+//                        '2nd' => 'itrademexico|itradelogisticayaduana',
+//                        '1st' => 'mx|com|org',
+//                    ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(

@@ -63,7 +63,7 @@ class ProveedorForm extends Form
             'name' => 'proveedorcliente_telefonocontacto',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Teléfono',
+                'label' => 'Teléfono ',
             ),
             'attributes' => array(
                 'required' => true,

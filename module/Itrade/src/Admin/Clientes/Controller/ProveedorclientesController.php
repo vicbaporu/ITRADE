@@ -106,7 +106,7 @@ class ProveedorclientesController extends AbstractActionController
         if($request->isPost()){
             
             $post_data = $request->getPost();
-           
+
             $entity = new \Proveedorcliente();
             
             foreach($post_data as $key => $value){

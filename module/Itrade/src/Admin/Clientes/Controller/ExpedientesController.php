@@ -363,7 +363,12 @@ class ExpedientesController extends AbstractActionController
             
             $entity->setExpedienteFolio($folio);
             $entity->save();
-
+            
+            $mailer = new \Shared\GeneralFunction\Itrademailer();
+            if($mailer->newExpedienteEmail($cliente, $folio)){
+                $this->flashMessenger()->addSuccessMessage('Correo electronico enviado exitosamente!');
+            }
+            
             $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
             
             //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
@@ -717,4 +722,291 @@ class ExpedientesController extends AbstractActionController
                        
         }
     }
+    
+    public function nuevoservicioAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            $post_data = $request->getPost();
+            
+            $entity = new \Expedienteservicio();
+            
+            foreach($post_data as $key => $value){
+                if(\ExpedienteservicioPeer::getTableMap()->hasColumn($key) && !empty($value) && $key != 'expedienteservicio_fecha'){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            //LA FECHA
+            $expedienteservicio_fecha = \DateTime::createFromFormat('d/m/Y', $post_data['expedienteservicio_fecha']);
+            $entity->setExpedienteservicioFecha($expedienteservicio_fecha);
+            
+            $entity->save();
+
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toUrl('/clientes/ver/'.$entity->getExpediente()->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente());
+            
+        }
+        
+        $idexpediente = $this->params()->fromQuery('idexpediente');
+        $expediente = \ExpedienteQuery::create()->findPk($idexpediente);
+        
+        $servicios_array = array();
+        if($expediente->getExpedienteTipo() == 'importacion'){
+            
+            $servicios = \ServicioQuery::create()->filterByServicioTipo('importacion')->find();
+            
+        }else{
+            
+            $servicios = \ServicioQuery::create()->filterByServicioTipo('exportacion')->find();
+        }
+        
+        $servicio = new \Servicio();
+        foreach ($servicios as $servicio){
+            $idservicio = $servicio->getIdservicio();
+            $servicios_array[$idservicio] = $servicio->getServicioNombre();
+        }
+        
+        //Instanciamos nuestro formulario
+        $form = new \Admin\Clientes\Form\ServicioForm($idexpediente);
+        
+        //Enviamos a la vista
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true)
+                   ->setVariable('form', $form)
+                    ->setVariable('entity', $expediente)
+                   ->setTemplate('/clientes/expedientes/modal/nuevoservicio');
+        
+        return $view_model;
+        
+        
+    }
+    
+    public function getserviciosAction(){
+        
+        $tipo = $this->params()->fromQuery('tipo');
+        $medio = $this->params()->fromQuery('medio');
+        
+        $result = \ServicioQuery::create()->filterByServicioTipo($tipo)->filterByServicioMedio($medio)->find()->toArray(null,false,\BasePeer::TYPE_FIELDNAME);
+       
+        return $this->getResponse()->setContent(json_encode($result));
+        
+        
+    }
+    
+    public function agregarhistorialAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            $entity = new \Expedientehistorial();
+            
+            foreach($post_data as $key => $value){
+                if(\ExpedientehistorialPeer::getTableMap()->hasColumn($key) && !empty($value)){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            //La fecha
+            $entity->setExpedientehistorialFecha(new \DateTime());
+            
+            $entity->save();
+            
+            //Validamos si se va enviar por correo al cliente
+            if(isset($post_data['sendemail'])){
+                
+                $cliente = $entity->getExpedienteservicio()->getExpediente()->getCliente();
+                $new_status = $entity->getServicioestado()->getServicioestadoNombre();
+                $folio = $entity->getExpedienteservicio()->getExpediente()->getExpedienteFolio();
+                
+                $mailer = new \Shared\GeneralFunction\Itrademailer();
+                if($mailer->changeStatusEmail($cliente, $folio, $new_status)){
+                    $this->flashMessenger()->addSuccessMessage('Correo electronico enviado exitosamente!');
+                }
+               
+            }
+            
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toUrl('/clientes/ver/'.$entity->getExpedienteservicio()->getExpediente()->getIdcliente().'/expedientes/ver/'.$entity->getExpedienteservicio()->getIdexpediente());
+            
+        }
+        
+        $idexpedienteservicio = $this->params()->fromQuery('idexpedienteservicio');
+        $expedienteservicio = \ExpedienteservicioQuery::create()->findPk($idexpedienteservicio);
+        $expediente = $expedienteservicio->getExpediente();
+        
+        //Obtenemos los estatus disponibles dependiendo del servicio seleccionado
+        $servicio_estatus = array();
+        $servicioestatus = \ServicioestadoQuery::create()->filterByIdservicio($expedienteservicio->getIdservicio())->find();
+        
+        $estatus = new \Servicioestado();
+        foreach ($servicioestatus as $estatus){
+            $id = $estatus->getIdservicioestado();
+            $servicio_estatus[$id] = $estatus->getServicioestadoNombre();
+        }
+        
+        //Instanciamos nuestro formurmalario
+        $form = new \Admin\Clientes\Form\HistorialForm($idexpedienteservicio, $servicio_estatus);
+        
+        //Enviamos a la vista
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true)
+                   ->setVariable('form', $form)
+                    ->setVariable('entity', $expediente)
+                   ->setTemplate('/clientes/expedientes/modal/agregarhistorial');
+        
+        return $view_model;
+        
+        
+    }
+    
+    public function editarhistorialAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $post_data = $request->getPost();
+            
+            $id = $post_data['idexpedientehistorial'];
+            $entity = \ExpedientehistorialQuery::create()->findPk($id);
+            
+            foreach($post_data as $key => $value){
+                if(\ExpedientehistorialPeer::getTableMap()->hasColumn($key) && !empty($value)){
+                    $entity->setByName($key, $value, \BasePeer::TYPE_FIELDNAME);
+                }
+            }
+            
+            $entity->save();
+            
+            //Validamos si se va enviar por correo al cliente
+            if(isset($post_data['sendemail'])){
+                
+                $cliente = $entity->getExpedienteservicio()->getExpediente()->getCliente();
+                $new_status = $entity->getServicioestado()->getServicioestadoNombre();
+                $folio = $entity->getExpedienteservicio()->getExpediente()->getExpedienteFolio();
+                
+                $mailer = new \Shared\GeneralFunction\Itrademailer();
+                if($mailer->changeStatusEmail($cliente, $folio, $new_status)){
+                    $this->flashMessenger()->addSuccessMessage('Correo electronico enviado exitosamente!');
+                }
+               
+            }
+            
+            $this->flashMessenger()->addSuccessMessage('Registro guardado exitosamente!');
+            
+            //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
+            return $this->redirect()->toUrl('/clientes/ver/'.$entity->getExpedienteservicio()->getExpediente()->getIdcliente().'/expedientes/ver/'.$entity->getExpedienteservicio()->getIdexpediente());
+
+            
+        }
+        
+        $id = $this->params()->fromQuery('id');
+        $entity = \ExpedientehistorialQuery::create()->findPk($id);
+        $expedienteservicio = $entity->getExpedienteservicio();
+        $expediente = $expedienteservicio->getExpediente();
+        
+        //Obtenemos los estatus disponibles dependiendo del servicio seleccionado
+        $servicio_estatus = array();
+        $servicioestatus = \ServicioestadoQuery::create()->filterByIdservicio($expedienteservicio->getIdservicio())->find();
+        
+        $estatus = new \Servicioestado();
+        foreach ($servicioestatus as $estatus){
+            $id = $estatus->getIdservicioestado();
+            $servicio_estatus[$id] = $estatus->getServicioestadoNombre();
+        }
+        
+        //Instanciamos nuestro formurmalario
+        $form = new \Admin\Clientes\Form\HistorialForm($expedienteservicio->getIdexpedienteservicio(), $servicio_estatus);
+        $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+        
+        //Enviamos a la vista
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true)
+                   ->setVariable('form', $form)
+                    ->setVariable('entity', $expediente)
+                   ->setTemplate('/clientes/expedientes/modal/editarhistorial');
+        
+        return $view_model;
+        
+        
+        
+        
+        echo '<pre>';var_dump($entity->toArray()); echo '</pre>';exit();
+        
+    }
+    
+    public function eliminarhistorialAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $id = $request->getPost('id');
+
+            $entity = \ExpedientehistorialQuery::create()->findPk($id);
+            $expediente_servicio = $entity->getExpedienteservicio();
+
+            $entity->delete();
+
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro eliminado exitosamente!');
+            
+            if($entity->isDeleted()){
+                return $this->getResponse()->setContent(json_encode(true));
+            }
+
+        }
+        
+        $id = $this->params()->fromQuery('id');
+
+        //RETORNAMOS A NUESTRA VISTA
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true);
+        $view_model->setTemplate('/clientes/expedientes/modal/eliminarhistorial');
+        
+        return $view_model;
+
+    }
+    
+    public function eliminarservicioAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $id = $request->getPost('id');
+            
+            $entity = \ExpedienteservicioQuery::create()->findPk($id);
+
+            $entity->delete();
+
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro eliminado exitosamente!');
+            
+            if($entity->isDeleted()){
+                return $this->getResponse()->setContent(json_encode(true));
+            }
+
+        }
+        
+        $id = $this->params()->fromQuery('id');
+
+        //RETORNAMOS A NUESTRA VISTA
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true);
+        $view_model->setTemplate('/clientes/expedientes/modal/eliminarhistorial');
+        
+        return $view_model;
+
+    }
 }
+    

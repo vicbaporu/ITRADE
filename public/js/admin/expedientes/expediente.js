@@ -354,12 +354,120 @@
                     });
                     
                 });
+
+                //NUEVO SERVICIO
+                $container.find('#nuevo_servicio').on('click',function(){
+                    var idexpediente = $container.find('input[name=idexpediente]').val();
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/nuevoservicio',
+                        data:{idexpediente:idexpediente},
+                        success:function(source){
+                            source = $('<div>'+source+'</div>');
+                            
+                            //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                           source.find('select[name=servicio_medio]').select2().on('change', function (e){
+                               
+                               $container.find('select[name=idservicio] option:not(:first-child)').remove();
+                               $("select[name=idservicio]").select2("val", "");
+   
+                               var medio = e.val;
+                               var tipo = $container.find('input[name=expediente_tipo]').val();
+                               
+                               if(medio != ""){
+                                   
+                                    $.ajax({
+                                        dataType: 'json',
+                                        url: '/clientes/ver/' + idcliente + '/expedientes/ver/' + idexpediente + '/getservicios',
+                                        data: {medio: medio,tipo:tipo},
+                                        success: function (data)
+                                        {
+                                            $.each(data, function () {
+                                                var option = $('<option>').text(this.servicio_nombre);
+                                                option.attr('value', this.idservicio)
+                                                source.find('select[name=idservicio]').append(option);
+                                            });
+                                            
+                                            source.find('select[name=idservicio]').select2("enable", true);
+                                        }
+                                    });
+                               }else{
+                                   source.find('select[name=idservicio]').select2("enable", false);
+                               }
+                               
+                           });
+                           
+                           //INICIALIZAMOS NUESTRO CALENDARIO
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
+                            
+                            
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
                 
+                //ELIMINAR SERVICIO
+                $container.find('a.eliminar_servicio').on('click',function(){
+                    var idexpedienteservicio = $(this).closest('tr').attr('id');
+                     $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarservicio',
+                        data:{idexpedienteservicio:idexpedienteservicio},
+                        success:function(source){
+                            source = $('<div>'+source+'</div>');
+                            source.find('button[btn-action=eliminar]').on('click', function () {
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarservicio',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {id: idexpedienteservicio},
+                                    success: function (data) {
+                                        if (data) {
+                                            window.location.replace('/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente);
+                                        }
+                                    }
+                                });
+                            });
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        },
+                     });
+                });
+                
+                //AGREGAR HISTORIAL AL SERVICIO
+                $container.find('a.agregar_historial').on('click',function(){
+                    var idexpedienteservicio = $(this).closest('tr').attr('id');
+                    
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/agregarhistorial',
+                        data:{idexpedienteservicio:idexpedienteservicio},
+                        success: function (source) {
+                            source = $('<div>'+source+'</div>');
+                            
+                            source.find("select").select2({
+                                placeholder: "Select a state",
+                                allowClear: true,
+                                language: "es"
+                            });
+                                
+                                
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
+
                 //DATATABLE FACTURACION
 
-               /*
-                * Insert a 'details' column to the table
-                */
 
                 $('#table_facturacion tr.details table tbody tr').filter(function(){
 
@@ -410,8 +518,72 @@
                     }
 
                 });
+                
+                $('#table_servicios tbody td i.collapse').css('cursor','pointer');
+                $('#table_servicios tbody td i.collapse').live('click', function (){
+                    var tr = $(this).parents('tr')[0];
+                    var nTr = $(tr).next('tr');
+                    var visible = nTr.css('display');
 
-                 
+                    if(visible == 'none'){
+                        nTr.slideDown();
+                        $(tr).find('td.center i').removeClass('fa fa-plus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-minus-circle');
+                    }else{
+                        nTr.slideUp();
+                        $(tr).find('td.center i').removeClass('fa fa-minus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-plus-circle');
+                    }
+                });
+
+                //ELIMINAR HISTORIAL
+                $container.find('a.eliminar_historial').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarhistorial',
+                        data:{id:id},
+                        success: function (source) {
+                            source = $('<div>'+source+'</div>');
+                            source.find('button[btn-action=eliminar]').on('click', function () {
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarhistorial',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {id: id},
+                                    success: function (data) {
+                                        if (data) {
+                                            window.location.replace('/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente);
+                                        }
+                                    }
+                                });
+                            });
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
+                
+                $container.find('a.editar_historial').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                     $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/editarhistorial',
+                        data:{id:id},
+                        success:function(source){
+                             source = $('<div>'+source+'</div>');
+                             
+                             //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                           $container.append(source);
+                           source.find('.modal').modal();
+                        }
+                     });
+                });
+                
             }
             
             //INICIALIZAMOS NUESTROS SELECT
