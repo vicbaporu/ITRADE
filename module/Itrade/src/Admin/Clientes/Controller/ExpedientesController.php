@@ -248,7 +248,7 @@ class ExpedientesController extends AbstractActionController
             }
             
             //anticipo
-            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('mxn')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('anticipo')->groupByExpedientegastoTipo('anticipo')->withColumn('SUM(expedientegasto_monto)','anticipo_total')->groupByIdgastofacturacion()->findOne();
+            $expedientes_gastos = \ExpedienteanticipoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedienteanticipoMoneda('mxn')->withColumn('SUM(expedienteanticipo_cantidad)','anticipo_total')->findOne();
             if(!empty($expedientes_gastos)){
                 $totales['anticipo'] = $expedientes_gastos->getVirtualColumn('anticipo_total');
             }
@@ -319,7 +319,7 @@ class ExpedientesController extends AbstractActionController
             }
             
             //anticipo
-            $expedientes_gastos = \ExpedientegastoQuery::create()->filterByExpedientegastoMoneda('usd')->filterByIdexpediente($entity->getIdexpediente())->filterByExpedientegastoTipo('anticipo')->groupByExpedientegastoTipo('anticipo')->withColumn('SUM(expedientegasto_monto)','anticipo_total')->groupByIdgastofacturacion()->findOne();
+            $expedientes_gastos = \ExpedienteanticipoQuery::create()->filterByIdexpediente($entity->getIdexpediente())->filterByExpedienteanticipoMoneda('usd')->withColumn('SUM(expedienteanticipo_cantidad)','anticipo_total')->findOne();
             if(!empty($expedientes_gastos)){
                 $totales_usd['anticipo'] = $expedientes_gastos->getVirtualColumn('anticipo_total');
             }
