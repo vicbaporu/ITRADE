@@ -161,17 +161,32 @@
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">Subtotal: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['subtotal'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['subtotal']).' MXN'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">I.V.A: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['iva'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['iva']).' MXN'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
-                                    <td style="text-align: right">Total: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['total']).' MXN'?></td>
+                                    <td style="text-align: right"><b>Total: </b></td>
+                                    <td><b><?php echo money_format('%(#10n', (float)$totales['total']).' MXN'?></b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Anticipo: </td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['anticipo']).' MXN'?><a id="add_anticipo_mxn" style="float: right; margin-right: 10px;" href="javascript:;"><i class="fa fa-plus-square"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Saldo: </td>
+                                    <?php 
+                                        $color = 'black';
+                                        if($totales['saldo'] < 0 ){$color = 'red';}
+                                        elseif($totales['saldo'] > 0 ){$color = 'green';}
+                                    ?>
+                                    <td style="color:<?php echo $color?>"><?php echo money_format('%#10n', (float)$totales['saldo']).' MXN'?></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -256,17 +271,32 @@
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">Subtotal: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['subtotal'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['subtotal']).' USD'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">I.V.A: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['iva'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['iva']).' USD'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
-                                    <td style="text-align: right">Total: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['total']).' USD'?></td>
+                                    <td style="text-align: right"><b>Total: </b></td>
+                                    <td><b><?php echo money_format('%(#10n', (float)$totales_usd['total']).' USD'?></b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Anticipo: </td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['anticipo']).' USD'?><a id="add_anticipo_usd" style="float: right; margin-right: 10px;" href="javascript:;"><i class="fa fa-plus-square"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Saldo: </td>
+                                    <?php 
+                                        $color = 'black';
+                                        if($totales_usd['saldo'] < 0 ){$color = 'red';}
+                                        elseif($totales_usd['saldo'] > 0 ){$color = 'green';}
+                                    ?>
+                                    <td style="color:<?php echo $color?>"><?php echo money_format('%#10n', (float)$totales_usd['saldo']).' USD'?></td>
                                 </tr>
                             </tfoot>
                         </table>

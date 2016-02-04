@@ -195,6 +195,7 @@ CREATE TABLE `expedienteanticipo`
     `expedienteanticipo_cantidad` DECIMAL(10,2) NOT NULL,
     `expedienteanticipo_metodopago` enum('efectivo','cheque','trasnferencia','otro') NOT NULL,
     `expedienteanticipo_comprobante` VARCHAR(45) NOT NULL,
+    `expedienteanticipo_moneda` enum('mxn','usd'),
     PRIMARY KEY (`idexpedienteanticipo`),
     INDEX `idexpediente` (`idexpediente`),
     CONSTRAINT `idexpediente_expedienteanticipo`
@@ -244,12 +245,12 @@ CREATE TABLE `expedientegasto`
 (
     `idexpedientegasto` INTEGER NOT NULL AUTO_INCREMENT,
     `idexpediente` INTEGER NOT NULL,
-    `idgastofacturacion` INTEGER NOT NULL,
-    `idproveedoritrade` INTEGER NOT NULL,
+    `idgastofacturacion` INTEGER,
+    `idproveedoritrade` INTEGER,
     `idempleado` INTEGER NOT NULL,
     `expedientegasto_fecha` DATETIME NOT NULL,
     `expedientegasto_monto` DECIMAL(10,2) NOT NULL,
-    `expedientegasto_tipo` enum('gastorecibir','gastoconocido','cobro') NOT NULL,
+    `expedientegasto_tipo` enum('gastorecibir','gastoconocido','cobro','anticipo') NOT NULL,
     `expedientegasto_comprobante` TEXT,
     `expedientegasto_nota` TEXT,
     `expedientegasto_moneda` enum('mxn','usd') NOT NULL,

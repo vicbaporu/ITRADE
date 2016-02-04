@@ -16,6 +16,7 @@ return array(
     'Admin\Clientes\Controller\ExpedientesController'       => __DIR__ . '/src/Admin/Clientes/Controller/ExpedientesController.php',
     'Admin\Clientes\Controller\ProveedorclientesController' => __DIR__ . '/src/Admin/Clientes/Controller/ProveedorclientesController.php',
     'Admin\Clientes\Form\ClientesForm'                      => __DIR__ . '/src/Admin/Clientes/Form/ClientesForm.php',
+    'Admin\Clientes\Form\ExpedienteanticipoForm'            => __DIR__ . '/src/Admin/Clientes/Form/ExpedienteanticipoForm.php',
     'Admin\Clientes\Form\ExpedienteForm'                    => __DIR__ . '/src/Admin/Clientes/Form/ExpedienteForm.php',
     'Admin\Clientes\Form\ExpedientegastoForm'               => __DIR__ . '/src/Admin/Clientes/Form/ExpedientegastoForm.php',
     'Admin\Clientes\Form\HistorialForm'                     => __DIR__ . '/src/Admin/Clientes/Form/HistorialForm.php',

@@ -66,6 +66,12 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
     protected $expedienteanticipo_comprobante;
 
     /**
+     * The value for the expedienteanticipo_moneda field.
+     * @var        string
+     */
+    protected $expedienteanticipo_moneda;
+
+    /**
      * @var        Expediente
      */
     protected $aExpediente;
@@ -183,6 +189,17 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
     {
 
         return $this->expedienteanticipo_comprobante;
+    }
+
+    /**
+     * Get the [expedienteanticipo_moneda] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteanticipoMoneda()
+    {
+
+        return $this->expedienteanticipo_moneda;
     }
 
     /**
@@ -318,6 +335,27 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
     } // setExpedienteanticipoComprobante()
 
     /**
+     * Set the value of [expedienteanticipo_moneda] column.
+     *
+     * @param  string $v new value
+     * @return Expedienteanticipo The current object (for fluent API support)
+     */
+    public function setExpedienteanticipoMoneda($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expedienteanticipo_moneda !== $v) {
+            $this->expedienteanticipo_moneda = $v;
+            $this->modifiedColumns[] = ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA;
+        }
+
+
+        return $this;
+    } // setExpedienteanticipoMoneda()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -355,6 +393,7 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
             $this->expedienteanticipo_cantidad = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->expedienteanticipo_metodopago = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
             $this->expedienteanticipo_comprobante = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->expedienteanticipo_moneda = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -364,7 +403,7 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 6; // 6 = ExpedienteanticipoPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = ExpedienteanticipoPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Expedienteanticipo object", $e);
@@ -610,6 +649,9 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE)) {
             $modifiedColumns[':p' . $index++]  = '`expedienteanticipo_comprobante`';
         }
+        if ($this->isColumnModified(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA)) {
+            $modifiedColumns[':p' . $index++]  = '`expedienteanticipo_moneda`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `expedienteanticipo` (%s) VALUES (%s)',
@@ -638,6 +680,9 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
                         break;
                     case '`expedienteanticipo_comprobante`':
                         $stmt->bindValue($identifier, $this->expedienteanticipo_comprobante, PDO::PARAM_STR);
+                        break;
+                    case '`expedienteanticipo_moneda`':
+                        $stmt->bindValue($identifier, $this->expedienteanticipo_moneda, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -803,6 +848,9 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
             case 5:
                 return $this->getExpedienteanticipoComprobante();
                 break;
+            case 6:
+                return $this->getExpedienteanticipoMoneda();
+                break;
             default:
                 return null;
                 break;
@@ -838,6 +886,7 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
             $keys[3] => $this->getExpedienteanticipoCantidad(),
             $keys[4] => $this->getExpedienteanticipoMetodopago(),
             $keys[5] => $this->getExpedienteanticipoComprobante(),
+            $keys[6] => $this->getExpedienteanticipoMoneda(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -900,6 +949,9 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
             case 5:
                 $this->setExpedienteanticipoComprobante($value);
                 break;
+            case 6:
+                $this->setExpedienteanticipoMoneda($value);
+                break;
         } // switch()
     }
 
@@ -930,6 +982,7 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
         if (array_key_exists($keys[3], $arr)) $this->setExpedienteanticipoCantidad($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setExpedienteanticipoMetodopago($arr[$keys[4]]);
         if (array_key_exists($keys[5], $arr)) $this->setExpedienteanticipoComprobante($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setExpedienteanticipoMoneda($arr[$keys[6]]);
     }
 
     /**
@@ -947,6 +1000,7 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_CANTIDAD)) $criteria->add(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_CANTIDAD, $this->expedienteanticipo_cantidad);
         if ($this->isColumnModified(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO)) $criteria->add(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO, $this->expedienteanticipo_metodopago);
         if ($this->isColumnModified(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE)) $criteria->add(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE, $this->expedienteanticipo_comprobante);
+        if ($this->isColumnModified(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA)) $criteria->add(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA, $this->expedienteanticipo_moneda);
 
         return $criteria;
     }
@@ -1015,6 +1069,7 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
         $copyObj->setExpedienteanticipoCantidad($this->getExpedienteanticipoCantidad());
         $copyObj->setExpedienteanticipoMetodopago($this->getExpedienteanticipoMetodopago());
         $copyObj->setExpedienteanticipoComprobante($this->getExpedienteanticipoComprobante());
+        $copyObj->setExpedienteanticipoMoneda($this->getExpedienteanticipoMoneda());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1136,6 +1191,7 @@ abstract class BaseExpedienteanticipo extends BaseObject implements Persistent
         $this->expedienteanticipo_cantidad = null;
         $this->expedienteanticipo_metodopago = null;
         $this->expedienteanticipo_comprobante = null;
+        $this->expedienteanticipo_moneda = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

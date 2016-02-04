@@ -69,6 +69,7 @@ abstract class BaseExpedientegastoPeer
     const EXPEDIENTEGASTO_TIPO_GASTORECIBIR = 'gastorecibir';
     const EXPEDIENTEGASTO_TIPO_GASTOCONOCIDO = 'gastoconocido';
     const EXPEDIENTEGASTO_TIPO_COBRO = 'cobro';
+    const EXPEDIENTEGASTO_TIPO_ANTICIPO = 'anticipo';
 
     /** The enumerated values for the expedientegasto_moneda field */
     const EXPEDIENTEGASTO_MONEDA_MXN = 'mxn';
@@ -122,6 +123,7 @@ abstract class BaseExpedientegastoPeer
             ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_GASTORECIBIR,
             ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_GASTOCONOCIDO,
             ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_COBRO,
+            ExpedientegastoPeer::EXPEDIENTEGASTO_TIPO_ANTICIPO,
         ),
         ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA => array(
             ExpedientegastoPeer::EXPEDIENTEGASTO_MONEDA_MXN,

@@ -251,10 +251,23 @@
                                 source.find('.input-append.date').datepicker({
                                     autoclose: true,
                                     todayHighlight: true,
-                                    format:'dd/mm/yyyy'
+                                    format:'dd/mm/yyyy',
+                                    maxDate: new Date(),
                                 });
-
-
+                                
+                                //EVENTO DISPLAY OPTIONS
+                                /*source.find('select[name=expedientegasto_tipo]').select2().on('change', function (e){
+                                       
+                                       var expedientegasto_tipo = e.val;
+                                       if(expedientegasto_tipo == 'gastorecibir' || expedientegasto_tipo == 'gastoconocido' || expedientegasto_tipo == 'cobro'){
+                                           source.find('#options').slideDown();
+                                           source.find('#options select').attr('required',true);
+                                       }else{
+                                           source.find('#options').slideUp();
+                                           source.find('#options select').attr('required',false);
+                                       }
+                                });*/
+                                
                                  $container.append(source);
                                  source.find('.modal').modal();
                             }
@@ -467,8 +480,6 @@
                 });
 
                 //DATATABLE FACTURACION
-
-
                 $('#table_facturacion tr.details table tbody tr').filter(function(){
 
                     var id = $(this).closest('tr').attr('id');
@@ -582,6 +593,45 @@
                            source.find('.modal').modal();
                         }
                      });
+                });
+                
+                //NUEVO ANTICIPO
+                $container.find('#add_anticipo_mxn,#add_anticipo_usd').on('click',function(){
+                    
+                    var moneda = $(this).attr('id');
+                    moneda = moneda.split('add_anticipo_');
+                    moneda = moneda[1];
+                    
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/nuevoanticipo',
+                        data:{id:idexpediente,moneda:moneda},
+                        success:function(source){
+                            source = $('<div>'+source+'</div>');
+                            
+                            //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                            //NUMERIC DEL CAMPO MONTO
+                            source.find('input[name=expedienteanticipo_cantidad]').numeric();
+                           
+                            //INICIALIZAMOS NUESTRO CALENDARIO
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
+                                
+                                
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        },
+                    });
+                    
+                    
                 });
                 
             }

@@ -461,6 +461,36 @@ return array(
                                                             ),
                                                         ),
                                                     ),
+                                                    'nuevoanticipo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/nuevoanticipo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'nuevoanticipo',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'editaranticipo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/editaranticipo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'editaranticipo',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'eliminaranticipo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/eliminaranticipo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'eliminaranticipo',
+                                                            ),
+                                                        ),
+                                                    ),
                                                     'getcargos' => array(
                                                         'type' => 'Segment',
                                                         'options' => array(

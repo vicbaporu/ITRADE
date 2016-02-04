@@ -1826,7 +1826,7 @@ abstract class BaseProveedoritrade extends BaseObject implements Persistent
                 $this->expedientegastosScheduledForDeletion = clone $this->collExpedientegastos;
                 $this->expedientegastosScheduledForDeletion->clear();
             }
-            $this->expedientegastosScheduledForDeletion[]= clone $expedientegasto;
+            $this->expedientegastosScheduledForDeletion[]= $expedientegasto;
             $expedientegasto->setProveedoritrade(null);
         }
 

@@ -40,8 +40,8 @@ class ExpedientegastoTableMap extends TableMap
         // columns
         $this->addPrimaryKey('idexpedientegasto', 'Idexpedientegasto', 'INTEGER', true, null, null);
         $this->addForeignKey('idexpediente', 'Idexpediente', 'INTEGER', 'expediente', 'idexpediente', true, null, null);
-        $this->addForeignKey('idgastofacturacion', 'Idgastofacturacion', 'INTEGER', 'gastofacturacion', 'idgastofacturacion', true, null, null);
-        $this->addForeignKey('idproveedoritrade', 'Idproveedoritrade', 'INTEGER', 'proveedoritrade', 'idproveedoritrade', true, null, null);
+        $this->addForeignKey('idgastofacturacion', 'Idgastofacturacion', 'INTEGER', 'gastofacturacion', 'idgastofacturacion', false, null, null);
+        $this->addForeignKey('idproveedoritrade', 'Idproveedoritrade', 'INTEGER', 'proveedoritrade', 'idproveedoritrade', false, null, null);
         $this->addForeignKey('idempleado', 'Idempleado', 'INTEGER', 'empleado', 'idempleado', true, null, null);
         $this->addColumn('expedientegasto_fecha', 'ExpedientegastoFecha', 'TIMESTAMP', true, null, null);
         $this->addColumn('expedientegasto_monto', 'ExpedientegastoMonto', 'DECIMAL', true, 10, null);
@@ -50,6 +50,7 @@ class ExpedientegastoTableMap extends TableMap
   0 => 'gastorecibir',
   1 => 'gastoconocido',
   2 => 'cobro',
+  3 => 'anticipo',
 ));
         $this->addColumn('expedientegasto_comprobante', 'ExpedientegastoComprobante', 'LONGVARCHAR', false, null, null);
         $this->addColumn('expedientegasto_nota', 'ExpedientegastoNota', 'LONGVARCHAR', false, null, null);

@@ -156,6 +156,7 @@
     <column name="expedienteanticipo_cantidad" phpName="ExpedienteanticipoCantidad" type="DECIMAL" size="10" scale="2" required="true"/>
     <column name="expedienteanticipo_metodopago" phpName="ExpedienteanticipoMetodopago" type="CHAR" sqlType="enum('efectivo','cheque','trasnferencia','otro')" required="true"/>
     <column name="expedienteanticipo_comprobante" phpName="ExpedienteanticipoComprobante" type="VARCHAR" size="45" required="true"/>
+    <column name="expedienteanticipo_moneda" phpName="ExpedienteanticipoMoneda" type="CHAR" sqlType="enum('mxn','usd')" required="false"/>
     <foreign-key foreignTable="expediente" name="idexpediente_expedienteanticipo" onDelete="CASCADE" onUpdate="CASCADE">
       <reference local="idexpediente" foreign="idexpediente"/>
     </foreign-key>
@@ -193,12 +194,12 @@
   <table name="expedientegasto" phpName="Expedientegasto" idMethod="native">
     <column name="idexpedientegasto" phpName="Idexpedientegasto" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="idexpediente" phpName="Idexpediente" type="INTEGER" required="true"/>
-    <column name="idgastofacturacion" phpName="Idgastofacturacion" type="INTEGER" required="true"/>
-    <column name="idproveedoritrade" phpName="Idproveedoritrade" type="INTEGER" required="true"/>
+    <column name="idgastofacturacion" phpName="Idgastofacturacion" type="INTEGER" required="false"/>
+    <column name="idproveedoritrade" phpName="Idproveedoritrade" type="INTEGER" required="false"/>
     <column name="idempleado" phpName="Idempleado" type="INTEGER" required="true"/>
     <column name="expedientegasto_fecha" phpName="ExpedientegastoFecha" type="TIMESTAMP" required="true"/>
     <column name="expedientegasto_monto" phpName="ExpedientegastoMonto" type="DECIMAL" size="10" scale="2" required="true"/>
-    <column name="expedientegasto_tipo" phpName="ExpedientegastoTipo" type="CHAR" sqlType="enum('gastorecibir','gastoconocido','cobro')" required="true"/>
+    <column name="expedientegasto_tipo" phpName="ExpedientegastoTipo" type="CHAR" sqlType="enum('gastorecibir','gastoconocido','cobro','anticipo')" required="true"/>
     <column name="expedientegasto_comprobante" phpName="ExpedientegastoComprobante" type="LONGVARCHAR" required="false"/>
     <column name="expedientegasto_nota" phpName="ExpedientegastoNota" type="LONGVARCHAR" required="false"/>
     <column name="expedientegasto_moneda" phpName="ExpedientegastoMoneda" type="CHAR" sqlType="enum('mxn','usd')" required="true"/>
