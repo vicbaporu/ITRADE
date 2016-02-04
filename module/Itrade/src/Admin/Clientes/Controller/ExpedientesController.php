@@ -1066,7 +1066,8 @@ class ExpedientesController extends AbstractActionController
             
             //LA FECHA
             $expedienteanticipo_fecha = \DateTime::createFromFormat('d/m/Y', $post_data['expedienteanticipo_fecha']);
-           
+            $entity->setExpedienteanticipoFecha($expedienteanticipo_fecha);
+
             $entity->save();
             
             //El comprobante
@@ -1086,10 +1087,7 @@ class ExpedientesController extends AbstractActionController
             
             //REDIRECCIONAMOS A LA ENTIDAD QUE ACABAMOS DE CREAR
             return $this->redirect()->toUrl('/clientes/ver/'.$entity->getExpediente()->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente());
-            
-            echo '<pre>';var_dump($entity->toArray()); echo '</pre>';
-            
-            echo '<pre>';var_dump($post_files); echo '</pre>';exit();
+
             
         }
         
