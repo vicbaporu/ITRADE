@@ -511,6 +511,16 @@ return array(
                                                             ),
                                                         ),
                                                     ),
+                                                    'getcomprobanteanticipo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/getcomprobanteanticipo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'getcomprobanteanticipo',
+                                                            ),
+                                                        ),
+                                                    ),
                                                     'nuevoservicio' => array(
                                                         'type' => 'Segment',
                                                         'options' => array(
@@ -561,6 +571,16 @@ return array(
                                                             ),
                                                         ),
                                                     ),
+                                                    'eliminaranticipo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/eliminaranticipo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'eliminaranticipo',
+                                                            ),
+                                                        ),
+                                                    ),
                                                     'editarhistorial' => array(
                                                         'type' => 'Segment',
                                                         'options' => array(
@@ -568,6 +588,16 @@ return array(
                                                             'defaults' => array(
                                                                 'controller' => 'Admin\Clientes\Controller\Expedientes',
                                                                 'action' => 'editarhistorial',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    'editaranticipo' => array(
+                                                        'type' => 'Segment',
+                                                        'options' => array(
+                                                            'route' => '/editaranticipo',
+                                                            'defaults' => array(
+                                                                'controller' => 'Admin\Clientes\Controller\Expedientes',
+                                                                'action' => 'editaranticipo',
                                                             ),
                                                         ),
                                                     ),

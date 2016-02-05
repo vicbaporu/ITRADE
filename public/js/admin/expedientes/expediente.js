@@ -546,6 +546,55 @@
                         $(tr).find('td.center i').addClass('fa fa-plus-circle');
                     }
                 });
+                
+                $('#table_facturacion tfoot td i.collapse').css('cursor','pointer');
+                $('#table_facturacion tfoot td i.collapse').live('click', function (){
+                    
+                    var tr = $(this).parents('tr')[0];
+                    var nTr = $(tr).next('tr');
+                    var visible = nTr.css('display');
+                    if(visible == 'none'){
+                        nTr.slideDown();
+                        $(tr).find('td.center i').removeClass('fa fa-plus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-minus-circle');
+                    }else{
+                        nTr.slideUp();
+                        $(tr).find('td.center i').removeClass('fa fa-minus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-plus-circle');
+                    }
+                    
+                });
+                $('#table_facturacion tfoot tr.details table tbody tr').filter(function(){
+
+                    var id = $(this).closest('tr').attr('id');
+                    var comprobante = $(this).find('td').eq('2').text();
+
+                    if(comprobante == ""){
+                        $(this).find('td').eq('2').text('N/D');
+                    }else{
+                        var file_icon = $('<a href="javascript:;"><i class="fa fa-file"></i></a>');
+                        $(this).find('td').eq('2').html(file_icon);
+
+                        //El evento click del archivo
+                        file_icon.on('click',function(){
+                            $.ajax({
+                                url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/getcomprobanteanticipo',
+                                dataType:'json',
+                                data:{id:id},
+                                success:function(base64){
+                                    download("data:"+base64.type+";base64,"+base64.base64,base64.name,base64.type);
+                                }
+                            });
+                        });
+
+                    }
+                    
+                    var comprobante = $(this).find('td').eq('5').text();
+                    if(comprobante == ""){
+                        $(this).find('td').eq('5').text('N/D');
+                    }
+                    
+                });
 
                 //ELIMINAR HISTORIAL
                 $container.find('a.eliminar_historial').on('click',function(){
@@ -574,6 +623,34 @@
                     });
                 });
                 
+                //ELIMINAR ANTICIPO
+                $container.find('a.eliminar_anticipo').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminaranticipo',
+                        data:{id:id},
+                        success: function (source) {
+                            source = $('<div>'+source+'</div>');
+                            source.find('button[btn-action=eliminar]').on('click', function () {
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminaranticipo',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {id: id},
+                                    success: function (data) {
+                                        if (data) {
+                                            window.location.replace('/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente);
+                                        }
+                                    }
+                                });
+                            });
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
+                
+                //EDITAR HISTORIAL
                 $container.find('a.editar_historial').on('click',function(){
                     var id = $(this).closest('tr').attr('id');
                      $.ajax({
@@ -588,6 +665,42 @@
                                allowClear: true,
                                language: "es"
                            });
+                           
+                           $container.append(source);
+                           source.find('.modal').modal();
+                        }
+                     });
+                });
+                
+                //EDITAR ANTICIPO
+                $container.find('a.editar_anticipo').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                    var moneda = $(this).closest('table').attr('id');
+                    moneda = moneda.split('table_anticipos_');
+                    moneda = moneda[1];
+         
+                     $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/editaranticipo',
+                        data:{id:id,moneda:moneda},
+                        success:function(source){
+                             source = $('<div>'+source+'</div>');
+                             
+                             //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                           //NUMERIC DEL CAMPO MONTO
+                            source.find('input[name=expedienteanticipo_cantidad]').numeric();
+                           
+                            //INICIALIZAMOS NUESTRO CALENDARIO
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
                            
                            $container.append(source);
                            source.find('.modal').modal();
@@ -633,6 +746,8 @@
                     
                     
                 });
+                
+                
                 
             }
             

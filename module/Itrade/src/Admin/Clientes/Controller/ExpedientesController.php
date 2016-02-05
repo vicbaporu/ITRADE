@@ -129,6 +129,25 @@ class ExpedientesController extends AbstractActionController
         
     }
     
+    public function getcomprobanteanticipoAction(){
+        
+        $idanticipo = $this->params()->fromQuery('id');
+        $entity = \ExpedienteanticipoQuery::create()->findPk($idanticipo);
+
+        $file_path = $entity->getExpedienteanticipoComprobante();
+        $file_name = explode('/files/expedientesanticipos/',$entity->getExpedienteanticipoComprobante());
+        $file_name = $file_name[1];
+        
+        $taget_file = $_SERVER['DOCUMENT_ROOT'].$entity->getExpedienteanticipoComprobante();
+        
+        $file_base64 = base64_encode(file_get_contents($taget_file));
+        $file_type = mime_content_type($taget_file);
+        
+        return $this->getResponse()->setContent(json_encode(array('base64' => $file_base64, 'type' => $file_type,'name' => $file_name)));
+        
+        
+    }
+    
     public function editarAction(){
         
         $request = $this->getRequest();
@@ -332,6 +351,13 @@ class ExpedientesController extends AbstractActionController
             //SERVICIOS
             $servicios = \ExpedienteservicioQuery::create()->filterByIdexpediente($entity->getIdexpediente())->find();
             
+            
+            //LOS ANTICIPOS
+            $anticipos = array();
+            $anticipos['mxn'] = \ExpedienteanticipoQuery::create()->filterByExpedienteanticipoMoneda('mxn')->filterByIdexpediente($entity->getIdexpediente())->find();
+            $anticipos['usd'] = \ExpedienteanticipoQuery::create()->filterByExpedienteanticipoMoneda('usd')->filterByIdexpediente($entity->getIdexpediente())->find();
+            
+            
             //CONSIGNATARIO, EMBARCADOR
             if($entity->getExpedienteTipo() == 'importacion'){
                 $consignatario = $entity->getCliente()->getClienteRazonsocial();
@@ -356,7 +382,8 @@ class ExpedientesController extends AbstractActionController
                 'totales_usd' => $totales_usd,
                 'files' => json_encode($files_array),
                 'consignatario' => $consignatario,
-                'embarcador' => $embarcador
+                'embarcador' => $embarcador,
+                'anticipos' => $anticipos,
             ));
             return $view_model;
         }else{
@@ -1015,6 +1042,39 @@ class ExpedientesController extends AbstractActionController
 
     }
     
+    public function eliminaranticipoAction(){
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            
+            $id = $request->getPost('id');
+            
+            $entity = \ExpedienteanticipoQuery::create()->findPk($id);
+            
+
+            $entity->delete();
+
+            //Agregamos un mensaje
+            $this->flashMessenger()->addSuccessMessage('Registro eliminado exitosamente!');
+            
+            if($entity->isDeleted()){
+                return $this->getResponse()->setContent(json_encode(true));
+            }
+
+        }
+        
+        $id = $this->params()->fromQuery('id');
+
+        //RETORNAMOS A NUESTRA VISTA
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true);
+        $view_model->setTemplate('/clientes/expedientes/modal/eliminarhistorial');
+        
+        return $view_model;
+
+    }
+    
     public function eliminarservicioAction(){
         
         $request = $this->getRequest();
@@ -1107,6 +1167,32 @@ class ExpedientesController extends AbstractActionController
         
         return $view_model;
         
+        
+    }
+    
+    public function editaranticipoAction(){
+        
+        $request = $this->getRequest();
+        
+        $id = $this->params()->fromQuery('id');
+        $moneda = $this->params()->fromQuery('moneda');
+        
+        $entity = \ExpedienteanticipoQuery::create()->findPk($id);
+        $expediente = \ExpedienteQuery::create()->findPk($entity->getIdexpediente());
+        
+        $form = new \Admin\Clientes\Form\ExpedienteanticipoForm($expediente->getIdexpediente(), $moneda);
+        $form->setData($entity->toArray(\BasePeer::TYPE_FIELDNAME));
+        $form->get('expedienteanticipo_fecha')->setValue($entity->getExpedienteanticipoFecha('d/m/Y'));
+        
+        //Enviamos a la vista
+        $view_model = new ViewModel();
+        $view_model->setTerminal(true)
+                   ->setVariable('form', $form)
+                   ->setVariable('entity', $expediente) 
+                   ->setTemplate('/clientes/expedientes/modal/editaranticipo');
+        
+        return $view_model;
+
         
     }
 }
