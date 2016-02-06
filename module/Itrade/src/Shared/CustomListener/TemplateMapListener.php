@@ -38,7 +38,7 @@ class TemplateMapListener implements ListenerAggregateInterface
         
         $section = $section ->getFileName();   
         $section = explode('/src/',  $section);
-        $section = explode("/",$section[1]);
+        $section = explode("\\",$section[1]);
 
         $template_map=$e->getApplication()->getServiceManager()->get('viewtemplatemapresolver');
         

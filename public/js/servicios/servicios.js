@@ -7,13 +7,43 @@ $( document ).ready(function()
     // run the currently selected effect
     function runEffect(component, dir) 
     {
-      var selectedEffect = "drop"; 
-      options = { direction: dir };
-      $( "#"+ component).toggle( selectedEffect, options, 400 );
-    };
- 
+        if(isOpen()=="" || isOpen() == component)
+        {
+            var selectedEffect = "drop"; 
+            options = { direction: dir };
+            $( "#"+ component).toggle( selectedEffect, options, 400 );
+            $( "#"+ component).toggleClass('active');
+            if($( "#"+ component).hasClass('active'))
+            {
+                $('html,body').animate({
+                    scrollTop: $("#"+component).offset().top
+                }, 1000);
+            }
+        }
+
+    }
+    function isOpen()
+    {
+        if($( "#detalleMaritimo").hasClass('active'))
+            return "detalleMaritimo";
+        if($( "#detalleAereo").hasClass('active'))
+            return "detalleAereo";
+        if($( "#detalleTerrestre").hasClass('active'))
+            return "detalleTerrestre";
+        if($( "#detalleAduana").hasClass('active'))
+            return "detalleAduana";
+        if($( "#detalleSeguro").hasClass('active'))
+            return "detalleSeguro";
+        if($( "#detalleLogistica").hasClass('active'))
+            return "detalleLogistica";
+
+        return "";
+    }
+    
+    
     //Efecto maritimo
     $( "#btnMaritimo" ).click(function() {
+        
       closeAll();
       runEffect("detalleMaritimo","left");
     });
