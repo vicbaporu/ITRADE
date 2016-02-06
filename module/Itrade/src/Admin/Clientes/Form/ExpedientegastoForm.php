@@ -105,7 +105,7 @@ class ExpedientegastoForm extends Form
             'name' => 'expedientegasto_tipo',
             'type' => 'Select',
             'options' => array(
-                'label' => 'Consignatario/Embarcador',
+                'label' => 'Tipo',
                 'empty_option' => 'Sin especificar',
                 'value_options' => array(
                     'gastorecibir' => 'Cargo estimado',

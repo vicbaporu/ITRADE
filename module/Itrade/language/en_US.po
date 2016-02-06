@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2015-10-20 00:50-0500\n"
-"PO-Revision-Date: 2015-10-20 00:51-0500\n"
+"PO-Revision-Date: 2016-02-04 09:25-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: translate\n"
@@ -162,13 +162,16 @@ msgstr ""
 
 #: ENTIDAD EXPEDIENTE
 msgid "gastorecibir"
-msgstr "Cargo a recibir"
+msgstr "Cargo estimado"
 
 msgid "gastoconocido"
-msgstr "Cargo conocido"
+msgstr "Cargo realizado"
 
 msgid "cobro"
-msgstr "Cobro"
+msgstr "Venta"
+
+msgid "anticipo"
+msgstr "Anticipo"
 
 msgid "Inicio"
 msgstr "Home"
@@ -198,58 +201,58 @@ msgid "Lee mas acerca de nuestros servicios"
 msgstr "Read more about our services"
 
 msgid "ASESORIA EN LOGISTICA Y COMERCIO EXTERIOR"
-msgstr "LOGISTICS AND INTERNACIONAL TRADE CONSULTING" 
+msgstr "LOGISTICS AND INTERNACIONAL TRADE CONSULTING"
 
 msgid "Bienvenido a ITRADE"
-msgstr "Welcome to ITRADE" 
+msgstr "Welcome to ITRADE"
 
 msgid "ITRADE es una empresa mexicana dedicada a brindar soluciones logísticas y aduaneras,  nuestro servicio es personalizado y atendido por personas responsables, honestas y con experiencia en comercio internacional. Lo que nos distingue es la eficiencia y resultados alcanzados. Elaboramos una planeación estratégica aduanal y logística para reducir tiempos, riesgos y costos en las importaciones y exportaciones. Nuestro compromiso es con usted y su negocio."
-msgstr "ITRADE is a mexican company dedicated to provide customs and logistic solutions. Our services are personalized and attended by responsible, honest and experienced people in internacional trade consulting. Our commitment is with you and your business." 
+msgstr "ITRADE is a mexican company dedicated to provide customs and logistic solutions. Our services are personalized and attended by responsible, honest and experienced people in internacional trade consulting. Our commitment is with you and your business."
 
 msgid "Nuestra Visión es convertirnos en un departamento externo de logística para las empresas, capaz de poder ofrecer un servicio de calidad y soluciones a la demanda de nuestros clientes."
 msgstr "Our vision is to become the external logistics deparment; capable to fulfill any company’s demands."
 
-msgid "CONTÁCTENOS," 
+msgid "CONTÁCTENOS,"
 msgstr "CONTACT US,"
 
-msgid "Podemos ayudarle." 
+msgid "Podemos ayudarle."
 msgstr "We can help you."
 
-msgid "Nombre" 
+msgid "Nombre"
 msgstr "Name"
 
-msgid "Empresa" 
+msgid "Empresa"
 msgstr "Company"
- 
-msgid "Teléfono" 
+
+msgid "Teléfono"
 msgstr "Phone"
 
-msgid "Mensaje" 
+msgid "Mensaje"
 msgstr "Message"
 
-msgid "Servicio" 
+msgid "Servicio"
 msgstr "Service"
 
-msgid "Enviar" 
+msgid "Enviar"
 msgstr "Send"
 
-msgid "Marítimo" 
+msgid "Marítimo"
 msgstr "Oceanfreight"
 
-msgid "Aéreo" 
+msgid "Aéreo"
 msgstr "Airfreight"
 
-msgid "Terrestre" 
+msgid "Terrestre"
 msgstr "Inland freight"
 
-msgid "Aduana" 
+msgid "Aduana"
 msgstr "Customs clearance"
 
-msgid "Seguro" 
+msgid "Seguro"
 msgstr "Insurance"
 
 msgid " Oficina: +52(33)20010565"
-msgstr " Office: +52(33)20010565" 
+msgstr " Office: +52(33)20010565"
 
 msgid "COTIZAR"
 msgstr "QUOTE REQUEST"
@@ -275,3 +278,65 @@ msgstr "Customer service"
 msgid "Soporte Logístico:"
 msgstr "Logistic support"
 
+msgid "TRANSPORTE MARÍTIMO"
+msgstr "OCEANFREIGHT"
+
+msgid "Somos especialistas en todo de tipo de carga marítima, desde un paquete pequeño hasta un contenedor completo. Tenemos acuerdos con diversas navieras para embarcar y desembarcar en puertos de todo el mundo."
+msgstr "We specialize in all kinds of shipping containers, despite the size of the package. We have established numerous agreements with shipping companies for embarkation and disembarkations all around the world."
+
+msgid "Contenedor completo (FCL)"
+msgstr "Full container load (FCL)"
+
+msgid "Carga consolidada"
+msgstr "Less than truckload"
+
+msgid "TRANSPORTE TERRESTRE"
+msgstr "INLAND FREIGHT"
+
+msgid "Ponemos a su disposición nuestro servicio de transporte terrestre. Contamos con unidades propias y una red de servicios para satisfacer las necesidades del mercado global. Enfocamos nuestras entregas y recolecciones en Canadá, Estados Unidos, México y Latinoamérica."
+msgstr "We put to your disposition our inland transportation services. We have our own terrestrial units ready to satisfy worldwide market demands. Our pick-ups and deliveries include Canada, United States, Mexico and most of Latinamerican countries."
+
+msgid "Servicio de carga consolidada (LTL)"
+msgstr "Full truck load (FTL-Reefer-Isotanques)"
+
+msgid "Custodia de mercancías. "
+msgstr "Safekeeping of goods"
+
+msgid "Sobredimensionado "
+msgstr "Oversized shiploads"
+
+msgid "TRANSPORTE AÉREO"
+msgstr "AIRFREIGHT"
+
+msgid "Servicio aéreo doméstico y global para sus embarques de importación y exportación. Puede estar tranquilo: nuestro equipo de aeropuerto acompañará su mercancía durante el trámite aduanal. Aseguraremos en tiempo su ingreso y/o liberación."
+msgstr "We offer domestic and global aerial services for your import and export shipments Leave it in our hands: we can assure you that ITRADE’s staff will monitor your goods during the customs process."
+
+msgid "ADUANA"
+msgstr "CUSTOMS CLEARANCE"
+
+msgid "En ITRADE nos preocupamos por optimizar los tiempos en su despacho de aduanas, en la elaboración correcta de certificados de origen y cada documento requerido por la autoridad. Trabajamos en cada aduana del país de cualquier modalidad, puerto, aeropuerto o frontera terrestre."
+msgstr "ITRADE cares about optimizing times in custom clearance’s process, as well as the correct elaboration of certificates of origin and every document required by authority."
+
+msgid "Despacho aduanal"
+msgstr "Customs clearance"
+
+msgid "Análisis previo de impuestos y gastos en aduana"
+msgstr "Previous analysis of fees and customs taxes."
+
+msgid "Asesoría en trámites aduanales"
+msgstr "Consultancy in custom procedures"
+
+msgid "SEGURO"
+msgstr "INSURANCE"
+
+msgid "En ITRADE la seguridad de tu carga es nuestra mayor preocupación. Ofrecemos una póliza que brinda  protección desde el lugar de recolección hasta su entrega final, contra daños o pérdidas de su mercancía correctamente embalada."
+msgstr "In ITRADE your merchandise’s safety is our biggest concern, that is why we offer an end-to-end protection policy wich includes any damage or lost of your goods."
+
+msgid "COMPRAS Y LOGISTICA INTERNACIONAL"
+msgstr "PURCHASES AND INTERNATIONAL LOGISTICS"
+
+msgid "Departamento diseñado para todas aquellas empresas que no cuentan con área propia de compras y/o logística internacional."
+msgstr "We have created this department for all those companies that does not have their own purchase and international logistic areas."
+
+msgid "Funge como tu departamento externo y exclusivo para brindarte el servicio y asesoría en tus compras internacionales."
+msgstr "ITRADE has trained personnel ready to place and follow-up your orders in foreign territory. Also, we have quality services regarding international purchases, logistic design, worldwide tranfers, customs clearance and invoicing if required."

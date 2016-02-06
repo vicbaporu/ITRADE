@@ -730,7 +730,7 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
      *
      * @return ProveedoritradeQuery The current query, for fluid interface
      */
-    public function joinExpedientegasto($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinExpedientegasto($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Expedientegasto');
@@ -765,7 +765,7 @@ abstract class BaseProveedoritradeQuery extends ModelCriteria
      *
      * @return   ExpedientegastoQuery A secondary query class using the current class as primary query
      */
-    public function useExpedientegastoQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useExpedientegastoQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinExpedientegasto($relationAlias, $joinType)

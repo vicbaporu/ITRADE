@@ -50,6 +50,11 @@ class ExpedienteanticipoTableMap extends TableMap
   3 => 'otro',
 ));
         $this->addColumn('expedienteanticipo_comprobante', 'ExpedienteanticipoComprobante', 'VARCHAR', true, 45, null);
+        $this->addColumn('expedienteanticipo_moneda', 'ExpedienteanticipoMoneda', 'CHAR', false, null, null);
+        $this->getColumn('expedienteanticipo_moneda', false)->setValueSet(array (
+  0 => 'mxn',
+  1 => 'usd',
+));
         // validators
     } // initialize()
 

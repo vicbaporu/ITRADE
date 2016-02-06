@@ -1,0 +1,87 @@
+<div class="modal fade" tabindex="-1" role="dialog">
+    <?php 
+        $form->setAttribute('action', '/clientes/ver/'.$entity->getIdcliente().'/expedientes/ver/'.$entity->getIdexpediente().'/editaranticipo');
+        $form->setAttribute('enctype', 'multipart/form-data');
+
+        echo $this->form()->openTag($form); 
+    ?>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">EDITAR ANTICIPO EN <?php echo strtoupper($form->get('expedienteanticipo_moneda')->getValue())?></h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <?php echo $this->formHidden($form->get('idexpedienteanticipo')) ?>
+                            <?php echo $this->formHidden($form->get('expedienteanticipo_moneda')) ?>
+                            <?php echo $this->formHidden($form->get('idexpediente')) ?>
+                            <?php echo $this->formLabel($form->get('expedienteanticipo_fecha')) ?>  
+                            <div class="controls">
+                                <div class="input-with-icon  right">
+                                    <div class="input-append success date width-93">
+                                        <i class=""></i>
+                                        <?php echo $this->formText($form->get('expedienteanticipo_fecha')) ?>  
+                                        <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <?php echo $this->formLabel($form->get('expedienteanticipo_metodopago')) ?>  
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <?php echo $this->formSelect($form->get('expedienteanticipo_metodopago')) ?>
+                            </div>
+                            <span class="error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <?php echo $this->formLabel($form->get('expedienteanticipo_cantidad')) ?>  
+                            <span class="help req">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon success">
+                                    <span class="arrow" style="left: 22px;"></span>
+                                    <?php if($form->get('expedienteanticipo_moneda')->getValue() == 'mxn') :?>
+                                        MXN
+                                    <?php else :?>
+                                        USD
+                                    <?php endif;?>
+                                </span>
+                                <?php echo $this->formText($form->get('expedienteanticipo_cantidad')) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <label class="form-label">Comprobante</label>
+                            <input class="width-100" type="file" name="expedienteanticipo_comprobante">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button btn-action="submit" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+  </form>
+</div><!-- /.modal -->
+

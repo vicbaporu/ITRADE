@@ -99,6 +99,8 @@ CREATE TABLE `clientearchivo`
     CONSTRAINT `idcliente_clientearchivo`
         FOREIGN KEY (`idcliente`)
         REFERENCES `cliente` (`idcliente`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -150,11 +152,20 @@ CREATE TABLE `expediente`
     `expediente_factura` VARCHAR(45),
     `expediente_fechainicio` DATE NOT NULL,
     `expediente_fechafin` DATE,
-    `expediente_preciomxn` DECIMAL(10,2),
     `expediente_tipo` enum('exportacion','importacion') NOT NULL,
     `expediente_estatus` enum('abierto','cerrado') NOT NULL,
     `expediente_folio` VARCHAR(45),
+    `expediente_preciomxn` DECIMAL(10,2),
     `expediente_preciousd` DECIMAL(10,2),
+    `expediente_estatuspago` TINYINT(1),
+    `expediente_facturacionmxn` enum('nofacturada','facturada','cancelada'),
+    `expediente_facturacionusd` enum('nofacturada','facturada','cancelada'),
+    `expediente_pendientepagomxn` DECIMAL(10,2),
+    `expediente_pendientepagousd` DECIMAL(10,2),
+    `expediente_facturapdfmxn` TEXT,
+    `expediente_facturaxmlmxn` TEXT,
+    `expediente_facturapdfusd` TEXT,
+    `expediente_facturaxmlusd` TEXT,
     PRIMARY KEY (`idexpediente`),
     INDEX `idconsignatarioembarcador` (`idconsignatarioembarcador`),
     INDEX `idcliente` (`idcliente`),
@@ -184,6 +195,7 @@ CREATE TABLE `expedienteanticipo`
     `expedienteanticipo_cantidad` DECIMAL(10,2) NOT NULL,
     `expedienteanticipo_metodopago` enum('efectivo','cheque','trasnferencia','otro') NOT NULL,
     `expedienteanticipo_comprobante` VARCHAR(45) NOT NULL,
+    `expedienteanticipo_moneda` enum('mxn','usd'),
     PRIMARY KEY (`idexpedienteanticipo`),
     INDEX `idexpediente` (`idexpediente`),
     CONSTRAINT `idexpediente_expedienteanticipo`
@@ -233,12 +245,12 @@ CREATE TABLE `expedientegasto`
 (
     `idexpedientegasto` INTEGER NOT NULL AUTO_INCREMENT,
     `idexpediente` INTEGER NOT NULL,
-    `idgastofacturacion` INTEGER NOT NULL,
-    `idproveedoritrade` INTEGER NOT NULL,
+    `idgastofacturacion` INTEGER,
+    `idproveedoritrade` INTEGER,
     `idempleado` INTEGER NOT NULL,
     `expedientegasto_fecha` DATETIME NOT NULL,
     `expedientegasto_monto` DECIMAL(10,2) NOT NULL,
-    `expedientegasto_tipo` enum('gastorecibir','gastoconocido','cobro') NOT NULL,
+    `expedientegasto_tipo` enum('gastorecibir','gastoconocido','cobro','anticipo') NOT NULL,
     `expedientegasto_comprobante` TEXT,
     `expedientegasto_nota` TEXT,
     `expedientegasto_moneda` enum('mxn','usd') NOT NULL,
@@ -259,10 +271,14 @@ CREATE TABLE `expedientegasto`
         ON DELETE CASCADE,
     CONSTRAINT `idgastofacturacion_expedientegasto`
         FOREIGN KEY (`idgastofacturacion`)
-        REFERENCES `gastofacturacion` (`idgastofacturacion`),
+        REFERENCES `gastofacturacion` (`idgastofacturacion`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT `idproveedoritrade_expedientegasto`
         FOREIGN KEY (`idproveedoritrade`)
         REFERENCES `proveedoritrade` (`idproveedoritrade`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -371,6 +387,8 @@ CREATE TABLE `proveedorcliente`
     CONSTRAINT `idcliente_proveedorcliente`
         FOREIGN KEY (`idcliente`)
         REFERENCES `cliente` (`idcliente`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

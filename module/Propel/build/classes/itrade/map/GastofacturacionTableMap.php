@@ -57,7 +57,7 @@ class GastofacturacionTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('Categoriagasto', 'Categoriagasto', RelationMap::MANY_TO_ONE, array('idcategoriagasto' => 'idcategoriagasto', ), 'CASCADE', 'CASCADE');
-        $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idgastofacturacion' => 'idgastofacturacion', ), null, null, 'Expedientegastos');
+        $this->addRelation('Expedientegasto', 'Expedientegasto', RelationMap::ONE_TO_MANY, array('idgastofacturacion' => 'idgastofacturacion', ), 'CASCADE', 'CASCADE', 'Expedientegastos');
     } // buildRelations()
 
 } // GastofacturacionTableMap

@@ -40,8 +40,8 @@ class ExpedientegastoTableMap extends TableMap
         // columns
         $this->addPrimaryKey('idexpedientegasto', 'Idexpedientegasto', 'INTEGER', true, null, null);
         $this->addForeignKey('idexpediente', 'Idexpediente', 'INTEGER', 'expediente', 'idexpediente', true, null, null);
-        $this->addForeignKey('idgastofacturacion', 'Idgastofacturacion', 'INTEGER', 'gastofacturacion', 'idgastofacturacion', true, null, null);
-        $this->addForeignKey('idproveedoritrade', 'Idproveedoritrade', 'INTEGER', 'proveedoritrade', 'idproveedoritrade', true, null, null);
+        $this->addForeignKey('idgastofacturacion', 'Idgastofacturacion', 'INTEGER', 'gastofacturacion', 'idgastofacturacion', false, null, null);
+        $this->addForeignKey('idproveedoritrade', 'Idproveedoritrade', 'INTEGER', 'proveedoritrade', 'idproveedoritrade', false, null, null);
         $this->addForeignKey('idempleado', 'Idempleado', 'INTEGER', 'empleado', 'idempleado', true, null, null);
         $this->addColumn('expedientegasto_fecha', 'ExpedientegastoFecha', 'TIMESTAMP', true, null, null);
         $this->addColumn('expedientegasto_monto', 'ExpedientegastoMonto', 'DECIMAL', true, 10, null);
@@ -50,6 +50,7 @@ class ExpedientegastoTableMap extends TableMap
   0 => 'gastorecibir',
   1 => 'gastoconocido',
   2 => 'cobro',
+  3 => 'anticipo',
 ));
         $this->addColumn('expedientegasto_comprobante', 'ExpedientegastoComprobante', 'LONGVARCHAR', false, null, null);
         $this->addColumn('expedientegasto_nota', 'ExpedientegastoNota', 'LONGVARCHAR', false, null, null);
@@ -68,8 +69,8 @@ class ExpedientegastoTableMap extends TableMap
     {
         $this->addRelation('Empleado', 'Empleado', RelationMap::MANY_TO_ONE, array('idempleado' => 'idempleado', ), 'CASCADE', 'CASCADE');
         $this->addRelation('Expediente', 'Expediente', RelationMap::MANY_TO_ONE, array('idexpediente' => 'idexpediente', ), 'CASCADE', 'CASCADE');
-        $this->addRelation('Gastofacturacion', 'Gastofacturacion', RelationMap::MANY_TO_ONE, array('idgastofacturacion' => 'idgastofacturacion', ), null, null);
-        $this->addRelation('Proveedoritrade', 'Proveedoritrade', RelationMap::MANY_TO_ONE, array('idproveedoritrade' => 'idproveedoritrade', ), null, null);
+        $this->addRelation('Gastofacturacion', 'Gastofacturacion', RelationMap::MANY_TO_ONE, array('idgastofacturacion' => 'idgastofacturacion', ), 'CASCADE', 'CASCADE');
+        $this->addRelation('Proveedoritrade', 'Proveedoritrade', RelationMap::MANY_TO_ONE, array('idproveedoritrade' => 'idproveedoritrade', ), 'CASCADE', 'CASCADE');
     } // buildRelations()
 
 } // ExpedientegastoTableMap

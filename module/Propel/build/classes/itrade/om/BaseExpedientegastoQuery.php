@@ -876,7 +876,7 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
      *
      * @return ExpedientegastoQuery The current query, for fluid interface
      */
-    public function joinGastofacturacion($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinGastofacturacion($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Gastofacturacion');
@@ -911,7 +911,7 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
      *
      * @return   GastofacturacionQuery A secondary query class using the current class as primary query
      */
-    public function useGastofacturacionQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useGastofacturacionQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinGastofacturacion($relationAlias, $joinType)
@@ -952,7 +952,7 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
      *
      * @return ExpedientegastoQuery The current query, for fluid interface
      */
-    public function joinProveedoritrade($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinProveedoritrade($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('Proveedoritrade');
@@ -987,7 +987,7 @@ abstract class BaseExpedientegastoQuery extends ModelCriteria
      *
      * @return   ProveedoritradeQuery A secondary query class using the current class as primary query
      */
-    public function useProveedoritradeQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useProveedoritradeQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinProveedoritrade($relationAlias, $joinType)

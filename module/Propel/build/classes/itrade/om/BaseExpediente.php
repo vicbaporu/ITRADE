@@ -72,12 +72,6 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     protected $expediente_fechafin;
 
     /**
-     * The value for the expediente_preciomxn field.
-     * @var        string
-     */
-    protected $expediente_preciomxn;
-
-    /**
      * The value for the expediente_tipo field.
      * @var        string
      */
@@ -96,10 +90,70 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     protected $expediente_folio;
 
     /**
+     * The value for the expediente_preciomxn field.
+     * @var        string
+     */
+    protected $expediente_preciomxn;
+
+    /**
      * The value for the expediente_preciousd field.
      * @var        string
      */
     protected $expediente_preciousd;
+
+    /**
+     * The value for the expediente_estatuspago field.
+     * @var        boolean
+     */
+    protected $expediente_estatuspago;
+
+    /**
+     * The value for the expediente_facturacionmxn field.
+     * @var        string
+     */
+    protected $expediente_facturacionmxn;
+
+    /**
+     * The value for the expediente_facturacionusd field.
+     * @var        string
+     */
+    protected $expediente_facturacionusd;
+
+    /**
+     * The value for the expediente_pendientepagomxn field.
+     * @var        string
+     */
+    protected $expediente_pendientepagomxn;
+
+    /**
+     * The value for the expediente_pendientepagousd field.
+     * @var        string
+     */
+    protected $expediente_pendientepagousd;
+
+    /**
+     * The value for the expediente_facturapdfmxn field.
+     * @var        string
+     */
+    protected $expediente_facturapdfmxn;
+
+    /**
+     * The value for the expediente_facturaxmlmxn field.
+     * @var        string
+     */
+    protected $expediente_facturaxmlmxn;
+
+    /**
+     * The value for the expediente_facturapdfusd field.
+     * @var        string
+     */
+    protected $expediente_facturapdfusd;
+
+    /**
+     * The value for the expediente_facturaxmlusd field.
+     * @var        string
+     */
+    protected $expediente_facturaxmlusd;
 
     /**
      * @var        Cliente
@@ -315,17 +369,6 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [expediente_preciomxn] column value.
-     *
-     * @return string
-     */
-    public function getExpedientePreciomxn()
-    {
-
-        return $this->expediente_preciomxn;
-    }
-
-    /**
      * Get the [expediente_tipo] column value.
      *
      * @return string
@@ -359,6 +402,17 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     }
 
     /**
+     * Get the [expediente_preciomxn] column value.
+     *
+     * @return string
+     */
+    public function getExpedientePreciomxn()
+    {
+
+        return $this->expediente_preciomxn;
+    }
+
+    /**
      * Get the [expediente_preciousd] column value.
      *
      * @return string
@@ -367,6 +421,105 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     {
 
         return $this->expediente_preciousd;
+    }
+
+    /**
+     * Get the [expediente_estatuspago] column value.
+     *
+     * @return boolean
+     */
+    public function getExpedienteEstatuspago()
+    {
+
+        return $this->expediente_estatuspago;
+    }
+
+    /**
+     * Get the [expediente_facturacionmxn] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteFacturacionmxn()
+    {
+
+        return $this->expediente_facturacionmxn;
+    }
+
+    /**
+     * Get the [expediente_facturacionusd] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteFacturacionusd()
+    {
+
+        return $this->expediente_facturacionusd;
+    }
+
+    /**
+     * Get the [expediente_pendientepagomxn] column value.
+     *
+     * @return string
+     */
+    public function getExpedientePendientepagomxn()
+    {
+
+        return $this->expediente_pendientepagomxn;
+    }
+
+    /**
+     * Get the [expediente_pendientepagousd] column value.
+     *
+     * @return string
+     */
+    public function getExpedientePendientepagousd()
+    {
+
+        return $this->expediente_pendientepagousd;
+    }
+
+    /**
+     * Get the [expediente_facturapdfmxn] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteFacturapdfmxn()
+    {
+
+        return $this->expediente_facturapdfmxn;
+    }
+
+    /**
+     * Get the [expediente_facturaxmlmxn] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteFacturaxmlmxn()
+    {
+
+        return $this->expediente_facturaxmlmxn;
+    }
+
+    /**
+     * Get the [expediente_facturapdfusd] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteFacturapdfusd()
+    {
+
+        return $this->expediente_facturapdfusd;
+    }
+
+    /**
+     * Get the [expediente_facturaxmlusd] column value.
+     *
+     * @return string
+     */
+    public function getExpedienteFacturaxmlusd()
+    {
+
+        return $this->expediente_facturaxmlusd;
     }
 
     /**
@@ -529,27 +682,6 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     } // setExpedienteFechafin()
 
     /**
-     * Set the value of [expediente_preciomxn] column.
-     *
-     * @param  string $v new value
-     * @return Expediente The current object (for fluent API support)
-     */
-    public function setExpedientePreciomxn($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (string) $v;
-        }
-
-        if ($this->expediente_preciomxn !== $v) {
-            $this->expediente_preciomxn = $v;
-            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_PRECIOMXN;
-        }
-
-
-        return $this;
-    } // setExpedientePreciomxn()
-
-    /**
      * Set the value of [expediente_tipo] column.
      *
      * @param  string $v new value
@@ -613,6 +745,27 @@ abstract class BaseExpediente extends BaseObject implements Persistent
     } // setExpedienteFolio()
 
     /**
+     * Set the value of [expediente_preciomxn] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedientePreciomxn($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_preciomxn !== $v) {
+            $this->expediente_preciomxn = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_PRECIOMXN;
+        }
+
+
+        return $this;
+    } // setExpedientePreciomxn()
+
+    /**
      * Set the value of [expediente_preciousd] column.
      *
      * @param  string $v new value
@@ -632,6 +785,203 @@ abstract class BaseExpediente extends BaseObject implements Persistent
 
         return $this;
     } // setExpedientePreciousd()
+
+    /**
+     * Sets the value of the [expediente_estatuspago] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     *
+     * @param boolean|integer|string $v The new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteEstatuspago($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->expediente_estatuspago !== $v) {
+            $this->expediente_estatuspago = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_ESTATUSPAGO;
+        }
+
+
+        return $this;
+    } // setExpedienteEstatuspago()
+
+    /**
+     * Set the value of [expediente_facturacionmxn] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteFacturacionmxn($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_facturacionmxn !== $v) {
+            $this->expediente_facturacionmxn = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_FACTURACIONMXN;
+        }
+
+
+        return $this;
+    } // setExpedienteFacturacionmxn()
+
+    /**
+     * Set the value of [expediente_facturacionusd] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteFacturacionusd($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_facturacionusd !== $v) {
+            $this->expediente_facturacionusd = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_FACTURACIONUSD;
+        }
+
+
+        return $this;
+    } // setExpedienteFacturacionusd()
+
+    /**
+     * Set the value of [expediente_pendientepagomxn] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedientePendientepagomxn($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_pendientepagomxn !== $v) {
+            $this->expediente_pendientepagomxn = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOMXN;
+        }
+
+
+        return $this;
+    } // setExpedientePendientepagomxn()
+
+    /**
+     * Set the value of [expediente_pendientepagousd] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedientePendientepagousd($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_pendientepagousd !== $v) {
+            $this->expediente_pendientepagousd = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOUSD;
+        }
+
+
+        return $this;
+    } // setExpedientePendientepagousd()
+
+    /**
+     * Set the value of [expediente_facturapdfmxn] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteFacturapdfmxn($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_facturapdfmxn !== $v) {
+            $this->expediente_facturapdfmxn = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_FACTURAPDFMXN;
+        }
+
+
+        return $this;
+    } // setExpedienteFacturapdfmxn()
+
+    /**
+     * Set the value of [expediente_facturaxmlmxn] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteFacturaxmlmxn($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_facturaxmlmxn !== $v) {
+            $this->expediente_facturaxmlmxn = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_FACTURAXMLMXN;
+        }
+
+
+        return $this;
+    } // setExpedienteFacturaxmlmxn()
+
+    /**
+     * Set the value of [expediente_facturapdfusd] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteFacturapdfusd($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_facturapdfusd !== $v) {
+            $this->expediente_facturapdfusd = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_FACTURAPDFUSD;
+        }
+
+
+        return $this;
+    } // setExpedienteFacturapdfusd()
+
+    /**
+     * Set the value of [expediente_facturaxmlusd] column.
+     *
+     * @param  string $v new value
+     * @return Expediente The current object (for fluent API support)
+     */
+    public function setExpedienteFacturaxmlusd($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->expediente_facturaxmlusd !== $v) {
+            $this->expediente_facturaxmlusd = $v;
+            $this->modifiedColumns[] = ExpedientePeer::EXPEDIENTE_FACTURAXMLUSD;
+        }
+
+
+        return $this;
+    } // setExpedienteFacturaxmlusd()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -672,11 +1022,20 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             $this->expediente_factura = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
             $this->expediente_fechainicio = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
             $this->expediente_fechafin = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-            $this->expediente_preciomxn = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
-            $this->expediente_tipo = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
-            $this->expediente_estatus = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
-            $this->expediente_folio = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
+            $this->expediente_tipo = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->expediente_estatus = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+            $this->expediente_folio = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+            $this->expediente_preciomxn = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
             $this->expediente_preciousd = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
+            $this->expediente_estatuspago = ($row[$startcol + 12] !== null) ? (boolean) $row[$startcol + 12] : null;
+            $this->expediente_facturacionmxn = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
+            $this->expediente_facturacionusd = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
+            $this->expediente_pendientepagomxn = ($row[$startcol + 15] !== null) ? (string) $row[$startcol + 15] : null;
+            $this->expediente_pendientepagousd = ($row[$startcol + 16] !== null) ? (string) $row[$startcol + 16] : null;
+            $this->expediente_facturapdfmxn = ($row[$startcol + 17] !== null) ? (string) $row[$startcol + 17] : null;
+            $this->expediente_facturaxmlmxn = ($row[$startcol + 18] !== null) ? (string) $row[$startcol + 18] : null;
+            $this->expediente_facturapdfusd = ($row[$startcol + 19] !== null) ? (string) $row[$startcol + 19] : null;
+            $this->expediente_facturaxmlusd = ($row[$startcol + 20] !== null) ? (string) $row[$startcol + 20] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -686,7 +1045,7 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 12; // 12 = ExpedientePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 21; // 21 = ExpedientePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Expediente object", $e);
@@ -1022,9 +1381,6 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FECHAFIN)) {
             $modifiedColumns[':p' . $index++]  = '`expediente_fechafin`';
         }
-        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIOMXN)) {
-            $modifiedColumns[':p' . $index++]  = '`expediente_preciomxn`';
-        }
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_TIPO)) {
             $modifiedColumns[':p' . $index++]  = '`expediente_tipo`';
         }
@@ -1034,8 +1390,38 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FOLIO)) {
             $modifiedColumns[':p' . $index++]  = '`expediente_folio`';
         }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIOMXN)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_preciomxn`';
+        }
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIOUSD)) {
             $modifiedColumns[':p' . $index++]  = '`expediente_preciousd`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_ESTATUSPAGO)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_estatuspago`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURACIONMXN)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_facturacionmxn`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURACIONUSD)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_facturacionusd`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOMXN)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_pendientepagomxn`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOUSD)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_pendientepagousd`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAPDFMXN)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_facturapdfmxn`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAXMLMXN)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_facturaxmlmxn`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAPDFUSD)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_facturapdfusd`';
+        }
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAXMLUSD)) {
+            $modifiedColumns[':p' . $index++]  = '`expediente_facturaxmlusd`';
         }
 
         $sql = sprintf(
@@ -1069,9 +1455,6 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                     case '`expediente_fechafin`':
                         $stmt->bindValue($identifier, $this->expediente_fechafin, PDO::PARAM_STR);
                         break;
-                    case '`expediente_preciomxn`':
-                        $stmt->bindValue($identifier, $this->expediente_preciomxn, PDO::PARAM_STR);
-                        break;
                     case '`expediente_tipo`':
                         $stmt->bindValue($identifier, $this->expediente_tipo, PDO::PARAM_STR);
                         break;
@@ -1081,8 +1464,38 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                     case '`expediente_folio`':
                         $stmt->bindValue($identifier, $this->expediente_folio, PDO::PARAM_STR);
                         break;
+                    case '`expediente_preciomxn`':
+                        $stmt->bindValue($identifier, $this->expediente_preciomxn, PDO::PARAM_STR);
+                        break;
                     case '`expediente_preciousd`':
                         $stmt->bindValue($identifier, $this->expediente_preciousd, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_estatuspago`':
+                        $stmt->bindValue($identifier, (int) $this->expediente_estatuspago, PDO::PARAM_INT);
+                        break;
+                    case '`expediente_facturacionmxn`':
+                        $stmt->bindValue($identifier, $this->expediente_facturacionmxn, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_facturacionusd`':
+                        $stmt->bindValue($identifier, $this->expediente_facturacionusd, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_pendientepagomxn`':
+                        $stmt->bindValue($identifier, $this->expediente_pendientepagomxn, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_pendientepagousd`':
+                        $stmt->bindValue($identifier, $this->expediente_pendientepagousd, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_facturapdfmxn`':
+                        $stmt->bindValue($identifier, $this->expediente_facturapdfmxn, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_facturaxmlmxn`':
+                        $stmt->bindValue($identifier, $this->expediente_facturaxmlmxn, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_facturapdfusd`':
+                        $stmt->bindValue($identifier, $this->expediente_facturapdfusd, PDO::PARAM_STR);
+                        break;
+                    case '`expediente_facturaxmlusd`':
+                        $stmt->bindValue($identifier, $this->expediente_facturaxmlusd, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1290,19 +1703,46 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                 return $this->getExpedienteFechafin();
                 break;
             case 7:
-                return $this->getExpedientePreciomxn();
-                break;
-            case 8:
                 return $this->getExpedienteTipo();
                 break;
-            case 9:
+            case 8:
                 return $this->getExpedienteEstatus();
                 break;
-            case 10:
+            case 9:
                 return $this->getExpedienteFolio();
+                break;
+            case 10:
+                return $this->getExpedientePreciomxn();
                 break;
             case 11:
                 return $this->getExpedientePreciousd();
+                break;
+            case 12:
+                return $this->getExpedienteEstatuspago();
+                break;
+            case 13:
+                return $this->getExpedienteFacturacionmxn();
+                break;
+            case 14:
+                return $this->getExpedienteFacturacionusd();
+                break;
+            case 15:
+                return $this->getExpedientePendientepagomxn();
+                break;
+            case 16:
+                return $this->getExpedientePendientepagousd();
+                break;
+            case 17:
+                return $this->getExpedienteFacturapdfmxn();
+                break;
+            case 18:
+                return $this->getExpedienteFacturaxmlmxn();
+                break;
+            case 19:
+                return $this->getExpedienteFacturapdfusd();
+                break;
+            case 20:
+                return $this->getExpedienteFacturaxmlusd();
                 break;
             default:
                 return null;
@@ -1340,11 +1780,20 @@ abstract class BaseExpediente extends BaseObject implements Persistent
             $keys[4] => $this->getExpedienteFactura(),
             $keys[5] => $this->getExpedienteFechainicio(),
             $keys[6] => $this->getExpedienteFechafin(),
-            $keys[7] => $this->getExpedientePreciomxn(),
-            $keys[8] => $this->getExpedienteTipo(),
-            $keys[9] => $this->getExpedienteEstatus(),
-            $keys[10] => $this->getExpedienteFolio(),
+            $keys[7] => $this->getExpedienteTipo(),
+            $keys[8] => $this->getExpedienteEstatus(),
+            $keys[9] => $this->getExpedienteFolio(),
+            $keys[10] => $this->getExpedientePreciomxn(),
             $keys[11] => $this->getExpedientePreciousd(),
+            $keys[12] => $this->getExpedienteEstatuspago(),
+            $keys[13] => $this->getExpedienteFacturacionmxn(),
+            $keys[14] => $this->getExpedienteFacturacionusd(),
+            $keys[15] => $this->getExpedientePendientepagomxn(),
+            $keys[16] => $this->getExpedientePendientepagousd(),
+            $keys[17] => $this->getExpedienteFacturapdfmxn(),
+            $keys[18] => $this->getExpedienteFacturaxmlmxn(),
+            $keys[19] => $this->getExpedienteFacturapdfusd(),
+            $keys[20] => $this->getExpedienteFacturaxmlusd(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1426,19 +1875,46 @@ abstract class BaseExpediente extends BaseObject implements Persistent
                 $this->setExpedienteFechafin($value);
                 break;
             case 7:
-                $this->setExpedientePreciomxn($value);
-                break;
-            case 8:
                 $this->setExpedienteTipo($value);
                 break;
-            case 9:
+            case 8:
                 $this->setExpedienteEstatus($value);
                 break;
-            case 10:
+            case 9:
                 $this->setExpedienteFolio($value);
+                break;
+            case 10:
+                $this->setExpedientePreciomxn($value);
                 break;
             case 11:
                 $this->setExpedientePreciousd($value);
+                break;
+            case 12:
+                $this->setExpedienteEstatuspago($value);
+                break;
+            case 13:
+                $this->setExpedienteFacturacionmxn($value);
+                break;
+            case 14:
+                $this->setExpedienteFacturacionusd($value);
+                break;
+            case 15:
+                $this->setExpedientePendientepagomxn($value);
+                break;
+            case 16:
+                $this->setExpedientePendientepagousd($value);
+                break;
+            case 17:
+                $this->setExpedienteFacturapdfmxn($value);
+                break;
+            case 18:
+                $this->setExpedienteFacturaxmlmxn($value);
+                break;
+            case 19:
+                $this->setExpedienteFacturapdfusd($value);
+                break;
+            case 20:
+                $this->setExpedienteFacturaxmlusd($value);
                 break;
         } // switch()
     }
@@ -1471,11 +1947,20 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if (array_key_exists($keys[4], $arr)) $this->setExpedienteFactura($arr[$keys[4]]);
         if (array_key_exists($keys[5], $arr)) $this->setExpedienteFechainicio($arr[$keys[5]]);
         if (array_key_exists($keys[6], $arr)) $this->setExpedienteFechafin($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setExpedientePreciomxn($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setExpedienteTipo($arr[$keys[8]]);
-        if (array_key_exists($keys[9], $arr)) $this->setExpedienteEstatus($arr[$keys[9]]);
-        if (array_key_exists($keys[10], $arr)) $this->setExpedienteFolio($arr[$keys[10]]);
+        if (array_key_exists($keys[7], $arr)) $this->setExpedienteTipo($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setExpedienteEstatus($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setExpedienteFolio($arr[$keys[9]]);
+        if (array_key_exists($keys[10], $arr)) $this->setExpedientePreciomxn($arr[$keys[10]]);
         if (array_key_exists($keys[11], $arr)) $this->setExpedientePreciousd($arr[$keys[11]]);
+        if (array_key_exists($keys[12], $arr)) $this->setExpedienteEstatuspago($arr[$keys[12]]);
+        if (array_key_exists($keys[13], $arr)) $this->setExpedienteFacturacionmxn($arr[$keys[13]]);
+        if (array_key_exists($keys[14], $arr)) $this->setExpedienteFacturacionusd($arr[$keys[14]]);
+        if (array_key_exists($keys[15], $arr)) $this->setExpedientePendientepagomxn($arr[$keys[15]]);
+        if (array_key_exists($keys[16], $arr)) $this->setExpedientePendientepagousd($arr[$keys[16]]);
+        if (array_key_exists($keys[17], $arr)) $this->setExpedienteFacturapdfmxn($arr[$keys[17]]);
+        if (array_key_exists($keys[18], $arr)) $this->setExpedienteFacturaxmlmxn($arr[$keys[18]]);
+        if (array_key_exists($keys[19], $arr)) $this->setExpedienteFacturapdfusd($arr[$keys[19]]);
+        if (array_key_exists($keys[20], $arr)) $this->setExpedienteFacturaxmlusd($arr[$keys[20]]);
     }
 
     /**
@@ -1494,11 +1979,20 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURA)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURA, $this->expediente_factura);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FECHAINICIO)) $criteria->add(ExpedientePeer::EXPEDIENTE_FECHAINICIO, $this->expediente_fechainicio);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FECHAFIN)) $criteria->add(ExpedientePeer::EXPEDIENTE_FECHAFIN, $this->expediente_fechafin);
-        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIOMXN)) $criteria->add(ExpedientePeer::EXPEDIENTE_PRECIOMXN, $this->expediente_preciomxn);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_TIPO)) $criteria->add(ExpedientePeer::EXPEDIENTE_TIPO, $this->expediente_tipo);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_ESTATUS)) $criteria->add(ExpedientePeer::EXPEDIENTE_ESTATUS, $this->expediente_estatus);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FOLIO)) $criteria->add(ExpedientePeer::EXPEDIENTE_FOLIO, $this->expediente_folio);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIOMXN)) $criteria->add(ExpedientePeer::EXPEDIENTE_PRECIOMXN, $this->expediente_preciomxn);
         if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PRECIOUSD)) $criteria->add(ExpedientePeer::EXPEDIENTE_PRECIOUSD, $this->expediente_preciousd);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_ESTATUSPAGO)) $criteria->add(ExpedientePeer::EXPEDIENTE_ESTATUSPAGO, $this->expediente_estatuspago);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURACIONMXN)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURACIONMXN, $this->expediente_facturacionmxn);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURACIONUSD)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURACIONUSD, $this->expediente_facturacionusd);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOMXN)) $criteria->add(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOMXN, $this->expediente_pendientepagomxn);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOUSD)) $criteria->add(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOUSD, $this->expediente_pendientepagousd);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAPDFMXN)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURAPDFMXN, $this->expediente_facturapdfmxn);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAXMLMXN)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURAXMLMXN, $this->expediente_facturaxmlmxn);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAPDFUSD)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURAPDFUSD, $this->expediente_facturapdfusd);
+        if ($this->isColumnModified(ExpedientePeer::EXPEDIENTE_FACTURAXMLUSD)) $criteria->add(ExpedientePeer::EXPEDIENTE_FACTURAXMLUSD, $this->expediente_facturaxmlusd);
 
         return $criteria;
     }
@@ -1568,11 +2062,20 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         $copyObj->setExpedienteFactura($this->getExpedienteFactura());
         $copyObj->setExpedienteFechainicio($this->getExpedienteFechainicio());
         $copyObj->setExpedienteFechafin($this->getExpedienteFechafin());
-        $copyObj->setExpedientePreciomxn($this->getExpedientePreciomxn());
         $copyObj->setExpedienteTipo($this->getExpedienteTipo());
         $copyObj->setExpedienteEstatus($this->getExpedienteEstatus());
         $copyObj->setExpedienteFolio($this->getExpedienteFolio());
+        $copyObj->setExpedientePreciomxn($this->getExpedientePreciomxn());
         $copyObj->setExpedientePreciousd($this->getExpedientePreciousd());
+        $copyObj->setExpedienteEstatuspago($this->getExpedienteEstatuspago());
+        $copyObj->setExpedienteFacturacionmxn($this->getExpedienteFacturacionmxn());
+        $copyObj->setExpedienteFacturacionusd($this->getExpedienteFacturacionusd());
+        $copyObj->setExpedientePendientepagomxn($this->getExpedientePendientepagomxn());
+        $copyObj->setExpedientePendientepagousd($this->getExpedientePendientepagousd());
+        $copyObj->setExpedienteFacturapdfmxn($this->getExpedienteFacturapdfmxn());
+        $copyObj->setExpedienteFacturaxmlmxn($this->getExpedienteFacturaxmlmxn());
+        $copyObj->setExpedienteFacturapdfusd($this->getExpedienteFacturapdfusd());
+        $copyObj->setExpedienteFacturaxmlusd($this->getExpedienteFacturaxmlusd());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -2821,11 +3324,20 @@ abstract class BaseExpediente extends BaseObject implements Persistent
         $this->expediente_factura = null;
         $this->expediente_fechainicio = null;
         $this->expediente_fechafin = null;
-        $this->expediente_preciomxn = null;
         $this->expediente_tipo = null;
         $this->expediente_estatus = null;
         $this->expediente_folio = null;
+        $this->expediente_preciomxn = null;
         $this->expediente_preciousd = null;
+        $this->expediente_estatuspago = null;
+        $this->expediente_facturacionmxn = null;
+        $this->expediente_facturacionusd = null;
+        $this->expediente_pendientepagomxn = null;
+        $this->expediente_pendientepagousd = null;
+        $this->expediente_facturapdfmxn = null;
+        $this->expediente_facturaxmlmxn = null;
+        $this->expediente_facturapdfusd = null;
+        $this->expediente_facturaxmlusd = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

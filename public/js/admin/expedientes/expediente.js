@@ -180,8 +180,7 @@
                             });
                         },
                     });
-                myDropzone.autoDiscover = false;
-                
+                myDropzone.autoDiscover = false;            
                 $.each(files, function (key, value) {
 
 
@@ -196,7 +195,6 @@
 
 
                 });
-
                 
                 //NUEVO CARGO
                 $container.find('a#nuevo_cargo_mxn,a#nuevo_cargo_usd').on('click',function(){
@@ -253,10 +251,23 @@
                                 source.find('.input-append.date').datepicker({
                                     autoclose: true,
                                     todayHighlight: true,
-                                    format:'dd/mm/yyyy'
+                                    format:'dd/mm/yyyy',
+                                    maxDate: new Date(),
                                 });
-
-
+                                
+                                //EVENTO DISPLAY OPTIONS
+                                /*source.find('select[name=expedientegasto_tipo]').select2().on('change', function (e){
+                                       
+                                       var expedientegasto_tipo = e.val;
+                                       if(expedientegasto_tipo == 'gastorecibir' || expedientegasto_tipo == 'gastoconocido' || expedientegasto_tipo == 'cobro'){
+                                           source.find('#options').slideDown();
+                                           source.find('#options select').attr('required',true);
+                                       }else{
+                                           source.find('#options').slideUp();
+                                           source.find('#options select').attr('required',false);
+                                       }
+                                });*/
+                                
                                  $container.append(source);
                                  source.find('.modal').modal();
                             }
@@ -356,13 +367,119 @@
                     });
                     
                 });
+
+                //NUEVO SERVICIO
+                $container.find('#nuevo_servicio').on('click',function(){
+                    var idexpediente = $container.find('input[name=idexpediente]').val();
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/nuevoservicio',
+                        data:{idexpediente:idexpediente},
+                        success:function(source){
+                            source = $('<div>'+source+'</div>');
+                            
+                            //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                           source.find('select[name=servicio_medio]').select2().on('change', function (e){
+                               
+                               $container.find('select[name=idservicio] option:not(:first-child)').remove();
+                               $("select[name=idservicio]").select2("val", "");
+   
+                               var medio = e.val;
+                               var tipo = $container.find('input[name=expediente_tipo]').val();
+                               
+                               if(medio != ""){
+                                   
+                                    $.ajax({
+                                        dataType: 'json',
+                                        url: '/clientes/ver/' + idcliente + '/expedientes/ver/' + idexpediente + '/getservicios',
+                                        data: {medio: medio,tipo:tipo},
+                                        success: function (data)
+                                        {
+                                            $.each(data, function () {
+                                                var option = $('<option>').text(this.servicio_nombre);
+                                                option.attr('value', this.idservicio)
+                                                source.find('select[name=idservicio]').append(option);
+                                            });
+                                            
+                                            source.find('select[name=idservicio]').select2("enable", true);
+                                        }
+                                    });
+                               }else{
+                                   source.find('select[name=idservicio]').select2("enable", false);
+                               }
+                               
+                           });
+                           
+                           //INICIALIZAMOS NUESTRO CALENDARIO
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
+                            
+                            
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
                 
+                //ELIMINAR SERVICIO
+                $container.find('a.eliminar_servicio').on('click',function(){
+                    var idexpedienteservicio = $(this).closest('tr').attr('id');
+                     $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarservicio',
+                        data:{idexpedienteservicio:idexpedienteservicio},
+                        success:function(source){
+                            source = $('<div>'+source+'</div>');
+                            source.find('button[btn-action=eliminar]').on('click', function () {
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarservicio',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {id: idexpedienteservicio},
+                                    success: function (data) {
+                                        if (data) {
+                                            window.location.replace('/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente);
+                                        }
+                                    }
+                                });
+                            });
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        },
+                     });
+                });
+                
+                //AGREGAR HISTORIAL AL SERVICIO
+                $container.find('a.agregar_historial').on('click',function(){
+                    var idexpedienteservicio = $(this).closest('tr').attr('id');
+                    
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/agregarhistorial',
+                        data:{idexpedienteservicio:idexpedienteservicio},
+                        success: function (source) {
+                            source = $('<div>'+source+'</div>');
+                            
+                            source.find("select").select2({
+                                placeholder: "Select a state",
+                                allowClear: true,
+                                language: "es"
+                            });
+                                
+                                
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
+
                 //DATATABLE FACTURACION
-
-               /*
-                * Insert a 'details' column to the table
-                */
-
                 $('#table_facturacion tr.details table tbody tr').filter(function(){
 
                     var id = $(this).closest('tr').attr('id');
@@ -412,8 +529,226 @@
                     }
 
                 });
+                
+                $('#table_servicios tbody td i.collapse').css('cursor','pointer');
+                $('#table_servicios tbody td i.collapse').live('click', function (){
+                    var tr = $(this).parents('tr')[0];
+                    var nTr = $(tr).next('tr');
+                    var visible = nTr.css('display');
 
-                 
+                    if(visible == 'none'){
+                        nTr.slideDown();
+                        $(tr).find('td.center i').removeClass('fa fa-plus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-minus-circle');
+                    }else{
+                        nTr.slideUp();
+                        $(tr).find('td.center i').removeClass('fa fa-minus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-plus-circle');
+                    }
+                });
+                
+                $('#table_facturacion tfoot td i.collapse').css('cursor','pointer');
+                $('#table_facturacion tfoot td i.collapse').live('click', function (){
+                    
+                    var tr = $(this).parents('tr')[0];
+                    var nTr = $(tr).next('tr');
+                    var visible = nTr.css('display');
+                    if(visible == 'none'){
+                        nTr.slideDown();
+                        $(tr).find('td.center i').removeClass('fa fa-plus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-minus-circle');
+                    }else{
+                        nTr.slideUp();
+                        $(tr).find('td.center i').removeClass('fa fa-minus-circle');
+                        $(tr).find('td.center i').addClass('fa fa-plus-circle');
+                    }
+                    
+                });
+                $('#table_facturacion tfoot tr.details table tbody tr').filter(function(){
+
+                    var id = $(this).closest('tr').attr('id');
+                    var comprobante = $(this).find('td').eq('2').text();
+
+                    if(comprobante == ""){
+                        $(this).find('td').eq('2').text('N/D');
+                    }else{
+                        var file_icon = $('<a href="javascript:;"><i class="fa fa-file"></i></a>');
+                        $(this).find('td').eq('2').html(file_icon);
+
+                        //El evento click del archivo
+                        file_icon.on('click',function(){
+                            $.ajax({
+                                url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/getcomprobanteanticipo',
+                                dataType:'json',
+                                data:{id:id},
+                                success:function(base64){
+                                    download("data:"+base64.type+";base64,"+base64.base64,base64.name,base64.type);
+                                }
+                            });
+                        });
+
+                    }
+                    
+                    var comprobante = $(this).find('td').eq('5').text();
+                    if(comprobante == ""){
+                        $(this).find('td').eq('5').text('N/D');
+                    }
+                    
+                });
+
+                //ELIMINAR HISTORIAL
+                $container.find('a.eliminar_historial').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarhistorial',
+                        data:{id:id},
+                        success: function (source) {
+                            source = $('<div>'+source+'</div>');
+                            source.find('button[btn-action=eliminar]').on('click', function () {
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminarhistorial',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {id: id},
+                                    success: function (data) {
+                                        if (data) {
+                                            window.location.replace('/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente);
+                                        }
+                                    }
+                                });
+                            });
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
+                
+                //ELIMINAR ANTICIPO
+                $container.find('a.eliminar_anticipo').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminaranticipo',
+                        data:{id:id},
+                        success: function (source) {
+                            source = $('<div>'+source+'</div>');
+                            source.find('button[btn-action=eliminar]').on('click', function () {
+                                $.ajax({
+                                    url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/eliminaranticipo',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {id: id},
+                                    success: function (data) {
+                                        if (data) {
+                                            window.location.replace('/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente);
+                                        }
+                                    }
+                                });
+                            });
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        }
+                    });
+                });
+                
+                //EDITAR HISTORIAL
+                $container.find('a.editar_historial').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                     $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/editarhistorial',
+                        data:{id:id},
+                        success:function(source){
+                             source = $('<div>'+source+'</div>');
+                             
+                             //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                           $container.append(source);
+                           source.find('.modal').modal();
+                        }
+                     });
+                });
+                
+                //EDITAR ANTICIPO
+                $container.find('a.editar_anticipo').on('click',function(){
+                    var id = $(this).closest('tr').attr('id');
+                    var moneda = $(this).closest('table').attr('id');
+                    moneda = moneda.split('table_anticipos_');
+                    moneda = moneda[1];
+         
+                     $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/editaranticipo',
+                        data:{id:id,moneda:moneda},
+                        success:function(source){
+                             source = $('<div>'+source+'</div>');
+                             
+                             //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                           //NUMERIC DEL CAMPO MONTO
+                            source.find('input[name=expedienteanticipo_cantidad]').numeric();
+                           
+                            //INICIALIZAMOS NUESTRO CALENDARIO
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
+                           
+                           $container.append(source);
+                           source.find('.modal').modal();
+                        }
+                     });
+                });
+                
+                //NUEVO ANTICIPO
+                $container.find('#add_anticipo_mxn,#add_anticipo_usd').on('click',function(){
+                    
+                    var moneda = $(this).attr('id');
+                    moneda = moneda.split('add_anticipo_');
+                    moneda = moneda[1];
+                    
+                    $.ajax({
+                        url:'/clientes/ver/'+idcliente+'/expedientes/ver/'+idexpediente+'/nuevoanticipo',
+                        data:{id:idexpediente,moneda:moneda},
+                        success:function(source){
+                            source = $('<div>'+source+'</div>');
+                            
+                            //SELECT 2 DEL MODAL
+                            source.find("select").select2({
+                               placeholder: "Select a state",
+                               allowClear: true,
+                               language: "es"
+                           });
+                           
+                            //NUMERIC DEL CAMPO MONTO
+                            source.find('input[name=expedienteanticipo_cantidad]').numeric();
+                           
+                            //INICIALIZAMOS NUESTRO CALENDARIO
+                            source.find('.input-append.date').datepicker({
+                                autoclose: true,
+                                todayHighlight: true,
+                                format:'dd/mm/yyyy'
+                            });
+                                
+                                
+                            $container.append(source);
+                            source.find('.modal').modal();
+                        },
+                    });
+                    
+                    
+                });
+                
+                
+                
             }
             
             //INICIALIZAMOS NUESTROS SELECT

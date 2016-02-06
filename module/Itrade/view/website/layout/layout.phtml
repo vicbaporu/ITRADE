@@ -72,7 +72,7 @@ else
             <div class="bold text-center  col-lg-4 col-lg-offset-5 col-md-4 col-md-offset-5 col-sm-6 col-sm-offset-1 hidden-xs">
 
                 
-                <a href="http://clientes.itrade/<?php echo lan?>/login"class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-2 col-sm-5 col-sm-offset-2">
+                <a href="#"class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-2 col-sm-5 col-sm-offset-2">
 
                     <div class="login"><?php echo  $this->translate('Iniciar sesión')?></div>
                 </a>
@@ -118,12 +118,12 @@ else
                         <a href="#" class="dropdown-toggle bRight" data-toggle="dropdown" data-hover="dropdown" data-delay="" data-close-others="false">
                             <strong><?php echo  $this->translate('Recursos') ?></strong> <b class="caret"></b>
                         </a>
-                        
-
                         <ul class="dropdown-menu blue navmenu-nav " >
-                            <li><a class="text-center"href="#"><?php echo  $this->translate('PDF')?></a></li>
+                            <li><a class="text-center"href="#"><?php echo  $this->translate('REQUISITOS IMPORTACIÓN')?></a></li>
+                            <li class="divider"></li> 
+                            <li><a class="text-center"href="#"><?php echo  $this->translate('REQUISITOS EXPORTACION')?></a></li>
                             <li class="divider"></li>
-                            <li><a class="text-center"href="#"><?php echo  $this->translate('PDF')?></a></li>
+                            <li><a class="text-center"href="#"><?php echo  $this->translate('PROCEDIMIENTO PARA IMPORTACION COMERCIALIZADORA ITRADE')?></a></li>
                         </ul>
                     </li>
                     <li><a class="text-center" href="/<?php echo lan?>/contacto"><strong><?php echo  $this->translate('Contacto') ?> </strong></a></li>
@@ -142,13 +142,25 @@ else
                         <a href="#" class="dropdown-toggle bRight" data-toggle="dropdown" data-hover="dropdown" data-delay="" data-close-others="false">
                             <strong><?php echo  $this->translate('Recursos') ?></strong> <b class="caret"></b>
                         </a>
-                        
-
+                        <?php if(lan == 'es') :?>
                         <ul class="dropdown-menu blue " >
-                            <li><a class="textWhite"href="#"><?php echo  $this->translate('PDF')?></a></li>
+                            <li><a target="_blank" class="textWhite" href="/files/website/REQUISITOS IMPORTACIÓN.PDF">
+                            <?php echo  $this->translate('REQUISITOS IMPORTACIÓN')?></a></li>
                             <li class="divider"></li>
-                            <li><a href="#">PDF</a></li>
+                            <li><a href="/files/website/REQUISITOS EXPORTACION.PDF" target="_blank" href="#">REQUISITOS EXPORTACION</a></li>
+                            <li class="divider"></li>
+                            <li><a target="_blank" href="/files/website/PROCEDIMIENTO PARA IMPORTACION COMERCIALIZADORA ITRADE.PDF">PROCEDIMIENTO PARA IMPORTACION COMERCIALIZADORA ITRADE</a></li>
                         </ul>
+                        <?php else :?>
+                        <ul class="dropdown-menu blue " >
+                            <li><a target="_blank" class="textWhite" href="/files/website/IMPORTATION REQUIREMENTS.PDF">
+                            <?php echo  $this->translate('IMPORTATION REQUIREMENTS')?></a></li>
+                            <li class="divider"></li>
+                            <li><a href="/files/website/EXPORTATION REQUIREMENTS.PDF" target="_blank" href="#">EXPORTATION REQUIREMENTS</a></li>
+                            <li class="divider"></li>
+                            <li><a target="_blank" href="/files/website/IMPORTATION PROCEDURE TRADING COMPANY.PDF">IMPORTATION PROCEDURE TRADING COMPANY</a></li>
+                        </ul>
+                        <?php endif;?>
                     </li>
 
                     

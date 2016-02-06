@@ -24,13 +24,13 @@ abstract class BaseExpedienteanticipoPeer
     const TM_CLASS = 'ExpedienteanticipoTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 6;
+    const NUM_COLUMNS = 7;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 6;
+    const NUM_HYDRATE_COLUMNS = 7;
 
     /** the column name for the idexpedienteanticipo field */
     const IDEXPEDIENTEANTICIPO = 'expedienteanticipo.idexpedienteanticipo';
@@ -50,11 +50,18 @@ abstract class BaseExpedienteanticipoPeer
     /** the column name for the expedienteanticipo_comprobante field */
     const EXPEDIENTEANTICIPO_COMPROBANTE = 'expedienteanticipo.expedienteanticipo_comprobante';
 
+    /** the column name for the expedienteanticipo_moneda field */
+    const EXPEDIENTEANTICIPO_MONEDA = 'expedienteanticipo.expedienteanticipo_moneda';
+
     /** The enumerated values for the expedienteanticipo_metodopago field */
     const EXPEDIENTEANTICIPO_METODOPAGO_EFECTIVO = 'efectivo';
     const EXPEDIENTEANTICIPO_METODOPAGO_CHEQUE = 'cheque';
     const EXPEDIENTEANTICIPO_METODOPAGO_TRASNFERENCIA = 'trasnferencia';
     const EXPEDIENTEANTICIPO_METODOPAGO_OTRO = 'otro';
+
+    /** The enumerated values for the expedienteanticipo_moneda field */
+    const EXPEDIENTEANTICIPO_MONEDA_MXN = 'mxn';
+    const EXPEDIENTEANTICIPO_MONEDA_USD = 'usd';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -75,12 +82,12 @@ abstract class BaseExpedienteanticipoPeer
      * e.g. ExpedienteanticipoPeer::$fieldNames[ExpedienteanticipoPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedienteanticipo', 'ExpedienteanticipoFecha', 'Idexpediente', 'ExpedienteanticipoCantidad', 'ExpedienteanticipoMetodopago', 'ExpedienteanticipoComprobante', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedienteanticipo', 'expedienteanticipoFecha', 'idexpediente', 'expedienteanticipoCantidad', 'expedienteanticipoMetodopago', 'expedienteanticipoComprobante', ),
-        BasePeer::TYPE_COLNAME => array (ExpedienteanticipoPeer::IDEXPEDIENTEANTICIPO, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_FECHA, ExpedienteanticipoPeer::IDEXPEDIENTE, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_CANTIDAD, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEANTICIPO', 'EXPEDIENTEANTICIPO_FECHA', 'IDEXPEDIENTE', 'EXPEDIENTEANTICIPO_CANTIDAD', 'EXPEDIENTEANTICIPO_METODOPAGO', 'EXPEDIENTEANTICIPO_COMPROBANTE', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedienteanticipo', 'expedienteanticipo_fecha', 'idexpediente', 'expedienteanticipo_cantidad', 'expedienteanticipo_metodopago', 'expedienteanticipo_comprobante', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedienteanticipo', 'ExpedienteanticipoFecha', 'Idexpediente', 'ExpedienteanticipoCantidad', 'ExpedienteanticipoMetodopago', 'ExpedienteanticipoComprobante', 'ExpedienteanticipoMoneda', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedienteanticipo', 'expedienteanticipoFecha', 'idexpediente', 'expedienteanticipoCantidad', 'expedienteanticipoMetodopago', 'expedienteanticipoComprobante', 'expedienteanticipoMoneda', ),
+        BasePeer::TYPE_COLNAME => array (ExpedienteanticipoPeer::IDEXPEDIENTEANTICIPO, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_FECHA, ExpedienteanticipoPeer::IDEXPEDIENTE, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_CANTIDAD, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEANTICIPO', 'EXPEDIENTEANTICIPO_FECHA', 'IDEXPEDIENTE', 'EXPEDIENTEANTICIPO_CANTIDAD', 'EXPEDIENTEANTICIPO_METODOPAGO', 'EXPEDIENTEANTICIPO_COMPROBANTE', 'EXPEDIENTEANTICIPO_MONEDA', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedienteanticipo', 'expedienteanticipo_fecha', 'idexpediente', 'expedienteanticipo_cantidad', 'expedienteanticipo_metodopago', 'expedienteanticipo_comprobante', 'expedienteanticipo_moneda', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -90,12 +97,12 @@ abstract class BaseExpedienteanticipoPeer
      * e.g. ExpedienteanticipoPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpedienteanticipo' => 0, 'ExpedienteanticipoFecha' => 1, 'Idexpediente' => 2, 'ExpedienteanticipoCantidad' => 3, 'ExpedienteanticipoMetodopago' => 4, 'ExpedienteanticipoComprobante' => 5, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedienteanticipo' => 0, 'expedienteanticipoFecha' => 1, 'idexpediente' => 2, 'expedienteanticipoCantidad' => 3, 'expedienteanticipoMetodopago' => 4, 'expedienteanticipoComprobante' => 5, ),
-        BasePeer::TYPE_COLNAME => array (ExpedienteanticipoPeer::IDEXPEDIENTEANTICIPO => 0, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_FECHA => 1, ExpedienteanticipoPeer::IDEXPEDIENTE => 2, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_CANTIDAD => 3, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO => 4, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE => 5, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEANTICIPO' => 0, 'EXPEDIENTEANTICIPO_FECHA' => 1, 'IDEXPEDIENTE' => 2, 'EXPEDIENTEANTICIPO_CANTIDAD' => 3, 'EXPEDIENTEANTICIPO_METODOPAGO' => 4, 'EXPEDIENTEANTICIPO_COMPROBANTE' => 5, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpedienteanticipo' => 0, 'expedienteanticipo_fecha' => 1, 'idexpediente' => 2, 'expedienteanticipo_cantidad' => 3, 'expedienteanticipo_metodopago' => 4, 'expedienteanticipo_comprobante' => 5, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpedienteanticipo' => 0, 'ExpedienteanticipoFecha' => 1, 'Idexpediente' => 2, 'ExpedienteanticipoCantidad' => 3, 'ExpedienteanticipoMetodopago' => 4, 'ExpedienteanticipoComprobante' => 5, 'ExpedienteanticipoMoneda' => 6, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpedienteanticipo' => 0, 'expedienteanticipoFecha' => 1, 'idexpediente' => 2, 'expedienteanticipoCantidad' => 3, 'expedienteanticipoMetodopago' => 4, 'expedienteanticipoComprobante' => 5, 'expedienteanticipoMoneda' => 6, ),
+        BasePeer::TYPE_COLNAME => array (ExpedienteanticipoPeer::IDEXPEDIENTEANTICIPO => 0, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_FECHA => 1, ExpedienteanticipoPeer::IDEXPEDIENTE => 2, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_CANTIDAD => 3, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO => 4, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE => 5, ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA => 6, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTEANTICIPO' => 0, 'EXPEDIENTEANTICIPO_FECHA' => 1, 'IDEXPEDIENTE' => 2, 'EXPEDIENTEANTICIPO_CANTIDAD' => 3, 'EXPEDIENTEANTICIPO_METODOPAGO' => 4, 'EXPEDIENTEANTICIPO_COMPROBANTE' => 5, 'EXPEDIENTEANTICIPO_MONEDA' => 6, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpedienteanticipo' => 0, 'expedienteanticipo_fecha' => 1, 'idexpediente' => 2, 'expedienteanticipo_cantidad' => 3, 'expedienteanticipo_metodopago' => 4, 'expedienteanticipo_comprobante' => 5, 'expedienteanticipo_moneda' => 6, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
     /** The enumerated values for this table */
@@ -105,6 +112,10 @@ abstract class BaseExpedienteanticipoPeer
             ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO_CHEQUE,
             ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO_TRASNFERENCIA,
             ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO_OTRO,
+        ),
+        ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA => array(
+            ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA_MXN,
+            ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA_USD,
         ),
     );
 
@@ -230,6 +241,7 @@ abstract class BaseExpedienteanticipoPeer
             $criteria->addSelectColumn(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_CANTIDAD);
             $criteria->addSelectColumn(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_METODOPAGO);
             $criteria->addSelectColumn(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE);
+            $criteria->addSelectColumn(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA);
         } else {
             $criteria->addSelectColumn($alias . '.idexpedienteanticipo');
             $criteria->addSelectColumn($alias . '.expedienteanticipo_fecha');
@@ -237,6 +249,7 @@ abstract class BaseExpedienteanticipoPeer
             $criteria->addSelectColumn($alias . '.expedienteanticipo_cantidad');
             $criteria->addSelectColumn($alias . '.expedienteanticipo_metodopago');
             $criteria->addSelectColumn($alias . '.expedienteanticipo_comprobante');
+            $criteria->addSelectColumn($alias . '.expedienteanticipo_moneda');
         }
     }
 

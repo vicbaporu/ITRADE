@@ -12,6 +12,7 @@
  * @method ExpedienteanticipoQuery orderByExpedienteanticipoCantidad($order = Criteria::ASC) Order by the expedienteanticipo_cantidad column
  * @method ExpedienteanticipoQuery orderByExpedienteanticipoMetodopago($order = Criteria::ASC) Order by the expedienteanticipo_metodopago column
  * @method ExpedienteanticipoQuery orderByExpedienteanticipoComprobante($order = Criteria::ASC) Order by the expedienteanticipo_comprobante column
+ * @method ExpedienteanticipoQuery orderByExpedienteanticipoMoneda($order = Criteria::ASC) Order by the expedienteanticipo_moneda column
  *
  * @method ExpedienteanticipoQuery groupByIdexpedienteanticipo() Group by the idexpedienteanticipo column
  * @method ExpedienteanticipoQuery groupByExpedienteanticipoFecha() Group by the expedienteanticipo_fecha column
@@ -19,6 +20,7 @@
  * @method ExpedienteanticipoQuery groupByExpedienteanticipoCantidad() Group by the expedienteanticipo_cantidad column
  * @method ExpedienteanticipoQuery groupByExpedienteanticipoMetodopago() Group by the expedienteanticipo_metodopago column
  * @method ExpedienteanticipoQuery groupByExpedienteanticipoComprobante() Group by the expedienteanticipo_comprobante column
+ * @method ExpedienteanticipoQuery groupByExpedienteanticipoMoneda() Group by the expedienteanticipo_moneda column
  *
  * @method ExpedienteanticipoQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method ExpedienteanticipoQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -36,6 +38,7 @@
  * @method Expedienteanticipo findOneByExpedienteanticipoCantidad(string $expedienteanticipo_cantidad) Return the first Expedienteanticipo filtered by the expedienteanticipo_cantidad column
  * @method Expedienteanticipo findOneByExpedienteanticipoMetodopago(string $expedienteanticipo_metodopago) Return the first Expedienteanticipo filtered by the expedienteanticipo_metodopago column
  * @method Expedienteanticipo findOneByExpedienteanticipoComprobante(string $expedienteanticipo_comprobante) Return the first Expedienteanticipo filtered by the expedienteanticipo_comprobante column
+ * @method Expedienteanticipo findOneByExpedienteanticipoMoneda(string $expedienteanticipo_moneda) Return the first Expedienteanticipo filtered by the expedienteanticipo_moneda column
  *
  * @method array findByIdexpedienteanticipo(int $idexpedienteanticipo) Return Expedienteanticipo objects filtered by the idexpedienteanticipo column
  * @method array findByExpedienteanticipoFecha(string $expedienteanticipo_fecha) Return Expedienteanticipo objects filtered by the expedienteanticipo_fecha column
@@ -43,6 +46,7 @@
  * @method array findByExpedienteanticipoCantidad(string $expedienteanticipo_cantidad) Return Expedienteanticipo objects filtered by the expedienteanticipo_cantidad column
  * @method array findByExpedienteanticipoMetodopago(string $expedienteanticipo_metodopago) Return Expedienteanticipo objects filtered by the expedienteanticipo_metodopago column
  * @method array findByExpedienteanticipoComprobante(string $expedienteanticipo_comprobante) Return Expedienteanticipo objects filtered by the expedienteanticipo_comprobante column
+ * @method array findByExpedienteanticipoMoneda(string $expedienteanticipo_moneda) Return Expedienteanticipo objects filtered by the expedienteanticipo_moneda column
  *
  * @package    propel.generator.itrade.om
  */
@@ -150,7 +154,7 @@ abstract class BaseExpedienteanticipoQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `idexpedienteanticipo`, `expedienteanticipo_fecha`, `idexpediente`, `expedienteanticipo_cantidad`, `expedienteanticipo_metodopago`, `expedienteanticipo_comprobante` FROM `expedienteanticipo` WHERE `idexpedienteanticipo` = :p0';
+        $sql = 'SELECT `idexpedienteanticipo`, `expedienteanticipo_fecha`, `idexpediente`, `expedienteanticipo_cantidad`, `expedienteanticipo_metodopago`, `expedienteanticipo_comprobante`, `expedienteanticipo_moneda` FROM `expedienteanticipo` WHERE `idexpedienteanticipo` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -466,6 +470,35 @@ abstract class BaseExpedienteanticipoQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_COMPROBANTE, $expedienteanticipoComprobante, $comparison);
+    }
+
+    /**
+     * Filter the query on the expedienteanticipo_moneda column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByExpedienteanticipoMoneda('fooValue');   // WHERE expedienteanticipo_moneda = 'fooValue'
+     * $query->filterByExpedienteanticipoMoneda('%fooValue%'); // WHERE expedienteanticipo_moneda LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $expedienteanticipoMoneda The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ExpedienteanticipoQuery The current query, for fluid interface
+     */
+    public function filterByExpedienteanticipoMoneda($expedienteanticipoMoneda = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($expedienteanticipoMoneda)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $expedienteanticipoMoneda)) {
+                $expedienteanticipoMoneda = str_replace('*', '%', $expedienteanticipoMoneda);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ExpedienteanticipoPeer::EXPEDIENTEANTICIPO_MONEDA, $expedienteanticipoMoneda, $comparison);
     }
 
     /**

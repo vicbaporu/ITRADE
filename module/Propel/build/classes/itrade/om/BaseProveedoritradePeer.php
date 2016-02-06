@@ -420,6 +420,9 @@ abstract class BaseProveedoritradePeer
      */
     public static function clearRelatedInstancePool()
     {
+        // Invalidate objects in ExpedientegastoPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        ExpedientegastoPeer::clearInstancePool();
         // Invalidate objects in ProveedoritradearchivoPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ProveedoritradearchivoPeer::clearInstancePool();
@@ -759,6 +762,12 @@ abstract class BaseProveedoritradePeer
         $objects = ProveedoritradePeer::doSelect($criteria, $con);
         foreach ($objects as $obj) {
 
+
+            // delete related Expedientegasto objects
+            $criteria = new Criteria(ExpedientegastoPeer::DATABASE_NAME);
+
+            $criteria->add(ExpedientegastoPeer::IDPROVEEDORITRADE, $obj->getIdproveedoritrade());
+            $affectedRows += ExpedientegastoPeer::doDelete($criteria, $con);
 
             // delete related Proveedoritradearchivo objects
             $criteria = new Criteria(ProveedoritradearchivoPeer::DATABASE_NAME);

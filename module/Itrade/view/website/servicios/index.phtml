@@ -27,14 +27,18 @@
 <div class="row top">
 	<div class="hidden-xs">
 		<div style="position: relative;">
-			<img class="img-responsive" id="imgTransportes" src="/img/Servicios/Servicios-transporte.jpg"  usemap="#mapTransportes" alt="" />
+                        <?php if(lan == 'es') :?>
+                            <img class="img-responsive" id="imgTransportes" src="/img/servicios/Servicios-transporte.jpg"  usemap="#mapTransportes" alt="" />
+                        <?php else :?>
+                            <img class="img-responsive" id="imgTransportes" src="/img/servicios/Servicios-transporte-en.jpg"  usemap="#mapTransportes" alt="" />
+                        <?php endif;?>
 		  	<div id="detalleMaritimo">
 				<div class="detalle-content">
 					<span id="maritimoClose"class="glyphicon glyphicon-remove pull-right icon-close" aria-hidden="true"></span>
 					<br>
 			    	<h4><strong><?php echo $this->translate('TRANSPORTE MARÍTIMO') ?></strong></h4>
 					<br>
-					<?php echo $this->translate('Especialistas en todo de tipo de carga marítima desde un paquete  pequeño hasta un contenedor completo. Contamos con acuerdos con diversas navieras para embarcar y desembarcar a puertos en el todo mundo.');?>
+					<?php echo $this->translate('Somos especialistas en todo de tipo de carga marítima, desde un paquete pequeño hasta un contenedor completo. Tenemos acuerdos con diversas navieras para embarcar y desembarcar en puertos de todo el mundo.');?>
 					<br>
 						<ul>
 							•	<?php echo $this->translate('Contenedor completo (FCL)')?>
@@ -64,7 +68,7 @@
 					<br>
 			    	<h4><strong><?php echo $this->translate('TRANSPORTE TERRESTRE')?></strong></h4>
 						<br>
-						<?php echo $this->translate('Ponemos a su disposición nuestro servicio de transporte terrestre, contamos con unidades propias y una red de servicios para satisfacer las necesidades del mercado global. Enfocamos nuestras entregas y recolecciones en Canadá, Estados Unidos, México y Centroamérica.')?>
+						<?php echo $this->translate('Ponemos a su disposición nuestro servicio de transporte terrestre. Contamos con unidades propias y una red de servicios para satisfacer las necesidades del mercado global. Enfocamos nuestras entregas y recolecciones en Canadá, Estados Unidos, México y Latinoamérica.')?>
 						<br> 
 							•	<?php echo $this->translate('Caja completa (FTL-Reefer-Isotanques)')?> <br>
 							•	<?php echo $this->translate('Servicio de carga consolidada (LTL)')?> <br>
@@ -78,9 +82,9 @@
 			<div class="detalle-content">
 				<span id="aereoClose"class="glyphicon glyphicon-remove pull-right icon-close" aria-hidden="true"></span>
 				<br>
-		    	<h4><strong><?php echo $this->translate('TRANSPORTE AEREO')?></strong></h4>
+		    	<h4><strong><?php echo $this->translate('TRANSPORTE AÉREO')?></strong></h4>
 				<br>
-				<?php echo $this->translate('Servicio aéreo doméstico y global para tus embarques de importación y exportación. Con Nuestro equipo de trabajo en aeropuerto puedes estar tranquilo, este acompañara tu mercancía durante el trámite aduanal para asegurar su ingreso o liberación en tiempo.')?>
+				<?php echo $this->translate('Servicio aéreo doméstico y global para sus embarques de importación y exportación. Puede estar tranquilo: nuestro equipo de aeropuerto acompañará su mercancía durante el trámite aduanal. Aseguraremos en tiempo su ingreso y/o liberación.')?>
 			</div>
 			<a class="cotizar  text-right"href="/contacto/aereo"><?php echo $this->translate('COTIZAR')?></a>
 	  	</div>
@@ -98,8 +102,12 @@
 	</div>
 
 	<div class="hidden visible-xs">
-
-		<img class="img-responsive col-xs-10 col-xs-offset-1 " 		id="imgMaritimoM" src="/img/Servicios/Movil/transporte1.jpg"  usemap="#maritimoM" alt="" />
+                <?php if(lan == 'es') :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 " 		id="imgMaritimoM" src="/img/servicios/movil/transporte1.jpg"  usemap="#maritimoM" alt="" />
+                        <?php else :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 " 		id="imgMaritimoM" src="/img/servicios/movil/transporte1_en.jpg"  usemap="#maritimoM" alt="" />
+                        <?php endif;?>
+		
 		<div class="col-xs-10 col-xs-offset-1">
 			<div id="detalleMaritimoM" class="col-xs-12 " >
 				<span id="maritimoMClose" class="glyphicon glyphicon-remove pull-right top " ></span>
@@ -107,7 +115,7 @@
 					<br>
 			    	<h4><strong><?php echo $this->translate('TRANSPORTE MARÍTIMO')?></strong></h4>
 					<br>
-					<?php echo $this->translate('Especialistas en todo de tipo de carga marítima desde un paquete  pequeño hasta un contenedor completo. Contamos con acuerdos con diversas navieras para embarcar y desembarcar a puertos en el todo mundo.')?>
+					<?php echo $this->translate('Somos especialistas en todo de tipo de carga marítima, desde un paquete pequeño hasta un contenedor completo. Tenemos acuerdos con diversas navieras para embarcar y desembarcar en puertos de todo el mundo.')?>
 					<br>
 						<ul>
 							•	<?php echo $this->translate('Contenedor completo (FCL)')?>
@@ -130,16 +138,20 @@
 		<map name="maritimoM">
 			<area id="btnMaritimoM" alt="" title=""  shape="rect" coords="0,253,335,335"  target="_self"    />
 		</map>
-
-		<img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" 	id="imgAereoM" src="/img/Servicios/Movil/transporte2.jpg"  usemap="#aereoM" alt="" />
+                            <?php if(lan == 'es') :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" 	id="imgAereoM" src="/img/servicios/movil/transporte2.jpg"  usemap="#aereoM" alt="" />
+                        <?php else :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" 	id="imgAereoM" src="/img/servicios/movil/transporte2_en.jpg"  usemap="#aereoM" alt="" />
+                        <?php endif;?>
+		
 		<div class="col-xs-10 col-xs-offset-1">
 			<div id="detalleAereoM" class="col-xs-12 " >
 				<span id="aereoMClose" class="glyphicon glyphicon-remove pull-right top " ></span>
 				<div class="col-xs-12">
 					<br>
-			    	<h4><strong><?php echo $this->translate('TRANSPORTE AEREO')?></strong></h4>
+			    	<h4><strong><?php echo $this->translate('TRANSPORTE AÉREO')?></strong></h4>
 					<br>
-					<?php echo $this->translate('Servicio aéreo doméstico y global para tus embarques de importación y exportación. Con Nuestro equipo de trabajo en aeropuerto puedes estar tranquilo, este acompañara tu mercancía durante el trámite aduanal para asegurar su ingreso o liberación en tiempo.')?>
+					<?php echo $this->translate('Servicio aéreo doméstico y global para tus embarques de importación y exportación. Con Nuestro equipo de trabajo en aeropuerto puedes estar tranquilo, este acompañara tu mercancía durante el trámite aduanal para asegurar su ingreso o liberación en tiempo.Servicio aéreo doméstico y global para sus embarques de importación y exportación. Puede estar tranquilo: nuestro equipo de aeropuerto acompañará su mercancía durante el trámite aduanal. Aseguraremos en tiempo su ingreso y/o liberación.')?>
 					<a class="cotizar-xs col-xs-12 top"href="/contacto/aereo"><?php echo $this->translate('COTIZAR')?></a>
 				</div>
 		  	</div>
@@ -148,8 +160,12 @@
 		<map name="aereoM">
 			<area id="btnAereoM" alt="" title=""  shape="rect" coords="0,253,335,335"  target="_self"    />
 		</map>
-
-		<img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" 	id="imgTerrestreM" src="/img/Servicios/Movil/transporte3.jpg"  usemap="#terrestreM" alt="" />
+                            <?php if(lan == 'es') :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" 	id="imgTerrestreM" src="/img/servicios/movil/transporte3.jpg"  usemap="#terrestreM" alt="" />
+                        <?php else :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" 	id="imgTerrestreM" src="/img/servicios/movil/transporte3_en.jpg"  usemap="#terrestreM" alt="" />
+                        <?php endif;?>
+		
 		<div class="col-xs-10 col-xs-offset-1">
 			<div id="detalleTerrestreM" class="col-xs-12 " >
 				<span id="terrestreMClose" class="glyphicon glyphicon-remove pull-right top " ></span>
@@ -157,7 +173,7 @@
 					<br>
 			    	<h4><strong><?php echo $this->translate('TRANSPORTE TERRESTRE')?></strong></h4>
 					<br>
-					<?php echo $this->translate('Ponemos a su disposición nuestro servicio de transporte terrestre, contamos con unidades propias y una red de servicios para satisfacer las necesidades del mercado global. Enfocamos nuestras entregas y recolecciones en Canadá, Estados Unidos, México y Centroamérica. ')?>
+					<?php echo $this->translate('Ponemos a su disposición nuestro servicio de transporte terrestre. Contamos con unidades propias y una red de servicios para satisfacer las necesidades del mercado global. Enfocamos nuestras entregas y recolecciones en Canadá, Estados Unidos, México y Latinoamérica.')?>
 					<ul>
 						•	<?php echo $this->translate('Caja completa (FTL-Reefer-Isotanques)')?>
 						•	<?php echo $this->translate('Servicio de carga consolidada (LTL)')?>
@@ -180,7 +196,12 @@
 	
 	<div class="hidden-xs">
 		<div style="position: relative;">
-			<img class="img-responsive" id="imgLogistica" src="/img/Servicios/Servicios-logisticos.jpg" usemap="#mapLogistica" alt="" >	
+                    <?php if(lan == 'es') :?>
+                            <img class="img-responsive" id="imgLogistica" src="/img/servicios/Servicios-logisticos.jpg" usemap="#mapLogistica" alt="" >	
+                        <?php else :?>
+                           <img class="img-responsive" id="imgLogistica" src="/img/servicios/Servicios-logisticos-en.jpg" usemap="#mapLogistica" alt="" >	
+                        <?php endif;?>
+			
 			
 			<div id="detalleAduana">
 				<div class="detalle-content">
@@ -189,9 +210,7 @@
 					<br>
 			    	<h4><strong><?php echo $this->translate('ADUANA')?></strong></h4>
 					<br>
-					<?php echo $this->translate('En ITRADE nos preocupamos por optimizar los tiempos en su despacho de aduanas, en la elaboración correcta de certificados de origen y cada documento requerido por la autoridad. ')?>
-					<br>
-					<?php echo $this->translate('Trabajamos en cada aduana del país de cualquier modalidad, puerto, aeropuerto o frontera terrestre.')?>
+					<?php echo $this->translate('En ITRADE nos preocupamos por optimizar los tiempos en su despacho de aduanas, en la elaboración correcta de certificados de origen y cada documento requerido por la autoridad. Trabajamos en cada aduana del país de cualquier modalidad, puerto, aeropuerto o frontera terrestre.')?>
 					<br>
 					•	<?php echo $this->translate('Despacho aduanal')?><br>
 					•	<?php echo $this->translate('Análisis previo de impuestos y gastos en aduana')?><br>
@@ -229,9 +248,8 @@
 				<br>
 		    	<h4><strong><?php echo $this->translate('SEGURO')?></strong></h4>
 				<br>
-					<?php echo $this->translate('En ITRADE la seguridad de tu carga es nuestra mayor preocupación.')?>
+					<?php echo $this->translate('En ITRADE la seguridad de tu carga es nuestra mayor preocupación. Ofrecemos una póliza que brinda  protección desde el lugar de recolección hasta su entrega final, contra daños o pérdidas de su mercancía correctamente embalada.')?>
 					<br><br>
-					<?php echo $this->translate('Ofrecemos una póliza que brinda  protección desde el lugar de recolección hasta su entrega final, contra daños o pérdidas de su mercancía correctamente embalada.')?>
 					<a class="cotizar-xs col-xs-12 top"href="/contacto/seguro"><?php echo $this->translate('COTIZAR')?></a>
 			</div>
 	  	</div>
@@ -247,7 +265,12 @@
 
 
 	<div class="hidden visible-xs">
-		<img class="img-responsive col-xs-10 col-xs-offset-1 img-rounded" id="imgAduanaM " src="/img/Servicios/Movil/logistica1.jpg"  usemap="#aduanaM" alt="" />
+            <?php if(lan == 'es') :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 img-rounded" id="imgAduanaM " src="/img/servicios/movil/logistica1.jpg"  usemap="#aduanaM" alt="" />
+                        <?php else :?>
+                           <img class="img-responsive col-xs-10 col-xs-offset-1 img-rounded" id="imgAduanaM " src="/img/servicios/movil/logistica1_en.jpg"  usemap="#aduanaM" alt="" />
+                        <?php endif;?>
+		
 		<div class="col-xs-10 col-xs-offset-1">
 			<div id="detalleAduanaM" class="col-xs-12 " >
 				<span id="aduanaMClose" class="glyphicon glyphicon-remove pull-right top " ></span>
@@ -255,9 +278,7 @@
 					<br>
 			    	<h4><strong><?php echo $this->translate('ADUANA')?></strong></h4>
 					<br>
-					<?php echo $this->translate('En ITRADE nos preocupamos por optimizar los tiempos en su despacho de aduanas, en la elaboración correcta de certificados de origen y cada documento requerido por la autoridad.')?>
-					<br>
-					<?php echo $this->translate('Trabajamos en cada aduana del país de cualquier modalidad, puerto, aeropuerto o frontera terrestre.')?>
+					<?php echo $this->translate('En ITRADE nos preocupamos por optimizar los tiempos en su despacho de aduanas, en la elaboración correcta de certificados de origen y cada documento requerido por la autoridad. Trabajamos en cada aduana del país de cualquier modalidad, puerto, aeropuerto o frontera terrestre.')?>
 					<br>
 					•	<?php echo $this->translate('Despacho aduanal')?> <br>
 					•	<?php echo $this->translate('Análisis previo de impuestos y gastos en aduana')?> <br>
@@ -278,17 +299,21 @@
 		</map>
 
 
-		<img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" id="imgSeguroM" src="/img/Servicios/Movil/logistica2.jpg"  usemap="#seguroM" alt="" />
+		 <?php if(lan == 'es') :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 img-rounded" id="imgAduanaM " src="/img/servicios/movil/logistica2.jpg"  usemap="#aduanaM" alt="" />
+                <?php else :?>
+                           <img class="img-responsive col-xs-10 col-xs-offset-1 img-rounded" id="imgAduanaM " src="/img/servicios/movil/logistica2_en.jpg"  usemap="#aduanaM" alt="" />
+                        <?php endif;?>
 		<div class="col-xs-10 col-xs-offset-1">
 			<div id="detalleSeguroM" class="col-xs-12 " >
 				<span id="seguroMClose" class="glyphicon glyphicon-remove pull-right top " ></span>
 				<div class="col-xs-12">
 					
-			    	<h4><strong><?php echo $this->translate('Seguro')?></strong></h4>
+			    	<h4><strong><?php echo $this->translate('SEGURO')?></strong></h4>
 					<br>
-					<?php echo $this->translate('En ITRADE la seguridad de tu carga es nuestra mayor preocupación.')?>
+					<?php echo $this->translate('En ITRADE la seguridad de tu carga es nuestra mayor preocupación. Ofrecemos una póliza que brinda  protección desde el lugar de recolección hasta su entrega final, contra daños o pérdidas de su mercancía correctamente embalada.')?>
 					<br><br>
-					<?php echo $this->translate('Ofrecemos una póliza que brinda  protección desde el lugar de recolección hasta su entrega final, contra daños o pérdidas de su mercancía correctamente embalada.')?>
+					
 
 
 				</div>
@@ -302,7 +327,11 @@
 		</map>
 
 
-		<img class="img-responsive col-xs-10 col-xs-offset-1 top img-rounded" id="imgLogisticaM" src="/img/Servicios/Movil/logistica3.jpg"  usemap="#logisticaM" alt="" />
+		 <?php if(lan == 'es') :?>
+                            <img class="img-responsive col-xs-10 col-xs-offset-1 img-rounded" id="imgAduanaM " src="/img/servicios/movil/logistica3.jpg"  usemap="#aduanaM" alt="" />
+                        <?php else :?>
+                           <img class="img-responsive col-xs-10 col-xs-offset-1 img-rounded" id="imgAduanaM " src="/img/servicios/movil/logistica3_en.jpg"  usemap="#aduanaM" alt="" />
+                        <?php endif;?>
 		<div class="col-xs-10 col-xs-offset-1">
 			<div id="detalleLogisticaM" class="col-xs-12 " >
 				<span id="logsticaMClose" class="glyphicon glyphicon-remove pull-right top " ></span>
@@ -312,10 +341,12 @@
 					<?php echo $this->translate('Departamento diseñado para todas aquellas empresas que no cuentan con área propia de compras y/o logística internacional.')?>
 					<br><br>
 					<?php echo $this->translate('Funge como tu departamento externo y exclusivo para brindarte el servicio y asesoría en tus compras internacionales.')?>
-					<br><br>
+					<?php if (lan == 'es') :?>
+                                        <br><br>
 					<?php echo $this->translate('Contamos con personal especializado para colocar tus órdenes de compra en el extranjero, seguimiento a pedidos, diseño de logística, transferencias internacionales, despacho de aduanas de importación y facturación nacional en caso de requerirlo.')?>
 					<br><br>
 					<?php echo $this->translate('Un departamento fuera de la nómina de tu empresa, sin gastos adicionales, por expertos en comercio internacional y dedicado a cumplir con las compras que requieras. ')?>
+                                        <?php endif;?>
 				</div>
 				
 		  	</div>

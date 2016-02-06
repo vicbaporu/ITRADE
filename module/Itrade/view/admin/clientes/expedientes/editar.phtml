@@ -40,6 +40,7 @@
                                 <div class="form-group">
                                     <?php echo $this->formHidden($form->get('idcliente')) ?> 
                                     <?php echo $this->formHidden($form->get('idexpediente')) ?> 
+                                    <?php echo $this->formHidden($form->get('expediente_tipo')) ?> 
                                     <?php echo $this->formLabel($form->get('expediente_estatus')) ?>  
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
@@ -74,6 +75,16 @@
                                     <span class="error"></span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <b>CONSIGNATARIO</b>
+                            <p><?php echo $consignatario?></p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <b>EMBARCADOR</b>
+                            <p><?php echo $embarcador?></p>
                         </div>
                     </div>
                 </div>
@@ -150,17 +161,59 @@
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">Subtotal: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['subtotal'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['subtotal']).' MXN'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">I.V.A: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['iva'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['iva']).' MXN'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
-                                    <td style="text-align: right">Total: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales['total']).' MXN'?></td>
+                                    <td style="text-align: right"><b>Total: </b></td>
+                                    <td><b><?php echo money_format('%(#10n', (float)$totales['total']).' MXN'?></b></td>
+                                </tr>
+                                <tr>
+                                    <td class="center"><i class="fa fa-plus-circle collapse"></i></td>
+                                    <td colspan="3"></td>
+                                    <td style="text-align: right">Anticipo: </td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales['anticipo']).' MXN'?><a id="add_anticipo_mxn" style="float: right; margin-right: 10px;" href="javascript:;"><i class="fa fa-plus-square"></i></a></td>
+                                </tr>
+                                <tr class="details" style="display: none">
+                                    <td colspan="6">
+                                        <table id="table_anticipos_mxn" class="table inner-table">
+                                            <thead>
+                                                <th>FECHA</th>
+                                                <th>MONTO</th>
+                                                <th>COMPROBANTE</th>
+                                                <th>OPCIONES</th>
+                                            </thead>
+                                            <tbody>
+                                                <?php $anticipo = new Expedienteanticipo();?>
+                                                <?php foreach ($anticipos['mxn'] as $anticipo) :?>
+                                                <tr id="<?php echo $anticipo->getIdexpedienteanticipo()?>">
+                                                    <td><?php echo $anticipo->getExpedienteanticipoFecha('d/m/Y')?></td>
+                                                    <td><?php echo money_format('%(#10n', (float)$anticipo->getExpedienteanticipoCantidad())?></td>
+                                                    <td><?php echo $anticipo->getExpedienteanticipoComprobante()?></td>
+                                                    <td>
+                                                        <a class="editar_anticipo" href="javascript:;" title="Editar" data-placement="left" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
+                                                        <a class="eliminar_anticipo" href="javascript:void(0)" title="Eliminar" data-placement="left" data-toggle="tooltip"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Saldo: </td>
+                                    <?php 
+                                        $color = 'black';
+                                        if($totales['saldo'] < 0 ){$color = 'red';}
+                                        elseif($totales['saldo'] > 0 ){$color = 'green';}
+                                    ?>
+                                    <td style="color:<?php echo $color?>"><?php echo money_format('%#10n', (float)$totales['saldo']).' MXN'?></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -232,7 +285,7 @@
                                                             <td><?php echo money_format('%(#10n', (float)$valueDetails['expedientegasto_monto'])?></td>
                                                             <td><?php echo $valueDetails['expedientegasto_comprobante']?></td>
                                                             <td><?php echo $valueDetails['expedientegasto_nota']?></td>
-                                                            <td><a class="editar_cargo" data-toggle="tooltip" data-placement="left" title="Editar" href="javascript:;"><i  class="fa fa-pencil"></i></a><a class="eliminar_cargo" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></i></a></td>
+                                                            <td><a class="editar_cargo" data-toggle="tooltip" data-placement="left" title="Editar" href="javascript:;"><i  class="fa fa-pencil"></i></a><a class="eliminar_servicio" data-toggle="tooltip" data-placement="left" title="Eliminar" href="javascript:void(0)"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></a></td>
                                                         </tr>
                                                     <?php endforeach;?>
                                                 </tbody>
@@ -245,17 +298,32 @@
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">Subtotal: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['subtotal'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['subtotal']).' USD'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
                                     <td style="text-align: right">I.V.A: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['iva'])?></td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['iva']).' USD'?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
-                                    <td style="text-align: right">Total: </td>
-                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['total']).' USD'?></td>
+                                    <td style="text-align: right"><b>Total: </b></td>
+                                    <td><b><?php echo money_format('%(#10n', (float)$totales_usd['total']).' USD'?></b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Anticipo: </td>
+                                    <td><?php echo money_format('%(#10n', (float)$totales_usd['anticipo']).' USD'?><a id="add_anticipo_usd" style="float: right; margin-right: 10px;" href="javascript:;"><i class="fa fa-plus-square"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td style="text-align: right">Saldo: </td>
+                                    <?php 
+                                        $color = 'black';
+                                        if($totales_usd['saldo'] < 0 ){$color = 'red';}
+                                        elseif($totales_usd['saldo'] > 0 ){$color = 'green';}
+                                    ?>
+                                    <td style="color:<?php echo $color?>"><?php echo money_format('%#10n', (float)$totales_usd['saldo']).' USD'?></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -273,22 +341,68 @@
                     <div class="grid-title no-border">
                         <h4><span class="semi-bold">Servicios</span></h4>
                         <div class="tools">
+                            <a id="user-options" class="dropdown-toggle config" href="javascript:;" data-toggle="dropdown"></a>
                             <a class="collapse" href="javascript:;"></a>
+
+                            <ul class="dropdown-menu pull-right" aria-labelledby="user-options" role="menu">
+                                <li>
+                                    <a id="nuevo_servicio" style="background: none"href="javascript:void(0)"><i class="fa fa-plus"></i> Nuevo servicio</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="grid-body no-border">
-                        <table id="table_servicios" class="table">
+                        <table id="table_servicios" class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Creación</th>
                                     <th>Servicio</th>
                                     <th>Estatus (Actual)</th>
-                                    <th>Fecha final</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php $servicio = new Expedienteservicio()?>
+                                <?php foreach ($servicios as $servicio) :?>
+                                    <!-- OBTENEMOS EL SERVICIO ACTUAL DEL SERVICIO-->
+                                    <?php 
+                                        $estatus_actual = 'N/D';
+                                        $query = ExpedientehistorialQuery::create()->filterByIdexpedienteservicio($servicio->getIdexpedienteservicio())->orderByIdestadoservicio(Criteria::DESC)->findOne();
+                                        if(!is_null($query)){
+                                            $estatus_actual = $query->getServicioestado()->getServicioestadoNombre();
+                                        }
+                                    ?>
+                                    <tr id="<?php echo $servicio->getIdexpedienteservicio()?>">
+                                        <td class="center"><i class="fa fa-plus-circle collapse"></i></td>
+                                        <td><?php echo $servicio->getExpedienteservicioFecha('d/m/Y')?></td>
+                                        <td><?php echo $servicio->getServicio()->getServicioNombre()?></td>
+                                        <td><?php echo $estatus_actual?></td>
+                                        <td><a class="eliminar_servicio" href="javascript:void(0)" title="Eliminar" data-placement="left" data-toggle="tooltip"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></a><a class="agregar_historial" href="javascript:void(0)" title="Eliminar" data-placement="left" data-toggle="tooltip"><i class="fa fa-plus-square" style="margin-left: 15px; color: green"></i></a></td>
+                                    </tr>
+                                    <tr class="details" style="display: none">
+                                        <td colspan="5">
+                                            <table class="table inner-table">
+                                                <thead>
+                                                    <th>FECHA/HORA</th>
+                                                    <th>ESTATUS</th>
+                                                    <th>NOTA</th>
+                                                    <th>OPCIONES</th>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($servicio->getExpedientehistorials() as $valueDetails) :?>
+                                                    <tr id="<?php echo $valueDetails->getIdexpedientehistorial()?>">
+                                                        <td><?php echo $valueDetails->getExpedientehistorialFecha()?></td>
+                                                        <td><?php echo $valueDetails->getServicioestado()->getServicioestadoNombre()?></td>
+                                                        <td><?php echo $valueDetails->getExpedientehistorialNota()?></td>
+                                                        <td><a class="eliminar_historial" href="javascript:void(0)" title="Eliminar" data-placement="left" data-toggle="tooltip"><i class="fa fa-trash-o" style="margin-left: 15px; color: red"></i></a><a class="editar_historial" href="javascript:void(0)" title="Editar" data-placement="left" data-toggle="tooltip"><i class="fa fa-pencil" style="margin-left: 15px;"></i></a></td>
+                                                    </tr>
+                                                    <?php endforeach;?>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
                             </tbody>
                         </table>
                     </div>

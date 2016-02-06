@@ -24,13 +24,13 @@ abstract class BaseExpedientePeer
     const TM_CLASS = 'ExpedienteTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 12;
+    const NUM_COLUMNS = 21;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 12;
+    const NUM_HYDRATE_COLUMNS = 21;
 
     /** the column name for the idexpediente field */
     const IDEXPEDIENTE = 'expediente.idexpediente';
@@ -53,9 +53,6 @@ abstract class BaseExpedientePeer
     /** the column name for the expediente_fechafin field */
     const EXPEDIENTE_FECHAFIN = 'expediente.expediente_fechafin';
 
-    /** the column name for the expediente_preciomxn field */
-    const EXPEDIENTE_PRECIOMXN = 'expediente.expediente_preciomxn';
-
     /** the column name for the expediente_tipo field */
     const EXPEDIENTE_TIPO = 'expediente.expediente_tipo';
 
@@ -65,8 +62,38 @@ abstract class BaseExpedientePeer
     /** the column name for the expediente_folio field */
     const EXPEDIENTE_FOLIO = 'expediente.expediente_folio';
 
+    /** the column name for the expediente_preciomxn field */
+    const EXPEDIENTE_PRECIOMXN = 'expediente.expediente_preciomxn';
+
     /** the column name for the expediente_preciousd field */
     const EXPEDIENTE_PRECIOUSD = 'expediente.expediente_preciousd';
+
+    /** the column name for the expediente_estatuspago field */
+    const EXPEDIENTE_ESTATUSPAGO = 'expediente.expediente_estatuspago';
+
+    /** the column name for the expediente_facturacionmxn field */
+    const EXPEDIENTE_FACTURACIONMXN = 'expediente.expediente_facturacionmxn';
+
+    /** the column name for the expediente_facturacionusd field */
+    const EXPEDIENTE_FACTURACIONUSD = 'expediente.expediente_facturacionusd';
+
+    /** the column name for the expediente_pendientepagomxn field */
+    const EXPEDIENTE_PENDIENTEPAGOMXN = 'expediente.expediente_pendientepagomxn';
+
+    /** the column name for the expediente_pendientepagousd field */
+    const EXPEDIENTE_PENDIENTEPAGOUSD = 'expediente.expediente_pendientepagousd';
+
+    /** the column name for the expediente_facturapdfmxn field */
+    const EXPEDIENTE_FACTURAPDFMXN = 'expediente.expediente_facturapdfmxn';
+
+    /** the column name for the expediente_facturaxmlmxn field */
+    const EXPEDIENTE_FACTURAXMLMXN = 'expediente.expediente_facturaxmlmxn';
+
+    /** the column name for the expediente_facturapdfusd field */
+    const EXPEDIENTE_FACTURAPDFUSD = 'expediente.expediente_facturapdfusd';
+
+    /** the column name for the expediente_facturaxmlusd field */
+    const EXPEDIENTE_FACTURAXMLUSD = 'expediente.expediente_facturaxmlusd';
 
     /** The enumerated values for the expediente_tipo field */
     const EXPEDIENTE_TIPO_EXPORTACION = 'exportacion';
@@ -75,6 +102,16 @@ abstract class BaseExpedientePeer
     /** The enumerated values for the expediente_estatus field */
     const EXPEDIENTE_ESTATUS_ABIERTO = 'abierto';
     const EXPEDIENTE_ESTATUS_CERRADO = 'cerrado';
+
+    /** The enumerated values for the expediente_facturacionmxn field */
+    const EXPEDIENTE_FACTURACIONMXN_NOFACTURADA = 'nofacturada';
+    const EXPEDIENTE_FACTURACIONMXN_FACTURADA = 'facturada';
+    const EXPEDIENTE_FACTURACIONMXN_CANCELADA = 'cancelada';
+
+    /** The enumerated values for the expediente_facturacionusd field */
+    const EXPEDIENTE_FACTURACIONUSD_NOFACTURADA = 'nofacturada';
+    const EXPEDIENTE_FACTURACIONUSD_FACTURADA = 'facturada';
+    const EXPEDIENTE_FACTURACIONUSD_CANCELADA = 'cancelada';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -95,12 +132,12 @@ abstract class BaseExpedientePeer
      * e.g. ExpedientePeer::$fieldNames[ExpedientePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpediente', 'Idcliente', 'Idconsignatarioembarcador', 'ExpedienteListaempaque', 'ExpedienteFactura', 'ExpedienteFechainicio', 'ExpedienteFechafin', 'ExpedientePreciomxn', 'ExpedienteTipo', 'ExpedienteEstatus', 'ExpedienteFolio', 'ExpedientePreciousd', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expedienteListaempaque', 'expedienteFactura', 'expedienteFechainicio', 'expedienteFechafin', 'expedientePreciomxn', 'expedienteTipo', 'expedienteEstatus', 'expedienteFolio', 'expedientePreciousd', ),
-        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE, ExpedientePeer::IDCLIENTE, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE, ExpedientePeer::EXPEDIENTE_FACTURA, ExpedientePeer::EXPEDIENTE_FECHAINICIO, ExpedientePeer::EXPEDIENTE_FECHAFIN, ExpedientePeer::EXPEDIENTE_PRECIOMXN, ExpedientePeer::EXPEDIENTE_TIPO, ExpedientePeer::EXPEDIENTE_ESTATUS, ExpedientePeer::EXPEDIENTE_FOLIO, ExpedientePeer::EXPEDIENTE_PRECIOUSD, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE', 'IDCLIENTE', 'IDCONSIGNATARIOEMBARCADOR', 'EXPEDIENTE_LISTAEMPAQUE', 'EXPEDIENTE_FACTURA', 'EXPEDIENTE_FECHAINICIO', 'EXPEDIENTE_FECHAFIN', 'EXPEDIENTE_PRECIOMXN', 'EXPEDIENTE_TIPO', 'EXPEDIENTE_ESTATUS', 'EXPEDIENTE_FOLIO', 'EXPEDIENTE_PRECIOUSD', ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expediente_listaempaque', 'expediente_factura', 'expediente_fechainicio', 'expediente_fechafin', 'expediente_preciomxn', 'expediente_tipo', 'expediente_estatus', 'expediente_folio', 'expediente_preciousd', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpediente', 'Idcliente', 'Idconsignatarioembarcador', 'ExpedienteListaempaque', 'ExpedienteFactura', 'ExpedienteFechainicio', 'ExpedienteFechafin', 'ExpedienteTipo', 'ExpedienteEstatus', 'ExpedienteFolio', 'ExpedientePreciomxn', 'ExpedientePreciousd', 'ExpedienteEstatuspago', 'ExpedienteFacturacionmxn', 'ExpedienteFacturacionusd', 'ExpedientePendientepagomxn', 'ExpedientePendientepagousd', 'ExpedienteFacturapdfmxn', 'ExpedienteFacturaxmlmxn', 'ExpedienteFacturapdfusd', 'ExpedienteFacturaxmlusd', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expedienteListaempaque', 'expedienteFactura', 'expedienteFechainicio', 'expedienteFechafin', 'expedienteTipo', 'expedienteEstatus', 'expedienteFolio', 'expedientePreciomxn', 'expedientePreciousd', 'expedienteEstatuspago', 'expedienteFacturacionmxn', 'expedienteFacturacionusd', 'expedientePendientepagomxn', 'expedientePendientepagousd', 'expedienteFacturapdfmxn', 'expedienteFacturaxmlmxn', 'expedienteFacturapdfusd', 'expedienteFacturaxmlusd', ),
+        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE, ExpedientePeer::IDCLIENTE, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE, ExpedientePeer::EXPEDIENTE_FACTURA, ExpedientePeer::EXPEDIENTE_FECHAINICIO, ExpedientePeer::EXPEDIENTE_FECHAFIN, ExpedientePeer::EXPEDIENTE_TIPO, ExpedientePeer::EXPEDIENTE_ESTATUS, ExpedientePeer::EXPEDIENTE_FOLIO, ExpedientePeer::EXPEDIENTE_PRECIOMXN, ExpedientePeer::EXPEDIENTE_PRECIOUSD, ExpedientePeer::EXPEDIENTE_ESTATUSPAGO, ExpedientePeer::EXPEDIENTE_FACTURACIONMXN, ExpedientePeer::EXPEDIENTE_FACTURACIONUSD, ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOMXN, ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOUSD, ExpedientePeer::EXPEDIENTE_FACTURAPDFMXN, ExpedientePeer::EXPEDIENTE_FACTURAXMLMXN, ExpedientePeer::EXPEDIENTE_FACTURAPDFUSD, ExpedientePeer::EXPEDIENTE_FACTURAXMLUSD, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE', 'IDCLIENTE', 'IDCONSIGNATARIOEMBARCADOR', 'EXPEDIENTE_LISTAEMPAQUE', 'EXPEDIENTE_FACTURA', 'EXPEDIENTE_FECHAINICIO', 'EXPEDIENTE_FECHAFIN', 'EXPEDIENTE_TIPO', 'EXPEDIENTE_ESTATUS', 'EXPEDIENTE_FOLIO', 'EXPEDIENTE_PRECIOMXN', 'EXPEDIENTE_PRECIOUSD', 'EXPEDIENTE_ESTATUSPAGO', 'EXPEDIENTE_FACTURACIONMXN', 'EXPEDIENTE_FACTURACIONUSD', 'EXPEDIENTE_PENDIENTEPAGOMXN', 'EXPEDIENTE_PENDIENTEPAGOUSD', 'EXPEDIENTE_FACTURAPDFMXN', 'EXPEDIENTE_FACTURAXMLMXN', 'EXPEDIENTE_FACTURAPDFUSD', 'EXPEDIENTE_FACTURAXMLUSD', ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpediente', 'idcliente', 'idconsignatarioembarcador', 'expediente_listaempaque', 'expediente_factura', 'expediente_fechainicio', 'expediente_fechafin', 'expediente_tipo', 'expediente_estatus', 'expediente_folio', 'expediente_preciomxn', 'expediente_preciousd', 'expediente_estatuspago', 'expediente_facturacionmxn', 'expediente_facturacionusd', 'expediente_pendientepagomxn', 'expediente_pendientepagousd', 'expediente_facturapdfmxn', 'expediente_facturaxmlmxn', 'expediente_facturapdfusd', 'expediente_facturaxmlusd', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
     );
 
     /**
@@ -110,12 +147,12 @@ abstract class BaseExpedientePeer
      * e.g. ExpedientePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Idexpediente' => 0, 'Idcliente' => 1, 'Idconsignatarioembarcador' => 2, 'ExpedienteListaempaque' => 3, 'ExpedienteFactura' => 4, 'ExpedienteFechainicio' => 5, 'ExpedienteFechafin' => 6, 'ExpedientePreciomxn' => 7, 'ExpedienteTipo' => 8, 'ExpedienteEstatus' => 9, 'ExpedienteFolio' => 10, 'ExpedientePreciousd' => 11, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expedienteListaempaque' => 3, 'expedienteFactura' => 4, 'expedienteFechainicio' => 5, 'expedienteFechafin' => 6, 'expedientePreciomxn' => 7, 'expedienteTipo' => 8, 'expedienteEstatus' => 9, 'expedienteFolio' => 10, 'expedientePreciousd' => 11, ),
-        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE => 0, ExpedientePeer::IDCLIENTE => 1, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR => 2, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE => 3, ExpedientePeer::EXPEDIENTE_FACTURA => 4, ExpedientePeer::EXPEDIENTE_FECHAINICIO => 5, ExpedientePeer::EXPEDIENTE_FECHAFIN => 6, ExpedientePeer::EXPEDIENTE_PRECIOMXN => 7, ExpedientePeer::EXPEDIENTE_TIPO => 8, ExpedientePeer::EXPEDIENTE_ESTATUS => 9, ExpedientePeer::EXPEDIENTE_FOLIO => 10, ExpedientePeer::EXPEDIENTE_PRECIOUSD => 11, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE' => 0, 'IDCLIENTE' => 1, 'IDCONSIGNATARIOEMBARCADOR' => 2, 'EXPEDIENTE_LISTAEMPAQUE' => 3, 'EXPEDIENTE_FACTURA' => 4, 'EXPEDIENTE_FECHAINICIO' => 5, 'EXPEDIENTE_FECHAFIN' => 6, 'EXPEDIENTE_PRECIOMXN' => 7, 'EXPEDIENTE_TIPO' => 8, 'EXPEDIENTE_ESTATUS' => 9, 'EXPEDIENTE_FOLIO' => 10, 'EXPEDIENTE_PRECIOUSD' => 11, ),
-        BasePeer::TYPE_FIELDNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expediente_listaempaque' => 3, 'expediente_factura' => 4, 'expediente_fechainicio' => 5, 'expediente_fechafin' => 6, 'expediente_preciomxn' => 7, 'expediente_tipo' => 8, 'expediente_estatus' => 9, 'expediente_folio' => 10, 'expediente_preciousd' => 11, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        BasePeer::TYPE_PHPNAME => array ('Idexpediente' => 0, 'Idcliente' => 1, 'Idconsignatarioembarcador' => 2, 'ExpedienteListaempaque' => 3, 'ExpedienteFactura' => 4, 'ExpedienteFechainicio' => 5, 'ExpedienteFechafin' => 6, 'ExpedienteTipo' => 7, 'ExpedienteEstatus' => 8, 'ExpedienteFolio' => 9, 'ExpedientePreciomxn' => 10, 'ExpedientePreciousd' => 11, 'ExpedienteEstatuspago' => 12, 'ExpedienteFacturacionmxn' => 13, 'ExpedienteFacturacionusd' => 14, 'ExpedientePendientepagomxn' => 15, 'ExpedientePendientepagousd' => 16, 'ExpedienteFacturapdfmxn' => 17, 'ExpedienteFacturaxmlmxn' => 18, 'ExpedienteFacturapdfusd' => 19, 'ExpedienteFacturaxmlusd' => 20, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expedienteListaempaque' => 3, 'expedienteFactura' => 4, 'expedienteFechainicio' => 5, 'expedienteFechafin' => 6, 'expedienteTipo' => 7, 'expedienteEstatus' => 8, 'expedienteFolio' => 9, 'expedientePreciomxn' => 10, 'expedientePreciousd' => 11, 'expedienteEstatuspago' => 12, 'expedienteFacturacionmxn' => 13, 'expedienteFacturacionusd' => 14, 'expedientePendientepagomxn' => 15, 'expedientePendientepagousd' => 16, 'expedienteFacturapdfmxn' => 17, 'expedienteFacturaxmlmxn' => 18, 'expedienteFacturapdfusd' => 19, 'expedienteFacturaxmlusd' => 20, ),
+        BasePeer::TYPE_COLNAME => array (ExpedientePeer::IDEXPEDIENTE => 0, ExpedientePeer::IDCLIENTE => 1, ExpedientePeer::IDCONSIGNATARIOEMBARCADOR => 2, ExpedientePeer::EXPEDIENTE_LISTAEMPAQUE => 3, ExpedientePeer::EXPEDIENTE_FACTURA => 4, ExpedientePeer::EXPEDIENTE_FECHAINICIO => 5, ExpedientePeer::EXPEDIENTE_FECHAFIN => 6, ExpedientePeer::EXPEDIENTE_TIPO => 7, ExpedientePeer::EXPEDIENTE_ESTATUS => 8, ExpedientePeer::EXPEDIENTE_FOLIO => 9, ExpedientePeer::EXPEDIENTE_PRECIOMXN => 10, ExpedientePeer::EXPEDIENTE_PRECIOUSD => 11, ExpedientePeer::EXPEDIENTE_ESTATUSPAGO => 12, ExpedientePeer::EXPEDIENTE_FACTURACIONMXN => 13, ExpedientePeer::EXPEDIENTE_FACTURACIONUSD => 14, ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOMXN => 15, ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOUSD => 16, ExpedientePeer::EXPEDIENTE_FACTURAPDFMXN => 17, ExpedientePeer::EXPEDIENTE_FACTURAXMLMXN => 18, ExpedientePeer::EXPEDIENTE_FACTURAPDFUSD => 19, ExpedientePeer::EXPEDIENTE_FACTURAXMLUSD => 20, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('IDEXPEDIENTE' => 0, 'IDCLIENTE' => 1, 'IDCONSIGNATARIOEMBARCADOR' => 2, 'EXPEDIENTE_LISTAEMPAQUE' => 3, 'EXPEDIENTE_FACTURA' => 4, 'EXPEDIENTE_FECHAINICIO' => 5, 'EXPEDIENTE_FECHAFIN' => 6, 'EXPEDIENTE_TIPO' => 7, 'EXPEDIENTE_ESTATUS' => 8, 'EXPEDIENTE_FOLIO' => 9, 'EXPEDIENTE_PRECIOMXN' => 10, 'EXPEDIENTE_PRECIOUSD' => 11, 'EXPEDIENTE_ESTATUSPAGO' => 12, 'EXPEDIENTE_FACTURACIONMXN' => 13, 'EXPEDIENTE_FACTURACIONUSD' => 14, 'EXPEDIENTE_PENDIENTEPAGOMXN' => 15, 'EXPEDIENTE_PENDIENTEPAGOUSD' => 16, 'EXPEDIENTE_FACTURAPDFMXN' => 17, 'EXPEDIENTE_FACTURAXMLMXN' => 18, 'EXPEDIENTE_FACTURAPDFUSD' => 19, 'EXPEDIENTE_FACTURAXMLUSD' => 20, ),
+        BasePeer::TYPE_FIELDNAME => array ('idexpediente' => 0, 'idcliente' => 1, 'idconsignatarioembarcador' => 2, 'expediente_listaempaque' => 3, 'expediente_factura' => 4, 'expediente_fechainicio' => 5, 'expediente_fechafin' => 6, 'expediente_tipo' => 7, 'expediente_estatus' => 8, 'expediente_folio' => 9, 'expediente_preciomxn' => 10, 'expediente_preciousd' => 11, 'expediente_estatuspago' => 12, 'expediente_facturacionmxn' => 13, 'expediente_facturacionusd' => 14, 'expediente_pendientepagomxn' => 15, 'expediente_pendientepagousd' => 16, 'expediente_facturapdfmxn' => 17, 'expediente_facturaxmlmxn' => 18, 'expediente_facturapdfusd' => 19, 'expediente_facturaxmlusd' => 20, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
     );
 
     /** The enumerated values for this table */
@@ -127,6 +164,16 @@ abstract class BaseExpedientePeer
         ExpedientePeer::EXPEDIENTE_ESTATUS => array(
             ExpedientePeer::EXPEDIENTE_ESTATUS_ABIERTO,
             ExpedientePeer::EXPEDIENTE_ESTATUS_CERRADO,
+        ),
+        ExpedientePeer::EXPEDIENTE_FACTURACIONMXN => array(
+            ExpedientePeer::EXPEDIENTE_FACTURACIONMXN_NOFACTURADA,
+            ExpedientePeer::EXPEDIENTE_FACTURACIONMXN_FACTURADA,
+            ExpedientePeer::EXPEDIENTE_FACTURACIONMXN_CANCELADA,
+        ),
+        ExpedientePeer::EXPEDIENTE_FACTURACIONUSD => array(
+            ExpedientePeer::EXPEDIENTE_FACTURACIONUSD_NOFACTURADA,
+            ExpedientePeer::EXPEDIENTE_FACTURACIONUSD_FACTURADA,
+            ExpedientePeer::EXPEDIENTE_FACTURACIONUSD_CANCELADA,
         ),
     );
 
@@ -253,11 +300,20 @@ abstract class BaseExpedientePeer
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURA);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FECHAINICIO);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FECHAFIN);
-            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_PRECIOMXN);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_TIPO);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_ESTATUS);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FOLIO);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_PRECIOMXN);
             $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_PRECIOUSD);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_ESTATUSPAGO);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURACIONMXN);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURACIONUSD);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOMXN);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_PENDIENTEPAGOUSD);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURAPDFMXN);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURAXMLMXN);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURAPDFUSD);
+            $criteria->addSelectColumn(ExpedientePeer::EXPEDIENTE_FACTURAXMLUSD);
         } else {
             $criteria->addSelectColumn($alias . '.idexpediente');
             $criteria->addSelectColumn($alias . '.idcliente');
@@ -266,11 +322,20 @@ abstract class BaseExpedientePeer
             $criteria->addSelectColumn($alias . '.expediente_factura');
             $criteria->addSelectColumn($alias . '.expediente_fechainicio');
             $criteria->addSelectColumn($alias . '.expediente_fechafin');
-            $criteria->addSelectColumn($alias . '.expediente_preciomxn');
             $criteria->addSelectColumn($alias . '.expediente_tipo');
             $criteria->addSelectColumn($alias . '.expediente_estatus');
             $criteria->addSelectColumn($alias . '.expediente_folio');
+            $criteria->addSelectColumn($alias . '.expediente_preciomxn');
             $criteria->addSelectColumn($alias . '.expediente_preciousd');
+            $criteria->addSelectColumn($alias . '.expediente_estatuspago');
+            $criteria->addSelectColumn($alias . '.expediente_facturacionmxn');
+            $criteria->addSelectColumn($alias . '.expediente_facturacionusd');
+            $criteria->addSelectColumn($alias . '.expediente_pendientepagomxn');
+            $criteria->addSelectColumn($alias . '.expediente_pendientepagousd');
+            $criteria->addSelectColumn($alias . '.expediente_facturapdfmxn');
+            $criteria->addSelectColumn($alias . '.expediente_facturaxmlmxn');
+            $criteria->addSelectColumn($alias . '.expediente_facturapdfusd');
+            $criteria->addSelectColumn($alias . '.expediente_facturaxmlusd');
         }
     }
 

@@ -24,6 +24,32 @@ class ClientesController extends AbstractActionController
         
     }
     
+    public function eliminarAction(){
+        
+        $request = $this->getRequest();
+        $id= $this->params()->fromRoute('id');
+        
+        if($request->isPost()){
+            
+            $id= $request->getPost('id');
+            
+            $entity = \ClienteQuery::create()->findPk($id);
+            
+            $entity->delete();
+            
+            $this->flashMessenger()->addSuccessMessage('Registro eliminado exitosamente!');
+            
+            return $this->getResponse()->setContent(json_encode(true));
+        }
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('admin/clientes/clientes/eliminar');
+        
+        return $viewModel;
+        
+    }
+    
     public function serversideAction(){
         
         $request = $this->getRequest();
