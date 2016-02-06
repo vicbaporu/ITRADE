@@ -7,10 +7,26 @@ $( document ).ready(function()
     // run the currently selected effect
     function runEffect(component, dir) 
     {
+        var selectedEffect = "drop"; 
         if(isOpen()=="" || isOpen() == component)
         {
-            var selectedEffect = "drop"; 
+            
             options = { direction: dir };
+            $( "#"+ component).toggle( selectedEffect, options, 400 );
+            $( "#"+ component).toggleClass('active');
+            if($( "#"+ component).hasClass('active'))
+            {
+                $('html,body').animate({
+                    scrollTop: $("#"+component).offset().top
+                }, 1000);
+            }
+        }
+        else
+        {
+            var opened = isOpen();
+            $( "#"+ opened).toggle( selectedEffect, options, 400 );
+            $( "#"+ opened).toggleClass('active');
+            
             $( "#"+ component).toggle( selectedEffect, options, 400 );
             $( "#"+ component).toggleClass('active');
             if($( "#"+ component).hasClass('active'))
@@ -25,7 +41,9 @@ $( document ).ready(function()
     function isOpen()
     {
         if($( "#detalleMaritimo").hasClass('active'))
+        {
             return "detalleMaritimo";
+        }
         if($( "#detalleAereo").hasClass('active'))
             return "detalleAereo";
         if($( "#detalleTerrestre").hasClass('active'))
